@@ -1,0 +1,115 @@
+#!/bin/sh
+
+# This script sets the statusbar with the xsetroot command at the end. Have it
+# started by ~/.xinitrc or ~/.xprofile.
+
+# Set the deliminter character.
+delim="|"
+cs=1
+
+dte(){
+	echo " $(date '+%d %b %Y %H:%M')"
+}
+
+volume(){
+	volume_display
+}
+
+mem(){
+  mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
+}
+
+load(){
+	load="$(cut -d ' ' -f1 /proc/loadavg)"
+	load2="$(cut -d ' ' -f2 /proc/loadavg)"
+	load3="$(cut -d ' ' -f3 /proc/loadavg)"
+
+	echo " $load $load2 $load3"
+}
+
+cpu(){
+  read cpu a b c previdle rest < /proc/stat
+  prevtotal=$((a+b+c+previdle))
+  sleep 0.5
+  read cpu a b c idle rest < /proc/stat
+  total=$((a+b+c+idle))
+  cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+  echo -e "💻 $cpu% cpu"
+}
+
+player_st(){
+	player
+}
+
+pomodoro_st(){
+	pomodoro
+}
+
+count_sleep(){
+	incrm=$1
+	upda=$2
+	echo $(( intrm + upda ))
+}
+
+weather_show(){
+	updt=$(( $cs % 20 ))
+	if [ "$updt" -eq "0" ] || [ "$cs" -eq "1" ]; then
+		echo $(curl -Ss 'https://wttr.in?format=%c+%t+%m') > ~/.temp
+	fi
+	foo="`cat ~/.temp`"
+	echo "$foo"
+}
+
+print_var(){
+	if [ -z "$1" ]; then
+		echo ""
+	else
+		echo "$1 $2"
+	fi
+}
+
+reset_cs(){
+	if [ "$cs" -eq "$1" ]; then
+		cs=1
+	fi
+}
+
+# while true; do
+# xsetroot -name "$(cpu) | $(dte) | $(volume)"
+#      sleep 10s    # Update time every ten seconds
+# done &
+
+# Here is the (big) function that outputs the appearance of the statusbar. It
+# can really be broken down into many submodules which I've commented and
+# explained.
+status() { \
+#	pomodoro_var=$(pomodoro_st)
+#	print_var "$pomodoro_var" "$delim"
+#	player_var=$(player_st)
+#	print_var "$player_var" "$delim"
+	load_var=$(load)
+	print_var "$load_var" "$delim"
+	weather_var=$(weather_show)
+	print_var "$weather_var" "$delim"
+	dte_var=$(dte)
+	print_var "$dte_var" "$delim"
+	volume_var=$(volume)
+	print_var "$volume_var"
+	}
+
+while :; do
+	# So all that big status function was just a command that quicking gets
+	# what we want to be the statusbar. This xsetroot command is what sets
+	# it. Note that the tr command replaces newlines with spaces. This is
+	# to prevent some weird issues that cause significant slowing of
+	# everything in dwm. Note entirely sure of the cause, but again, the tr
+	# command easily avoids it.
+	xsetroot -name "$(status | tr '\n' ' ')"
+
+	# Sleep for a minute after changing the status bar before updating it
+	# again. Note that the `refbar` "refreshes" the statusbar by killing
+	# this command. Feel free to change the time interval if you want.
+	cs=$(( "$cs" + "1" ))
+	reset_cs "61"
+	sleep 1m
+done
