@@ -1,0 +1,652 @@
+2018-06-06 11:15:28,903 INFO     [14595] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:15:28,904 INFO     [14595] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:15:28,910 DEBUG    [14595] (deoplete.core) on_event: Init
+2018-06-06 11:15:28,927 DEBUG    [14595] (deoplete.core) Process 0: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/base.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 1: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/buffer.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 2: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/tag.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 3: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/omni.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 0: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/around.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 1: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/dictionary.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 2: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/file.py
+2018-06-06 11:15:28,928 DEBUG    [14595] (deoplete.core) Process 3: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/member.py
+2018-06-06 11:15:28,929 DEBUG    [14595] (deoplete.core) Process 0: /home/alexvanaxe/.config/nvim/plugged/deoplete-jedi/rplugin/python3/deoplete/sources/deoplete_jedi.py
+2018-06-06 11:15:28,929 DEBUG    [14595] (deoplete.core) Process 1: /home/alexvanaxe/.config/nvim/plugged/ultisnips/rplugin/python3/deoplete/sources/ultisnips.py
+2018-06-06 11:15:28,930 DEBUG    [14595] (deoplete.core) Process 2: /home/alexvanaxe/.config/nvim/plugged/nvim-typescript/rplugin/python3/deoplete/sources/typescript.py
+2018-06-06 11:15:28,930 DEBUG    [14595] (deoplete.core) Process 3: /home/alexvanaxe/.config/nvim/plugged/django-plus.vim/rplugin/python3/deoplete/sources/django.py
+2018-06-06 11:15:29,059 INFO     [14598] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:15:29,059 INFO     [14598] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:15:29,060 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,060 DEBUG    [14598] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,060 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,061 DEBUG    [14598] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,061 DEBUG    [14598] (deoplete.child) Loaded Source: around (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/around.py)
+2018-06-06 11:15:29,061 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,061 DEBUG    [14598] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,066 INFO     [14599] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:15:29,066 INFO     [14599] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:15:29,067 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,067 DEBUG    [14599] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,068 INFO     [14600] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:15:29,068 DEBUG    [14599] (deoplete.child) Loaded Source: buffer (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/buffer.py)
+2018-06-06 11:15:29,068 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,068 DEBUG    [14599] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,068 INFO     [14600] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:15:29,068 DEBUG    [14599] (deoplete.child) Loaded Source: dictionary (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/dictionary.py)
+2018-06-06 11:15:29,068 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,068 DEBUG    [14599] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,069 DEBUG    [14599] (deoplete.child) Loaded Source: ultisnips (/home/alexvanaxe/.config/nvim/plugged/ultisnips/rplugin/python3/deoplete/sources/ultisnips.py)
+2018-06-06 11:15:29,069 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,069 DEBUG    [14599] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:15:29,069 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,069 DEBUG    [14600] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,069 DEBUG    [14600] (deoplete.child) Loaded Source: tag (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/tag.py)
+2018-06-06 11:15:29,070 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,070 DEBUG    [14600] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,070 DEBUG    [14600] (deoplete.child) Loaded Source: file (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/file.py)
+2018-06-06 11:15:29,070 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,070 DEBUG    [14600] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:15:29,071 DEBUG    [14598] (deoplete.child) Loaded Source: jedi (/home/alexvanaxe/.config/nvim/plugged/deoplete-jedi/rplugin/python3/deoplete/sources/deoplete_jedi.py)
+2018-06-06 11:15:29,071 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,071 DEBUG    [14598] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,072 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,072 DEBUG    [14600] (deoplete.child) Loaded Source: typescript (/home/alexvanaxe/.config/nvim/plugged/nvim-typescript/rplugin/python3/deoplete/sources/typescript.py)
+2018-06-06 11:15:29,072 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,072 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:15:29,073 DEBUG    [14600] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:15:29,073 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,073 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,073 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:15:29,074 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:15:29,074 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,074 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,075 DEBUG    [14600] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:15:29,075 DEBUG    [14599] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:15:29,076 DEBUG    [14599] (deoplete.child) on_event: Source: ultisnips
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14599] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,076 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,077 DEBUG    [14598] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:15:29,077 DEBUG    [14600] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:15:29,078 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,078 DEBUG    [14598] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:15:29,078 DEBUG    [14600] (deoplete.child) on_event: Source: tag
+2018-06-06 11:15:29,078 DEBUG    [14600] (deoplete.child) main_loop: end
+2018-06-06 11:15:29,079 DEBUG    [14598] (deoplete.child) on_event: Source: around
+2018-06-06 11:15:29,079 DEBUG    [14598] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,742 INFO     [16117] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:16:17,743 INFO     [16117] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:16:17,750 DEBUG    [16117] (deoplete.core) on_event: Init
+2018-06-06 11:16:17,766 DEBUG    [16117] (deoplete.core) Process 0: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/base.py
+2018-06-06 11:16:17,767 DEBUG    [16117] (deoplete.core) Process 1: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/buffer.py
+2018-06-06 11:16:17,767 DEBUG    [16117] (deoplete.core) Process 2: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/tag.py
+2018-06-06 11:16:17,768 DEBUG    [16117] (deoplete.core) Process 3: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/omni.py
+2018-06-06 11:16:17,768 DEBUG    [16117] (deoplete.core) Process 0: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/around.py
+2018-06-06 11:16:17,768 DEBUG    [16117] (deoplete.core) Process 1: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/dictionary.py
+2018-06-06 11:16:17,768 DEBUG    [16117] (deoplete.core) Process 2: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/file.py
+2018-06-06 11:16:17,768 DEBUG    [16117] (deoplete.core) Process 3: /home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/member.py
+2018-06-06 11:16:17,769 DEBUG    [16117] (deoplete.core) Process 0: /home/alexvanaxe/.config/nvim/plugged/deoplete-jedi/rplugin/python3/deoplete/sources/deoplete_jedi.py
+2018-06-06 11:16:17,769 DEBUG    [16117] (deoplete.core) Process 1: /home/alexvanaxe/.config/nvim/plugged/ultisnips/rplugin/python3/deoplete/sources/ultisnips.py
+2018-06-06 11:16:17,769 DEBUG    [16117] (deoplete.core) Process 2: /home/alexvanaxe/.config/nvim/plugged/nvim-typescript/rplugin/python3/deoplete/sources/typescript.py
+2018-06-06 11:16:17,770 DEBUG    [16117] (deoplete.core) Process 3: /home/alexvanaxe/.config/nvim/plugged/django-plus.vim/rplugin/python3/deoplete/sources/django.py
+2018-06-06 11:16:17,898 INFO     [16122] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:16:17,899 INFO     [16122] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) Loaded Source: around (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/around.py)
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,900 DEBUG    [16122] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,902 INFO     [16123] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:16:17,903 INFO     [16123] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:16:17,904 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,904 DEBUG    [16123] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,904 DEBUG    [16123] (deoplete.child) Loaded Source: buffer (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/buffer.py)
+2018-06-06 11:16:17,905 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,905 DEBUG    [16123] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,905 DEBUG    [16123] (deoplete.child) Loaded Source: dictionary (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/dictionary.py)
+2018-06-06 11:16:17,905 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,905 DEBUG    [16123] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,905 DEBUG    [16123] (deoplete.child) Loaded Source: ultisnips (/home/alexvanaxe/.config/nvim/plugged/ultisnips/rplugin/python3/deoplete/sources/ultisnips.py)
+2018-06-06 11:16:17,906 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,906 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,908 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,909 INFO     [16124] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,909 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,910 INFO     [16124] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,910 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,910 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,910 DEBUG    [16122] (deoplete.child) Loaded Source: jedi (/home/alexvanaxe/.config/nvim/plugged/deoplete-jedi/rplugin/python3/deoplete/sources/deoplete_jedi.py)
+2018-06-06 11:16:17,911 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,910 DEBUG    [16124] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,911 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,911 DEBUG    [16124] (deoplete.child) Loaded Source: tag (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/tag.py)
+2018-06-06 11:16:17,911 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:16:17,911 DEBUG    [16124] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,911 DEBUG    [16124] (deoplete.child) Loaded Source: file (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/file.py)
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,911 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,911 DEBUG    [16123] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,911 DEBUG    [16124] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:17,912 DEBUG    [16123] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:16:17,912 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,912 DEBUG    [16123] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:17,912 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,912 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,912 DEBUG    [16123] (deoplete.child) on_event: Source: ultisnips
+2018-06-06 11:16:17,912 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,912 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,913 DEBUG    [16122] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,914 DEBUG    [16124] (deoplete.child) Loaded Source: typescript (/home/alexvanaxe/.config/nvim/plugged/nvim-typescript/rplugin/python3/deoplete/sources/typescript.py)
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:16:17,914 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,914 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,914 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,915 DEBUG    [16122] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:16:17,915 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:16:17,915 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,915 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,916 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,917 DEBUG    [16122] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:16:17,917 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,918 DEBUG    [16122] (deoplete.child) on_event: Source: around
+2018-06-06 11:16:17,918 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,918 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) on_event: Source: tag
+2018-06-06 11:16:17,919 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,533 DEBUG    [16117] (deoplete.core) on_event: InsertEnter
+2018-06-06 11:16:26,533 DEBUG    [16122] (deoplete.child) _read: 4470 bytes
+2018-06-06 11:16:26,533 DEBUG    [16123] (deoplete.child) _read: 4470 bytes
+2018-06-06 11:16:26,533 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,534 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,534 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,534 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,534 DEBUG    [16122] (deoplete.child) _read: 4456 bytes
+2018-06-06 11:16:26,534 DEBUG    [16123] (deoplete.child) _read: 4457 bytes
+2018-06-06 11:16:26,534 DEBUG    [16122] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:26,534 DEBUG    [16124] (deoplete.child) _read: 8927 bytes
+2018-06-06 11:16:26,534 DEBUG    [16123] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:26,534 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,534 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,534 DEBUG    [16124] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:26,540 DEBUG    [16123] (deoplete.child) on_event: Source: buffer
+2018-06-06 11:16:26,541 DEBUG    [16122] (deoplete.child) on_event: Source: around
+2018-06-06 11:16:26,541 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,552 DEBUG    [16124] (deoplete.child) on_event: Source: tag
+2018-06-06 11:16:26,552 DEBUG    [16124] (deoplete.child) on_event: Source: file
+2018-06-06 11:16:26,554 DEBUG    [16123] (deoplete.child) on_event: Source: dictionary
+2018-06-06 11:16:26,554 DEBUG    [16123] (deoplete.child) on_event: Source: ultisnips
+2018-06-06 11:16:26,554 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,555 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,585 DEBUG    [16117] (deoplete.core) completion_begin: 
+2018-06-06 11:16:26,585 DEBUG    [16122] (deoplete.child) _read: 4483 bytes
+2018-06-06 11:16:26,585 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,586 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,586 DEBUG    [16122] (deoplete.child) _read: 4475 bytes
+2018-06-06 11:16:26,586 DEBUG    [16122] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:26,586 DEBUG    [16122] (deoplete.child) merged_results: begin
+2018-06-06 11:16:26,586 DEBUG    [16123] (deoplete.child) _read: 8958 bytes
+2018-06-06 11:16:26,586 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,586 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,586 DEBUG    [16123] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:26,586 DEBUG    [16124] (deoplete.child) _read: 8956 bytes
+2018-06-06 11:16:26,586 DEBUG    [16123] (deoplete.child) merged_results: begin
+2018-06-06 11:16:26,586 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,586 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,586 DEBUG    [16124] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:26,586 DEBUG    [16124] (deoplete.child) merged_results: begin
+2018-06-06 11:16:26,588 DEBUG    [16122] (deoplete.child) merged_results: end
+2018-06-06 11:16:26,588 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,588 DEBUG    [16117] (deoplete.core) completion_end: 
+2018-06-06 11:16:26,589 DEBUG    [16124] (deoplete.child) merged_results: end
+2018-06-06 11:16:26,589 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,590 DEBUG    [16123] (deoplete.child) merged_results: end
+2018-06-06 11:16:26,590 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,600 INFO     [16125] (deoplete.logging) --- Deoplete Log Start ---
+2018-06-06 11:16:26,600 INFO     [16125] (deoplete.logging) NVIM v0.2.2, Python 3.6.5, neovim client 0.2.6
+2018-06-06 11:16:26,601 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,601 DEBUG    [16125] (deoplete.child) _read: 29515 bytes
+2018-06-06 11:16:26,601 DEBUG    [16125] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:26,602 DEBUG    [16125] (deoplete.child) Loaded Source: omni (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/omni.py)
+2018-06-06 11:16:26,602 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,602 DEBUG    [16125] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:26,602 DEBUG    [16125] (deoplete.child) Loaded Source: member (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/source/member.py)
+2018-06-06 11:16:26,602 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,602 DEBUG    [16125] (deoplete.child) main_loop: add_source begin
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) Loaded Source: django (/home/alexvanaxe/.config/nvim/plugged/django-plus.vim/rplugin/python3/deoplete/sources/django.py)
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,603 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_auto_delimiter (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_delimiter.py)
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_truncate_abbr (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_abbr.py)
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_remove_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_paren.py)
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) Loaded Filter: sorter_word (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_word.py)
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,604 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) Loaded Filter: matcher_full_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_full_fuzzy.py)
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) Loaded Filter: matcher_fuzzy (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_fuzzy.py)
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) Loaded Filter: matcher_length (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_length.py)
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) Loaded Filter: matcher_head (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_head.py)
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,605 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_truncate_kind (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_kind.py)
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_remove_overlap (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_remove_overlap.py)
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) Loaded Filter: matcher_cpsm (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/matcher_cpsm.py)
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) Loaded Filter: sorter_rank (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/sorter_rank.py)
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,606 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_auto_paren (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_auto_paren.py)
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: add_filter begin
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) Loaded Filter: converter_truncate_menu (/home/alexvanaxe/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/converter_truncate_menu.py)
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) on_event: Source: omni
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) on_event: Source: member
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,607 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) on_event: Source: omni
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) on_event: Source: member
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,608 DEBUG    [16125] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:26,609 DEBUG    [16125] (deoplete.child) merged_results: begin
+2018-06-06 11:16:26,610 DEBUG    [16125] (deoplete.child) merged_results: end
+2018-06-06 11:16:26,610 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,638 DEBUG    [16117] (deoplete.core) completion_begin: 
+2018-06-06 11:16:26,638 DEBUG    [16122] (deoplete.child) _read: 4543 bytes
+2018-06-06 11:16:26,638 DEBUG    [16123] (deoplete.child) _read: 4543 bytes
+2018-06-06 11:16:26,639 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,639 DEBUG    [16125] (deoplete.child) _read: 4542 bytes
+2018-06-06 11:16:26,639 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,639 DEBUG    [16124] (deoplete.child) _read: 4543 bytes
+2018-06-06 11:16:26,639 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,639 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,639 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,639 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:26,639 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,639 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:26,642 DEBUG    [16117] (deoplete.core) completion_end: 
+2018-06-06 11:16:27,193 DEBUG    [16117] (deoplete.core) completion_begin: "
+2018-06-06 11:16:27,193 DEBUG    [16122] (deoplete.child) _read: 4545 bytes
+2018-06-06 11:16:27,193 DEBUG    [16123] (deoplete.child) _read: 4544 bytes
+2018-06-06 11:16:27,194 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,194 DEBUG    [16125] (deoplete.child) _read: 4545 bytes
+2018-06-06 11:16:27,194 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,194 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,194 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,194 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,194 DEBUG    [16122] (deoplete.child) _read: 4537 bytes
+2018-06-06 11:16:27,194 DEBUG    [16124] (deoplete.child) _read: 9082 bytes
+2018-06-06 11:16:27,194 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,194 DEBUG    [16123] (deoplete.child) _read: 4537 bytes
+2018-06-06 11:16:27,194 DEBUG    [16122] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:27,194 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,194 DEBUG    [16125] (deoplete.child) _read: 4537 bytes
+2018-06-06 11:16:27,194 DEBUG    [16122] (deoplete.child) merged_results: begin
+2018-06-06 11:16:27,194 DEBUG    [16123] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:27,194 DEBUG    [16123] (deoplete.child) merged_results: begin
+2018-06-06 11:16:27,194 DEBUG    [16125] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:27,194 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,195 DEBUG    [16125] (deoplete.child) merged_results: begin
+2018-06-06 11:16:27,195 DEBUG    [16124] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:27,195 DEBUG    [16124] (deoplete.child) merged_results: begin
+2018-06-06 11:16:27,199 DEBUG    [16122] (deoplete.child) merged_results: end
+2018-06-06 11:16:27,199 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,200 DEBUG    [16125] (deoplete.child) merged_results: end
+2018-06-06 11:16:27,200 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,200 DEBUG    [16124] (deoplete.child) merged_results: end
+2018-06-06 11:16:27,200 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,201 DEBUG    [16117] (deoplete.core) completion_end: "
+2018-06-06 11:16:27,202 DEBUG    [16123] (deoplete.child) merged_results: end
+2018-06-06 11:16:27,202 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,247 DEBUG    [16117] (deoplete.core) completion_begin: "
+2018-06-06 11:16:27,247 DEBUG    [16122] (deoplete.child) _read: 4545 bytes
+2018-06-06 11:16:27,247 DEBUG    [16123] (deoplete.child) _read: 4545 bytes
+2018-06-06 11:16:27,247 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,247 DEBUG    [16124] (deoplete.child) _read: 4546 bytes
+2018-06-06 11:16:27,247 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,248 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,248 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,248 DEBUG    [16125] (deoplete.child) _read: 4546 bytes
+2018-06-06 11:16:27,248 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,248 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:27,248 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,248 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:27,250 DEBUG    [16117] (deoplete.core) completion_end: "
+2018-06-06 11:16:28,119 DEBUG    [16117] (deoplete.core) completion_begin: " 
+2018-06-06 11:16:28,119 DEBUG    [16122] (deoplete.child) _read: 4546 bytes
+2018-06-06 11:16:28,119 DEBUG    [16123] (deoplete.child) _read: 4547 bytes
+2018-06-06 11:16:28,119 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,119 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,119 DEBUG    [16124] (deoplete.child) _read: 9086 bytes
+2018-06-06 11:16:28,119 DEBUG    [16125] (deoplete.child) _read: 9085 bytes
+2018-06-06 11:16:28,119 DEBUG    [16122] (deoplete.child) _read: 4539 bytes
+2018-06-06 11:16:28,119 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,119 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,119 DEBUG    [16122] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:28,119 DEBUG    [16122] (deoplete.child) merged_results: begin
+2018-06-06 11:16:28,119 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,119 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,119 DEBUG    [16124] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:28,119 DEBUG    [16125] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:28,119 DEBUG    [16124] (deoplete.child) merged_results: begin
+2018-06-06 11:16:28,119 DEBUG    [16125] (deoplete.child) merged_results: begin
+2018-06-06 11:16:28,120 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,120 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,120 DEBUG    [16123] (deoplete.child) _read: 4539 bytes
+2018-06-06 11:16:28,120 DEBUG    [16123] (deoplete.child) main_loop: merge_results begin
+2018-06-06 11:16:28,120 DEBUG    [16123] (deoplete.child) merged_results: begin
+2018-06-06 11:16:28,121 DEBUG    [16122] (deoplete.child) merged_results: end
+2018-06-06 11:16:28,121 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,121 DEBUG    [16125] (deoplete.child) merged_results: end
+2018-06-06 11:16:28,121 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,121 DEBUG    [16117] (deoplete.core) completion_end: " 
+2018-06-06 11:16:28,122 DEBUG    [16124] (deoplete.child) merged_results: end
+2018-06-06 11:16:28,122 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,124 DEBUG    [16123] (deoplete.child) merged_results: end
+2018-06-06 11:16:28,124 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,174 DEBUG    [16117] (deoplete.core) completion_begin: " 
+2018-06-06 11:16:28,174 DEBUG    [16123] (deoplete.child) _read: 4548 bytes
+2018-06-06 11:16:28,174 DEBUG    [16125] (deoplete.child) _read: 4548 bytes
+2018-06-06 11:16:28,174 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,174 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,175 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,174 DEBUG    [16124] (deoplete.child) _read: 4548 bytes
+2018-06-06 11:16:28,175 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,174 DEBUG    [16122] (deoplete.child) _read: 4548 bytes
+2018-06-06 11:16:28,175 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,175 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:28,175 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,175 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:28,178 DEBUG    [16117] (deoplete.core) completion_end: " 
+2018-06-06 11:16:30,340 DEBUG    [16117] (deoplete.core) on_event: BufWritePost
+2018-06-06 11:16:30,340 DEBUG    [16123] (deoplete.child) _read: 4474 bytes
+2018-06-06 11:16:30,341 DEBUG    [16125] (deoplete.child) _read: 4474 bytes
+2018-06-06 11:16:30,341 DEBUG    [16123] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:30,341 DEBUG    [16125] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:30,341 DEBUG    [16124] (deoplete.child) _read: 8935 bytes
+2018-06-06 11:16:30,341 DEBUG    [16123] (deoplete.child) main_loop: end
+2018-06-06 11:16:30,341 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:30,341 DEBUG    [16123] (deoplete.child) _read: 4461 bytes
+2018-06-06 11:16:30,341 DEBUG    [16124] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:30,341 DEBUG    [16125] (deoplete.child) _read: 4461 bytes
+2018-06-06 11:16:30,342 DEBUG    [16123] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:30,342 DEBUG    [16125] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:30,342 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:30,342 DEBUG    [16124] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:30,340 DEBUG    [16122] (deoplete.child) _read: 4474 bytes
+2018-06-06 11:16:30,342 DEBUG    [16122] (deoplete.child) main_loop: set_source_attributes begin
+2018-06-06 11:16:30,342 DEBUG    [16122] (deoplete.child) main_loop: end
+2018-06-06 11:16:30,342 DEBUG    [16122] (deoplete.child) _read: 4461 bytes
+2018-06-06 11:16:30,342 DEBUG    [16122] (deoplete.child) main_loop: on_event begin
+2018-06-06 11:16:30,392 DEBUG    [16123] (deoplete.child) on_event: Source: buffer
+2018-06-06 11:16:30,395 DEBUG    [16125] (deoplete.child) on_event: Source: omni
+2018-06-06 11:16:30,396 DEBUG    [16125] (deoplete.child) on_event: Source: member
+2018-06-06 11:16:30,396 DEBUG    [16125] (deoplete.child) main_loop: end
+2018-06-06 11:16:30,396 DEBUG    [16124] (deoplete.child) on_event: Source: tag
+2018-06-06 11:16:30,397 DEBUG    [16124] (deoplete.child) main_loop: end
+2018-06-06 11:16:30,399 DEBUG    [16122] (deoplete.child) on_event: Source: around
+2018-06-06 11:16:30,399 DEBUG    [16122] (deoplete.child) main_loop: end
