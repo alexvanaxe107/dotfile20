@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+VAR1=$RANDOM
+echo '<span foreground="#FF0000">[<i>Testing</i>]</span><sup>+'$VAR1'</sup>'
+echo "teste $VAR1"
+#echo '{"full_text":"Counter: $RANDOM"}'
