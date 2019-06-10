@@ -4,7 +4,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
 
-zstyle :compinstall filename '/home/alexvanaxe/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*:pacman:*' force-list always
 zstyle ':completion:*:*:pacman:*' menu yes select
@@ -19,10 +19,17 @@ zstyle ':completion:*:killall:*'   force-list always
 #zstyle ':completion::complete:*' gain-privileges 1
 #
 
-source /home/alexvanaxe/.fdirrc
-source /usr/share/zsh/scripts/zplug/init.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.fdirrc
+source $HOME/.zplug/init.zsh
+export ZPLUG_HOME=$HOME/.zplug
+
+
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "themes/fishy", from:oh-my-zsh
+
 bindkey '^ ' autosuggest-accept
 
 zplug "zsh-users/zsh-history-substring-search"
