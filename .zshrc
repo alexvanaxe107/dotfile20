@@ -28,16 +28,15 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
 
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug "themes/fishy", from:oh-my-zsh
 
 bindkey '^ ' autosuggest-accept
 
 zplug "zsh-users/zsh-history-substring-search"
 
-# zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 zplug mafredri/zsh-async, from:github
-zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+#zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
 zplug "plugins/z",   from:oh-my-zsh
 
