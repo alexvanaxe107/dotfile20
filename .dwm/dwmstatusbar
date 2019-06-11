@@ -54,9 +54,9 @@ count_sleep(){
 weather_show(){
 	updt=$(( $cs % 20 ))
 	if [ "$updt" -eq "0" ] || [ "$cs" -eq "1" ]; then
-		echo $(curl -Ss 'https://wttr.in?format=%c+%t+%m') > ~/.temp
+		echo $(curl -Ss 'https://wttr.in?format=%c+%t+%m') > ~/.dwm/weather.cache
 	fi
-	foo="`cat ~/.temp`"
+	foo="`cat ~/.dwm/weather.cache`"
 	echo "$foo"
 }
 
