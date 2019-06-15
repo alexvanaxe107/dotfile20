@@ -15,6 +15,10 @@ volume(){
 	volume_display
 }
 
+torrent_st(){
+    torrent
+}
+
 mem(){
   mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
 }
@@ -87,6 +91,8 @@ status() { \
 #	print_var "$pomodoro_var" "$delim"
 #	player_var=$(player_st)
 #	print_var "$player_var" "$delim"
+    torrent_var=$(torrent)
+    print_var "$torrent_var" "$delim"
 	load_var=$(load)
 	print_var "$load_var" "$delim"
 	weather_var=$(weather_show)
