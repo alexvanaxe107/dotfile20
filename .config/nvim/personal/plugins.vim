@@ -51,6 +51,7 @@ Plug 'tpope/vim-obsession'
 " Troca janelas de posicao
 Plug 'wesQ3/vim-windowswap'
 Plug 'tpope/vim-unimpaired'
+Plug 'mkitt/tabline.vim'
 " Icones
 " Plug 'ryanoasis/vim-devicons'
 
