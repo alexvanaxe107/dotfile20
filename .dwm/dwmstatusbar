@@ -110,7 +110,11 @@ while :; do
 	# to prevent some weird issues that cause significant slowing of
 	# everything in dwm. Note entirely sure of the cause, but again, the tr
 	# command easily avoids it.
-	xsetroot -name "$(status | tr '\n' ' ')"
+    if [ $1 == "test" ]; then
+        echo "$(status | tr '\n' ' ')"
+    else
+        xsetroot -name "$(status | tr '\n' ' ')"
+    fi
 
 	# Sleep for a minute after changing the status bar before updating it
 	# again. Note that the `refbar` "refreshes" the statusbar by killing
