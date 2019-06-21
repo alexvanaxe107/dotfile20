@@ -9,7 +9,7 @@ transmission-remote -l | grep % |
 	s/.*Uploading.*/L/g;
 	s/.*%.*/M/g" |
 		sort -h | uniq -c | sed " # Now we replace the standin letters with icons.
-				s/A/🛑/g;
+				s/A//g;
 				s/B/⌛️/g;
 				s/L/🔼/g;
 				s/M/🔽/g;
@@ -18,7 +18,7 @@ transmission-remote -l | grep % |
 
 case $BLOCK_BUTTON in
     1) $TERMINAL -e transmission-remote-cli ;;
-    3) pgrep -x dunst >/dev/null && notify-send "Torrent module" "🛑: paused
+    3) pgrep -x dunst >/dev/null && notify-send "Torrent module" ": paused
 ⏳: idle (seeds needed)
 🔼: uploading (unfinished)
 🔽: downloading
