@@ -5,5 +5,6 @@ killall conky
 # /home/alexvanaxe/.config/i3/conky/conky.sh &
 /home/alexvanaxe/.config/conky/night/conky.sh
 compton -b &
+stalonetray &
 killall dwmstatusbar
 ~/.dwm/dwmstatusbar &
