@@ -18,6 +18,9 @@ nnoremap <leader>b i<CR><ESC>
 nnoremap <leader>o o<ESC>
 nnoremap <leader>O O<ESC>
 
+nnoremap - ddp
+nnoremap + ddkkp
+
 nnoremap <F4> :Files<CR>
 nnoremap <F5> :Buffers<CR>
 nnoremap <F6> :Tags<CR>
@@ -78,8 +81,11 @@ nnoremap tc :tabclose<CR>
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprevious<CR>
 
-nnoremap cd :cclose<CR>
-nnoremap co :copen<CR>
+nnoremap <silent> cd :cclose<CR>
+nnoremap <silent> co :copen<CR>
+
+nnoremap <silent> <leader>ld :lclose<CR>
+nnoremap <silent> <leader>lo :lopen<CR>
 
 nnoremap <leader>tn :TestNearest<CR>
 nnoremap <leader>tf :TestFile<CR>

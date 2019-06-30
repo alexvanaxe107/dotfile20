@@ -1,12 +1,8 @@
 " Specify a directory for plugins
 " " - For Neovim: ~/.local/share/nvim/plugged
 " " - Avoid using standard Vim directory names like 'plugin'
-"Home
 call plug#begin('~/.config/nvim/plugged')
 
-"Work
-"call plug#begin('~/.vim/plugged')
-"
 Plug 'smancill/conky-syntax.vim'
 
 "Plug 'gantheory/vim-easymotion'
@@ -35,6 +31,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
 Plug 'scrooloose/nerdcommenter', {'for': ['python', 'html', 'typescript', 'sh']}
+Plug 'mkitt/tabline.vim'
 
 " ## Facilitadores
 " Plug 'easymotion/vim-easymotion'
@@ -51,7 +48,6 @@ Plug 'tpope/vim-obsession'
 " Troca janelas de posicao
 Plug 'wesQ3/vim-windowswap'
 Plug 'tpope/vim-unimpaired'
-Plug 'mkitt/tabline.vim'
 " Icones
 " Plug 'ryanoasis/vim-devicons'
 
