@@ -82,6 +82,11 @@ reset_cs(){
 	fi
 }
 
+recording_indicator(){
+  rec="`cat ~/.dwm/recording`"
+  echo "$rec"
+}
+
 # while true; do
 # xsetroot -name "$(cpu) | $(dte) | $(volume)"
 #      sleep 10s    # Update time every ten seconds
@@ -91,6 +96,8 @@ reset_cs(){
 # can really be broken down into many submodules which I've commented and
 # explained.
 status() { \
+	recording_var=$(recording_indicator)
+	print_var "$recording_var" "$delim"
 	pomodoro_var=$(pomodoro_st)
 	print_var "$pomodoro_var" "$delim"
 #	player_var=$(player_st)
