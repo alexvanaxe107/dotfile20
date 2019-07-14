@@ -11,3 +11,7 @@ pacaur -S --noedit --noconfirm --needed localpkglist.txt
 
 New orphans clean:
 sudo pacman -Rs $(pacman -Qtdq)
+
+Verificar se todos os arquivos do todo foram pushados.
+
+
