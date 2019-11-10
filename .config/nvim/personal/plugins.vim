@@ -101,7 +101,10 @@ Plug 'mattn/emmet-vim'
 Plug 'valloric/MatchTagAlways'
 Plug 'leafgarland/typescript-vim'
 Plug 'bdauria/angular-cli.vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+" For Denite features
+Plug 'Shougo/denite.nvim'
 " Plug 'Quramy/tsuquyomi'
 Plug 'othree/javascript-libraries-syntax.vim'
 

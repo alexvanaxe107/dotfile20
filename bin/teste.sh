@@ -1,8 +1,60 @@
 #!/bin/sh
+play_local(){
+    if [[ $url == *"pls"* ]]; then
+        mpv -playlist $url&
+    else
+        mpv $url&
+    fi
+}
 
-valor=$(pidof spotify)
-if [ -z "$valor" ]
+play_cast(){
+    castnow --quiet $url&
+}
+
+stop_all(){
+    killall mpv&
+    #castnow --quiet --command s --exit&
+}
+
+chosen_mode=$(printf "Local\\nCast\\nStop" | dmenu "$@" -i -p "Where to play?")
+
+case "$chosen_mode" in
+    "Local") radio_file="$HOME/.config/play_radio/config";;
+    "Cast") radio_file="$HOME/.config/play_radio/config.cast";;
+    "Stop") $(stop_all);;
+    *) exit;;
+esac
+
+if [ -z "$radio_file" ]
 then
-	printf $valor
+    exit
 fi
 
+choosen_opts=""
+
+declare -A radios
+
+while IFS= read -r line
+do
+    radio_name=$(echo $line | awk 'BEGIN {FS=","}; {print $1}')
+    radio_url=$(echo $line | awk 'BEGIN {FS=","}; {print $2}')
+
+    radios[$radio_name]=$radio_url
+
+    choosen_opts="$choosen_opts$radio_name\\n"
+
+done < $radio_file
+
+chosen=$(printf "$choosen_opts" | dmenu "$@" -i -p "Choose radio")
+
+if [ -z "$chosen" ]
+then
+    exit 0
+fi
+
+url="${radios[$chosen]}"
+
+case "$chosen_mode" in
+    "Local") $(play_local)&;;
+    "Cast") $(play_cast)&;;
+esac
