@@ -4,6 +4,7 @@ $HOME/.config/i3/monitor/saver.sh &
 killall conky
 killall stalonetray &
 killall dwmstatusbar
+killall clipster
 sleep 2
 #/home/alexvanaxe/.config/i3/conky/conky.sh &
 #/home/alexvanaxe/.config/conky/night/conky.sh
@@ -12,3 +13,4 @@ sleep 2
 compton -b &
 ~/.dwm/dwmstatusbar &
 stalonetray &
+clipster -d &
