@@ -1,7 +1,6 @@
 #!/bin/sh
 
-source /home/alexvanaxe/.pyenv/versions/spotify/bin/activate
-POMODORO=$(/home/alexvanaxe/.config/i3/scripts/pomodoro-client.py status)
+POMODORO=$(pomodoro-client.py status)
 
 if [ -z "$POMODORO" ]; then
 	echo "" || exit 1
