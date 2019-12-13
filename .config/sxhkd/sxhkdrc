@@ -38,6 +38,9 @@ super + shift + p
 super + shift + t
 	$HOME/bin/dtodosh.sh "${DMENU_COLOR[@]}"
 
+#Pomodoro
+super + shift + b
+	$HOME/bin/conky_toggle.sh
 ###################
 ##### WM KEYS #####
 ###################
