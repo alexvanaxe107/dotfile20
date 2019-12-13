@@ -1,5 +1,5 @@
 #!/bin/sh
-
+source /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 POMODORO=$(pomodoro-client.py status)
 
 if [ -z "$POMODORO" ]; then

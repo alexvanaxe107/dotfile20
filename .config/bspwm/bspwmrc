@@ -1,6 +1,18 @@
 #! /bin/sh
 
 sxhkd &
+twmnd &
+nitrogen --restore &
+$HOME/.config/i3/monitor/saver.sh &
+sleep 2
+#/home/alexvanaxe/.config/i3/conky/conky.sh &
+/home/alexvanaxe/.config/conky/night/conky.sh
+#/home/alexvanaxe/.config/conky/day/conky.sh
+#/home/alexvanaxe/.config/conky/tonight/conky.sh
+picom -b &
+#stalonetray &
+clipster -d &
+
 #polybar example &
 bspc monitor -d I II III IV V VI VII VIII IX X
 
