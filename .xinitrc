@@ -35,7 +35,7 @@ setxkbmap -model abnt2 -layout br -variant abnt2
 xsetroot -cursor_name left_ptr
 source ~/.profile
 
-exec /home/alexvanaxe/bin/startdwm
+#exec /home/alexvanaxe/bin/startdwm
 #exec i3
 #exec dwm
-#exec bspwm
+exec bspwm

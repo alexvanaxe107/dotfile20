@@ -4,8 +4,8 @@ alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d ~/.config/todo/config'
 
 export EDITOR=nvim
-export XDG_SESSION_DESKTOP=i3
-export XDG_CURRENT_DESKTOP=i3
+#export XDG_SESSION_DESKTOP=i3
+#export XDG_CURRENT_DESKTOP=i3
 
 export PYENV_ROOT="$HOME/.pyenv"
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
@@ -36,7 +36,7 @@ alias pacimpl="pacman -D --asdep"	# Mark one or more installed packages as non e
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
 
-alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
+#alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 source ~/.profile

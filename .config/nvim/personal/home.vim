@@ -17,6 +17,7 @@ set termguicolors
 "  \ }
 
 "colorscheme PaperColor
-colorscheme one
+colorscheme default
+set background=dark
 
-let g:airline_theme='night_owl'
+let g:airline_theme="base16_vim"

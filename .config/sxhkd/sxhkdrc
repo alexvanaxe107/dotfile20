@@ -38,9 +38,26 @@ super + shift + p
 super + shift + t
 	$HOME/bin/dtodosh.sh "${DMENU_COLOR[@]}"
 
-#Pomodoro
+# Change theme
+super + shift + y
+	$HOME/bin/theme_select.sh "${DMENU_COLOR[@]}"
+
+#Power management
+super + shift + e
+	$HOME/bin/powercontrol.sh "${DMENU_COLOR[@]}"
+
+# Toggle the top bar
 super + shift + b
-	$HOME/bin/conky_toggle.sh
+	$HOME/bin/polybar_toggle.sh
+
+#Pomodoro
+super + shift + v
+	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
+
+#Pomodoro
+super + shift + g ; {1,2,8,f}
+	{st -e ranger,st -e transmission-remote-cli,st -e weechat,firefox}
+
 ###################
 ##### WM KEYS #####
 ###################
@@ -57,9 +74,17 @@ super + {_,shift + }q
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
+# focus or send to the given desktop
+super + control + {1-9,0}
+	bspc node -d '^{1-9,10}' --follow
+
 # alternate between the tiled and monocle layout
 super + m
 	bspc desktop -l next
+
+# Cycle through nodes
+super + control + {j,k} 
+	bspc node {next,prev}
 
 # send the newest marked node to the newest preselected node
 super + n
