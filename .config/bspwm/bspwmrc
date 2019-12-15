@@ -31,6 +31,8 @@ bspc config gapless_monocle      true
 
 # App rules
 bspc rule -a Gimp state=floating follow=on
+bspc rule -a ffplay state=floating
+#bspc rule -a Gnome-calculator state=floating follow=on
 #bspc rule -a Chromium desktop='^2'
 #bspc rule -a mplayer2 state=floating
 #bspc rule -a Kupfer.py focus=on

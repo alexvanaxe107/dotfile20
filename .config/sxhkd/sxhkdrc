@@ -27,7 +27,7 @@ super + shift + x
 	$HOME/bin/lock.sh
 
 #Fix Light
-super + shift + l
+super + shift + i
 	$HOME/bin/avalight "${DMENU_COLOR[@]}"
 
 #Pomodoro
@@ -55,8 +55,8 @@ super + shift + v
 	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
 
 #Pomodoro
-super + shift + g ; {1,2,8,f}
-	{st -e ranger,st -e transmission-remote-cli,st -e weechat,firefox}
+super + shift + g ; {1,2,8,f,c,r,s}
+	{st -e ranger,st -e transmission-remote-cli,st -e weechat,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
 
 ###################
 ##### WM KEYS #####
@@ -103,7 +103,7 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + {m,x,y,z}
+super + {w,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
 # focus the node in the given direction

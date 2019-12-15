@@ -16,11 +16,18 @@ stop_all(){
     #castnow --quiet --command s --exit&
 }
 
-chosen_mode=$(printf "Local\\nCast\\nStop" | dmenu "$@" -i -p "Where to play?")
+play_clipboard(){
+    result=$(xclip -o)
+    mpv "$result"
+    exit
+}
+
+chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard" | dmenu "$@" -i -p "Where to play?")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
     "Cast") radio_file="$HOME/.config/play_radio/config.cast";;
+    "Clipboard") play_clipboard;;
     "Stop") $(stop_all);;
     *) exit;;
 esac
