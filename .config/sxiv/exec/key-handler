@@ -15,8 +15,8 @@ do
         "C-l")
             cp "$file" $HOME/Documents/Pictures/lock.png ;;
         "C-n")
-            ln -s "$file" $HOME/Documents/Pictures/Wallpapers/night/ ;;
+            cp "$file" $HOME/Documents/Pictures/Wallpapers/night/ ;;
         "C-d")
-            ln "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
+            cp "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
     esac
 done
