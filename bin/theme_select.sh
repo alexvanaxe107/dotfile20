@@ -17,6 +17,7 @@ if [ "light" == "$chosen" ]; then
     bspc config window_gap 0  
 else
     killall picom; picom -b &
+    killall dunst; dunst &
     bspc config window_gap 6
     # Start conky according theme
     case "$chosen" in

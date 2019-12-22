@@ -2,7 +2,6 @@
 
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd &
-killall twmnd; twmnd &
 #nitrogen --restore &
 $HOME/.config/i3/monitor/saver.sh &
 

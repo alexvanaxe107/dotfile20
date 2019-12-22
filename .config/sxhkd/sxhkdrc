@@ -3,7 +3,7 @@ super + shift + Return
 	st
 
 # start dmenu
-super + shift + d
+super + d
 	dmenu_run "${DMENU_COLOR[@]}"
 
 # Toggle mute
@@ -17,6 +17,10 @@ XF86Audio{Raise,Lower}Volume
 # Play Radio!
 super + shift + r
 	$HOME/bin/play_radio.sh "${DMENU_COLOR[@]}"
+
+# Configure Printscreen
+Print
+	gnome-screenshot --interactive
 
 #Player Control
 super + shift + s
@@ -55,8 +59,8 @@ super + shift + v
 	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
 
 #Pomodoro
-super + shift + g ; {1,2,8,f,c,r,s}
-	{st -e ranger,st -e transmission-remote-cli,st -e weechat,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
+super + shift + g ; {1,2,8,i,f,c,r,s}
+	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/investcharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
 
 ###################
 ##### WM KEYS #####
