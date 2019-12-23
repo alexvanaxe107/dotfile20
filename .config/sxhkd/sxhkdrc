@@ -58,7 +58,7 @@ super + shift + b
 super + shift + v
 	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
 
-#Pomodoro
+# Chords
 super + shift + g ; {1,2,8,i,f,c,r,s}
 	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/investcharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
 
@@ -88,7 +88,7 @@ super + m
 
 # Cycle through nodes
 super + control + {j,k} 
-	bspc node {next,prev}
+	bspc node -f {next,prev}
 
 # send the newest marked node to the newest preselected node
 super + n
