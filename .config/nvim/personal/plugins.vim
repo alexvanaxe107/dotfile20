@@ -92,6 +92,11 @@ Plug 'jakwings/vim-colors'
 Plug 'morhetz/gruvbox'
 Plug 'nightsense/seabird'
 Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
+" Smoothie the scroll
+Plug 'psliwka/vim-smoothie'
+" Vim distraction free
+Plug 'junegunn/goyo.vim'
 
 " ## Angular Plugins
 " Plug 'Shougo/vimproc.vim'

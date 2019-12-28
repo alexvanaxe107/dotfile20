@@ -62,6 +62,13 @@ super + shift + v
 super + shift + g ; {1,2,8,i,f,c,r,s}
 	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/investcharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
 
+# Change wallpapers
+super + shift + w ; {n}
+	{nitrogen --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night}
+
+super + shift + w ; {d}
+	{nitrogen --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day}
+
 ###################
 ##### WM KEYS #####
 ###################
