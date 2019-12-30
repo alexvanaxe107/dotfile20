@@ -6,14 +6,50 @@ if [ -z "$chosen" ]; then
     exit
 fi
 
+# Try to copy the config where is the themename
+cp $HOME/.config/bspwm/themes/$chosen.cfg $HOME/.config/bspwm/themes/bsp.cfg
+source $HOME/.config/bspwm/themes/bsp.cfg
+
 reset_configs(){
-    cp $HOME/.config/polybar/config_bkp $HOME/.config/polybar/config
-    cp $HOME/.config/bspwm/themes/night.cfg $HOME/.config/bspwm/themes/bsp.cfg
-    cp $HOME/.config/conky/night/process.conf_tmp $HOME/.config/conky/night/process.conf
-    cp $HOME/.config/conky/night/cpu.conf_tmp $HOME/.config/conky/night/cpu.conf
-    cp $HOME/.config/conky/night/clock.conf_tmp $HOME/.config/conky/night/clock.conf
+    cp $HOME/.config/polybar/themes/$theme_name $HOME/.config/polybar/config
+    cp $HOME/.config/bspwm/themes/$theme_name.cfg $HOME/.config/bspwm/themes/bsp.cfg
+    cp $HOME/.config/conky/themes/$theme_name/process.conf_tmp $HOME/.config/conky/process.conf
+    cp $HOME/.config/conky/themes/$theme_name/cpu.conf_tmp $HOME/.config/conky/cpu.conf
+    cp $HOME/.config/conky/themes/$theme_name/clock.conf_tmp $HOME/.config/conky/clock.conf
 }
-reset_configs
+
+startup_theme(){
+    reset_configs
+    if [ "light" == "$chosen" ]; then
+        killall picom
+        killall conky
+        killall polybar
+        xsetroot -solid blue
+        bspc config top_padding 0
+        bspc config window_gap 0  
+    else
+        killall picom; picom -b &
+        killall dunst; dunst &
+        bspc config window_gap 6
+        # Start conky according theme
+        killall conky
+        $HOME/.config/conky/conky.sh
+
+        # Set wallpaper according theme
+        nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+
+        killall polybar
+        polybar $theme_name &
+        sleep 1
+        bspc config top_padding 16
+    fi
+}
+
+case "$chosen" in
+    "wallpaper") set_color_by_walpaper;;
+    *) echo startup_theme;;
+esac
+
 set_color_by_walpaper() {
     # Retrieve the background path
     reset_configs
@@ -36,61 +72,22 @@ set_color_by_walpaper() {
     sed -i "s/#EAF2EF/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 75))]}/" $HOME/.config/bspwm/themes/bsp.cfg
 
     # Configure conky! Here we go!
-    sed -i "s/041866/${colors_wallpaper[15]}/" $HOME/.config/conky/night/process.conf
-    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/night/process.conf
-    sed -i "s/FFFFFF/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/night/process.conf
+    sed -i "s/041866/${colors_wallpaper[15]}/" $HOME/.config/conky/process.conf
+    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/process.conf
+    sed -i "s/FFFFFF/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/process.conf
 
-    sed -i "s/041866/${colors_wallpaper[15]}/" $HOME/.config/conky/night/cpu.conf
-    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/night/cpu.conf
-    sed -i "s/FFFFFF/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/night/cpu.conf
+    sed -i "s/041866/${colors_wallpaper[15]}/" $HOME/.config/conky/cpu.conf
+    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/cpu.conf
+    sed -i "s/FFFFFF/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/cpu.conf
 
-    sed -i "s/041866/${colors_wallpaper[1]}/" $HOME/.config/conky/night/clock.conf
-    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/night/clock.conf
-    sed -i "s/2d2d2d/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/night/cpu.conf
+    sed -i "s/041866/${colors_wallpaper[1]}/" $HOME/.config/conky/clock.conf
+    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/clock.conf
+    sed -i "s/2d2d2d/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/cpu.conf
 
     source $HOME/.config/bspwm/themes/bsp.cfg
     killall conky
-    $HOME/.config/conky/night/conky.sh
+    $HOME/.config/conky/conky.sh
 }
-
-case "$chosen" in
-    "wallpaper") set_color_by_walpaper;;
-    *) echo "Oii";;
-esac
-
-cp $HOME/.config/bspwm/themes/$chosen.cfg $HOME/.config/bspwm/themes/bsp.cfg
-source $HOME/.config/bspwm/themes/bsp.cfg
-
-if [ "light" == "$chosen" ]; then
-    killall picom
-    killall conky
-    killall polybar
-    xsetroot -solid blue
-    bspc config top_padding 0
-    bspc config window_gap 0  
-else
-    killall picom; picom -b &
-    killall dunst; dunst &
-    bspc config window_gap 6
-    # Start conky according theme
-    case "$chosen" in
-        "night") killall conky; $HOME/.config/conky/night/conky.sh;;
-        "day") killall conky; $HOME/.config/conky/day/conky.sh;;
-        *) echo "Oii";;
-    esac
-
-    # Set wallpaper according theme
-    case "$chosen" in
-        "night") nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night;;
-        "day") nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day;;
-        *) echo "Oii";;
-    esac
-
-    killall polybar
-    polybar $theme_name &
-    sleep 1
-    bspc config top_padding 16
-fi
 
 set_vim(){
     if [ "day" == $1 ]; then
@@ -118,7 +115,6 @@ case "$chosen" in
     *) echo "Oii";;
 esac
 
-
 # Colors
 bspc config focused_border_color            "$focused_border_color"
 bspc config active_border_color             "$active_border_color"
@@ -134,4 +130,3 @@ bspc config normal_sticky_border_color      "$normal_sticky_border_color"
 bspc config focused_private_border_color    "$focused_private_border_color"
 bspc config active_private_border_color     "$active_private_border_color"
 bspc config normal_private_border_color     "$normal_private_border_color"
-

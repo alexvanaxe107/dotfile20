@@ -18,18 +18,6 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #C5F0F2CD
-background-alt = #8A792B
-;foreground = ${xrdb:color7:#222}
-foreground = #101820
-foreground-alt = #6B6B6B
-foreground-alt2 = #C48669
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-
-[colors/night]
-;background = ${xrdb:color0:#222}
 background = #B705080F
 background-alt = #040C38
 ;foreground = ${xrdb:color7:#222}
@@ -40,7 +28,7 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/night]
+[bar/default]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 16
@@ -52,8 +40,8 @@ fixed-center = false
 bottom = false
 enable-ipc = true
 
-background = ${colors/night.background}
-foreground = ${colors/night.foreground}
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 line-size = 0
 line-color = #f00
@@ -72,7 +60,7 @@ font-1 = FontAwesome:pixelsize=9
 font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
 
-modules-left = bspwm-night
+modules-left = bspwm
 modules-center = pomodoro nweather torrent
 modules-right =  recording pulseaudio memory cpu temperature date
 
@@ -97,66 +85,6 @@ border-top-color=#000000
 
 cursor-click = pointer
 cursor-scroll = ns-resize
-
-
-[bar/day]
-;monitor = ${env:MONITOR:HDMI-1}
-width = 98%
-height = 16
-offset-x = 1%
-;offset-y = 1%
-radius = 6.0
-fixed-center = false
-
-bottom = false
-enable-ipc = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 1
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = "Special Elite:pixelsize=8"
-font-1 = "Noto Color Emoji:scale=14"
-font-2 = FontAwesome:pixelsize=8
-font-3 = symbola:pixelsize=9
-
-modules-left = bspwm
-modules-center = pomodoro nweather torrent
-modules-right =  recording pulseaudio memory cpu temperature date
-
-tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
-
-wm-restack = bspwm
-;wm-restack = i3
-
-override-redirect = true
-separator = "|"
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[module/pomodoro]
-type = custom/script
-interval = 3
-exec = /home/alexvanaxe/bin/pomodoro
 
 [module/torrent]
 type = custom/script
@@ -206,41 +134,6 @@ label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
-[module/bspwm-night]
-type = internal/bspwm
-
-#label-focused = %index%
-label-focused = %icon%
-label-focused-background = ${colors/night.background-alt}
-label-focused-underline= ${colors/night.primary}
-label-focused-padding = 1
-
-#label-occupied = %index%
-label-occupied = %index%%icon%
-label-occupied-padding = 1
-
-#label-urgent = %index%!
-label-urgent = %icon%!
-label-urgent-background = ${colors/night.alert}
-label-urgent-padding = 1
-
-#label-empty = %index%
-label-empty = %index%%icon%
-label-empty-foreground = ${colors/night.foreground-alt2}
-label-empty-padding = 1
-
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-9 = 10;
-ws-icon-default = ♟
-
 [module/bspwm]
 type = internal/bspwm
 
@@ -275,9 +168,6 @@ ws-icon-7 = 8;
 ws-icon-8 = 9;
 ws-icon-9 = 10;
 ws-icon-default = ♟
-
-; Separator in between workspaces
-; label-separator = |
 
 [module/i3]
 type = internal/i3

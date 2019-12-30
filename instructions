@@ -1,16 +1,13 @@
 In order to install from these lists you can do
 
 sudo pacman -S --needed $(comm -12 <(pacman -Slq|sort) <(sort pkglist.txt) )
-sudo pacman -S --needed $(comm -12 <(pacman -Slq|sort) <(sort pkglist.txt) )
 
 and
 
 pacaur -S --noedit --noconfirm --needed localpkglist.txt
-pacaur -S --noedit --noconfirm --needed localpkglist.txt
-
 
 New orphans clean:
 sudo pacman -Rs $(pacman -Qtdq)
 
-
 gcc -march=native -Q --help=target|grep march
+
