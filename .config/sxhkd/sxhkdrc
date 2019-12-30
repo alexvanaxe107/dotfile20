@@ -64,10 +64,10 @@ super + shift + g ; {1,2,8,i,f,c,r,s}
 
 # Change wallpapers
 super + shift + w ; {n}
-	{nitrogen --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night}
+	{nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night}
 
 super + shift + w ; {d}
-	{nitrogen --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day}
+	{nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day}
 
 ###################
 ##### WM KEYS #####

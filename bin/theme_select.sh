@@ -6,14 +6,17 @@ if [ -z "$chosen" ]; then
     exit
 fi
 
-
-cp $HOME/.config/polybar/config_bkp $HOME/.config/polybar/config
-cp $HOME/.config/bspwm/themes/night.cfg $HOME/.config/bspwm/themes/bsp.cfg
-cp $HOME/.config/conky/night/process.conf_tmp $HOME/.config/conky/night/process.conf
-cp $HOME/.config/conky/night/cpu.conf_tmp $HOME/.config/conky/night/cpu.conf
-cp $HOME/.config/conky/night/clock.conf_tmp $HOME/.config/conky/night/clock.conf
+reset_configs(){
+    cp $HOME/.config/polybar/config_bkp $HOME/.config/polybar/config
+    cp $HOME/.config/bspwm/themes/night.cfg $HOME/.config/bspwm/themes/bsp.cfg
+    cp $HOME/.config/conky/night/process.conf_tmp $HOME/.config/conky/night/process.conf
+    cp $HOME/.config/conky/night/cpu.conf_tmp $HOME/.config/conky/night/cpu.conf
+    cp $HOME/.config/conky/night/clock.conf_tmp $HOME/.config/conky/night/clock.conf
+}
+reset_configs
 set_color_by_walpaper() {
     # Retrieve the background path
+    reset_configs
 
     cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | cut -d "=" -f 2)
     colors_wallpaper=($(convert $cur_wallpaper -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
@@ -22,8 +25,8 @@ set_color_by_walpaper() {
     sed -i "s/^background = #B7.*/background = #B7${colors_wallpaper[1]}/" $HOME/.config/polybar/config
     sed -i "s/^background-alt = #040C38/background-alt = #${colors_wallpaper[9]}/" $HOME/.config/polybar/config
     sed -i "s/^foreground = #EAF2EF/foreground = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/polybar/config
-    sed -i "s/^foreground-alt = #6B6B6B/foreground-alt = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 55))]}/" $HOME/.config/polybar/config
-    sed -i "s/^foreground-alt2 = #969F63/foreground-alt2 = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 75))]}/" $HOME/.config/polybar/config
+    sed -i "s/^foreground-alt = #6B6B6B/foreground-alt = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 10))]}/" $HOME/.config/polybar/config
+    sed -i "s/^foreground-alt2 = #969F63/foreground-alt2 = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 215))]}/" $HOME/.config/polybar/config
 
     # Config bsp collors
     sed -i "s/#05080F/#${colors_wallpaper[1]}/" $HOME/.config/bspwm/themes/bsp.cfg
@@ -46,7 +49,8 @@ set_color_by_walpaper() {
     sed -i "s/2d2d2d/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/night/cpu.conf
 
     source $HOME/.config/bspwm/themes/bsp.cfg
-    echo "Setting color";
+    killall conky
+    $HOME/.config/conky/night/conky.sh
 }
 
 case "$chosen" in
