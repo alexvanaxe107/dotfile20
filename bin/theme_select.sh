@@ -7,15 +7,33 @@ if [ -z "$chosen" ]; then
 fi
 
 # Try to copy the config where is the themename
-cp $HOME/.config/bspwm/themes/$chosen.cfg $HOME/.config/bspwm/themes/bsp.cfg
+
+if [ "wallpaper" != "$chosen" ]; then
+    cp $HOME/.config/bspwm/themes/$chosen.cfg $HOME/.config/bspwm/themes/bsp.cfg
+fi
 source $HOME/.config/bspwm/themes/bsp.cfg
 
 reset_configs(){
     cp $HOME/.config/polybar/themes/$theme_name $HOME/.config/polybar/config
     cp $HOME/.config/bspwm/themes/$theme_name.cfg $HOME/.config/bspwm/themes/bsp.cfg
-    cp $HOME/.config/conky/themes/$theme_name/process.conf_tmp $HOME/.config/conky/process.conf
-    cp $HOME/.config/conky/themes/$theme_name/cpu.conf_tmp $HOME/.config/conky/cpu.conf
-    cp $HOME/.config/conky/themes/$theme_name/clock.conf_tmp $HOME/.config/conky/clock.conf
+    cp $HOME/.config/conky/themes/$theme_name/process.conf $HOME/.config/conky/process.conf
+    cp $HOME/.config/conky/themes/$theme_name/cpu.conf $HOME/.config/conky/cpu.conf
+    cp $HOME/.config/conky/themes/$theme_name/clock.conf $HOME/.config/conky/clock.conf
+}
+
+refresh_theme() {
+    source $HOME/.config/bspwm/themes/bsp.cfg
+    killall picom; picom -b &
+    killall dunst; dunst &
+    bspc config window_gap 6
+    # Start conky according theme
+    killall conky
+    $HOME/.config/conky/conky.sh
+
+    killall polybar
+    polybar $theme_name &
+    sleep 1
+    bspc config top_padding 16
 }
 
 startup_theme(){
@@ -28,20 +46,10 @@ startup_theme(){
         bspc config top_padding 0
         bspc config window_gap 0  
     else
-        killall picom; picom -b &
-        killall dunst; dunst &
-        bspc config window_gap 6
-        # Start conky according theme
-        killall conky
-        $HOME/.config/conky/conky.sh
-
         # Set wallpaper according theme
         nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
 
-        killall polybar
-        polybar $theme_name &
-        sleep 1
-        bspc config top_padding 16
+        refresh_theme
     fi
 }
 
@@ -53,40 +61,11 @@ esac
 set_color_by_walpaper() {
     # Retrieve the background path
     reset_configs
+    
+    # This function is located on bspwm themes files
+    update_files
 
-    cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | cut -d "=" -f 2)
-    colors_wallpaper=($(convert $cur_wallpaper -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
-
-    # Config polybar colors
-    sed -i "s/^background = #B7.*/background = #B7${colors_wallpaper[1]}/" $HOME/.config/polybar/config
-    sed -i "s/^background-alt = #040C38/background-alt = #${colors_wallpaper[9]}/" $HOME/.config/polybar/config
-    sed -i "s/^foreground = #EAF2EF/foreground = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/polybar/config
-    sed -i "s/^foreground-alt = #6B6B6B/foreground-alt = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 10))]}/" $HOME/.config/polybar/config
-    sed -i "s/^foreground-alt2 = #969F63/foreground-alt2 = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 215))]}/" $HOME/.config/polybar/config
-
-    # Config bsp collors
-    sed -i "s/#05080F/#${colors_wallpaper[1]}/" $HOME/.config/bspwm/themes/bsp.cfg
-    sed -i "s/#372549/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/bspwm/themes/bsp.cfg
-    sed -i "s/#EAF2EF/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/bspwm/themes/bsp.cfg
-    sed -i "s/#040C38/#${colors_wallpaper[9]}/" $HOME/.config/bspwm/themes/bsp.cfg
-    sed -i "s/#EAF2EF/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 75))]}/" $HOME/.config/bspwm/themes/bsp.cfg
-
-    # Configure conky! Here we go!
-    sed -i "s/041866/${colors_wallpaper[15]}/" $HOME/.config/conky/process.conf
-    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/process.conf
-    sed -i "s/FFFFFF/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/process.conf
-
-    sed -i "s/041866/${colors_wallpaper[15]}/" $HOME/.config/conky/cpu.conf
-    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/cpu.conf
-    sed -i "s/FFFFFF/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/cpu.conf
-
-    sed -i "s/041866/${colors_wallpaper[1]}/" $HOME/.config/conky/clock.conf
-    sed -i "s/CBD38F/${colors_wallpaper[$((${#colors_wallpaper[@]} - 45))]}/" $HOME/.config/conky/clock.conf
-    sed -i "s/2d2d2d/${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/conky/cpu.conf
-
-    source $HOME/.config/bspwm/themes/bsp.cfg
-    killall conky
-    $HOME/.config/conky/conky.sh
+    refresh_theme
 }
 
 set_vim(){
@@ -112,7 +91,7 @@ case "$chosen" in
     "night") set_vim $chosen;;
     "day") set_vim $chosen;;
     "light") set_vim $chosen;;
-    *) echo "Oii";;
+    *) echo "None";;
 esac
 
 # Colors
