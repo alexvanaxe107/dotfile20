@@ -1,12 +1,41 @@
 #!/bin/sh
 
-chosen=$(printf "night\\nday\\nlight" | dmenu "$@" -i -p "Change the theme: ")
-cp $HOME/.config/bspwm/themes/$chosen.cfg $HOME/.config/bspwm/themes/bsp.cfg
-source $HOME/.config/bspwm/themes/bsp.cfg
+chosen=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the theme: ")
 
 if [ -z "$chosen" ]; then
     exit
 fi
+
+
+set_color_by_walpaper() {
+    # Retrieve the background path
+    cp /home/alexvanaxe/.config/polybar/config_bkp /home/alexvanaxe/.config/polybar/config
+    cp /home/alexvanaxe/.config/bspwm/themes/night.cfg /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+    cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | cut -d "=" -f 2)
+    colors_wallpaper=($(convert $cur_wallpaper -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
+    sed -i "s/^background = #B7.*/background = #B7${colors_wallpaper[1]}/" $HOME/.config/polybar/config
+    sed -i "s/^background-alt = #040C38/background-alt = #${colors_wallpaper[9]}/" $HOME/.config/polybar/config
+    sed -i "s/^foreground = #EAF2EF/foreground = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" $HOME/.config/polybar/config
+    sed -i "s/^foreground-alt = #6B6B6B/foreground-alt = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 55))]}/" $HOME/.config/polybar/config
+    sed -i "s/^foreground-alt2 = #969F63/foreground-alt2 = #${colors_wallpaper[$((${#colors_wallpaper[@]} - 75))]}/" $HOME/.config/polybar/config
+
+    sed -i "s/#05080F/#${colors_wallpaper[1]}/" /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+    sed -i "s/#372549/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+    sed -i "s/#EAF2EF/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 5))]}/" /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+    sed -i "s/#040C38/#${colors_wallpaper[9]}/" /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+    sed -i "s/#EAF2EF/#${colors_wallpaper[$((${#colors_wallpaper[@]} - 75))]}/" /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+
+    source $HOME/.config/bspwm/themes/bsp.cfg
+    echo "Setting color";
+}
+
+case "$chosen" in
+    "wallpaper") set_color_by_walpaper;;
+    *) echo "Oii";;
+esac
+
+cp $HOME/.config/bspwm/themes/$chosen.cfg $HOME/.config/bspwm/themes/bsp.cfg
+source $HOME/.config/bspwm/themes/bsp.cfg
 
 if [ "light" == "$chosen" ]; then
     killall picom
@@ -28,8 +57,8 @@ else
 
     # Set wallpaper according theme
     case "$chosen" in
-        "night") nitrogen --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night;;
-        "day") nitrogen --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day;;
+        "night") nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night;;
+        "day") nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day;;
         *) echo "Oii";;
     esac
 
@@ -64,6 +93,7 @@ case "$chosen" in
     "light") set_vim $chosen;;
     *) echo "Oii";;
 esac
+
 
 # Colors
 bspc config focused_border_color            "$focused_border_color"
