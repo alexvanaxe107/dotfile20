@@ -24,9 +24,9 @@ conky.config = {
 
 	font='Orbitron:size=16',
 	default_shade_color='ffffff',
-	default_color= 'FFAA22',
+	default_color= 'CBD38F',
 	color1= '2d2d2d',
-	color2 = '000011',
+	color2 = '041866',
 	gap_x=50,
 	gap_y=450
 }

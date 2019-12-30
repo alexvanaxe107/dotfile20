@@ -25,12 +25,12 @@ conky.config = {
 	draw_graph_borders= true,
 
 	font='Iceland:size=13',
-	default_color= 'FFFF99',
+	default_color= 'FFFFFF',
 	default_shade_color= '333333',
 	default_outline_color= 'black',
-	color1 = '001144',
-	color2 = 'FFAA22',
-	color3 = 'FFFF99',
+	color1 = '041866',
+	color2 = 'CBD38F',
+	color3 = 'FFFFFF',
 
 	alignment= 'bottom_left',
 	text_buffer_size = 512,
