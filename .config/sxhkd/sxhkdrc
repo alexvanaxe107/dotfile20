@@ -1,6 +1,6 @@
 # Start the terminal
 super + shift + Return
-	st
+	termite
 
 # start dmenu
 super + d

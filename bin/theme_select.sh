@@ -2,6 +2,10 @@
 
 chosen=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the theme: ")
 
+if [ $chosen == "wallpaper" ]; then
+    chosen_font=$(printf "Original\\nSoft" | dmenu "$@" -i -p "Chose the font kind:")
+fi
+
 if [ -z "$chosen" ]; then
     exit
 fi
@@ -14,11 +18,12 @@ fi
 source $HOME/.config/bspwm/themes/bsp.cfg
 
 reset_configs(){
-    cp $HOME/.config/polybar/themes/$theme_name $HOME/.config/polybar/config
     cp $HOME/.config/bspwm/themes/$theme_name.cfg $HOME/.config/bspwm/themes/bsp.cfg
+    cp $HOME/.config/polybar/themes/$theme_name $HOME/.config/polybar/config
     cp $HOME/.config/conky/themes/$theme_name/process.conf $HOME/.config/conky/process.conf
     cp $HOME/.config/conky/themes/$theme_name/cpu.conf $HOME/.config/conky/cpu.conf
     cp $HOME/.config/conky/themes/$theme_name/clock.conf $HOME/.config/conky/clock.conf
+    cp $HOME/.config/conky/themes/$theme_name/fortune.conf $HOME/.config/conky/fortune.conf
 }
 
 refresh_theme() {
@@ -28,15 +33,22 @@ refresh_theme() {
     bspc config window_gap 6
     # Start conky according theme
     killall conky
-    $HOME/.config/conky/conky.sh
 
     killall polybar
-    polybar $theme_name &
+    polybar default&
     sleep 1
+    $HOME/.config/conky/conky.sh
     bspc config top_padding 16
 }
 
+prepare_wallpaper(){
+    killall picom
+    killall conky
+    killall polybar
+}
+
 startup_theme(){
+    echo "starting up"
     reset_configs
     if [ "light" == "$chosen" ]; then
         killall picom
@@ -53,20 +65,23 @@ startup_theme(){
     fi
 }
 
-case "$chosen" in
-    "wallpaper") set_color_by_walpaper;;
-    *) echo startup_theme;;
-esac
-
 set_color_by_walpaper() {
     # Retrieve the background path
+    prepare_wallpaper
     reset_configs
+    sleep 2
     
     # This function is located on bspwm themes files
     update_files
+    sleep 2
 
     refresh_theme
 }
+
+case "$chosen" in
+    "wallpaper") set_color_by_walpaper;;
+    *) startup_theme;;
+esac
 
 set_vim(){
     if [ "day" == $1 ]; then
