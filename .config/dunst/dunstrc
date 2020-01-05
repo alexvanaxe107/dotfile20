@@ -3,14 +3,14 @@
 [urgency_low]
   # IMPORTANT: colors have to be defined in quotation marks.
   # Otherwise the # and following would be interpreted as a comment.
-  background = "#0B1B03"
-  foreground = "#FFFFFF"
-  frame_color = "#03171B"
+  background = "#FFFFDD"
+  foreground = "#000022"
+  frame_color = "#FFEEAA"
   timeout = 4
 
 [urgency_normal]
-  background = "#27125B"
-  foreground = "#FFFFFF"
+  background = "#886644"
+  foreground = "#000022"
   frame_color = "#668BC8"
   timeout = 6
 

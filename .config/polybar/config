@@ -18,23 +18,23 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #87000011
-background-alt = #001144
+background = #C5FFFFDD
+background-alt = #886644
 ;foreground = ${xrdb:color7:#222}
-foreground = #99DDEE
-foreground-alt = #88DDEE
-foreground-alt2 = #224455
+foreground = #000022
+foreground-alt = #111122
+foreground-alt2 = #225566
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
 [bar/default]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 100%
+width = 98%
 height = 16
-;offset-x = 1%
+offset-x = 1%
 ;offset-y = 1%
-radius = 0.0
+radius = 6.0
 fixed-center = false
 
 bottom = false
@@ -43,22 +43,22 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 0
+line-size = 1
 line-color = #f00
 
 border-size = 0
 border-color = #00000000
 
-padding-left = 1
-padding-right = 1
+padding-left = 2
+padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Iceland:pixelsize=10
-font-1 = FontAwesome:pixelsize=9
-font-2 = symbola:pixelsize=10
-;font-1 = "Noto Color Emoji:scale=14"
+font-0 = "Special Elite:pixelsize=8"
+font-1 = "Noto Color Emoji:scale=14"
+font-2 = FontAwesome:pixelsize=8
+font-3 = symbola:pixelsize=9
 
 modules-left = bspwm
 modules-center = pomodoro nweather torrent
@@ -78,13 +78,14 @@ scroll-down = bspwm-deskprev
 
 ;scroll-up = i3wm-wsnext
 ;scroll-down = i3wm-wsprev
-border-bottom-size=2
-border-bottom-color=#000000
-border-top-size=2
-border-top-color=#000000
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/pomodoro]
+type = custom/script
+interval = 3
+exec = /home/alexvanaxe/bin/pomodoro
 
 [module/torrent]
 type = custom/script
@@ -162,12 +163,15 @@ ws-icon-1 = 2;
 ws-icon-2 = 3;
 ws-icon-3 = 4;
 ws-icon-4 = 5;
-ws-icon-5 = 6;
+ws-icon-5 = 6;
 ws-icon-6 = 7;
 ws-icon-7 = 8;
 ws-icon-8 = 9;
 ws-icon-9 = 10;
 ws-icon-default = ♟
+
+; Separator in between workspaces
+; label-separator = |
 
 [module/i3]
 type = internal/i3
@@ -482,4 +486,3 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
-
