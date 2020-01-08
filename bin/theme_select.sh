@@ -126,12 +126,12 @@ update_files(){
 
     if [ "$theme_name" == "night" ]; then
         if [ $chosen_font != "Original" ]; then
-            sed -i "s/Iceland/Hack/" $HOME/.config/polybar/config
-            sed -i "s/Iceland/Hack/" $HOME/.config/bspwm/themes/bsp.cfg
-            sed -i "s/Iceland/Hack/" $HOME/.config/conky/process.conf
-            sed -i "s/Iceland/Hack/" $HOME/.config/conky/cpu.conf
-            sed -i "s/Orbitron/Hack/" $HOME/.config/conky/fortune.conf
-            sed -i "s/Orbitron/Hack/" $HOME/.config/conky/clock.conf
+            sed -i "s/Iceland/Cantarell/" $HOME/.config/polybar/config
+            sed -i "s/Iceland/Cantarell/" $HOME/.config/bspwm/themes/bsp.cfg
+            sed -i "s/Iceland/Cantarell/" $HOME/.config/conky/process.conf
+            sed -i "s/Iceland/Cantarell/" $HOME/.config/conky/cpu.conf
+            sed -i "s/Orbitron/Cantarell/" $HOME/.config/conky/fortune.conf
+            sed -i "s/Orbitron/Cantarell/" $HOME/.config/conky/clock.conf
         fi
 
         # Config polybar colors

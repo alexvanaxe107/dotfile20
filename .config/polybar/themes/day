@@ -64,8 +64,8 @@ modules-left = bspwm
 modules-center = pomodoro nweather torrent
 modules-right =  recording pulseaudio memory cpu temperature date
 
-tray-position = right
-tray-padding = 2
+;tray-position = right
+;tray-padding = 2
 ;tray-background = #0063ff
 
 wm-restack = bspwm

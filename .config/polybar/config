@@ -18,23 +18,23 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #C5FFFFDD
-background-alt = #886644
+background = #87000011
+background-alt = #002233
 ;foreground = ${xrdb:color7:#222}
-foreground = #000022
-foreground-alt = #111122
-foreground-alt2 = #225566
+foreground = #CC9999
+foreground-alt = #BB8888
+foreground-alt2 = #DD9988
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
 [bar/default]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 98%
+width = 100%
 height = 16
-offset-x = 1%
+;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0.0
 fixed-center = false
 
 bottom = false
@@ -43,29 +43,29 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 1
+line-size = 0
 line-color = #f00
 
 border-size = 0
 border-color = #00000000
 
-padding-left = 2
-padding-right = 2
+padding-left = 1
+padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Special Elite:pixelsize=8"
-font-1 = "Noto Color Emoji:scale=14"
-font-2 = FontAwesome:pixelsize=8
-font-3 = symbola:pixelsize=9
+font-0 = Iceland:pixelsize=10
+font-1 = FontAwesome:pixelsize=9
+font-2 = symbola:pixelsize=10
+;font-1 = "Noto Color Emoji:scale=14"
 
 modules-left = bspwm
 modules-center = pomodoro nweather torrent
 modules-right =  recording pulseaudio memory cpu temperature date
 
-tray-position = right
-tray-padding = 2
+;tray-position = right
+;tray-padding = 2
 ;tray-background = #0063ff
 
 wm-restack = bspwm
@@ -78,6 +78,10 @@ scroll-down = bspwm-deskprev
 
 ;scroll-up = i3wm-wsnext
 ;scroll-down = i3wm-wsprev
+border-bottom-size=2
+border-bottom-color=#000000
+border-top-size=2
+border-top-color=#000000
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -169,9 +173,6 @@ ws-icon-7 = 8;
 ws-icon-8 = 9;
 ws-icon-9 = 10;
 ws-icon-default = ♟
-
-; Separator in between workspaces
-; label-separator = |
 
 [module/i3]
 type = internal/i3
@@ -486,3 +487,4 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
+
