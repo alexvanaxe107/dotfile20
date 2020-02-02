@@ -1,6 +1,6 @@
 # Start the terminal
 super + shift + Return
-	termite
+	alacritty
 
 # start dmenu
 super + d
@@ -57,9 +57,13 @@ super + shift + e
 super + shift + b
 	$HOME/bin/polybar_toggle.sh
 
-#Pomodoro
+# Clipboard tool
 super + shift + v
 	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
+
+# Equalizer
+super + shift + a
+	$HOME/bin/equalizer "${DMENU_COLOR[@]}"
 
 # Chords
 super + shift + g ; {1,2,8,i,f,c,r,s}
@@ -113,8 +117,15 @@ super + u
 #
 
 # set the window state
-super + {t,shift + t,s,f}
+super + {t,ctrl + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set ignore ewmh to fullscreen to container
+super + ctrl + f
+	bspc config ignore_ewmh_fullscreen enter
+
+super + ctrl + shift + f
+	bspc config ignore_ewmh_fullscreen none
 
 # set the node flags
 super + {w,x,y,z}
