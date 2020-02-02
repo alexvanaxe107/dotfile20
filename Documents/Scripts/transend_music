@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# TR_TORRENT_DIR
+
+chmod -R 770 "$TR_TORRENT_DIR/$TR_TORRENT_NAME"
+mv "$TR_TORRENT_DIR/$TR_TORRENT_NAME" /home/media/Music/
+chgrp -R plex /home/media/Music/*
+
+notify-send "Torrent finished" "Music torrent added to the plex directory."

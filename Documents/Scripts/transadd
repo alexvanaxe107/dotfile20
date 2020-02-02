@@ -5,11 +5,13 @@
 # transmission-daemon sometimes fails to take remote requests in its first moments.
 
 #pgrep -x transmission-da || (transmission-daemon && notify-send "Starting transmission daemon..." && sleep 3 && pkill -RTMIN+7 i3blocks)
-
-chosen="$(printf "Other\\nMovie\\nTV" | dmenu -i -p "Choose the download: " -nb darkred -sb red -sf white -nf gray )"
+source /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
+chosen="$(printf "Other\\nMovie\\nTV\\nMusic" | dmenu ${DMENU_COLOR[@]} -i -p "Choose the download: " )"
 
 case $chosen  in
 	"Movie") transmission-remote -a "$@" --no-start-paused --torrent-done-script /home/alexvanaxe/Documents/Scripts/transend_video && notify-send  "🔽 Torrent added" "Started downloading a movie at $@";;
 	"TV") transmission-remote -a "$@" --no-start-paused --torrent-done-script /home/alexvanaxe/Documents/Scripts/transend_tv && notify-send  "🔽 Torrent added" "Started downloading a tv show at $@";;
-	*) transmission-remote -a "$@" && notify-send  "🔽 Torrent added" "Started downloading $@"
+	"Music") transmission-remote -a "$@" --no-start-paused --torrent-done-script /home/alexvanaxe/Documents/Scripts/transend_music && notify-send  "🔽 Torrent added" "Started downloading some music at $@";;
+	"Other") transmission-remote -a "$@" && notify-send  "🔽 Torrent added" "Started downloading $@";;
+	*) notify-send "Canceled" "The torrent download was CANCELED"
 esac

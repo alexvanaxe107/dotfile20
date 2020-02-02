@@ -1,5 +1,5 @@
 alias ls='ls -h --color'
-alias fdir='fdir.sh'
+alias fdir='$HOME/.fdir/fdir.sh'
 alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d ~/.config/todo/config'
 
