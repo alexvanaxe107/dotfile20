@@ -65,6 +65,10 @@ super + shift + v
 super + shift + a
 	$HOME/bin/equalizer "${DMENU_COLOR[@]}"
 
+# Start stop conky
+super + shift + c
+	$HOME/.config/conky/conky.sh
+
 # Chords
 super + shift + g ; {1,2,8,i,f,c,r,s}
 	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/investcharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
