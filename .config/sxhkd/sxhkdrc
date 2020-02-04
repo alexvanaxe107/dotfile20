@@ -71,7 +71,7 @@ super + shift + c
 
 # Chords
 super + shift + g ; {1,2,8,i,f,c,r,s}
-	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/investcharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
+	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
 
 # Change wallpapers
 super + shift + w ; {n}
