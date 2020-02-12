@@ -65,6 +65,10 @@ super + shift + v
 super + shift + a
 	$HOME/bin/equalizer "${DMENU_COLOR[@]}"
 
+# Edit Config file
+super + shift + u
+	$HOME/bin/configshortcut.sh "${DMENU_COLOR[@]}"
+
 # Start stop conky
 super + shift + c
 	$HOME/.config/conky/conky.sh
