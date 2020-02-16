@@ -8,14 +8,16 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
 set termguicolors
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'transparent_background': 1
-  \     }
-  \   }
-  \ }
+"let g:PaperColor_Theme_Options = {
+"  \   'theme': {
+"  \     'default.dark': {
+"  \       'transparent_background': 1
+"  \     }
+"  \   }
+"  \ }
 
-colorscheme PaperColor
+"colorscheme PaperColor
+colorscheme one
+set background=dark
 
-let g:airline_theme='night_owl'
+let g:airline_theme="one"

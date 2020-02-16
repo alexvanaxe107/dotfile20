@@ -73,6 +73,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'haishanh/night-owl.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 " ColorSchemes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'rakr/vim-one'
@@ -91,6 +92,11 @@ Plug 'jakwings/vim-colors'
 Plug 'morhetz/gruvbox'
 Plug 'nightsense/seabird'
 Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
+" Smoothie the scroll
+Plug 'psliwka/vim-smoothie'
+" Vim distraction free
+Plug 'junegunn/goyo.vim'
 
 " ## Angular Plugins
 " Plug 'Shougo/vimproc.vim'
@@ -100,7 +106,10 @@ Plug 'mattn/emmet-vim'
 Plug 'valloric/MatchTagAlways'
 Plug 'leafgarland/typescript-vim'
 Plug 'bdauria/angular-cli.vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+" For Denite features
+Plug 'Shougo/denite.nvim'
 " Plug 'Quramy/tsuquyomi'
 Plug 'othree/javascript-libraries-syntax.vim'
 

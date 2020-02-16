@@ -5,6 +5,9 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
+synclient TapButton1=1
+synclient VertEdgeScroll=1
+
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
@@ -32,7 +35,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 setxkbmap -model abnt2 -layout br -variant abnt2
+xsetroot -cursor_name left_ptr
+source ~/.profile
 
-exec /home/alexvanaxe/bin/startdwm
+#exec /home/alexvanaxe/bin/startdwm
 #exec i3
 #exec dwm
+exec bspwm

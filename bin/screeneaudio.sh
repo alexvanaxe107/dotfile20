@@ -1,3 +1,4 @@
+#!/bin/sh
 
 if [[ $1 == "play" ]]; then
     mv $HOME/Documents/output.mkv $HOME/Documents/output_bkp.mkv
@@ -8,6 +9,6 @@ fi
 
 if [[ $1 == "stop" ]]; then
     killall ffmpeg
-    rm $HOME/.dwm/recording
+    echo "" > $HOME/.dwm/recording
     refbar
 fi

@@ -1,0 +1,22 @@
+#!/bin/sh
+while read file
+do
+    case "$1" in
+        "C-r")
+            convert -rotate 90 "$file" "$file" ;;
+        "C-c")
+            echo -n "$file" | xclip -selection clipboard ;;
+        "C-w")
+            nitrogen --save --set-zoom-fill "$file" ;;
+        "C-p")
+            magick convert "$file" -resize 1366x768\! "$file".png ;;
+        "C-s")
+            $HOME/.config/i3/scripts/sway_wallpaper.sh "$file" ;;
+        "C-l")
+            cp "$file" $HOME/Documents/Pictures/lock.png ;;
+        "C-n")
+            cp "$file" $HOME/Documents/Pictures/Wallpapers/night/ ;;
+        "C-d")
+            cp "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
+    esac
+done

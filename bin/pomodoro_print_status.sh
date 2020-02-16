@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/sh
+source /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 
-source $HOME/.pyenv/versions/spotify/bin/activate
-$HOME/.config/i3/scripts/pomodoro-client.py status
+pomodoro-client.py status
 

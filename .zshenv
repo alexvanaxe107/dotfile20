@@ -1,11 +1,11 @@
 alias ls='ls -h --color'
-alias fdir='fdir.sh'
+alias fdir='$HOME/.fdir/fdir.sh'
 alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d ~/.config/todo/config'
 
 export EDITOR=nvim
-export XDG_SESSION_DESKTOP=i3
-export XDG_CURRENT_DESKTOP=i3
+#export XDG_SESSION_DESKTOP=i3
+#export XDG_CURRENT_DESKTOP=i3
 
 export PYENV_ROOT="$HOME/.pyenv"
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
@@ -15,6 +15,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Pacman alias examples
 alias pacupg='sudo pacman -Syu'		# Synchronize with repositories and then upgrade packages that are out of date on the local system.
@@ -35,4 +36,7 @@ alias pacimpl="pacman -D --asdep"	# Mark one or more installed packages as non e
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
 
-alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
+#alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+source ~/.profile

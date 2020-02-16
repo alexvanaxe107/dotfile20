@@ -1,6 +1,6 @@
 #!/bin/sh
 
-transmission-remote -l | grep % |
+transmission-remote -l 2> /dev/null | grep % |
 	sed " # This first sed command is to ensure a desirable order with sort
 	s/.*Stopped.*/A/g;
 	s/.*Seeding.*/Z/g;

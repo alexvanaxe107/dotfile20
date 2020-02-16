@@ -1,0 +1,39 @@
+#! /bin/sh
+
+. "$HOME/.config/bspwm/themes/bsp.cfg"
+killall sxhkd; sxhkd &
+#nitrogen --restore &
+$HOME/.config/i3/monitor/saver.sh &
+
+#/home/alexvanaxe/.config/i3/conky/conky.sh &
+
+#/home/alexvanaxe/.config/conky/day/conky.sh
+#/home/alexvanaxe/.config/conky/tonight/conky.sh
+#stalonetray &
+killall clipster; clipster -d &
+
+# Configure the window manager
+#polybar example &
+#bspc monitor -d          X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+# Prevent windows to steal focus
+#bspc config ignore_ewmh_focus true
+
+bspc config border_width         1
+bspc config window_gap           6
+bspc config split_ratio 0.60
+
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+
+# App rules
+bspc rule -a Gimp state=floating follow=on
+bspc rule -a ffplay state=floating
+#bspc rule -a Gnome-calculator state=floating follow=on
+#bspc rule -a Chromium desktop='^2'
+#bspc rule -a mplayer2 state=floating
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
+

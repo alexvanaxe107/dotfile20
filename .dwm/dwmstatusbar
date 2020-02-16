@@ -59,7 +59,7 @@ weather_show(){
 	updt=$(( $cs % 20 ))
 	if [ "$updt" -eq "0" ] || [ "$cs" -eq "1" ]; then
         temp=$(curl -Ss 'https://wttr.in?format=%c+%t+%m')
-        regex="[\+\-][0-9]"
+        regex="[\+\-][0-9].*C"
         if [[ $temp =~ $regex ]]; then
             echo $temp > ~/.dwm/weather.cache
         fi
