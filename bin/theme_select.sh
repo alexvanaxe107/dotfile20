@@ -105,6 +105,7 @@ update_files(){
         
         # Config bsp collors
         sed -i "s/#6F8E27/#$(retrieve_color n 2)/" $HOME/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#123456/#$(retrieve_color i 5)/" $HOME/.config/bspwm/themes/bsp.cfg
 
         sed -i "s/#F0F2CD/#$(retrieve_color i 3)/" $HOME/.config/bspwm/themes/bsp.cfg
         sed -i "s/#49291D/#$(retrieve_color n 2)/" $HOME/.config/bspwm/themes/bsp.cfg
