@@ -41,6 +41,10 @@ super + shift + i
 super + shift + p
 	$HOME/bin/pomodoro-client.sh "${DMENU_COLOR[@]}"
 
+# Mount a partition
+super + shift + m
+	$HOME/bin/dmenumount "${DMENU_COLOR[@]}"
+
 #Todos
 super + shift + t
 	$HOME/bin/dtodosh.sh "${DMENU_COLOR[@]}"

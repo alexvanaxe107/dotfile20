@@ -79,6 +79,7 @@ update_files(){
     cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | cut -d "=" -f 2)
     colors_wallpaper=($(convert $cur_wallpaper -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
 
+    # DAY THEME
     if [ "$theme_name" == "day" ]; then
         if [ $chosen_font != "Original" ]; then
             sed -i "s/Special Elite/Hack/" $HOME/.config/polybar/config
@@ -88,14 +89,14 @@ update_files(){
         fi
                 
         # Config polybar colors
-        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 3)/" $HOME/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color i 240)/" $HOME/.config/polybar/config
+        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 13)/" $HOME/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 100)/" $HOME/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 2)/" $HOME/.config/polybar/config
-        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 20)/" $HOME/.config/polybar/config
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 70)/" $HOME/.config/polybar/config
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 140)/" $HOME/.config/polybar/config #ICONS
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 100)/" $HOME/.config/polybar/config
 
         # Config dunst colors
-        sed -i "s/#0B1B03/#$(retrieve_color i 3)/" $HOME/.config/dunst/dunstrc
+        sed -i "s/#0B1B03/#$(retrieve_color i 13)/" $HOME/.config/dunst/dunstrc
         sed -i "s/#FFFFFF/#$(retrieve_color n 2)/" $HOME/.config/dunst/dunstrc
         sed -i "s/#03171B/#$(retrieve_color i 10)/" $HOME/.config/dunst/dunstrc
 
@@ -105,19 +106,20 @@ update_files(){
         
         # Config bsp collors
         sed -i "s/#6F8E27/#$(retrieve_color n 2)/" $HOME/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#123456/#$(retrieve_color i 5)/" $HOME/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#123456/#$(retrieve_color i 13)/" $HOME/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#F0F2CD/#$(retrieve_color i 3)/" $HOME/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#49291D/#$(retrieve_color n 2)/" $HOME/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#8A792B/#$(retrieve_color i 240)/" $HOME/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#DFF1DA/#$(retrieve_color n 20)/" $HOME/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#F0F2CD/#$(retrieve_color i 13)/" $HOME/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#49291D/#$(retrieve_color n 2)/" $HOME/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#8A792B/#$(retrieve_color n 100)/" $HOME/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#DFF1DA/#$(retrieve_color i 13)/" $HOME/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+
         # Configure conky! Here we go!
-        sed -i "s/777777/$(retrieve_color i 25)/" $HOME/.config/conky/process.conf
-        sed -i "s/CBD38F/$(retrieve_color n 20)/" $HOME/.config/conky/process.conf
+        sed -i "s/777777/$(retrieve_color n 100)/" $HOME/.config/conky/process.conf
+        sed -i "s/CBD38F/$(retrieve_color i 140)/" $HOME/.config/conky/process.conf
         sed -i "s/FFFFFF/$(retrieve_color i 5)/" $HOME/.config/conky/process.conf
 
-        sed -i "s/777777/$(retrieve_color i 25)/" $HOME/.config/conky/cpu.conf
-        sed -i "s/CBD38F/$(retrieve_color n 20)/" $HOME/.config/conky/cpu.conf
+        sed -i "s/777777/$(retrieve_color n 100)/" $HOME/.config/conky/cpu.conf
+        sed -i "s/CBD38F/$(retrieve_color i 140)/" $HOME/.config/conky/cpu.conf
         sed -i "s/FFFFFF/$(retrieve_color i 5)/" $HOME/.config/conky/cpu.conf
 
         sed -i "s/041866/$(retrieve_color i 1)/" $HOME/.config/conky/clock.conf

@@ -5,6 +5,9 @@ killall sxhkd; sxhkd &
 #nitrogen --restore &
 $HOME/.config/i3/monitor/saver.sh &
 
+#bspc monitor eDP1 -n 0 -d 1 2 3 4 5 6 7 8
+#bspc monitor HDMI1 -n 1 -d 9 10
+
 #/home/alexvanaxe/.config/i3/conky/conky.sh &
 
 #/home/alexvanaxe/.config/conky/day/conky.sh
