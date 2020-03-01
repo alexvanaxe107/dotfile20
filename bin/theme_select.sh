@@ -96,13 +96,15 @@ update_files(){
         sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 100)/" $HOME/.config/polybar/config
 
         # Config dunst colors
-        sed -i "s/#0B1B03/#$(retrieve_color i 13)/" $HOME/.config/dunst/dunstrc
-        sed -i "s/#FFFFFF/#$(retrieve_color n 2)/" $HOME/.config/dunst/dunstrc
-        sed -i "s/#03171B/#$(retrieve_color i 10)/" $HOME/.config/dunst/dunstrc
+        # Urgency low
+        sed -i "s/#0B1B03/#$(retrieve_color n 100)/" $HOME/.config/dunst/dunstrc #background
+        sed -i "s/#FFFFFF/#$(retrieve_color i 13)/" $HOME/.config/dunst/dunstrc #foreground
+        sed -i "s/#03171B/#$(retrieve_color i 10)/" $HOME/.config/dunst/dunstrc # frame
 
-        sed -i "s/#27125B/#$(retrieve_color i 240)/" $HOME/.config/dunst/dunstrc
-        sed -i "s/#FFFFFF/#$(retrieve_color n 2)/" $HOME/.config/dunst/dunstrc
-        sed -i "s/#03171B/#$(retrieve_color i 70)/" $HOME/.config/dunst/dunstrc
+        # Urgency normal
+        sed -i "s/#27125B/#$(retrieve_color i 13)/" $HOME/.config/dunst/dunstrc
+        sed -i "s/#FFFFFE/#$(retrieve_color n 2)/" $HOME/.config/dunst/dunstrc
+        sed -i "s/#03171B/#$(retrieve_color i 10)/" $HOME/.config/dunst/dunstrc
         
         # Config bsp collors
         sed -i "s/#6F8E27/#$(retrieve_color n 2)/" $HOME/.config/bspwm/themes/bsp.cfg
@@ -159,7 +161,7 @@ update_files(){
         sed -i "s/#03171B/#$(retrieve_color n 20)/" $HOME/.config/dunst/dunstrc
 
         sed -i "s/#27125B/#$(retrieve_color n 9)/" $HOME/.config/dunst/dunstrc
-        sed -i "s/#FFFFFF/#$(retrieve_color i 20)/" $HOME/.config/dunst/dunstrc
+        sed -i "s/#FFFFFE/#$(retrieve_color i 20)/" $HOME/.config/dunst/dunstrc
         sed -i "s/#03171B/#$(retrieve_color n 70)/" $HOME/.config/dunst/dunstrc
 
         # Configure conky! Here we go!

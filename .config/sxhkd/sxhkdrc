@@ -113,7 +113,7 @@ super + m
 	bspc desktop -l next
 
 # Cycle through nodes
-super + control + {j,k} 
+super + control + {j,k}
 	bspc node -f {next,prev}
 
 # send the newest marked node to the newest preselected node
@@ -123,6 +123,15 @@ super + n
 # swap the current node and the biggest node
 super + u
 	bspc node -s biggest
+
+# focus the node in the given direction
+super + control + u
+	bspc node -s last
+
+# focus the node in the given direction
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
 
 #
 # state/flags
@@ -148,7 +157,7 @@ super + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
 # focus the node in the given direction
-super + shift + {h,j,k,l}
+super + shift + control + {h,j,k,l}
 	euclid_mover {west,south,north,east}
 
 # focus the node for the given path jump
