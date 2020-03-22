@@ -41,6 +41,10 @@ super + shift + i
 super + shift + p
 	$HOME/bin/pomodoro-client.sh "${DMENU_COLOR[@]}"
 
+# Mount a partition
+super + shift + m
+	$HOME/bin/dmenumount "${DMENU_COLOR[@]}"
+
 #Todos
 super + shift + t
 	$HOME/bin/dtodosh.sh "${DMENU_COLOR[@]}"
@@ -74,8 +78,8 @@ super + shift + c
 	$HOME/.config/conky/conky.sh
 
 # Chords
-super + shift + g ; {1,2,8,i,f,c,r,s}
-	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop}
+super + shift + g ; {1,2,8,i,f,c,r,s,p}
+	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*}
 
 # Change wallpapers
 super + shift + w ; {n}
@@ -109,7 +113,7 @@ super + m
 	bspc desktop -l next
 
 # Cycle through nodes
-super + control + {j,k} 
+super + control + {j,k}
 	bspc node -f {next,prev}
 
 # send the newest marked node to the newest preselected node
@@ -119,6 +123,15 @@ super + n
 # swap the current node and the biggest node
 super + u
 	bspc node -s biggest
+
+# focus the node in the given direction
+super + control + u
+	bspc node -s last
+
+# focus the node in the given direction
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
 
 #
 # state/flags
@@ -144,7 +157,7 @@ super + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
 # focus the node in the given direction
-super + shift + {h,j,k,l}
+super + shift + control + {h,j,k,l}
 	euclid_mover {west,south,north,east}
 
 # focus the node for the given path jump

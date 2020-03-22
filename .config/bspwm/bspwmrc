@@ -5,6 +5,9 @@ killall sxhkd; sxhkd &
 #nitrogen --restore &
 $HOME/.config/i3/monitor/saver.sh &
 
+#bspc monitor eDP1 -n 0 -d 1 2 3 4 5 6 7 8
+#bspc monitor HDMI1 -n 1 -d 9 10
+
 #/home/alexvanaxe/.config/i3/conky/conky.sh &
 
 #/home/alexvanaxe/.config/conky/day/conky.sh
@@ -27,9 +30,9 @@ bspc config split_ratio 0.60
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-
 # App rules
 bspc rule -a Gimp state=floating follow=on
+bspc rule -a Surf state=tiled
 bspc rule -a ffplay state=floating
 #bspc rule -a Gnome-calculator state=floating follow=on
 #bspc rule -a Chromium desktop='^2'
