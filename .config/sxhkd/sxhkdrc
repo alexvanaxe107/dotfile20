@@ -93,8 +93,11 @@ super + shift + w ; {d}
 ###################
 
 # quit/restart bspwm
-super + {e,r}
-	bspc {quit,wm -r}
+super + r
+	bspc wm -r
+
+super + e
+	$HOME/bin/bspwmexit.sh
 
 # close and kill
 super + {_,shift + }q
