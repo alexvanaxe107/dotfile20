@@ -15,3 +15,4 @@ picom -b &
 ~/.dwm/dwmstatusbar &
 stalonetray &
 clipster -d &
+
