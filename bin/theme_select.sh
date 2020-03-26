@@ -38,7 +38,7 @@ refresh_theme() {
     killall conky
 
     killall polybar
-    polybar default&
+    polybar_toggle.sh
     sleep 1
     $HOME/.config/conky/conky.sh
     bspc config top_padding 16
@@ -62,7 +62,8 @@ startup_theme(){
         bspc config window_gap 0  
     else
         # Set wallpaper according theme
-        nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+        nitrogen --head=0 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+        nitrogen --head=1 --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
 
         refresh_theme
     fi
@@ -152,6 +153,12 @@ update_files(){
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 5)/" $HOME/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 77)/" $HOME/.config/polybar/config
         sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 86)/" $HOME/.config/polybar/config
+
+        sed -i "s/^background = #.*/background = #87$(retrieve_color n 2)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 26)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 5)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 77)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 86)/" $HOME/.config/polybar/config_simple
 
         # Config bsp collors
         sed -i "s/#372549/#$(retrieve_color i 5)/" $HOME/.config/bspwm/themes/bsp.cfg

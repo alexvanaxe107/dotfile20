@@ -65,6 +65,10 @@ super + shift + b
 super + shift + v
 	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
 
+# Configure monitors
+super + shift + d
+	$HOME/bin/configdisplay.sh "${DMENU_COLOR[@]}"
+
 # Equalizer
 super + shift + a
 	$HOME/bin/equalizer "${DMENU_COLOR[@]}"
@@ -83,10 +87,10 @@ super + shift + g ; {1,2,8,i,f,c,r,s,p}
 
 # Change wallpapers
 super + shift + w ; {n}
-	{nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night}
+	{nitrogen --head=0 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night;nitrogen --head=1 --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night}
 
 super + shift + w ; {d}
-	{nitrogen --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day}
+	{nitrogen --head=0 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day;nitrogen --head=1 --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day}
 
 ###################
 ##### WM KEYS #####
@@ -111,12 +115,20 @@ super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} 'focused:^{1-9,10}'
 
 # focus or send to the given desktop
-super + {F}{1,2,3,4,5,6,7,8,9,10}
-	bspc desktop -f '^{1,2,3,4,5,6,7,8,9,10}'
+super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
+	bspc {desktop -f, node -d} '^{1,2,3,4,5,6,7,8,9,10}'
+
+# Swap desktops
+super + alt + {F}{1,2,3,4,5,6,7,8,9,10}
+	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
 
 # focus or send to the given desktop
-super + shift + {F}{1,2,3,4,5,6,7,8,9,10}
-	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
+super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
+	bspc monitor focused --add-desktops '{terminal,web,coding,trade,game,stocks,video,twitter,chat,audio}'
+
+# Swich monitors
+super + F12
+	bspc monitor --focus next
 
 # focus or send to the given desktop
 super + control + {1-9,0}
