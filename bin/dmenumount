@@ -17,7 +17,7 @@ getmount() { \
 	}
 
 mountusb() { \
-	chosen="$(echo "$usbdrives" | dmenu "$@" -i -p "Mount which drive?" | awk '{print $1}')"
+	chosen="$(echo "$usbdrives" | dmenu "$parametros" -i -p "Mount which drive?" | awk '{print $1}')"
 
 	if [ -z $chosen ]
 	then

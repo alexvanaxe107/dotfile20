@@ -3,10 +3,10 @@
 PID=$(pgrep -a polybar | grep "default" | awk '{print $1}')
 
 if [ ! -z $PID ]; then
-    killall polybar
     bspc config top_padding 0
+    kill $PID
 else
-    polybar default &
-    sleep 1
     bspc config top_padding 16
+    polybar default &
+    polybar -c /home/alexvanaxe/.config/polybar/config_simple simple &
 fi

@@ -5,7 +5,6 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-synclient TapButton1=1
 synclient VertEdgeScroll=1
 
 # merge in defaults and keymaps

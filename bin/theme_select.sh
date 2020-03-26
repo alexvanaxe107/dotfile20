@@ -22,6 +22,7 @@ reset_configs(){
     cp $HOME/.config/bspwm/themes/$theme_name.cfg $HOME/.config/bspwm/themes/bsp.cfg
     cp $HOME/.config/dunst/dunstrc_default $HOME/.config/dunst/dunstrc
     cp $HOME/.config/polybar/themes/$theme_name $HOME/.config/polybar/config
+    cp $HOME/.config/polybar/themes/"$theme_name"_simple $HOME/.config/polybar/config_simple
     cp $HOME/.config/conky/themes/$theme_name/process.conf $HOME/.config/conky/process.conf
     cp $HOME/.config/conky/themes/$theme_name/cpu.conf $HOME/.config/conky/cpu.conf
     cp $HOME/.config/conky/themes/$theme_name/clock.conf $HOME/.config/conky/clock.conf
@@ -94,6 +95,12 @@ update_files(){
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 2)/" $HOME/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 140)/" $HOME/.config/polybar/config #ICONS
         sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 100)/" $HOME/.config/polybar/config
+
+        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 13)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 100)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 2)/" $HOME/.config/polybar/config_simple
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 140)/" $HOME/.config/polybar/config_simple #ICONS
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 100)/" $HOME/.config/polybar/config_simple
 
         # Config dunst colors
         # Urgency low
