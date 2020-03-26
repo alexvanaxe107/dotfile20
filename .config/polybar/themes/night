@@ -60,7 +60,7 @@ font-1 = FontAwesome:pixelsize=9
 font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
 
-modules-left = bspwm
+modules-left = desktop bspwm
 modules-center = pomodoro nweather torrent
 modules-right =  recording pulseaudio memory cpu temperature date
 
@@ -95,6 +95,11 @@ exec = /home/alexvanaxe/bin/pomodoro
 type = custom/script
 interval = 10
 exec = /home/alexvanaxe/bin/torrent
+
+[module/desktop]
+type = custom/script
+interval = 1
+exec = /home/alexvanaxe/bin/active_monitor.sh
 
 [module/recording]
 type = custom/script
