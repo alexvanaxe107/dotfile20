@@ -1,19 +1,10 @@
 #!/bin/sh
 
-
 MONITOR=$(bspc query --monitor focused --monitors --names)
 option=$1
 
-if [ "$1" == "simple" ]; then
-    if [ "$MONITOR" == "HDMI1" ]; then
-        echo 
-    else
-        echo 
-    fi
+if [ "$MONITOR" == "$1" ]; then
+    echo 
 else
-    if [ "$MONITOR" == "HDMI1" ]; then
-        echo 
-    else
-        echo 
-    fi
+    echo 
 fi

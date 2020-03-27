@@ -60,7 +60,7 @@ font-1 = "Noto Color Emoji:scale=14"
 font-2 = FontAwesome:pixelsize=8
 font-3 = symbola:pixelsize=9
 
-modules-left = bspwm
+modules-left = desktop bspwm
 modules-center = pomodoro nweather torrent
 modules-right =  recording pulseaudio memory cpu temperature date
 
@@ -134,6 +134,11 @@ mount-2 = /home/alexvanaxe/Documents
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/desktop]
+type = custom/script
+interval = 1
+exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
 
 [module/bspwm]
 type = internal/bspwm

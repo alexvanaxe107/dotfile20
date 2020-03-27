@@ -99,7 +99,7 @@ exec = /home/alexvanaxe/bin/torrent
 [module/desktop]
 type = custom/script
 interval = 1
-exec = /home/alexvanaxe/bin/active_monitor.sh
+exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
 
 [module/recording]
 type = custom/script
