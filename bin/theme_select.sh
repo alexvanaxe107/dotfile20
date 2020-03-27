@@ -41,7 +41,6 @@ refresh_theme() {
     polybar_toggle.sh
     sleep 1
     $HOME/.config/conky/conky.sh
-    bspc config top_padding 16
 }
 
 prepare_wallpaper(){
