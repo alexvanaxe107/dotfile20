@@ -3,8 +3,8 @@
 PID=$(pgrep -a polybar | grep "default" | awk '{print $1}')
 PID_SIMPLE=$(pgrep -a polybar | grep "simple" | awk '{print $1}')
 
-MONITOR2=$(polybar -m | cut -d":" -f1 | awk 'NR==1 {print $0}')
-MONITOR1=$(polybar -m | cut -d":" -f1 | awk 'NR==2 {print $0}')
+MONITOR1=$(polybar -m | cut -d":" -f1 | awk 'NR==1 {print $0}')
+MONITOR2=$(polybar -m | cut -d":" -f1 | awk 'NR==2 {print $0}')
 
 if [ ! -z $PID ]; then
     bspc config top_padding 0

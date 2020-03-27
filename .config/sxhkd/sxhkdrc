@@ -162,12 +162,12 @@ super + shift + {h,j,k,l}
 	bspc node -s {west,south,north,east}
 
 # Send desktop backwards
-super + comma
-	bspc desktop --bubble prev
+super + shift + {comma,period}
+	bspc desktop --bubble {prev,next}
 
-# Send desktop forward
-super + period
-	bspc desktop --bubble next
+super + {comma,period}
+	bspc desktop {prev,next} --focus
+
 #
 # state/flags
 #
