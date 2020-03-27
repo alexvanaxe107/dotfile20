@@ -130,6 +130,9 @@ super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
 super + F12
 	bspc monitor --focus next
 
+super + t
+	bspc node last --to-desktop focused
+
 # focus or send to the given desktop
 super + control + {1-9,0}
 	bspc node -d '^{1-9,10}' --follow
@@ -171,6 +174,10 @@ super + period
 
 # set the window state
 super + {t,ctrl + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Change wallpapers
+super + shift + w: {t,p,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set ignore ewmh to fullscreen to container
