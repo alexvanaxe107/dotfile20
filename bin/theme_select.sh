@@ -1,6 +1,8 @@
 #!/bin/sh
 
 chosen=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the theme: ")
+#Get the last to get how many monitors
+monitor=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
 
 if [ $chosen == "wallpaper" ]; then
     chosen_font=$(printf "Original\\nSoft" | dmenu "$@" -i -p "Chose the font kind:")
@@ -27,6 +29,24 @@ reset_configs(){
     cp $HOME/.config/conky/themes/$theme_name/cpu.conf $HOME/.config/conky/cpu.conf
     cp $HOME/.config/conky/themes/$theme_name/clock.conf $HOME/.config/conky/clock.conf
     cp $HOME/.config/conky/themes/$theme_name/fortune.conf $HOME/.config/conky/fortune.conf
+}
+
+get_wallpaper() {
+    monitor=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
+
+    monitor=0
+
+    if [ $monitor -gt 1 ]; then
+        cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==1 {print $2}')
+    else
+        cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==2 {print $2}')
+    fi
+
+    if [ -z $cur_wallpaper ]; then
+        cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==1 {print $2}')
+    fi
+
+    echo $cur_wallpaper
 }
 
 refresh_theme() {
@@ -77,7 +97,8 @@ retrieve_color(){
 }
 
 update_files(){
-    cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | cut -d "=" -f 2)
+    cur_wallpaper=$(get_wallpaper)
+
     colors_wallpaper=($(convert $cur_wallpaper -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
 
     # DAY THEME

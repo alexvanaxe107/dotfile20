@@ -39,3 +39,4 @@ ttf-font-icons
 tulizu
 weechat-vimode-git
 weeplugins-git
+mpv-mpris-git
