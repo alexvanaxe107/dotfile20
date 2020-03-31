@@ -4,9 +4,9 @@ chosen=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the
 #Get the last to get how many monitors
 monitor=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
 
-if [ $chosen == "wallpaper" ]; then
-    chosen_font=$(printf "Original\\nSoft" | dmenu "$@" -i -p "Chose the font kind:")
-fi
+# if [ $chosen == "wallpaper" ]; then
+#     chosen_font=$(printf "Original\\nSoft" | dmenu "$@" -i -p "Chose the font kind:")
+# fi
 
 if [ -z "$chosen" ]; then
     exit
@@ -34,12 +34,16 @@ reset_configs(){
 get_wallpaper() {
     monitor=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
 
-    monitor=0
-
     if [ $monitor -gt 1 ]; then
-        cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==1 {print $2}')
+        wallpaper_number=$(printf "1\\n2" | dmenu "$@" -i -p "Choose the wallpaper to use:")
+        if [ "$wallpaper_number" -eq "1" ]; then
+            cur_wallpaper="$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==1 {print $2}')"
+        fi
+        if [ "$wallpaper_number" -eq "2" ]; then
+            cur_wallpaper="$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==2 {print $2}')"
+        fi
     else
-        cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==2 {print $2}')
+        cur_wallpaper=$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==1 {print $2}')
     fi
 
     if [ -z $cur_wallpaper ]; then

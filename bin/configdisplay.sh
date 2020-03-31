@@ -3,18 +3,21 @@
 chosen=$(printf "Dual\\nNotebook\\nHDMI" | dmenu "$@" -i -p "Select a monitor config")
 
 hdmi(){
+    killall polybar
     $HOME/.screenlayout/hdmi.sh
     polybar_toggle.sh
     #bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9 10
 }
 
 notebook(){
+    killall polybar
     $HOME/.screenlayout/notebook.sh
     polybar_toggle.sh
     #bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
 }
 
 dual(){
+   killall polybar
    $HOME/.screenlayout/dual.sh
    sleep 1
    polybar_toggle.sh

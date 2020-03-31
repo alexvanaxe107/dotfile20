@@ -12,6 +12,7 @@ if [ ! -z $PID ]; then
     kill $PID_SIMPLE
 else
     bspc config -m $MONITOR1 top_padding 16
+    bspc config -m $MONITOR2 top_padding 0
     MONITOR1=$MONITOR1 polybar default &
-    MONITOR2=$MONITOR2 polybar -c /home/alexvanaxe/.config/polybar/config_simple simple &
+    MONITOR2=$MONITOR2 polybar -c $HOME/.config/polybar/config_simple simple &
 fi
