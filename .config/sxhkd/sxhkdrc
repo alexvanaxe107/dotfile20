@@ -100,6 +100,7 @@ super + shift + w ; {d}
 super + r
 	bspc wm -r
 
+# Exit the window manager asking confirmation
 super + e
 	$HOME/bin/bspwmexit.sh
 
@@ -107,14 +108,19 @@ super + e
 super + {_,shift + }q
 	bspc node -{c,k}
 
+# Remove the current desktop
 super + Delete
 	bspc desktop focused --remove
+
+# Create a desktop
+super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
+	bspc monitor focused --add-desktops '{terminal,web,coding,trade,game,stocks,video,twitter,chat,audio}'
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} 'focused:^{1-9,10}'
 
-# focus or send to the given desktop
+# focus or send to the given desktop considering all monitors
 super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 	bspc {desktop -f, node -d} '^{1,2,3,4,5,6,7,8,9,10}'
 
@@ -122,20 +128,21 @@ super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 super + alt + {F}{1,2,3,4,5,6,7,8,9,10}
 	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
 
-# focus or send to the given desktop
-super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
-	bspc monitor focused --add-desktops '{terminal,web,coding,trade,game,stocks,video,twitter,chat,audio}'
-
 # Swich monitors
 super + F12
 	bspc monitor --focus next
 
+# Send node to the other monitor
 super + t
-	bspc node last --to-desktop focused
+	bspc node focused --to-monitor next
 
-# focus or send to the given desktop
+#Send node to the other monitor and follow it
+super + ctrl + t
+	bspc node focused --to-monitor next --follow
+
+# Send to other desktop and follow it
 super + control + {1-9,0}
-	bspc node -d '^{1-9,10}' --follow
+	bspc node -d  'focused:^{1-9,10}' --follow
 
 # alternate between the tiled and monocle layout
 super + m
@@ -144,14 +151,6 @@ super + m
 # Cycle through nodes
 super + control + {j,k}
 	bspc node -f {next,prev}
-
-# send the newest marked node to the newest preselected node
-super + n
-	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest node
-super + u
-	bspc node -s biggest
 
 # focus the node in the given direction
 super + control + u
@@ -165,16 +164,13 @@ super + shift + {h,j,k,l}
 super + shift + {comma,period}
 	bspc desktop --bubble {prev,next}
 
+# Move to the next prev desktop
 super + {comma,period}
 	bspc desktop {prev,next} --focus
 
 #
 # state/flags
 #
-
-# set the window state
-super + {t,ctrl + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # Change wallpapers
 super + shift + w: {t,p,s,f}

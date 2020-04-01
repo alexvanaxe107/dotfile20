@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
 
 chosen=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the theme: ")
 #Get the last to get how many monitors
