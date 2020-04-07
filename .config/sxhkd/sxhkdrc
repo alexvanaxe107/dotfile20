@@ -59,7 +59,7 @@ super + shift + e
 
 # Toggle the top bar
 super + shift + b
-	$HOME/bin/polybar_toggle.sh
+	$HOME/bin/toggle_bars.sh
 
 # Clipboard tool
 super + shift + v
@@ -82,6 +82,10 @@ super + shift + c
 	$HOME/.config/conky/conky.sh
 
 # Chords
+# Toggle the top bar
+super + ctrl + b; {s,f}
+	{$HOME/bin/toggle_bars.sh --target2,$HOME/bin/toggle_bars.sh --target1}
+
 super + shift + g ; {1,2,8,i,f,c,r,s,p}
 	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*}
 

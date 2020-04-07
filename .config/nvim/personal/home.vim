@@ -17,7 +17,7 @@ set termguicolors
 "  \ }
 
 "colorscheme PaperColor
-colorscheme PaperColor
-set background=light
+colorscheme one
+set background=dark
 
-let g:airline_theme="papercolor"
+let g:airline_theme="one"
