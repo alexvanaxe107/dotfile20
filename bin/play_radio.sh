@@ -22,12 +22,19 @@ play_clipboard(){
     exit
 }
 
-chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard" | dmenu "$@" -i -p "Where to play?")
+play_clipboard_audio(){
+    result=$(xclip -o)
+    mpv "$result" --no-video
+    exit
+}
+
+chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio" | dmenu "$@" -i -p "Where to play?")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
     "Cast") radio_file="$HOME/.config/play_radio/config.cast";;
     "Clipboard") play_clipboard;;
+    "Clipboard Audio") play_clipboard_audio;;
     "Stop") $(stop_all);;
     *) exit;;
 esac

@@ -138,7 +138,7 @@ super + t
 
 #Send node to the other monitor and follow it
 super + ctrl + t
-	bspc node focused --to-monitor next --follow
+	bspc desktop focused --to-monitor next
 
 # Send to other desktop and follow it
 super + control + {1-9,0}
