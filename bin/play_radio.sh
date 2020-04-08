@@ -22,18 +22,25 @@ play_clipboard(){
     exit
 }
 
+play_clipboard_low_quality(){
+    result=$(xclip -o)
+    mpv "$result" --ytdl-format=18
+    exit
+}
+
 play_clipboard_audio(){
     result=$(xclip -o)
     mpv "$result" --no-video
     exit
 }
 
-chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio" | dmenu "$@" -i -p "Where to play?")
+chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio\\nClipboard Low quality" | dmenu "$@" -i -p "Where to play?")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
     "Cast") radio_file="$HOME/.config/play_radio/config.cast";;
     "Clipboard") play_clipboard;;
+    "Clipboard Low quality") play_clipboard_low_quality;;
     "Clipboard Audio") play_clipboard_audio;;
     "Stop") $(stop_all);;
     *) exit;;

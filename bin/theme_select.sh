@@ -30,7 +30,7 @@ fi
 source ${HOME}/.config/bspwm/themes/bsp.cfg
 
 
-reset_configs(){
+function reset_configs(){
     cp ${HOME}/.config/bspwm/themes/${theme_name}.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
@@ -41,7 +41,7 @@ reset_configs(){
     cp ${HOME}/.config/conky/themes/${theme_name}/fortune.conf ${HOME}/.config/conky/fortune.conf
 }
 
-get_wallpaper() {
+function get_wallpaper() {
     if [[ ${MONITOR} -gt 1 ]]; then
         local wallpaper_number=$(printf "1\\n2" | dmenu "$@" -i -p "Choose the wallpaper to use:")
         if [[  "${wallpaper_number}" -eq "1" ]]; then
@@ -61,7 +61,7 @@ get_wallpaper() {
     echo ${cur_wallpaper}
 }
 
-refresh_theme() {
+function refresh_theme() {
     source ${HOME}/.config/bspwm/themes/bsp.cfg
     killall -qw picom; picom -b >> /tmp/picom.log 2>&1 &
     killall -qw dunst; dunst >> /tmp/dunst.log 2>&1 &
@@ -74,13 +74,13 @@ refresh_theme() {
     ${HOME}/.config/conky/conky.sh >> /tmp/conky.log 2>&1 &
 }
 
-prepare_wallpaper(){
+function prepare_wallpaper(){
     killall -qw picom
     killall -qw conky
     killall -qw polybar
 }
 
-startup_theme(){
+function startup_theme(){
     echo "starting up"
     reset_configs
     if [[  "light" = "${CHOSEN}" ]]; then
@@ -99,7 +99,7 @@ startup_theme(){
     fi
 }
 
-retrieve_color(){
+function retrieve_color(){
     if [[   "$1" == "i" ]]; then
         echo "${colors_wallpaper[$((${#colors_wallpaper[@]} - $2))]}"
     else
@@ -107,11 +107,16 @@ retrieve_color(){
     fi
 }
 
-update_files(){
+function update_files(){
     local chosen_font="Original"
     local cur_wallpaper=$(get_wallpaper)
 
-    local colors_wallpaper=($(convert ${cur_wallpaper} -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
+    local colors_wallpaper=($(convert "${cur_wallpaper}" -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
+
+    if [[ ${#colors_wallpaper[@]} -lt 141 ]]; then
+        local colors_wallpaper=($(convert "${cur_wallpaper}" -format %c -depth 10  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
+    fi
+
 
     # DAY THEME
     if [[  "${theme_name}" = "day" ]]; then
@@ -227,7 +232,7 @@ update_files(){
 
 }
 
-set_color_by_walpaper() {
+function set_color_by_walpaper() {
     # Retrieve the background path
     echo "Changing color wallpaper"
     prepare_wallpaper
@@ -249,7 +254,7 @@ case "${CHOSEN}" in
     *) startup_theme;;
 esac
 
-set_vim(){
+function set_vim(){
     if [[  "day" = ${1} ]]; then
         sed -i 's/^colorscheme.*/colorscheme PaperColor/' ${HOME}/.config/nvim/personal/home.vim
         sed -i 's/set background.*/set background=light/' ${HOME}/.config/nvim/personal/home.vim
