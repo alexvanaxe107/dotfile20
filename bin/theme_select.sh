@@ -63,7 +63,7 @@ refresh_theme() {
     killall conky
 
     killall polybar
-    polybar_toggle.sh
+    toggle_bars.sh
     sleep 1
     $HOME/.config/conky/conky.sh
 }
