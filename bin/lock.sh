@@ -1,3 +1,3 @@
 #!/bin/sh
 
-i3lock  -e -f -c 000000 -t -i $HOME/Documents/Pictures/lock.png
+env XSECURELOCK_PASSWORD_PROMPT=emoticon XSECURELOCK_SAVER=saver_mplayer XSECURELOCK_SHOW_DATETIME=1 xsecurelock
