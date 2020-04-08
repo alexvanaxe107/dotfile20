@@ -86,8 +86,8 @@ super + shift + c
 super + ctrl + b; {s,f}
 	{$HOME/bin/toggle_bars.sh --target2,$HOME/bin/toggle_bars.sh --target1}
 
-super + shift + g ; {1,2,8,i,f,c,r,s,p}
-	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*}
+super + shift + g ; {1,2,8,i,f,c,r,s,p,v}
+	{st -e ranger,st -e transmission-remote-cli,st -e weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,firefox,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*,alacritty -e vis}
 
 # Change wallpapers
 super + shift + w ; {n}

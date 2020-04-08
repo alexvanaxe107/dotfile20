@@ -61,8 +61,19 @@ function get_wallpaper() {
     echo ${cur_wallpaper}
 }
 
+function update_screensaver() {
+    rm $HOME/Videos/*
+
+    if [[  "${theme_name}" = "day" ]]; then
+        ln -s /home/alexvanaxe/Documents/Pictures/screensavers/day/* $HOME/Videos
+    else
+        ln -s /home/alexvanaxe/Documents/Pictures/screensavers/futuristic/* $HOME/Videos
+    fi
+}
+
 function refresh_theme() {
     source ${HOME}/.config/bspwm/themes/bsp.cfg
+    $(update_screensaver)
     killall -qw picom; picom -b >> /tmp/picom.log 2>&1 &
     killall -qw dunst; dunst >> /tmp/dunst.log 2>&1 &
     bspc config window_gap 6
