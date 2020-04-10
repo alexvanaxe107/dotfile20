@@ -15,6 +15,7 @@ if [ $players_len -gt 1 ]; then
             "play ▶") playerctl -p $chosen_p play;;
             "forward ▶▶") playerctl -p $chosen_p next;;
             "back ◀◀") playerctl -p $chosen_p previous;;
+            *) playerctl position "${chosen}";;
         esac
     fi
 
@@ -27,6 +28,7 @@ else
         "play ▶") playerctl play;;
         "forward ▶▶") playerctl next;;
         "back ◀◀") playerctl previous;;
+        *) playerctl position "${chosen}";;
     esac
 fi
 
