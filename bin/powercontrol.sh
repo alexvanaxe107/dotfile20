@@ -14,7 +14,7 @@ chibernate() { \
 	confirm="$(printf "No\\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
 	if [ "Yes" == "$confirm" ]
 	then
-		$HOME/.config/i3/scripts/lock.sh
+		lock.sh
 		systemctl hibernate
 	fi
 }
@@ -24,7 +24,7 @@ monitor() { \
 }
 
 csuspend() { \
-	$HOME/.config/i3/scripts/lock.sh
+	lock.sh
 	systemctl suspend -i
 }
 
