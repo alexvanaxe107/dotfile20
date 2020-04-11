@@ -1,22 +1,25 @@
 #!/bin/sh
 
-set -o errexit
+#set -o errexit
 # Exit on error inside any functions or subshells.
-set -o errtrace
+#set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
+#set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
-set -o pipefail
+#set -o pipefail
 
 function play_local(){
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
+    echo "" > $HOME/.config/indicators/play_radio.ind
 
     if [[ $url == *"pls"* ]]; then
-        mpv -playlist $url
+        mpv -playlist=$url
     else
         mpv $url
     fi
+
     notify-send -u normal  "Finished" "Media stoped. Bye."
+    rm $HOME/.config/indicators/play_radio.ind
     exit
 }
 
@@ -30,16 +33,19 @@ function stop_all(){
 }
 
 function play_clipboard(){
+    echo "" > $HOME/.config/indicators/play_radio.ind
     notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
 
     result=$(xclip -o)
     mpv "$result"
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
+    rm $HOME/.config/indicators/play_radio.ind
     exit
 }
 
 function play_clipboard_quality(){
+    echo "" > $HOME/.config/indicators/play_radio.ind
     result=$(xclip -o)
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
 
@@ -49,6 +55,7 @@ function play_clipboard_quality(){
 
     if [[ -z "${choosen_quality}" ]]; then
         notify-send -u normal  "Your choice" "None choice was made. Exiting"
+        rm $HOME/.config/indicators/play_radio.ind
         exit 0
     fi
 
@@ -57,16 +64,20 @@ function play_clipboard_quality(){
     mpv "$result" --ytdl-format=${choosen_quality}
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
+    rm $HOME/.config/indicators/play_radio.ind
     exit
 }
 
 function play_clipboard_audio(){
+    echo "" > $HOME/.config/indicators/play_radio.ind
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     result=$(xclip -o)
     mpv "$result" --no-video
     notify-send -u normal  "Done" "Hopefully your media was played =/"
+    rm $HOME/.config/indicators/play_radio.ind
     exit
 }
+
 
 chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality" | dmenu "$@" -i -p "Where to play?")
 
@@ -110,6 +121,6 @@ fi
 url="${radios[$chosen]}"
 
 case "$chosen_mode" in
-    "Local") $(play_local)&;;
-    "Cast") castnow $url&;;
+    "Local") play_local;;
+    "Cast") castnow $url;;
 esac
