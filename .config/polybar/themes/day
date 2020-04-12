@@ -62,7 +62,7 @@ font-3 = symbola:pixelsize=9
 
 modules-left = desktop bspwm
 modules-center = pomodoro nweather torrent
-modules-right =  recording pulseaudio memory cpu temperature date
+modules-right =  indicators ava_load recording pulseaudio memory cpu temperature date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -86,6 +86,19 @@ cursor-scroll = ns-resize
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro
+
+[module/ava_load]
+type = custom/script
+interval = 20
+exec = /home/alexvanaxe/bin/load
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+[module/indicators]
+type = custom/script
+interval = 3
+exec = /home/alexvanaxe/bin/indicators.sh
 
 [module/torrent]
 type = custom/script
