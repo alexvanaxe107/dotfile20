@@ -20,6 +20,7 @@
 ;background = ${xrdb:color0:#222}
 background = #B705080F
 background-alt = #040C38
+background-talt = #B7040C38
 ;foreground = ${xrdb:color7:#222}
 foreground = #EAF2EF
 foreground-alt = #6B6B6B
@@ -35,7 +36,7 @@ height = 16
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
-fixed-center = false
+fixed-center = true
 
 bottom = false
 enable-ipc = true
@@ -43,7 +44,19 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 0
+background-0 = ${colors.background}
+background-1 = ${colors.background}
+background-2 = ${colors.background}
+background-3 = ${colors.background}
+background-4 = ${colors.background}
+background-5 = ${colors.background}
+background-6 = ${colors.background}
+background-7 = ${colors.background-talt}
+background-8 = ${colors.background-talt}
+background-9 = ${colors.foreground-alt2}
+
+overline-size = 2
+line-size = 1
 line-color = #f00
 
 border-size = 0
@@ -55,10 +68,12 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Iceland:pixelsize=10
+font-0 = Audiowide:pixelsize=8
 font-1 = FontAwesome:pixelsize=9
 font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
+
+separator = ⏽
 
 modules-left = desktop bspwm
 modules-center = pomodoro nweather torrent
@@ -72,7 +87,6 @@ wm-restack = bspwm
 ;wm-restack = i3
 
 override-redirect = true
-separator = "|"
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
@@ -493,7 +507,12 @@ menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
 [settings]
-screenchange-reload = true
+screenchange-reload = false
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
 ;compositing-background = xor
 ;compositing-background = screen
 ;compositing-foreground = source

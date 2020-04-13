@@ -20,6 +20,7 @@
 ;background = ${xrdb:color0:#222}
 background = #C5F0F2CD
 background-alt = #8A792B
+background-talt = #C58A792B
 ;foreground = ${xrdb:color7:#222}
 foreground = #101820
 foreground-alt = #6B6B6B
@@ -35,13 +36,24 @@ height = 16
 offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
-fixed-center = false
+fixed-center = true
 
 bottom = false
 enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
+
+background-0 = ${colors.background}
+background-1 = ${colors.background}
+background-2 = ${colors.background}
+background-3 = ${colors.background}
+background-4 = ${colors.background}
+background-5 = ${colors.background}
+background-6 = ${colors.background}
+background-7 = ${colors.background-talt}
+background-8 = ${colors.background-talt}
+background-9 = ${colors.foreground-alt2}
 
 line-size = 1
 line-color = #f00
@@ -60,6 +72,8 @@ font-1 = "Noto Color Emoji:scale=14"
 font-2 = FontAwesome:pixelsize=8
 font-3 = symbola:pixelsize=9
 
+separator = ⏽
+
 modules-left = desktop bspwm
 modules-center = pomodoro nweather torrent
 modules-right =  indicators ava_load recording pulseaudio memory cpu temperature date
@@ -72,7 +86,6 @@ wm-restack = bspwm
 ;wm-restack = i3
 
 override-redirect = true
-separator = "|"
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
