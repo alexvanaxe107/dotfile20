@@ -72,7 +72,7 @@ function play_clipboard_audio(){
     echo "" > $HOME/.config/indicators/play_radio.ind
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     result=$(xclip -o)
-    mpv "$result" --no-video
+    mpv "$result" --no-video --shuffle
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     rm $HOME/.config/indicators/play_radio.ind
     exit
