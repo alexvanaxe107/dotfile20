@@ -22,6 +22,18 @@ background = #B705080F
 background-alt = #040C38
 background-talt = #B7040C38
 ;foreground = ${xrdb:color7:#222}
+;Generated bg colors
+background-talt0 = #B705080F
+background-talt1 = #B705080F
+background-talt2 = #B705080F
+background-talt3 = #B705080F
+background-talt4 = #B705080F
+background-talt5 = #B705080F
+background-talt6 = #B705080F
+background-talt7 = #B705080F
+background-talt8 = #B705080F
+background-talt9 = #B705080F
+
 foreground = #EAF2EF
 foreground-alt = #6B6B6B
 foreground-alt2 = #969F63
@@ -44,19 +56,19 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-background-0 = ${colors.background}
-background-1 = ${colors.background}
-background-2 = ${colors.background}
-background-3 = ${colors.background}
-background-4 = ${colors.background}
-background-5 = ${colors.background}
-background-6 = ${colors.background}
-background-7 = ${colors.background-talt}
-background-8 = ${colors.background-talt}
-background-9 = ${colors.foreground-alt2}
+background-0 = ${colors.background-talt0}
+background-1 = ${colors.background-talt1}
+background-2 = ${colors.background-talt2}
+background-3 = ${colors.background-talt3}
+background-4 = ${colors.background-talt4}
+background-5 = ${colors.background-talt5}
+background-6 = ${colors.background-talt6}
+background-7 = ${colors.background-talt7}
+background-8 = ${colors.background-talt8}
+background-9 = ${colors.background-talt9}
 
 overline-size = 2
-line-size = 1
+line-size = 2
 line-color = #f00
 
 border-size = 0
