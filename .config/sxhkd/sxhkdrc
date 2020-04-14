@@ -154,7 +154,7 @@ super + m
 
 # Cycle through nodes
 super + control + {j,k}
-	bspc node -f {next,prev}
+	bspc node -f {next.local,prev.local}
 
 # focus the node in the given direction
 super + control + u
@@ -171,6 +171,11 @@ super + shift + {comma,period}
 # Move to the next prev desktop
 super + {comma,period}
 	bspc desktop {prev,next} --focus
+
+# Make a grid layout
+super + g
+	$HOME/bin/grid_layout.sh
+
 
 #
 # state/flags
