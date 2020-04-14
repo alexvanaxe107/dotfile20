@@ -237,7 +237,7 @@ function update_files(){
 
         sed -i "s/#05080F/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
         sed -i "s/#EAF2EF/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#040C38/#$(retrieve_color n 26)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#040C38/#$(retrieve_color n 78)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
         sed -i "s/#EAF2EF/#$(retrieve_color i 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Config dunst colors
