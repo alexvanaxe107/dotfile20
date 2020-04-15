@@ -199,7 +199,7 @@ function update_files(){
 
         sed -i "s/041866/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/2d2d2d/$(retrieve_color n 2)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/2d2d2d/$(retrieve_color i 2)/" ${HOME}/.config/conky/clock.conf
     fi
 
     if [[  "${theme_name}" = "night" ]]; then
@@ -265,7 +265,7 @@ function update_files(){
 
         sed -i "s/041866/$(retrieve_color n 1)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/CBD38F/$(retrieve_color i 4)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/2d2d2d/$(retrieve_color i 5)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/2d2d2d/$(retrieve_color i 5)/" ${HOME}/.config/conky/clock.conf
 
     fi
 
