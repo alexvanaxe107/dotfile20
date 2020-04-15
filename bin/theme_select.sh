@@ -263,7 +263,7 @@ function update_files(){
         sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/cpu.conf
         sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/cpu.conf
 
-        sed -i "s/041866/$(retrieve_color n 1)/" ${HOME}/.config/conky/clock.conf
+        sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/CBD38F/$(retrieve_color i 4)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/2d2d2d/$(retrieve_color i 5)/" ${HOME}/.config/conky/clock.conf
 
