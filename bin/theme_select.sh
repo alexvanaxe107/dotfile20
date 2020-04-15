@@ -10,6 +10,8 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 set -o pipefail
 
+source $HOME/bin/imports/color_sort.sh
+
 CHOSEN=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the theme: ")
 #Get the last to get how many monitors
 MONITOR=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
@@ -119,14 +121,18 @@ function retrieve_color(){
 }
 
 function update_files(){
+    echo "Getting colors"
     local chosen_font="Original"
     local cur_wallpaper=$(get_wallpaper)
 
-    local colors_wallpaper=($(convert "${cur_wallpaper}" -format %c -depth 4  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
+    echo $cur_wallpaper > ~/wallpaper.txt
 
-    if [[ ${#colors_wallpaper[@]} -lt 141 ]]; then
-        local colors_wallpaper=($(convert "${cur_wallpaper}" -format %c -depth 10  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
-    fi
+    local colors=($(convert "$cur_wallpaper" -format %c -depth 8 -colors 15 histogram:info:- | sort -n | grep -o "#......"))
+    local colors_wallpaper=($(get_sorted_color $colors))
+
+    # if [[ ${#colors_wallpaper[@]} -lt 141 ]]; then
+    #     local colors_wallpaper=($(convert "${cur_wallpaper}" -format %c -depth 10  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
+    # fi
 
 
     # DAY THEME
@@ -139,61 +145,61 @@ function update_files(){
         fi
                 
         # Config polybar colors
-        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 13)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 100)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 140)/" ${HOME}/.config/polybar/config #ICONS
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 100)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 3)/" ${HOME}/.config/polybar/config #ICONS
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 8)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^background-talt0 = #.*/background-talt0 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt1 = #.*/background-talt1 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt2 = #.*/background-talt2 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt3 = #.*/background-talt3 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt4 = #.*/background-talt4 = #C5$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt5 = #.*/background-talt5 = #C5$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt6 = #.*/background-talt6 = #C5$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt7 = #.*/background-talt7 = #C5$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt8 = #.*/background-talt8 = #C5$(retrieve_color i 9)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt9 = #.*/background-talt9 = #C5$(retrieve_color i 9)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt0 = #.*/background-talt0 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt1 = #.*/background-talt1 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt2 = #.*/background-talt2 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt3 = #.*/background-talt3 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt4 = #.*/background-talt4 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt5 = #.*/background-talt5 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt6 = #.*/background-talt6 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt7 = #.*/background-talt7 = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt8 = #.*/background-talt8 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt9 = #.*/background-talt9 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 100)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 140)/" ${HOME}/.config/polybar/config_simple #ICONS
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 100)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config_simple #ICONS
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 8)/" ${HOME}/.config/polybar/config_simple
 
         # Config dunst colors
         # Urgency low
-        sed -i "s/#0B1B03/#$(retrieve_color n 100)/" ${HOME}/.config/dunst/dunstrc #background
-        sed -i "s/#FFFFFF/#$(retrieve_color i 13)/" ${HOME}/.config/dunst/dunstrc #foreground
-        sed -i "s/#03171B/#$(retrieve_color i 10)/" ${HOME}/.config/dunst/dunstrc # frame
+        sed -i "s/#0B1B03/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc #background
+        sed -i "s/#FFFFFF/#$(retrieve_color n 1)/" ${HOME}/.config/dunst/dunstrc #foreground
+        sed -i "s/#03171B/#$(retrieve_color n 4)/" ${HOME}/.config/dunst/dunstrc # frame
 
         # Urgency normal
-        sed -i "s/#27125B/#$(retrieve_color i 13)/" ${HOME}/.config/dunst/dunstrc
+        sed -i "s/#27125B/#$(retrieve_color i 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#FFFFFE/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#03171B/#$(retrieve_color i 10)/" ${HOME}/.config/dunst/dunstrc
         
         # Config bsp collors
         sed -i "s/#6F8E27/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#123456/#$(retrieve_color i 13)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#123456/#$(retrieve_color n 11)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#F0F2CD/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
-        sed -i "s/#49291D/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#8A792B/#$(retrieve_color n 100)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
-        sed -i "s/#DFF1DA/#$(retrieve_color i 13)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+        sed -i "s/#F0F2CD/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#49291D/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#8A792B/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#DFF1DA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Configure conky! Here we go!
-        sed -i "s/777777/$(retrieve_color n 100)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/CBD38F/$(retrieve_color i 140)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/777777/$(retrieve_color n 3)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/FFFFFF/$(retrieve_color i 2)/" ${HOME}/.config/conky/process.conf
 
-        sed -i "s/777777/$(retrieve_color n 100)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/CBD38F/$(retrieve_color i 140)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/777777/$(retrieve_color n 3)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/FFFFFF/$(retrieve_color i 2)/" ${HOME}/.config/conky/cpu.conf
 
-        sed -i "s/041866/$(retrieve_color i 1)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/CBD38F/$(retrieve_color i 5)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/2d2d2d/$(retrieve_color n 5)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/041866/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock.conf
+        sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/clock.conf
+        sed -i "s/2d2d2d/$(retrieve_color n 2)/" ${HOME}/.config/conky/cpu.conf
     fi
 
     if [[  "${theme_name}" = "night" ]]; then
@@ -207,42 +213,41 @@ function update_files(){
         fi
 
         # Config polybar colors
-        sed -i "s/^background = #.*/background = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt = #.*/background-talt = #87$(retrieve_color n 26)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 77)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 86)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background = #.*/background = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 4)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^background-talt0 = #.*/background-talt0 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt1 = #.*/background-talt1 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt2 = #.*/background-talt2 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt3 = #.*/background-talt3 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt4 = #.*/background-talt4 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt5 = #.*/background-talt5 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt6 = #.*/background-talt6 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt7 = #.*/background-talt7 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt8 = #.*/background-talt8 = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt9 = #.*/background-talt9 = #87$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt0 = #.*/background-talt0 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt1 = #.*/background-talt1 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt2 = #.*/background-talt2 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt3 = #.*/background-talt3 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt4 = #.*/background-talt4 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt5 = #.*/background-talt5 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt6 = #.*/background-talt6 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt7 = #.*/background-talt7 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt8 = #.*/background-talt8 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt9 = #.*/background-talt9 = #87$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^background = #.*/background = #87$(retrieve_color n 2)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 5)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 77)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 86)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background = #.*/background = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 4)/" ${HOME}/.config/polybar/config_simple
 
         # Config bsp collors
-        sed -i "s/#372549/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#372549/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
         sed -i "s/#123456/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#05080F/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
-        sed -i "s/#EAF2EF/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#040C38/#$(retrieve_color n 78)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
-        sed -i "s/#EAF2EF/#$(retrieve_color i 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+        sed -i "s/#05080F/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#EAF2EF/#$(retrieve_color i 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#040C38/#$(retrieve_color i 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#EAF2EF/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Config dunst colors
-        sed -i "s/#0B1B03/#$(retrieve_color n 26)/" ${HOME}/.config/dunst/dunstrc #background
-        sed -i "s/#FFFFFF/#$(retrieve_color i 77)/" ${HOME}/.config/dunst/dunstrc #foreground
+        sed -i "s/#0B1B03/#$(retrieve_color n 3)/" ${HOME}/.config/dunst/dunstrc #background
+        sed -i "s/#FFFFFF/#$(retrieve_color i 4)/" ${HOME}/.config/dunst/dunstrc #foreground
         sed -i "s/#03171B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc #frame
 
         sed -i "s/#27125B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
@@ -251,15 +256,15 @@ function update_files(){
 
         # Configure conky! Here we go!
         sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/CBD38F/$(retrieve_color i 77)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
         sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/process.conf
 
         sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/CBD38F/$(retrieve_color i 77)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/cpu.conf
         sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/cpu.conf
 
         sed -i "s/041866/$(retrieve_color n 1)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/CBD38F/$(retrieve_color i 45)/" ${HOME}/.config/conky/clock.conf
+        sed -i "s/CBD38F/$(retrieve_color i 4)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/2d2d2d/$(retrieve_color i 5)/" ${HOME}/.config/conky/cpu.conf
 
     fi
