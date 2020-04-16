@@ -1,12 +1,12 @@
-#! /bin/sh
-#! /bin/sh
+#! /bin/bash
 
-set -o errexit
-# Exit on error inside any functions or subshells.
-set -o errtrace
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
-set -o pipefail
+set -u
 
-echo ${teste}
+teste="oi"
+
+if [[ $teste = "oi" ]]
+then
+    echo $teste
+fi
+
+echo $teste2

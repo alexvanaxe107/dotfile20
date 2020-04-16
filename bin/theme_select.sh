@@ -219,6 +219,15 @@ function update_files(){
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 4)/" ${HOME}/.config/polybar/config
 
+        sed -i "s/^foreground-clock = #.*/foreground-clock = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-load = #.*/foreground-load = #$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-temp = #.*/foreground-temp = #$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-cpu = #.*/foreground-cpu = #$(retrieve_color i 7)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-memory = #.*/foreground-memory = #$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-sound = #.*/foreground-sound = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-pomodoro = #.*/foreground-pomodoro = #$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-weather = #.*/foreground-weather = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+
         sed -i "s/^background-talt0 = #.*/background-talt0 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-talt1 = #.*/background-talt1 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-talt2 = #.*/background-talt2 = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
