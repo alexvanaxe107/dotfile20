@@ -28,8 +28,29 @@ function play_cast(){
 }
 
 function stop_all(){
+    rm $HOME/.config/indicators/play_radio.ind
     killall mpv
+    killall play_radio.sh
     #castnow --quiet --command s --exit&
+}
+
+function add_playlist(){
+    result=$(xclip -o)
+    echo ${result} >> $HOME/.config/tmp/yt_pl.ps
+}
+
+function play_playlist(){
+    notify-send -u normal "Playing PL" "Playing the playlist saved."
+    echo "" > $HOME/.config/indicators/play_radio.ind
+    file_ps=$HOME/.config/tmp/yt_pl.ps
+    while read line
+    do
+        notify-send -u low "Playing..." "$line"
+        mpv "${line}"
+        sed -i '1d' $file_ps 
+    done < $file_ps
+    rm $HOME/.config/indicators/play_radio.ind
+    notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
 function play_clipboard(){
@@ -78,8 +99,9 @@ function play_clipboard_audio(){
     exit
 }
 
+PL_ITENS=$(wc -l "${HOME}"/.config/tmp/yt_pl.ps | awk '{print $1}')
 
-chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality" | dmenu "$@" -i -p "Where to play?")
+chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
@@ -87,6 +109,8 @@ case "$chosen_mode" in
     "Clipboard") play_clipboard;;
     "Clipboard quality") play_clipboard_quality;;
     "Clipboard Audio") play_clipboard_audio;;
+    "Add PL") add_playlist;;
+    "Play PL") play_playlist;;
     "Stop") $(stop_all);;
     *) exit;;
 esac
