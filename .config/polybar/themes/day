@@ -80,9 +80,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Special Elite:pixelsize=8"
+font-0 = "Special Elite:pixelsize=9"
 font-1 = "Noto Color Emoji:scale=14"
-font-2 = FontAwesome:pixelsize=8
+font-2 = FontAwesome:pixelsize=9
 font-3 = symbola:pixelsize=9
 
 separator = ⏽
