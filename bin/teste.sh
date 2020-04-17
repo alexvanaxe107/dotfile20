@@ -1,12 +1,10 @@
-#! /bin/bash
+#! /bin/sh
 
-set -u
+comparacao=st
+teste=$1
 
-teste="oi"
-
-if [[ $teste = "oi" ]]
-then
-    echo $teste
+if echo ${teste} | grep -E "st"; then
+    echo teste
+else
+    echo no teste
 fi
-
-echo $teste2
