@@ -286,7 +286,6 @@ function set_color_by_walpaper() {
     prepare_wallpaper
     echo "Reseting configs"
     reset_configs
-    echo "Sleeping..."
     
     # This function is located on bspwm themes files
     echo "Updating files"
