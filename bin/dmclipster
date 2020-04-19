@@ -4,6 +4,6 @@
 
 result=`clipster -o -n 10 | dmenu "$@" -p "Clipboard:" -l 10`
 
-echo "$result"| tr -d '\n' | clipster -c
+printf "$result"| tr -d '\n' | clipster -c
 
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-file=$(echo -e "sxhkd\nbspwm\nradio\nconfig\nzshrc\nvimb" | dmenu "$@" -p "Select file to edit")
+file=$(printf "sxhkd\nbspwm\nradio\nconfig\nzshrc\nvimb" | dmenu "$@" -p "Select file to edit")
 
 case $file in
     "sxhkd") alacritty -e $EDITOR $HOME/.config/sxhkd/sxhkdrc;;

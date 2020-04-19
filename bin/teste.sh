@@ -1,10 +1,10 @@
 #! /bin/sh
 
-comparacao=st
-teste=$1
+number=$1
+re="^[0-9]+$"
 
-if echo ${teste} | grep -E "st"; then
-    echo teste
+if  [ $(echo "$number" | grep -E $re) ]; then
+    echo "number"
 else
-    echo no teste
+    echo "not number"
 fi

@@ -201,6 +201,13 @@ function update_files(){
         sed -i "s/041866/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/2d2d2d/$(retrieve_color i 2)/" ${HOME}/.config/conky/clock.conf
+
+        # Configure vis color
+        sed -i "s/180ECD/$(retrieve_color i 1)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/921FEF/$(retrieve_color i 5)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/EF1FE5/$(retrieve_color i 8)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/EF1F7D/$(retrieve_color i 10)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/180000/$(retrieve_color i 13)/" ${HOME}/.config/vis/colors/theme
     fi
 
     if [[  "${theme_name}" = "night" ]]; then
@@ -283,10 +290,6 @@ function update_files(){
         sed -i "s/EF1FE5/$(retrieve_color n 8)/" ${HOME}/.config/vis/colors/theme
         sed -i "s/EF1F7D/$(retrieve_color n 10)/" ${HOME}/.config/vis/colors/theme
         sed -i "s/180000/$(retrieve_color n 13)/" ${HOME}/.config/vis/colors/theme
-        
-        
-
-
     fi
 
 }
