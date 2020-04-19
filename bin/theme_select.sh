@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # To call use script >>/tmp/polybar1.log 2>&1 &
 

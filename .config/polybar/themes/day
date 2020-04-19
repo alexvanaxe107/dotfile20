@@ -82,10 +82,10 @@ module-margin-right = 2
 
 font-0 = Press Start 2P:pixelsize=7;2
 font-1 = "Noto Color Emoji:scale=14"
-font-2 = FontAwesome:pixelsize=9
+font-2 = FontAwesome:pixelsize=9;2
 font-3 = symbola:pixelsize=9
 
-separator = ⏽
+separator = 
 
 modules-left = desktop bspwm
 modules-center = pomodoro nweather torrent
