@@ -46,7 +46,7 @@ play_playlist(){
     while read line
     do
         notify-send -u low "Playing..." "$line"
-        mpv "${line}"
+        mpv "${line}" --no-video --shuffle
         sed -i '1d' $file_ps 
     done < $file_ps
     rm $HOME/.config/indicators/play_radio.ind
@@ -101,11 +101,10 @@ play_clipboard_audio(){
 
 PL_ITENS=$(wc -l "${HOME}"/.config/tmp/yt_pl.ps | awk '{print $1}')
 
-chosen_mode=$(printf "Local\\nCast\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
+chosen_mode=$(printf "Local\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
-    "Cast") radio_file="$HOME/.config/play_radio/config.cast";;
     "Clipboard") play_clipboard;;
     "Clipboard quality") play_clipboard_quality;;
     "Clipboard Audio") play_clipboard_audio;;
