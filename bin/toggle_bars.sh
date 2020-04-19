@@ -9,8 +9,8 @@ MONITOR2=$(polybar -m | cut -d":" -f1 | awk 'NR==2 {print $0}')
 TARGET=$1
 
 toggle_full(){
-    if [[ "$TARGET" = "--target1" ]]; then
-        if [[ ! -z "$PID" ]]; then
+    if [ "$TARGET" = "--target1" ]; then
+        if [ ! -z "$PID" ]; then
             bspc config -m $MONITOR1 top_padding 0
             kill $PID
         else
@@ -21,8 +21,8 @@ toggle_full(){
 }
 
 toggle_simple(){
-    if [[ "$TARGET" = "--target2" ]]; then
-        if [[ ! -z "$PID_SIMPLE" ]]; then
+    if [ "$TARGET" = "--target2" ]; then
+        if [ ! -z "$PID_SIMPLE" ]; then
             kill $PID_SIMPLE
         else
             MONITOR2=$MONITOR2 polybar -q -c $HOME/.config/polybar/config_simple simple >>/tmp/polybar2.log 2>&1 &

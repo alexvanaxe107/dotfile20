@@ -8,11 +8,11 @@
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-function play_local(){
+play_local () {
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
     echo "" > $HOME/.config/indicators/play_radio.ind
 
-    if [[ $url == *"pls"* ]]; then
+    if [ $url = *"pls"* ]; then
         mpv -playlist=$url
     else
         mpv $url
@@ -23,23 +23,23 @@ function play_local(){
     exit
 }
 
-function play_cast(){
+play_cast(){
     castnow --quiet $url&
 }
 
-function stop_all(){
+stop_all(){
     rm $HOME/.config/indicators/play_radio.ind
     killall mpv
     killall play_radio.sh
     #castnow --quiet --command s --exit&
 }
 
-function add_playlist(){
+add_playlist(){
     result=$(xclip -o)
     echo ${result} >> $HOME/.config/tmp/yt_pl.ps
 }
 
-function play_playlist(){
+play_playlist(){
     notify-send -u normal "Playing PL" "Playing the playlist saved."
     echo "" > $HOME/.config/indicators/play_radio.ind
     file_ps=$HOME/.config/tmp/yt_pl.ps
@@ -53,7 +53,7 @@ function play_playlist(){
     notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
-function play_clipboard(){
+play_clipboard(){
     echo "" > $HOME/.config/indicators/play_radio.ind
     notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
 
@@ -65,16 +65,16 @@ function play_clipboard(){
     exit
 }
 
-function play_clipboard_quality(){
+play_clipboard_quality(){
     echo "" > $HOME/.config/indicators/play_radio.ind
     result=$(xclip -o)
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
 
     local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the player:")
 
-    local choosen_quality=$(awk '{print $1}' <<< ${chosen_p})
+    local choosen_quality=$(echo ${chosen_p} | awk '{print $1}')
 
-    if [[ -z "${choosen_quality}" ]]; then
+    if [ -z "${choosen_quality}" ]; then
         notify-send -u normal  "Your choice" "None choice was made. Exiting"
         rm $HOME/.config/indicators/play_radio.ind
         exit 0
@@ -89,7 +89,7 @@ function play_clipboard_quality(){
     exit
 }
 
-function play_clipboard_audio(){
+play_clipboard_audio(){
     echo "" > $HOME/.config/indicators/play_radio.ind
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     result=$(xclip -o)

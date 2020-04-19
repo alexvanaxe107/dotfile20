@@ -1,9 +1,11 @@
 #! /bin/sh
 
-number=$1
-re="^[0-9]+$"
+number="⛅️ +22°C 🌘"
+re="[0-9].*c"
 
-if  [ $(echo "$number" | grep -E $re) ]; then
+number=$(echo $number | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
+
+if  [ $(echo "$number"  | grep -E $re) ]; then
     echo "number"
 else
     echo "not number"

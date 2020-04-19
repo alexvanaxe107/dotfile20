@@ -1,18 +1,18 @@
 #!/bin/sh
 
-chosen=$(printf "Turnoff monitor\\nSleep\\nRestart\\nPoweroff\\nHibernate" | dmenu "$@" -i -p "Power:")
+chosen=$(printf "Turnoff monitor\nSleep\nRestart\nPoweroff\nHibernate" | dmenu "$@" -i -p "Power:")
 
 poweroff() { \
-	confirm="$(printf "No\\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
-	if [ "Yes" == "$confirm" ]
+	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+	if [ "Yes" = "$confirm" ]
 	then
 		systemctl poweroff
 	fi
 }
 
 chibernate() { \
-	confirm="$(printf "No\\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
-	if [ "Yes" == "$confirm" ]
+	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+	if [ "Yes" = "$confirm" ]
 	then
 		lock.sh
 		systemctl hibernate
@@ -29,8 +29,8 @@ csuspend() { \
 }
 
 crestart() { \
-	confirm="$(printf "No\\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
-	if [ "Yes" == "$confirm" ]
+	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+	if [ "Yes" = "$confirm" ]
 	then
 		systemctl reboot
 	fi

@@ -19,7 +19,7 @@ then
 	icon=""
 fi
 
-if [ "$is_muted" == "yes" ]
+if [ "$is_muted" = "yes" ]
 then
     icon=""
 fi
@@ -33,4 +33,4 @@ else
     icon="$icon"
 fi
 
-echo -e "$icon $volume"
+printf "$icon $volume"
