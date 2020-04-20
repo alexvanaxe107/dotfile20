@@ -87,7 +87,7 @@
 
   # Which monitor should the notifications be displayed on.
   monitor = 0
-  follow = none
+  follow = mouse
 
   # Show how many messages are currently hidden (because of geometry).
   indicate_hidden = yes
