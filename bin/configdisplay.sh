@@ -2,28 +2,28 @@
 
 chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI" | dmenu "$@" -i -p "Select a monitor config")
 
-function hdmi(){
+hdmi(){
     killall polybar
     $HOME/.screenlayout/hdmi.sh
     toggle_bars.sh
     #bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9 10
 }
 
-function notebook(){
+notebook(){
     killall polybar
     $HOME/.screenlayout/notebook.sh
     toggle_bars.sh
     #bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
 }
 
-function dual_inverted(){
+dual_inverted(){
    killall polybar
    $HOME/.screenlayout/dual_inverted.sh
    sleep 1
    toggle_bars.sh
 }
 
-function dual(){
+dual(){
    killall polybar
    $HOME/.screenlayout/dual.sh
    sleep 1
