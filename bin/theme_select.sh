@@ -184,10 +184,10 @@ function update_files(){
         sed -i "s/#6F8E27/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg
         sed -i "s/#123456/#$(retrieve_color n 11)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#F0F2CD/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
-        sed -i "s/#49291D/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#8A792B/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
-        sed -i "s/#DFF1DA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+        sed -i "s/#9AB6CA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#3C413E/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#48473A/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#9AB6CA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Configure conky! Here we go!
         sed -i "s/777777/$(retrieve_color n 3)/" ${HOME}/.config/conky/process.conf
