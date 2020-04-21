@@ -102,6 +102,8 @@ c.editor.command = ["alacritty", "-e", "vim '{}'"]
 # Hide title bar when only one
 c.tabs.show = "multiple"
 
+c.tabs.background = True
+
 # Dont know, but seems cool
 c.scrolling.smooth = True
 
