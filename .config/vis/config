@@ -36,7 +36,7 @@ audio.sources=pulse
 
 ##Configures what character the spectrum visualizer will use. Specifying a space (e.g " ") means the
 ##background will be colored instead of the character. Defaults to " ".
-visualizer.spectrum.character=║
+visualizer.spectrum.character=⬥
 
 ##Spectrum bar width. Defaults to 2.
 visualizer.spectrum.bar.width=1
@@ -50,7 +50,7 @@ visualizer.spectrum.smoothing.mode=sgs
 
 ##This configures the falloff effect on the spectrum visualizer. Available falloff options are fill,top,none.
 ##Defaults to "fill"
-visualizer.spectrum.falloff.mode=top
+visualizer.spectrum.falloff.mode=fill
 
 ##Configures how fast the falloff character falls. This is an exponential falloff so values usually look
 ##best 0.9+ and small changes in this value can have a large effect. Defaults to 0.95
