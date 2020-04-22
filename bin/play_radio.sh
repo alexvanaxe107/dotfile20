@@ -32,6 +32,7 @@ save_location() {
     position=$(playerctl position)
     last_played="$(cat $LAST_PLAYED_FILE)?t=${position}"
     echo $last_played > $LAST_LOCATION_PLAYED
+    sed -i 's/www.youtube.com.watch.v\=/youtu.be\//g' $LAST_LOCATION_PLAYED
 }
 
 play_local () {
@@ -54,6 +55,7 @@ play_cast(){
 }
 
 stop_all(){
+    save_location
     remove_indicator
     killall mpv
     killall play_radio.sh
@@ -87,7 +89,6 @@ play_clipboard(){
     save_last_played $result
     mpv "$result"
 
-    save_location
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
@@ -114,7 +115,6 @@ play_clipboard_quality(){
 
     mpv "$result" --ytdl-format=${choosen_quality}
 
-    save_location
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
     exit
@@ -126,7 +126,6 @@ play_clipboard_audio(){
     result=$(xclip -o)
     save_last_played $result
     mpv "$result" --no-video --shuffle
-    save_location
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
     exit
@@ -139,7 +138,6 @@ resume() {
     url=$(cat $LAST_LOCATION_PLAYED)
     mpv "$url"
 
-    save_location
     remove_indicator
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     exit
