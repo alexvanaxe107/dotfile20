@@ -29,6 +29,8 @@ save_last_played() {
 }
 
 save_location() {
+    yt_link=$(ps aux | grep -E '[y]ou' | awk '{print $12}' | sed 's/\?t.*//g') # Search the playing yt video and format it
+    save_last_played $yt_link
     position=$(playerctl position)
     last_played="$(cat $LAST_PLAYED_FILE)?t=${position}"
     echo $last_played > $LAST_LOCATION_PLAYED
@@ -55,9 +57,8 @@ play_cast(){
 }
 
 stop_all(){
-    save_location
-    remove_indicator
     killall mpv
+    remove_indicator
     killall play_radio.sh
     #castnow --quiet --command s --exit&
 }
@@ -74,7 +75,7 @@ play_playlist(){
     while read line
     do
         notify-send -u low "Playing..." "$line"
-        mpv "${line}" --no-video --shuffle
+        mpv "${line}"
         sed -i '1d' $file_ps 
     done < $file_ps
     remove_indicator
@@ -86,7 +87,6 @@ play_clipboard(){
     set_indicator
 
     result=$(xclip -o)
-    save_last_played $result
     mpv "$result"
 
 
@@ -110,7 +110,6 @@ play_clipboard_quality(){
         exit 0
     fi
 
-    save_last_played $result
     notify-send -u normal  "Trying to play" "The media will be played soon... wait a little and enjoy."
 
     mpv "$result" --ytdl-format=${choosen_quality}
@@ -124,7 +123,6 @@ play_clipboard_audio(){
     set_indicator
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     result=$(xclip -o)
-    save_last_played $result
     mpv "$result" --no-video --shuffle
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
@@ -145,7 +143,7 @@ resume() {
 
 PL_ITENS=$(wc -l "${HOME}"/.config/tmp/yt_pl.ps | awk '{print $1}')
 
-chosen_mode=$(printf "Local\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL\\nResume" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
+chosen_mode=$(printf "Local\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL\\nSave\\nResume" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
@@ -155,6 +153,7 @@ case "$chosen_mode" in
     "Add PL") add_playlist;;
     "Play PL") play_playlist;;
     "Stop") $(stop_all);;
+    "Save") save_location;;
     "Resume") resume;;
     *) exit;;
 esac
