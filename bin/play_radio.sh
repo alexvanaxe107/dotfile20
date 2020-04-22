@@ -25,7 +25,6 @@ remove_indicator() {
 }
 
 save_last_played() {
-    echo $LAST_PLAYED_FILE
     echo "$1" > $LAST_PLAYED_FILE
 }
 
