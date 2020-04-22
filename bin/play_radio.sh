@@ -8,6 +8,10 @@
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
+TMP_LOCATION=$HOME/.config/tmp
+LAST_PLAYED_FILE="${TMP_LOCATION}/last_played"
+LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
+
 set_indicator() {
     echo "" > $HOME/.config/indicators/play_radio.ind
 }
@@ -18,6 +22,17 @@ remove_indicator() {
     then
         rm $HOME/.config/indicators/play_radio.ind
     fi
+}
+
+save_last_played() {
+    echo $LAST_PLAYED_FILE
+    echo "$1" > $LAST_PLAYED_FILE
+}
+
+save_location() {
+    position=$(playerctl position)
+    last_played="$(cat $LAST_PLAYED_FILE)?t=${position}"
+    echo $last_played > $LAST_LOCATION_PLAYED
 }
 
 play_local () {
@@ -70,7 +85,10 @@ play_clipboard(){
     set_indicator
 
     result=$(xclip -o)
+    save_last_played $result
     mpv "$result"
+
+    save_location
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
@@ -92,10 +110,12 @@ play_clipboard_quality(){
         exit 0
     fi
 
+    save_last_played $result
     notify-send -u normal  "Trying to play" "The media will be played soon... wait a little and enjoy."
 
     mpv "$result" --ytdl-format=${choosen_quality}
 
+    save_location
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
     exit
@@ -105,15 +125,30 @@ play_clipboard_audio(){
     set_indicator
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     result=$(xclip -o)
+    save_last_played $result
     mpv "$result" --no-video --shuffle
+    save_location
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
     exit
 }
 
+resume() {
+    set_indicator
+    notify-send -u normal  "Trying to resume..." "Trying to resume the last played media where it stoped..."
+
+    url=$(cat $LAST_LOCATION_PLAYED)
+    mpv "$url"
+
+    save_location
+    remove_indicator
+    notify-send -u normal  "Done" "Hopefully your media was played =/"
+    exit
+}
+
 PL_ITENS=$(wc -l "${HOME}"/.config/tmp/yt_pl.ps | awk '{print $1}')
 
-chosen_mode=$(printf "Local\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
+chosen_mode=$(printf "Local\\nStop\\nClipboard\\nClipboard Audio\\nClipboard quality\\nAdd PL\\nPlay PL\\nResume" | dmenu "$@" -i -p "Where to play? ($PL_ITENS)")
 
 case "$chosen_mode" in
     "Local") radio_file="$HOME/.config/play_radio/config";;
@@ -123,6 +158,7 @@ case "$chosen_mode" in
     "Add PL") add_playlist;;
     "Play PL") play_playlist;;
     "Stop") $(stop_all);;
+    "Resume") resume;;
     *) exit;;
 esac
 
