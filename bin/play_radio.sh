@@ -8,9 +8,21 @@
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
+set_indicator() {
+    echo "" > $HOME/.config/indicators/play_radio.ind
+}
+
+remove_indicator() {
+    process=$(pgrep mpv)
+    if [ -z "${process}" ]
+    then
+        rm $HOME/.config/indicators/play_radio.ind
+    fi
+}
+
 play_local () {
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
-    echo "" > $HOME/.config/indicators/play_radio.ind
+    set_indicator
 
     if [ $url = *"pls"* ]; then
         mpv -playlist=$url
@@ -19,7 +31,7 @@ play_local () {
     fi
 
     notify-send -u normal  "Finished" "Media stoped. Bye."
-    rm $HOME/.config/indicators/play_radio.ind
+    remove_indicator
     exit
 }
 
@@ -28,7 +40,7 @@ play_cast(){
 }
 
 stop_all(){
-    rm $HOME/.config/indicators/play_radio.ind
+    remove_indicator
     killall mpv
     killall play_radio.sh
     #castnow --quiet --command s --exit&
@@ -41,7 +53,7 @@ add_playlist(){
 
 play_playlist(){
     notify-send -u normal "Playing PL" "Playing the playlist saved."
-    echo "" > $HOME/.config/indicators/play_radio.ind
+    set_indicator
     file_ps=$HOME/.config/tmp/yt_pl.ps
     while read line
     do
@@ -49,24 +61,24 @@ play_playlist(){
         mpv "${line}" --no-video --shuffle
         sed -i '1d' $file_ps 
     done < $file_ps
-    rm $HOME/.config/indicators/play_radio.ind
+    remove_indicator
     notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
 play_clipboard(){
-    echo "" > $HOME/.config/indicators/play_radio.ind
     notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
+    set_indicator
 
     result=$(xclip -o)
     mpv "$result"
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
-    rm $HOME/.config/indicators/play_radio.ind
+    remove_indicator
     exit
 }
 
 play_clipboard_quality(){
-    echo "" > $HOME/.config/indicators/play_radio.ind
+    set_indicator
     result=$(xclip -o)
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
 
@@ -76,7 +88,7 @@ play_clipboard_quality(){
 
     if [ -z "${choosen_quality}" ]; then
         notify-send -u normal  "Your choice" "None choice was made. Exiting"
-        rm $HOME/.config/indicators/play_radio.ind
+        remove_indicator
         exit 0
     fi
 
@@ -85,17 +97,17 @@ play_clipboard_quality(){
     mpv "$result" --ytdl-format=${choosen_quality}
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
-    rm $HOME/.config/indicators/play_radio.ind
+    remove_indicator
     exit
 }
 
 play_clipboard_audio(){
-    echo "" > $HOME/.config/indicators/play_radio.ind
+    set_indicator
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     result=$(xclip -o)
     mpv "$result" --no-video --shuffle
     notify-send -u normal  "Done" "Hopefully your media was played =/"
-    rm $HOME/.config/indicators/play_radio.ind
+    remove_indicator
     exit
 }
 
