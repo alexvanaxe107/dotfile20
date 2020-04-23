@@ -78,18 +78,18 @@ padding-left = 2
 padding-right = 2
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
-font-0 = Kelly Slab:pixelsize=10;2
+font-0 = Erica Type:style=Bold:pixelsize=9
 font-1 = "Noto Color Emoji:scale=14"
-font-2 = FontAwesome:pixelsize=9
-font-3 = symbola:pixelsize=9
+font-2 = FontAwesome:style=Bold:pixelsize=9
+font-3 = symbola:style=Bold:pixelsize=9;1
 
 separator = ⍿
 
-modules-left = desktop bspwm
+modules-left = desktop bspwm pulseaudio indicators
 modules-center = pomodoro nweather torrent
-modules-right =  indicators ava_load recording pulseaudio memory cpu temperature date
+modules-right = ava_load recording memory cpu temperature date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -200,7 +200,8 @@ label-urgent-padding = 1
 
 #label-empty = %index%
 label-empty = %index%%icon%
-label-empty-foreground = ${colors.foreground-alt2}
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-background = ${colors.foreground-alt2}
 label-empty-padding = 1
 
 ws-icon-0 = terminal;
