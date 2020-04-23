@@ -35,6 +35,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 setxkbmap -model abnt2 -layout br -variant abnt2
 xsetroot -cursor_name left_ptr
+alias dmenu="ava_dmenu"
 source ~/.profile
 
 #exec /home/alexvanaxe/bin/startdwm

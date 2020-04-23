@@ -12,12 +12,12 @@ set -o pipefail
 
 source $HOME/bin/imports/color_sort.sh
 
-CHOSEN=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu "$@" -i -p "Change the theme: ")
+CHOSEN=$(printf "night\\nday\\nlight\\nwallpaper" | dmenu -i -p "Change the theme: ")
 #Get the last to get how many monitors
 MONITOR=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
 
 # if [ $CHOSEN == "wallpaper" ]; then
-#     CHOSEN_font=$(printf "Original\\nSoft" | dmenu "$@" -i -p "Chose the font kind:")
+#     CHOSEN_font=$(printf "Original\\nSoft" | dmenu -i -p "Chose the font kind:")
 # fi
 
 if [[ -z "${CHOSEN}" ]]; then
@@ -46,7 +46,7 @@ function reset_configs(){
 
 function get_wallpaper() {
     if [[ ${MONITOR} -gt 1 ]]; then
-        local wallpaper_number=$(printf "1\\n2" | dmenu "$@" -i -p "Choose the wallpaper to use:")
+        local wallpaper_number=$(printf "1\\n2" | dmenu -i -p "Choose the wallpaper to use:")
         if [[  "${wallpaper_number}" -eq "1" ]]; then
             local cur_wallpaper="$(cat $XDG_CONFIG_HOME/nitrogen/bg-saved.cfg | grep file | awk 'BEGIN{FS="="} NR==1 {print $2}')"
         fi

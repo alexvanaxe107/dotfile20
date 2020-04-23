@@ -13,11 +13,11 @@ function go_to_position() {
 
 
 if [ $players_len -gt 1 ]; then
-    chosen_p=$(basename -a ${players[@]} | dmenu "$@" -i -p "Select the player:")
+    chosen_p=$(basename -a ${players[@]} | dmenu -i -p "Select the player:")
 
     if [ ! -z $chosen_p ]; then
         position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
-        chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀" | dmenu "$@" -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - $(playerctl -p $chosen_p metadata title)}")
+        chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀" | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - $(playerctl -p $chosen_p metadata title)}")
 
         case "$chosen" in
             "pause ⏸") playerctl -p $chosen_p pause;;
@@ -31,7 +31,7 @@ if [ $players_len -gt 1 ]; then
 
 else
     position=$(echo "$(playerctl position) / 60" | bc)
-    chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀" | dmenu "$@" -i -p "${position}Min: $(playerctl metadata artist) - $(playerctl metadata title)")
+    chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀" | dmenu -i -p "${position}Min: $(playerctl metadata artist) - $(playerctl metadata title)")
 
     case "$chosen" in
         "pause ⏸") playerctl pause;;

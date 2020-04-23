@@ -8,6 +8,8 @@
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
+source ~/.config/bspwm/themes/bsp.cfg
+
 TMP_LOCATION=$HOME/.config/tmp
 LAST_PLAYED_FILE="${TMP_LOCATION}/last_played"
 LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
@@ -170,7 +172,7 @@ play_radio() {
 
     done < $radio_file
 
-    chosen=$(printf "$choosen_opts" | dmenu "$@" -i -p "Choose radio")
+    chosen=$(printf "$choosen_opts" | dmenu -i -p "Choose radio")
 
     if [ -z "$chosen" ]
     then
@@ -191,7 +193,7 @@ clear_playlist() {
     $(rm ${PLAYLIST_FILE})
 }
 
-chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nSave\\nResume\\nStop" | dmenu "$@" -i -p "How to play? ($(pl_len))")
+chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nSave\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
 
 case "$chosen_mode" in
     "Local") play_radio;;

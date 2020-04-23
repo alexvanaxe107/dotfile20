@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # A script to use dmenu to change the light
-GS=`printf auto | dmenu "$@" -f -p "Light digit: ($(light -G)) "`
+GS=`printf auto | dmenu -f -p "Light digit: ($(light -G)) "`
 if [ ! -z "$GS" ] && [ "auto" != "$GS" ]
 then
     killall clight

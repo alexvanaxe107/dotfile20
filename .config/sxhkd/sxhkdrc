@@ -4,7 +4,7 @@ super + shift + Return
 
 # start dmenu
 super + d
-	dmenu_run "${DMENU_COLOR[@]}"
+    ava_dmenu_run
 
 # Toggle mute
 XF86AudioMute
@@ -19,7 +19,7 @@ XF86MonBrightness{Down,Up}
 
 # Play Radio!
 super + shift + r
-	$HOME/bin/play_radio.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/play_radio.sh
 
 # Configure Printscreen
 Print
@@ -27,7 +27,7 @@ Print
 
 #Player Control
 super + shift + s
-	$HOME/bin/player_ctl.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/player_ctl.sh
 
 #Lock screen
 super + shift + x
@@ -35,27 +35,27 @@ super + shift + x
 
 #Fix Light
 super + shift + i
-	$HOME/bin/avalight "${DMENU_COLOR[@]}"
+	$HOME/bin/avalight
 
 #Pomodoro
 super + shift + p
-	$HOME/bin/pomodoro-client.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/pomodoro-client.sh
 
 # Mount a partition
 super + shift + m
-	$HOME/bin/dmenumount "${DMENU_COLOR[@]}"
+	$HOME/bin/dmenumount
 
 #Todos
 super + shift + t
-	$HOME/bin/dtodosh.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/dtodosh.sh
 
 # Change theme
 super + shift + y
-	$HOME/bin/theme_select.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/theme_select.sh
 
 #Power management
 super + shift + e
-	$HOME/bin/powercontrol.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/powercontrol.sh
 
 # Toggle the top bar
 super + shift + b
@@ -63,19 +63,19 @@ super + shift + b
 
 # Clipboard tool
 super + shift + v
-	$HOME/bin/dmclipster "${DMENU_COLOR[@]}"
+	$HOME/bin/dmclipster
 
 # Configure monitors
 super + shift + d
-	$HOME/bin/configdisplay.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/configdisplay.sh
 
 # Equalizer
 super + shift + a
-	$HOME/bin/equalizer "${DMENU_COLOR[@]}"
+	$HOME/bin/equalizer
 
 # Edit Config file
 super + shift + u
-	$HOME/bin/configshortcut.sh "${DMENU_COLOR[@]}"
+	$HOME/bin/configshortcut.sh
 
 # Start stop conky
 super + shift + c

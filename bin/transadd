@@ -5,8 +5,7 @@
 # transmission-daemon sometimes fails to take remote requests in its first moments.
 
 #pgrep -x transmission-da || (transmission-daemon && notify-send "Starting transmission daemon..." && sleep 3 && pkill -RTMIN+7 i3blocks)
-source /home/alexvanaxe/.config/bspwm/themes/bsp.cfg
-chosen="$(printf "Other\\nMovie\\nTV\\nMusic" | dmenu ${DMENU_COLOR[@]} -i -p "Choose the download: " )"
+chosen="$(printf "Other\\nMovie\\nTV\\nMusic" | dmenu -i -p "Choose the download: " )"
 
 case $chosen  in
 	"Movie") transmission-remote -a "$@" --no-start-paused --torrent-done-script /home/alexvanaxe/Documents/Scripts/transend_video && notify-send  "🔽 Torrent added" "Started downloading a movie at $@";;

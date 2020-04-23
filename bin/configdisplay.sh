@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI" | dmenu "$@" -i -p "Select a monitor config")
+chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI" | dmenu -i -p "Select a monitor config")
 
 hdmi(){
     killall polybar

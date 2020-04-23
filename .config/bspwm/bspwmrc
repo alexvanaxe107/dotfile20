@@ -36,7 +36,6 @@ bspc rule -a ffplay state=floating
 bspc rule -a Gpick state=pseudo_tiled
 bspc rule -a qutebrowser desktop=^2
 bspc rule -a mpv desktop=\^5
-bspc rule -a Alacritty state=pseudo_tiled
 bspc rule -a Alacritty:vis desktop=^5 state=tiled
 bspc rule -a Alacritty:weechat desktop=^7 state=tiled
 #bspc rule -a Gnome-calculator state=floating follow=on
