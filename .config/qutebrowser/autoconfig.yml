@@ -6,9 +6,5 @@
 
 config_version: 2
 settings:
-  content.notifications:
-    https://www.xn--thepratebay-fcb.com: false
   statusbar.hide:
     global: false
-  tabs.show:
-    global: multiple
