@@ -1,0 +1,5 @@
+#!/bin/sh
+
+source ~/.config/bspwm/themes/bsp.cfg
+
+/usr/local/bin/dmenu "${DMENU_COLOR[@]}" "$@"
