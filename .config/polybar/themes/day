@@ -22,18 +22,6 @@ background = #C5F0F2CD
 background-alt = #8A792B
 background-talt = #C58A792B
 
-;Generated bg colors
-background-talt0 = #C5F0F2CD
-background-talt1 = #C5F0F2CD
-background-talt2 = #C5F0F2CD
-background-talt3 = #C5F0F2CD
-background-talt4 = #C5F0F2CD
-background-talt5 = #C5F0F2CD
-background-talt6 = #C5F0F2CD
-background-talt7 = #C5F0F2CD
-background-talt8 = #C5F0F2CD
-background-talt9 = #C5F0F2CD
-
 ;foreground = ${xrdb:color7:#222}
 foreground = #101820
 foreground-alt = #6B6B6B
@@ -56,17 +44,6 @@ enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
-
-background-0 = ${colors.background-talt0}
-background-1 = ${colors.background-talt1}
-background-2 = ${colors.background-talt2}
-background-3 = ${colors.background-talt3}
-background-4 = ${colors.background-talt4}
-background-5 = ${colors.background-talt5}
-background-6 = ${colors.background-talt6}
-background-7 = ${colors.background-talt7}
-background-8 = ${colors.background-talt8}
-background-9 = ${colors.background-talt9}
 
 line-size = 1
 line-color = #f00
