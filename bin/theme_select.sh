@@ -221,31 +221,23 @@ function update_files(){
         fi
 
         # Config polybar colors
-        sed -i "s/^background = #.*/background = #87$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        transp_level=00
+        transp_level2=72
+        sed -i "s/^background = #.*/background = #${transp_level}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #${transp_level}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^foreground-clock = #.*/foreground-clock = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-load = #.*/foreground-load = #$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-temp = #.*/foreground-temp = #$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-cpu = #.*/foreground-cpu = #$(retrieve_color i 7)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-memory = #.*/foreground-memory = #$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-sound = #.*/foreground-sound = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-pomodoro = #.*/foreground-pomodoro = #$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-weather = #.*/foreground-weather = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
-
-        sed -i "s/^background-talt0 = #.*/background-talt0 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt1 = #.*/background-talt1 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt2 = #.*/background-talt2 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt3 = #.*/background-talt3 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt4 = #.*/background-talt4 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt5 = #.*/background-talt5 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt6 = #.*/background-talt6 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt7 = #.*/background-talt7 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt8 = #.*/background-talt8 = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt9 = #.*/background-talt9 = #87$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-clock = #.*/foreground-clock = #${transp_level2}$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-load = #.*/foreground-load = #${transp_level2}$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-temp = #.*/foreground-temp = #${transp_level2}$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-cpu = #.*/foreground-cpu = #${transp_level2}$(retrieve_color i 7)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-memory = #.*/foreground-memory = #${transp_level2}$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-sound = #.*/foreground-sound = #${transp_level2}$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-pomodoro = #.*/foreground-pomodoro = #${transp_level2}$(retrieve_color i 6)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-weather = #.*/foreground-weather = #${transp_level2}$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-torrent = #.*/foreground-torrent = #${transp_level2}$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
 
         sed -i "s/^background = #.*/background = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
