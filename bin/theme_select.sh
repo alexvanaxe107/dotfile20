@@ -154,12 +154,12 @@ function update_files(){
 
         sed -i "s/^background-talt0 = #.*/background-talt0 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-talt1 = #.*/background-talt1 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt2 = #.*/background-talt2 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt3 = #.*/background-talt3 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt4 = #.*/background-talt4 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt5 = #.*/background-talt5 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt6 = #.*/background-talt6 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-talt7 = #.*/background-talt7 = #C5$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt2 = #.*/background-talt2 = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt3 = #.*/background-talt3 = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt4 = #.*/background-talt4 = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt5 = #.*/background-talt5 = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt6 = #.*/background-talt6 = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-talt7 = #.*/background-talt7 = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-talt8 = #.*/background-talt8 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-talt9 = #.*/background-talt9 = #C5$(retrieve_color i 5)/" ${HOME}/.config/polybar/config
 
