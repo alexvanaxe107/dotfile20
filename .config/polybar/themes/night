@@ -510,11 +510,13 @@ format-foreground = ${colors.foreground-alt2}
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.foreground-alt2}
+format-warn-padding = 3
 
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 label-ramp-foreground = ${colors.foreground-alt2}
+format-ramp-padding = 3
 
 [module/powermenu]
 type = custom/menu

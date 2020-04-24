@@ -9,4 +9,4 @@ settings:
   content.notifications:
     https://www.facebook.com: false
   statusbar.hide:
-    global: true
+    global: false
