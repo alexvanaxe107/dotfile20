@@ -211,12 +211,12 @@ function update_files(){
 
         # Config polybar colors
         transp_level=00
-        transp_level2=72
+        transp_level2=9F
         sed -i "s/^background = #.*/background = #${transp_level}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #${transp_level}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #${transp_level2}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #FFFFFF/" ${HOME}/.config/polybar/config
 
         sed -i "s/^foreground-clock = #.*/foreground-clock = #${transp_level2}$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-load = #.*/foreground-load = #${transp_level2}$(retrieve_color i 3)/" ${HOME}/.config/polybar/config
@@ -228,11 +228,13 @@ function update_files(){
         sed -i "s/^foreground-weather = #.*/foreground-weather = #${transp_level2}$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-torrent = #.*/foreground-torrent = #${transp_level2}$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^background = #.*/background = #87$(retrieve_color n 0)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background = #.*/background = #${transp_level}$(retrieve_color n 0)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background-alt = #.*/background-alt = #${transp_level2}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config_simple
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color n 4)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #FFFFFF/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground-cpu = #.*/foreground-cpu = #${transp_level2}$(retrieve_color i 7)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^foreground-load = #.*/foreground-load = #${transp_level2}$(retrieve_color i 3)/" ${HOME}/.config/polybar/config_simple
 
         # Config bsp collors
         sed -i "s/#372549/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
