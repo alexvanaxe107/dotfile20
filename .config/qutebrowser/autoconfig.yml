@@ -6,6 +6,8 @@
 
 config_version: 2
 settings:
+  content.geolocation:
+    https://www.rico.com.vc: true
   content.notifications:
     https://www.facebook.com: false
   statusbar.hide:
