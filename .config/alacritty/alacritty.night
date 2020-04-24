@@ -109,7 +109,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Fira Code
+    family: Anonymous Pro
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -120,7 +120,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fantasque Sans Mono
+    family: Anonymous Pro
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
@@ -132,7 +132,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fantasque Sans Mono
+    family: Anonymous Pro
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
@@ -144,7 +144,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fantasque Sans Mono
+    family: Anonymous Pro
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
@@ -262,7 +262,33 @@ font:
   #   `- { index: 16, color: '0xff00ff' }`
   #
   #indexed_colors: []
+colors:
+  # Default colors
+  primary:
+    background: '0x000000'
+    foreground: '0xffffff'
 
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0x571dc2'
+    green:   '0x14db49'
+    yellow:  '0x403d70'
+    blue:    '0x385a70'
+    magenta: '0x384894'
+    cyan:    '0x4f3a5e'
+    white:   '0x999999'
+
+  # Bright colors
+  bright:
+    black:   '0x38372c'
+    red:     '0x7c54b0'
+    green:   '0xa2e655'
+    yellow:  '0x9c6f59'
+    blue:    '0x323f5c'
+    magenta: '0x5e6c99'
+    cyan:    '0x667d77'
+    white:   '0xffffff'
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -293,7 +319,7 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.6
+background_opacity: 0.8
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
