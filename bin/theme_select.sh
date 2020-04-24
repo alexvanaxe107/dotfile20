@@ -247,12 +247,12 @@ function update_files(){
         sed -i "s/#EAF2EF/#$(retrieve_color n 0)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Config dunst colors
-        sed -i "s/#0B1B03/#$(retrieve_color n 3)/" ${HOME}/.config/dunst/dunstrc #background
-        sed -i "s/#FFFFFF/#$(retrieve_color i 4)/" ${HOME}/.config/dunst/dunstrc #foreground
+        sed -i "s/#0B1B03/#$(retrieve_color n 3)/" ${HOME}/.config/dunst/dunstrc #background low
+        sed -i "s/#FFFFFF/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc #foreground
         sed -i "s/#03171B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc #frame
 
         sed -i "s/#27125B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
-        sed -i "s/#FFFFFE/#$(retrieve_color i 5)/" ${HOME}/.config/dunst/dunstrc
+        sed -i "s/#FFFFFE/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#03171B/#$(retrieve_color n 0)/" ${HOME}/.config/dunst/dunstrc
 
         # Configure conky! Here we go!
