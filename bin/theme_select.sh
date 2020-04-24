@@ -212,7 +212,7 @@ function update_files(){
 
         # Config polybar colors
         transp_level=00
-        transp_level2=9F
+        transp_level2=7F
         sed -i "s/^background = #.*/background = #${transp_level}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-alt = #.*/background-alt = #${transp_level2}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
