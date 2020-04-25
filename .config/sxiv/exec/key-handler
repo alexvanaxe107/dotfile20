@@ -15,8 +15,10 @@ do
         "C-l")
             cp "$file" $HOME/Documents/Pictures/lock.png ;;
         "C-n")
-            cp "$file" $HOME/Documents/Pictures/Wallpapers/night/ ;;
+            mv "$file" $HOME/Documents/Pictures/Wallpapers/night/ ;;
         "C-d")
-            cp "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
+            mv "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
+        "C-a")
+            rm "$file" ;;
     esac
 done
