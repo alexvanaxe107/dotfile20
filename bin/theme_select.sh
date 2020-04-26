@@ -37,10 +37,12 @@ function reset_configs(){
     cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
     cp ${HOME}/.config/polybar/themes/"${theme_name}"_simple ${HOME}/.config/polybar/config_simple
+    cp ${HOME}/.config/conky/themes/${theme_name}/conky.sh ${HOME}/.config/conky/conky.sh
     cp ${HOME}/.config/conky/themes/${theme_name}/process.conf ${HOME}/.config/conky/process.conf
     cp ${HOME}/.config/conky/themes/${theme_name}/cpu.conf ${HOME}/.config/conky/cpu.conf
     cp ${HOME}/.config/conky/themes/${theme_name}/clock.conf ${HOME}/.config/conky/clock.conf
     cp ${HOME}/.config/conky/themes/${theme_name}/fortune.conf ${HOME}/.config/conky/fortune.conf
+    cp ${HOME}/.config/conky/themes/${theme_name}/clock_rings.lua ${HOME}/.config/conky/clock_rings.lua
     cp ${HOME}/.config/vis/colors/theme_tpl ${HOME}/.config/vis/colors/theme
     cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
 }
@@ -258,11 +260,22 @@ function update_files(){
         # Configure conky! Here we go!
         sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/process.conf
         sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/process.conf
 
-        sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/FFFFFF/$(retrieve_color i 5)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/000001/$(retrieve_color i 3)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/000002/$(retrieve_color i 4)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/000003/$(retrieve_color i 5)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/000004/$(retrieve_color i 6)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/000005/$(retrieve_color i 7)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/000006/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
+
+
+        sed -i "s/100000/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/200000/$(retrieve_color i 2)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/000004/$(retrieve_color i 6)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/000005/$(retrieve_color i 7)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/000006/$(retrieve_color i 8)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/000001/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/000002/$(retrieve_color i 4)/" ${HOME}/.config/conky/clock_rings.lua
 
         sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/clock.conf
         sed -i "s/CBD38F/$(retrieve_color i 4)/" ${HOME}/.config/conky/clock.conf

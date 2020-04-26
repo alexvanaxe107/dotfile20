@@ -1,4 +1,12 @@
-conky -d --config ~/.config/conky/night/cpu.conf
-conky -d --config ~/.config/conky/night/fortune.conf
-conky -d --config ~/.config/conky/night/clock.conf
-conky -d --config ~/.config/conky/night/process.conf
+#!/bin/sh
+
+pid=$(pidof conky)
+if [ -z "$pid" ]
+then
+        conky -d --config ~/.config/conky/clock.conf
+        conky -d --config ~/.config/conky/fortune.conf
+        conky -d --config ~/.config/conky/process.conf
+    else
+        killall conky
+
+fi
