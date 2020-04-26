@@ -7,8 +7,6 @@
 config_version: 2
 settings:
   content.geolocation:
-    https://www.rico.com.vc: true
+    https://g1.globo.com: false
   content.notifications:
-    https://www.facebook.com: false
-  statusbar.hide:
-    global: false
+    https://www.reddit.com: false

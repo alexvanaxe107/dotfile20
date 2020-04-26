@@ -111,4 +111,4 @@ c.tabs.background = True
 # Dont know, but seems cool
 c.scrolling.smooth = True
 
-c.url.searchengines = {"DEFAULT": "https://duckduckgo.com/?q={}", "y": "http://www.youtube.com/results?search_query={}", "g": "http://www.google.com/?q={}"}
+c.url.searchengines = {"DEFAULT": "https://duckduckgo.com/?q={}", "y": "http://www.youtube.com/results?search_query={}", "g": "http://www.google.com/search?q={}"}
