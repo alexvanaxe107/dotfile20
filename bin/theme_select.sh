@@ -195,11 +195,17 @@ function update_files(){
         sed -i "s/2d2d2d/$(retrieve_color i 2)/" ${HOME}/.config/conky/clock.conf
 
         # Configure vis color
-        sed -i "s/180ECD/$(retrieve_color i 1)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/921FEF/$(retrieve_color i 5)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/EF1FE5/$(retrieve_color i 8)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/EF1F7D/$(retrieve_color i 10)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/180000/$(retrieve_color i 13)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000001/$(retrieve_color i 1)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000002/$(retrieve_color i 2)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000003/$(retrieve_color i 3)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000004/$(retrieve_color i 4)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000005/$(retrieve_color i 5)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000006/$(retrieve_color i 6)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000007/$(retrieve_color i 7)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000008/$(retrieve_color i 8)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000009/$(retrieve_color i 9)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000010/$(retrieve_color i 10)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000011/$(retrieve_color i 11)/" ${HOME}/.config/vis/colors/theme
     fi
 
     if [[  "${theme_name}" = "night" ]]; then
@@ -283,12 +289,18 @@ function update_files(){
         sed -i "s/2d2d2d/$(retrieve_color i 5)/" ${HOME}/.config/conky/clock.conf
 
         # Configure vis color
-        sed -i "s/180ECD/$(retrieve_color n 1)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/921FEF/$(retrieve_color n 5)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/EF1FE5/$(retrieve_color n 8)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/EF1F7D/$(retrieve_color n 10)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/180000/$(retrieve_color n 13)/" ${HOME}/.config/vis/colors/theme
-    fi
+        sed -i "s/000001/$(retrieve_color n 1)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000002/$(retrieve_color n 2)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000003/$(retrieve_color n 3)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000004/$(retrieve_color n 4)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000005/$(retrieve_color n 5)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000006/$(retrieve_color n 6)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000007/$(retrieve_color n 7)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000008/$(retrieve_color n 8)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000009/$(retrieve_color n 9)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000010/$(retrieve_color n 10)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000011/$(retrieve_color n 11)/" ${HOME}/.config/vis/colors/theme
+    fi           
 
 }
 

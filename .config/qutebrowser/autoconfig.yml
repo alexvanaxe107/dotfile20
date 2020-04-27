@@ -10,3 +10,5 @@ settings:
     https://g1.globo.com: false
   content.notifications:
     https://www.reddit.com: false
+  statusbar.hide:
+    global: true
