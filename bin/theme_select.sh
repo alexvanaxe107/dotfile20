@@ -243,10 +243,10 @@ function update_files(){
         sed -i "s/#372549/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
         sed -i "s/#123456/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#05080F/#$(retrieve_color n 0)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
-        sed -i "s/#EAF2EF/#$(retrieve_color i 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#040C38/#$(retrieve_color i 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
-        sed -i "s/#EAF2EF/#$(retrieve_color n 0)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+        sed -i "s/#05080F/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#EAF2EF/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#040C38/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#EAF2EF/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Config dunst colors
         sed -i "s/#0B1B03/#$(retrieve_color n 3)/" ${HOME}/.config/dunst/dunstrc #background low
