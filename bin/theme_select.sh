@@ -151,13 +151,13 @@ function update_files(){
         fi
                 
         # Config polybar colors
-        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #C5$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 3)/" ${HOME}/.config/polybar/config #ICONS
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
 
-        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 4)/" ${HOME}/.config/polybar/config_simple
+        sed -i "s/^background = #.*/background = #C5$(retrieve_color i 2)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 3)/" ${HOME}/.config/polybar/config_simple #ICONS
@@ -184,17 +184,15 @@ function update_files(){
         sed -i "s/#9AB6CA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Configure conky! Here we go!
-        sed -i "s/777777/$(retrieve_color n 3)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/FFFFFF/$(retrieve_color i 2)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/777777/$(retrieve_color i 6)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/444444/$(retrieve_color i 4)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/222222/$(retrieve_color i 2)/" ${HOME}/.config/conky/process.conf
 
-        sed -i "s/777777/$(retrieve_color n 3)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/cpu.conf
-        sed -i "s/FFFFFF/$(retrieve_color i 2)/" ${HOME}/.config/conky/cpu.conf
-
-        sed -i "s/041866/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/CBD38F/$(retrieve_color i 6)/" ${HOME}/.config/conky/clock.conf
-        sed -i "s/2d2d2d/$(retrieve_color i 2)/" ${HOME}/.config/conky/clock.conf
+        sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/777777/$(retrieve_color i 6)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/444444/$(retrieve_color i 4)/" ${HOME}/.config/conky/cpu.conf
+        sed -i "s/222222/$(retrieve_color i 2)/" ${HOME}/.config/conky/cpu.conf
 
         # Configure vis color
         sed -i "s/000001/$(retrieve_color i 1)/" ${HOME}/.config/vis/colors/theme
