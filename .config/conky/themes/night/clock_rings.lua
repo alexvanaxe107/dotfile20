@@ -203,7 +203,7 @@ settings_table = {
 	{
                 name='acpitemp',
                 arg='',
-                max=100,
+                max=105,
                 bg_colour=0x300000,
                 bg_alpha=0.4,
                 fg_colour=0x300000,
