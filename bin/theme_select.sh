@@ -258,8 +258,8 @@ function update_files(){
         sed -i "s/#03171B/#$(retrieve_color n 0)/" ${HOME}/.config/dunst/dunstrc
 
         # Configure conky! Here we go!
-        sed -i "s/041866/$(retrieve_color n 2)/" ${HOME}/.config/conky/process.conf
-        sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/768B98/$(retrieve_color i 1)/" ${HOME}/.config/conky/process.conf
+        sed -i "s/5A615C/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
 
         sed -i "s/000001/$(retrieve_color i 3)/" ${HOME}/.config/conky/process.conf
         sed -i "s/000002/$(retrieve_color i 4)/" ${HOME}/.config/conky/process.conf
@@ -271,6 +271,7 @@ function update_files(){
 
         sed -i "s/100000/$(retrieve_color i 3)/" ${HOME}/.config/conky/clock_rings.lua
         sed -i "s/200000/$(retrieve_color i 2)/" ${HOME}/.config/conky/clock_rings.lua
+        sed -i "s/300000/$(retrieve_color i 5)/" ${HOME}/.config/conky/clock_rings.lua
         sed -i "s/000004/$(retrieve_color i 6)/" ${HOME}/.config/conky/clock_rings.lua
         sed -i "s/000005/$(retrieve_color i 7)/" ${HOME}/.config/conky/clock_rings.lua
         sed -i "s/000006/$(retrieve_color i 8)/" ${HOME}/.config/conky/clock_rings.lua

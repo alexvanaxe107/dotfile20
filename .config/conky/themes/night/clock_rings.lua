@@ -83,8 +83,8 @@ settings_table = {
 		x=160, y=155,
 		radius=105,
 		thickness=5,
-		start_angle=-20,
-		end_angle=208
+		start_angle=-25,
+		end_angle=90
 	},
 	{
 		name='cpu',
@@ -97,8 +97,8 @@ settings_table = {
 		x=160, y=155,
 		radius=111,
 		thickness=5,
-		start_angle=-20,
-		end_angle=208
+		start_angle=-25,
+		end_angle=90
 	},
 
 	{
@@ -112,8 +112,8 @@ settings_table = {
                 x=160, y=155,
                 radius=117,
                 thickness=5,
-                start_angle=-20,
-                end_angle=208
+                start_angle=-25,
+                end_angle=90
         },
 
 	{
@@ -127,7 +127,21 @@ settings_table = {
                 x=160, y=155,
                 radius=123,
                 thickness=5,
-                start_angle=-20,
+                start_angle=-25,
+                end_angle=90
+        },
+	{
+                name='cpu',
+                arg='cpu',
+                max=100,
+                bg_colour=0x000001,
+                bg_alpha=0.4,
+                fg_colour=0x000001,
+                fg_alpha=0.8,
+                x=160, y=155,
+                radius=114,
+                thickness=22.5,
+                start_angle=95,
                 end_angle=208
         },
 	{
@@ -187,12 +201,12 @@ settings_table = {
 		end_angle=235
 	},
 	{
-                name='cpu',
-                arg='cpu',
+                name='acpitemp',
+                arg='',
                 max=100,
-                bg_colour=0x000001,
+                bg_colour=0x300000,
                 bg_alpha=0.4,
-                fg_colour=0x000001,
+                fg_colour=0x300000,
                 fg_alpha=0.8,
                 x=160, y=155,
                 radius=150,
