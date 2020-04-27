@@ -134,6 +134,8 @@ function update_files(){
     local colors=($(convert "$cur_wallpaper" -format %c -depth 8 -colors 15 histogram:info:- | sort -n | grep -o "#......"))
     local colors_wallpaper=($(get_sorted_color $colors))
 
+    echo ${colors_wallpaper[@]} > ~/wallcolors.txt
+
     # if [[ ${#colors_wallpaper[@]} -lt 141 ]]; then
     #     local colors_wallpaper=($(convert "${cur_wallpaper}" -format %c -depth 10  histogram:info:- | grep -o "#......" | cut -d "#" -f 2))
     # fi
@@ -289,17 +291,17 @@ function update_files(){
         sed -i "s/2d2d2d/$(retrieve_color i 5)/" ${HOME}/.config/conky/clock.conf
 
         # Configure vis color
-        sed -i "s/000001/$(retrieve_color n 1)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000002/$(retrieve_color n 2)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000003/$(retrieve_color n 3)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000004/$(retrieve_color n 4)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000005/$(retrieve_color n 5)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000006/$(retrieve_color n 6)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000007/$(retrieve_color n 7)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000008/$(retrieve_color n 8)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000009/$(retrieve_color n 9)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000010/$(retrieve_color n 10)/" ${HOME}/.config/vis/colors/theme
-        sed -i "s/000011/$(retrieve_color n 11)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000001/$(retrieve_color n 0)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000002/$(retrieve_color n 1)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000003/$(retrieve_color n 2)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000004/$(retrieve_color n 3)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000005/$(retrieve_color n 4)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000006/$(retrieve_color n 5)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000007/$(retrieve_color n 6)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000008/$(retrieve_color n 7)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000009/$(retrieve_color n 8)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000010/$(retrieve_color n 9)/" ${HOME}/.config/vis/colors/theme
+        sed -i "s/000011/$(retrieve_color n 10)/" ${HOME}/.config/vis/colors/theme
     fi           
 
 }
