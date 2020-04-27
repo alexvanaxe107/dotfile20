@@ -28,7 +28,7 @@ set laststatus=2  " Always display the status line
 "
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
-set shell=/bin/fish
+set shell=/bin/zsh
 
 " Bookmark: To auto read the annotations from .vim-bookmarks
 let g:bookmark_save_per_working_dir = 1
