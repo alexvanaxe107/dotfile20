@@ -3,6 +3,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'gantheory/vim-easymotion'
 Plug 'tpope/vim-speeddating'
 Plug 'arielrossanigo/dir-configs-override.vim'
+Plug 'junegunn/goyo.vim'
+
 " #### IDE
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -18,6 +20,8 @@ Plug 'sk1418/QFGrep'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
+Plug 'dense-analysis/ale' " Linting
+Plug 'prettier/vim-prettier' " Formatting
 
 " Javascript/Typescript
 Plug 'pangloss/vim-javascript'
