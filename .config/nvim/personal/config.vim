@@ -68,7 +68,7 @@ set timeout!
 " mapping
 nmap  <leader>c  <Plug>(choosewin)
 " show big letters
-let g:choosewin_overlay_enable = 1
+" let g:choosewin_overlay_enable = 1
 
 " Autoclose ------------------------------
 

@@ -1,9 +1,9 @@
 filetype indent on
 
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
+"let g:typescript_compiler_binary = 'tsc'
+"let g:typescript_compiler_options = ''
+"autocmd QuickFixCmdPost [^l]* nested cwindow
+"autocmd QuickFixCmdPost    l* nested lwindow
 
 " let g:nvim_typescript#default_mappings = 1
 
@@ -18,6 +18,7 @@ setlocal colorcolumn=+1
 
 " Numbers
 setlocal number
+setlocal relativenumber
 " set numberwidth=5
 
 " filetype plugin indent on
@@ -49,6 +50,10 @@ let g:deoplete#enable_smart_case = 1
 " complete with words from any opened file
 let g:context_filetype#same_filetypes = {}
 let g:context_filetype#same_filetypes._ = '_'
+let g:nvim_typescript#diagnostics_enable = get(g:, 'nvim_typescript#diagnostics_enable', 0)
+let g:nvim_typescript#expand_snippet = get(g:, 'nvim_typescript#expand_snippet', 0)
+let g:nvim_typescript#follow_dir_change = get(g:, 'nvim_typescript#follow_dir_change', 0)
+let g:nvim_typescript#suggestions_enabled = get(g:, 'nvim_typescript#suggestions_enabled', 0)
 
 " When writing a buffer (no delay).
 call neomake#configure#automake('w')
@@ -65,7 +70,7 @@ call neomake#configure#automake('w')
 
 " comment this line to enable autocompletion preview window
 " (displays documentation related to the selected completion option)
-setlocal completeopt-=preview
+" setlocal completeopt-=preview
 
 " autocompletion of files and commands behaves like shell
 " (complete only the common part, list the options that match)

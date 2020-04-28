@@ -104,13 +104,13 @@ Plug 'junegunn/goyo.vim'
 Plug 'mattn/emmet-vim'
 " Highlight matching html tags
 Plug 'valloric/MatchTagAlways'
-Plug 'leafgarland/typescript-vim'
-Plug 'bdauria/angular-cli.vim'
-Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'bdauria/angular-cli.vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 " For Denite features
-Plug 'Shougo/denite.nvim'
-" Plug 'Quramy/tsuquyomi'
+"Plug 'Shougo/denite.nvim'
+"Plug 'Quramy/tsuquyomi'
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " ## Python Plugins
@@ -119,7 +119,7 @@ Plug 'davidhalter/jedi-vim'
 " Automatically sort python imports
 Plug 'fisadev/vim-isort' "<C-i> to use it in visual mode
 " Linters
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 " Django
 Plug 'jmcomets/vim-pony'
 Plug 'tweekmonster/django-plus.vim'
