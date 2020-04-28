@@ -265,31 +265,30 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x1e2021'
-    foreground: '0x888a8c'
+    background: '0x333333'
+    foreground: '0xcccccc'
 
   # Normal colors
   normal:
-    black:   '0x515151'
-    red:     '0xbf6382'
-    green:   '0x65a446'
-    yellow:  '0xad8a43'
-    blue:    '0x6b85c2'
-    magenta: '0x9e6bb8'
-    cyan:    '0x5c9d88'
-    white:   '0x919191'
+    black:   '0x666666'
+    red:     '0xcc6699'
+    green:   '0x99cc66'
+    yellow:  '0xcc9966'
+    blue:    '0x6699cc'
+    magenta: '0x9966cc'
+    cyan:    '0x66cc99'
+    white:   '0xcccccc'
 
   # Bright colors
   bright:
-    black:   '0x707172'
-    red:     '0xeaaec2'
-    green:   '0xaed49b'
-    yellow:  '0xd4c3a0'
-    blue:    '0xafc4e9'
-    magenta: '0xd2b1e2'
-    cyan:    '0xa4d0c1'
-    white:   '0xd0d0d0'
-
+    black:   '0x999999'
+    red:     '0xff99cc'
+    green:   '0xccff99'
+    yellow:  '0xffcc99'
+    blue:    '0x99ccff'
+    magenta: '0xcc99ff'
+    cyan:    '0x99ffcc'
+    white:   '0xffffff'
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -320,7 +319,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.8
+background_opacity: 0.9
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
