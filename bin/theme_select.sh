@@ -152,10 +152,10 @@ function update_files(){
                 
         # Config polybar colors
         sed -i "s/^background = #.*/background = #C5$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #C5$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color n 3)/" ${HOME}/.config/polybar/config #ICONS
-        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 4)/" ${HOME}/.config/polybar/config
+        sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
 
         sed -i "s/^background = #.*/background = #C5$(retrieve_color i 2)/" ${HOME}/.config/polybar/config_simple
         sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config_simple
