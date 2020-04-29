@@ -1,4 +1,4 @@
-colorscheme dracula
-set background=dark
+colorscheme PaperColor
+set background=light
 
-let g:airline_theme="dracula"
+let g:airline_theme="papercolor"
