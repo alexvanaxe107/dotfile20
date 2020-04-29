@@ -45,7 +45,7 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 1
+line-size = 2
 line-color = #f00
 
 border-size = 0
@@ -89,6 +89,7 @@ cursor-scroll = ns-resize
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro
+format-underline = #000008
 
 [module/ava_load]
 type = custom/script
@@ -96,7 +97,7 @@ interval = 20
 exec = /home/alexvanaxe/bin/load
 format-prefix = "📉 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+format-underline = #000006
 
 [module/indicators]
 type = custom/script
@@ -117,6 +118,7 @@ exec = cat ~/.dwm/recording
 type = custom/script
 interval = 1200
 exec = weather.sh
+format-underline = #000007
 
 [module/xwindow]
 type = internal/xwindow
@@ -163,7 +165,7 @@ type = internal/bspwm
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
 label-focused-foreground = ${colors.background}
-label-focused-underline= ${colors.primary}
+label-focused-underline= #000009
 label-focused-padding = 1
 
 #label-occupied = %index%
@@ -253,7 +255,7 @@ interval = 1
 format-prefix = "SPOTIFY: "
 format = <label>
 exec = python /home/alexvanaxe/.config/polybar/plugins/polybar-spotify/spotify_status.py -f '{play_pause} {song} - {artist}'
-format-underline = #1db954
+format-underline = #000003
 
 [module/mpd]
 type = internal/mpd
@@ -295,7 +297,7 @@ type = internal/cpu
 interval = 2
 format-prefix = "🏿 " 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-underline = #000004
 label = %percentage:02%%
 
 [module/memory]
@@ -303,7 +305,7 @@ type = internal/memory
 interval = 2
 format-prefix = "👣 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-underline = #000005
 label = %percentage_used%%
 
 [module/wlan]
@@ -356,7 +358,7 @@ time-alt = %H:%M:%S
 
 format-prefix = ⏰
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-underline = #000001
 
 label = %date% %time%
 
@@ -454,7 +456,7 @@ thermal-zone = 0
 warn-temperature = 90
 
 format = <ramp> <label>
-format-underline = #f50a4d
+format-underline = #000002
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 

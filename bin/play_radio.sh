@@ -66,6 +66,7 @@ play_cast(){
 
 stop_all(){
     killall mpv
+    sleep 1
     remove_indicator
     killall play_radio.sh
     #castnow --quiet --command s --exit&
