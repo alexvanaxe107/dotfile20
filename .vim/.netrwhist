@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
-let g:netrw_dirhist_5='/home/alexvanaxe/.vim'
-let g:netrw_dirhist_4='/home/alexvanaxe/.config/fish'
-let g:netrw_dirhist_3='/home/alexvanaxe/.dwm'
-let g:netrw_dirhist_2='/home/alexvanaxe/.tmux'
-let g:netrw_dirhist_1='/home/alexvanaxe/.config/sxiv/exec'
