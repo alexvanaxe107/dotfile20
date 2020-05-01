@@ -81,6 +81,12 @@ super + shift + u
 super + shift + c
 	$HOME/.config/conky/conky.sh
 
+shift + Tab
+	$HOME/bin/bspc_node_manager.sh
+
+ctrl + Tab
+	$HOME/bin/bspc_node_manager.sh -b
+
 # Chords
 # Toggle the top bar
 super + ctrl + b; {s,f}
