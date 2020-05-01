@@ -3,7 +3,7 @@ alias fdir='$HOME/.fdir/fdir.sh'
 alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d ~/.config/todo/config'
 
-export EDITOR=nvim
+export EDITOR=vim
 #export XDG_SESSION_DESKTOP=i3
 #export XDG_CURRENT_DESKTOP=i3
 

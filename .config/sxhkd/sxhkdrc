@@ -81,7 +81,7 @@ super + shift + u
 super + shift + c
 	$HOME/.config/conky/conky.sh
 
-shift + Tab
+alt + Tab
 	$HOME/bin/bspc_node_manager.sh
 
 ctrl + Tab
