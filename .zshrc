@@ -47,7 +47,7 @@ zplug load
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 setopt COMPLETE_ALIASES
-setopt correctall
+#setopt correctall
 autoload -Uz compinit;
 compinit
 

@@ -193,7 +193,7 @@ super + ctrl + shift + f
 	bspc config ignore_ewmh_fullscreen none
 
 # set the node flags
-super + {w,x,y,z}
+super + {t,x,s,p}
 	bspc node -g {marked,locked,sticky,private}
 
 # focus the node in the given direction
