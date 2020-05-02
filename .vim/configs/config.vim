@@ -20,6 +20,9 @@ set showmatch
 set laststatus=2  " Always display the status line
 " set autowrite     " Automatically :write before running commands
 
+set spell spelllang=en_us
+set complete+=k
+
 "
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
