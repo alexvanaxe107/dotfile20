@@ -290,6 +290,10 @@ colors:
     cyan:    '0x95e1d2'
     white:   '0xc9d0c2'
 
+  cursor:
+    text: '0x000000'
+    cursor: '0xfa54ff'
+
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -338,7 +342,7 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Beam
+  style: Block
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
