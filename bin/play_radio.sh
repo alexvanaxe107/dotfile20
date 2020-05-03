@@ -19,6 +19,8 @@ INDICATOR_FILE=$HOME/.config/indicators/play_radio.ind
 PLAYLIST_FILE=$HOME/.config/tmp/yt_pl.ps
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
+PLAY_BKP=$HOME/.config/tmp/play_bkp
+
 set_indicator() {
     echo "" > ${INDICATOR_FILE}
 }
@@ -98,6 +100,7 @@ play_clipboard(){
     set_indicator
 
     result=$(xclip -o)
+    echo "mpv $result" > ${PLAY_BKP};
     mpv "$result"
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -122,6 +125,7 @@ play_clipboard_quality(){
 
     notify-send -u normal  "Trying to play" "The media will be played soon... wait a little and enjoy."
 
+    echo "mpv \"$result\" --ytdl-format=${choosen_quality}" > ${PLAY_BKP};
     mpv "$result" --ytdl-format=${choosen_quality}
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -133,6 +137,7 @@ play_clipboard_audio(){
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     set_indicator
     result=$(xclip -o)
+    echo "mpv \"$result\" --no-video --shuffle" > ${PLAY_BKP};
     mpv "$result" --no-video --shuffle
     remove_indicator
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -144,7 +149,20 @@ resume() {
     set_indicator
 
     url=$(cat $LAST_LOCATION_PLAYED)
+    echo "mpv ${url}" > ${PLAY_BKP};
     mpv "$url"
+
+    remove_indicator
+    notify-send -u normal  "Done" "Hopefully your media was played =/"
+    exit
+}
+
+replay() {
+    notify-send -u normal  "Trying to replay last played..." "Trying to replay the last played media..."
+    set_indicator
+
+    cmd=$(cat $PLAY_BKP)
+    eval $cmd
 
     remove_indicator
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -207,6 +225,7 @@ case "$chosen_mode" in
     "Save") save_location;;
     "Resume") resume;;
     "clear") clear_playlist;;
+    "replay") replay;;
     *) exit;;
 esac
 
