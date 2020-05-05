@@ -108,11 +108,11 @@ super + shift + w ; {d}
 
 # quit/restart bspwm
 super + r
-	bspc wm -r
+	$HOME/bin/bspwmexit.sh -r "Restart?"
 
 # Exit the window manager asking confirmation
 super + e
-	$HOME/bin/bspwmexit.sh
+	$HOME/bin/bspwmexit.sh -e "Exit?"
 
 # close and kill
 super + {_,shift + }q

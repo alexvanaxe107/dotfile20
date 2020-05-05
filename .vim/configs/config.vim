@@ -22,7 +22,7 @@ set laststatus=2  " Always display the status line
 
 set spell spelllang=en_us
 set complete+=k
-
+set spell!
 "
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)

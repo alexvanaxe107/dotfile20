@@ -1,9 +1,13 @@
 #!/bin/sh
 
+confirm="$(printf "No\\nYes" | dmenu -i -p "$2" -nb darkred -sb red -sf white -nf gray )"
 
-confirm="$(printf "No\\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+action=$1
 
 if [ "Yes" = "$confirm" ]
 then
-    bspc quit
+    case "$action" in
+        "-e") bspc quit;;
+        "-r") bspc wm -r;;
+    esac
 fi
