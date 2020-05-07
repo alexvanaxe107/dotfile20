@@ -107,6 +107,7 @@ function startup_theme(){
         xsetroot -solid blue
         bspc config top_padding 0
         bspc config window_gap 0  
+        notify-send "DUNST_COMMAND_PAUSE"
     else
         # Set wallpaper according theme
         nitrogen --head=0 --save --set-scaled --random ${HOME}/Documents/Pictures/Wallpapers/${theme_name}
