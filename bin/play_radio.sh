@@ -54,7 +54,7 @@ play_local () {
     if [ $url = *"pls"* ]; then
         mpv -playlist=$url
     else
-        mpv $url
+        mpv $url --no-video
     fi
 
     notify-send -u normal  "Finished" "Media stoped. Bye."
