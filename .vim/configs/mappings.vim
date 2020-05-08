@@ -41,6 +41,8 @@ nnoremap <leader><F8> :set foldmethod=manual<cr>zE
 nnoremap <F10> :set hlsearch!<CR>
 nmap <leader>ms :BookmarkSave .vim-bookmarks
 
+inoremap <C-@> <C-x><C-o>
+
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
