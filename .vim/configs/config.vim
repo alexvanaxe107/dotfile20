@@ -31,3 +31,7 @@ set timeout!
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
 let g:airline_powerline_fonts = 1
+
+" Hide de guy menus
+set guioptions -=m
+set guioptions -=T
