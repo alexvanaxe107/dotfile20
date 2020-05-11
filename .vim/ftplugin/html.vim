@@ -26,3 +26,4 @@ setlocal formatprg=js-beautify\ --type\ html
 
 " highlight matching braces
 setlocal showmatch
+"hi Normal ctermbg=None

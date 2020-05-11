@@ -346,9 +346,9 @@ function set_vim(){
         sed -i 's/airline_theme.*/airline_theme="papercolor"/' ${HOME}/.config/nvim/personal/home.vim
 
 	# VIM
-        sed -i 's/^colorscheme.*/colorscheme PaperColor/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/^colorscheme.*/colorscheme solarized8/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/airline_theme.*/airline_theme="papercolor"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="solarized"/' ${HOME}/.vim/configs/theme.vim
     fi
     if [[  "night" = ${1} ]]; then
 	# NVIM
@@ -357,9 +357,9 @@ function set_vim(){
         sed -i 's/airline_theme.*/airline_theme="one"/' ${HOME}/.config/nvim/personal/home.vim
 
 	# VIM
-        sed -i 's/^colorscheme.*/colorscheme dracula/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/^colorscheme.*/colorscheme solarized8/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/airline_theme.*/airline_theme="dracula"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="solarized"/' ${HOME}/.vim/configs/theme.vim
     fi
     if [[  "light" = ${1} ]]; then
         sed -i 's/^colorscheme.*/colorscheme default/' ${HOME}/.config/nvim/personal/home.vim

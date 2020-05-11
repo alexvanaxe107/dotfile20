@@ -79,7 +79,7 @@ font-2 = symbola:pixelsize=10
 ;separator =%{B#8763E5ED}⏽%{B-}
 
 modules-left = desktop bspwm nweather pomodoro torrent
-modules-right = indicators  memory cpu temperature ava_load date pulseaudio 
+modules-right = indicators wlan memory cpu temperature ava_load date pulseaudio 
 
 ;tray-position = right
 ;tray-padding = 2
@@ -350,24 +350,30 @@ label = %percentage_used%%
 [module/wlan]
 type = internal/network
 interface = wlp3s0
-interval = 3.0
+interval = 30.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+#format-connected-underline = #9f78e1
 label-connected = %essid%
+format-connected-prefix = "  " 
 
 format-disconnected =
+format-disconnected-prefix = 
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = .__
-ramp-signal-1 = :__
-ramp-signal-2 = :._
-ramp-signal-3 = ::_
-ramp-signal-4 = ::.
-ramp-signal-foreground = ${colors.foreground-alt}
+format-connected-foreground = ${colors.foreground-alt2}
+format-connected-background = ${colors.foreground-sound}
+format-connected-padding = 3
+
+ramp-signal-0 = 𝋡
+ramp-signal-1 = 𝋢
+ramp-signal-2 = 𝋣
+ramp-signal-3 = 𝋤
+ramp-signal-4 = 𝋥
+ramp-signal-foreground = ${colors.foreground-alt2}
 
 [module/eth]
 type = internal/network

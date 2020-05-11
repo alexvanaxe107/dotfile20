@@ -33,8 +33,8 @@ bindkey '^ ' autosuggest-accept
 
 zplug "zsh-users/zsh-history-substring-search"
 
-zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
-#zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+#zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 #zplug oskarkrawczyk/honukai-iterm-zsh, use:honukai.zsh-theme, from:github, as:theme
 #zplug "eendroroy/alien-minimal"
 

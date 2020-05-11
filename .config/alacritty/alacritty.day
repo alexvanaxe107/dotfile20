@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: xterm-256color
+  TERM: xterm-256color
 
 #window:
   # Window dimensions (changes require restart)
@@ -265,30 +265,33 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x333333'
-    foreground: '0xcccccc'
+    background: '0xfcf4dc'
+    foreground: '0x536870'
 
   # Normal colors
   normal:
-    black:   '0x666666'
-    red:     '0xcc6699'
-    green:   '0x99cc66'
-    yellow:  '0xcc9966'
-    blue:    '0x6699cc'
-    magenta: '0x9966cc'
-    cyan:    '0x66cc99'
-    white:   '0xcccccc'
+    black:   '0x002831'
+    red:     '0xd11c24'
+    green:   '0x738a05'
+    yellow:  '0xa57706'
+    blue:    '0x2176c7'
+    magenta: '0xc61c6f'
+    cyan:    '0x259286'
+    white:   '0xeae3cb'
 
   # Bright colors
   bright:
-    black:   '0x999999'
-    red:     '0xff99cc'
-    green:   '0xccff99'
-    yellow:  '0xffcc99'
-    blue:    '0x99ccff'
-    magenta: '0xcc99ff'
-    cyan:    '0x99ffcc'
-    white:   '0xffffff'
+    black:   '0x001e27'
+    red:     '0xbd3613'
+    green:   '0x475b62'
+    yellow:  '0x536870'
+    blue:    '0x708284'
+    magenta: '0x5956ba'
+    cyan:    '0x819090'
+    white:   '0xfcf4dc'
+
+
+
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -319,7 +322,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 0.7
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
