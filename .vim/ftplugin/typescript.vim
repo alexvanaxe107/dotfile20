@@ -31,4 +31,7 @@ setlocal formatprg=prettier\ --parser\ typescript
 " ##### Plugins ######
 " Vim typescript
 let g:typescript_indent_disable = 1
+" Tsu...
+let g:tsuquyomi_single_quote_import= 1
+let tsuquyomi_single_quote_import=1
 "hi Normal ctermbg=None

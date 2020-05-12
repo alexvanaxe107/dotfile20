@@ -104,7 +104,7 @@ function startup_theme(){
         killall -qw picom
         killall -qw conky
         killall -qw polybar
-        xsetroot -solid blue
+        xsetroot -solid "#002B57"
         bspc config top_padding 0
         bspc config window_gap 0  
         notify-send "DUNST_COMMAND_PAUSE"
