@@ -13,6 +13,7 @@ function go_to_position() {
 
 
 if [ $players_len -gt 1 ]; then
+    echo "Player select"
     chosen_p=$(basename -a ${players[@]} | dmenu -i -p "Select the player:")
 
     if [ ! -z $chosen_p ]; then

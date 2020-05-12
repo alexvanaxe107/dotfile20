@@ -18,24 +18,16 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #005700
+background = #005757
 background-alt = #C0CDE5
-background-talt = #B7040C38
+background-alt2 = #575700
+background-alt3 = #2C0057
 ;foreground = ${xrdb:color7:#222}
 ;Generated bg colors
 
-foreground-clock = #B7040CF
-foreground-load = #B7040CF
-foreground-temp = #B7040CF
-foreground-cpu = #B7040CF
-foreground-memory = #B7040CF
-foreground-sound = #B7040CF
-foreground-pomodoro = #B7040CF
-foreground-weather = #B7040CF
-
 foreground = #FFFFFF
-foreground-alt = #111111
-foreground-alt2 = #111111
+foreground-alt = #FFFFFF
+foreground-alt2 = #FFFFFF
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -56,7 +48,7 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 overline-size = 2
-line-size = 0
+line-size = 1
 line-color = #f00
 
 border-size = 0
@@ -68,7 +60,7 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Fira Code:style=Retina:pixelsize=8
+font-0 = hack:style=Retina:pixelsize=8
 font-1 = FontAwesome:pixelsize=10
 font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
@@ -94,7 +86,7 @@ scroll-down = bspwm-deskprev
 ;scroll-down = i3wm-wsprev
 border-bottom-size=2
 border-bottom-color=#000000
-border-top-size=2
+border-top-size=0
 border-top-color=#000000
 
 cursor-click = pointer
@@ -112,12 +104,7 @@ type = custom/script
 interval = 20
 exec = /home/alexvanaxe/bin/load
 
-format-foreground = ${colors.foreground-load}
-format-underline = ${colors.foreground-memory}
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-load}
-format-prefix-underline = ${colors.foreground-cpu}
+format-prefix = Load:
 
 [module/indicators]
 type = custom/script
@@ -143,8 +130,6 @@ exec = cat ~/.dwm/recording
 type = custom/script
 interval = 1200
 exec = weather.sh
-format-foreground = ${colors.foreground-weather}
-format-prefix-foreground = ${colors.foreground-weather}
 
 [module/xwindow]
 type = internal/xwindow
@@ -183,27 +168,29 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 #label-focused = %index%
-label-focused = %icon%
-label-focused-background = ${colors.background-alt}
+label-focused = %index%
+label-focused-background = ${colors.background-alt3}
 label-focused-foreground = ${colors.foreground-alt}
-label-focused-underline= ${colors.foreground}
-label-focused-padding = 1
+label-focused-underline= ${colors.background-alt2}
+label-focused-padding = 2
 
 #label-occupied = %index%
-label-occupied = %index%%icon%
+label-occupied = %index%
 label-occupied-padding = 1
+label-occupied-background = ${colors.background-alt2}
 
 #label-urgent = %index%!
 label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 1
+label-urgent-padding= 1
 
 #label-empty = %index%
-label-empty = %index%%icon%
+label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt2}
+label-empty-background = ${colors.background}
 label-empty-padding = 1
 
-ws-icon-0 = terminal;
+ws-icon-0 = terminal;
 ws-icon-1 = web;
 ws-icon-2 = coding;
 ws-icon-3 = trade;
@@ -266,14 +253,6 @@ ws-icon-9 = 10: ;
 ws-icon-default = ♟
 
 
-[module/spotify]
-type = custom/script
-interval = 1
-format-prefix = "SPOTIFY: "
-format = <label>
-exec = python /home/alexvanaxe/.config/polybar/plugins/polybar-spotify/spotify_status.py -f '{play_pause} {song} - {artist}'
-format-underline = #1db954
-
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
@@ -312,19 +291,13 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " " 
-format-prefix-foreground = ${colors.foreground-cpu}
-format-foreground = ${colors.foreground-cpu}
-format-underline = ${colors.foreground-weather}
+format-prefix = Cpu: 
 label = %percentage:02%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-memory}
-format-foreground = ${colors.foreground-memory}
-format-underline = ${colors.foreground-weather}
+format-prefix = "Mem: "
 label = %percentage_used%%
 
 [module/wlan]
@@ -376,9 +349,7 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-clock}
-format-underline = ${colors.foreground-sound}
+format-prefix = Time:
 
 label = %date% %time%
 
@@ -387,7 +358,6 @@ type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 label-volume =  %percentage%%
-label-volume-foreground = ${colors.foreground-sound}
 
 label-muted = 🔇 muted
 label-muted-foreground = #666
@@ -477,19 +447,17 @@ warn-temperature = 60
 
 
 format = <ramp> <label>
-format-underline = ${colors.foreground-pomodoro}
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-format-foreground = ${colors.foreground-temp}
+format-foreground = ${colors.foreground}
 
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-temp}
+ramp-0 = Temp:
+ramp-1 = Temp:
+ramp-2 = Temp:
+ramp-foreground = ${colors.foreground}
 
 [module/powermenu]
 type = custom/menu
@@ -538,4 +506,3 @@ margin-top = 25
 margin-bottom = 25
 
 ; vim:ft=dosini
-

@@ -18,13 +18,15 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #005700
+background = #00572B
 background-alt = #C0CDE5
+background-alt2 = #575700
+background-alt3 = #2C0057
 ;foreground = ${xrdb:color7:#222}
 
 foreground = #FFFFFF
 foreground-alt = #111111
-foreground-alt2 = #969F63
+foreground-alt2 = #FFFFFF
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -57,7 +59,7 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Fira Code:style:Retina:pixelsize=8
+font-0 = hack:style:Retina:pixelsize=8
 font-1 = FontAwesome:pixelsize=10
 font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
@@ -146,14 +148,15 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 #label-focused = %index%
-label-focused = %icon%
-label-focused-background = ${colors.background-alt}
-label-focused-foreground = ${colors.foreground-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 1
+label-focused = %index%
+label-focused-background = ${colors.background-alt3}
+label-focused-foreground = ${colors.foreground-alt2}
+label-focused-underline= ${colors.background-alt2}
+label-focused-padding = 2
 
 #label-occupied = %index%
-label-occupied = %index%%icon%
+label-occupied = %index%
+label-occupied-background = ${colors.background-alt2}
 label-occupied-padding = 1
 
 #label-urgent = %index%!
@@ -162,7 +165,8 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 1
 
 #label-empty = %index%
-label-empty = %index%%icon%
+label-empty = %index%
+label-empty-background = ${colors.background}
 label-empty-foreground = ${colors.foreground-alt2}
 label-empty-padding = 1
 
@@ -491,4 +495,3 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
-
