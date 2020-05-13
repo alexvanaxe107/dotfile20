@@ -151,7 +151,7 @@ type = internal/bspwm
 
 #label-focused = %index%
 label-focused = %icon%
-;label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.foreground-cpu}
 label-focused-foreground = ${colors.foreground-alt2}
 label-focused-padding = 2
 
@@ -170,7 +170,7 @@ label-urgent-padding = 2
 label-empty = %index%%icon%
 label-empty-padding = 2
 label-empty-foreground = ${colors.foreground-alt2}
-label-empty-background = ${colors.foreground-cpu}
+label-empty-background = ${colors.background}
 
 ws-icon-0 = terminal;
 ws-icon-1 = web;
