@@ -203,6 +203,8 @@ label-focused-foreground = ${colors.foreground-alt2}
 label-focused-background = ${colors.foreground-cpu}
 label-focused-padding = 2
 
+label-dimmed-focused-background = ${colors.foreground-pomodoro}
+
 #label-occupied = %index%
 label-occupied = %index%%icon%
 label-occupied-padding = 2
