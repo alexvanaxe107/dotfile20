@@ -185,11 +185,13 @@ function update_files(){
         # Urgency normal
         sed -i "s/#27125B/#$(retrieve_color i 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#FFFFFE/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
-        sed -i "s/#03171B/#$(retrieve_color i 10)/" ${HOME}/.config/dunst/dunstrc
+        sed -i "s/#668BC8/#$(retrieve_color i 10)/" ${HOME}/.config/dunst/dunstrc
         
         # Config bsp collors
-        sed -i "s/#6F8E27/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#123456/#$(retrieve_color n 11)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100001/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100002/#$(retrieve_color i 5 )/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100003/#$(retrieve_color n 3 )/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100004/#$(retrieve_color i 3 )/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
         sed -i "s/#9AB6CA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
         sed -i "s/#3C413E/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
@@ -259,8 +261,10 @@ function update_files(){
         sed -i "s/^foreground-load = #.*/foreground-load = #${transp_level2}$(retrieve_color i 3)/" ${HOME}/.config/polybar/config_simple
 
         # Config bsp collors
-        sed -i "s/#372549/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
-        sed -i "s/#123456/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100001/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100002/#$(retrieve_color i 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100003/#$(retrieve_color n 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
+        sed -i "s/#100004/#$(retrieve_color n 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
         sed -i "s/#05080F/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
         sed -i "s/#EAF2EF/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
@@ -268,13 +272,15 @@ function update_files(){
         sed -i "s/#EAF2EF/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Config dunst colors
+        # Low
         sed -i "s/#0B1B03/#$(retrieve_color n 3)/" ${HOME}/.config/dunst/dunstrc #background low
         sed -i "s/#FFFFFF/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc #foreground
         sed -i "s/#03171B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc #frame
 
+        # Normal
         sed -i "s/#27125B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#FFFFFE/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc
-        sed -i "s/#03171B/#$(retrieve_color n 0)/" ${HOME}/.config/dunst/dunstrc
+        sed -i "s/#668BC8/#$(retrieve_color n 0)/" ${HOME}/.config/dunst/dunstrc
 
         # Configure conky! Here we go!
         sed -i "s/768B98/$(retrieve_color i 1)/" ${HOME}/.config/conky/process.conf
@@ -382,12 +388,4 @@ esac
 bspc config focused_border_color            "${focused_border_color}"
 bspc config active_border_color             "${active_border_color}"
 bspc config normal_border_color             "${normal_border_color}"
-bspc config urgent_border_color             "${urgent_border_color}"
 bspc config presel_feedback_color           "${presel_feedback_color}"
-bspc config normal_locked_border_color      "${normal_locked_border_color}"
-bspc config focused_sticky_border_color     "${focused_sticky_border_color}"
-bspc config active_sticky_border_color      "${active_sticky_border_color}"
-bspc config normal_sticky_border_color      "${normal_sticky_border_color}"
-bspc config focused_private_border_color    "${focused_private_border_color}"
-bspc config active_private_border_color     "${active_private_border_color}"
-bspc config normal_private_border_color     "${normal_private_border_color}"
