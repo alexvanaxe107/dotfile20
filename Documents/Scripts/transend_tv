@@ -4,6 +4,6 @@
 
 chmod -R 770 "$TR_TORRENT_DIR/$TR_TORRENT_NAME"
 mv "$TR_TORRENT_DIR/$TR_TORRENT_NAME" /home/media/TV/
-chgrp -R plex /home/media/TV/*
+chgrp -R jellyfin /home/media/TV/*
 
 notify-send "Torrent finished" "Movie torrent added to the plex."
