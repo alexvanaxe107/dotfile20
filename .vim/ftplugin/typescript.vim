@@ -28,6 +28,8 @@ setlocal showmatch
 " Set formatter
 setlocal formatprg=prettier\ --parser\ typescript
 
+nmap <leader>o :TsuImport<CR>
+
 " ##### Plugins ######
 " Vim typescript
 let g:typescript_indent_disable = 1

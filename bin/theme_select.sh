@@ -237,7 +237,7 @@ function update_files(){
         transp_level=00
         transp_level2=B7
         sed -i "s/^background = #.*/background = #${transp_level}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
-        sed -i "s/^background-alt = #.*/background-alt = #${transp_level2}$(retrieve_color n 1)/" ${HOME}/.config/polybar/config
+        sed -i "s/^background-alt = #.*/background-alt = #${transp_level2}$(retrieve_color n 0)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground = #.*/foreground = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt = #.*/foreground-alt = #$(retrieve_color i 2)/" ${HOME}/.config/polybar/config
         sed -i "s/^foreground-alt2 = #.*/foreground-alt2 = #FFFFFF/" ${HOME}/.config/polybar/config
@@ -266,7 +266,7 @@ function update_files(){
         sed -i "s/#100003/#$(retrieve_color n 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
         sed -i "s/#100004/#$(retrieve_color n 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#05080F/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#05080F/#$(retrieve_color n 0)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
         sed -i "s/#EAF2EF/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
         sed -i "s/#040C38/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
         sed -i "s/#EAF2EF/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
