@@ -104,7 +104,7 @@ type = custom/script
 interval = 20
 exec = /home/alexvanaxe/bin/load
 
-format-prefix = Load:
+;format-prefix = Load:
 
 [module/indicators]
 type = custom/script
@@ -341,14 +341,15 @@ format-disconnected =
 [module/date]
 type = internal/date
 interval = 5
-format-foreground = ${colors.foreground-clock}
+format-foreground = ${colors.foreground}
 
+date =
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = Time:
+;format-prefix =
 
 label = %date% %time%
 
@@ -453,9 +454,9 @@ label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = Temp:
-ramp-1 = Temp:
-ramp-2 = Temp:
+;ramp-0 = Temp:
+;ramp-1 = Temp:
+;ramp-2 = Temp:
 ramp-foreground = ${colors.foreground}
 
 [module/powermenu]
