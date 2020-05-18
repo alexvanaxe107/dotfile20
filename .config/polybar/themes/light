@@ -69,7 +69,7 @@ separator = ⏽
 
 modules-left = desktop bspwm
 modules-center = 
-modules-right =  pulseaudio memory cpu temperature ava_load
+modules-right =  pulseaudio memory cpu temperature ava_load date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -343,7 +343,6 @@ type = internal/date
 interval = 5
 format-foreground = ${colors.foreground-clock}
 
-date =
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
