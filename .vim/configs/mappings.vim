@@ -102,7 +102,7 @@ map <C-down> <C-w>J
 map <C-up> <C-w>K
 map <C-right> <C-w>L
 
-map <leader>mt :hi Normal ctermbg=None<CR>
+map <leader>mt :hi Normal ctermbg=None
 
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
