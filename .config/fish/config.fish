@@ -20,3 +20,4 @@ pyenv init - | source
 
 ###########     CONFIGS        ###########
 fish_vi_key_bindings
+
