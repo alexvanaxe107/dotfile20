@@ -42,7 +42,7 @@ case $CHOSEN in
     "Impressive") font "Yeseva One" Bold 9 10 11 0;;
     "Programming") font "Fira Code" Bold 9 10 11 0;;
     "Cursive") font "Z003" "Medium Italic" 12 11 12 1;;
-    "Soft") font "Fantasque Sans Mono" Regular 10 11 12 0;;
+    "Soft") font "Fantasque Sans Mono" Regular 10 11 12 1;;
     "80s") font "Audiowide" Regular 9 9 11 1;;
     "SpaceShip") font "Orbitron" Regular 9 9 11 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;

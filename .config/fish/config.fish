@@ -4,10 +4,11 @@ alias pacupg='sudo pacman -Syu'		# Synchronize with repositories and then upgrad
 alias pacre='sudo pacman -R'		# Remove the specified package(s), retaining its configuration(s) and required dependencies
 
 alias fdir='fdir.sh'
+alias fvim="vim -u $HOME/.vimfullrc"
 
 ############     SETS     #############
 set -gx PATH "$HOME/bin" "$PYENV_ROOT/bin" $PATH
-set -x EDITOR nvim
+set -x EDITOR vim
 set -x SUDO_ASKPASS "/usr/bin/lxqt-openssh-askpass"
 set -x FZF_DEFAULT_COMMAND 'fd -I --type f'
 

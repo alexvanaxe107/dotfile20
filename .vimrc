@@ -4,8 +4,8 @@
     
 source ~/.vim/configs/config.vim
 source ~/.vim/configs/mappings.vim
-source ~/.vim/configs/plugin.vim
-source ~/.vim/configs/theme.vim
+"source ~/.vim/configs/plugin.vim
+"source ~/.vim/configs/theme.vim
 
 "set guicursor=
 " Workaround some broken plugins which set guicursor indiscriminately.
