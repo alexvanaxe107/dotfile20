@@ -356,7 +356,7 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = ⏰
+format-prefix = 🕑
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #000001
 
