@@ -163,16 +163,16 @@ label-urgent-padding = 1
 label-empty = %index%%icon%
 label-empty-padding = 1
 
-ws-icon-0 = terminal;
-ws-icon-1 = web;
-ws-icon-2 = coding;
-ws-icon-3 = trade;
-ws-icon-4 = game;
-ws-icon-5 = stocks;
-ws-icon-6 = video;
-ws-icon-7 = twitter;
-ws-icon-8 = chat;
-ws-icon-9 = audio;
+ws-icon-0 = terminal;🔲
+ws-icon-1 = web;🌍
+ws-icon-2 = coding;💻
+ws-icon-3 = trade;💵
+ws-icon-4 = game;🎮
+ws-icon-5 = stocks;🐃
+ws-icon-6 = video;🎞
+ws-icon-7 = twitter;🕳
+ws-icon-8 = chat;⚛
+ws-icon-9 = audio;🎶
 ws-icon-default = ♟
 
 ; Separator in between workspaces
