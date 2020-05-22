@@ -53,6 +53,10 @@ super + shift + t
 super + shift + y
 	$HOME/bin/theme_select.sh
 
+# Change theme
+super + shift + f
+	$HOME/bin/font_select.sh
+
 #Power management
 super + shift + e
 	$HOME/bin/powercontrol.sh
