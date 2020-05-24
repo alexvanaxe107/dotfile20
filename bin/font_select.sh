@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nImpressive\\nElegant\\nElite\\nWestern\\n80s\\nSpaceShip\\nProgramming\\nSoft\\nBook\\nCursive" | dmenu -i -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nImpressive\\nElegant\\nElite\\nWestern\\n80s\\nSpaceShip\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive" | dmenu -i -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -32,13 +32,25 @@ font() {
     for file in ${HOME}/.config/conky/*.conf; do
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
     done
+
+    update=$(printf "Yes\nNo" | dmenu -i -p "Update Font?")
+
+    if [ "${update}" = "Yes" ]; then
+        cp ${HOME}/.config/alacritty/alacritty.yml ${HOME}/.config/alacritty/alacritty_bkp_font.yml 
+        sed -i "s/family:.*/family: ${font_name}/" ${HOME}/.config/alacritty/alacritty.yml
+        sed -i "s/#size:.*/size: ${size3}/" ${HOME}/.config/alacritty/alacritty.yml
+    else
+        cp ${HOME}/.config/alacritty/alacritty_bkp_font.yml ${HOME}/.config/alacritty/alacritty.yml 
+    fi
+    
 }
 
 case $CHOSEN in
     "Day Original") font "Erica Type" Bold 9 10 12 0;;
     "Night Original") font "Iceland" Regular 12 12 15 0;;
+    "Old Terminal") font "VT323" Regular 11 11 13 1;;
     "Elite") font "Special Elite" Bold 10 10 12 2;;
-    "Elegant") font "Unica One" Bold 10 10 12 1;;
+    "Elegant") font "Unica One" Regular 9 10 12 1;;
     "Impressive") font "Yeseva One" Bold 9 10 11 0;;
     "Programming") font "Fira Code" Bold 9 10 11 0;;
     "Cursive") font "Z003" "Medium Italic" 12 11 12 1;;
