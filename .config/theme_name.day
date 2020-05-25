@@ -1,0 +1,3 @@
+#! /bin/dash
+
+export theme_name=day

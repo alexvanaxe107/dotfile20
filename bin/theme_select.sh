@@ -28,6 +28,7 @@ fi
 
 if [[  "wallpaper" != "${CHOSEN}" ]]; then
     cp ${HOME}/.config/bspwm/themes/${CHOSEN}.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
+    cp ${HOME}/.config/theme_name.${CHOSEN} ${HOME}/.config/theme_name
 fi
 source ${HOME}/.config/bspwm/themes/bsp.cfg
 

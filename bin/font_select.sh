@@ -15,7 +15,7 @@ if [ -z "${CHOSEN}" ]; then
 fi
 
 # Source the theme
-#. ${HOME}/.config/bspwm/themes/bsp.cfg
+. ${HOME}/.config/theme_name
 
 font() {
     font_name=$1
@@ -50,7 +50,7 @@ case $CHOSEN in
     "Old Terminal") font "VT323" Regular 11 11 14 1;;
     "Stocks") font "Hack" Bold 9 10 12 1;;
     "Elegant") font "Unica One" Regular 9 10 12 1;;
-    "Elegant2") font "NovaMono" Normal 11 11 14 1;;
+    "Elegant2") font "NovaMono" Normal 10 10 12 1;;
     "Neon") font "Segment14" Regular 9 9 14 1;;
     "War") font "American Stencil" Regular 9 10 12 1;;
     "Programming") font "Fira Code" Bold 9 10 11 0;;
@@ -59,7 +59,7 @@ case $CHOSEN in
     "80s") font "Press Start 2P" Regular 8 8 10 2;;
     "Cyberpunk") font "Small Pixel7" Regular 11 11 14 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
-    "Book") font "CarbonType" Regular 8 9 11 1;;
+    "Book") font "Kingthings Trypewriter 2" Regular 10 11 14 1;;
     "Wasteland") font "Beccaria" Bold 11 12 14 1;;
     "Futuristic") font "Typo Draft Demo" Bold 11 12 14 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
