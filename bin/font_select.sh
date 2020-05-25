@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nWar\\nStocks\\nWestern\\n80s\\nNeon\\nCyberpunk\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive" | dmenu -i -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nWar\\nMinimalist\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nDelirium" | dmenu -i -l 22 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -48,7 +48,9 @@ case $CHOSEN in
     "Day Original") font "Erica Type" Bold 9 10 12 0;;
     "Night Original") font "Iceland" Regular 12 12 15 0;;
     "Old Terminal") font "VT323" Regular 11 11 14 1;;
-    "Stocks") font "Hack" Bold 9 10 12 1;;
+    "Minimalist") font "Nouveau IBM Stretch" Bold 9 10 14 0;;
+    "Modern") font "CQ Mono" Bold 9 10 12 0;;
+    "Futuristic") font "Lotte Paperfang" Normal 8 8 11 1;;
     "Elegant") font "Unica One" Regular 9 10 12 1;;
     "Elegant2") font "NovaMono" Normal 10 10 12 1;;
     "Neon") font "Segment14" Regular 9 9 14 1;;
@@ -57,9 +59,13 @@ case $CHOSEN in
     "Cursive") font "Z003" "Medium Italic" 12 11 14 1;;
     "Soft") font "Fantasque Sans Mono" Regular 10 11 12 1;;
     "80s") font "Press Start 2P" Regular 8 8 10 2;;
-    "Cyberpunk") font "Small Pixel7" Regular 11 11 14 1;;
+    "Cyberpunk") font "5Identification Mono" Regular 5 5 7 1;;
+    "Pixel") font "Small Pixel7" Regular 11 11 14 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 10 11 14 1;;
+    "Stock") font "SVI Basic Manual" Bold 10 11 14 1;;
     "Wasteland") font "Beccaria" Bold 11 12 14 1;;
+    "Cartoon") font "Pointfree" Bold 9 10 11 1;;
+    "Delirium") font "A.D. MONO" Bold 11 11 13 2;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac
