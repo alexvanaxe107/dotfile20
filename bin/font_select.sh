@@ -33,12 +33,13 @@ font() {
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
     done
 
-    update=$(printf "Yes\nNo" | dmenu -i -p "Update Font?")
+    update=$(printf "Yes\nNo" | dmenu -i -p "Update terminal font? (ESC go to default)")
 
     if [ "${update}" = "Yes" ]; then
         sed -i "s/family:.*/family: ${font_name}/" ${HOME}/.config/alacritty/alacritty.yml
         sed -i "s/#size:.*/size: ${size3}/" ${HOME}/.config/alacritty/alacritty.yml
-    else
+    fi
+    if [ -z "${update}" ]; then
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml 
     fi
     
