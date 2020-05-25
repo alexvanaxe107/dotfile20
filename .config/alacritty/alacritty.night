@@ -265,7 +265,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#002b36' # base03
+    background: '#000000' # base03
     foreground: '#839496' # base0
 
   # Cursor colors
