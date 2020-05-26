@@ -26,7 +26,7 @@ set spell!
 "
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
-set shell=/bin/zsh
+set shell=/bin/fish
 set timeout!
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
@@ -35,3 +35,4 @@ let g:airline_powerline_fonts = 1
 " Hide de guy menus
 set guioptions -=m
 set guioptions -=T
+

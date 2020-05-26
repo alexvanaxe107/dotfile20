@@ -15,6 +15,7 @@ set -x FZF_DEFAULT_COMMAND 'fd -I --type f'
 ############     SOURCES     #############
 source $HOME/.fdirrc
 source $HOME/.config/fish/space.fish
+source $HOME/.config/fish/ng.fish
 
 ###########     INIT PYENV     ###########
 pyenv init - | source
