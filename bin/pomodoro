@@ -1,14 +1,16 @@
 #!/bin/sh
 
 . /home/alexvanaxe/.pyenv/versions/wm/bin/activate
-POMODORO=$(pomodoro-client.py status)
+POMODORO=$(pomodoro-client.py status | awk '{print $2}')
+POMODORO_STATUS=$(pomodoro-client.py status)
 
-if [ -z "$POMODORO" ]; then
-	printf "" || exit 1
-elif [ "$POMODORO" = *"PAUSED"* ]
+
+if [ -z "$POMODORO_STATUS" ]; then
+	printf "" || exit 1
+elif [[ "${POMODORO_STATUS}" == *PAUSED* ]]
 then
-	printf " $POMODORO" || exit 1
+	printf " $POMODORO" || exit 1
 else
-	printf " $POMODORO" || exit 1
+	printf " $POMODORO" || exit 1
 fi
 
