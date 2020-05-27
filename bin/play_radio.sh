@@ -8,8 +8,6 @@
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-source ~/.config/bspwm/themes/bsp.cfg
-
 TMP_LOCATION=$HOME/.config/tmp
 LAST_PLAYED_FILE="${TMP_LOCATION}/last_played"
 LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
@@ -74,7 +72,7 @@ stop_all(){
     #castnow --quiet --command s --exit&
 }
 
-stop(){
+stop_one(){
     pro_sel=$(ps aux | grep -E '[m]pv' | awk '{print $2,$12}' | dmenu -l 10)
     pro_pid=$(echo ${pro_sel} | awk '{print $1}')
 
@@ -235,7 +233,7 @@ case "$chosen_mode" in
     "Clipboard Audio") play_clipboard_audio;;
     "+PL") add_playlist;;
     "Play PL") play_playlist;;
-    "Stop") $(stop);;
+    "Stop") $(stop_one);;
     "stopall") $(stop_all);;
     "Save") save_location;;
     "Resume") resume;;
