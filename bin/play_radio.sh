@@ -74,6 +74,20 @@ stop_all(){
     #castnow --quiet --command s --exit&
 }
 
+stop(){
+    pro_sel=$(ps aux | grep -E '[m]pv' | awk '{print $2,$12}' | dmenu -l 10)
+    pro_pid=$(echo ${pro_sel} | awk '{print $1}')
+
+    kill -9 ${pro_pid}
+
+    exists=$(pidof -s mpv)
+
+    if [ -z "${exists}" ]; then
+        remove_indicator
+        killall play_radio.sh
+    fi
+}
+
 add_playlist(){
     result=$(xclip -o)
     echo ${result} >> ${PLAYLIST_FILE}
@@ -221,7 +235,8 @@ case "$chosen_mode" in
     "Clipboard Audio") play_clipboard_audio;;
     "+PL") add_playlist;;
     "Play PL") play_playlist;;
-    "Stop") $(stop_all);;
+    "Stop") $(stop);;
+    "stopall") $(stop_all);;
     "Save") save_location;;
     "Resume") resume;;
     "clear") clear_playlist;;
