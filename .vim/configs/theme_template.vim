@@ -4,5 +4,6 @@ if (has("termguicolors"))
 endif
 set background=dark
 
-let g:airline_theme="minimalist"
+let g:airline_theme="base16_greenscreen"
 "hi Normal ctermbg=None
+let g:airline_theme="gruvbox"

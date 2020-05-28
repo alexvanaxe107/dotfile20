@@ -347,33 +347,19 @@ esac
 
 function set_vim(){
     if [[  "day" = ${1} ]]; then
-	# NVIM
-        sed -i 's/^colorscheme.*/colorscheme PaperColor/' ${HOME}/.config/nvim/personal/home.vim
-        sed -i 's/set background.*/set background=light/' ${HOME}/.config/nvim/personal/home.vim
-        sed -i 's/airline_theme.*/airline_theme="papercolor"/' ${HOME}/.config/nvim/personal/home.vim
-
 	# VIM
-        sed -i 's/^colorscheme.*/colorscheme solarized8/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/airline_theme.*/airline_theme="solarized"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     fi
     if [[  "night" = ${1} ]]; then
-	# NVIM
-        sed -i 's/^colorscheme.*/colorscheme one/' ${HOME}/.config/nvim/personal/home.vim
-        sed -i 's/set background.*/set background=dark/' ${HOME}/.config/nvim/personal/home.vim
-        sed -i 's/airline_theme.*/airline_theme="one"/' ${HOME}/.config/nvim/personal/home.vim
-
 	# VIM
-        sed -i 's/^colorscheme.*/colorscheme solarized8/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/airline_theme.*/airline_theme="solarized"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     fi
     if [[  "light" = ${1} ]]; then
-        sed -i 's/^colorscheme.*/colorscheme default/' ${HOME}/.config/nvim/personal/home.vim
-        sed -i 's/set background.*/set background=dark/' ${HOME}/.config/nvim/personal/home.vim
-        sed -i 's/airline_theme.*/airline_theme="base16_vim"/' ${HOME}/.config/nvim/personal/home.vim
-
-	cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
+        cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
     fi
 }
 
