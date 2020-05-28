@@ -42,7 +42,10 @@ font() {
     if [ -z "${update}" ]; then
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml 
     fi
-    
+
+    notify-send -u normal "$CHOSEN" "Enjoy the font ${font_name}"
+    sleep 1
+    toggle_bars.sh --restart
 }
 
 case $CHOSEN in
@@ -60,7 +63,7 @@ case $CHOSEN in
     "Cursive") font "Z003" "Medium Italic" 12 11 14 1;;
     "Soft") font "Fantasque Sans Mono" Regular 10 11 12 1;;
     "80s") font "Press Start 2P" Regular 8 8 10 2;;
-    "Cyberpunk") font "Terminus (TTF)" Regular 10 10 14 1;;
+    "Cyberpunk") font "Terminus (TTF)" Regular 10 10 14 2;;
     "Pixel") font "Small Pixel7" Regular 11 11 14 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 10 11 14 1;;

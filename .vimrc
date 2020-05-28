@@ -7,6 +7,8 @@ source ~/.vim/configs/mappings.vim
 source ~/.vim/configs/plugin_minimal.vim
 "source ~/.vim/configs/theme.vim
 
+let g:airline_theme="hybridline"
+
 "set guicursor=
 " Workaround some broken plugins which set guicursor indiscriminately.
 "autocmd OptionSet guicursor noautocmd set guicursor=
