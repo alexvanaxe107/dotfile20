@@ -28,6 +28,7 @@ font() {
     sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
     sed -i "s/font-0.*/font-0 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
     sed -i "s/-fn \".*\"/-fn \"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
+    sed -i "s/font =.*/font = ${font_name},${style} ${size1}/" ${HOME}/.config/dunst/dunstrc
 
     for file in ${HOME}/.config/conky/*.conf; do
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
@@ -43,9 +44,11 @@ font() {
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml 
     fi
 
-    notify-send -u normal "$CHOSEN" "Enjoy the font ${font_name}"
+    killall dunst
     sleep 1
+    dunst&
     toggle_bars.sh --restart
+    notify-send -u normal "${CHOSEN}" "Enjoy the ${font_name}"
 }
 
 case $CHOSEN in
