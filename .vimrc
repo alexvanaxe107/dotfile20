@@ -4,7 +4,7 @@
     
 source ~/.vim/configs/config.vim
 source ~/.vim/configs/mappings.vim
-"source ~/.vim/configs/plugin.vim
+source ~/.vim/configs/plugin_minimal.vim
 "source ~/.vim/configs/theme.vim
 
 "set guicursor=

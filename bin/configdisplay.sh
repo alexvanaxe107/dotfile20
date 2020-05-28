@@ -3,8 +3,8 @@
 chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI" | dmenu -i -p "Select a monitor config")
 
 hdmi(){
-    killall polybar
-#    $HOME/.screenlayout/hdmi.sh
+#    killall polybar
+    $HOME/.screenlayout/hdmi.sh
 #    toggle_bars.sh
     #bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9 10
 }
