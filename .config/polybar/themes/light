@@ -18,10 +18,10 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #005757
-background-alt = #C0CDE5
-background-alt2 = #575700
-background-alt3 = #2C0057
+background = #030303
+background-alt = #33E294
+background-alt2 = #2C0057
+background-alt3 = #00BB00
 ;foreground = ${xrdb:color7:#222}
 ;Generated bg colors
 
@@ -60,7 +60,7 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = hack:style=Retina:pixelsize=8
+font-0 = VT323:pixelsize=11;1
 font-1 = FontAwesome:pixelsize=10;2
 ;font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
