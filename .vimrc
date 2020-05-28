@@ -5,7 +5,8 @@
 source ~/.vim/configs/config.vim
 source ~/.vim/configs/mappings.vim
 source ~/.vim/configs/plugin_minimal.vim
-"source ~/.vim/configs/theme.vim
+
+let g:airline_theme="base16_grayscale"
 
 
 "set guicursor=

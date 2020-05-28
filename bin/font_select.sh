@@ -57,9 +57,9 @@ case $CHOSEN in
     "Old Terminal") font "VT323" Regular 11 11 14 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 9 10 14 0;;
     "Modern") font "CQ Mono" Bold 9 10 12 1;;
-    "Futuristic") font "Lotte Paperfang" Normal 8 8 11 1;;
+    "Futuristic") font "minim" Normal 8 8 10 1;;
     "Elegant") font "Unica One" Regular 9 10 12 1;;
-    "Elegant2") font "NovaMono" Normal 10 10 12 1;;
+    "Elegant2") font "NovaMono" Normal 9 9 12 1;;
     "Neon") font "Segment14" Regular 9 9 14 1;;
     "War") font "American Stencil" Regular 9 10 12 1;;
     "Programming") font "Fira Code" Bold 9 10 11 1;;
