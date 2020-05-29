@@ -30,10 +30,12 @@ restart_bar(){
     pid_simple=$(ps aux | egrep "[p]olybar.*simple" | awk '{print $2}')
     if [ ! -z "$pid" ]; then
         kill ${pid}
+        sleep 1
         toggle_full
     fi
     if [ ! -z "$pid_simple" ]; then
         kill ${pid_simple}
+        sleep 1
         toggle_simple
     fi
 }

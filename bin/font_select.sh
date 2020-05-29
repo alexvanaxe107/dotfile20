@@ -45,7 +45,6 @@ font() {
     fi
 
     killall dunst
-    sleep 1
     dunst&
     toggle_bars.sh --restart
     notify-send -u normal "${CHOSEN}" "Enjoy the ${font_name}"
