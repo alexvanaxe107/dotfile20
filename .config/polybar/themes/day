@@ -67,7 +67,7 @@ separator = ⍿
 
 modules-left = desktop bspwm pulseaudio indicators
 modules-center = pomodoro nweather torrent
-modules-right = ava_load recording memory cpu temperature date
+modules-right = ava_load recording memory cpu temperature wlan date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -315,8 +315,9 @@ interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+ramp-signal-underline = #000005
 label-connected = %essid%
+;format-connected-prefix = "  " 
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -324,11 +325,11 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = .__
-ramp-signal-1 = :__
-ramp-signal-2 = :._
-ramp-signal-3 = ::_
-ramp-signal-4 = ::.
+ramp-signal-0 = 🖕
+ramp-signal-1 = 👎
+ramp-signal-2 = 👌
+ramp-signal-3 = 👍
+ramp-signal-4 = 👏
 ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]

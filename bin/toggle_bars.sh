@@ -1,7 +1,13 @@
 #!/bin/dash
 
-MONITOR1=$(polybar -m | cut -d":" -f1 | awk 'NR==1 {print $0}')
-MONITOR2=$(polybar -m | cut -d":" -f1 | awk 'NR==2 {print $0}')
+MONITOR1=$(polybar -m | grep -v primary | cut -d":" -f1 | awk '{print $0}')
+
+if [ -z $MONITOR1 ]; then
+    MONITOR1=$(polybar -m | grep primary | cut -d":" -f1 | awk '{print $0}')
+else
+    MONITOR2=$(polybar -m | grep primary | cut -d":" -f1 | awk '{print $0}')
+fi
+
 
 TARGET=$1
 
