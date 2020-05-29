@@ -36,3 +36,5 @@ let g:airline_powerline_fonts = 1
 set guioptions -=m
 set guioptions -=T
 
+
+let g:indentLine_char = '.'

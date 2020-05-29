@@ -1,10 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 
-players=($(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'))
+players_len=$(playerctl -l | awk '!seen[$1] {print NR} {++seen[$1]}' | tail -n 1)
 
-players_len=${#players[@]}
+get_titles(){
+    for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
+        teste="$(playerctl -p "$player" metadata title 2> /dev/null | awk -v player=$player '{print player,$0}' OFS=" - ")"
+        if [ ! -z $teste ]; then
+            printf "%s\n" "$teste"
+        fi
+    done
+}
 
-function go_to_position() {
+IFS=$'\n'
+
+go_to_position() {
     time=$1
    
     goto=$(echo "${time}" | bc)
@@ -24,7 +33,10 @@ adjust_volume(){
 }
 
 if [ $players_len -gt 1 ]; then
-    chosen_p=$(basename -a ${players[@]} | dmenu -i -p "Select the player:")
+    chosen_p=$(get_titles | dmenu -i -l 20 -p "Select the player:")
+    chosen_p=$(echo $chosen_p | awk '{print $1}') 
+
+    echo $chosen_p
 
     if [ ! -z $chosen_p ]; then
         position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
