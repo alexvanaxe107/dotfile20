@@ -12,6 +12,8 @@ sudo pacman -Rs $(pacman -Qtdq)
 gcc -march=native -Q --help=target|grep march
 
 
+### DEPS
+pacman -S wmctrl
 ### FONTS
 pikaur -S symbola
 pacman -S ttf-nerd-fonts-symbols-mono

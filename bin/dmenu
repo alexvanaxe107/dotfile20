@@ -2,4 +2,4 @@
 
 source ~/.config/bspwm/themes/bsp.cfg
 
-/usr/local/bin/dmenu "${DMENU_COLOR[@]}" "$@"
+/usr/bin/dmenu "${DMENU_COLOR[@]}" "$@"
