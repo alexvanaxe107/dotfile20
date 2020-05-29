@@ -40,7 +40,7 @@ if [ $players_len -gt 1 ]; then
 
     if [ ! -z $chosen_p ]; then
         position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
-        chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - $(playerctl -p $chosen_p metadata title)}")
+        chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - $(playerctl -p $chosen_p metadata title)")
 
         case "$chosen" in
             "pause ⏸") playerctl -p $chosen_p pause;;
