@@ -10,7 +10,7 @@ then
 	printf "" || exit 1
 elif [[ "${POMODORO_STATUS}" == *PAUSED* ]]
 then
-	printf " $POMODORO" || exit 1
+	printf " $POMODORO" || exit 1
 elif [[ "${POMODORO_STATUS}" == *Break* ]]
 then
 	printf " $POMODORO" || exit 1
