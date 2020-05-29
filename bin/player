@@ -1,8 +1,8 @@
 #!/bin/sh
 
-STATUS=$(playerctl status)
+STATUS=$(playerctl status 2> /dev/null)
 if [ "$STATUS" == "Playing" ]; then
-  ARTIST=$(playerctl metadata artist)
-  TITLE=$(playerctl metadata title)
+  ARTIST=$(playerctl metadata artist 2> /dev/null)
+  TITLE=$(playerctl metadata title 2> /dev/null)
   echo "  ${ARTIST:0:15} - ${TITLE:0:20}"
 fi

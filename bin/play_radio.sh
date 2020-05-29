@@ -20,7 +20,7 @@ PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 PLAY_BKP=$HOME/.config/tmp/play_bkp
 
 set_indicator() {
-    echo "" > ${INDICATOR_FILE}
+    echo "蓼" > ${INDICATOR_FILE}
 }
 
 remove_indicator() {
