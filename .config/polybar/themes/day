@@ -57,12 +57,11 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Pomodoro:pixelsize=10;2
-font-1 = Erica Type:style=Bold:pixelsize=9
-font-2 = "joypixels:scale=14"
-font-3 = FontAwesome:style=Bold:pixelsize=9
-font-4 = symbola:style=Bold:pixelsize=9;1
-font-5 = Symbols Nerd Font:pixelsize=10;1
+font-0 = Erica Type:style=Bold:pixelsize=9
+font-1 = "joypixels:scale=14"
+font-2 = FontAwesome:style=Bold:pixelsize=9
+font-3 = symbola:style=Bold:pixelsize=9;1
+font-4 = Symbols Nerd Font:pixelsize=10;2
 
 separator = ⍿
 
