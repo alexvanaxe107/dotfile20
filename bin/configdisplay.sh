@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI" | dmenu -i -p "Select a monitor config")
+chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI\\nDual DPI" | dmenu -i -p "Select a monitor config")
 
 hdmi(){
     $HOME/.screenlayout/hdmi.sh
@@ -26,9 +26,16 @@ dual(){
    toggle_bars.sh --restart
 }
 
+dual_dpi(){
+   $HOME/.screenlayout/dual_dpi.sh
+   sleep 1
+   toggle_bars.sh --restart
+}
+
 case $chosen in
     "Dual") dual;;
     "Dual Inverted") dual_inverted;;
     "Notebook") notebook;;
     "HDMI") hdmi;;
+    "Dual DPI") dual_dpi;;
 esac

@@ -1,6 +1,6 @@
 #!/bin/dash
 
-MONITOR1=$(polybar -m | grep -v primary | cut -d":" -f1 | awk '{print $0}')
+MONITOR1=$(polybar -m | grep -v primary | cut -d":" -f1 | awk 'NR==1 {print $0}')
 
 if [ -z $MONITOR1 ]; then
     MONITOR1=$(polybar -m | grep primary | cut -d":" -f1 | awk '{print $0}')
