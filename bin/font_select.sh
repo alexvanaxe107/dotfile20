@@ -15,7 +15,7 @@ if [ -z "${CHOSEN}" ]; then
 fi
 
 # Source the theme
-. ${HOME}/.config/theme_name
+. ${HOME}/.config/bspwm/themes/bsp.cfg
 
 font() {
     font_name=$1
