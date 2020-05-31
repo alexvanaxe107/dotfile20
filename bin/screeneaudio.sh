@@ -8,7 +8,7 @@ if [ "$1" = "play" ]; then
 fi
 
 if [ "$1" = "stop" ]; then
-    killall ffmpeg
     echo "" > $HOME/.dwm/recording
+    killall ffmpeg
     refbar
 fi
