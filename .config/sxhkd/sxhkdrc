@@ -92,9 +92,6 @@ ctrl + Tab
 	$HOME/bin/bspc_node_manager.sh -b
 
 # Chords
-# Make layout
-super + g: {t,e,w,i,r}
-	{bsp-layout set tiled,bsp-layout set even,bsp-layout set wide,bsp-layout set tall,bsp-layout remove}
 
 # Toggle the top bar
 super + ctrl + b; {s,f}
@@ -120,6 +117,10 @@ super + shift + w ; {d}
 # quit/restart bspwm
 super + r
 	$HOME/bin/bspwmexit.sh -r "Restart?"
+
+# Make layout
+super + g
+	$HOME/bin/bspwm_layout_manager.sh
 
 # Exit the window manager asking confirmation
 super + e
