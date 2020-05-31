@@ -179,13 +179,6 @@ function update_files(){
 
     # DAY THEME
     if [[  "${theme_name}" = "day" ]]; then
-        if [[  "${chosen_font}" != "Original" ]]; then
-            sed -i "s/Special Elite/Hack/" ${HOME}/.config/polybar/config
-            sed -i "s/Lekton/Hack/" ${HOME}/.config/bspwm/themes/bsp.cfg
-            sed -i "s/Special Elite/Hack/" ${HOME}/.config/conky/process.conf
-            sed -i "s/Special Elite/Hack/" ${HOME}/.config/conky/cpu.conf
-        fi
-                
         # Config polybar colors
         sed -i "s/^background = #.*/background = #C5$(retrieve_color i 1)/" ${HOME}/.config/polybar/config
         sed -i "s/^background-alt = #.*/background-alt = #$(retrieve_color n 2)/" ${HOME}/.config/polybar/config
@@ -231,10 +224,10 @@ function update_files(){
         sed -i "s/#100003/#$(retrieve_color n 3 )/" ${HOME}/.config/bspwm/themes/bsp.cfg
         sed -i "s/#100004/#$(retrieve_color i 3 )/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#9AB6CA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
-        sed -i "s/#3C413E/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#48473A/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
-        sed -i "s/#9AB6CA/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+        sed -i "s/#100005/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#1ffff6/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#100007/#$(retrieve_color n 2)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#100008/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Configure conky! Here we go!
         sed -i "s/CBD38F/$(retrieve_color i 8)/" ${HOME}/.config/conky/process.conf
@@ -262,15 +255,6 @@ function update_files(){
     fi
 
     if [[  "${theme_name}" = "night" ]]; then
-        if [[  ${chosen_font} != "Original" ]]; then
-            sed -i "s/Iceland/Cantarell/" ${HOME}/.config/polybar/config
-            sed -i "s/Iceland/Cantarell/" ${HOME}/.config/bspwm/themes/bsp.cfg
-            sed -i "s/Iceland/Cantarell/" ${HOME}/.config/conky/process.conf
-            sed -i "s/Iceland/Cantarell/" ${HOME}/.config/conky/cpu.conf
-            sed -i "s/Orbitron/Cantarell/" ${HOME}/.config/conky/fortune.conf
-            sed -i "s/Orbitron/Cantarell/" ${HOME}/.config/conky/clock.conf
-        fi
-
         # Config polybar colors
         transp_level=00
         transp_level2=B7
@@ -304,10 +288,10 @@ function update_files(){
         sed -i "s/#100003/#$(retrieve_color n 5)/" ${HOME}/.config/bspwm/themes/bsp.cfg
         sed -i "s/#100004/#$(retrieve_color n 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
-        sed -i "s/#05080F/#$(retrieve_color n 0)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
-        sed -i "s/#EAF2EF/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
-        sed -i "s/#040C38/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
-        sed -i "s/#EAF2EF/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
+        sed -i "s/#100005/#$(retrieve_color n 0)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU BCKGROUND
+        sed -i "s/#1ffff6/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg # DMENU FONT COLOR
+        sed -i "s/#000007/#$(retrieve_color i 3)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU ALT
+        sed -i "s/#100008/#$(retrieve_color n 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg #DMENU SELECTED FONT COLOR
 
         # Config dunst colors
         # Low

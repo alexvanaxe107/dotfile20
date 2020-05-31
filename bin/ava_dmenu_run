@@ -1,4 +1,4 @@
 #!/bin/sh
 
 source $HOME/.config/bspwm/themes/bsp.cfg
-dmenu_path | dmenu "${DMENU_COLOR[@]}" | ${SHELL:-"/bin/sh"} &
+dmenu_path | dmenu | ${SHELL:-"/bin/sh"} &
