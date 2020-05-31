@@ -32,8 +32,26 @@ if [[  "wallpaper" != "${CHOSEN}" ]]; then
 fi
 source ${HOME}/.config/bspwm/themes/bsp.cfg
 
+function set_vim(){
+    if [[  "day" = ${1} ]]; then
+	# VIM
+        sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
+    fi
+    if [[  "night" = ${1} ]]; then
+	# VIM
+        sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
+    fi
+    if [[  "light" = ${1} ]]; then
+        cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
+    fi
+}
 
 function reset_configs(){
+    cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
     cp ${HOME}/.config/bspwm/themes/${theme_name}.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
@@ -80,6 +98,7 @@ function update_screensaver() {
 
 function refresh_theme() {
     source ${HOME}/.config/bspwm/themes/bsp.cfg
+    set_vim ${theme_name}
     $(update_screensaver)
     killall -qw picom; picom -b >> /tmp/picom.log 2>&1 &
     killall -qw dunst; dunst >> /tmp/dunst.log 2>&1 &
@@ -345,31 +364,7 @@ case "${CHOSEN}" in
     *) startup_theme;;
 esac
 
-function set_vim(){
-    if [[  "day" = ${1} ]]; then
-	# VIM
-        sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
-    fi
-    if [[  "night" = ${1} ]]; then
-	# VIM
-        sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
-        sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
-    fi
-    if [[  "light" = ${1} ]]; then
-        cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
-    fi
-}
 
-# Set vim according theme
-case "${CHOSEN}" in
-    "night") set_vim ${CHOSEN};;
-    "day") set_vim ${CHOSEN};;
-    "light") set_vim ${CHOSEN};;
-    *) echo "None";;
-esac
 
 # Colors
 bspc config focused_border_color            "${focused_border_color}"

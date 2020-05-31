@@ -92,6 +92,10 @@ ctrl + Tab
 	$HOME/bin/bspc_node_manager.sh -b
 
 # Chords
+# Make layout
+super + g: {t,e,w,i}
+	{bsp-layout set tiled,bsp-layout set even,bsp-layout set wide,bsp-layout set tall}
+
 # Toggle the top bar
 super + ctrl + b; {s,f}
 	{$HOME/bin/toggle_bars.sh --target2,$HOME/bin/toggle_bars.sh --target1}
@@ -185,9 +189,7 @@ super + shift + {comma,period}
 super + {comma,period}
 	bspc desktop {prev,next} --focus
 
-# Make a grid layout
-super + g
-	$HOME/bin/grid_layout.sh
+	
 
 
 #
