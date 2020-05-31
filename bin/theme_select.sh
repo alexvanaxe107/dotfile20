@@ -111,6 +111,12 @@ function refresh_theme() {
         dunst >> /tmp/dunst.log 2>&1 &
     fi
 
+    if [ "${theme_name}" = "day" ]; then
+        bspc config border_radius 7
+    else
+        bspc config border_radius 0
+    fi
+
     bspc config window_gap 6
     # Start conky according theme
     killall -qw conky
