@@ -54,6 +54,7 @@ function reset_configs(){
     cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
     cp ${HOME}/.config/bspwm/themes/${theme_name}.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
+    cp ${HOME}/.config/twmn/twmn.conf.tmpl ${HOME}/.config/twmn/twmn.conf
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
     cp ${HOME}/.config/polybar/themes/"${theme_name}"_simple ${HOME}/.config/polybar/config_simple
     cp ${HOME}/.config/conky/themes/${theme_name}/conky.sh ${HOME}/.config/conky/conky.sh
@@ -101,7 +102,15 @@ function refresh_theme() {
     set_vim ${theme_name}
     $(update_screensaver)
     killall -qw picom; picom -b >> /tmp/picom.log 2>&1 &
-    killall -qw dunst; dunst >> /tmp/dunst.log 2>&1 &
+    killall -qw dunst
+    killall -qw twmnd
+
+    if [ "${theme_name}" == "night" ]; then
+        twmnd >> /tmp/twmn.log 2>&1 &
+    else
+        dunst >> /tmp/dunst.log 2>&1 &
+    fi
+
     bspc config window_gap 6
     # Start conky according theme
     killall -qw conky
@@ -206,6 +215,9 @@ function update_files(){
         sed -i "s/#27125B/#$(retrieve_color i 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#FFFFFE/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#668BC8/#$(retrieve_color i 10)/" ${HOME}/.config/dunst/dunstrc
+
+        sed -i "s/#000000/#$(retrieve_color i 2)/" ${HOME}/.config/twmn/twmn.conf
+        sed -i "s/#999999/#$(retrieve_color n 2)/" ${HOME}/.config/twmn/twmn.conf
         
         # Config bsp collors
         sed -i "s/#100001/#$(retrieve_color i 1)/" ${HOME}/.config/bspwm/themes/bsp.cfg
@@ -297,10 +309,14 @@ function update_files(){
         sed -i "s/#FFFFFF/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc #foreground
         sed -i "s/#03171B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc #frame
 
+
         # Normal
         sed -i "s/#27125B/#$(retrieve_color n 2)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#FFFFFE/#$(retrieve_color i 1)/" ${HOME}/.config/dunst/dunstrc
         sed -i "s/#668BC8/#$(retrieve_color n 0)/" ${HOME}/.config/dunst/dunstrc
+
+        sed -i "s/#000000/#$(retrieve_color n 2)/" ${HOME}/.config/twmn/twmn.conf
+        sed -i "s/#999999/#$(retrieve_color i 1)/" ${HOME}/.config/twmn/twmn.conf
 
         # Configure conky! Here we go!
         sed -i "s/768B98/$(retrieve_color i 1)/" ${HOME}/.config/conky/process.conf

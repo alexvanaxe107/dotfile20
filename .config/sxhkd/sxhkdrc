@@ -93,8 +93,8 @@ ctrl + Tab
 
 # Chords
 # Make layout
-super + g: {t,e,w,i}
-	{bsp-layout set tiled,bsp-layout set even,bsp-layout set wide,bsp-layout set tall}
+super + g: {t,e,w,i,r}
+	{bsp-layout set tiled,bsp-layout set even,bsp-layout set wide,bsp-layout set tall,bsp-layout remove}
 
 # Toggle the top bar
 super + ctrl + b; {s,f}
