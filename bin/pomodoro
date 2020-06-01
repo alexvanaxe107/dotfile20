@@ -1,7 +1,7 @@
 #!/bin/sh
 
 . /home/alexvanaxe/.pyenv/versions/wm/bin/activate
-POMODORO=$(pomodoro-client.py status | awk '{print $2}')
+POMODORO=$(pomodoro-client.py status | grep -oP "\d\d:\d\d")
 POMODORO_STATUS=$(pomodoro-client.py status)
 
 
