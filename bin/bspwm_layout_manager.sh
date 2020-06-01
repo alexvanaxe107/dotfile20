@@ -10,30 +10,39 @@ fi
 LAYOUTS_DIR=$HOME/.config/tmp/layouts
 
 set_tiled() {
-    bsp-layout set tiled
+    bsp-layout remove
+    bspc desktop --layout tiled
     desktop=$(bspc query --desktops -d)
     echo "🧱" > ${LAYOUTS_DIR}/${desktop}
 }
 
 set_monocle() {
+    bsp-layout remove
+    bspc desktop --layout tiled
     bspc desktop --layout monocle
     desktop=$(bspc query --desktops -d)
     echo "◼" > ${LAYOUTS_DIR}/${desktop}
 }
 
 set_even() {
+    bsp-layout remove
+    bspc desktop --layout tiled
     bsp-layout set even
     desktop=$(bspc query --desktops -d)
     echo "ℹ" > ${LAYOUTS_DIR}/${desktop}
 }
 
 set_tall() {
+    bsp-layout remove
+    bspc desktop --layout tiled
     bsp-layout set tall
     desktop=$(bspc query --desktops -d)
     echo "↕" > ${LAYOUTS_DIR}/${desktop}
 }
 
 set_wide() {
+    bsp-layout remove
+    bspc desktop --layout tiled
     bsp-layout set wide
     desktop=$(bspc query --desktops -d)
     echo "↔" > ${LAYOUTS_DIR}/${desktop}
@@ -41,7 +50,7 @@ set_wide() {
 
 remove_layout() {
     bsp-layout remove
-    bsp-layout set monocle
+    bspc desktop --layout tiled
 
     desktop=$(bspc query --desktops -d)
     rm ${LAYOUTS_DIR}/${desktop}
