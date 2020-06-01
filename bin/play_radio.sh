@@ -35,16 +35,6 @@ save_last_played() {
     echo "$1" > $LAST_PLAYED_FILE
 }
 
-save_location() {
-    yt_link=$(ps aux | grep -E '[y]ou' | awk '{print $12}' | sed 's/\?t.*//g') # Search the playing yt video and format it
-    save_last_played $yt_link
-    position=$(playerctl position)
-    last_played="$(cat $LAST_PLAYED_FILE)?t=${position}"
-    echo $last_played > $LAST_LOCATION_PLAYED
-    sed -i 's/www.youtube.com.watch.v\=/youtu.be\//g' $LAST_LOCATION_PLAYED
-    notify-send -u normal  "Saved" "Location saved"
-}
-
 play_local () {
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
     set_indicator
@@ -224,7 +214,7 @@ clear_playlist() {
     $(rm ${PLAYLIST_FILE})
 }
 
-chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nSave\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
+chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
 
 case "$chosen_mode" in
     "Local") play_radio;;
@@ -235,7 +225,6 @@ case "$chosen_mode" in
     "Play PL") play_playlist;;
     "Stop") $(stop_one);;
     "stopall") $(stop_all);;
-    "Save") save_location;;
     "Resume") resume;;
     "clear") clear_playlist;;
     "replay") replay;;

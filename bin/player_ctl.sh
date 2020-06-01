@@ -1,5 +1,8 @@
 #!/bin/sh
 
+TMP_LOCATION=$HOME/.config/tmp
+LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
+
 get_titles(){
     for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
         teste="$(playerctl -p "$player" metadata title 2> /dev/null | awk -v player=$player '{print player,$0}' OFS=" - ")"
@@ -16,6 +19,19 @@ go_to_position() {
    
     goto=$(echo "${time}" | bc)
     playerctl position "${goto}"
+}
+
+save() {
+    #https://youtu.be/vVRCJ52g5m4?t=97
+    player=$1
+    yt_link=$(playerctl -p "${player}" metadata xesam:url)
+    position=$(playerctl -p ${player} position)
+
+    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -o "v.*" | awk 'BEGIN { FS = "=" }{print $2}')
+    
+    echo "https://youtu.be/${video_rash}?t=${position}" > ${LAST_LOCATION_PLAYED}
+
+    notify-send -u normal  "Saved" "Location saved"
 }
 
 adjust_volume(){
@@ -45,6 +61,7 @@ if [ ! -z $chosen_p ]; then
         "back ◀◀") playerctl -p $chosen_p previous;;
         "stop ") playerctl -p $chosen_p stop;;
         "volume ") adjust_volume $chosen_p;;
+        "save") save $chosen_p;;
         *) go_to_position ${chosen};;
     esac
 fi
