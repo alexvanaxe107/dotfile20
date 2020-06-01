@@ -74,7 +74,7 @@ case $CHOSEN in
     "Cursive") font "Z003" "Medium Italic" 12 11 14 1;;
     "Soft") font "mononoki" Regular 10 10 12 1;;
     "80s") font "Press Start 2P" Regular 7 7 10 2;;
-    "Cyberpunk") font "Braciola MS" "Regular Rg" 10 10 12 1;;
+    "Cyberpunk") font "Braciola MS" "Regular Rg" 10 10 13 1;;
     "Pixel") font "Repetition Scrolling" Regular 10 10 13 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 10 11 14 1;;
