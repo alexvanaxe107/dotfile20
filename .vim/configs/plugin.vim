@@ -33,6 +33,7 @@ Plug 'mattn/emmet-vim' " Generate code html
 
 " Python
 Plug 'davidhalter/jedi-vim'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " #### EYECANDY
 Plug 'vim-airline/vim-airline'
