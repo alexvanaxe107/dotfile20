@@ -141,6 +141,7 @@ function startup_theme(){
         killall -qw polybar
         killall -qw twmnd
         xsetroot -solid "#17241D"
+        bspc config border_radius 0
         bspc config top_padding 0
         bspc config window_gap 0  
         notify-send "DUNST_COMMAND_PAUSE"
