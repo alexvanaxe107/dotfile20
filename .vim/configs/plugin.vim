@@ -37,14 +37,15 @@ Plug 'davidhalter/jedi-vim'
 " #### EYECANDY
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mkitt/tabline.vim'
 "Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'mkitt/tabline.vim'
 Plug 'endel/vim-github-colorscheme'
 Plug 'jaredgorski/fogbell.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'lifepillar/vim-solarized8'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
