@@ -17,6 +17,7 @@ source $HOME/.fdirrc
 source $HOME/.config/fish/space.fish
 source $HOME/.config/fish/completions/ng.fish
 source $HOME/.config/fish/completions/django.fish
+source $HOME/.config/fish/completions/theme_select.fish
 
 ###########     INIT PYENV     ###########
 pyenv init - | source

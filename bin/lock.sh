@@ -4,7 +4,7 @@
 
 killall clight
 
-if [ "$theme_name" = "light" ]
+if [ "$theme_name" = "light*" ]
 then
     i3lock-fancy-dualmonitor&
 else
