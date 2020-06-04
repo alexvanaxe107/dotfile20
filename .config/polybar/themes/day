@@ -81,7 +81,7 @@ font-2 = FontAwesome:style=Bold:pixelsize=9
 font-3 = symbola:style=Bold:pixelsize=9;1
 font-4 = Symbols Nerd Font:pixelsize=10;2
 
-separator = 
+separator = ⏽
 
 modules-left = desktop bspwm pulseaudio
 modules-center = pomodoro nweather torrent
