@@ -1,4 +1,4 @@
-;==========================================================
+==========================================================
 ;
 ;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
@@ -30,10 +30,26 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
+desktop = #000001
+ws = #000002
+pomodoro = #000003
+weather = #000004
+load = #000005
+mem = #000006
+cpu = #000007
+time = #000008
+wlan = #000009
+temp = #000010
+
+[format]
+padding=1
+padding_border=3
+bspadding=2
+
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 98%
-height = 16
+height = 18
 offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -45,14 +61,16 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
+dim-value = 1.0
+
 line-size = 2
 line-color = #f00
 
 border-size = 0
-border-color = #00000000
+border-color = ${colors.desktop}
 
-padding-left = 2
-padding-right = 2
+padding-left = 0
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 1
@@ -63,11 +81,11 @@ font-2 = FontAwesome:style=Bold:pixelsize=9
 font-3 = symbola:style=Bold:pixelsize=9;1
 font-4 = Symbols Nerd Font:pixelsize=10;2
 
-separator = ⍿
+separator = 
 
-modules-left = desktop bspwm pulseaudio indicators
+modules-left = desktop bspwm pulseaudio
 modules-center = pomodoro nweather torrent
-modules-right = ava_load recording memory cpu temperature wlan date
+modules-right = ava_load recording memory cpu temperature wlan date indicators
 
 ;tray-position = right
 ;tray-padding = 2
@@ -90,7 +108,8 @@ cursor-scroll = ns-resize
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro
-format-underline = #000008
+format-underline = ${colors.pomodoro}
+format-padding = ${format.padding}
 
 [module/ava_load]
 type = custom/script
@@ -98,28 +117,34 @@ interval = 20
 exec = /home/alexvanaxe/bin/load
 format-prefix = "📉 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #000006
+format-underline = ${colors.load}
+format-padding = ${format.padding}
 
 [module/indicators]
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/indicators.sh
+format-padding = ${format.padding_border}
+format-background = ${colors.desktop}
 
 [module/torrent]
 type = custom/script
 interval = 10
 exec = /home/alexvanaxe/bin/torrent
+format-padding = ${format.padding}
 
 [module/recording]
 type = custom/script
 interval = 3
 exec = cat ~/.dwm/recording
+format-padding = ${format.padding}
 
 [module/nweather]
 type = custom/script
 interval = 1200
 exec = weather.sh
-format-underline = #000007
+format-underline = ${colors.weather}
+format-padding = ${format.padding}
 
 [module/xwindow]
 type = internal/xwindow
@@ -153,11 +178,14 @@ mount-2 = /home/alexvanaxe/Documents
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+format-padding = ${format.padding}
 
 [module/desktop]
 type = custom/script
 interval = 1
 exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
+format-background = ${colors.desktop}
+format-padding = ${format.padding_border}
 
 [module/bspwm]
 type = internal/bspwm
@@ -166,23 +194,23 @@ type = internal/bspwm
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
 label-focused-foreground = ${colors.background}
-label-focused-underline= #000009
-label-focused-padding = 1
+label-focused-underline= ${colors.ws}
+label-focused-padding = ${format.bspadding}
 
 #label-occupied = %index%
 label-occupied = %index%%icon%
-label-occupied-padding = 1
+label-occupied-padding = ${format.bspadding}
 label-occupied-foreground = ${colors.foreground-alt}
 label-occupied-background = ${colors.foreground-alt2}
 
 #label-urgent = %index%!
 label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 1
+label-urgent-padding = ${format.bspadding}
 
 #label-empty = %index%
 label-empty = %index%%icon%
-label-empty-padding = 1
+label-empty-padding = ${format.bspadding}
 
 ws-icon-0 = terminal;🔲
 ws-icon-1 = web;🌍
@@ -298,16 +326,18 @@ type = internal/cpu
 interval = 2
 format-prefix = "🏿 " 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #000004
+format-underline = ${colors.cpu}
 label = %percentage:02%%
+format-padding = ${format.padding}
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = "👣 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #000005
+format-underline = ${colors.mem}
 label = %percentage_used%%
+format-padding = ${format.padding}
 
 [module/wlan]
 type = internal/network
@@ -315,8 +345,9 @@ interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-ramp-signal-underline = #000005
+ramp-signal-underline = ${colors.wlan}
 label-connected = %essid%
+format-padding = ${format.padding}
 ;format-connected-prefix = "  " 
 
 format-disconnected =
@@ -360,13 +391,15 @@ time-alt = %H:%M:%S
 
 format-prefix = 🕑
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #000001
+format-underline = ${colors.time}
+format-padding = ${format.padding}
 
 label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
+format-padding = ${format.padding}
 format-volume = <label-volume> <bar-volume>
 label-volume = 🔊 %percentage%%
 label-volume-foreground = ${colors.foreground-alt}
@@ -456,11 +489,13 @@ animation-discharging-framerate = 750
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 90
+format-padding = ${format.padding}
 
 format = <ramp> <label>
-format-underline = #000002
+format-underline = ${colors.temp}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
+format-warn-padding = ${format.padding}
 
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -470,6 +505,7 @@ ramp-0 = ⛄
 ramp-1 = ✅
 ramp-2 = 🔥
 ramp-foreground = ${colors.foreground-alt}
+format-ramp-padding = ${format.padding}
 
 [module/powermenu]
 type = custom/menu
@@ -507,6 +543,18 @@ screenchange-reload = true
 ;compositing-foreground = source
 ;compositing-border = over
 ;pseudo-transparency = false
+throttle-output = 5
+throttle-output-for = 10
+
+throttle-input-for = 30
+
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+pseudo-transparency = false
 
 [global/wm]
 margin-top = 5

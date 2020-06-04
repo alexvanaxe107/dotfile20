@@ -69,6 +69,7 @@ function refresh_theme() {
     bspc config border_radius 0
     bspc config window_gap 0
     bspc config top_padding 0
+    bspc config bottom_padding 0
 
     # Start conky according theme
     killall -q conky
