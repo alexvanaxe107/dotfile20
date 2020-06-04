@@ -6,8 +6,6 @@ source ~/.vim/configs/config.vim
 source ~/.vim/configs/mappings.vim
 source ~/.vim/configs/plugin_minimal.vim
 
-let g:airline_theme="base16_greenscreen"
-
 
 "set guicursor=
 " Workaround some broken plugins which set guicursor indiscriminately.

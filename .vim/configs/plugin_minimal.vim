@@ -13,8 +13,4 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 
 
-" #### EYECANDY
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
 call plug#end()
