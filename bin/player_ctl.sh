@@ -22,7 +22,6 @@ go_to_position() {
 }
 
 save() {
-    #https://youtu.be/vVRCJ52g5m4?t=97
     player=$1
     yt_link=$(playerctl -p "${player}" metadata xesam:url)
     position=$(playerctl -p ${player} position)

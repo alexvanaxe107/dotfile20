@@ -48,5 +48,6 @@ Plug 'jaredgorski/fogbell.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
+Plug 'fenetikm/falcon'
 
 call plug#end()

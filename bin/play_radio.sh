@@ -36,12 +36,15 @@ save_last_played() {
 }
 
 play_local () {
+    url=$1
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
     set_indicator
 
     if [ $url = *"pls"* ]; then
+        echo "mpv -playlist=$url" > ${PLAY_BKP};
         mpv -playlist=$url
     else
+        echo "mpv $url --no-video" > ${PLAY_BKP};
         mpv $url --no-video
     fi
 
@@ -77,7 +80,12 @@ stop_one(){
 }
 
 add_playlist(){
-    result=$(xclip -o)
+    result=$1
+    if [ -z "${result}" ]
+    then
+        result=$(xclip -o)
+    fi
+
     echo ${result} >> ${PLAYLIST_FILE}
     notify-send -u normal  "Added" "Added ${result} to play later"
 }
@@ -172,37 +180,17 @@ replay() {
 }
 
 play_radio() {
-    radio_file="$HOME/.config/play_radio/config"
-    if [ -z "$radio_file" ]
-    then
-        exit
-    fi
-
-    choosen_opts=""
-
-    declare -A radios
-
-    while IFS= read -r line
-    do
-        radio_name=$(echo $line | awk 'BEGIN {FS=","}; {print $1}')
-        radio_url=$(echo $line | awk 'BEGIN {FS=","}; {print $2}')
-
-        radios[$radio_name]=$radio_url
-
-        choosen_opts="$choosen_opts$radio_name\\n"
-
-    done < $radio_file
-
-    chosen=$(printf "$choosen_opts" | dmenu -i -p "Choose radio")
+    chosen=$1
 
     if [ -z "$chosen" ]
     then
-        exit 0
+        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu)
     fi
+    index=$(echo $chosen | awk '{print $1}')
 
-    url="${radios[$chosen]}"
+    radio_url=$(cat $HOME/.config/play_radio/config | awk -v IND=${index} 'NR==IND {print $2}' FS=",")
 
-    play_local
+    play_local "${radio_url}"
 }
 
 pl_len() {
@@ -214,20 +202,27 @@ clear_playlist() {
     $(rm ${PLAYLIST_FILE})
 }
 
-chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
+chosen_mode=$1
+option=$2
+
+if [ -z "$chosen_mode" ]
+then
+    chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
+fi
 
 case "$chosen_mode" in
-    "Local") play_radio;;
+    "Local") play_radio "$option";;
     "Clipboard") play_clipboard;;
     "Clipboard quality") play_clipboard_quality;;
     "Clipboard Audio") play_clipboard_audio;;
-    "+PL") add_playlist;;
+    "+PL") add_playlist "$option";;
     "Play PL") play_playlist;;
     "Stop") $(stop_one);;
     "stopall") $(stop_all);;
     "Resume") resume;;
     "clear") clear_playlist;;
     "replay") replay;;
+    "play") play_local "$option";;
     *) exit;;
 esac
 
