@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/dash
 
-source ~/.config/bspwm/themes/bsp.cfg
+. ~/.config/bspwm/themes/bsp.cfg
 
 /usr/bin/dmenu -h "${DMENU_H}" -nb "${DMENU_NB}" -nf "${DMENU_NF}" -sb "${DMENU_SB}" -sf "${DMENU_SF}" -fn "${DMENU_FN}"  "$@"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 confirm="$(printf "No\\nYes" | dmenu -i -p "$2" -nb darkred -sb red -sf white -nf gray )"
 

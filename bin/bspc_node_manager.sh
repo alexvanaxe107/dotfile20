@@ -2,15 +2,12 @@
 
 retrieve_index() {
 	selected=$(wmctrl -l | awk '{$1=$2=$3="";print NR $0}' | dmenu -l 10)
-
 	index=$(echo $selected | awk '{print $1}')
-
 	echo ${index}
 }
 
 retrieve_program() {
 	index=$1
-	
 	code=$(wmctrl -l | awk -v IND=${index} 'NR==IND {print $1}')
 	echo ${code}
 }

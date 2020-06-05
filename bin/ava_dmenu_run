@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
-source $HOME/.config/bspwm/themes/bsp.cfg
+. $HOME/.config/bspwm/themes/bsp.cfg
 dmenu_path | dmenu | ${SHELL:-"/bin/sh"} &

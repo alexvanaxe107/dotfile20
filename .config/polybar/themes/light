@@ -66,7 +66,7 @@ font-2 = Symbols Nerd Font:pixelsize=10;2
 ;font-2 = symbola:pixelsize=10
 ;font-1 = "Noto Color Emoji:scale=14"
 
-separator = ⏽
+separator = •
 
 modules-left = desktop bspwm
 modules-center = 
@@ -177,19 +177,19 @@ label-focused-padding = 2
 
 #label-occupied = %index%
 label-occupied = %index%
-label-occupied-padding = 1
+label-occupied-padding = 2
 label-occupied-background = ${colors.background-alt2}
 
 #label-urgent = %index%!
 label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
-label-urgent-padding= 1
+label-urgent-padding= 2
 
 #label-empty = %index%
 label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt2}
 label-empty-background = ${colors.background}
-label-empty-padding = 1
+label-empty-padding = 2
 
 ws-icon-0 = terminal;
 ws-icon-1 = web;
@@ -372,7 +372,7 @@ bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = true
-bar-volume-indicator = |
+bar-volume-indicator = 
 bar-volume-indicator-font = 4
 bar-volume-fill = ─
 bar-volume-fill-font = 4

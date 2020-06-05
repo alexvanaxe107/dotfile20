@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 # A script to use dmenu to change the light
 GS=`printf auto | dmenu -f -p "Light digit: ($(light -G)) "`

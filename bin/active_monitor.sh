@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 MONITOR=$(bspc query --monitor focused --monitors --names)
 option=$1
