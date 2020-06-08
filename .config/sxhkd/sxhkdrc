@@ -188,10 +188,7 @@ super + shift + {comma,period}
 
 # Move to the next prev desktop
 super + {comma,period}
-	bspc desktop {prev,next} --focus
-
-	
-
+	bspc monitor --focus {prev,next}
 
 #
 # state/flags

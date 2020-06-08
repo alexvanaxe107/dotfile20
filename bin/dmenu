@@ -2,7 +2,7 @@
 
 . ~/.config/bspwm/themes/bsp.cfg
 
-if [ -z "$(bspc wm 2> /dev/null)" ]
+if [ -z "${theme_name}" ]
 then
 	/usr/bin/dmenu "$@"
 else

@@ -14,7 +14,7 @@ chibernate() { \
 	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
 	if [ "Yes" = "$confirm" ]
 	then
-		lock.sh
+		lock.sh -d
 		systemctl hibernate
 	fi
 }
@@ -24,7 +24,7 @@ monitor() { \
 }
 
 csuspend() { \
-	lock.sh
+	lock.sh -d
 	systemctl suspend -i
 }
 
