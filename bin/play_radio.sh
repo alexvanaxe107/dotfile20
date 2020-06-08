@@ -202,12 +202,14 @@ clear_playlist() {
     $(rm ${PLAYLIST_FILE})
 }
 
-chosen_mode=$1
-option=$2
+command=$1
 
-if [ -z "$chosen_mode" ]
+if [ "$command" != "-m" ]
 then
     chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
+else
+    chosen_mode=$2
+    option=$3
 fi
 
 case "$chosen_mode" in
