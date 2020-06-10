@@ -15,6 +15,7 @@ chibernate() { \
 	if [ "Yes" = "$confirm" ]
 	then
 		lock.sh -d
+        sleep 10
 		systemctl hibernate
 	fi
 }
@@ -25,6 +26,7 @@ monitor() { \
 
 csuspend() { \
 	lock.sh -d
+    sleep 10
 	systemctl suspend -i
 }
 
