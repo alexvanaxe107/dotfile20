@@ -38,10 +38,10 @@ xsetroot -cursor_name dot
 alias dmenu="ava_dmenu"
 source ~/.profile
 
-exec /home/alexvanaxe/bin/startdwm
+#exec /home/alexvanaxe/bin/startdwm
 #exec i3
 #exec dwm
-#exec bspwm
+exec bspwm
 
 #export XDG_SESSION_TYPE=x11
 #export GDK_BACKEND=x11

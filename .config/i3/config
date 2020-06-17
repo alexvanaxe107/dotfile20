@@ -293,8 +293,6 @@ bindsym $mod+Shift+Right gaps inner all plus 3
 
 bindsym $mod+F4 exec --no-startup-id compton -b
 bindsym $mod+Shift+F4 exec --no-startup-id killall compton
-bindsym $mod+F5 exec --no-startup-id xflux -l -22.9023744 -g -43.2553984
-bindsym $mod+Shift+F5 exec --no-startup-id killall xflux
 bindsym $mod+F6 exec --no-startup-id  $HOME/.config/i3/scripts/random.sh
 bindsym $mod+F7 exec --no-startup-id $HOME/.config/i3/conky/conky.sh
 bindsym $mod+Shift+F7 exec --no-startup-id killall conky
