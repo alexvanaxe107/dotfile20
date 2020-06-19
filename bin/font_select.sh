@@ -77,7 +77,7 @@ case $CHOSEN in
     "Cyberpunk") font "Braciola MS" "Regular Rg" 10 10 13 1;;
     "Pixel") font "Repetition Scrolling" Regular 9 10 13 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
-    "Book") font "Kingthings Trypewriter 2" Regular 9 9 14 1;;
+    "Book") font "Kingthings Trypewriter 2" Regular 9 9 11 1;;
     "Stock") font "SVI Basic Manual" Bold 9 9 14 1;;
     "Wasteland") font "Beccaria" Bold 11 12 14 1;;
     "Cartoon") font "Pointfree" Bold 9 10 11 1;;
