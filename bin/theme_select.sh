@@ -93,6 +93,8 @@ function retrieve_color(){
 
 startup_theme
 
+. $HOME/.config/bspwm/themes/bsp.cfg
+
 
 # Colors
 bspc config focused_border_color            "${focused_border_color}"

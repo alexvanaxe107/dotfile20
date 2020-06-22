@@ -4,6 +4,8 @@ setlocal softtabstop=2
 setlocal shiftwidth=2
 setlocal expandtab
 
+setlocal colorcolumn=79
+setlocal ruler
 " Numbers
 setlocal number
 setlocal relativenumber

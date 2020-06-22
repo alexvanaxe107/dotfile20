@@ -4,6 +4,7 @@ Plug 'gantheory/vim-easymotion'
 Plug 'tpope/vim-speeddating'
 Plug 'arielrossanigo/dir-configs-override.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'wesQ3/vim-windowswap'
 
 " #### IDE
 Plug 'majutsushi/tagbar'

@@ -6,6 +6,8 @@ setlocal expandtab
 setlocal autoindent
 setlocal fileformat=unix
 
+setlocal colorcolumn=79
+setlocal ruler
 " Numbers
 setlocal number
 setlocal relativenumber
