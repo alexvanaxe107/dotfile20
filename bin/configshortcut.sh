@@ -1,6 +1,18 @@
 #!/bin/sh
 
-file=$(printf "config\nsxhkd\nbspwm\nradio\nconfig\nzshrc\nvim\nfish\nfonts" | dmenu -p "Select file to edit")
+source ~/.config/bspwm/themes/bsp.cfg
+file=$(printf "config\nsxhkd\nbspwm\nradio\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper" | dmenu -p "Select config to edit")
+
+process_wallpaper(){
+    sxiv $HOME/Documents/Pictures/Wallpapers/$theme_name&
+
+    ultra=$(xrandr | grep -w "HDMI1 connected" | grep -o 2560)
+    
+    if [ ! -z "$ultra" ] 
+    then
+        sxiv $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name&
+    fi
+}
 
 case $file in
     "config") alacritty -e $EDITOR $0;;
@@ -12,5 +24,6 @@ case $file in
     "vim") alacritty -e $EDITOR $HOME/.vim/configs;;
     "fish") alacritty -e $EDITOR $HOME/.config/fish/config.fish;;
     "fonts") alacritty -e $EDITOR $HOME/bin/font_select.sh;;
+    "wallpaper") process_wallpaper;;
 esac
 
