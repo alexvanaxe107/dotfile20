@@ -4,7 +4,7 @@ LAYOUT=$1
 
 if [ -z ${LAYOUT} ]
 then
-    LAYOUT=$(printf "tiled\nmonocle\neven\ntall\nwide\nremove" | dmenu -p "What layout you want?")
+    LAYOUT=$(printf "tiled\nmonocle\neven\ntall\nwide\n\pseudo\nrpseudo\nremove" | dmenu -p "What layout you want?")
 fi
 
 LAYOUTS_DIR=$HOME/.config/tmp/layouts
@@ -48,6 +48,14 @@ set_wide() {
     echo "↔" > ${LAYOUTS_DIR}/${desktop}
 }
 
+set_pseudo() {
+    bspc rule -a \* state=pseudo_tiled rectangle=2450x990+0+0
+}
+
+remove_pseudo() {
+    bspc rule -a \* state=tiled rectangle=900x568+0+0
+}
+
 remove_layout() {
     bsp-layout remove
     bspc desktop --layout tiled
@@ -55,6 +63,7 @@ remove_layout() {
     desktop=$(bspc query --desktops -d)
     rm ${LAYOUTS_DIR}/${desktop}
 }
+
 
 get_icon() {
     desktop=$(bspc query --desktops -d)
@@ -80,6 +89,8 @@ case "$LAYOUT" in
     "even") set_even;;
     "tall") set_tall;;
     "wide") set_wide;;
+    "pseudo") set_pseudo;;
+    "rpseudo") remove_pseudo;;
     "remove") remove_layout;;
     "icon") get_icon;;
     "clear") clear_icons;;
