@@ -6,5 +6,5 @@ if [ -z "${theme_name}" ]
 then
 	/usr/bin/dmenu "$@"
 else
-	/usr/bin/dmenu "$@" -h "${DMENU_H}" -nb "${DMENU_NB}" -nf "${DMENU_NF}" -sb "${DMENU_SB}" -sf "${DMENU_SF}" -fn "${DMENU_FN}"
+	/usr/bin/dmenu -h "${DMENU_H}" -nb "${DMENU_NB}" -nf "${DMENU_NF}" -sb "${DMENU_SB}" -sf "${DMENU_SF}" -fn "${DMENU_FN}" "$@"
 fi
