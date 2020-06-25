@@ -2,8 +2,8 @@
 
 # A script to use dmenu to change the light
 
-result=`clipster -o -n 10 | dmenu -p "Clipboard:" -l 10`
+result=`clipster -o -n 30 | dmenu -p "Clipboard:" -l 30`
 
-printf "$result"| tr -d '\n' | clipster -c
+printf "$result"| tr -d '\n' | clipster -p
 
 

@@ -83,7 +83,7 @@ add_playlist(){
     result=$1
     if [ -z "${result}" ]
     then
-        result=$(xclip -o)
+        result=$(clipster -o)
     fi
 
     echo ${result} >> ${PLAYLIST_FILE}
@@ -109,7 +109,7 @@ play_clipboard(){
     notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
     set_indicator
 
-    result=$(xclip -o)
+    result="$(clipster -o)"
     echo "mpv $result" > ${PLAY_BKP};
     mpv "$result"
 
@@ -120,7 +120,7 @@ play_clipboard(){
 
 play_clipboard_quality(){
     set_indicator
-    result=$(xclip -o)
+    result=$(clipster -o)
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
 
     local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the quality:")
@@ -146,7 +146,7 @@ play_clipboard_quality(){
 play_clipboard_audio(){
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     set_indicator
-    result=$(xclip -o)
+    result=$(clipster -o)
     echo "mpv \"$result\" --no-video --shuffle" > ${PLAY_BKP};
     mpv "$result" --no-video --shuffle
     remove_indicator

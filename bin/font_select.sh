@@ -71,7 +71,7 @@ case $CHOSEN in
     "Rock") font "Targa MS" Regular 9 9 13 1;;
     "War") font "American Stencil" Regular 9 10 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 11 1;;
-    "Cursive") font "Z003" "Medium Italic" 12 11 14 1;;
+    "Cursive") font "Z003" "Medium Italic" 13 12 15 2;;
     "Soft") font "mononoki" Regular 9 9 13 1;;
     "80s") font "Press Start 2P" Regular 7 7 10 2;;
     "Cyberpunk") font "Braciola MS" "Regular Rg" 10 10 13 1;;
