@@ -61,14 +61,14 @@ case $CHOSEN in
     "Day Original") font "Erica Type" Bold 9 10 12 0;;
     "Night Original") font "Iceland" Regular 12 12 15 0;;
     "Old Terminal") font "VT323" Regular 11 11 14 1;;
-    "Minimalist") font "Nouveau IBM Stretch" Bold 9 10 14 0;;
-    "clear") font "TeX Gyre Cursor" Bold 9 10 14 0;;
+    "Minimalist") font "Nouveau IBM Stretch" Bold 9 10 14 1;;
+    "clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
     "Modern") font "CQ Mono" Bold 9 10 12 1;;
     "Futuristic") font "Larabiefont Rg" Normal 8 8 10 1;;
     "Elegant") font "Unica One" Regular 9 10 12 1;;
     "Elegant2") font "NovaMono" Normal 8 8 12 1;;
     "Neon") font "Segment14" Regular 9 9 14 1;;
-    "Rock") font "Targa MS" Regular 9 9 13 1;;
+    "Rock") font "Targa MS" Regular 11 11 13 2;;
     "War") font "American Stencil" Regular 9 10 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 11 1;;
     "Cursive") font "Z003" "Medium Italic" 13 12 15 2;;
@@ -77,7 +77,7 @@ case $CHOSEN in
     "Cyberpunk") font "Braciola MS" "Regular Rg" 10 10 13 1;;
     "Pixel") font "Repetition Scrolling" Regular 9 10 13 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
-    "Book") font "Kingthings Trypewriter 2" Regular 9 9 11 1;;
+    "Book") font "Kingthings Trypewriter 2" Regular 11 11 13 1;;
     "Stock") font "SVI Basic Manual" Bold 9 9 14 1;;
     "Wasteland") font "Beccaria" Bold 11 12 14 1;;
     "Cartoon") font "Pointfree" Bold 9 10 11 1;;

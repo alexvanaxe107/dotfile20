@@ -65,6 +65,13 @@ super + shift + e
 super + shift + b
 	$HOME/bin/toggle_bars.sh
 
+# balance squalize
+super + b
+	bspc node @/ --balance
+
+super + n
+	bspc node @/ --equalize
+
 # Clipboard tool
 super + shift + v
 	$HOME/bin/dmclipster
@@ -126,6 +133,9 @@ super + g
 super + e
 	$HOME/bin/bspwmexit.sh -e "Exit?"
 
+super + p
+	bspc node focused --swap biggest.local
+
 # close and kill
 super + {_,shift + }q
 	bspc node -{c,k}
@@ -166,9 +176,6 @@ super + ctrl + t
 super + control + {1-9,0}
 	bspc node -d  'focused:^{1-9,10}' --follow
 
-# alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
 
 # Cycle through nodes
 super + control + {j,k}
@@ -198,6 +205,11 @@ super + {comma,period}
 super + shift + w: {t,p,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
+
+# alternate between the tiled and monocle layout
+super + shift + w: m
+	bspc desktop -l next
+
 # set ignore ewmh to fullscreen to container
 super + ctrl + f
 	bspc config ignore_ewmh_fullscreen enter
@@ -206,8 +218,8 @@ super + ctrl + shift + f
 	bspc config ignore_ewmh_fullscreen none
 
 # set the node flags
-super + {t,x,s,p}
-	bspc node -g {marked,locked,sticky,private}
+super + {m,x,s}
+	bspc node -g {marked,locked,sticky}
 
 # focus the node in the given direction
 super + {h,j,k,l}
@@ -215,7 +227,7 @@ super + {h,j,k,l}
 
 # focus the node in the given direction
 super + shift + control + {h,j,k,l}
-	euclid_mover {west,south,north,east}
+	bspc node --to-node {west,south,north,east}
 
 
 #
