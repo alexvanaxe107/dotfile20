@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-import math
-from threading import Thread
-from subprocess import Popen
-from pydbus import SessionBus
 from gi.repository import GLib
+from pydbus import SessionBus
+from subprocess import Popen
+from threading import Thread
 import click
 import i3ipc
+import math
 
 
 bus = SessionBus()
@@ -21,20 +21,22 @@ def get_pomodoro_proxy():
     return bus.get("org.gnome.Pomodoro", "/org/gnome/Pomodoro")
 
 
-def format_time(seconds):
-    return "{minutes:02d}:{seconds:02d}".format(
-        minutes=int(math.floor(seconds / 60)),
-        seconds=int(round(seconds % 60))
+def format_time(seconds, show_seconds):
+    time = "{minutes:02d}".format(minutes=int(math.floor(seconds / 60))) + (
+        ":{seconds:02d}".format(seconds=int(round(seconds % 60))) if show_seconds 
+        else "m"
     )
+
+    return time
 
 
 def format_is_paused(is_paused):
     return " PAUSED " if is_paused else ""
 
 
-def format_state(state):
+def format_state(state, icon_text):
     return {
-        "pomodoro": "Pomodoro",
+        "pomodoro": icon_text,
         "short-break": "Break",
         "long-break": "Long Break",
     }[state]
@@ -49,69 +51,86 @@ def extract_pomodoro_data(pomodoro):
     }
 
 
-def format_pomodoro_data(pomodoro_data):
+def format_pomodoro_data(pomodoro_data, icon_text, show_seconds):
     return {
-        "elapsed": format_time(pomodoro_data["elapsed"]),
-        "duration": format_time(pomodoro_data["duration"]),
-        "remaining": format_time(pomodoro_data["remaining"]),
+        "elapsed": format_time(pomodoro_data["elapsed"], show_seconds),
+        "duration": format_time(pomodoro_data["duration"], show_seconds),
+        "remaining": format_time(pomodoro_data["remaining"], show_seconds),
         "is_paused": format_is_paused(pomodoro_data["is_paused"]),
-        "state": format_state(pomodoro_data["state"]),
+        "state": format_state(pomodoro_data["state"], icon_text),
     }
 
 
-def format_output(pomodoro_data):
+def format_output(pomodoro_data, always, icon_text, show_seconds):
+
     if pomodoro_data["state"] != "null":
         return "{state} {remaining} {is_paused}".format(**format_pomodoro_data(
-            pomodoro_data
+            pomodoro_data, icon_text, show_seconds
         ))
-    else:
-        return ""
+    if always:
+        return icon_text
+    return ""
 
 
 @click.group()
 def main():
     pass
 
-
-@click.command()
-def status():
+@click.option('--always/--not-always', default=False,
+              help="""Show a constant icon.""")
+@click.option('--show-seconds/--no-seconds', default=True,
+              help="""Show seconds in timers""")
+@click.option('--icon-text', default="Pomodoro", help='What to show as icon.')
+@click.command(help=
+               """
+               Returns a string descriping the current pomodoro state.
+               """)
+def status(always, icon_text, show_seconds):
     pomodoro = get_pomodoro_proxy()
     pomodoro_data = extract_pomodoro_data(pomodoro)
-    click.echo(format_output(pomodoro_data))
+    click.echo(format_output(pomodoro_data, always, icon_text, show_seconds))
 
 
-@click.command()
+
+@click.command(help="""Pauses the current pomodoro if any is running.""")
 def pause():
     get_pomodoro_proxy().Pause()
 
 
-@click.command()
+@click.command(help="""Resume pomodoro if paused.""")
 def resume():
     get_pomodoro_proxy().Resume()
 
 
-@click.command()
+@click.command(help="Start a pomodoro.")
 def start():
     get_pomodoro_proxy().Start()
 
 
-@click.command()
+@click.command(help="Stop current pomodoro.")
 def stop():
     get_pomodoro_proxy().Stop()
 
+@click.command(help="Toggling function to start a pomodoro if none is running or stop the current one.")
+def start_stop():
+    pomodoro = get_pomodoro_proxy()
+    if pomodoro.State == 'null':
+        pomodoro.Start()
+    elif pomodoro.State == 'pomodoro':
+        pomodoro.Stop()
 
-@click.command()
+@click.command(help="Skip the current activity.")
 def skip():
     get_pomodoro_proxy().Skip()
 
 
 @click.command()
-def reset():
+def reset(help="Reset the current pomodoro."):
     get_pomodoro_proxy().Reset()
 
 
 @click.command()
-def toggle():
+def toggle(help="Toggling function to pause/resume current pomodoro."):
     pomodoro = get_pomodoro_proxy()
     if pomodoro.IsPaused:
         pomodoro.Resume()
@@ -193,7 +212,7 @@ def pomodoro_daemon():
     GLib.MainLoop().run()
 
 
-@click.command()
+@click.command(help="Disable certain workspaces during pomodoro")
 @click.argument('workspaces_disabled_during_pomodoro', nargs=-1, type=int)
 @click.option('--nagbar/--no-nagbar', default=False)
 def daemon(workspaces_disabled_during_pomodoro, nagbar):
@@ -201,7 +220,7 @@ def daemon(workspaces_disabled_during_pomodoro, nagbar):
         i3_daemon(workspaces_disabled_during_pomodoro, nagbar), pomodoro_daemon]
     threads = [Thread(target=command) for command in daemon_commands]
     for thread in threads:
-        thread.daemon=True
+        thread.daemon = True
         thread.start()
 
     for thread in threads:
@@ -212,6 +231,7 @@ main.add_command(pause)
 main.add_command(resume)
 main.add_command(start)
 main.add_command(stop)
+main.add_command(start_stop)
 main.add_command(skip)
 main.add_command(reset)
 main.add_command(toggle)

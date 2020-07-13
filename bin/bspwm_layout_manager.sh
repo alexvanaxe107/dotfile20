@@ -49,7 +49,7 @@ set_wide() {
 }
 
 set_pseudo() {
-    bspc rule -a \* state=pseudo_tiled rectangle=2450x990+0+0
+    bspc rule -a \* state=pseudo_tiled rectangle=1850x1040+0+0
 }
 
 remove_pseudo() {
