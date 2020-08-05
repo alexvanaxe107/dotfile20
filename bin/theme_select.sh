@@ -51,7 +51,9 @@ function reset_configs(){
     cp ${HOME}/.config/conky/themes/${theme_name}/fortune.conf ${HOME}/.config/conky/fortune.conf
     cp ${HOME}/.config/conky/themes/${theme_name}/clock_rings.lua ${HOME}/.config/conky/clock_rings.lua
     cp ${HOME}/.config/vis/colors/theme_tpl ${HOME}/.config/vis/colors/theme
-    cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
+    if [ "${CHOSEN}" != "wallpaper" ]; then
+        cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
+    fi
 }
 
 

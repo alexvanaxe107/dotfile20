@@ -1,14 +1,25 @@
 #!/bin/dash
 
 # A script to use dmenu to change the light
-GS=`printf auto | dmenu -f -p "Light digit: ($(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ')) "`
+GS=$(xrandr  | grep -w connected | awk '{printf "%s\n", $1} END {printf "auto"}' | dmenu -f -p "Monitor: (`light`)")
+
 if [ ! -z "$GS" ] && [ "auto" != "$GS" ]
 then
 	killall clight
 	
-	xrandr  | grep -w connected | cut -d ' ' -f 1 | while read line ; do
-		xrandr --output $line --brightness $GS
-	done
+	#xrandr  | grep -w connected | cut -d ' ' -f 1 | while read line ; do
+	
+	if [ "${GS}" = "eDP1" ]; then
+		BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
+		light -S ${BT}
+	elif [ "${GS}" = "HDMI1" ]; then
+		BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
+		ddcutil setvcp 10 ${BT}
+	else
+		light -S ${GS}
+		ddcutil setvcp 10 ${GS}
+	fi
+		
 
 	notify-send -u low "Light" "Screen monitor set to $GS"
 fi

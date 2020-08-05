@@ -49,7 +49,7 @@ bspadding=2
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 98%
-height = 18
+height = 19
 offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -108,7 +108,7 @@ cursor-scroll = ns-resize
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro
-format-underline = ${colors.pomodoro}
+#format-underline = ${colors.pomodoro}
 format-padding = ${format.padding}
 
 [module/ava_load]
@@ -117,7 +117,7 @@ interval = 20
 exec = /home/alexvanaxe/bin/load
 format-prefix = "📉 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.load}
+#format-underline = ${colors.load}
 format-padding = ${format.padding}
 
 [module/indicators]
@@ -125,7 +125,6 @@ type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/indicators.sh
 format-padding = ${format.padding_border}
-format-background = ${colors.desktop}
 
 [module/torrent]
 type = custom/script
@@ -143,7 +142,7 @@ format-padding = ${format.padding}
 type = custom/script
 interval = 1200
 exec = weather.sh
-format-underline = ${colors.weather}
+#format-underline = ${colors.weather}
 format-padding = ${format.padding}
 
 [module/xwindow]
@@ -284,7 +283,7 @@ interval = 1
 format-prefix = "SPOTIFY: "
 format = <label>
 exec = python /home/alexvanaxe/.config/polybar/plugins/polybar-spotify/spotify_status.py -f '{play_pause} {song} - {artist}'
-format-underline = #000003
+#format-underline = #000003
 
 [module/mpd]
 type = internal/mpd
@@ -326,7 +325,7 @@ type = internal/cpu
 interval = 2
 format-prefix = "🏿 " 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.cpu}
+#format-underline = ${colors.cpu}
 label = %percentage:02%%
 format-padding = ${format.padding}
 
@@ -335,7 +334,7 @@ type = internal/memory
 interval = 2
 format-prefix = "👣 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.mem}
+#format-underline = ${colors.mem}
 label = %percentage_used%%
 format-padding = ${format.padding}
 
@@ -345,7 +344,7 @@ interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-ramp-signal-underline = ${colors.wlan}
+#ramp-signal-underline = ${colors.wlan}
 label-connected = %essid%
 format-padding = ${format.padding}
 ;format-connected-prefix = "  " 
@@ -391,7 +390,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 🕑
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.time}
+#format-underline = ${colors.time}
 format-padding = ${format.padding}
 
 label = %date% %time%
@@ -492,9 +491,9 @@ warn-temperature = 90
 format-padding = ${format.padding}
 
 format = <ramp> <label>
-format-underline = ${colors.temp}
+#format-underline = ${colors.temp}
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+#format-warn-underline = ${self.format-underline}
 format-warn-padding = ${format.padding}
 
 label = %temperature-c%
