@@ -184,9 +184,14 @@ play_radio() {
 
     if [ -z "$chosen" ]
     then
-        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu)
+        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -l 20)
     fi
     index=$(echo $chosen | awk '{print $1}')
+
+    if [ -z "${index}" ]; then
+        notify-send -u normal  "Done" "No radio selected"
+        exit 0
+    fi
 
     radio_url=$(cat $HOME/.config/play_radio/config | awk -v IND=${index} 'NR==IND {print $2}' FS=",")
 
