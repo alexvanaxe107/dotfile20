@@ -1,11 +1,14 @@
 #!/bin/dash
 
 # A script to use dmenu to change the light
-GS=$(xrandr  | grep -w connected | awk '{printf "%s\n", $1} END {printf "auto"}' | dmenu -f -p "Monitor: (`light`)")
+GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1}' | dmenu -f -p "Monitor: (`light`)")
+INDICATOR_PATH="$HOME/.config/indicators"
+INDICATOR_FILE="${INDICATOR_PATH}/light.ind"
 
 if [ ! -z "$GS" ] && [ "auto" != "$GS" ]
 then
 	killall clight
+	echo "" > ${INDICATOR_FILE}
 	
 	#xrandr  | grep -w connected | cut -d ' ' -f 1 | while read line ; do
 	
@@ -28,5 +31,7 @@ if [ "auto" = "$GS" ]
 then
     killall clight
 	clight&
+	
+    echo 🔆 > ${INDICATOR_FILE}
     notify-send -u low "Light" "Auto"
 fi

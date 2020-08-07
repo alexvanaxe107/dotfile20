@@ -9,9 +9,10 @@ set -o nounset
 #set -o pipefail
 
 radio=$(cat $HOME/.config/indicators/play_radio.ind 2> /dev/null)
+light=$(cat $HOME/.config/indicators/light.ind 2> /dev/null)
 
 desktop=$(bspwm_layout_manager.sh icon)
 
-indicator="$desktop$radio"
+indicator="$desktop$radio$light"
 
 printf $indicator
