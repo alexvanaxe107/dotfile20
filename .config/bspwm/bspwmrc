@@ -13,8 +13,8 @@ bspc monitor ^2 -d terminal
 
 # Prevent windows to steal focus
 #bspc config ignore_ewmh_focus true
-bspc config remove_disabled_monitors true
-bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors false
+bspc config remove_unplugged_monitors false
 bspc config border_width         1
 bspc config window_gap           6
 bspc config split_ratio 0.60
