@@ -111,7 +111,7 @@ border_color_pressed = #ffffff 60
 
 #-------------------------------------
 # Panel
-panel_items = C:EEEEE:T:S
+panel_items = C:EEEEEE:T:S
 panel_size = 95% 8%
 panel_margin = 0 0
 panel_padding = 2 2 2
@@ -387,6 +387,28 @@ execp_background_id = 8
 execp_centered = 1
 execp_icon_w = 0
 execp_icon_h = 0
+
+#-------------------------------------
+# Executor 6
+execp = new
+execp_command = indicators.sh
+execp_interval = 5
+execp_has_icon = 1
+execp_cache_icon = 0
+execp_continuous = 0
+execp_markup = 1
+execp_lclick_command = 
+execp_rclick_command = 
+execp_mclick_command = 
+execp_uwheel_command = 
+execp_dwheel_command = 
+execp_font = Erica Type 10
+execp_font_color = #000006 100
+execp_padding = 0 0
+execp_background_id = 8
+execp_centered = 1
+execp_icon_w = 15
+execp_icon_h = 15
 
 #-------------------------------------
 # Tooltip
