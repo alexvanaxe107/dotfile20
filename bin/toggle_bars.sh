@@ -11,6 +11,17 @@ fi
 
 TARGET=$1
 
+toggle_tint(){
+    pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
+    if [ ! -z "$pid" ]; then
+        bspc config -m $MONITOR1 right_padding 0
+        kill $pid
+    else
+        bspc config -m $MONITOR1 right_padding 203
+        tint2 >> /tmp/tint2.log 2>&1 &
+    fi
+}
+
 toggle_full(){
     pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
     if [ ! -z "$pid" ]; then
@@ -34,6 +45,12 @@ toggle_simple(){
 restart_bar(){
     pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
     pid_simple=$(ps aux | egrep "[p]olybar.*simple" | awk '{print $2}')
+    pid_tint=$(ps aux | egrep "[t]int2" | awk '{print $2}')
+    if [ ! -z "$pid_tint" ]; then
+        kill ${pid_tint}
+        sleep 1
+        toggle_tint
+    fi
     if [ ! -z "$pid" ]; then
         kill ${pid}
         sleep 1
@@ -64,6 +81,7 @@ toggle_all(){
 case "$TARGET" in
     "--target2") $(toggle_simple);;
     "--target1") $(toggle_full);;
+    "--tint") $(toggle_tint);;
     "--restart") restart_bar;;
     *) $(toggle_all);;
 esac

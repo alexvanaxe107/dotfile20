@@ -75,6 +75,8 @@ function refresh_theme() {
     bspc config window_gap 0
     bspc config top_padding 0
     bspc config bottom_padding 0
+    bspc config left_padding 0
+    bspc config right_padding 0
 
     killall -q tint2
     killall -q conky

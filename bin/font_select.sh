@@ -32,6 +32,10 @@ font() {
     sed -i "s/font=.*/font=${font_name}/" ${HOME}/.config/twmn/twmn.conf
     sed -i "s/font_size=.*/font_size=${size3}/" ${HOME}/.config/twmn/twmn.conf
 
+    sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
+    sed -i "s/font =.*/font = ${font_name} ${style} ${size1}/" ${HOME}/.config/tint2/tint2rc
+    sed -i "s/zont = Pomodoro.*/font = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
+
     for file in ${HOME}/.config/conky/*.conf; do
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
     done
