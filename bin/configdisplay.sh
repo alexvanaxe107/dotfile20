@@ -4,32 +4,32 @@ chosen=$(printf "Dual\\nDual Inverted\\nNotebook\\nHDMI\\nDual DPI" | dmenu -i -
 
 hdmi(){
     $HOME/.screenlayout/hdmi.sh
-    toggle_bars.sh --restart
+    #toggle_bars.sh --restart
     #bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9 10
 }
 
 notebook(){
     $HOME/.screenlayout/notebook.sh
-    toggle_bars.sh --restart
+    #toggle_bars.sh --restart
     #bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
 }
 
 dual_inverted(){
    $HOME/.screenlayout/dual_inverted.sh
-   sleep 1
-   toggle_bars.sh --restart
+   #sleep 1
+   #toggle_bars.sh --restart
 }
 
 dual(){
    $HOME/.screenlayout/dual.sh
-   sleep 1
-   toggle_bars.sh --restart
+   #sleep 1
+   #toggle_bars.sh --restart
 }
 
 dual_dpi(){
    $HOME/.screenlayout/dual_dpi.sh
-   sleep 1
-   toggle_bars.sh --restart
+   #sleep 1
+   #toggle_bars.sh --restart
 }
 
 case $chosen in
