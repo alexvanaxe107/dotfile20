@@ -96,6 +96,21 @@ function retrieve_color(){
     fi
 }
 
+function text_color(){
+    if [[   "$1" == "i" ]]; then
+        index=$((${#colors[@]} - $2))
+        text=$(black_or_white $colors $index)
+    else
+        text=$(black_or_white $colors $2)
+    fi
+
+    if [ "$text" = "light" ]; then
+        echo $(retrieve_color i 1)
+    else
+        echo $(retrieve_color n 1)
+    fi
+}
+
 . $HOME/bin/themes/${CHOSEN}.cfg
 
 startup_theme

@@ -42,6 +42,24 @@ order_list() {
     echo ${colors_lum[@]}
 }
 
+black_or_white() {
+    colors=$1
+
+    index=$2
+    
+    local colors_abc=($(order_list $colors))
+    lums=($(echo -e ${colors_abc[@]}  | sort -n | awk '{print $1}' | cut -d "#" -f 2))
+
+    lum=${lums[$index]}
+    echo ${lum} > ~/debug.txt
+    if (( $(echo "$lum  > 133" |bc -l) )); then
+        echo black
+    fi
+    if (( $(echo "$lum  <= 133" |bc -l) )); then
+        echo light
+    fi
+}
+
 get_sorted_color() {
     local colors_lum=($(order_list $1))
     echo -e ${colors_lum[@]}  | sort -n | awk '{print $2}' | cut -d "#" -f 2
