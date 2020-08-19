@@ -50,5 +50,6 @@ Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
 Plug 'fenetikm/falcon'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
 call plug#end()

@@ -111,7 +111,7 @@ border_color_pressed = #ffffff 60
 
 #-------------------------------------
 # Panel
-panel_items = C:EEEEEE:T:S
+panel_items = C:EEEEEEE:T:S
 panel_size = 95% 8%
 panel_margin = 0 0
 panel_padding = 2 2 2
@@ -142,11 +142,11 @@ scale_relative_to_screen_height = 0
 taskbar_mode = multi_desktop
 taskbar_hide_if_empty = 0
 taskbar_padding = 0 0 2
-taskbar_background_id = 0
+taskbar_background_id = 1
 taskbar_active_background_id = 0
 taskbar_name = 1
 taskbar_hide_inactive_tasks = 0
-taskbar_hide_different_monitor = 0
+taskbar_hide_different_monitor = 1
 taskbar_hide_different_desktop = 0
 taskbar_always_show_all_desktop_tasks = 0
 taskbar_name_padding = 6 3
@@ -394,6 +394,28 @@ execp = new
 execp_command = indicators.sh
 execp_interval = 5
 execp_has_icon = 0
+execp_cache_icon = 0
+execp_continuous = 0
+execp_markup = 1
+execp_lclick_command = 
+execp_rclick_command = 
+execp_mclick_command = 
+execp_uwheel_command = 
+execp_dwheel_command = 
+execp_font = Erica Type 10
+execp_font_color = #000006 100
+execp_padding = 0 0
+execp_background_id = 8
+execp_centered = 1
+execp_icon_w = 15
+execp_icon_h = 15
+
+#-------------------------------------
+# Executor 7
+execp = new
+execp_command = t2ec --wifi
+execp_interval = 5
+execp_has_icon = 1
 execp_cache_icon = 0
 execp_continuous = 0
 execp_markup = 1

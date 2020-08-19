@@ -1,37 +1,51 @@
 #!/bin/dash
 
 # A script to use dmenu to change the light
-GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1}' | dmenu -f -p "Monitor: (`light`)")
+# FOR REFERENCE: xrandr --output eDP1 --brightness 1 
+GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1} END {printf "xrandr"}' | dmenu -f -p "Monitor: (`light`)")
 INDICATOR_PATH="$HOME/.config/indicators"
 INDICATOR_FILE="${INDICATOR_PATH}/light.ind"
 
-if [ ! -z "$GS" ] && [ "auto" != "$GS" ]
-then
-	killall clight
+eDP1() {
+    killall clight
 	echo "" > ${INDICATOR_FILE}
 	
-	#xrandr  | grep -w connected | cut -d ' ' -f 1 | while read line ; do
-	
-	if [ "${GS}" = "eDP1" ]; then
-		BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
-		light -S ${BT}
-	elif [ "${GS}" = "HDMI1" ]; then
-		BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
-		ddcutil setvcp 10 ${BT}
-	else
-		light -S ${GS}
-		ddcutil setvcp 10 ${GS}
-	fi
-		
+    BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
+    light -S ${BT}
+	notify-send -u low "Light" "Screen monitor set to $GS"
+}
+
+HDMI1() {
+    killall clight
+	echo "" > ${INDICATOR_FILE}
+
+    BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
+    ddcutil setvcp 10 ${BT}
+	notify-send -u low "Light" "Screen monitor set to $GS"
+}
+
+both() {
+    killall clight
+	echo "" > ${INDICATOR_FILE}
+
+    light -S ${GS}
+    ddcutil setvcp 10 ${GS}
 
 	notify-send -u low "Light" "Screen monitor set to $GS"
-fi
+}
 
-if [ "auto" = "$GS" ]
-then
+
+auto() {
     killall clight
-	clight&
-	
+    clight&
+    
     echo 🔆 > ${INDICATOR_FILE}
     notify-send -u low "Light" "Auto"
-fi
+}
+
+case "$GS" in
+    "auto") auto;;
+    "eDP1") eDP1;;
+    "HDMI1") HDMI1;;
+    *) both;;
+esac

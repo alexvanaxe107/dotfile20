@@ -83,7 +83,7 @@ case $CHOSEN in
     "Western") font "Graduate" Regular 9 9 11 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 11 11 13 1;;
     "Stock") font "SVI Basic Manual" Bold 9 9 14 1;;
-    "Wasteland") font "Beccaria" Bold 11 12 14 1;;
+    "Wasteland") font "Beccaria" Bold 12 12 16 1;;
     "Cartoon") font "Pointfree" Bold 9 10 11 1;;
     "Delirium") font "Plasmatic" Bold 10 10 13 1;;
     "Box") font "Small Pixel7" Regular 13 13 15 1;;
