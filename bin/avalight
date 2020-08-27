@@ -11,6 +11,7 @@ eDP1() {
 	echo "" > ${INDICATOR_FILE}
 	
     BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
+    xrandr --output eDP1 --brightness 1 
     light -S ${BT}
 	notify-send -u low "Light" "Screen monitor set to $GS"
 }
@@ -20,6 +21,7 @@ HDMI1() {
 	echo "" > ${INDICATOR_FILE}
 
     BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
+    xrandr --output HDMI1 --brightness 1 
     ddcutil setvcp 10 ${BT}
 	notify-send -u low "Light" "Screen monitor set to $GS"
 }
@@ -28,6 +30,8 @@ both() {
     killall clight
 	echo "" > ${INDICATOR_FILE}
 
+    xrandr --output eDP1 --brightness 1 
+    xrandr --output HDMI1 --brightness 1 
     light -S ${GS}
     ddcutil setvcp 10 ${GS}
 

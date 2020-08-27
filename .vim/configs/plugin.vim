@@ -5,6 +5,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'arielrossanigo/dir-configs-override.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'wesQ3/vim-windowswap'
+Plug 'freitass/todo.txt-vim'
 
 " #### IDE
 Plug 'majutsushi/tagbar'

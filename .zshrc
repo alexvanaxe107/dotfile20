@@ -20,29 +20,7 @@ zstyle ':completion:*:killall:*'   force-list always
 #
 
 source $HOME/.fdirrc
-source $HOME/.zplug/init.zsh
-export ZPLUG_HOME=$HOME/.zplug
 
-
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-autosuggestions"
-
-zplug "zsh-users/zsh-syntax-highlighting"
-
-bindkey '^ ' autosuggest-accept
-
-zplug "zsh-users/zsh-history-substring-search"
-
-#zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
-zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-#zplug oskarkrawczyk/honukai-iterm-zsh, use:honukai.zsh-theme, from:github, as:theme
-#zplug "eendroroy/alien-minimal"
-
-zplug mafredri/zsh-async, from:github
-
-zplug "plugins/z",   from:oh-my-zsh
-
-zplug load
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -53,3 +31,38 @@ compinit
 
 #prompt default
 
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk
+#
+# Load the pure theme, with zsh-async library that's bundled with it.
+#zinit ice pick"async.zsh" src"pure.zsh"
+#zinit light sindresorhus/pure
+zinit light "denysdovhan/spaceship-prompt"
+
+zinit light "zsh-users/zsh-syntax-highlighting"
+zinit light agkozak/zsh-z
+zinit light "zsh-users/zsh-autosuggestions"
+zinit light "Aloxaf/fzf-tab"
+
+bindkey '^ ' autosuggest-accept
