@@ -8,36 +8,44 @@ INDICATOR_FILE="${INDICATOR_PATH}/light.ind"
 
 eDP1() {
     killall clight
-	echo "" > ${INDICATOR_FILE}
+    echo "" > ${INDICATOR_FILE}
 	
     BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
-    xrandr --output eDP1 --brightness 1 
     light -S ${BT}
-	notify-send -u low "Light" "Screen monitor set to $GS"
+    notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
 HDMI1() {
     killall clight
-	echo "" > ${INDICATOR_FILE}
+    echo "" > ${INDICATOR_FILE}
 
     BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
-    xrandr --output HDMI1 --brightness 1 
     ddcutil setvcp 10 ${BT}
-	notify-send -u low "Light" "Screen monitor set to $GS"
+    notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
 both() {
+    if [ ! -z "$GS" ]; then
+	    killall clight
+	    echo "" > ${INDICATOR_FILE}
+
+	    light -S ${GS}
+	    ddcutil setvcp 10 ${GS}
+
+	    notify-send -u low "Light" "Screen monitor set to $GS"
+    fi
+}
+
+_xrandr() {
     killall clight
-	echo "" > ${INDICATOR_FILE}
+    echo "" > ${INDICATOR_FILE}
 
     xrandr --output eDP1 --brightness 1 
     xrandr --output HDMI1 --brightness 1 
-    light -S ${GS}
-    ddcutil setvcp 10 ${GS}
-
-	notify-send -u low "Light" "Screen monitor set to $GS"
+    
+    
+    notify-send -u low "Light" "Xrand reseted"
 }
-
 
 auto() {
     killall clight
@@ -51,5 +59,6 @@ case "$GS" in
     "auto") auto;;
     "eDP1") eDP1;;
     "HDMI1") HDMI1;;
+    "xrandr") _xrandr;;
     *) both;;
 esac
