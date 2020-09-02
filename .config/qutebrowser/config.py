@@ -93,6 +93,7 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 config.bind('<Ctrl-s>', ':config-cycle statusbar.hide')
 config.bind('<Ctrl-p>', ':config-cycle tabs.show multiple never')
 
+config.bind("Xa", "hint links userscript addlink.sh")
 # Page when o and enter is hit
 c.url.default_page = "https://start.duckduckgo.com/"
 
