@@ -105,11 +105,15 @@ play_playlist(){
     notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
-play_clipboard(){
+play(){
     notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
     set_indicator
+    result=$1
 
-    result="$(clipster -o)"
+    if [ -z "${result}" ]; then
+        result="$(clipster -o)"
+    fi
+
     echo "mpv $result" > ${PLAY_BKP};
     mpv "$result"
 
@@ -118,9 +122,15 @@ play_clipboard(){
     exit
 }
 
-play_clipboard_quality(){
+play_quality(){
     set_indicator
-    result=$(clipster -o)
+    
+    result=$1
+
+    if [ -z "${result}" ]; then
+        result="$(clipster -o)"
+    fi
+
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
 
     local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the quality:")
@@ -143,10 +153,14 @@ play_clipboard_quality(){
     exit
 }
 
-play_clipboard_audio(){
+play_audio(){
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     set_indicator
-    result=$(clipster -o)
+    result=$1
+
+    if [ -z "${result}" ]; then
+        result="$(clipster -o)"
+    fi
     echo "mpv \"$result\" --no-video --shuffle" > ${PLAY_BKP};
     mpv "$result" --no-video --shuffle
     remove_indicator
@@ -185,8 +199,13 @@ play_radio() {
     if [ -z "$chosen" ]
     then
         chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 20)
+        index=$(echo $chosen | awk '{print $1}')
+    else
+        index=$(cat $HOME/.config/play_radio/config | nl | grep ${chosen} | awk '{print $1}')
     fi
-    index=$(echo $chosen | awk '{print $1}')
+
+    echo "SAIDA"
+    echo $index
 
     if [ -z "${index}" ]; then
         notify-send -u normal  "Done" "No radio selected"
@@ -207,21 +226,25 @@ clear_playlist() {
     $(rm ${PLAYLIST_FILE})
 }
 
+list_radio() {
+    cat $HOME/.config/play_radio/config | nl
+}
+
 command=$1
 
 if [ "$command" != "-m" ]
 then
-    chosen_mode=$(printf "Local\\nClipboard\\nClipboard Audio\\nClipboard quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
+    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
 else
     chosen_mode=$2
     option=$3
 fi
 
 case "$chosen_mode" in
-    "Local") play_radio "$option";;
-    "Clipboard") play_clipboard;;
-    "Clipboard quality") play_clipboard_quality;;
-    "Clipboard Audio") play_clipboard_audio;;
+    "Radio") play_radio "$option";;
+    "Play") play "$option";;
+    "Play Quality") play_quality "$option";;
+    "Play Audio") play_audio "$option";;
     "+PL") add_playlist "$option";;
     "Play PL") play_playlist;;
     "Stop") $(stop_one);;
@@ -230,6 +253,7 @@ case "$chosen_mode" in
     "clear") clear_playlist;;
     "replay") replay;;
     "play") play_local "$option";;
+    "list") list_radio;;
     *) exit;;
 esac
 

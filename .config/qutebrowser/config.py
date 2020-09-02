@@ -94,6 +94,13 @@ config.bind('<Ctrl-s>', ':config-cycle statusbar.hide')
 config.bind('<Ctrl-p>', ':config-cycle tabs.show multiple never')
 
 config.bind("Xa", "hint links userscript addlink.sh")
+config.bind("Pv", "hint links userscript playvideo.sh")
+config.bind("PV", "spawn --userscript playvideo.sh")
+config.bind("Pa", "hint links userscript playaudio.sh")
+config.bind("PA", "spawn --userscript playaudio.sh")
+config.bind("Pq", "hint links userscript playquality.sh")
+config.bind("PQ", "spawn --userscript playquality.sh")
+
 # Page when o and enter is hit
 c.url.default_page = "https://start.duckduckgo.com/"
 
