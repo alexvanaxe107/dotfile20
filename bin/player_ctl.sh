@@ -28,7 +28,12 @@ save() {
 
     video_rash=$(playerctl -p ${player} metadata xesam:url | grep -o "v.*" | awk 'BEGIN { FS = "=" }{print $2}')
     
-    echo "https://youtu.be/${video_rash}?t=${position}" > ${LAST_LOCATION_PLAYED}
+    if [ ! -z ${video_rash} ]; then
+        echo "https://youtu.be/${video_rash}?t=${position}" > ${LAST_LOCATION_PLAYED}
+    else
+        yt_link=$(playerctl -p "${player}" metadata xesam:url)
+        echo "${yt_link}" > ${LAST_LOCATION_PLAYED} 
+    fi
 
     notify-send -u normal  "Saved" "Location saved"
 }

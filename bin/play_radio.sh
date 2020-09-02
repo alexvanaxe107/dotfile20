@@ -45,7 +45,7 @@ play_local () {
         mpv -playlist=$url
     else
         echo "mpv $url --no-video" > ${PLAY_BKP};
-        mpv $url --no-video
+        mpv "$url" --no-video
     fi
 
     notify-send -u normal  "Finished" "Media stoped. Bye."
