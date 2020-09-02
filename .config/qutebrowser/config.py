@@ -100,6 +100,8 @@ config.bind("Pa", "hint links userscript playaudio.sh")
 config.bind("PA", "spawn --userscript playaudio.sh")
 config.bind("Pq", "hint links userscript playquality.sh")
 config.bind("PQ", "spawn --userscript playquality.sh")
+config.bind("Pp", "hint links userscript playpl.sh")
+config.bind("PP", "spawn --userscript playpl.sh")
 
 # Page when o and enter is hit
 c.url.default_page = "https://start.duckduckgo.com/"
