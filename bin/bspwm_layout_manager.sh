@@ -53,7 +53,13 @@ set_pseudo() {
 }
 
 remove_pseudo() {
-    bspc rule -a \* state=tiled rectangle=900x568+0+0
+    bspc rule -a \* state=tiled rectangle=1850x1040+0+0
+    bspc rule -a Gimp state=floating follow=on
+    bspc rule -a Surf state=tiled
+    bspc rule -a ffplay state=floating
+    bspc rule -a Gpick state=floating
+    bspc rule -a qutebrowser desktop=^2
+    bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0
 }
 
 remove_layout() {
