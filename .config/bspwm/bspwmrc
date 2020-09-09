@@ -19,6 +19,8 @@ bspc config border_width         1
 bspc config window_gap           6
 bspc config split_ratio 0.60
 
+bspc config pointer_follows_monitor true
+
 # App rules
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Surf state=tiled
