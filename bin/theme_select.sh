@@ -26,7 +26,7 @@ then
 fi
 
 #Get the last to get how many monitors
-MONITOR=$(xrandr --query | grep " connected" | nl | awk '{print $1}' | tail -n 1)
+MONITOR=$(xrandr --query | grep "*" | nl | awk '{print $1}')
 
 WALLPAPER_PATH=$HOME/.config/nitrogen/bg-saved.cfg
 
@@ -61,7 +61,7 @@ function reset_configs(){
 
 
 function get_wallpaper() {
-    selected_wallpaper=$(cat ${WALLPAPER_PATH} | grep xin | awk '{print NR}' | /usr/bin/dmenu -p "Extract color from wallpaper:" -n)
+    selected_wallpaper=$(xrandr --query | grep "*" | nl | awk '{print $1}' | /usr/bin/dmenu -p "Extract color from wallpaper:" -n)
     cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep file | awk -v SEL=$selected_wallpaper 'BEGIN {FS="="} NR==SEL {print $2}')
 
     echo ${cur_wallpaper}
