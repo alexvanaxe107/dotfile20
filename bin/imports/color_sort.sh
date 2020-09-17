@@ -51,7 +51,6 @@ black_or_white() {
     lums=($(echo -e ${colors_abc[@]}  | sort -n | awk '{print $1}' | cut -d "#" -f 2))
 
     lum=${lums[$index]}
-    echo ${lum} > ~/debug.txt
     if (( $(echo "$lum  > 133" |bc -l) )); then
         echo black
     fi
