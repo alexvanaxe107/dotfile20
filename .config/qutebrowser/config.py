@@ -94,6 +94,7 @@ config.bind('<Ctrl-s>', ':config-cycle statusbar.hide')
 config.bind('<Ctrl-p>', ':config-cycle tabs.show multiple never')
 
 config.bind("Xa", "hint links userscript addlink.sh")
+config.bind("Xp", "hint links userscript cplink.sh")
 config.bind("Pv", "hint links userscript playvideo.sh")
 config.bind("PV", "spawn --userscript playvideo.sh")
 config.bind("Pa", "hint links userscript playaudio.sh")

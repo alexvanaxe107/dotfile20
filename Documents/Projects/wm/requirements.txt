@@ -7,8 +7,10 @@
 git+https://github.com/toggle-corp/alacritty-colorscheme.git  # via -r requirements.in
 click==7.1.2              # via -r requirements.in
 i3ipc==2.2.1              # via -r requirements.in
-pycairo==1.19.1           # via -r requirements.in, pygobject
+pycairo==1.20.0           # via -r requirements.in, pygobject
 pydbus==0.6.0             # via -r requirements.in
-pygobject==3.36.1         # via -r requirements.in
-python-xlib==0.27         # via i3ipc
+pygobject==3.38.0         # via -r requirements.in
+python-xlib==0.28         # via i3ipc
+ruamel.yaml.clib==0.2.2   # via ruamel.yaml
+ruamel.yaml==0.16.12      # via alacritty-colorscheme
 six==1.15.0               # via python-xlib
