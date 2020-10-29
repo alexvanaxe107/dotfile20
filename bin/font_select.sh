@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nDelirium\\nclear\\nSpace" | dmenu -i -l 30 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nDelirium\\nclear\\nSpace\\nNoir" | dmenu -i -l 30 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -88,5 +88,6 @@ case $CHOSEN in
     "Cartoon") font "Pointfree" Bold 9 10 11 1;;
     "Delirium") font "Plasmatic" Bold 10 10 13 1;;
     "Space") font "Space Mono" Regular 10 10 12 1;;
+    "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac
