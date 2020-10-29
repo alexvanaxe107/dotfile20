@@ -38,7 +38,7 @@ font() {
 
     for file in ${HOME}/.config/conky/*.conf; do
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
-        sed -i "s/TITLEFONT/${font_name}/" ${file}
+        sed -i "s/TITLEFONT/${font_name}/g" ${file}
     done
 
     update=$(printf "Yes\nNo" | dmenu -i -p "Update terminal font? (ESC go to default)")
