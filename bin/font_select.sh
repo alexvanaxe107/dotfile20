@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nDelirium\\nclear\\nBox" | dmenu -i -l 30 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nDelirium\\nclear\\nSpace" | dmenu -i -l 30 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -38,6 +38,7 @@ font() {
 
     for file in ${HOME}/.config/conky/*.conf; do
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
+        sed -i "s/TITLEFONT/${font_name}/" ${file}
     done
 
     update=$(printf "Yes\nNo" | dmenu -i -p "Update terminal font? (ESC go to default)")
@@ -86,6 +87,6 @@ case $CHOSEN in
     "Wasteland") font "Beccaria" Bold 12 12 16 1;;
     "Cartoon") font "Pointfree" Bold 9 10 11 1;;
     "Delirium") font "Plasmatic" Bold 10 10 13 1;;
-    "Box") font "Small Pixel7" Regular 13 13 15 1;;
+    "Space") font "Space Mono" Regular 10 10 12 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac
