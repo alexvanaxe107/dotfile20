@@ -4,5 +4,5 @@ shabbat=$(date | grep -E "(Fri|Sat)")
 if [ -z "$shabbat" ]; then
     fortune -n 400 -s
 else
-    fortune -n 600 -s ara
+    fortune -n 600 -s ara | fold -s -w 75
 fi
