@@ -84,6 +84,10 @@ super + shift + d
 super + shift + a
 	$HOME/bin/equalizer
 
+# Terminal theme
+super + shift + o
+	$HOME/bin/alacritty_theme.sh
+
 # Edit Config file
 super + shift + u
 	$HOME/bin/configshortcut.sh
