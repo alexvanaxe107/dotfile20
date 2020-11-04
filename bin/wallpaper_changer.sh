@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -o errexit
+# Source the theme
+. ${HOME}/.config/bspwm/themes/bsp.cfg
 
 change_all(){
     count=0
