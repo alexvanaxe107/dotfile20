@@ -111,11 +111,9 @@ super + shift + g ; {d,n}
 	{sxiv $HOME/Documents/Pictures/Wallpapers/day/*,sxiv $HOME/Documents/Pictures/Wallpapers/night/*}
 
 # Change wallpapers
-super + shift + w ; {n}
-	{nitrogen --head=0 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night;nitrogen --head=1 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/night}
+super + shift + w ; {w}
+	$HOME/bin/wallpaper_changer.sh
 
-super + shift + w ; {d}
-	{nitrogen --head=0 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day;nitrogen --head=1 --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/day}
 
 ###################
 ##### WM KEYS #####
