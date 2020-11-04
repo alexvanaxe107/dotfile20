@@ -203,7 +203,6 @@ super + {comma,period}
 # state/flags
 #
 
-# Change wallpapers
 super + shift + w: {t,p,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
