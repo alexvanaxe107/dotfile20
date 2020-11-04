@@ -85,7 +85,7 @@ case $CHOSEN in
     "Book") font "Kingthings Trypewriter 2" Regular 11 11 13 1;;
     "Stock") font "SVI Basic Manual" Bold 11 11 16 1;;
     "Wasteland") font "Beccaria" Bold 12 12 16 1;;
-    "Cartoon") font "Pointfree" Bold 9 10 11 1;;
+    "Cartoon") font "Pointfree" Bold 9 10 13 1;;
     "Delirium") font "Plasmatic" Bold 10 10 13 1;;
     "Space") font "Space Mono" Regular 10 10 12 1;;
     "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;
