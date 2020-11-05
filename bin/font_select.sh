@@ -25,16 +25,28 @@ font() {
     size3=$5
     space=$6
 
+    #Change the polybar
     sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
     sed -i "s/font-0.*/font-0 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
+
+    #Change the dmenu font
     sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
+
+    #Change the dunst font
     sed -i "s/font =.*/font = ${font_name},${style} ${size1}/" ${HOME}/.config/dunst/dunstrc
+
+    #Change the twmn font
     sed -i "s/font=.*/font=${font_name}/" ${HOME}/.config/twmn/twmn.conf
     sed -i "s/font_size=.*/font_size=${size3}/" ${HOME}/.config/twmn/twmn.conf
 
+    #Change the tint font
     sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
     sed -i "s/font =.*/font = ${font_name} ${style} ${size1}/" ${HOME}/.config/tint2/tint2rc
     sed -i "s/zont = Pomodoro.*/font = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
+
+    #Change the lock screen font
+    sed -i "s/FONT=.*/FONT=\"${font_name}\":pixelsize=$(($size3+7))/" ${HOME}/bin/imports/lock.sh
+    
 
     for file in ${HOME}/.config/conky/*.conf; do
         sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
