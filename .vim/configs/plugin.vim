@@ -41,6 +41,8 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mkitt/tabline.vim'
+Plug 'guns/xterm-color-table.vim'
+
 "Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
@@ -52,5 +54,9 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'chriskempson/base16-vim'
 Plug 'fenetikm/falcon'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'fneu/breezy'
+Plug 'whatyouhide/vim-gotham'
+Plug 'arcticicestudio/nord-vim'
+Plug 'Ardakilic/vim-tomorrow-night-theme'
 
 call plug#end()
