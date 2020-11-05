@@ -58,5 +58,8 @@ Plug 'fneu/breezy'
 Plug 'whatyouhide/vim-gotham'
 Plug 'arcticicestudio/nord-vim'
 Plug 'Ardakilic/vim-tomorrow-night-theme'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'ayu-theme/ayu-vim'
+Plug 'Arkham/vim-tango'
 
 call plug#end()
