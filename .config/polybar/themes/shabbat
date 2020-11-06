@@ -49,7 +49,7 @@ bspadding=2
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 100%
-height = 19
+height = 17
 ;offset-x = 0%
 ;offset-y = 1%
 radius = 0.0
@@ -80,7 +80,7 @@ font-1 = Kingthings Trypewriter 2:style=Bold:pixelsize=9
 font-2 = FontAwesome:style=Bold:pixelsize=9
 font-3 = symbola:style=Bold:pixelsize=9;1
 
-separator = ⏽
+separator = ✡
 
 modules-left = desktop bspwm pulseaudio
 modules-center = pomodoro nweather torrent
