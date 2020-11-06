@@ -11,7 +11,7 @@ do
         "C-p")
             magick convert "$file" -resize 1366x768\! "$file".png ;;
         "C-s")
-            $HOME/.config/i3/scripts/sway_wallpaper.sh "$file" ;;
+            mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
         "C-l")
             cp "$file" $HOME/Documents/Pictures/lock.png ;;
         "C-n")
