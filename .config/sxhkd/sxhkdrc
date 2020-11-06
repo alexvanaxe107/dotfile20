@@ -115,7 +115,7 @@ super + shift + g ; {d,n}
 	{sxiv $HOME/Documents/Pictures/Wallpapers/day/*,sxiv $HOME/Documents/Pictures/Wallpapers/night/*}
 
 # Change wallpapers
-super + shift + w ; {w}
+super + w;
 	$HOME/bin/wallpaper_changer.sh
 
 

@@ -15,7 +15,7 @@ change_all(){
         fi
         count=$(($count+1))
     done
-    option=$(xrandr --listmonitors | awk '{print $1$2}' | tail -n 2 | (echo "All" && cat && echo "OK") | dmenu)
+    option=$(xrandr --listmonitors | awk 'NR>1 {print $1$2}' | (echo "All" && cat && echo "OK") | dmenu)
     echo "$option"
 }
 
@@ -32,11 +32,11 @@ change_wallpaper(){
         fi
     fi
 
-    option=$(xrandr --listmonitors | awk '{print $1$2}' | tail -n 2 | (echo "All" && cat && echo "OK") | dmenu)
+    option=$(xrandr --listmonitors | awk 'NR>1 {print $1$2}' | (echo "All" && cat && echo "OK") | dmenu)
     echo $option
 }
 
-option=$(xrandr --listmonitors | awk '{print $1$2}' | tail -n 2 | (echo "All" && cat && echo "OK") | dmenu)
+option=$(xrandr --listmonitors | awk 'NR>1 {print $1$2}' | (echo "All" && cat && echo "OK") | dmenu)
 
 while [ "true" ]; do
     case "$option" in
