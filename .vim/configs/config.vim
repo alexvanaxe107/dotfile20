@@ -36,5 +36,7 @@ let g:airline_powerline_fonts = 1
 set guioptions -=m
 set guioptions -=T
 
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 let g:indentLine_char = '.'

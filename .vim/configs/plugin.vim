@@ -37,6 +37,10 @@ Plug 'mattn/emmet-vim' " Generate code html
 Plug 'davidhalter/jedi-vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 
+" General writing
+Plug 'reedes/vim-pencil', { 'for': ['text', 'notes', 'markdown', 'mkd'] }
+Plug 'junegunn/limelight.vim'
+
 " #### EYECANDY
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
