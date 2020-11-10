@@ -90,10 +90,16 @@ function startup_theme(){
 }
 
 function retrieve_color(){
+    index=$((($2 * ${#colors_wallpaper[@]}) / 15))
+
+    if [ $index -eq 0 ]; then
+        index=1
+    fi
+
     if [[   "$1" == "i" ]]; then
-        echo "${colors_wallpaper[$((${#colors_wallpaper[@]} - $2))]}"
+        echo "${colors_wallpaper[$((${#colors_wallpaper[@]} - $index))]}"
     else
-        echo "${colors_wallpaper[$2]}"
+        echo "${colors_wallpaper[$index]}"
     fi
 }
 
