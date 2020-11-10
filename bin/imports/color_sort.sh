@@ -121,7 +121,7 @@ get_sorted_color() {
 
 function get_wall_colors() {
     wallpaper=$1
-    local colors12=($(convert "${wallpaper}" -scale 50x50! -depth 3 +dither -colors 15 -format "%c" histogram:info: | grep -o "#......"))
+    local colors12=($(convert "${wallpaper}" -scale 50x50! -depth 4 +dither -colors 15 -format "%c" histogram:info: | grep -o "#......"))
     local colors_lum12=$(order_list "${colors12[@]}")
     echo -e  ${colors_lum12}  | sort -n | awk 'NR>1 {print $2}' | cut -d "#" -f 2
 }
