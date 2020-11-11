@@ -14,7 +14,7 @@ enable_graphic_card_temperature_sensor= "No"
 -- Colors
 HTML_colors = "#000000"
 HTML_colors_current = "#FFFFFF"
-transparency = 0.80 -- From 0 to 1
+transparency = 0.90 -- From 0 to 1
 
 -- Scaled relative position from middle. Positive x and y means left and up, negative x and y means right and down.
 x_rel_pos = 0
@@ -177,12 +177,12 @@ function draw_function(cr)
   
   
 --- Clock ---
-  cairo_set_font_size(cr,62)
-  cairo_move_to(cr, (w-x_rel_pos)/2-78,(h-y_rel_pos)/2+20)
-  cairo_show_text(cr,conky_parse('${exec date +%H}') .. ":" .. conky_parse('${exec date +%M}'))
-  cairo_set_font_size(cr,12)
-  cairo_move_to(cr, (w-x_rel_pos)/2-24,(h-y_rel_pos)/2+14)
-  cairo_show_text(cr, "")
+---  cairo_set_font_size(cr,62)
+---  cairo_move_to(cr, (w-x_rel_pos)/2-78,(h-y_rel_pos)/2+20)
+---  cairo_show_text(cr,conky_parse('${exec date +%H}') .. ":" .. conky_parse('${exec date +%M}'))
+---  cairo_set_font_size(cr,12)
+---  cairo_move_to(cr, (w-x_rel_pos)/2-24,(h-y_rel_pos)/2+14)
+---  cairo_show_text(cr, "")
   
 
 --- Free space ---
