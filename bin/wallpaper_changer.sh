@@ -7,6 +7,8 @@ set -o errexit
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
+WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nLandscape\nLandscape Night\nNight city\nscience fiction\nminimalism\nSpace"
+
 show_options(){
     option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)
     echo $option
@@ -32,21 +34,32 @@ download(){
         #option=$(show_options)
         #echo "$option"
     else
-        scene=$(printf "Cyberpunk\nFuturist\nAbstract\nLandscape\nLandscape Night\nNight city\nscience fiction\nminimalism\nSpace" | dmenu -p "Choose the scene:")
+        scene=$(printf "${WALLPAPER_SCENES}" | dmenu -l 20 -p "Choose the scene:")
+        if [ -z "${scene}" ];then
+            exit 0
+        fi
+
+        if [ "Any" = "${scene}" ]; then
+            scene=""
+        fi
+
         if [ "$monitor" == "All" ]; then
+            notify-send -u normal "Setting all monitors to ${scene}"
             for monitor_all in $(monitors_info.sh -m); do
-                path=$(wallfinder.py -m $monitor_all -s "$scene")
-                nitrogen --head=$count --save --set-scaled $path
+                path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
+                nitrogen --head=${count} --save --set-scaled ${path}
                 count=$(($count+1))
             done
         else
-                path=$(wallfinder.py -m $monitor -s "$scene")
+                notify-send -u normal "Setting monitor ${monitor} to ${scene}"
+                path=$(wallfinder.py -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -in ${monitor})
-                nitrogen --head=$selected --save --set-scaled $path
+                nitrogen --head=${selected} --save --set-scaled ${path}
         fi
         #option=$(show_options)
         #echo "$option"
     fi
+    notify-send -u normal "Wallpaper downloaded. Enjoy."
 }
 
 change_wallpaper(){
