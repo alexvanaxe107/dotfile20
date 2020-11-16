@@ -3,8 +3,12 @@
 set -o errexit
 # Source the theme
 . ${HOME}/.config/bspwm/themes/bsp.cfg
+
+NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
+WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
+
 show_options(){
-    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat) | dmenu)
+    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)
     echo $option
 }
 
@@ -24,10 +28,11 @@ download(){
     monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
 
     if [ -z "$monitor" ]; then
-        option=$(show_options)
-        echo "$option"
+        exit 0
+        #option=$(show_options)
+        #echo "$option"
     else
-        scene=$(printf "Cyberpunk\nFuturist\nLandscape\nNight city" | dmenu -p "Choose the scene:")
+        scene=$(printf "Cyberpunk\nFuturist\nLandscape\nLandscape Night\nNight city\nscience fiction\nminimalist\nSpace" | dmenu -p "Choose the scene:")
         if [ "$monitor" == "All" ]; then
             for monitor_all in $(monitors_info.sh -m); do
                 path=$(wallfinder.py -m $monitor_all -s "$scene")
@@ -39,8 +44,8 @@ download(){
                 selected=$(monitors_info.sh -in ${monitor})
                 nitrogen --head=$selected --save --set-scaled $path
         fi
-        option=$(show_options)
-        echo "$option"
+        #option=$(show_options)
+        #echo "$option"
     fi
 }
 
@@ -62,6 +67,23 @@ change_wallpaper(){
     #echo $option
 }
 
+save_wallpaper(){
+    count=0
+    for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do
+        theme="$theme_name"
+        is_wide=$(monitors_info.sh -iw ${count})
+        count=$(($count + 1))
+
+        if [ "${is_wide}" = "yes" ]; then
+            dest="${WALLPAPER_ROOT}/ultra/${theme}/"
+        else
+            dest="${WALLPAPER_ROOT}/${theme}/"
+        fi
+        
+        cp "${wallpaper}" "${dest}"
+    done
+}
+
 
 option=$(show_options)
 
@@ -69,9 +91,8 @@ option=$(show_options)
     case "$option" in
         "All") option=$(change_all);;
         "Download") option=$(download);;
+        "save") save_wallpaper;;
         "") exit 0;;
         *) option=$(change_wallpaper $option);
     esac
 #done
-
-
