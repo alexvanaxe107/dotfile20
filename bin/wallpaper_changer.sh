@@ -69,19 +69,39 @@ change_wallpaper(){
 
 save_wallpaper(){
     count=0
-    for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do
-        theme="$theme_name"
-        is_wide=$(monitors_info.sh -iw ${count})
-        count=$(($count + 1))
+    option=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
 
+    if [ "$option" = "All" ]; then
+        for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do
+            theme="$theme_name"
+            is_wide=$(monitors_info.sh -iw ${count})
+            count=$(($count + 1))
+
+            if [ "${is_wide}" = "yes" ]; then
+                dest="${WALLPAPER_ROOT}/ultra/${theme}/"
+            else
+                dest="${WALLPAPER_ROOT}/${theme}/"
+            fi
+            
+            #cp "${wallpaper}" "${dest}"
+        done
+    else
+        theme="$theme_name"
+        is_wide=$(monitors_info.sh -w ${option})
+        
         if [ "${is_wide}" = "yes" ]; then
             dest="${WALLPAPER_ROOT}/ultra/${theme}/"
         else
             dest="${WALLPAPER_ROOT}/${theme}/"
         fi
+
+        index=$(monitors_info.sh -in ${option})
+        index=$(($index + 1))
         
-        cp "${wallpaper}" "${dest}"
-    done
+        wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
+
+        cp "${wall}" "${dest}"
+    fi
 }
 
 
