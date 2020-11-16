@@ -12,13 +12,31 @@ from Xlib.ext import randr
 CONFIG_PATH="/home/alexvanaxe/.config/wallfinder"
 WALLHAVEN_URL="https://wallhaven.cc/api/v1/search"
 
-def get_wallpapers(search):
-    wallpapers = requests.get(WALLHAVEN_URL+search)
+def get_wallpapers(resolution, search):
+    query="?"
+    query += "sorting=random&resolutions={}".format(resolution)
+
+    if search:
+        query += "&q={}".format(search)
+
+    wallpapers = requests.get(WALLHAVEN_URL+query)
 
     if wallpapers.status_code != 200:
         print("Error! Error!")
+    
+    url = ''
+    try:
+        url = wallpapers.json()['data'][0]['path']
+    except IndexError:
+        query="?"
+        query += "sorting=random"
+        if search:
+            query += "&q={}".format(search)
+            wallpapers = requests.get(WALLHAVEN_URL+query)
+            url = wallpapers.json()['data'][0]['path']
 
-    return wallpapers.json()['data'][0]['path']
+
+    return url
 
 def download(url, dirname, filename):
     url_int = url
@@ -82,12 +100,11 @@ def _parse_arguments():
 
 def _get_monitor_res(monitor):
     monitors = get_display_info()
-
     monitor = monitors[monitor]
-
     resolution=monitor['resolution']
 
     return resolution
+
 
 def _main():
     options = _parse_arguments()
@@ -96,15 +113,10 @@ def _main():
     monitor = options.monitor
     scene = options.scene
 
-    search = "?"
     if monitor:
         resolution = _get_monitor_res(monitor)
-        search += "sorting=random&resolutions={}".format(resolution) 
 
-    if scene:
-        search += "&q={}".format(scene)
-
-    url = get_wallpapers(search)
+    url = get_wallpapers(resolution, scene)
     filename = re.findall("/(wall.*)", url)
     path = ""
     if theme:
@@ -112,7 +124,11 @@ def _main():
     else:
         path = "{}".format(resolution)
 
-    downloaded = download(url, path, filename[0])
+    
+    if (url):
+        downloaded = download(url, path, filename[0])
+    else:
+        downloaded = ""
 
     print(downloaded)
         

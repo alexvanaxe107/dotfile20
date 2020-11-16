@@ -32,7 +32,7 @@ download(){
         #option=$(show_options)
         #echo "$option"
     else
-        scene=$(printf "Cyberpunk\nFuturist\nLandscape\nLandscape Night\nNight city\nscience fiction\nminimalist\nSpace" | dmenu -p "Choose the scene:")
+        scene=$(printf "Cyberpunk\nFuturist\nAbstract\nLandscape\nLandscape Night\nNight city\nscience fiction\nminimalism\nSpace" | dmenu -p "Choose the scene:")
         if [ "$monitor" == "All" ]; then
             for monitor_all in $(monitors_info.sh -m); do
                 path=$(wallfinder.py -m $monitor_all -s "$scene")
