@@ -1,24 +1,29 @@
 #!/bin/dash
 
-MONITOR1=$(polybar -m | grep -v primary | cut -d":" -f1 | awk 'NR==1 {print $0}')
+MONITOR1=$(monitors_info.sh -n 1)
+MONITOR2=$(monitors_info.sh -n 0)
 
 if [ -z $MONITOR1 ]; then
-    MONITOR1=$(polybar -m | grep primary | cut -d":" -f1 | awk '{print $0}')
-else
-    MONITOR2=$(polybar -m | grep primary | cut -d":" -f1 | awk '{print $0}')
+    MONITOR1=$(monitors_info.sh -n 0)
+    unset MONITOR2
 fi
-
 
 TARGET=$1
 
 toggle_tint(){
-    pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
-    if [ ! -z "$pid" ]; then
-        bspc config -m $MONITOR1 right_padding 0
-        kill $pid
+    if [ "${MONITOR1}" = "HDMI1" ]; then
+        pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
+        if [ ! -z "$pid" ]; then
+            bspc config -m $MONITOR1 right_padding 0
+            kill $pid
+        else
+            bspc config -m $MONITOR1 right_padding 203
+            tint2 >> /tmp/tint2.log 2>&1 &
+        fi
     else
-        bspc config -m $MONITOR1 right_padding 203
-        tint2 >> /tmp/tint2.log 2>&1 &
+            bspc config -m $MONITOR1 right_padding 0
+            pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
+            kill $pid
     fi
 }
 
