@@ -9,12 +9,12 @@ choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -l 40 -p "Choose the terminal th
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 
 if [ ! -z "$choosen" ]; then
-    alacritty-colorscheme -a ${choosen} 
+    cp ${HOME}/.vim/configs/theme_template.vim  ${HOME}/.vim/configs/theme.vim
+    alacritty-colorscheme -a "${choosen}"
 fi
 
-vim_theme=$(basename -s .yaml $choosen)
+vim_theme=$(basename -s .yaml "$choosen")
 
-cp ${HOME}/.vim/configs/theme_template.vim  ${HOME}/.vim/configs/theme.vim
 
 if [ "$vim_theme" == "breeze" ]; then
     sed -i 's/^colorscheme.*/colorscheme breezy/' ${HOME}/.vim/configs/theme.vim
@@ -34,15 +34,39 @@ if [ "$vim_theme" == "gruvbox_light" ]; then
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "3024.dark.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme base16-3024/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="base16_3024"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "gruvbox_dark" ]; then
     sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "gruvbox_material.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme gruvbox-material/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="gruvbox_material"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "argonaut" ]; then
+    sed -i 's/^colorscheme.*/colorscheme argonaut/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="gotham"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "gotham" ]; then
     sed -i 's/^colorscheme.*/colorscheme gotham/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="gotham"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "cyber_punk_neon" ]; then
+    sed -i 's/^colorscheme.*/colorscheme synthwave84/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="synthwave84"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
@@ -109,6 +133,12 @@ if [ "$vim_theme" == "dracula" ]; then
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "oceanic_next" ]; then
+    sed -i 's/^colorscheme.*/colorscheme OceanicNext/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="oceanicnext"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "falcon" ]; then
     sed -i 's/^colorscheme.*/colorscheme falcon/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="falcon"/' ${HOME}/.vim/configs/theme.vim
@@ -119,4 +149,70 @@ if [ "$vim_theme" == "tango_dark" ]; then
     sed -i 's/^colorscheme.*/colorscheme tango/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="afterglow"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Muzieca mono.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme monochrome/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="base16_grayscale"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierdune.dark.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_DuneDark/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_DuneDark"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierdune.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_DuneLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_DuneLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierforest.dark.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_ForestDark/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_ForestDark"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierforest.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_ForestLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_ForestLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierheath.dark.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_HeathDark/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_HeathDark"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierheath.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_HeathLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_HeathLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierlakeside.dark.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_LakesideDark/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_LakesideDark"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierlakeside.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_LakesideLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_LakesideLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierseaside.dark.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_SeasideDark/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_SeasideDark"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Atelierseaside.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme Atelier_SeasideLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_SeasideLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi

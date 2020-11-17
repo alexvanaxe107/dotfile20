@@ -12,6 +12,13 @@ set -o pipefail
 
 source $HOME/bin/imports/color_sort.sh
 
+show_help () {
+    echo "Yay! Change the theme of the desktop"
+    echo "-t          The theme name"
+    echo "-h          This help message"
+}
+
+
 retrieve_themes () {
     for theme in $HOME/bin/themes/*
     do
@@ -19,23 +26,42 @@ retrieve_themes () {
     done
 }
 
-CHOSEN=$1
-if [ -z "$CHOSEN" ] 
-then
-    CHOSEN=$(retrieve_themes | /usr/bin/dmenu -i -p "Change the theme: ")
-fi
 
-#Get the last to get how many monitors
-MONITOR=$(xrandr --query | grep "*" | nl | awk '{print $1}')
+choose(){
+    CHOSEN=$1
+    if [ -z "$CHOSEN" ] 
+    then
+        CHOSEN=$(retrieve_themes | dmenu -i -p "Change the theme: ")
+    fi
 
-WALLPAPER_PATH=$HOME/.config/nitrogen/bg-saved.cfg
+    #Get the last to get how many monitors
+    MONITOR=$(xrandr --query | grep "*" | nl | awk '{print $1}')
 
-if [[ -z "${CHOSEN}" ]]; then
-    exit
-fi
+    WALLPAPER_PATH=$HOME/.config/nitrogen/bg-saved.cfg
+
+    if [[ -z "${CHOSEN}" ]]; then
+        exit
+    fi
+}
+
+begin(){
+    choose $1
+
+    . $HOME/bin/themes/${CHOSEN}.cfg
+
+    startup_theme
+
+    . $HOME/.config/bspwm/themes/bsp.cfg
+
+
+    # Colors
+    bspc config focused_border_color            "${focused_border_color}"
+    bspc config active_border_color             "${active_border_color}"
+    bspc config normal_border_color             "${normal_border_color}"
+    bspc config presel_feedback_color           "${presel_feedback_color}"
+}
 
 # Try to copy the config where is the themename
-
 function reset_configs(){
     theme_name=$1
     cp ${HOME}/.config/bspwm/themes/${theme_name}.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
@@ -59,7 +85,6 @@ function reset_configs(){
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
     fi
 }
-
 
 function get_wallpaper() {
     selected_wallpaper=$(xrandr --query | grep "*" | nl | awk '{print $1}' | /usr/bin/dmenu -p "Extract color from wallpaper:" -n)
@@ -118,15 +143,16 @@ function text_color(){
     fi
 }
 
-. $HOME/bin/themes/${CHOSEN}.cfg
-
-startup_theme
-
-. $HOME/.config/bspwm/themes/bsp.cfg
-
-
-# Colors
-bspc config focused_border_color            "${focused_border_color}"
-bspc config active_border_color             "${active_border_color}"
-bspc config normal_border_color             "${normal_border_color}"
-bspc config presel_feedback_color           "${presel_feedback_color}"
+if [[ $1 == "" ]]; then
+    begin
+else
+    while getopts "h?t:" opt; do
+        case "$opt" in
+        h|\?)
+            show_help
+            ;;
+        t) begin $OPTARG
+            ;;
+        esac
+    done
+fi

@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd &
@@ -8,8 +8,8 @@ $HOME/bin/bspwm_layout_manager.sh clear
 
 # Configure the window manager
 #polybar example &
-bspc monitor ^1 -d terminal 
-bspc monitor ^2 -d terminal 
+bspc monitor ^1 -d terminal
+bspc monitor ^2 -d terminal
 
 # Prevent windows to steal focus
 #bspc config ignore_ewmh_focus true
@@ -37,3 +37,8 @@ bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0
 #bspc rule -a Kupfer.py focus=on
 #bspc rule -a Screenkey manage=off
 
+theme_select.sh -t light
+
+if [ $(monitors_info.sh -q) -ge 1 ]; then
+    configdisplay.sh
+fi

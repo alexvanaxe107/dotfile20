@@ -65,5 +65,11 @@ Plug 'Ardakilic/vim-tomorrow-night-theme'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'ayu-theme/ayu-vim'
 Plug 'Arkham/vim-tango'
+Plug 'effkay/argonaut.vim'
+Plug 'artanikin/vim-synthwave84'
+Plug 'sainnhe/gruvbox-material'
+Plug 'atelierbram/vim-colors_atelier-schemes'
+Plug 'fxn/vim-monochrome'
+Plug 'mhartington/oceanic-next'
 
 call plug#end()

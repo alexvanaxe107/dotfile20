@@ -7,7 +7,7 @@ set -o errexit
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
-WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nLandscape\nLandscape Night\nNight city\nscience fiction\nminimalism\nSpace"
+WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nNight city\nCity Landscape\nscience fiction\nminimalism\nSpace"
 
 show_options(){
     option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)
@@ -23,6 +23,9 @@ change_all(){
             nitrogen --head=$monitor --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
         fi
     done
+    option=$(show_options)
+    echo "$option"
+    notify-send -u normal "Wallpaper downloaded. Enjoy."
 }
 
 download(){
@@ -56,16 +59,15 @@ download(){
                 selected=$(monitors_info.sh -in ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
         fi
-        #option=$(show_options)
-        #echo "$option"
     fi
+    option=$(show_options)
+    echo "$option"
     notify-send -u normal "Wallpaper downloaded. Enjoy."
 }
 
 change_wallpaper(){
     monitor_name=$1
     selected=$(monitors_info.sh -in ${monitor_name})
-    echo $selected
 
     if [ ! -z "$selected" ]; then
         is_wide=$(monitors_info.sh -iw ${selected})
@@ -76,8 +78,8 @@ change_wallpaper(){
         fi
     fi
 
-    #option=$(show_options)
-    #echo $option
+    option=$(show_options)
+    echo $option
 }
 
 save_wallpaper(){
@@ -120,7 +122,7 @@ save_wallpaper(){
 
 option=$(show_options)
 
-#while [ "true" ]; do
+while [ "true" ]; do
     case "$option" in
         "All") option=$(change_all);;
         "Download") option=$(download);;
@@ -128,4 +130,4 @@ option=$(show_options)
         "") exit 0;;
         *) option=$(change_wallpaper $option);
     esac
-#done
+done
