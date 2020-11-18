@@ -23,9 +23,9 @@ change_all(){
             nitrogen --head=$monitor --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
         fi
     done
+    notify-send -u normal "All wallpapers setted. Enjoy."
     option=$(show_options)
     echo "$option"
-    notify-send -u normal "Wallpaper downloaded. Enjoy."
 }
 
 download(){
@@ -47,22 +47,22 @@ download(){
         fi
 
         if [ "$monitor" == "All" ]; then
-            notify-send -u normal "Setting all monitors to ${scene}"
+            notify-send -u normal "Downloading wallpaper to all monitors"
             for monitor_all in $(monitors_info.sh -m); do
                 path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
                 nitrogen --head=${count} --save --set-scaled ${path}
                 count=$(($count+1))
             done
         else
-                notify-send -u normal "Setting monitor ${monitor} to ${scene}"
+                notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
                 path=$(wallfinder.py -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -in ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
         fi
     fi
+    notify-send -u normal "Wallpaper downloaded. Enjoy."
     option=$(show_options)
     echo "$option"
-    notify-send -u normal "Wallpaper downloaded. Enjoy."
 }
 
 change_wallpaper(){
@@ -78,6 +78,7 @@ change_wallpaper(){
         fi
     fi
 
+    notify-send -u normal "Wallpaper ${selected} changed. Enjoy."
     option=$(show_options)
     echo $option
 }
