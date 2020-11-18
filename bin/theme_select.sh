@@ -1,4 +1,6 @@
 #!/bin/bash
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
 # To call use script >>/tmp/polybar1.log 2>&1 &
 
