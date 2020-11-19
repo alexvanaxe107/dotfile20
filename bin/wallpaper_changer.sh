@@ -7,7 +7,7 @@ set -o errexit
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
-WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nNight city\nCity Landscape\nscience fiction\nminimalism\nSpace\nWasteland\nApocalypse"
+WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nCity Night\nCity Landscape\nScience Fiction\nMinimalism\nSpace\nWar\nApocalypse"
 
 show_options(){
     option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)

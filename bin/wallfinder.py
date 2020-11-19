@@ -13,7 +13,7 @@ from Xlib.ext import randr
 
 CONFIG_PATH="/home/alexvanaxe/.config/wallfinder"
 
-
+""" Helo this is a coment """
 def find_mode(id, modes):
    for mode in modes:
        if id == mode.id:
@@ -63,17 +63,28 @@ def get_display_info():
         modes = set()
 
         kind=""
+        ratio_w=""
+        ratio_h=""
         if crtc.width >= 2560:
             kind="ultra"
         else:
             kind="normal"
+
+        if kind == "normal":
+            ratio_w="16"
+            ratio_h="9"
+        else:
+            ratio_w="21"
+            ratio_h="9"
 
         result[params.name] = {
             'name': params.name,
             'kind': kind,
             'resolution': "{}x{}".format(crtc.width, crtc.height),
             'width': crtc.width,
-            'height': crtc.height
+            'height': crtc.height,
+            'ratio_w': ratio_w,
+            'ratio_h': ratio_h
         }
 
     return result
@@ -189,7 +200,10 @@ class Alpha():
 class WallHaven():
     WALLHAVEN_URL="https://wallhaven.cc/api/v1/search"
     def get_wallpaper(self, monitor, scene, theme):
-        resolution = _get_monitor_res(monitor)
+        monitor_info = _get_monitor_info(monitor)
+
+        resolution="{}x{}".format(monitor_info['ratio_w'],
+                                  monitor_info['ratio_h'])
 
         url = self.retrieve_url_wallapaper(resolution, scene)
         filename = self.getFileName(url)
@@ -211,7 +225,7 @@ class WallHaven():
     def retrieve_url_wallapaper(self, resolution, search):
         query="?"
         if resolution:
-            query += "sorting=random&resolutions={}".format(resolution)
+            query += "sorting=random&ratio={}".format(resolution)
         else:
             query += "sorting=random"
 
@@ -276,23 +290,7 @@ def get_engine(monitor, scene, engine):
         if engine == "h":
             return WallHaven()
 
-    else:
-        if monitor and scene:
-            engine = random.randint(0, 1)
-            if engine == 0:
-                return WallHaven()
-            if engine == 1:
-                return Alpha()
-
-        if monitor and not scene:
-            return WallHaven()
-
-
-    engine = random.randint(0, 1)
-    if engine == 0:
-        return WallHaven()
-    if engine == 1:
-        return Alpha()
+    return WallHaven()
 
     
 
@@ -307,6 +305,10 @@ def _main():
     # wallservice = WallHaven()
     wallservice = get_engine(monitor, scene, engine)
     downloaded = wallservice.get_wallpaper(monitor, scene, theme)
+
+    if  not downloaded and not engine:
+        wallservice = get_engine(monitor, scene, 'h')
+        downloaded = wallservice.get_wallpaper(monitor, scene, theme)
 
     print(downloaded)
         
