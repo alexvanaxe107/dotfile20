@@ -4,52 +4,46 @@ import requests
 import argparse
 import re
 import pathlib
+import random
+import math
 from tabulate import tabulate
 
 from Xlib import X, display
 from Xlib.ext import randr
 
 CONFIG_PATH="/home/alexvanaxe/.config/wallfinder"
-WALLHAVEN_URL="https://wallhaven.cc/api/v1/search"
 
-def get_wallpapers(resolution, search):
-    query="?"
-    query += "sorting=random&resolutions={}".format(resolution)
-
-    if search:
-        query += "&q={}".format(search)
-
-    wallpapers = requests.get(WALLHAVEN_URL+query)
-
-    if wallpapers.status_code != 200:
-        print("Error! Error!")
-    
-    url = ''
-    try:
-        url = wallpapers.json()['data'][0]['path']
-    except IndexError:
-        query="?"
-        query += "sorting=random"
-        if search:
-            query += "&q={}".format(search)
-            wallpapers = requests.get(WALLHAVEN_URL+query)
-            url = wallpapers.json()['data'][0]['path']
-
-
-    return url
-
-def download(url, dirname, filename):
-    url_int = url
-    r = requests.get(url_int, allow_redirects=True)
-    savename="{}/{}/{}".format(CONFIG_PATH, dirname, filename)
-    pathlib.Path("{}/{}".format(CONFIG_PATH, dirname)).mkdir(parents=True, exist_ok=True)
-    open(savename, 'wb').write(r.content)
-    return savename
 
 def find_mode(id, modes):
    for mode in modes:
        if id == mode.id:
            return "{}x{}".format(mode.width, mode.height)
+
+def _get_monitor_res(monitor):
+    monitors = get_display_info()
+    if monitor:
+        monitor_plugged = monitors[monitor]
+    else:
+        if len(monitors) == 1:
+            monitor_plugged = list(monitors.values())[0]
+        else:
+            return ""
+
+    resolution=monitor_plugged['resolution']
+
+    return resolution
+
+def _get_monitor_info(monitor):
+    monitors = get_display_info()
+    if monitor:
+        monitor_plugged = monitors[monitor]
+    else:
+        if len(monitors) == 1:
+            monitor_plugged = list(monitors.values())[0]
+        else:
+            raise BaseException("Multiple monitors connected. Please inform monitor with -m")
+
+    return monitor_plugged
 
 def get_display_info():
     d = display.Display(':0')
@@ -78,9 +72,184 @@ def get_display_info():
             'name': params.name,
             'kind': kind,
             'resolution': "{}x{}".format(crtc.width, crtc.height),
+            'width': crtc.width,
+            'height': crtc.height
         }
 
     return result
+
+class Alpha():
+    ALPHA_URL="https://wall.alphacoders.com/api2.0/get.php"
+    ALPHA_KEY="e33fa5bbf58d48763cee4c57258e0749"
+
+    def get_wallpaper(self, monitor, scene, theme):
+        downloaded = ""
+
+        if monitor and scene:
+            monitor_info = _get_monitor_info(monitor)
+
+            url = self.get_wallpapers_alpha_search(monitor_info, scene)
+
+            path = ""
+            if theme:
+                path = "{}/{}/{}".format("alpha","{}x{}".format(monitor_info['width'],
+                                                         monitor_info['height'],
+                                                         theme))
+            else:
+                path = "{}/{}".format("alpha", "{}x{}".format(monitor_info['width'],
+                                                         monitor_info['height']))
+
+            filename = self.getFileName(url)
+            downloaded = self.download(url, path, filename)
+            return downloaded
+
+
+        url = self.get_wallpapers_alpha_random()
+        filename = self.getFileName(url)
+
+        path = ""
+        if theme:
+            path = "{}/{}".format("alpha", theme)
+        else:
+            path = "{}".format("alpha")
+
+        downloaded = self.download(url, path, filename)
+        return downloaded
+
+    def get_wallpapers_alpha_search(self, monitor_info, scene):
+        search="search"
+        url="{}?auth={}&method={}&term={}&width={}&height={}&info_level=1".format(
+            self.ALPHA_URL,
+            self.ALPHA_KEY,
+            search,
+            scene,
+            monitor_info['width'],
+            monitor_info['height'])
+
+        wallpapers = requests.get(url)
+        json = wallpapers.json()
+        
+        indexes = self.get_random_from_return(json)
+        if not indexes:
+            return ""
+
+        url="{}?auth={}&method={}&term={}&width={}&height={}&page={}&info_level=1".format(
+            self.ALPHA_URL,
+            self.ALPHA_KEY,
+            search,
+            scene,
+            monitor_info['width'],
+            monitor_info['height'],
+            indexes['page'])
+
+        wallpapers = requests.get(url)
+        json = wallpapers.json()
+
+        return json['wallpapers'][indexes['index_in_page']]['url_image']
+
+
+    def get_random_from_return(self, json):
+        total_match = json['total_match']
+        if int(total_match) == 0:
+            return None
+
+        index = random.randint(0, int(total_match) - 1)
+        page = math.ceil(index/30)
+        index_in_page = index % 30
+
+        result = {}
+        result['index'] = index
+        result['index_in_page'] = index_in_page
+        result['page'] = page
+
+        return result
+
+
+    def get_wallpapers_alpha_random(self):
+        search="random"
+        url="{}?auth={}&method={}&info_level=1".format(self.ALPHA_URL, self.ALPHA_KEY, search)
+        wallpapers = requests.get(url)
+        json = wallpapers.json()
+        return json['wallpapers'][0]['url_image']
+
+    def download(self, url, dirname, filename):
+        url_int = url
+        if not url:
+            return ""
+        r = requests.get(url_int, allow_redirects=True)
+        savename="{}/{}/{}".format(CONFIG_PATH, dirname, filename)
+        pathlib.Path("{}/{}".format(CONFIG_PATH, dirname)).mkdir(parents=True, exist_ok=True)
+        open(savename, 'wb').write(r.content)
+        return savename
+    
+    def getFileName(self, url):
+        filename = pathlib.PurePath(url)
+        return filename.name
+
+class WallHaven():
+    WALLHAVEN_URL="https://wallhaven.cc/api/v1/search"
+    def get_wallpaper(self, monitor, scene, theme):
+        resolution = _get_monitor_res(monitor)
+
+        url = self.retrieve_url_wallapaper(resolution, scene)
+        filename = self.getFileName(url)
+
+        path = ""
+        if theme:
+            path = "{}/{}".format(theme, resolution)
+        else:
+            path = "{}".format(resolution)
+
+        if (url):
+            downloaded = self.download(url, path, filename)
+        else:
+            downloaded = ""
+        
+        return downloaded
+        
+
+    def retrieve_url_wallapaper(self, resolution, search):
+        query="?"
+        if resolution:
+            query += "sorting=random&resolutions={}".format(resolution)
+        else:
+            query += "sorting=random"
+
+        if search:
+            query += "&q={}".format(search)
+
+        wallpapers = requests.get(self.WALLHAVEN_URL+query)
+
+        if wallpapers.status_code != 200:
+            print("Error! Error!")
+        
+        url = ''
+        try:
+            url = wallpapers.json()['data'][0]['path']
+        except IndexError:
+            query="?"
+            query += "sorting=random"
+            if search:
+                query += "&q={}".format(search)
+                wallpapers = requests.get(self.WALLHAVEN_URL+query)
+                try:
+                    url = wallpapers.json()['data'][0]['path']
+                except(IndexError):
+                    return ""
+
+        return url
+
+    def download(self, url, dirname, filename):
+        url_int = url
+        r = requests.get(url_int, allow_redirects=True)
+        savename="{}/{}/{}/{}".format(CONFIG_PATH, "haven", dirname, filename)
+        pathlib.Path("{}/{}/{}".format(CONFIG_PATH, "haven", dirname)).mkdir(parents=True, exist_ok=True)
+        open(savename, 'wb').write(r.content)
+        return savename
+
+    def getFileName(self, url):
+        filename = pathlib.PurePath(url)
+        return filename.name
 
 def _parse_arguments():
     import argparse
@@ -94,17 +263,38 @@ def _parse_arguments():
                         help='What monitor to download')
     parser.add_argument('-s', '--scene', type=str,
                         help='What is the scene')
+    parser.add_argument('-e', '--engine', type=str,
+                        help='Use a for alpha, h for haven')
 
     options = parser.parse_args()
     return options
 
-def _get_monitor_res(monitor):
-    monitors = get_display_info()
-    monitor = monitors[monitor]
-    resolution=monitor['resolution']
+def get_engine(monitor, scene, engine):
+    if engine:
+        if engine == "a":
+            return Alpha()
+        if engine == "h":
+            return WallHaven()
 
-    return resolution
+    else:
+        if monitor and scene:
+            engine = random.randint(0, 1)
+            if engine == 0:
+                return WallHaven()
+            if engine == 1:
+                return Alpha()
 
+        if monitor and not scene:
+            return WallHaven()
+
+
+    engine = random.randint(0, 1)
+    if engine == 0:
+        return WallHaven()
+    if engine == 1:
+        return Alpha()
+
+    
 
 def _main():
     options = _parse_arguments()
@@ -112,23 +302,11 @@ def _main():
     theme = options.theme
     monitor = options.monitor
     scene = options.scene
+    engine = options.engine
 
-    if monitor:
-        resolution = _get_monitor_res(monitor)
-
-    url = get_wallpapers(resolution, scene)
-    filename = re.findall("/(wall.*)", url)
-    path = ""
-    if theme:
-        path = "{}/{}".format(theme, resolution)
-    else:
-        path = "{}".format(resolution)
-
-    
-    if (url):
-        downloaded = download(url, path, filename[0])
-    else:
-        downloaded = ""
+    # wallservice = WallHaven()
+    wallservice = get_engine(monitor, scene, engine)
+    downloaded = wallservice.get_wallpaper(monitor, scene, theme)
 
     print(downloaded)
         
