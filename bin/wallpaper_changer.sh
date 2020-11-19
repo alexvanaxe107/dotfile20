@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/dash
 
 set -o errexit
 # Source the theme
@@ -7,7 +7,7 @@ set -o errexit
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
-WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nNight city\nCity Landscape\nscience fiction\nminimalism\nSpace"
+WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nNight city\nCity Landscape\nscience fiction\nminimalism\nSpace\nWasteland\nApocalypse"
 
 show_options(){
     option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)
@@ -37,7 +37,7 @@ download(){
         #option=$(show_options)
         #echo "$option"
     else
-        scene=$(printf "${WALLPAPER_SCENES}" | dmenu -l 20 -p "Choose the scene:")
+        scene=$(printf "${WALLPAPER_SCENES}" | dmenu -i -l 20 -p "Choose the scene:")
         if [ -z "${scene}" ];then
             exit 0
         fi
@@ -46,7 +46,7 @@ download(){
             scene=""
         fi
 
-        if [ "$monitor" == "All" ]; then
+        if [ "$monitor" = "All" ]; then
             notify-send -u normal "Downloading wallpaper to all monitors"
             for monitor_all in $(monitors_info.sh -m); do
                 path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
@@ -87,9 +87,10 @@ save_wallpaper(){
     count=0
     option=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
 
+    theme=$(printf "day\nnight\nshabbat" | dmenu -i -p "What theme you want this to go?")
+
     if [ "$option" = "All" ]; then
         for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do
-            theme="$theme_name"
             is_wide=$(monitors_info.sh -iw ${count})
             count=$(($count + 1))
 
@@ -98,11 +99,8 @@ save_wallpaper(){
             else
                 dest="${WALLPAPER_ROOT}/${theme}/"
             fi
-            
-            #cp "${wallpaper}" "${dest}"
         done
     else
-        theme="$theme_name"
         is_wide=$(monitors_info.sh -w ${option})
         
         if [ "${is_wide}" = "yes" ]; then
@@ -117,7 +115,10 @@ save_wallpaper(){
         wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
 
         cp "${wall}" "${dest}"
+        notify-send -u normal "Saved" "Wallpaper ${wall} saved to ${theme}."
     fi
+    option=$(show_options)
+    echo $option
 }
 
 
