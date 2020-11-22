@@ -42,17 +42,17 @@ wlan = #000009
 temp = #000010
 
 [format]
-padding=1
+padding=2
 padding_border=3
 bspadding=2
 
 [bar/default]
 monitor = ${env:MONITOR1}
-width = 100%
+width = 98%
 height = 17
-;offset-x = 0%
+offset-x = 1%
 ;offset-y = 1%
-radius = 0.0
+radius = 6.0
 fixed-center = true
 
 bottom = false

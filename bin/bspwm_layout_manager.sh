@@ -4,7 +4,7 @@ LAYOUT=$1
 
 if [ -z ${LAYOUT} ]
 then
-    LAYOUT=$(printf "tiled\nmonocle\neven\ntall\nwide\npseudo\nrpseudo\nremove" | dmenu -p "What layout you want?")
+    LAYOUT=$(printf "tiled\nmonocle\neven\ntall\nwide\npseudo\nremove" | dmenu -p "What layout you want?")
 fi
 
 LAYOUTS_DIR=$HOME/.config/tmp/layouts
@@ -49,22 +49,16 @@ set_wide() {
 }
 
 set_pseudo() {
-    bspc rule -a \* state=pseudo_tiled rectangle=1850x1040+0+0
-}
-
-remove_pseudo() {
-    bspc rule -a \* state=tiled rectangle=1850x1040+0+0
-    bspc rule -a Gimp state=floating follow=on
-    bspc rule -a Surf state=tiled
-    bspc rule -a ffplay state=floating
-    bspc rule -a Gpick state=floating
-    bspc rule -a qutebrowser desktop=^2
-    bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0
+    bspc rule -a Alacritty state=pseudo_tiled rectangle=1850x1040+0+0
+    bspc rule -a qutebrowser state=pseudo_tiled rectangle=1850x1040+0+0
 }
 
 remove_layout() {
     bsp-layout remove
     bspc desktop --layout tiled
+
+    bspc rule -a Alacritty state=tiled
+    bspc rule -a qutebrowser state=tiled desktop=^2
 
     desktop=$(bspc query --desktops -d)
     rm ${LAYOUTS_DIR}/${desktop}

@@ -1,5 +1,24 @@
 #! /bin/dash
 
+show_help() {
+    echo "Manipulates the notes of the bspwm" echo ""
+    echo "-b             Bring the program to the current desktop"
+    echo "-m             Mark the current node"
+}
+
+mark_node() {
+    . $HOME/.config/bspwm/themes/bsp.cfg
+    is_marked=$(bspc query -N -n focused.marked)
+
+    bspc node focused -g marked
+
+    if [ -z "${is_marked}" ]; then
+        bspc config -n focused border_width 5
+    else
+        bspc config -n focused border_width 1
+    fi
+}
+
 retrieve_index() {
 	selected=$(wmctrl -l | awk '{$1=$2=$3="";print NR $0}' | dmenu -l 10)
 	index=$(echo $selected | awk '{print $1}')
@@ -13,22 +32,28 @@ retrieve_program() {
 }
 
 focus_program() {
-	node=$1
-	bspc node $1 --focus
+    indice=$(retrieve_index)
+    code=$(retrieve_program $indice)
+	bspc node ${code} --focus
 }
 
 bring_program() {
-	node=$1
-	bspc node $1 --to-desktop focused
+    indice=$(retrieve_index)
+    code=$(retrieve_program $indice)
+	bspc node ${code} --to-desktop focused
 }
 
 action=$1
 
-indice=$(retrieve_index)
-code=$(retrieve_program $indice)
+if [ -z ${action} ]; then
+    focus_program
+fi
 
-case "${action}" in
-	"-b") bring_program ${code};;
-	*) focus_program ${code};;
-esac
 
+while getopts "h?bm" opt; do
+    case "${opt}" in
+        h|\?) show_help ;;
+        b) bring_program;;
+        m) mark_node;;
+    esac
+done

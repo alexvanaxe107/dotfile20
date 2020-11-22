@@ -23,12 +23,11 @@ bspc config pointer_follows_monitor true
 
 # App rules
 bspc rule -a Gimp state=floating follow=on
-bspc rule -a Surf state=tiled
 bspc rule -a ffplay state=floating
 bspc rule -a Gpick state=floating
 bspc rule -a qutebrowser desktop=^2
-#bspc rule -a mpv desktop=\^5
 bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0
+#bspc rule -a mpv desktop=\^5
 #bspc rule -a Alacritty:vis desktop=^5 state=tiled
 #bspc rule -a Alacritty:weechat desktop=^7 state=tiled
 #bspc rule -a Gnome-calculator state=floating follow=on

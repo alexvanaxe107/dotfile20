@@ -41,10 +41,6 @@ super + shift + i
 super + shift + p
 	$HOME/bin/pomodoro-client.sh
 
-# Mount a partition
-super + shift + m
-	$HOME/bin/dmenumount
-
 #Todos
 super + shift + t
 	$HOME/bin/dtodosh.sh
@@ -53,7 +49,7 @@ super + shift + t
 super + shift + y
 	$HOME/bin/theme_select.sh
 
-# Change theme
+# Change font
 super + shift + f
 	$HOME/bin/font_select.sh
 
@@ -65,7 +61,7 @@ super + shift + e
 super + shift + b
 	$HOME/bin/toggle_bars.sh
 
-# balance squalize
+# balance equalize
 super + b
 	bspc node @/ --balance
 
@@ -96,13 +92,11 @@ super + shift + u
 super + shift + c
 	$HOME/.config/conky/conky.sh
 
-alt + Tab
+super + shift + Tab
 	$HOME/bin/bspc_node_manager.sh
 
-ctrl + Tab
+super + ctrl + Tab
 	$HOME/bin/bspc_node_manager.sh -b
-
-# Chords
 
 # Toggle the top bar
 super + ctrl + b; {s,f,t}
@@ -111,11 +105,8 @@ super + ctrl + b; {s,f,t}
 super + shift + g ; {1,2,8,i,f,c,r,s,p,v,5,6,shift + 5}
 	{alacritty --command ranger,alacritty --command transmission-remote-cli,alacritty --class=weechat --command weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,qutebrowser,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*,alacritty --class=vis --command vis,screeneaudio.sh play,camera.sh,screeneaudio.sh stop}
 
-super + shift + g ; {d,n}
-	{sxiv $HOME/Documents/Pictures/Wallpapers/day/*,sxiv $HOME/Documents/Pictures/Wallpapers/night/*}
-
 # Change wallpapers
-super + w;
+super + w
 	$HOME/bin/wallpaper_changer.sh
 
 
@@ -124,8 +115,13 @@ super + w;
 ###################
 
 # quit/restart bspwm
-super + r
-	$HOME/bin/bspwmexit.sh -r "Restart?"
+#super + r
+#	$HOME/bin/bspwmexit.sh -r "Restart?"
+
+super + r : {h,j,k,l}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
 # Make layout
 super + g
@@ -135,8 +131,8 @@ super + g
 super + e
 	$HOME/bin/bspwmexit.sh -e "Exit?"
 
-super + p
-	bspc node focused --swap biggest.local
+#super + p
+#	bspc node focused --swap biggest.local
 
 # close and kill
 super + {_,shift + }q
@@ -162,10 +158,6 @@ super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 super + alt + {F}{1,2,3,4,5,6,7,8,9,10}
 	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
 
-# Swich monitors
-super + F12
-	bspc monitor --focus next
-
 # Send node to the other monitor
 super + t
 	bspc node focused --to-monitor next
@@ -178,20 +170,15 @@ super + ctrl + t
 super + control + {1-9,0}
 	bspc node -d  'focused:^{1-9,10}' --follow
 
-
 # Cycle through nodes
 super + control + {j,k}
 	bspc node -f {next.local,prev.local}
 
 # focus the node in the given direction
-super + control + u
-	bspc node -s last
-
-# focus the node in the given direction
 super + shift + {h,j,k,l}
 	bspc node -s {west,south,north,east}
 
-# Send desktop backwards
+# Send desktop forward, backwards
 super + shift + {comma,period}
 	bspc desktop --bubble {prev,next}
 
@@ -199,16 +186,27 @@ super + shift + {comma,period}
 super + {comma,period}
 	bspc monitor --focus {prev,next}
 
+# Insert receptacle
+super + i
+	bspc node -i
+
+# Remove receptacle
+super + ctrl + i
+	for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
+
+super + alt + i
+	bspc node `bspc query -N -n .marked` -n `bspc query -N -n .leaf.!window`
+
 #
 # state/flags
 #
 
-super + shift + w: {t,p,s,f}
+super + shift + w ; {t,p,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 
 # alternate between the tiled and monocle layout
-super + shift + w: m
+super + shift + w ; m
 	bspc desktop -l next
 
 # set ignore ewmh to fullscreen to container
@@ -219,17 +217,19 @@ super + ctrl + shift + f
 	bspc config ignore_ewmh_fullscreen none
 
 # set the node flags
-super + {m,x,s}
-	bspc node -g {marked,locked,sticky}
+super + {x,s}
+	bspc node -g {locked,sticky}
+
+super + m
+	$HOME/bin/bspc_node_manager.sh -m
 
 # focus the node in the given direction
 super + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
-# focus the node in the given direction
+# move the node in the given direction
 super + shift + control + {h,j,k,l}
 	bspc node --to-node {west,south,north,east}
-
 
 #
 # preselect
@@ -254,10 +254,6 @@ super + control + {Left,Down,Up,Right}
 # contract a window by moving one of its side inward
 super + control + shift + {Left,Down,Up,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-# move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Increase/decrease window gap on focused desktop
 super + bracket{left,right}
