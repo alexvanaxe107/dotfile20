@@ -103,6 +103,10 @@ scroll-down = bspwm-deskprev
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[format]
+padding = 2
+bspadding = 1
+
 [module/pomodoro]
 type = custom/script
 interval = 3
@@ -110,7 +114,7 @@ exec = /home/alexvanaxe/bin/pomodoro
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-pomodoro}
 format-prefix-foreground = ${colors.foreground-pomodoro}
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/ava_load]
 type = custom/script
@@ -121,13 +125,13 @@ format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-load}
 
 format-prefix = " "
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/indicators]
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/indicators.sh
-format-padding = 3
+format-padding = ${format.padding}
 format-background = ${colors.foreground-temp}
 format-foreground = ${colors.foreground-alt2}
 
@@ -137,13 +141,13 @@ interval = 10
 exec = /home/alexvanaxe/bin/torrent
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-torrent}
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/desktop]
 type = custom/script
 interval = 1
 exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
-format-padding = 3
+format-padding = ${format.padding}
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-cpu}
 
@@ -151,7 +155,7 @@ format-background = ${colors.foreground-cpu}
 type = custom/script
 interval = 3
 exec = cat ~/.dwm/recording
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/nweather]
 type = custom/script
@@ -159,12 +163,12 @@ interval = 1200
 exec = weather.sh
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-weather}
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -202,24 +206,24 @@ type = internal/bspwm
 label-focused = %icon%
 label-focused-foreground = ${colors.foreground-alt2}
 label-focused-background = ${colors.foreground-cpu}
-label-focused-padding = 2
+label-focused-padding = ${format.bspadding}
 
 label-dimmed-focused-background = ${colors.foreground-pomodoro}
 
 #label-occupied = %index%
 label-occupied = %index%%icon%
-label-occupied-padding = 2
+label-occupied-padding = ${format.bspadding}
 label-occupied-foreground = ${colors.foreground-alt2}
 label-occupied-background = ${colors.foreground-load}
 
 #label-urgent = %index%!
 label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = ${format.bspadding}
 
 #label-empty = %index%
 label-empty = %index%%icon%
-label-empty-padding = 2
+label-empty-padding = ${format.bspadding}
 label-empty-foreground = ${colors.foreground-alt2}
 label-empty-background = ${colors.background}
 
@@ -292,7 +296,7 @@ interval = 1
 format-prefix = "SPOTIFY: "
 format = <label>
 exec = python /home/alexvanaxe/.config/polybar/plugins/polybar-spotify/spotify_status.py -f '{play_pause} {song} - {artist}'
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/mpd]
 type = internal/mpd
@@ -306,7 +310,7 @@ icon-next = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -324,13 +328,13 @@ bar-fill-foreground = #9f78e1
 bar-empty = ─
 bar-empty-font = 4
 bar-empty-foreground = ${colors.foreground-alt}
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
-format-padding = 3
+format-padding = ${format.padding}
 
 [module/cpu]
 type = internal/cpu
@@ -338,7 +342,7 @@ interval = 2
 format-prefix = " " 
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-cpu}
-format-padding = 3
+format-padding = ${format.padding}
 label = %percentage:02%%
 
 [module/memory]
@@ -347,7 +351,7 @@ interval = 2
 format-prefix = " "
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-memory}
-format-padding = 3
+format-padding = ${format.padding}
 label = %percentage_used%%
 
 [module/wlan]
@@ -369,7 +373,7 @@ format-disconnected-prefix = 
 
 format-connected-foreground = ${colors.foreground-alt2}
 format-connected-background = ${colors.foreground-sound}
-format-connected-padding = 3
+format-connected-padding = ${format.padding}
 
 ramp-signal-0 = 𝋡
 ramp-signal-1 = 𝋢
@@ -408,7 +412,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 
-format-padding = 3
+format-padding = ${format.padding}
 
 label = %date% %time%
 
@@ -419,12 +423,12 @@ format-volume = <label-volume>
 label-volume =  %percentage%%
 label-volume-foreground = ${colors.foreground-alt2}
 label-volume-background = ${colors.foreground-sound}
-label-volume-padding = 3
+label-volume-padding = ${format.padding}
 
 label-muted = 🔇 %percentage%%
 label-muted-foreground = ${colors.foreground-alt2}
 label-muted-background = ${colors.foreground-sound}
-label-muted-padding = 3
+label-muted-padding = ${format.padding}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -509,7 +513,7 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 90
 
-format-padding = 3
+format-padding = ${format.padding}
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
@@ -519,13 +523,13 @@ format-foreground = ${colors.foreground-alt2}
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.foreground-alt2}
-format-warn-padding = 3
+format-warn-padding = ${format.padding}
 
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 label-ramp-foreground = ${colors.foreground-alt2}
-format-ramp-padding = 3
+format-ramp-padding = ${format.padding}
 
 [module/powermenu]
 type = custom/menu

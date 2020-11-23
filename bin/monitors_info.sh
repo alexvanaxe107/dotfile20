@@ -9,13 +9,13 @@ id_only=0
 
 show_help() {
     echo "Get monitor information." echo ""
-    echo "-m             Get a list with the monitors name (primary first)"
-    echo "-p             Show the primary monitor name"
-    echo "-i             Show the selected monitor id (ip)"
-    echo "-n {id}        Get name by id"
-    echo "-in {name}     Get name by id"
-    echo "-w {id}        The monitor is wide?"
-    echo "-q             How many monitors are plugged?"
+    echo "-m                             Get a list with the monitors name (primary first)"
+    echo "-p                             Show the primary monitor name"
+    echo "-i                             Show the selected monitor id (ip)"
+    echo "-n {id}                        Get name by id"
+    echo "-in {name}                     Get name by id"
+    echo "-w {[id, name, nothing}        The monitor is wide? If id is blank check any wide"
+    echo "-q                             How many monitors are plugged?"
 }
 
 print_primary_information() {
@@ -44,31 +44,46 @@ monitors_information() {
 }
 
 is_wide(){
-    if [ ${id_only} -eq 0 ]; then
-        wide=$(xrandr --listmonitors | grep -i $1 | awk 'NR==1{print $3}' | cut -d "/" -f 1)
-
-        if [ -z "${wide}" ]; then
-            echo ""
-        else
-            if [ ${wide} -gt 2559 ]; then
-                echo "yes"
+    monitor=$1
+    if [ -z ${monitor} ]; then
+        for n in $(monitors_information); do
+            wide=$(xrandr --listmonitors | grep -i ${n} | awk 'NR==1{print $3}' | cut -d "/" -f 1)
+            if [ -z "${wide}" ]; then
+                echo ""
             else
-                echo "no"
+                if [ "${wide}" -gt 2559 ]; then
+                    echo "yes"
+                    break
+                fi
             fi
-        fi
-
+        done
     else
-        wide=$(xrandr --listmonitors | grep $1: | awk '{print $3}' | cut -d "/" -f 1)
-        if [ -z ${wide} ]; then
-            echo ""
-        else
-            if [ ${wide} -gt 2559 ]; then
-                echo "yes"
-            else
-                echo "no"
-            fi
-        fi
+        if [ ${id_only} -eq 0 ]; then
+            wide=$(xrandr --listmonitors | grep -i ${monitor} | awk 'NR==1{print $3}' | cut -d "/" -f 1)
 
+            if [ -z "${wide}" ]; then
+                echo ""
+            else
+                if [ ${wide} -gt 2559 ]; then
+                    echo "yes"
+                else
+                    echo "no"
+                fi
+            fi
+
+        else
+            wide=$(xrandr --listmonitors | grep ${monitor}: | awk '{print $3}' | cut -d "/" -f 1)
+            if [ -z "${wide}" ]; then
+                echo ""
+            else
+                if [ "${wide}" -gt 2559 ]; then
+                    echo "yes"
+                else
+                    echo "no"
+                fi
+            fi
+
+        fi
     fi
 }
 

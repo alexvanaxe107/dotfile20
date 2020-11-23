@@ -42,9 +42,9 @@ wlan = #000009
 temp = #000010
 
 [format]
-padding=2
-padding_border=3
-bspadding=2
+padding=1
+padding_border=1
+bspadding=1
 
 [bar/default]
 monitor = ${env:MONITOR1}
@@ -72,8 +72,8 @@ border-color = ${colors.desktop}
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 1
+module-margin-left = 0
+module-margin-right = 0
 
 font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Kingthings Trypewriter 2:style=Bold:pixelsize=9
@@ -82,9 +82,9 @@ font-3 = symbola:style=Bold:pixelsize=9;1
 
 separator = ✡
 
-modules-left = desktop bspwm pulseaudio
+modules-left = bspwm pulseaudio
 modules-center = pomodoro nweather torrent
-modules-right = ava_load recording memory cpu temperature wlan date indicators
+modules-right = ava_load recording memory cpu temperature date indicators
 
 ;tray-position = right
 ;tray-padding = 2

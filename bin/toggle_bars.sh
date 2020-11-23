@@ -11,19 +11,13 @@ fi
 TARGET=$1
 
 toggle_tint(){
-    if [ "${MONITOR1}" = "HDMI1" ]; then
-        pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
-        if [ ! -z "$pid" ]; then
-            bspc config -m $MONITOR1 right_padding 0
-            kill $pid
-        else
-            bspc config -m $MONITOR1 right_padding 203
-            tint2 >> /tmp/tint2.log 2>&1 &
-        fi
+    pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
+    if [ ! -z "$pid" ]; then
+        bspc config -m $MONITOR1 right_padding 0
+        kill $pid
     else
-            bspc config -m $MONITOR1 right_padding 0
-            pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
-            kill $pid
+        bspc config -m $MONITOR1 right_padding 203
+        tint2 >> /tmp/tint2.log 2>&1 &
     fi
 }
 

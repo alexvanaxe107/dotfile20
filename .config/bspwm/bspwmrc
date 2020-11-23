@@ -37,7 +37,12 @@ bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0
 #bspc rule -a Screenkey manage=off
 
 theme_select.sh -t light
+pid=$(ps aux | egrep "[c]lipster" | awk '{print $2}')
 
-if [ $(monitors_info.sh -q) -ge 1 ]; then
+if [ -z ${pid} ]; then
+    clipster -d
+fi
+
+if [ $(monitors_info.sh -q) -ge 2 ]; then
     configdisplay.sh
 fi

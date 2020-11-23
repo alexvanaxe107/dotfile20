@@ -9,6 +9,8 @@ WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
 WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nCity Night\nCity Landscape\nScience Fiction\nMinimalism\nSpace\nWar\nApocalypse"
 
+MONITOR_NUMBER=$(monitors_info.sh -q)
+
 show_options(){
     option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)
     echo $option
@@ -30,7 +32,12 @@ change_all(){
 
 download(){
     count=0
-    monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
+
+    if [ ${MONITOR_NUMBER} -ge 2 ]; then
+        monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
+    else
+        monitor=$(monitors_info.sh -p)
+    fi
 
     if [ -z "$monitor" ]; then
         exit 0
@@ -102,7 +109,7 @@ save_wallpaper(){
         done
     else
         is_wide=$(monitors_info.sh -w ${option})
-        
+
         if [ "${is_wide}" = "yes" ]; then
             dest="${WALLPAPER_ROOT}/ultra/${theme}/"
         else
@@ -111,7 +118,7 @@ save_wallpaper(){
 
         index=$(monitors_info.sh -in ${option})
         index=$(($index + 1))
-        
+
         wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
 
         cp "${wall}" "${dest}"
