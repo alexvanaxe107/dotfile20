@@ -80,7 +80,7 @@ case $CHOSEN in
     "Old Terminal") font "VT323" Regular 12 12 17 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
     "clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
-    "Modern") font "CQ Mono" Bold 12 12 15 2;;
+    "Modern") font "CQ Mono" Bold 12 12 15 1;;
     "Futuristic") font "Larabiefont Rg" Normal 10 10 12 2;;
     "Elegant") font "Unica One" Regular 9 10 12 1;;
     "Elegant2") font "NovaMono" Normal 10 10 14 1;;
