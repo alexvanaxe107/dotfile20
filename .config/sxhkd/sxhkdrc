@@ -144,7 +144,7 @@ super + Delete
 
 # Create a desktop
 super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
-	bspc monitor focused --add-desktops '{terminal,web,coding,trade,game,stocks,video,twitter,chat,audio}'
+	bspc monitor focused --add-desktops '{terminal,web,coding,trade,game,book,video,twitter,chat,audio}'
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -195,7 +195,7 @@ super + ctrl + i
 	for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
 super + alt + i
-	bspc node `bspc query -N -n .marked` -n `bspc query -N -n .leaf.!window`
+	bspc node `bspc query -N -n .marked | head -n 1` -n `bspc query -N -n .leaf.!window`
 
 #
 # state/flags

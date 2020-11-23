@@ -77,7 +77,7 @@ font() {
 case $CHOSEN in
     "Day Original") font "Erica Type" Bold 9 10 12 0;;
     "Night Original") font "Iceland" Regular 12 12 15 0;;
-    "Old Terminal") font "VT323" Regular 12 12 15 1;;
+    "Old Terminal") font "VT323" Regular 12 12 17 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
     "clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
     "Modern") font "CQ Mono" Bold 12 12 15 2;;

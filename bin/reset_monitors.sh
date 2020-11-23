@@ -2,8 +2,8 @@
 
 monitors=$(monitors_info.sh -q)
 
-MONITOR1="terminal web coding trade"
-MONITOR2="chat audio video twitter"
+MONITOR1="terminal web coding book"
+MONITOR2="chat audio video trade"
 
 MONITOR="$MONITOR1 $MONITOR2"
 

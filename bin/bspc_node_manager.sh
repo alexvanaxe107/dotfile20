@@ -8,11 +8,11 @@ show_help() {
 
 mark_node() {
     . $HOME/.config/bspwm/themes/bsp.cfg
-    is_marked=$(bspc query -N -n focused.marked)
 
     bspc node focused -g marked
+    is_marked=$(bspc query -N -n focused.marked)
 
-    if [ -z "${is_marked}" ]; then
+    if [ ! -z "${is_marked}" ]; then
         bspc config -n focused border_width 5
     else
         bspc config -n focused border_width 1

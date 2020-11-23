@@ -4,7 +4,7 @@ LAYOUT=$1
 
 if [ -z ${LAYOUT} ]
 then
-    LAYOUT=$(printf "tiled\nmonocle\neven\ntall\nwide\npseudo\nremove" | dmenu -p "What layout you want?")
+    LAYOUT=$(printf "tiled\nmonocle\ngrid\neven\ntall\nwide\npseudo\nremove" | dmenu -p "What layout you want?")
 fi
 
 LAYOUTS_DIR=$HOME/.config/tmp/layouts
@@ -38,6 +38,14 @@ set_tall() {
     bsp-layout set tall
     desktop=$(bspc query --desktops -d)
     echo "↕" > ${LAYOUTS_DIR}/${desktop}
+}
+
+set_grid() {
+    bsp-layout remove
+    bspc desktop --layout tiled
+    bsp-layout set rgrid
+    desktop=$(bspc query --desktops -d)
+    echo "" > ${LAYOUTS_DIR}/${desktop}
 }
 
 set_wide() {
@@ -88,6 +96,7 @@ case "$LAYOUT" in
     "monocle") set_monocle;;
     "even") set_even;;
     "tall") set_tall;;
+    "grid") set_grid;;
     "wide") set_wide;;
     "pseudo") set_pseudo;;
     "rpseudo") remove_pseudo;;
