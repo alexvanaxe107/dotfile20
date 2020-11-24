@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nDelirium\\nclear\\nSpace\\nNoir" | dmenu -i -l 30 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir" | dmenu -i -l 30 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -79,10 +79,11 @@ case $CHOSEN in
     "Night Original") font "Iceland" Regular 12 12 15 0;;
     "Old Terminal") font "VT323" Regular 12 12 17 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
-    "clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
-    "Modern") font "CQ Mono" Bold 12 12 15 1;;
+    "Clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
+    "Nature") font "CQ Mono" Bold 12 12 15 1;;
+    "Modern") font "Iosevka" "Bold Oblique" 10 10 13 1;;
     "Futuristic") font "Larabiefont Rg" Normal 10 10 12 2;;
-    "Elegant") font "Unica One" Regular 9 10 12 1;;
+    "Elegant") font "Unica One" Regular 10 10 12 1;;
     "Elegant2") font "NovaMono" Normal 10 10 14 1;;
     "Neon") font "Segment14" Regular 9 9 14 1;;
     "Rock") font "Targa MS" Regular 11 11 13 2;;
@@ -95,10 +96,10 @@ case $CHOSEN in
     "Pixel") font "Repetition Scrolling" Regular 9 10 13 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 11 11 13 1;;
-    "Stock") font "SVI Basic Manual" Bold 11 11 16 1;;
+    "Stock") font "Share Tech Mono" Bold 11 11 16 1;;
     "Wasteland") font "Beccaria" Bold 12 12 16 1;;
     "Cartoon") font "Pointfree" Bold 9 10 13 1;;
-    "Delirium") font "Plasmatic" Bold 10 10 13 1;;
+    "Cute") font "Overpass Mono" Bold 10 10 12 0;;
     "Space") font "Space Mono" Regular 9 10 12 3;;
     "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
