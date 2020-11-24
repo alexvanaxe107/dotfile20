@@ -57,7 +57,7 @@ download(){
             notify-send -u normal "Downloading wallpaper to all monitors"
             for monitor_all in $(monitors_info.sh -m); do
                 path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
-                nitrogen --head=${count} --save --set-scaled ${path}
+                nitrogen --head=${count} --save --set-zoom-fill ${path}
                 count=$(($count+1))
             done
         else

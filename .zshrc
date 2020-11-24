@@ -45,6 +45,7 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+zinit light "zpm-zsh/colors"
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
@@ -57,12 +58,18 @@ zinit light-mode for \
 #
 # Load the pure theme, with zsh-async library that's bundled with it.
 #zinit ice pick"async.zsh" src"pure.zsh"
-#zinit light sindresorhus/pure
-zinit light "denysdovhan/spaceship-prompt"
+zinit light sindresorhus/pure
+#zinit light "denysdovhan/spaceship-prompt"
 
 zinit light "zsh-users/zsh-syntax-highlighting"
 zinit light agkozak/zsh-z
+#Muda a cor do autosuggestion
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE
 zinit light "zsh-users/zsh-autosuggestions"
 zinit light "Aloxaf/fzf-tab"
+zinit light "IngoMeyer441/zsh-easy-motion"
 
 bindkey '^ ' autosuggest-accept
+bindkey '^o' autosuggest-toggle
+bindkey ^f forward-word
+bindkey -M vicmd ' ' vi-easy-motion

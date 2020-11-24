@@ -98,7 +98,7 @@ case $CHOSEN in
     "Book") font "Kingthings Trypewriter 2" Regular 11 11 13 1;;
     "Stock") font "Share Tech Mono" Bold 11 11 16 1;;
     "Wasteland") font "Beccaria" Bold 12 12 16 1;;
-    "Cartoon") font "Pointfree" Bold 9 10 13 1;;
+    "Cartoon") font "Pointfree" Bold 9 9 12 1;;
     "Cute") font "Overpass Mono" Bold 10 10 12 0;;
     "Space") font "Space Mono" Regular 9 10 12 3;;
     "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;

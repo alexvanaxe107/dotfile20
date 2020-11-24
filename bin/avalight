@@ -6,12 +6,29 @@ GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", 
 INDICATOR_PATH="$HOME/.config/indicators"
 INDICATOR_FILE="${INDICATOR_PATH}/light.ind"
 
+_get_soft_brigtness() {
+    SOFT=$(echo $1 | awk '{print $1}')
+
+    if [ "${SOFT}" = "s" ]; then
+        BT_RETURN=$(echo $1 | awk '{print $2}')
+    fi
+
+    echo "${BT_RETURN}"
+}
+
 eDP1() {
     killall clight
     echo "" > ${INDICATOR_FILE}
-	
+    
     BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
-    light -S ${BT}
+
+    SOFT=$(_get_soft_brigtness "$BT")
+
+    if [ ! -z "${SOFT}" ]; then
+        xrandr --output ${GS} --brightness ${SOFT}
+    else
+        light -S ${BT}
+    fi
     notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
@@ -20,19 +37,33 @@ HDMI1() {
     echo "" > ${INDICATOR_FILE}
 
     BT=`printf "10\n50\n100" | dmenu -f -p "Set the brightness"`
-    ddcutil setvcp 10 ${BT}
+
+    SOFT=$(_get_soft_brigtness "$BT")
+
+    if [ ! -z "${SOFT}" ]; then
+        xrandr --output ${GS} --brightness ${SOFT}
+    else
+        ddcutil setvcp 10 ${BT}
+    fi
     notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
 both() {
     if [ ! -z "$GS" ]; then
-	    killall clight
-	    echo "" > ${INDICATOR_FILE}
+        killall clight
+        echo "" > ${INDICATOR_FILE}
 
-	    light -S ${GS}
-	    ddcutil setvcp 10 ${GS}
+        SOFT=$(_get_soft_brigtness "$GS")
 
-	    notify-send -u low "Light" "Screen monitor set to $GS"
+        if [ ! -z "${SOFT}" ]; then
+            xrandr --output HDMI1 --brightness ${SOFT}
+            xrandr --output eDP1 --brightness ${SOFT}
+        else
+            light -S ${GS}
+            ddcutil setvcp 10 ${GS}
+        fi
+
+        notify-send -u low "Light" "Screen monitor set to $GS"
     fi
 }
 
@@ -42,7 +73,6 @@ _xrandr() {
 
     xrandr --output eDP1 --brightness 1 
     xrandr --output HDMI1 --brightness 1 
-    
     
     notify-send -u low "Light" "Xrand reseted"
 }
