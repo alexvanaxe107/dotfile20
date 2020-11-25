@@ -33,7 +33,7 @@ choose(){
     CHOSEN=$1
     if [ -z "$CHOSEN" ] 
     then
-        CHOSEN=$(retrieve_themes | dmenu -i -p "Change the theme: ")
+        CHOSEN=$(retrieve_themes | dmenu -i -y 16 -bw 2 -z 850  -p "Change the theme: ")
     fi
 
     #Get the last to get how many monitors
@@ -89,7 +89,7 @@ function reset_configs(){
 }
 
 function get_wallpaper() {
-    selected_wallpaper=$(xrandr --query | grep "*" | nl | awk '{print $1}' | /usr/bin/dmenu -p "Extract color from wallpaper:" -n)
+    selected_wallpaper=$(xrandr --query | grep "*" | nl | awk '{print $1}' | /usr/bin/dmenu -y 16 -bw 2 -z 850 -p "Extract color from wallpaper:" -n)
     cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep file | awk -v SEL=$selected_wallpaper 'BEGIN {FS="="} NR==SEL {print $2}')
 
     echo ${cur_wallpaper}

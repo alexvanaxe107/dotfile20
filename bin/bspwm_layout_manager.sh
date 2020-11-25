@@ -4,7 +4,7 @@ LAYOUT=$1
 
 if [ -z ${LAYOUT} ]
 then
-    LAYOUT=$(printf "tiled\nmonocle\ngrid\neven\ntall\nwide\npseudo\nremove" | dmenu -p "What layout you want?")
+    LAYOUT=$(printf "tiled\nmonocle\ngrid\neven\ntall\nwide\npseudo\nremove" | dmenu -y 16 -bw 2 -z 790 -p "What layout you want?")
 fi
 
 LAYOUTS_DIR=$HOME/.config/tmp/layouts

@@ -4,7 +4,7 @@ PATH=/home/alexvanaxe/.pyenv/versions/wm/bin/:$PATH
 
 ALACRITTY_FILE=$HOME/.config/wm/alacritty.conf
 
-choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -l 40 -p "Choose the terminal theme")
+choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -y 16 -bw 2 -z 850 -l 40 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 

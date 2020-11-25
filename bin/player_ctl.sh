@@ -41,7 +41,7 @@ save() {
 adjust_volume(){
   player=$1
 
-  volume=$(printf "0\n0.5\n1" | dmenu -i -p "Volume (0.0 - 1.0)")
+  volume=$(printf "0\n0.5\n1" | dmenu -i -p "Volume (0.0 - 1.0)" -y 16 -bw 2 -z 350)
 
   if [ -z $player ]; then
       playerctl volume $volume 
@@ -50,13 +50,14 @@ adjust_volume(){
   fi
 }
 
-chosen_p=$(get_titles | dmenu -i -n -l 20 -p "Select the player:")
+chosen_p=$(get_titles | dmenu -i -n -l 20 -p "Select the player:" -y 16 -z 950 -bw 2)
 chosen_p=$(echo $chosen_p | awk '{print $1}') 
 
 
 if [ ! -z $chosen_p ]; then
     position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
-    chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - $(playerctl -p $chosen_p metadata title)")
+    title=$(playerctl -p $chosen_p metadata title)
+    chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - ${title:0:30}" -y 16 -z 950 -bw 2)
 
     case "$chosen" in
         "pause ⏸") playerctl -p $chosen_p pause;;

@@ -66,7 +66,7 @@ stop_all(){
 }
 
 stop_one(){
-    pro_sel=$(ps aux | grep -E '[m]pv' | awk '{print $2,$12}' | dmenu -l 10)
+    pro_sel=$(ps aux | grep -E '[m]pv' | awk '{print $2,$12}' | dmenu -p "Stop what?" -l 10 -bw 2 -y 16 -z 850)
     pro_pid=$(echo ${pro_sel} | awk '{print $1}')
 
     kill -9 ${pro_pid}
@@ -133,7 +133,7 @@ play_quality(){
 
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
 
-    local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the quality:")
+    local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the quality:" -bw 2 -y 16 -z 850)
 
     local choosen_quality=$(echo ${chosen_p} | awk '{print $1}')
 
@@ -198,7 +198,7 @@ play_radio() {
 
     if [ -z "$chosen" ]
     then
-        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 20)
+        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 20 -bw 2 -y 16 -z 850)
         index=$(echo $chosen | awk '{print $1}')
     else
         index=$(cat $HOME/.config/play_radio/config | nl | grep ${chosen} | awk '{print $1}')
@@ -234,7 +234,7 @@ command=$1
 
 if [ "$command" != "-m" ]
 then
-    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))")
+    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 850)
 else
     chosen_mode=$2
     option=$3

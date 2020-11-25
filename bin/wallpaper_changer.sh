@@ -12,7 +12,7 @@ WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape
 MONITOR_NUMBER=$(monitors_info.sh -q)
 
 show_options(){
-    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu)
+    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu -y 16 -bw 2 -z 550 -p "How rice it?")
     echo $option
 }
 
@@ -34,7 +34,7 @@ download(){
     count=0
 
     if [ ${MONITOR_NUMBER} -ge 2 ]; then
-        monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
+        monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu -y 16 -bw 2 -z 550 -p "Which monitor?")
     else
         monitor=$(monitors_info.sh -p)
     fi
@@ -44,7 +44,7 @@ download(){
         #option=$(show_options)
         #echo "$option"
     else
-        scene=$(printf "${WALLPAPER_SCENES}" | dmenu -i -l 20 -p "Choose the scene:")
+        scene=$(printf "${WALLPAPER_SCENES}" | dmenu -i -y 16 -bw 2 -z 550 -l 20 -p "Choose the scene:")
         if [ -z "${scene}" ];then
             exit 0
         fi
@@ -92,9 +92,14 @@ change_wallpaper(){
 
 save_wallpaper(){
     count=0
-    option=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu)
+    option=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu -y 16 -bw 2 -z 550 -p "What wallpaper to save?")
 
-    theme=$(printf "day\nnight\nshabbat" | dmenu -i -p "What theme you want this to go?")
+    theme=$(printf "day\nnight\nshabbat" | dmenu -i -y 16 -bw 2 -z 550 -p "What theme you want this to go?")
+
+    if [ -z "${theme}" ]; then
+        exit 0
+    fi
+    
 
     if [ "$option" = "All" ]; then
         for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do

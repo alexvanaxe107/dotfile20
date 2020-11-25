@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir" | dmenu -i -l 30 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir" | dmenu -i -y 16 -bw 2 -z 550 -l 30 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -53,7 +53,7 @@ font() {
         sed -i "s/TITLEFONT/${font_name}/g" ${file}
     done
 
-    update=$(printf "Yes\nNo" | dmenu -i -p "Update terminal font? (ESC go to default)")
+    update=$(printf "Yes\nNo" | dmenu -i -y 16 -bw 2 -z 550 -p "Update terminal font? (ESC go to default)")
 
     if [ "${update}" = "Yes" ]; then
         sed -i "s/family:.*/family: ${font_name}/" ${HOME}/.config/alacritty/alacritty.yml
