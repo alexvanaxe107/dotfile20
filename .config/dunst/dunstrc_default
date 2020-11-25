@@ -3,9 +3,9 @@
 [urgency_low]
   # IMPORTANT: colors have to be defined in quotation marks.
   # Otherwise the # and following would be interpreted as a comment.
-  background = "#0B1B03"
-  foreground = "#FFFFFF"
-  frame_color = "#03171B"
+  background = "#000001"
+  foreground = "#000002"
+  frame_color = "#000003"
   timeout = 4
 
 [urgency_normal]

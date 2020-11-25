@@ -13,7 +13,7 @@ from Xlib.ext import randr
 
 CONFIG_PATH="/home/alexvanaxe/.config/wallfinder"
 
-""" Helo this is a coment """
+
 def find_mode(id, modes):
    for mode in modes:
        if id == mode.id:
@@ -202,8 +202,8 @@ class WallHaven():
     def get_wallpaper(self, monitor, scene, theme):
         monitor_info = _get_monitor_info(monitor)
 
-        resolution="{}x{}".format(monitor_info['ratio_w'],
-                                  monitor_info['ratio_h'])
+        resolution="{}x{}".format(monitor_info['width'],
+                                  monitor_info['height'])
 
         url = self.retrieve_url_wallapaper(resolution, scene)
         filename = self.getFileName(url)
@@ -225,7 +225,7 @@ class WallHaven():
     def retrieve_url_wallapaper(self, resolution, search):
         query="?"
         if resolution:
-            query += "sorting=random&ratio={}".format(resolution)
+            query += "sorting=random&resolutions={}".format(resolution)
         else:
             query += "sorting=random"
 
