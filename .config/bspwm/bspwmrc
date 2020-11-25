@@ -1,6 +1,5 @@
 #! /bin/bash
 
-theme_select.sh -t light
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd &
 $HOME/.config/i3/monitor/saver.sh &
@@ -42,7 +41,4 @@ pid=$(ps aux | egrep "[c]lipster" | awk '{print $2}')
 if [ -z ${pid} ]; then
     clipster -d
 fi
-
-if [ "$(monitors_info.sh -q)" -ge "2" ]; then
-    configdisplay.sh
-fi
+theme_select.sh -t light
