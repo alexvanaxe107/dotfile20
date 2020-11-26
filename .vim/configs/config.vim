@@ -2,8 +2,16 @@ filetype on
 filetype plugin on
 syntax on
 
+" Fix tmux background
+if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+    set t_ut=
+endif
 " Set the encoding
 set encoding=utf-8
+set wildmenu
 
 set undofile " Maintain undo history between sessions not so eternally!
 set undodir=$HOME/.vim/history
@@ -30,7 +38,14 @@ set shell=/bin/fish
 set timeout!
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
-let g:airline_powerline_fonts = 1
+" Airline Configs
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let g:tmuxline_powerline_separators = 0
 
 " Hide de guy menus
 set guioptions -=m

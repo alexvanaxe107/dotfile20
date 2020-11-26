@@ -20,6 +20,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'sk1418/QFGrep'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
@@ -44,7 +45,6 @@ Plug 'junegunn/limelight.vim'
 " #### EYECANDY
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mkitt/tabline.vim'
 Plug 'guns/xterm-color-table.vim'
 
 "Colorschemes
