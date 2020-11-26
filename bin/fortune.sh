@@ -4,7 +4,7 @@
 . ${HOME}/.config/bspwm/themes/bsp.cfg
 
 if [  "shabbat" = "$theme_name" ]; then
-    fortune ara | fold -s -w 80
+    fortune ara
 else
     fortune -s
 fi

@@ -36,7 +36,7 @@ alias pacexpl="pacman -D --asexp"	# Mark one or more installed packages as expli
 alias pacimpl="pacman -D --asdep"	# Mark one or more installed packages as non explicitly installed
 
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
-alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+alias pacro="sudo pacman -Rns $(pacman -Qdt | awk '{print $1}')"
 
 #alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
 export _JAVA_AWT_WM_NONREPARENTING=1

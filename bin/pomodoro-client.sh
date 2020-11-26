@@ -1,7 +1,7 @@
 #!/bin/sh
 . /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 
-chosen=$(printf "⏸\n▶\n\n⏹\n▶▶\n↻" | dmenu -i -p "$($HOME/bin/pomodoro-client.py status) ")
+chosen=$(printf "⏸\n▶\n\n⏹\n▶▶\n↻" | dmenu -i -y 16 -bw 2 -z 470 -p "$($HOME/bin/pomodoro-client.py status) ")
 
 
 case "$chosen" in

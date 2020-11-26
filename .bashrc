@@ -173,7 +173,7 @@ alias pacexpl="pacman -D --asexp"	# Mark one or more installed packages as expli
 alias pacimpl="pacman -D --asdep"	# Mark one or more installed packages as non explicitly installed
 
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
-alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+alias pacro="pacman -Qtd > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
 
 alias fdir='fdir.sh'
 
