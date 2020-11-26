@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nSofter\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nSofter\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nNM-Terminator\nNM-Celtic" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -113,9 +113,12 @@ case $CHOSEN in
     "Cute") font "Overpass Mono" Bold 10 10 12 0;;
     "Space") font "Unispace" Bold 9 9 13 1;;
     "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;
-    "NM-Comix zone") font "Bangers" Bold 10 10 12 0;;
+    "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
     "NM-Japan") font "Shojumaru" Bold 9 9 12 0;;
-    "teste") font "Shojumaru" Bold 10 10 12 0;;
+    "NM-Watedland") font "Special Elite" Bold 11 11 12 0;;
+    "NM-Terminator") font "01 DigitMono" Bold 9 9 12 0;;
+    "NM-Celtic") font "A.D. MONO" Bold 12 12 12 0;;
+    "teste") font "01 DigitMono" Bold 10 10 12 0;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac
