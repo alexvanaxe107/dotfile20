@@ -26,6 +26,7 @@ Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
 Plug 'prettier/vim-prettier' " Formatting
 
+
 " Javascript/Typescript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'

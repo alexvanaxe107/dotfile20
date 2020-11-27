@@ -111,7 +111,7 @@ case $CHOSEN in
     "Wasteland") font "Beccaria" Bold 12 12 16 1;;
     "Cartoon") font "Pointfree" Bold 9 9 12 1;;
     "Cute") font "Overpass Mono" Bold 10 10 12 0;;
-    "Space") font "Unispace" Bold 9 9 13 1;;
+    "Space") font "Unispace" Bold 8 8 12 2;;
     "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;

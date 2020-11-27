@@ -55,3 +55,4 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 let g:indentLine_char = '.'
+
