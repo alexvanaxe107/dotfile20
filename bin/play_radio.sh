@@ -246,7 +246,7 @@ command=$1
 while getopts "hmlr:Pp:Aa:q:QcS" opt; do
     case "$opt" in
         h) command="param"; show_help;;
-        m) command="param";;
+        m) command="param"; chosen_mode="$2"; option=$3;;
         r) command="param"; chosen_mode="Radio"; option=$OPTARG;;
         P) command="param"; chosen_mode="Play";;
         p) command="param"; chosen_mode="Play"; option=$OPTARG;;

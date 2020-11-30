@@ -11,6 +11,7 @@ fi
 TARGET=$1
 
 dim=$(grep ";dim-value" -w $HOME/.config/polybar/config)
+dim_simple=$(grep ";dim-value" -w $HOME/.config/polybar/config_simple)
 
 toggle_tint(){
     pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
@@ -19,7 +20,7 @@ toggle_tint(){
         bspc config -m $MONITOR2 right_padding 0
         kill $pid
     else
-        bspc config -m $MONITOR1 right_padding 203
+        #bspc config -m $MONITOR1 right_padding 203
         tint2 >> /tmp/tint2.log 2>&1 &
     fi
 }
@@ -85,6 +86,12 @@ toggle_all(){
 }
 
 auto_hide(){
+    if [ -z "${dim_simple}" ]; then
+        sed -i "s/dim-value/;dim-value/" ${HOME}/.config/polybar/config_simple
+    else
+        sed -i "s/;dim-value/dim-value/" ${HOME}/.config/polybar/config_simple
+    fi
+
     if [ -z "${dim}" ]; then
         sed -i "s/dim-value/;dim-value/" ${HOME}/.config/polybar/config
     else

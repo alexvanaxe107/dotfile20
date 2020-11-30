@@ -2,4 +2,4 @@
 
 URL=$(echo "$QUTE_URL" | sed "s/\&.*//")
 
-play_radio.sh -m "+PL" "${URL}"
+play_radio.sh -q "${URL}"

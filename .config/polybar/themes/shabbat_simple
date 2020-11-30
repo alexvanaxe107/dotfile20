@@ -45,6 +45,8 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
+;dim-value = 0.0
+
 line-size = 1
 line-color = #f00
 
