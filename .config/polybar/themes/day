@@ -61,7 +61,7 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-dim-value = 1.0
+;dim-value = 0.0
 
 line-size = 2
 line-color = #f00
@@ -91,7 +91,7 @@ modules-right = ava_load recording memory temperature date indicators
 ;tray-padding = 2
 ;tray-background = #0063ff
 
-wm-restack = bspwm
+;wm-restack = bspwm
 ;wm-restack = i3
 
 override-redirect = true

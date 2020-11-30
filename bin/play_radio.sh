@@ -19,6 +19,20 @@ PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
 
+show_help() {
+    echo "Enjoy easly a music your stylish desktop."
+    echo "-r [n]           Play a radio of yout selection."
+    echo "-l               Get the list of the available radios."
+    echo "-p [url]         Play the video supplied."
+    echo "-P               Play the from your clipboard."
+    echo "-a [url]         Play only the audio of the supplied video."
+    echo "-A               Play only the audio from your clipboard."
+    echo "-q [item]        Queue an item to be played later."
+    echo "-Q               Play the queue"
+    echo "-S               Stop all"
+    echo "-h               This help message."
+}
+
 set_indicator() {
     echo "蓼" > ${INDICATOR_FILE}
 }
@@ -201,11 +215,8 @@ play_radio() {
         chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 20 -bw 2 -y 16 -z 850)
         index=$(echo $chosen | awk '{print $1}')
     else
-        index=$(cat $HOME/.config/play_radio/config | nl | grep ${chosen} | awk '{print $1}')
+        index=$chosen
     fi
-
-    echo "SAIDA"
-    echo $index
 
     if [ -z "${index}" ]; then
         notify-send -u normal  "Done" "No radio selected"
@@ -232,12 +243,26 @@ list_radio() {
 
 command=$1
 
-if [ "$command" != "-m" ]
+while getopts "hmlr:Pp:Aa:q:QcS" opt; do
+    case "$opt" in
+        h) command="param"; show_help;;
+        m) command="param";;
+        r) command="param"; chosen_mode="Radio"; option=$OPTARG;;
+        P) command="param"; chosen_mode="Play";;
+        p) command="param"; chosen_mode="Play"; option=$OPTARG;;
+        A) command="param"; chosen_mode="Play Audio";;
+        a) command="param"; chosen_mode="Play Audio"; option=$OPTARG;;
+        Q) command="param"; chosen_mode="Play PL";;
+        q) command="param"; chosen_mode="+PL"; option=$OPTARG;;
+        c) command="param"; chosen_mode="Resume";;
+        S) command="param"; chosen_mode="stopall";;
+        l) command="param"; chosen_mode="list";;
+    esac
+done
+
+if [ "$command" != "param" ]
 then
     chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 850)
-else
-    chosen_mode=$2
-    option=$3
 fi
 
 case "$chosen_mode" in
