@@ -6,5 +6,5 @@
 if [  "shabbat" = "$theme_name" ]; then
     fortune ara | fold -w 90
 else
-    fortune -s
+    fortune -n 70
 fi
