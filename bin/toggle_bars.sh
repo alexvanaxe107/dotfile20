@@ -94,8 +94,10 @@ auto_hide(){
 
     if [ -z "${dim}" ]; then
         sed -i "s/dim-value/;dim-value/" ${HOME}/.config/polybar/config
+        sed -i "s/;wm-restack/wm-restack/" ${HOME}/.config/polybar/config
     else
         sed -i "s/;dim-value/dim-value/" ${HOME}/.config/polybar/config
+        sed -i "s/wm-restack/;wm-restack/" ${HOME}/.config/polybar/config
     fi
 
 }

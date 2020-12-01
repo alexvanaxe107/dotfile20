@@ -91,7 +91,7 @@ modules-right = ava_load recording memory temperature date indicators
 ;tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 override-redirect = true

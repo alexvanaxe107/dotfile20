@@ -87,7 +87,7 @@ modules-right = indicators wlan memory cpu temperature ava_load date pulseaudio
 ;tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 override-redirect = true
