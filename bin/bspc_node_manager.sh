@@ -6,6 +6,17 @@ show_help() {
     echo "-m             Mark the current node"
 }
 
+hide_node() {
+    bspc node focused -g hidden
+}
+
+show_hidden_pile() {
+    window=$(bspc query -N -n .hidden | tail -n 1)
+
+    bspc node ${window} -g hidden
+    bspc node ${window} --focus
+}
+
 mark_node() {
     . $HOME/.config/bspwm/themes/bsp.cfg
 
@@ -50,10 +61,12 @@ if [ -z ${action} ]; then
 fi
 
 
-while getopts "h?bm" opt; do
+while getopts "h?bmiI" opt; do
     case "${opt}" in
         h|\?) show_help ;;
         b) bring_program;;
         m) mark_node;;
+        i) hide_node;;
+        I) show_hidden_pile;;
     esac
 done

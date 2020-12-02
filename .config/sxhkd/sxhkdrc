@@ -68,9 +68,12 @@ super + b
 super + n
 	bspc node @/ --equalize
 
-# Clipboard tool
+# Hide show window
+super + v
+	$HOME/bin/bspc_node_manager.sh -i
+
 super + shift + v
-	$HOME/bin/dmclipster
+	$HOME/bin/bspc_node_manager.sh -I
 
 # Configure monitors
 super + shift + d
@@ -206,7 +209,7 @@ super + shift + w : {t,p,s,f}
 
 
 # alternate between the tiled and monocle layout
-super + m
+super + shift +  m
 	bspc desktop -l next
 
 # set ignore ewmh to fullscreen to container
