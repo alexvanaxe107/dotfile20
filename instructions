@@ -23,3 +23,7 @@ pacman -S ttf-joypixels
 pacman -S ttf-roboto-mono
 pikaur -S ttf-mononoki
 pikaur -S ttf-graduate-git
+
+### to set the size in the monitor
+fbset -xres 1280
+fbset -yres 730

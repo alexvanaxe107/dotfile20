@@ -34,7 +34,7 @@ set spell!
 "
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
-set shell=/bin/fish
+set shell=/bin/zsh
 set timeout!
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 

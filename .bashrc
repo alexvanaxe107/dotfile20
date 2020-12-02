@@ -192,7 +192,7 @@ export EDITOR=vim
 source /home/alexvanaxe/.fdirrc
 
 alias fuck='sudo $(fc -ln -1)'
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='fd -I --type f'
 set -o vi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
