@@ -201,12 +201,12 @@ super + alt + i
 # state/flags
 #
 
-super + shift + w ; {t,p,s,f}
+super + shift + w : {t,p,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 
 # alternate between the tiled and monocle layout
-super + shift + w ; m
+super + m
 	bspc desktop -l next
 
 # set ignore ewmh to fullscreen to container

@@ -206,7 +206,7 @@ type = internal/bspwm
 #label-focused = %index%
 label-focused = %icon%
 label-focused-foreground = ${colors.foreground-alt2}
-label-focused-background = ${colors.foreground-cpu}
+label-focused-background = ${colors.background-alt}
 label-focused-padding = ${format.bspadding}
 
 label-dimmed-focused-background = ${colors.foreground-pomodoro}

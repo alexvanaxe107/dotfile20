@@ -1,5 +1,5 @@
 #!/bin/bash
 
-URL=$(echo "$QUTE_URL" | sed "s/\&.*//")
+URL="$QUTE_URL"
 
 play_radio.sh -p "${URL}"
