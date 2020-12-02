@@ -90,7 +90,7 @@ case $CHOSEN in
     "Old Terminal") font "VT323" Regular 12 12 17 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
     "Clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
-    "Nature") font "CQ Mono" Bold 12 12 15 1;;
+    "Nature") font "CQ Mono" Bold 12 12 14 1;;
     "Modern") font "Iosevka" "Bold Oblique" 10 10 13 1;;
     "Futuristic") font "Larabiefont Rg" Normal 10 10 12 2;;
     "Elegant") font "Unica One" Regular 10 10 12 1;;
@@ -116,7 +116,7 @@ case $CHOSEN in
     "Computer") font "Terminus \(TTF\)" Bold 10 10 13 0;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
-    "NM-Japan") font "Shojumaru" Bold 9 9 12 0;;
+    "NM-Japan") font "Shojumaru" Bold 9 9 11 0;;
     "NM-Watedland") font "Special Elite" Bold 11 11 12 0;;
     "NM-Terminator") font "01 DigitMono" Bold 9 9 12 0;;
     "NM-Celtic") font "A.D. MONO" Bold 12 12 12 0;;
