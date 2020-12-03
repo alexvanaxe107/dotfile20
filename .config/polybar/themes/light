@@ -76,6 +76,7 @@ modules-right =  pulseaudio memory cpu temperature ava_load date
 ;tray-padding = 2
 ;tray-background = #0063ff
 
+;dim-value = 0.0
 wm-restack = bspwm
 ;wm-restack = i3
 
