@@ -81,7 +81,9 @@ toggle_all(){
         fi
         bspc config -m $MONITOR2 top_padding 0
         MONITOR1=$MONITOR1 polybar -q default >>/tmp/polybar1.log 2>&1 &
-        MONITOR2=$MONITOR2 polybar -q -c $HOME/.config/polybar/config_simple simple >>/tmp/polybar2.log 2>&1 &
+        if [ ! -z ${MONITOR2} ]; then
+            MONITOR2=$MONITOR2 polybar -q -c $HOME/.config/polybar/config_simple simple >>/tmp/polybar2.log 2>&1 &
+        fi
     fi
 }
 
