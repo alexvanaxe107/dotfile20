@@ -73,4 +73,7 @@ Plug 'atelierbram/vim-colors_atelier-schemes'
 Plug 'fxn/vim-monochrome'
 Plug 'mhartington/oceanic-next'
 
+"Vimwiki
+Plug 'vimwiki/vimwiki'
+
 call plug#end()

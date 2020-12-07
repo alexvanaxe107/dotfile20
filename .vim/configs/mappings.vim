@@ -36,6 +36,7 @@ nmap <F12> :TagbarToggle<CR>
 nnoremap <leader><F6> :set foldmethod=indent<cr>
 nnoremap <leader><F7> :set foldmethod=syntax<cr>
 nnoremap <leader><F8> :set foldmethod=manual<cr>zE
+nnoremap <leader><F5> :wa<cr>
 
 " HL search toggle
 nnoremap <F10> :set hlsearch!<CR>
@@ -108,6 +109,12 @@ nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>
+
+" Map the window swap
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <leader>ss :call WindowSwap#EasyWindowSwap()<CR>
 
 " Remove trailing spaces
 nnoremap <leader>w :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>

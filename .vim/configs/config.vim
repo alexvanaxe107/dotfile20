@@ -15,6 +15,8 @@ set wildmenu
 
 set undofile " Maintain undo history between sessions not so eternally!
 set undodir=$HOME/.vim/history
+set number
+set relativenumber
 
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
