@@ -190,15 +190,15 @@ super + {comma,period}
 	bspc monitor --focus {prev,next}
 
 # Insert receptacle
-super + i
+super + alt + i
 	bspc node -i
 
 # Remove receptacle
 super + ctrl + i
 	for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
-super + alt + i
-	bspc node `bspc query -N -n .marked | head -n 1` -n `bspc query -N -n .leaf.!window`
+super + i
+        $HOME/bin/bspc_node_manager.sh -g
 
 #
 # state/flags

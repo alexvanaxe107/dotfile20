@@ -20,13 +20,37 @@ show_hidden_pile() {
 mark_node() {
     . $HOME/.config/bspwm/themes/bsp.cfg
 
-    bspc node focused -g marked
-    is_marked=$(bspc query -N -n focused.marked)
+    node=$1
+
+    if [ -z "${node}" ]; then
+        node=`bspc query -N -n focused`
+    fi
+    bspc node ${node} -g marked
+
+    is_marked=$(bspc query -N -n ${node}.marked)
 
     if [ ! -z "${is_marked}" ]; then
-        bspc config -n focused border_width 5
+        bspc config -n ${node} border_width 5
     else
-        bspc config -n focused border_width 1
+        bspc config -n ${node} border_width 1
+    fi
+}
+
+retrieve_marked_node (){
+    marked=`bspc query -N -n .marked | head -n 1`
+    empty=`bspc query -N -n .leaf.!window`
+
+    if [ -z "$marked" ];then
+        exit 0
+    fi
+    if [ -z "${empty}" ]; then
+        bspc node -s "$marked"
+        mark_node ${marked}
+        bspc node ${marked} -f
+    else
+        bspc node ${marked} -n ${empty}
+        mark_node ${marked}
+        bspc node ${marked} -f
     fi
 }
 
@@ -61,12 +85,13 @@ if [ -z ${action} ]; then
 fi
 
 
-while getopts "h?bmiI" opt; do
+while getopts "h?bmiIg" opt; do
     case "${opt}" in
         h|\?) show_help ;;
         b) bring_program;;
         m) mark_node;;
         i) hide_node;;
+        g) retrieve_marked_node;;
         I) show_hidden_pile;;
     esac
 done

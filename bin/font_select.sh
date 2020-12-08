@@ -92,7 +92,7 @@ case $CHOSEN in
     "Clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
     "Nature") font "CQ Mono" Bold 12 12 14 1;;
     "Modern") font "Iosevka" "Bold Oblique" 10 10 13 1;;
-    "Futuristic") font "Larabiefont Rg" Normal 10 10 12 2;;
+    "Futuristic") font "Larabiefont Rg" Bold 10 10 12 2;;
     "Elegant") font "Unica One" Regular 10 10 12 1;;
     "Elegant2") font "NovaMono" Normal 10 10 14 1;;
     "Neon") font "Segment14" Regular 9 9 14 1;;
