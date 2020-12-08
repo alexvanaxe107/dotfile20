@@ -13,8 +13,10 @@ hide_node() {
 show_hidden_pile() {
     window=$(bspc query -N -n .hidden | tail -n 1)
 
-    bspc node ${window} -g hidden
-    bspc node ${window} --focus
+    if [ ! -z "${window}" ]; then
+        bspc node ${window} -g hidden
+        bspc node ${window} --focus
+    fi
 }
 
 mark_node() {
