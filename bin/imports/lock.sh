@@ -1,2 +1,2 @@
-FONT="Audiowide":pixelsize=19
+FONT="Iosevka":pixelsize=20
 SAVER=saver_mpv

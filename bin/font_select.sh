@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nSofter\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nNM-Terminator\nNM-Space\nNM-Celtic\nNM-Soft" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nNM-Terminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -91,7 +91,7 @@ case $CHOSEN in
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
     "Clear") font "TeX Gyre Cursor" Bold 9 10 14 1;;
     "Nature") font "CQ Mono" Bold 12 12 14 1;;
-    "Modern") font "Iosevka" "Bold Oblique" 10 10 13 1;;
+    "Modern") font "Iosevka" "Bold Oblique" 10 10 13 3;;
     "Futuristic") font "Larabiefont Rg" Bold 10 10 12 2;;
     "Elegant") font "Unica One" Regular 10 10 12 1;;
     "Elegant2") font "NovaMono" Normal 10 10 14 1;;
@@ -101,7 +101,6 @@ case $CHOSEN in
     "Programming") font "Roboto Mono" Bold 8 8 11 1;;
     "Cursive") font "Z003" "Medium Italic" 13 12 15 2;;
     "Soft") font "mononoki" Regular 11 11 14 2;;
-    "Softer") font "Lerton" Regular 10 10 13 2;;
     "80s") font "Press Start 2P" Regular 7 7 9 2;;
     "Cyberpunk") font "Braciola MS" "Regular Rg" 11 11 13 1;;
     "Pixel") font "Repetition Scrolling" Regular 9 10 13 1;;
@@ -122,6 +121,7 @@ case $CHOSEN in
     "NM-Celtic") font "A.D. MONO" Bold 12 12 12 0;;
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;
+    "NM-Softer") font "Lerton" Regular 10 10 13 2;;
     "teste") font "Texturina" Bold 10 10 12 0;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac

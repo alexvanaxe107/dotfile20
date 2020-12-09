@@ -41,9 +41,11 @@ download(){
 
     if [ -z "$monitor" ]; then
         exit 0
-        #option=$(show_options)
-        #echo "$option"
     else
+        ratio=$(printf "Resolution\nRatio\nLuck" | dmenu -i -y 16 -bw 2 -z 550 -p "Wanna try your luck?")
+        if [ -z "${ratio}" ]; then
+            exit 0
+        fi
         scene=$(printf "${WALLPAPER_SCENES}" | dmenu -i -y 16 -bw 2 -z 550 -l 20 -p "Choose the scene:")
         if [ -z "${scene}" ];then
             exit 0
@@ -56,15 +58,37 @@ download(){
         if [ "$monitor" = "All" ]; then
             notify-send -u normal "Downloading wallpaper to all monitors"
             for monitor_all in $(monitors_info.sh -m); do
-                path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
-                nitrogen --head=${count} --save --set-zoom-fill ${path}
+                if [ "Luck" = "${ratio}" ]; then
+                    path=$(wallfinder.py -s "${scene}")
+                    nitrogen --head=${count} --save --set-zoom-fill ${path}
+                fi
+                if [ "Ratio" = "${ratio}" ]; then
+                    path=$(wallfinder.py -r -m ${monitor_all} -s "${scene}")
+                    nitrogen --head=${count} --save --set-zoom-fill ${path}
+                fi
+                if [ "Resolution" = "${ratio}" ]; then
+                    path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
+                    nitrogen --head=${count} --save --set-scaled ${path}
+                fi
                 count=$(($count+1))
             done
         else
-                notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
+            notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
+            if [ "Luck" = "${ratio}" ]; then
+                path=$(wallfinder.py -s "${scene}")
+                selected=$(monitors_info.sh -in ${monitor})
+                nitrogen --head=${selected} --save --set-zoom-fill ${path}
+            fi
+            if [ "Ratio" = "${ratio}" ]; then
+                path=$(wallfinder.py -r -m ${monitor} -s "${scene}")
+                selected=$(monitors_info.sh -in ${monitor})
+                nitrogen --head=${selected} --save --set-zoom-fill ${path}
+            fi
+            if [ "Resolution" = "${ratio}" ]; then
                 path=$(wallfinder.py -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -in ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
+            fi
         fi
     fi
     notify-send -u normal "Wallpaper downloaded. Enjoy."

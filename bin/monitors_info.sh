@@ -13,6 +13,7 @@ show_help() {
     echo "-p                             Show the primary monitor name"
     echo "-i                             Show the selected monitor id (ip)"
     echo "-n {id}                        Get name by id"
+    echo "-r {id}                        Get resolution of id"
     echo "-in {name}                     Get name by id"
     echo "-w {[id, name, nothing}        The monitor is wide? If id is blank check any wide"
     echo "-q                             How many monitors are plugged?"
@@ -72,7 +73,8 @@ is_wide(){
             fi
 
         else
-            wide=$(xrandr --listmonitors | grep ${monitor}: | awk '{print $3}' | cut -d "/" -f 1)
+            monitor_id=$((${monitor} + 2))
+            wide=$(xrandr --listmonitors | awk -v MON_ID=${monitor_id} 'NR==MON_ID{print $3}' | cut -d "/" -f 1)
             if [ -z "${wide}" ]; then
                 echo ""
             else
