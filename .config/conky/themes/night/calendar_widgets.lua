@@ -159,21 +159,21 @@ function draw_function(cr)
   cairo_select_font_face (cr, "Dejavu Sans Condensed", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
   
 -- Number of weeks per year --- 
-  create_circle(cr,w-x_rel_pos,h-y_rel_pos, 52.0, 2, 3.5, 225, 3, CAIRO_OPERATOR_OVER, 4, tonumber(conky_parse('${exec date +%V}')), '')
+  create_circle(cr,w-x_rel_pos,h-y_rel_pos, 52.0, 2, 3.5, 255, 3, CAIRO_OPERATOR_OVER, 4, tonumber(conky_parse('${exec date +%V}')), '')
   
 -- Number of days in a month ---
-  create_circle(cr,w-x_rel_pos,h-y_rel_pos, conky_parse('${exec cal |egrep -v [a-z] |wc -w}'), 2, 3.5, 200, 13,CAIRO_OPERATOR_CLEAR, -4.5,tonumber(conky_parse('${exec date +%d}')), '')
+  create_circle(cr,w-x_rel_pos,h-y_rel_pos, conky_parse('${exec cal |egrep -v [a-z] |wc -w}'), 2, 3.5, 230, 13,CAIRO_OPERATOR_CLEAR, -4.5,tonumber(conky_parse('${exec date +%d}')), '')
   
 --- Days ---
 -- function create_circle(cr,w,h, elements, distance_between_blocks, two_number_degree, radius, line_width, operator, radius_shift_for_text, current, days, shift_days_distance)
  
   local days = {"Mon", "Tue", "Wed","Thu", "Fri", "Sat", "Sun"}
-  create_circle(cr,w-x_rel_pos,h-y_rel_pos, 7, 2, 3.5, 150, 13, CAIRO_OPERATOR_CLEAR, -4, tonumber(conky_parse('${exec date +%u}')), days, 8.5)
+  create_circle(cr,w-x_rel_pos,h-y_rel_pos, 7, 2, 3.5, 180, 13, CAIRO_OPERATOR_CLEAR, -4, tonumber(conky_parse('${exec date +%u}')), days, 8.5)
   
 --- Month ---
   
   local month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
-  create_circle(cr,w-x_rel_pos,h-y_rel_pos, 12, 2, 3.5, 175, 13, CAIRO_OPERATOR_CLEAR, -4, tonumber(conky_parse('${exec date +%m}')), month, 5.5)
+  create_circle(cr,w-x_rel_pos,h-y_rel_pos, 12, 2, 3.5, 205, 13, CAIRO_OPERATOR_CLEAR, -4, tonumber(conky_parse('${exec date +%m}')), month, 5.5)
   
   
 --- Clock ---

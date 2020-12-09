@@ -11,7 +11,7 @@ hide_node() {
 }
 
 show_hidden_pile() {
-    window=$(bspc query -N -n .hidden | tail -n 1)
+    window=$(bspc query --desktop focused -N -n .hidden | tail -n 1)
 
     if [ ! -z "${window}" ]; then
         bspc node ${window} -g hidden

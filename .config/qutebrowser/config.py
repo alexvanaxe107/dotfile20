@@ -18,6 +18,20 @@
 # unchanged user agent of QtWebKit/QtWebEngine.  Note that the value
 # read from JavaScript is always the global value.
 # Type: FormatString
+
+# Load existing settings made via :set
+import dracula.draw
+
+# Load existing settings made via :set
+config.load_autoconfig()
+
+dracula.draw.blood(c, {
+    'spacing': {
+        'vertical': 6,
+        'horizontal': 8
+    }
+})
+
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
 
 # User agent to send.  The following placeholders are defined:  *
