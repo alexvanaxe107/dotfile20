@@ -32,6 +32,8 @@ if [ "$vim_theme" == "gruvbox_light" ]; then
     sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:gruvbox_italic=1" >> ${HOME}/.vim/configs/theme_config.vim
 fi
 
 if [ "$vim_theme" == "3024.dark.yml" ]; then
@@ -44,6 +46,8 @@ if [ "$vim_theme" == "gruvbox_dark" ]; then
     sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:gruvbox_italic=1" >> ${HOME}/.vim/configs/theme_config.vim
 fi
 
 if [ "$vim_theme" == "gruvbox_material.yml" ]; then
@@ -95,9 +99,11 @@ if [ "$vim_theme" == "tomorrow_night" ]; then
 fi
 
 if [ "$vim_theme" == "tomorrow_night_bright" ]; then
-    sed -i 's/^colorscheme.*/colorscheme Tomorrow-Night/' ${HOME}/.vim/configs/theme.vim
-    sed -i 's/airline_theme.*/airline_theme="tomorrow"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:gruvbox_transparent_bg=1" >> ${HOME}/.vim/configs/theme_config.vim
 fi
 
 if [ "$vim_theme" == "afterglow" ]; then
@@ -110,7 +116,8 @@ if [ "$vim_theme" == "taerminal" ]; then
     sed -i 's/^colorscheme.*/colorscheme afterglow/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="afterglow"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
-    sed -i '5s/^/let g:afterglow_inherit_background=1\n/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:afterglow_inherit_background=1" >> ${HOME}/.vim/configs/theme_config.vim
 fi
 
 if [ "$vim_theme" == "ayu_dark" ]; then
@@ -131,6 +138,8 @@ if [ "$vim_theme" == "dracula" ]; then
     sed -i 's/^colorscheme.*/colorscheme dracula/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="dracula"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:dracula_colorterm = 0" >> ${HOME}/.vim/configs/theme_config.vim
 fi
 
 if [ "$vim_theme" == "oceanic_next" ]; then

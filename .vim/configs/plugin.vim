@@ -50,7 +50,8 @@ Plug 'guns/xterm-color-table.vim'
 
 "Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'Dave-Elec/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'endel/vim-github-colorscheme'
 Plug 'jaredgorski/fogbell.vim'
