@@ -5,12 +5,28 @@
 #    pip-compile
 #
 git+https://github.com/toggle-corp/alacritty-colorscheme.git  # via -r requirements.in
+beautifulsoup4==4.9.3     # via -r requirements.in
+certifi==2020.12.5        # via requests
+chardet==4.0.0            # via requests
 click==7.1.2              # via -r requirements.in
+defusedxml==0.6.0         # via grab
+grab==0.6.41              # via -r requirements.in
 i3ipc==2.2.1              # via -r requirements.in
+idna==2.10                # via requests
+lxml==4.6.2               # via grab, selection
 pycairo==1.20.0           # via -r requirements.in, pygobject
+pycurl==7.43.0.1          # via grab
 pydbus==0.6.0             # via -r requirements.in
 pygobject==3.38.0         # via -r requirements.in
-python-xlib==0.28         # via i3ipc
-ruamel.yaml.clib==0.2.2   # via ruamel.yaml
+python-xlib==0.29         # via i3ipc
+pytils==0.3               # via weblib
+pyttsx3==2.90             # via -r requirements.in
+requests==2.25.1          # via -r requirements.in
 ruamel.yaml==0.16.12      # via alacritty-colorscheme
-six==1.15.0               # via python-xlib
+selection==0.0.14         # via grab
+six==1.15.0               # via grab, python-xlib, selection, user-agent, weblib
+soupsieve==2.1            # via beautifulsoup4
+urllib3==1.26.2           # via requests
+user-agent==0.1.9         # via grab, weblib
+weblib==0.1.30            # via grab, selection
+git+https://github.com/alexmercerind/youtube-search-python.git  # via -r requirements.in

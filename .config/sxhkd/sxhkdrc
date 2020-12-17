@@ -33,6 +33,10 @@ super + shift + s
 super + shift + x
 	$HOME/bin/lock.sh
 
+#DmenuAlexia
+super + a
+	$HOME/bin/dmenulexia.sh
+
 #Fix Light
 super + shift + i
 	$HOME/bin/avalight

@@ -1,7 +1,6 @@
 #!/bin/bash
 # A basic summary of my sales report
 
+teste="play teste as audio"
 
-MONITOR=$(xrandr --query | grep "*" | nl | awk '{print $1}')
-
-echo -e ${MONITOR}
+echo "[${teste:5:-9}]"

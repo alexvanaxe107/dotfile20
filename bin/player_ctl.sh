@@ -57,11 +57,10 @@ chosen_p=$(echo $chosen_p | awk '{print $1}')
 if [ ! -z $chosen_p ]; then
     position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
     title=$(playerctl -p $chosen_p metadata title)
-    chosen=$(printf "pause ⏸\\nplay ▶\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - ${title:0:30}" -y 16 -z 950 -bw 2)
+    chosen=$(printf "play ▶⏸\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - ${title:0:30}" -y 16 -z 950 -bw 2)
 
     case "$chosen" in
-        "pause ⏸") playerctl -p $chosen_p pause;;
-        "play ▶") playerctl -p $chosen_p play;;
+        "play ▶⏸") playerctl -p $chosen_p play-pause;;
         "forward ▶▶") playerctl -p $chosen_p next;;
         "back ◀◀") playerctl -p $chosen_p previous;;
         "stop ") playerctl -p $chosen_p stop;;

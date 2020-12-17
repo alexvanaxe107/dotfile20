@@ -59,6 +59,7 @@ set_wide() {
 set_pseudo() {
     bspc rule -a Alacritty state=pseudo_tiled rectangle=1850x1040+0+0
     bspc rule -a qutebrowser state=pseudo_tiled rectangle=1850x1040+0+0
+    bspc rule -a Evince state=pseudo_tiled rectangle=1850x1040+0+0
 }
 
 remove_layout() {
@@ -66,6 +67,7 @@ remove_layout() {
     bspc desktop --layout tiled
 
     bspc rule -a Alacritty state=tiled
+    bspc rule -a Evince state=tiled
     bspc rule -a qutebrowser state=tiled desktop=^2
 
     desktop=$(bspc query --desktops -d)

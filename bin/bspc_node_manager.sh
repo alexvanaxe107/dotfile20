@@ -1,22 +1,37 @@
 #! /bin/dash
 
 show_help() {
-    echo "Manipulates the notes of the bspwm" echo ""
+    echo "Manipulates the notes of the bspwm"
     echo "-b             Bring the program to the current desktop"
     echo "-m             Mark the current node"
 }
 
 hide_node() {
-    bspc node focused -g hidden
+    marked_node=$(bspc query --desktop focused -N -n .leaf.marked)
+    if [ -z "${marked_node}" ]; then
+        bspc node focused -g hidden
+    else
+        for node in ${marked_node}; do
+            bspc node "${node}" -g hidden --focus
+        done
+    fi
 }
 
 show_hidden_pile() {
-    window=$(bspc query --desktop focused -N -n .hidden | tail -n 1)
+    marked=$(bspc query --desktop focused -N -n .leaf.marked.hidden)
+
+    #if [ ! -z "${marked}" ]; then
+        #for node in ${marked}; do
+            #bspc node ${node} -g hidden
+        #done
+    #else
+    window=$(bspc query --desktop focused -N -n .leaf.hidden | head -n 1)
 
     if [ ! -z "${window}" ]; then
         bspc node ${window} -g hidden
         bspc node ${window} --focus
     fi
+    #fi
 }
 
 mark_node() {

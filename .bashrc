@@ -192,6 +192,7 @@ export EDITOR=vim
 source /home/alexvanaxe/.fdirrc
 
 alias fuck='sudo $(fc -ln -1)'
+alias tmuxa='tmux attach-session -t shell'
 export FZF_DEFAULT_COMMAND='fd -I --type f'
 set -o vi
 

@@ -6,6 +6,7 @@ import re
 import pathlib
 import random
 import math
+from datetime import datetime
 from tabulate import tabulate
 
 from Xlib import X, display
@@ -92,6 +93,72 @@ def get_display_info():
 
     return result
 
+class Bing():
+    BING_URL="https://bing.biturl.top/"
+    def get_wallpaper(self, monitor, scene, config):
+        url = self.retrieve_url()
+
+        return self.download(url)
+
+        
+        
+    def download(self, url):
+        file_to_save = self.file_name(url)
+        r = requests.get(url, allow_redirects=True)
+        open(file_to_save, 'wb').write(r.content)
+
+        return file_to_save
+
+
+    def retrieve_url(self):
+        json_resp = requests.get(self.BING_URL);
+        if json_resp.status_code == 200:
+            return json_resp.json()['url']
+
+    def file_name(self, url):
+        path="bing"
+        suffix = pathlib.PurePath(url).suffix
+        today = datetime.today().strftime('%Y%m%d')
+
+        filename = "{}{}".format(today, suffix)
+        filepath = "{}/{}".format(CONFIG_PATH, path)
+        pathlib.Path(filepath).mkdir(parents=True, exist_ok=True)
+
+        path="{}/{}".format(filepath, filename)
+
+        return path
+
+
+class Chromecast():
+    """ Get a wallpaper from the chromecast, unfurtunelly cant use monitor and
+    scene since it is totally random. """
+    CHROME_URL="https://raw.githubusercontent.com/dconnolly/chromecast-backgrounds/master/README.md"
+    def get_wallpaper(self, monitor, scene, config):
+        wallpapers = requests.get(self.CHROME_URL)
+        imagens = wallpapers.text.splitlines()
+
+        image_index = random.randint(1, len(imagens))
+        url = re.search('\((.*)\)', imagens[image_index]).group(1)
+
+        return self.download(url)
+
+    def download(self, url):
+        file_to_save = self.get_file_name(url)
+        r = requests.get(url, allow_redirects=True)
+        open(file_to_save, 'wb').write(r.content)
+
+        return file_to_save
+
+    def get_file_name(self, url):
+        path="googlechrome"
+        filename = pathlib.PurePath(url)
+        savename="{}/{}/{}".format(CONFIG_PATH, path, filename.name)
+        file_path="{}/{}".format(CONFIG_PATH,path)
+        pathlib.Path(file_path).mkdir(parents=True, exist_ok=True)
+        return savename
+
+
+
 class Alpha():
     ALPHA_URL="https://wall.alphacoders.com/api2.0/get.php"
     ALPHA_KEY="e33fa5bbf58d48763cee4c57258e0749"
@@ -117,7 +184,7 @@ class Alpha():
 
     def get_wallpapers_alpha_search(self, monitor_info, scene):
         search="search"
-         
+
         url="{}?auth={}".format(
             self.ALPHA_URL,
             self.ALPHA_KEY)
@@ -284,7 +351,7 @@ def _parse_arguments():
     parser.add_argument('-s', '--scene', type=str,
                         help='What is the scene')
     parser.add_argument('-e', '--engine', type=str,
-                        help='Use a for alpha, h for haven')
+                        help='Use a for alpha, h for haven, c for chromecast and b for Bing')
 
     options = parser.parse_args()
     return options
@@ -295,6 +362,10 @@ def get_engine(engine):
             return Alpha()
         if engine == "h":
             return WallHaven()
+        if engine == "c":
+            return Chromecast()
+        if engine == "b":
+            return Bing()
 
     return WallHaven()
 

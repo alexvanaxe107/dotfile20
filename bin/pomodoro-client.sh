@@ -1,14 +1,30 @@
 #!/bin/sh
 . /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 
-chosen=$(printf "⏸\n▶\n\n⏹\n▶▶\n↻" | dmenu -i -y 16 -bw 2 -z 470 -p "$($HOME/bin/pomodoro-client.py status) ")
 
+show_help() {
+    echo "Manage the pomodoro"
+    echo "-s               Start a pomodoro."
+    echo "-f               Finish a pomodoro."
+}
 
-case "$chosen" in
-	"⏸") python $HOME/.config/i3/scripts/pomodoro-client.py pause;;
-	"") python $HOME/.config/i3/scripts/pomodoro-client.py start;;
-	"▶") python $HOME/.config/i3/scripts/pomodoro-client.py resume;;
-	"⏹") python $HOME/.config/i3/scripts/pomodoro-client.py stop;;
-	"▶▶") python $HOME/.config/i3/scripts/pomodoro-client.py skip;;
-	"↻") python $HOME/.config/i3/scripts/pomodoro-client.py reset;;
-esac
+start_pomodoro(){
+    notify-send -u normal "Pomodoro" "Focus on your task"
+    pomodoro start
+}
+
+while getopts "hsf" opt; do
+    case "$opt" in
+        h) show_help;;
+        s) start_pomodoro;;
+        f) pomodoro finish;;
+    esac
+done
+
+if [ -z "$1" ]; then
+    chosen=$(printf "▶\n⏹" | dmenu -i -y 16 -bw 2 -z 470 -p "$(pomodoro_stats.sh) ")
+    case "$chosen" in
+        "▶") $(start_pomodoro);;
+        "⏹") pomodoro finish;;
+    esac
+fi

@@ -21,6 +21,8 @@ nnoremap <leader>O O<ESC>
 nnoremap - ddp
 nnoremap + ddkkp
 
+nmap <F2> :wa<CR>
+imap <F2> <esc>:wa<CR>
 nnoremap <F4> :Files<CR>
 nnoremap <F5> :Buffers<CR>
 nnoremap <F6> :Tags<CR>

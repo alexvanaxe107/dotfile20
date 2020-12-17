@@ -111,7 +111,7 @@ bspadding = 1
 [module/pomodoro]
 type = custom/script
 interval = 3
-exec = /home/alexvanaxe/bin/pomodoro
+exec = /home/alexvanaxe/bin/pomodoro_stats.sh
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-pomodoro}
 format-prefix-foreground = ${colors.foreground-pomodoro}

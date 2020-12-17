@@ -1,4 +1,4 @@
-==========================================================
+;==========================================================
 ;
 ;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
@@ -107,7 +107,7 @@ cursor-scroll = ns-resize
 [module/pomodoro]
 type = custom/script
 interval = 3
-exec = /home/alexvanaxe/bin/pomodoro
+exec = /home/alexvanaxe/bin/pomodoro_stats.sh
 #format-underline = ${colors.pomodoro}
 format-padding = ${format.padding}
 

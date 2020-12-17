@@ -303,7 +303,7 @@ execp_icon_h = 0
 #-------------------------------------
 # Executor 2
 execp = new
-execp_command = pomodoro
+execp_command = pomodoro_stats.sh
 execp_interval = 1
 execp_has_icon = 0
 execp_cache_icon = 1

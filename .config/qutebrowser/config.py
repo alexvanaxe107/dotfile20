@@ -104,7 +104,7 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
 #Key bindings
-config.bind('<Ctrl-s>', ':config-cycle statusbar.hide')
+config.bind('<Ctrl-s>', ':config-cycle statusbar.show always in-mode')
 config.bind('<Ctrl-p>', ':config-cycle tabs.show multiple never')
 
 config.bind("Xa", "hint links userscript addlink.sh")
