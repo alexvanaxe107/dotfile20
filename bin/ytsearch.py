@@ -31,7 +31,7 @@ def _main():
     if time:
         allSearch = CustomSearch(search, VideoSortOrder.uploadDate)
     else:
-        allSearch = VideosSearch(search)
+        allSearch = CustomSearch(search, VideoSortOrder.relevance)
 
 
     result = allSearch.result()
@@ -39,9 +39,15 @@ def _main():
     
     loop = range(0, quantity)
     for i in loop:
+        duration=result_json['result'][i]['duration']
+        if not duration:
+            duration="Live"
+            
         if title: 
-            print("%s;%s" % (result_json['result'][i]['link'], 
-                                     result_json['result'][i]['title']))
+            print("%s;%s;%s;%s" % (result_json['result'][i]['link'], 
+                                result_json['result'][i]['title'],
+                                result_json['result'][i]['channel']['name'],
+                                duration))
         else:
             print(result_json['result'][i]['link'])
 

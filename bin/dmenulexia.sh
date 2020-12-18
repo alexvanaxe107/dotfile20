@@ -14,21 +14,45 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
-search='*favorites*'
+search='*news*'
 if [[ "$action" == $search ]]; then
-    command=$(grep -e "list" <<<"${action}")
+    command=$(echo "$action" | grep -e "list")
+    asaudio=$(echo "$action" | grep -e "as audio")
+    live=$(echo "$action" | grep -e "live")
+    from=$(echo "$action" | grep -e "from")
 
-    if [ ! -z "${command}" ]; then
-        ytplay.sh -l&
-        exit 0
+    query=""
+    if [ ! -z "${from}" ]; then
+        query=$(echo $action | sed 's/play//g' | sed 's/news//g' | sed 's/from//g' | sed 's/as audio//g' | sed 's/live//g' | sed 's/list//g' | xargs)
     fi
-    ytplay.sh -t& 
+
+    if [ ! -z "${asaudio}" ]; then
+        param="-a"
+    fi
+    
+    if [ ! -z "${query}" ]; then
+        if [ ! -z "${command}" ]; then
+            param="${param} -m"
+        fi
+        ytplay.sh ${param} -T "${query}"& 
+        exit 0
+    elif [ ! -z "${command}" ]; then
+        param="${param} -l"
+    elif [ ! -z "${live}" ]; then
+        param="${param} -v"
+    else
+        param="${param} -t"
+    fi
+
+    echo ${param}
+     
+    ytplay.sh ${param}& 
     exit 0
 fi
 
 search='*play*'
 if [[ "$action" == $search ]]; then
-    command=$(grep -e "as audio" <<<"${action}")
+    command=$(echo "${action}" | grep -e "as audio")
     if [ ! -z "${command}" ]; then
         playwhat="${command:5:-9 }"
         url=$(ytsearch.py -s "${playwhat}")
@@ -36,7 +60,7 @@ if [[ "$action" == $search ]]; then
         exit 0
     fi
     
-    command=$(grep -e "play radio" <<<"${action}")
+    command=$(echo "${action}" | grep -e "play radio")
     
     if [ ! -z "${command}" ]; then
         playwhat="${action#play radio }"
@@ -65,7 +89,7 @@ fi
 
 search='*pomodoro*'
 if [[ "$action" == $search ]]; then
-    command=$(grep -e "start" <<<"${action}")
+    command=$(echo "${action}" | grep -e "start")
     if [ ! -z "${command}" ]; then
         pomodoro-client.sh -s
         exit 0

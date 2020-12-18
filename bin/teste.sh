@@ -1,6 +1,6 @@
 #!/bin/bash
 # A basic summary of my sales report
 
-teste="play teste as audio"
+teste="news from olavo de carvalho as audio"
 
-echo "[${teste:5:-9}]"
+echo $teste | sed 's/news from //g' | sed 's/as audio//g'
