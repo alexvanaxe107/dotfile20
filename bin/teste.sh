@@ -1,6 +1,12 @@
 #!/bin/bash
 # A basic summary of my sales report
 
-teste="news from olavo de carvalho as audio"
+teste="chromecastbing"
 
-echo $teste | sed 's/news from //g' | sed 's/as audio//g'
+option=*$1*
+if [[ "$teste" == $option ]]; then
+    echo "Esta dentro"
+else
+    echo "NAO esta"
+fi
+

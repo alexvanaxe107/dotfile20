@@ -31,7 +31,7 @@ def _main():
     if time:
         allSearch = CustomSearch(search, VideoSortOrder.uploadDate)
     else:
-        allSearch = CustomSearch(search, VideoSortOrder.relevance)
+        allSearch = VideosSearch(search)
 
 
     result = allSearch.result()

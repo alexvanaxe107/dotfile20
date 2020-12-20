@@ -25,11 +25,13 @@ speak() {
     fi
 
     if [ -z "${voice}" ]; then
-        speak-ng -s ${rate} "$1"
+        #speak-ng -s ${rate} "$1"
+        picospeaker "$1" &> /dev/null
         exit 0
     fi
 
-    speak-ng -v ${voice} -s ${rate} -p 64 "$1"
+    picospeaker "$1" &> /dev/null
+    #speak-ng -v ${voice} -s ${rate} -p 64 "$1"
 }
 
 while getopts "ht:" opt; do

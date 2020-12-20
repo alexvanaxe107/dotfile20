@@ -116,3 +116,20 @@ if [[ "$action" == $search ]]; then
     bspwmexit.sh 
     exit 0
 fi
+
+search='*keyb*'
+if [[ "$action" == $search ]]; then
+    setkmap
+    notify-send "Keyboard" "Keyboard reconfigured"
+    exit 0
+fi
+
+search='*reset*'
+if [[ "$action" == $search ]]; then
+    reset_monitors.sh
+    notify-send "Monitor" "Monitor reseted"
+    exit 0
+fi
+
+notify-send "Sorry" "Sorry, could not do what you asked"
+speach.sh -t "Sorry, I did not understood what you asked."

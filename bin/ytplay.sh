@@ -6,6 +6,8 @@ multiple="0"
 
 CONF="$HOME/.config/wm/ytplay.conf"
 
+CONF_CONT="$(<$CONF)"
+
 show_help() {
     echo "Iterate with the yt"
     echo "-a             Play audio only"
@@ -29,26 +31,32 @@ play() {
 search_live() {
     local lives=""
     while read -r line; do
-        search="$line"
-        lives="$(ytsearch.py -to -q 3 -s "${search}")"
+        local search="$line"
+        local search_query=$(awk '{print $1}' FS=";" <<< "${search}")
+        local search_refiner=$(awk '{print $2}' FS=";"<<< "${search}")
+        lives="$(ytsearch.py -to -q 3 -s "${search_query} ${search_refiner}")"
         while read -r live; do
             lives_tmp+="$(echo "$live" | grep ";Live$")\n"
         done <<<${lives}
     done < "${CONF}"
 
     echo -e "${lives_tmp}"
-    local choosen=$(echo -e "$lives_tmp" | grep ";Live" | awk '{printf "%s\n", $2}' FS=";" | dmenu -bw 2 -y 16 -z 1250  -l 30 -p "What do want to watch?")
+    local choosen=$(echo -e "$lives_tmp" | grep ";Live" | awk '{printf "%s-%s\n", $2,$3}' FS=";" | dmenu -bw 2 -y 16 -z 1250  -l 30 -p "What do want to watch?")
 
     if [ -z "${choosen}" ]; then
         exit 0
     fi
     
+    echo "${choosen}"
+    choosen="$(awk '{print $1}' FS="-" <<< "${choosen}")"
+    echo "${choosen}"
     url=$(echo -e "${lives_tmp}" | grep "${choosen}" | awk '{printf "%s", $1}' FS=";") 
     play $url
 }
 
 get_theme() {
     local choosen_theme=""
+    local filtered_content="$(awk '{print $1}' FS=";" <<< "${CONF_CONT}")"
 
     if [ "${cli}" = "1" ]; then
         local IFS=$'\n'
@@ -61,14 +69,16 @@ get_theme() {
     fi
    
     if [ "${cli}" == "0" ]; then
-        choosen_theme=$(dmenu -l 20 -bw 2 -y 16 -z 850 -p "Choose a channel/theme: " <<<  $(<${CONF}))
+        choosen_theme=$(dmenu -l 20 -bw 2 -y 16 -z 850 -p "Choose a channel/theme: " <<<  ${filtered_content})
     fi
 
     if [ -z "${choosen_theme}" ]; then
         exit 0
     fi
 
-    echo "${choosen_theme}"
+    refiner=$(grep "${choosen_theme}" <<< "${CONF_CONT}")
+
+    echo "${refiner}"
 }
 
 play_parameter() {
@@ -104,11 +114,14 @@ play_parameter() {
 
 play_by_list() {
     local choosen_theme=$(get_theme)
+    local search_query=$(awk '{print $1}' FS=";" <<< "${choosen_theme}")
+    local search_refiner=$(awk '{print $2}' FS=";"<<< "${choosen_theme}")
+
     if [ -z "${choosen_theme}" ];then
         exit 0
     fi
     
-    videos="$(ytsearch.py -to -q 10 -s "${choosen_theme}")"
+    videos="$(ytsearch.py -to -q 10 -s "${search_query} ${search_refiner}")"
     video=""
     if [ "${cli}" = "1" ]; then
         local IFS=$'\n'
@@ -119,7 +132,7 @@ play_by_list() {
         done
     fi
     if [ "${cli}" = "0" ]; then
-        video=$(awk '{printf "%s", $1}' FS="-" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s-%s-%s\n", $2, $3, $4}' FS=";" <<< $videos)))
+        video=$(awk '{printf "%s", $1}' FS="#" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s#%s#%s\n", $2, $3, $4}' FS=";" <<< $videos)))
     fi
 
     
@@ -139,11 +152,15 @@ play_by_list() {
 
 play_by_theme() {
     local choosen_theme=$(get_theme)
+
+    local search_query=$(awk '{print $1}' FS=";" <<< "${choosen_theme}")
+    local search_refiner=$(awk '{print $2}' FS=";"<<< "${choosen_theme}")
+
     if [ -z "${choosen_theme}" ];then
         exit 0
     fi
 
-    local link=$(ytsearch.py -o -s "${choosen_theme}")
+    local link=$(ytsearch.py -o -s "${search_query} ${search_refiner}")
     play "$link"
 }
 
