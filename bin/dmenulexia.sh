@@ -2,6 +2,10 @@
 
 action=$(echo "" | dmenu -p "What do you want to do?")
 
+if [ -z "${action}" ]; then
+    exit 0
+fi
+
 search='*time*'
 if [[ "$action" == $search ]]; then
     speach.sh -t "The time now is $(date +"%H:%M")"
@@ -132,4 +136,3 @@ if [[ "$action" == $search ]]; then
 fi
 
 notify-send "Sorry" "Sorry, could not do what you asked"
-speach.sh -t "Sorry, I did not understood what you asked."
