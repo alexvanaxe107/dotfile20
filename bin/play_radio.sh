@@ -14,7 +14,7 @@ LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 
 INDICATOR_FILE=$HOME/.config/indicators/play_radio.ind
 
-PLAYLIST_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_pl.ps
+PLAYLIST_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
@@ -230,6 +230,7 @@ play_radio() {
 
 pl_len() {
     pl_len=$(wc -l "${PLAYLIST_FILE}" | awk '{print $1}')
+    echo $(<$PLAYLIST_FILE) > teste.txt
     echo $pl_len
 }
 
