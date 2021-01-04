@@ -21,7 +21,7 @@ show_help() {
 
 print_primary_information() {
     if [ ${id_only} -eq 0 ]; then
-        xrandr --listmonitors | awk 'NR==2 {print $1$2}' | cut -d "*" -f 2
+        xrandr --listmonitors | awk 'NR==2 {print $4}'
     else
         xrandr --listmonitors | awk 'NR==2 {print $1$2}' | cut -d ":" -f 1
     fi
@@ -30,7 +30,7 @@ print_primary_information() {
 name_by_id(){
     if [ ${id_only} -eq 0 ]; then
         m_id=$(($1+2))
-        xrandr --listmonitors | awk -v ID=$m_id  'NR==ID {print $1$2}' | cut -d ":" -f 2 | grep -Po "[a-zA-Z0-9]*"
+        xrandr --listmonitors | awk -v ID=$m_id  'NR==ID {print $4}'
     else
         xrandr --listmonitors | awk 'NR>1 {print $1$2}' | grep -i $1 | cut -d : -f 1
     fi
@@ -38,7 +38,7 @@ name_by_id(){
 
 monitors_information() { 
     if [ ${id_only} -eq 0 ]; then
-        xrandr --listmonitors | awk 'NR>1 {print $1$2}' | cut -d ":" -f 2 | grep -Po "[a-zA-Z0-9]*"
+        xrandr --listmonitors | awk 'NR>1 {print $4}'
     else
         xrandr --listmonitors | awk 'NR>1 {print $1$2}' | cut -d ":" -f 1
     fi
