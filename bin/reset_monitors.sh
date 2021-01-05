@@ -14,7 +14,7 @@ if [ ${monitors} -ge 2 ]; then
 
     count=1
     for desktop1 in $MONITOR1; do
-        echo "bspc desktop ${desktop} -s ^${count}"
+        #echo "bspc desktop ${desktop} -s ^${count}"
         bspc desktop ${desktop1} -s ^${count} 
         count=$(($count+1))
     done
@@ -24,16 +24,23 @@ if [ ${monitors} -ge 2 ]; then
     done
 
     for desktop in $MONITOR2; do
-        echo "bspc desktop ${desktop} -s ^${count}"
+        #echo "bspc desktop ${desktop} -s ^${count}"
         bspc desktop ${desktop} -s ^${count} 
         count=$(($count+1))
     done
     bspc monitor ^1 --reset-desktops $MONITOR1
     bspc monitor ^2 --reset-desktops $MONITOR2
+
+    count=3
+    while [ $count -le $monitors ]; do
+        bspc monitor ^$count --reset-desktops terminal 
+        count=$(($count+1))
+    done
+    
 else
     count=1
     for desktop in $MONITOR; do
-        echo "bspc desktop ${desktop} -s ^${count}"
+        #echo "bspc desktop ${desktop} -s ^${count}"
         bspc desktop ${desktop} -s ^${count} 
         count=$(($count+1))
     done

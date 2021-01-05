@@ -1,11 +1,8 @@
 #!/bin/dash
 
-MONITOR1=$(monitors_info.sh -n 1)
-MONITOR2=$(monitors_info.sh -n 0)
-
-if [ -z $MONITOR1 ]; then
+if [ -z "${PREFERENCE}" ]; then
     MONITOR1=$(monitors_info.sh -n 0)
-    unset MONITOR2
+    MONITOR2=$(monitors_info.sh -n 1)
 fi
 
 TARGET=$1

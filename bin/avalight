@@ -32,6 +32,22 @@ eDP1() {
     notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
+DP1() {
+    killall clight
+    echo "" > ${INDICATOR_FILE}
+
+    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+
+    SOFT=$(_get_soft_brigtness "$BT")
+
+    if [ ! -z "${SOFT}" ]; then
+        xrandr --output ${GS} --brightness ${SOFT}
+    else
+        ddcutil setvcp -d 2 10 ${BT}
+    fi
+    notify-send -u low "Light" "Screen monitor set to $GS"
+}
+
 HDMI1() {
     killall clight
     echo "" > ${INDICATOR_FILE}
@@ -43,7 +59,7 @@ HDMI1() {
     if [ ! -z "${SOFT}" ]; then
         xrandr --output ${GS} --brightness ${SOFT}
     else
-        ddcutil setvcp 10 ${BT}
+        ddcutil setvcp -d 1 10 ${BT}
     fi
     notify-send -u low "Light" "Screen monitor set to $GS"
 }
@@ -58,9 +74,11 @@ both() {
         if [ ! -z "${SOFT}" ]; then
             xrandr --output HDMI1 --brightness ${SOFT}
             xrandr --output eDP1 --brightness ${SOFT}
+            xrandr --output DP1 --brightness ${SOFT}
         else
             light -S ${GS}
-            ddcutil setvcp 10 ${GS}
+            ddcutil setvcp -d 1 10 ${GS}
+            ddcutil setvcp -d 2 10 ${GS}
         fi
 
         notify-send -u low "Light" "Screen monitor set to $GS"
@@ -88,6 +106,7 @@ auto() {
 case "$GS" in
     "auto") auto;;
     "eDP1") eDP1;;
+    "DP1") DP1;;
     "HDMI1") HDMI1;;
     "xrandr") _xrandr;;
     *) both;;
