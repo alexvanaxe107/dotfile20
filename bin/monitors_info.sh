@@ -1,6 +1,7 @@
 #!/bin/dash
 # A POSIX variable
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
+PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 
 # Initialize our own variables:
 output_file=""
@@ -9,6 +10,7 @@ id_only=0
 show_help() {
     echo "Get monitor information." echo ""
     echo "-m                             Get a list with the monitors name (primary first)"
+    echo "-f                             Get a list of the favorite order monitors."
     echo "-a                             Get monitors info for the nitrogen."
     echo "-c                             Get a list of connected monitors"
     echo "-p                             Show the primary monitor name"
@@ -19,6 +21,9 @@ show_help() {
     echo "-in {name}                     Get name by id"
     echo "-w {[id, name, nothing}        The monitor is wide? If id is blank check any wide"
     echo "-q                             How many monitors are plugged?"
+    echo "-s                             Secundary is wide?"
+    echo "-t {id}                        Get Monitors acording prefered order."
+    echo "-it {name}                     Get Monitors acording prefered order."
 }
 
 monitors=$(bspc query --monitors --names)
@@ -62,6 +67,41 @@ monitors_information() {
         printf "${monitors}"
     else
         printf "${monitors}" | nl | awk '{print $1-1}'
+    fi
+}
+
+monitors_information_prefered() { 
+    prefered_monitors="$(cat $PREFERENCE_FILE | sort | awk '{print $2}')"
+
+    if [ -z "${prefered_monitors}" ]; then
+        prefered_monitors=$(monitors_information)
+    fi
+
+    if [ ${id_only} -eq 0 ]; then
+        printf "${prefered_monitors}"
+    else
+        printf "${prefered_monitors}" | nl | awk '{print $1-1}'
+    fi
+}
+
+name_by_prefered() { 
+    prefered_monitors="$(cat $PREFERENCE_FILE | sort)"
+
+    if [ ${id_only} -eq 0 ]; then
+        m_id=$(($1+1))
+        prefered=$(printf "${prefered_monitors}" | awk -v ID=$m_id  'NR==ID {print $2}')
+
+        if [ -z "${prefered}" ]; then
+            prefered=$(name_by_id $1)
+        fi
+        printf "${prefered}"
+    else
+        prefered=$(($(printf "${prefered_monitors}" | grep -wi $1 | xargs | cut -d " " -f 1)-1))
+        if [ -z "${prefered}" ]; then
+            prefered=$(name_by_id $1)
+        fi
+        
+        printf ${prefered}
     fi
 }
 
@@ -119,15 +159,18 @@ monitors_plugged(){
     echo $(($monitors - 1))
 }
 
+
+
 secundary_wide() {
-    sec=$(name_by_id 0)
+    sec=$(name_by_prefered 0)
+
     wide=$(is_wide "${sec}")
     
     echo "${wide}"
 }
 
 
-while getopts "h?mcpqiw:n:ab:s" opt; do
+while getopts "h?mcpqift:w:n:ab:s" opt; do
     case "$opt" in
     h|\?)
         show_help
@@ -136,7 +179,11 @@ while getopts "h?mcpqiw:n:ab:s" opt; do
         ;;
     m)  monitors_information
         ;;
+    f)  monitors_information_prefered
+        ;;
     a)  monitors_information_nitrogen
+        ;;
+    t)  name_by_prefered $OPTARG
         ;;
     c)  monitors_connected
         ;;

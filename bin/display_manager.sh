@@ -5,12 +5,21 @@ show_help() {
     echo "-p [name]                             Define wich monitor is the primary."
     echo "-t [name]                             Toggle monitor on and off"
     echo "-o [order]                            List with the order of the monitors"
+    echo "-a                                    Turn on all monitors."
 }
 
 define_primary() {
     primary=$1
 
     xrandr --output ${primary} --primary 
+}
+
+all_on() {
+    monitors=$(monitors_info.sh  -c)
+
+    for monitor in ${monitors}; do
+        xrandr --output ${monitor} --auto
+    done
 }
 
 toggle_monitor() {
@@ -45,7 +54,7 @@ define_order() {
     ${command}
 }
 
-while getopts "h?p:t:o:" opt; do
+while getopts "h?ap:t:o:" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
@@ -54,6 +63,8 @@ while getopts "h?p:t:o:" opt; do
     t) toggle_monitor $OPTARG
         ;;
     o) define_order "$OPTARG"
+        ;;
+    a) all_on
         ;;
     esac
 done

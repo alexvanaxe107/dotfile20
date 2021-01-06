@@ -1,6 +1,6 @@
 #! /bin/bash
 
-action=$(echo "" | dmenu -p "What do you want to do?")
+action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850)
 
 if [ -z "${action}" ]; then
     exit 0

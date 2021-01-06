@@ -33,7 +33,7 @@ if [ ${monitors} -ge 2 ]; then
 
     count=3
     while [ $count -le $monitors ]; do
-        bspc monitor ^$count --reset-desktops terminal 
+        bspc monitor ^$count --reset-desktops aux 
         count=$(($count+1))
     done
     

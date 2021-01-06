@@ -203,10 +203,12 @@ save_wallpaper(){
 
 option=$(show_options)
 
-case "$option" in
-    "All") option=$(change_all);;
-    "Download") option=$(download);;
-    "save") save_wallpaper;;
-    "") exit 0;;
-    *) option=$(change_wallpaper $option);
-esac
+while [ "true" ]; do
+    case "$option" in
+        "All") option=$(change_all);;
+        "Download") option=$(download);;
+        "save") save_wallpaper;;
+        "") exit 0;;
+        *) option=$(change_wallpaper $option);
+    esac
+done
