@@ -19,18 +19,21 @@ PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
 
+only_sound="0"
+
 show_help() {
-    echo "Enjoy easly a music your stylish desktop."
+    echo "Enjoy easly a music on your stylish desktop."
     echo "-r [n]           Play a radio of yout selection."
     echo "-l               Get the list of the available radios."
     echo "-p [url]         Play the video supplied."
     echo "-P               Play the from your clipboard."
-    echo "-a [url]         Play only the audio of the supplied video."
-    echo "-A               Play only the audio from your clipboard."
+    echo "-a [url]         Play only the audio of the supplied video. (deprecated)"
+    echo "-A               Play only the audio from your clipboard.(deprecated)"
     echo "-q [item]        Queue an item to be played later."
     echo "-Q               Play the queue"
     echo "-S               Stop all"
     echo "-h               This help message."
+    echo "-s               Flag to play only the sound" 
 }
 
 set_indicator() {
@@ -119,23 +122,6 @@ play_playlist(){
     notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
-play(){
-    notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
-    set_indicator
-    result=$1
-
-    if [ -z "${result}" ]; then
-        result="$(clipster -o)"
-    fi
-
-    echo "mpv $result" > ${PLAY_BKP};
-    mpv "$result"
-
-    notify-send -u normal  "Done" "Hopefully your media was played =/"
-    remove_indicator
-    exit
-}
-
 play_quality(){
     set_indicator
     
@@ -167,6 +153,30 @@ play_quality(){
     exit
 }
 
+play(){
+    result=$1
+
+    if [ -z "${result}" ]; then
+        result="$(clipster -o)"
+    fi
+
+    if [ "${only_sound}" = "1" ]; then
+        notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
+        set_indicator
+        echo "mpv --no-video $result" > ${PLAY_BKP};
+        mpv --no-video "$result"
+    else
+        notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
+        set_indicator
+        echo "mpv $result" > ${PLAY_BKP};
+        mpv "$result"
+    fi
+
+    notify-send -u normal  "Done" "Hopefully your media was played =/"
+    remove_indicator
+    exit
+}
+
 play_audio(){
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     set_indicator
@@ -187,8 +197,13 @@ resume() {
     set_indicator
 
     url=$(cat $LAST_LOCATION_PLAYED)
-    echo "mpv ${url}" > ${PLAY_BKP};
-    mpv "$url"
+    if [ "${only_sound}" = "1" ]; then
+        echo "mpv --no-video ${url}" > ${PLAY_BKP};
+        mpv --no-video "$url"
+    else
+        echo "mpv ${url}" > ${PLAY_BKP};
+        mpv "$url"
+    fi
 
     remove_indicator
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -244,9 +259,10 @@ list_radio() {
 
 command=$1
 
-while getopts "hmlr:Pp:Aa:q:QcS" opt; do
+while getopts "hsmlr:Pp:Aa:q:QcS" opt; do
     case "$opt" in
         h) command="param"; show_help;;
+        s) only_sound="1";;
         m) command="param"; chosen_mode="$2"; option=$3;;
         r) command="param"; chosen_mode="Radio"; option=$OPTARG;;
         P) command="param"; chosen_mode="Play";;

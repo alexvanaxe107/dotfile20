@@ -61,9 +61,8 @@ module-margin-right = 2
 
 font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Erica Type:style=Bold:pixelsize=9
-font-2 = "Noto Color Emoji:scale=14"
-font-3 = FontAwesome:pixelsize=9
-font-4 = symbola:pixelsize=9
+font-2 = FontAwesome:pixelsize=9
+font-3 = symbola:pixelsize=9
 
 modules-left = desktop bspwm
 

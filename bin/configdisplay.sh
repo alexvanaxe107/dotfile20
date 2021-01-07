@@ -48,14 +48,6 @@ set_monitors() {
         done
         IFS="$old_IFS"
         display_manager.sh -o "${list_monitor}"  
-        nitrogen --restore
-        restart_conky
-        reset_monitors.sh
-        toggle_bars.sh --restart
-        killall picom
-        sleep 1
-        start_picom.sh
-        notify_send -u low "Ambient is ready."
     fi
 
     if [ "$option" = "Manual" ]; then

@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 TMP_LOCATION=$HOME/.config/tmp
 LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
+PLAY_BKP=$HOME/.config/tmp/play_bkp
 
 get_titles(){
     for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
@@ -38,6 +39,36 @@ save() {
     notify-send -u normal  "Saved" "Location saved"
 }
 
+invert(){
+    player=$1
+    asaudio=$2
+
+    yt_link=$(playerctl -p "${player}" metadata xesam:url)
+    position=$(playerctl -p ${player} position)
+    
+    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9]{11}')
+    
+    if [ ! -z "${video_rash}" ]; then
+        if [ "${asaudio}" = "1" ]; then
+            playerctl -p $player stop;
+            play_radio.sh -sp "https://youtu.be/${video_rash}?t=${position}"
+        else
+            playerctl -p $player stop;
+            play_radio.sh -p "https://youtu.be/${video_rash}?t=${position}"
+        fi
+    else
+        yt_link=$(playerctl -p "${player}" metadata xesam:url)
+
+        if [ "${asaudio}" = "1" ]; then
+            playerctl -p $player stop;
+            play_radio.sh -sp "${yt_link}"
+        else
+            playerctl -p $player stop;
+            play_radio.sh -p "${yt_link}"
+        fi
+    fi
+}
+
 adjust_volume(){
   player=$1
 
@@ -66,6 +97,8 @@ if [ ! -z $chosen_p ]; then
         "stop ") playerctl -p $chosen_p stop;;
         "volume ") adjust_volume $chosen_p;;
         "save") save $chosen_p;;
+        "asvideo") invert "$chosen_p" "0";;
+        "asaudio") invert "$chosen_p" "1";;
         *) go_to_position ${chosen};;
     esac
 fi

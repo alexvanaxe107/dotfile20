@@ -23,7 +23,7 @@ super + shift + r
 
 # Configure Printscreen
 Print
-	gnome-screenshot --interactive
+	flameshot gui
 
 #Player Control
 super + shift + s
@@ -171,7 +171,7 @@ super + t
 
 #Send node to the other monitor and follow it
 super + ctrl + t
-	bspc desktop focused --to-monitor next
+	bspc node focused --to-monitor next --follow
 
 # Send to other desktop and follow it
 super + control + {1-9,0}
