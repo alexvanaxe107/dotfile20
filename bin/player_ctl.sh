@@ -46,7 +46,7 @@ invert(){
     yt_link=$(playerctl -p "${player}" metadata xesam:url)
     position=$(playerctl -p ${player} position)
     
-    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9]{11}')
+    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9_]{11}')
     
     if [ ! -z "${video_rash}" ]; then
         if [ "${asaudio}" = "1" ]; then

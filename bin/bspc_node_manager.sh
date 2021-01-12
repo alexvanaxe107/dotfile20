@@ -1,11 +1,7 @@
 #! /bin/dash
 
-show_help() {
-    echo "Manipulates the notes of the bspwm"
-    echo "-b             Bring the program to the current desktop"
-    echo "-m             Mark the current node"
-}
 
+bring_all="0"
 hide_node() {
     marked_node=$(bspc query --desktop focused -N -n .leaf.marked)
     if [ -z "${marked_node}" ]; then
@@ -17,7 +13,21 @@ hide_node() {
     fi
 }
 
+unhide_all() {
+    echo "Unhidding all"
+}
+
 show_hidden_pile() {
+    if [ "${bring_all}" = "1" ]; then
+        local hidden_windows="$(bspc query --nodes -n .leaf.hidden)"
+
+        for hid in ${hidden_windows}; do
+            bspc node ${hid} -g hidden
+        done
+
+        exit 0
+    fi
+
     marked=$(bspc query --desktop focused -N -n .leaf.marked.hidden)
 
     #if [ ! -z "${marked}" ]; then
@@ -101,10 +111,21 @@ if [ -z ${action} ]; then
     focus_program
 fi
 
+show_help() {
+    echo "Manipulates the notes of the bspwm"
+    echo "-b             Bring the program to the current desktop"
+    echo "-m             Mark the current node"
+    echo "-i             Hide the currently focused node"
+    echo "-I             Show hidden pile."
+    echo "-g             Retrieve marked node."
+    echo "-a             Bring all programs."
+}
 
-while getopts "h?bmiIg" opt; do
+
+while getopts "h?abmiIg" opt; do
     case "${opt}" in
         h|\?) show_help ;;
+        a) bring_all="1";;
         b) bring_program;;
         m) mark_node;;
         i) hide_node;;

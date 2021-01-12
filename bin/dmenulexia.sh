@@ -135,4 +135,10 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
+search='*unhide*'
+if [[ "$action" == $search ]]; then
+    bspc_node_manager.sh -aI
+    exit 0
+fi
+
 notify-send "Sorry" "Sorry, could not do what you asked"

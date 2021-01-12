@@ -1,7 +1,7 @@
 #!/bin/sh
 
 source ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nsxhkd\nbspwm\nradio\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper" | dmenu -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nsxhkd\nbspwm\nradio\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\nmonitors" | dmenu -y 16 -bw 2 -z 950 -p "Select config to edit")
 
 process_wallpaper(){
     sxiv $HOME/Documents/Pictures/Wallpapers/$theme_name&
@@ -24,6 +24,7 @@ case $file in
     "vim") alacritty -e $EDITOR $HOME/.vim/configs;;
     "fish") alacritty -e $EDITOR $HOME/.config/fish/config.fish;;
     "fonts") alacritty -e $EDITOR $HOME/bin/font_select.sh;;
+    "monitors") alacritty -e $EDITOR $HOME/.config/wm/monitors.conf;;
     "wallpaper") process_wallpaper;;
 esac
 
