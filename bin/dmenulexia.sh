@@ -8,13 +8,24 @@ fi
 
 search='*time*'
 if [[ "$action" == $search ]]; then
-    speach.sh -t "The time now is $(date +"%H:%M")"
+    speach.sh -t "The current time is $(date +"%H:%M")"
     exit 0
 fi
 
 search='*wallpaper*'
 if [[ "$action" == $search ]]; then
     wallpaper_changer.sh 
+    exit 0
+fi
+
+search='*read*'
+if [[ "$action" == $search ]]; then
+    command=$(echo "$action" | grep -e "read")
+
+    query=$(echo $action | sed 's/read//g' | xargs)
+
+    read_book.sh -b "${query}"
+
     exit 0
 fi
 
@@ -101,7 +112,7 @@ if [[ "$action" == $search ]]; then
 
     pomot=$(pomodoro status -f '%r')
     if [ ! -z "${pomot}" ]; then
-        speach.sh -t "There are ${pomot} minutes left"
+        speach.sh -t "Your current pomodoro has ${pomot} minutes left"
     else
         speach.sh -t "There is no pomodoro running."
     fi

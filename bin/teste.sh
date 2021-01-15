@@ -1,4 +1,10 @@
 #!/bin/bash
 # A basic summary of my sales report
 
-echo $! 
+select selected in carro uva abacaxi
+do
+    teste=$selected
+    break
+done
+
+echo $teste

@@ -73,6 +73,11 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'atelierbram/vim-colors_atelier-schemes'
 Plug 'fxn/vim-monochrome'
 Plug 'mhartington/oceanic-next'
+Plug 'andreasvc/vim-256noir'
+Plug 'wadackel/vim-dogrun'
+Plug 'arzg/vim-corvine'
+Plug 'zanglg/nova.vim'
+Plug 'reedes/vim-colors-pencil'
 
 "Vimwiki
 Plug 'vimwiki/vimwiki'

@@ -4,7 +4,7 @@ PATH=/home/alexvanaxe/.pyenv/versions/wm/bin/:$PATH
 
 ALACRITTY_FILE=$HOME/.config/wm/alacritty.conf
 
-choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -y 16 -bw 2 -z 850 -l 40 -p "Choose the terminal theme")
+choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -y 16 -bw 2 -z 850 -l 50 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 
@@ -15,6 +15,7 @@ fi
 
 vim_theme=$(basename -s .yaml "$choosen")
 
+echo "${vim_theme}"
 
 if [ "$vim_theme" == "breeze" ]; then
     sed -i 's/^colorscheme.*/colorscheme breezy/' ${HOME}/.vim/configs/theme.vim
@@ -22,10 +23,32 @@ if [ "$vim_theme" == "breeze" ]; then
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "Brewer.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme OceanicNextLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="oceanicnextlight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "papercolor_light" ]; then
     sed -i 's/^colorscheme.*/colorscheme PaperColor/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="papercolor"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "pencil_dark" ]; then
+    sed -i 's/^colorscheme.*/colorscheme pencil/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="pencil"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:pencil_terminal_italics = 1" >> ${HOME}/.vim/configs/theme_config.vim
+fi
+
+if [ "$vim_theme" == "pencil_light" ]; then
+    sed -i 's/^colorscheme.*/colorscheme pencil/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="pencil"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:pencil_terminal_italics = 1" >> ${HOME}/.vim/configs/theme_config.vim
 fi
 
 if [ "$vim_theme" == "gruvbox_light" ]; then
@@ -39,6 +62,12 @@ fi
 if [ "$vim_theme" == "3024.dark.yml" ]; then
     sed -i 's/^colorscheme.*/colorscheme base16-3024/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="base16_3024"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "OK100 - Matrix.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme base16-greenscreen/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="base16_greenscreen"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
@@ -74,6 +103,18 @@ if [ "$vim_theme" == "cyber_punk_neon" ]; then
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "Dawn.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme dogrun/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="synthwave84"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Cloud.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme synthwave84/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="synthwave84"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "material_theme" ]; then
     sed -i 's/^colorscheme.*/colorscheme material/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="material"/' ${HOME}/.vim/configs/theme.vim
@@ -99,6 +140,14 @@ if [ "$vim_theme" == "tomorrow_night" ]; then
 fi
 
 if [ "$vim_theme" == "tomorrow_night_bright" ]; then
+    sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:gruvbox_transparent_bg=1" >> ${HOME}/.vim/configs/theme_config.vim
+fi
+
+if [ "$vim_theme" == "Trim-yer-beard.yml" ]; then
     sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
@@ -158,6 +207,24 @@ if [ "$vim_theme" == "tango_dark" ]; then
     sed -i 's/^colorscheme.*/colorscheme tango/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="afterglow"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Nova.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme nova/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="nova"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Grayscale.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme base16-grayscale-light/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="base16_grayscale"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Embers.light.yml" ]; then
+    sed -i 's/^colorscheme.*/colorscheme corvine_light/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_HeathLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 
 if [ "$vim_theme" == "Muzieca mono.yml" ]; then
