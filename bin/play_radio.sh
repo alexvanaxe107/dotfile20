@@ -15,11 +15,13 @@ LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 INDICATOR_FILE=$HOME/.config/indicators/play_radio.ind
 
 PLAYLIST_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt
+#tr -d "\r" < "$PLAYLIST_FILE" > "$PLAYLIST_FILE.tmp"
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
 
 only_sound="0"
+cast="0"
 
 show_help() {
     echo "Enjoy easly a music on your stylish desktop."
@@ -34,6 +36,7 @@ show_help() {
     echo "-S               Stop all"
     echo "-h               This help message."
     echo "-s               Flag to play only the sound" 
+    echo "-C               Cast to chromecase beta" 
 }
 
 set_indicator() {
@@ -53,7 +56,7 @@ save_last_played() {
 }
 
 play_local () {
-    url=$1
+    url="$1"
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
     set_indicator
 
@@ -68,10 +71,6 @@ play_local () {
     notify-send -u normal  "Finished" "Media stoped. Bye."
     remove_indicator
     exit
-}
-
-play_cast(){
-    castnow --quiet $url&
 }
 
 stop_all(){
@@ -163,13 +162,22 @@ play(){
     if [ "${only_sound}" = "1" ]; then
         notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
         set_indicator
-        echo "mpv --no-video $result" > ${PLAY_BKP};
-        mpv --no-video "$result"
+        if [ "${cast}" = "0" ]; then
+            echo "mpv --no-video $result" > ${PLAY_BKP};
+            mpv --no-video "$result"
+        else
+            mkchromecast -y "$result"
+        fi
     else
         notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
         set_indicator
-        echo "mpv $result" > ${PLAY_BKP};
-        mpv "$result"
+        if [ "${cast}" = "0" ]; then
+            echo "mpv $result" > ${PLAY_BKP};
+            mpv "$result"
+        else
+            mkchromecast -y "$result" --video
+        fi
+
     fi
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -245,7 +253,6 @@ play_radio() {
 
 pl_len() {
     pl_len=$(wc -l "${PLAYLIST_FILE}" | awk '{print $1}')
-    echo $(<$PLAYLIST_FILE) > teste.txt
     echo $pl_len
 }
 
@@ -259,10 +266,11 @@ list_radio() {
 
 command=$1
 
-while getopts "hsmlr:Pp:Aa:q:QcS" opt; do
+while getopts "hsmlr:Pp:Aa:q:QcSC" opt; do
     case "$opt" in
         h) command="param"; show_help;;
         s) only_sound="1";;
+        C) cast="1";;
         m) command="param"; chosen_mode="$2"; option=$3;;
         r) command="param"; chosen_mode="Radio"; option=$OPTARG;;
         P) command="param"; chosen_mode="Play";;

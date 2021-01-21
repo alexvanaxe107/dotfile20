@@ -95,7 +95,7 @@ case $CHOSEN in
     "Futuristic") font "Larabiefont Rg" Bold 10 10 12 2;;
     "Elegant") font "Unica One" Regular 10 10 12 1;;
     "Elegant2") font "NovaMono" Normal 10 10 14 1;;
-    "Neon") font "Segment14" Regular 9 9 14 1;;
+    "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 11 11 13 2;;
     "War") font "American Stencil" Regular 9 10 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 12 1;;

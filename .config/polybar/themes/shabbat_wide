@@ -77,10 +77,11 @@ module-margin-right = 1
 
 font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Kingthings Trypewriter 2:style=Bold:pixelsize=9
-font-2 = FontAwesome:style=Bold:pixelsize=9
-font-3 = symbola:style=Bold:pixelsize=9;1
+font-2 = "Noto Color Emoji:scale=14"
+font-3 = FontAwesome:style=Bold:pixelsize=9
+font-4 = symbola:style=Bold:pixelsize=9;1
 
-separator = ✡
+separator = |✡|
 
 modules-left = desktop bspwm pulseaudio xwindow
 modules-center = pomodoro nweather torrent

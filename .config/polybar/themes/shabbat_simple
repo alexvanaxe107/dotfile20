@@ -39,7 +39,7 @@ height = 16
 radius = 10.0
 fixed-center = false
 
-bottom = true
+bottom = false
 enable-ipc = true
 
 background = ${colors.background}
@@ -175,7 +175,7 @@ ws-icon-1 = web;🌍
 ws-icon-2 = coding;💻
 ws-icon-3 = trade;💵
 ws-icon-4 = game;🎮
-ws-icon-5 = stocks;🐃
+ws-icon-5 = book;🐃
 ws-icon-6 = video;🎞
 ws-icon-7 = twitter;🕳
 ws-icon-8 = chat;⚛
