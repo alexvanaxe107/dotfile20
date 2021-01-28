@@ -7,26 +7,8 @@ PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 output_file=""
 id_only=0
 
-show_help() {
-    echo "Get monitor information." echo ""
-    echo "-m                             Get a list with the monitors name (primary first)"
-    echo "-f                             Get a list of the favorite order monitors."
-    echo "-a                             Get monitors info for the nitrogen."
-    echo "-c                             Get a list of connected monitors"
-    echo "-p                             Show the primary monitor name"
-    echo "-i                             Show the selected monitor id (ip)"
-    echo "-n {id}                        Get name by id"
-    echo "-b {id}                        Get name by id for nitrogen"
-    #echo "-r {id}                        Get resolution of id"
-    echo "-in {name}                     Get name by id"
-    echo "-w {[id, name, nothing}        The monitor is wide? If id is blank check any wide"
-    echo "-q                             How many monitors are plugged?"
-    echo "-s                             Secundary is wide?"
-    echo "-t {id}                        Get Monitors acording prefered order."
-    echo "-it {name}                     Get Monitors acording prefered order."
-}
-
 monitors=$(bspc query --monitors --names)
+all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
 
 print_primary_information() {
     if [ ${id_only} -eq 0 ]; then
@@ -169,8 +151,33 @@ secundary_wide() {
     echo "${wide}"
 }
 
+get_dimensions() {
+    local monitor="$1"
+    dim="$(xrandr | grep -A 1 -i "${monitor}" | tail -n 1 | grep -o "[[:digit:]]*x[[:digit:]]*" | head -n 1)"
+    echo "${dim}" 
+}
 
-while getopts "h?mcpqift:w:n:ab:s" opt; do
+show_help() {
+    echo "Get monitor information." echo ""
+    echo "-m                             Get a list with the monitors name (primary first)"
+    echo "-f                             Get a list of the favorite order monitors."
+    echo "-a                             Get monitors info for the nitrogen."
+    echo "-c                             Get a list of connected monitors"
+    echo "-p                             Show the primary monitor name"
+    echo "-i                             Show the selected monitor id (ip)"
+    echo "-n {id}                        Get name by id"
+    echo "-b {id}                        Get name by id for nitrogen"
+    #echo "-r {id}                        Get resolution of id"
+    echo "-in {name}                     Get name by id"
+    echo "-w {[id, name, nothing}        The monitor is wide? If id is blank check any wide"
+    echo "-q                             How many monitors are plugged?"
+    echo "-s                             Secundary is wide?"
+    echo "-t {id}                        Get Monitors acording prefered order."
+    echo "-it {name}                     Get Monitors acording prefered order."
+    echo "-d {name}                      Get Monitor dimension by its name"
+}
+
+while getopts "h?mcpqift:w:n:ab:sd:" opt; do
     case "$opt" in
     h|\?)
         show_help
@@ -184,6 +191,8 @@ while getopts "h?mcpqift:w:n:ab:s" opt; do
     a)  monitors_information_nitrogen
         ;;
     t)  name_by_prefered $OPTARG
+        ;;
+    d)  get_dimensions $OPTARG
         ;;
     c)  monitors_connected
         ;;

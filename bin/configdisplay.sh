@@ -1,6 +1,6 @@
 #!/bin/dash
 
-option=$(printf "%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "All On!" | dmenu -p "Setting up monitors: " -bw 2 -y 16 -z 850)
+option=$(printf "%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: " -bw 2 -y 16 -z 850)
 
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 
@@ -53,22 +53,44 @@ set_monitors() {
     if [ "$option" = "Manual" ]; then
         list_monitor=""
         count=1
-        for monitor in $(monitors_info.sh -m); do
-            list_monitor="$list_monitor $(monitors_info.sh -m | dmenu -p "Select the ${count}:" -bw 2 -y 16 -z 850)"
+        for monitor in $(monitors_info.sh -c); do
+            local mon_tmp=$(monitors_info.sh -c | dmenu -p "Select the ${count}:" -bw 2 -y 16 -z 850)
+            if [ -z "${mon_tmp}" ]; then
+                break
+            fi
+            list_monitor="$list_monitor ${mon_tmp}"
             count=$((${count}+1))
         done
 
         list_monitor=$(echo $list_monitor | xargs)
         display_manager.sh -o "${list_monitor}"  
-        nitrogen --restore
-        restart_conky
-        reset_monitors.sh
-        toggle_bars.sh --restart
-        killall picom
-        sleep 1
-        start_picom.sh
+        #nitrogen --restore
+        #restart_conky
+        #reset_monitors.sh
+        #toggle_bars.sh --restart
+        #killall picom
+        #sleep 1
+        #start_picom.sh
         notify_send -u low "Ambient is ready."
     fi
+}
+
+add_virtual() {
+    local dim="$(printf "1366x768\n1920x1080" | dmenu -p "Choose a screen dimension" -bw 2 -y 16 -z 850)"
+    if [ -z "${dim}" ]; then
+        exit 0
+    fi
+    display_manager.sh -d "${dim}" -v
+}
+
+rm_virtual() {
+    local virtual=$(monitors_info.sh -c | grep VIRTUAL | dmenu)
+
+    if [ -z "${virtual}" ]; then
+        exit 0
+    fi
+
+    display_manager.sh -V "${virtual}"
 }
 
 case "$option" in
@@ -77,6 +99,10 @@ case "$option" in
     "Order") set_monitors
     ;;
     "Primary") set_primary
+    ;;
+    "Add Virtual") add_virtual
+    ;;
+    "Rm Virtual") rm_virtual 
     ;;
     "All On!") display_manager.sh -a
     ;;

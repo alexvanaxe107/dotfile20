@@ -14,8 +14,7 @@ LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 
 INDICATOR_FILE=$HOME/.config/indicators/play_radio.ind
 
-PLAYLIST_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt
-#tr -d "\r" < "$PLAYLIST_FILE" > "$PLAYLIST_FILE.tmp"
+PLAYLIST_FILE=/home/alexvanaxe/Documents/Dropbox/stuffs/wm/yt_pl.txt
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp

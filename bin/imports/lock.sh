@@ -1,2 +1,2 @@
-FONT="CQ Mono":pixelsize=21
+FONT=Iceland:pixelsize=29
 SAVER=saver_mpv

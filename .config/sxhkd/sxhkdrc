@@ -179,7 +179,7 @@ super + control + {1-9,0}
 
 # Cycle through nodes
 super + control + {j,k}
-	bspc node -f {next.local,prev.local}
+	bspc node -f {next.local.leaf,prev.local.leaf}
 
 # focus the node in the given direction
 super + shift + {h,j,k,l}
@@ -276,3 +276,5 @@ super + shift + equal
 # Focus when clicking
 ~button1
 	bspc pointer --grab focus
+
+# End Move/Risize

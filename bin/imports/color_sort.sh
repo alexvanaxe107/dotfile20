@@ -105,7 +105,7 @@ black_or_white() {
 
     local lum="$(grep -oE "[[:digit:]]*" <<< "${lum}" | head -n 1)"
 
-    if [[ $lum -gt 70 ]]; then
+    if [[ $lum -gt 120 ]]; then
         echo "black"
     else
         echo "white"
