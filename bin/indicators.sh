@@ -10,9 +10,10 @@ set -o nounset
 
 radio=$(cat $HOME/.config/indicators/play_radio.ind 2> /dev/null)
 light=$(cat $HOME/.config/indicators/light.ind 2> /dev/null)
+creation=$(cat $HOME/.config/indicators/creation.ind 2> /dev/null)
 
 desktop=$(bspwm_layout_manager.sh icon)
 
-indicator="$desktop$radio$light"
+indicator="$desktop$creation$radio$light"
 
 printf $indicator

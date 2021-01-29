@@ -72,6 +72,7 @@ remove_virtual() {
     remoteVScreen=$(echo "${dim}" | awk '{print $2}' FS="x") 
 
     xrandr --delmode "${virtual}" "${remoteHScreen}x${remoteVScreen}"
+    xrandr --rmmode "${remoteHScreen}x${remoteVScreen}"
 }
 
 show_help() {

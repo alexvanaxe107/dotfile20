@@ -12,8 +12,8 @@ graphic_card_model = "Type Your Model Here"
 enable_graphic_card_temperature_sensor= "No" 
 
 -- Colors
-HTML_colors = "#000000"
-HTML_colors_current = "#FFFFFF"
+HTML_colors = "#FFFFFF"
+HTML_colors_current = "#000000"
 transparency = 0.90 -- From 0 to 1
 
 -- Scaled relative position from middle. Positive x and y means left and up, negative x and y means right and down.

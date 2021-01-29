@@ -79,6 +79,9 @@ super + v
 super + shift + v
 	$HOME/bin/bspc_node_manager.sh -I
 
+super + ctrl + v
+	$HOME/bin/bspc_node_manager.sh -aI
+
 # Configure monitors
 super + shift + d
 	$HOME/bin/configdisplay.sh
@@ -99,10 +102,10 @@ super + shift + u
 super + shift + c
 	$HOME/.config/conky/conky.sh
 
-super + shift + Tab
+super + Tab
 	$HOME/bin/bspc_node_manager.sh
 
-super + ctrl + Tab
+super + alt + Tab
 	$HOME/bin/bspc_node_manager.sh -b
 
 # Toggle the top bar
@@ -113,7 +116,7 @@ super + shift + g ; {1,2,8,i,f,c,r,s,p,v,5,6,shift + 5}
 	{alacritty --command ranger,alacritty --command transmission-remote-cli,alacritty --class=weechat --command weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,qutebrowser,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*,alacritty --class=vis --command vis,screeneaudio.sh play,camera.sh,screeneaudio.sh stop}
 
 # Change wallpapers
-super + w
+super + shift + w
 	$HOME/bin/wallpaper_changer.sh
 
 
@@ -138,9 +141,6 @@ super + g
 super + e
 	$HOME/bin/bspwmexit.sh -e "Exit?"
 
-#super + p
-#	bspc node focused --swap biggest.local
-
 # close and kill
 super + {_,shift + }q
 	bspc node -{c,k}
@@ -154,8 +154,14 @@ super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
 	bspc monitor focused --add-desktops '{terminal,web,coding,trade,game,book,video,twitter,chat,audio}'
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} 'focused:^{1-9,10}'
+super + shift + {1-9,0}
+	$HOME/bin/bspwm_desktop_manager.sh -m '{1-9,10}'
+
+super + {1-9,0}
+	$HOME/bin/bspwm_desktop_manager.sh -g '{1-9,10}'
+
+super + z : {1-9,0}
+	$HOME/bin/bspwm_desktop_manager.sh -r '{1-9,10}'
 
 # focus or send to the given desktop considering all monitors
 super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
@@ -208,7 +214,7 @@ super + i
 # state/flags
 #
 
-super + shift + w : {t,p,s,f}
+super + w : {t,p,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 
@@ -217,10 +223,10 @@ super + shift +  m
 	bspc desktop -l next
 
 # set ignore ewmh to fullscreen to container
-super + ctrl + f
+super + f
 	bspc config ignore_ewmh_fullscreen enter
 
-super + ctrl + shift + f
+super + ctrl + f
 	bspc config ignore_ewmh_fullscreen none
 
 # set the node flags

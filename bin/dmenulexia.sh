@@ -12,6 +12,12 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
+search='*creation*'
+if [[ "$action" == $search ]]; then
+    bspwm_desktop_manager.sh -t 
+    exit 0
+fi
+
 search='*wallpaper*'
 if [[ "$action" == $search ]]; then
     wallpaper_changer.sh 

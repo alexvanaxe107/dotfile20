@@ -13,10 +13,6 @@ hide_node() {
     fi
 }
 
-unhide_all() {
-    echo "Unhidding all"
-}
-
 show_hidden_pile() {
     if [ "${bring_all}" = "1" ]; then
         local hidden_windows="$(bspc query --nodes -n .leaf.hidden)"

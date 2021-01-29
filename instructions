@@ -2,6 +2,8 @@ vai se fuder seu bosta
 
 tor=8118
 
+tldr - Comando com exemplo de comandos
+
 In order to install from these lists you can do
 
 sudo pacman -S --needed $(comm -12 <(pacman -Slq|sort) <(sort pkglist.txt) )
