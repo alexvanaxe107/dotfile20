@@ -197,7 +197,8 @@ label-focused-underline= ${colors.ws}
 label-focused-padding = ${format.bspadding}
 
 #label-occupied = %index%
-label-occupied = %index%%icon%
+#label-occupied = %index%%icon%
+label-occupied = %icon%
 label-occupied-padding = ${format.bspadding}
 label-occupied-foreground = ${colors.foreground-alt}
 label-occupied-background = ${colors.foreground-alt2}
@@ -208,19 +209,20 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = ${format.bspadding}
 
 #label-empty = %index%
-label-empty = %index%%icon%
+#label-empty = %index%%icon%
+label-empty = %icon%
 label-empty-padding = ${format.bspadding}
 
-ws-icon-0 = terminal;🔲
-ws-icon-1 = web;🌍
-ws-icon-2 = coding;💻
-ws-icon-3 = trade;💵
-ws-icon-4 = game;🎮
-ws-icon-5 = book;
-ws-icon-6 = video;🎞
-ws-icon-7 = twitter;🕳
-ws-icon-8 = chat;⚛
-ws-icon-9 = audio;🎶
+ws-icon-0 = terminal;1🔲
+ws-icon-1 = web;2🌍
+ws-icon-2 = coding;3💻
+ws-icon-3 = trade;4💵
+ws-icon-4 = game;5🎮
+ws-icon-5 = book;6
+ws-icon-6 = video;7🎞
+ws-icon-7 = twitter;8🕳
+ws-icon-8 = chat;9⚛
+ws-icon-9 = audio;0🎶
 ws-icon-default = ♟
 
 ; Separator in between workspaces

@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/dash
 
 CONFIG_PATH="$HOME/.config/wm/bspwm.conf"
 
@@ -22,12 +22,13 @@ get_name(){
 goto(){
     desk_togo="$1"
     if [ "${creation_mode}" = "auto" ]; then
-        togo_code="$(bspc query --desktops --desktop focused:^${desk_togo})"
+        togo_name=$(get_name ${desk_togo})
+        togo_code="$(bspc query --desktops --desktop ${togo_name})"
         nodes="$(bspc query --nodes --node .leaf --desktop)"
 
         desktop="$(bspc query --desktops --desktop)"
 
-        bspc desktop -f "focused:^${desk_togo}"
+        bspc desktop -f "${togo_name}"
 
         if [ -z "${togo_code}" ]; then
             bspc monitor focused --add-desktops "$(get_name ${desk_togo})"
@@ -47,15 +48,16 @@ goto(){
 moto(){
     desk_togo="$1"
     if [ "${creation_mode}" = "auto" ]; then
-        togo_code="$(bspc query --desktops --desktop focused:^${desk_togo})"
+        togo_name=$(get_name ${desk_togo})
+        togo_code="$(bspc query --desktops --desktop ${togo_name})"
         nodes="$(bspc query --nodes --node .leaf --desktop)"
 
         desktop="$(bspc query --desktops --desktop)"
 
-        bspc node -d "focused:^${desk_togo}"
+        bspc node -d "${togo_name}"
 
         if [ -z "${togo_code}" ]; then
-            bspc monitor focused --add-desktops "$(get_name ${desk_togo})"
+            bspc monitor focused --add-desktops "${togo_name}"
             # Go to the last desktop
             bspc node -d "focused:^$(bspc query --desktops --monitor | wc -l)"
             nodes="$(bspc query --nodes --node .leaf --desktop)"

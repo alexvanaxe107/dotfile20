@@ -19,4 +19,8 @@ if [ "${pomodoro_status}" = "0:00" ]; then
 fi
 
 status="$(pomodoro status -f '%!r⏱  %c%!g🍅')"
-printf "%s" "${status}" 
+if [ ! -z "${status}" ]; then
+    printf "%s" "${status}" 
+else
+    echo ""
+fi
