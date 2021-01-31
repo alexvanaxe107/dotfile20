@@ -116,6 +116,9 @@ config.bind("PA", "spawn --userscript playaudio.sh")
 config.bind("Pq", "hint links userscript playquality.sh")
 config.bind("PQ", "spawn --userscript playquality.sh")
 config.bind("Pp", "hint links userscript playpl.sh")
+config.bind("cv", "hint links userscript castvideo.sh")
+config.bind("cs", "hint links userscript castsite.sh")
+config.bind("cV", "spawn --userscript castvideo.sh")
 config.bind("PP", "spawn --userscript playpl.sh")
 
 # Page when o and enter is hit
