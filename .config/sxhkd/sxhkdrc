@@ -191,6 +191,10 @@ super + control + {j,k}
 super + shift + {h,j,k,l}
 	bspc node -s {west,south,north,east}
 
+# Navigate in the desktops
+super + ctrl + {comma,period}
+	bspc desktop -f {prev,next}
+
 # Send desktop forward, backwards
 super + shift + {comma,period}
 	bspc desktop --bubble {prev,next}
