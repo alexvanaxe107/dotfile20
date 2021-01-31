@@ -1,22 +1,5 @@
 #! /bin/bash
 
-cli="0"
-audio="0"
-multiple="0"
-
-CONF="$HOME/.config/wm/ytplay.conf"
-
-CONF_CONT="$(<$CONF)"
-
-show_help() {
-    echo "Iterate with the yt"
-    echo "-a             Play audio only"
-    echo "-t             Find a channel by theme"
-    echo "-T             Play the latest video from the search"
-    echo "-l             Select the video from a list"
-    echo "-v             List live streams from the list"
-    echo "-m             Use multiple links"
-}
 
 play() {
     link="$1"
@@ -34,7 +17,7 @@ search_live() {
         local search="$line"
         local search_query=$(awk '{print $1}' FS=";" <<< "${search}")
         local search_refiner=$(awk '{print $2}' FS=";"<<< "${search}")
-        lives="$(ytsearch.py -to -q 3 -s "${search_query} ${search_refiner}")"
+        lives="$(ytsearch.py -to -q 3 "${search_query} ${search_refiner}")"
         while read -r live; do
             lives_tmp+="$(echo "$live" | grep ";Live$")\n"
         done <<<${lives}
@@ -88,7 +71,7 @@ play_parameter() {
     fi
 
     if [ "${multiple}" = "1" ]; then
-        local videos="$(ytsearch.py -to -q 5 -s "${choosen_theme}")"
+        local videos="$(ytsearch.py -to -q 5 "${choosen_theme}")"
         video=$(awk '{printf "%s", $1}' FS="-" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s-%s-%s\n", $2, $3, $4}' FS=";" <<< $videos)))
 
         if [ -z "${video}" ];then
@@ -107,7 +90,7 @@ play_parameter() {
         exit 0
     fi
 
-    local link=$(ytsearch.py -o -s "${choosen_theme}")
+    local link=$(ytsearch.py -o "${choosen_theme}")
 
     play ${link}
 }
@@ -121,7 +104,7 @@ play_by_list() {
         exit 0
     fi
     
-    videos="$(ytsearch.py -to -q 10 -s "${search_query} ${search_refiner}")"
+    videos="$(ytsearch.py -to -q 10 "${search_query} ${search_refiner}")"
     video=""
     if [ "${cli}" = "1" ]; then
         local IFS=$'\n'
@@ -160,19 +143,66 @@ play_by_theme() {
         exit 0
     fi
 
-    local link=$(ytsearch.py -o -s "${search_query} ${search_refiner}")
+    local link=$(ytsearch.py -o "${search_query} ${search_refiner}")
     play "$link"
 }
 
-while getopts "h?mactT:lv" opt; do
+channel_search() {
+    local channel_filter="$1"
+    options="$(ytsearch.py -c -q 5 "${channel_filter}")"
+    local IFS=$'\n'
+    select selected in $options
+    do
+        local choosen_channel="$selected"
+        break
+    done
+
+    awk '{printf $2}' FS=";" <<< ${choosen_channel} | clipster -c
+}
+
+show_help() {
+    echo "Iterate with the yt"
+    echo "-c             CLI mode"
+    echo "-a             Play audio only"
+    echo "-t             Find a channel by theme"
+    echo "-T             Play the latest video from the search"
+    echo "-l             Select the video from a list"
+    echo "-v             List live streams from the list"
+    echo "-C             Search for the channel"
+    echo "-m             Use multiple links"
+}
+
+cli="0"
+audio="0"
+multiple="0"
+
+CONF="$HOME/.config/wm/ytplay.conf"
+
+CONF_CONT="$(<$CONF)"
+
+req_command=0
+
+
+while getopts "h?mactTlvC" opt; do
     case "${opt}" in
         h|\?) show_help ;;
         c) cli=1;;
         a) audio="1";;
         m) multiple="1";;
-        t) play_by_theme;;
-        l) play_by_list;;
-        T) play_parameter "${OPTARG}";;
-        v) search_live;;
+        t) req_command="t";;
+        l) req_command="l";;
+        T) req_command="T";;
+        v) req_command="v";;
+        C) req_command="C";;
     esac
 done
+
+shift $((OPTIND-1))
+
+case "${req_command}" in
+    "T") play_parameter "$1";;
+    "t") play_by_theme;;
+    "l") play_by_list;;
+    "v") search_live;;
+    "C") channel_search "$1";;
+esac

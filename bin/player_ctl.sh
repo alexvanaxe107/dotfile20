@@ -3,6 +3,7 @@
 TMP_LOCATION=$HOME/.config/tmp
 LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 PLAY_BKP=$HOME/.config/tmp/play_bkp
+INDICATOR_CAST_FILE=$HOME/.config/indicators/casting.ind
 
 get_titles(){
     for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
@@ -11,6 +12,11 @@ get_titles(){
             printf "%s\n" "$teste"
         fi
     done
+
+    if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+        printf "%s\n" "casting-$(cast.sh -i)"
+    fi
+
 }
 
 IFS=$'\n'
@@ -69,6 +75,15 @@ invert(){
     fi
 }
 
+stop_play(){
+    playerctl -p $chosen_p stop
+
+    # How can only be one casting file, for now will be this way
+    if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+        cast.sh -S
+    fi
+}
+
 adjust_volume(){
   player=$1
 
@@ -94,7 +109,7 @@ if [ ! -z $chosen_p ]; then
         "play ▶⏸") playerctl -p $chosen_p play-pause;;
         "forward ▶▶") playerctl -p $chosen_p next;;
         "back ◀◀") playerctl -p $chosen_p previous;;
-        "stop ") playerctl -p $chosen_p stop;;
+        "stop ") stop_play;;
         "volume ") adjust_volume $chosen_p;;
         "save") save $chosen_p;;
         "asvideo") invert "$chosen_p" "0";;

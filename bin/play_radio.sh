@@ -59,6 +59,11 @@ play_local () {
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
     set_indicator
 
+    if [ "$cast" = "1" ]; then
+        cast.sh "$url"
+        exit 0
+    fi
+
     if [ $url = *"pls"* ]; then
         echo "mpv -playlist=$url" > ${PLAY_BKP};
         mpv -playlist=$url
@@ -69,7 +74,7 @@ play_local () {
 
     notify-send -u normal  "Finished" "Media stoped. Bye."
     remove_indicator
-    exit
+    exit 0
 }
 
 stop_all(){
@@ -263,6 +268,12 @@ list_radio() {
     cat $HOME/.config/play_radio/config | nl
 }
 
+play_cast() {
+    cast=1
+    echo "Playing $1    Cast - $cast"
+    play_radio "$1"
+}
+
 command=$1
 
 while getopts "hsmlr:Pp:Aa:q:QcSC" opt; do
@@ -286,10 +297,11 @@ done
 
 if [ "$command" != "param" ]
 then
-    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 850)
+    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop\\nCast" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 900)
 fi
 
 case "$chosen_mode" in
+    "Cast") play_cast "$option";;
     "Radio") play_radio "$option";;
     "Play") play "$option";;
     "Play Quality") play_quality "$option";;
