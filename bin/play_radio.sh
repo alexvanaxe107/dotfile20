@@ -57,13 +57,13 @@ save_last_played() {
 play_local () {
     url="$1"
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
-    set_indicator
 
     if [ "$cast" = "1" ]; then
         cast.sh "$url"
         exit 0
     fi
 
+    set_indicator
     if [ $url = *"pls"* ]; then
         echo "mpv -playlist=$url" > ${PLAY_BKP};
         mpv -playlist=$url
@@ -170,7 +170,7 @@ play(){
             echo "mpv --no-video $result" > ${PLAY_BKP};
             mpv --no-video "$result"
         else
-            mkchromecast -y "$result"
+            cast.sh "$result"
         fi
     else
         notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
@@ -179,7 +179,7 @@ play(){
             echo "mpv $result" > ${PLAY_BKP};
             mpv "$result"
         else
-            mkchromecast -y "$result" --video
+            cast.sh "$result"
         fi
 
     fi

@@ -1,2 +1,2 @@
-FONT="Overpass Mono":pixelsize=19
+FONT="Graduate":pixelsize=18
 SAVER=saver_mpv

@@ -40,6 +40,8 @@ alias pacro="pacman -Qtdq | sudo pacman -Rns -"
 
 alias subliminal="subliminal --opensubtitles nightwalker107 naovoudizer"
 
+alias clear="clear;echo;echo;spark.sh"
+
 #alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
 export _JAVA_AWT_WM_NONREPARENTING=1
 export FZF_DEFAULT_COMMAND='fd -I --type f'

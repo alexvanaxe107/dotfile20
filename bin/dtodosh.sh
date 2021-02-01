@@ -7,7 +7,7 @@ number=$(printf "$chosen" | awk '{print $1}')
 re='^[0-9]+$'
 
 if  [ $(echo "$number" | grep -E $re) ]; then
-    chosen_sel=$(printf ""| dmenu -y 16 -bw 2 -z 750  -p "Leave blank to done or A-Z to pri or - to depri: ($chosen)")
+    chosen_sel=$(printf ""| dmenu -y 16 -bw 2 -p "Leave blank to done or A-Z to pri or - to depri: ($chosen)")
     if [ -z "$chosen_sel" ] ; then
         $(todo.sh do $number > /dev/null 2>&1)
         notify-send -u normal "Task done" "$chosen"

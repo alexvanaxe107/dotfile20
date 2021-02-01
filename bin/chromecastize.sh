@@ -119,6 +119,8 @@ on_success() {
 	fi
 	mv "$FILENAME.$OUTPUT_GFORMAT" "$DESTINATION_FILENAME"
 	echo "- conversion succeeded; file '$DESTINATION_FILENAME' saved"
+    notify-send -u normal "Conversion succeeded" "file '$DESTINATION_FILENAME' saved"
+
 	mark_as_good "$DESTINATION_FILENAME"
 }
 
