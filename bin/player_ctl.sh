@@ -13,10 +13,13 @@ get_titles(){
         fi
     done
 
-    if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
-        printf "%s\n" "casting-$(cast.sh -i)"
-    fi
+    #if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+        #printf "%s\n" "casting-$(cast.sh -i)"
+    #fi
 
+    if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+        printf "%s\n" "chromecast"
+    fi
 }
 
 IFS=$'\n'
@@ -75,12 +78,37 @@ invert(){
     fi
 }
 
+cast(){
+    player="$1"
+    local media_url="$(playerctl -p "${player}" metadata xesam:url)"
+
+    cast.sh "${media_url}"
+    playerctl -p $player stop;
+}
+
+uncast(){
+    local yt_info=$(cast.sh -i)
+    local video_id=$(awk '{printf $3}' FS="|" <<< "${yt_info}")
+    local video_rash=$(awk '{printf $1}' FS="|" <<< "${yt_info}")
+
+    if [ "${video_id}" = "x-youtube/video" ]; then
+        local video_position=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
+        
+        play_radio.sh -p "https://youtu.be/${video_rash}?t=${video_position}"
+    else
+        echo "Opening ${video_rash}"
+        play_radio.sh -p "${video_rash}"
+    fi
+}
+
 stop_play(){
     playerctl -p $chosen_p stop
 
     # How can only be one casting file, for now will be this way
-    if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
-        cast.sh -S
+    if [ "$chosen_p" = "chromecast" ]; then
+        if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+            cast.sh -S
+        fi
     fi
 }
 
@@ -99,11 +127,50 @@ adjust_volume(){
 chosen_p=$(get_titles | dmenu -i -n -l 20 -p "Select the player:" -y 16 -z 950 -bw 2)
 chosen_p=$(echo $chosen_p | awk '{print $1}') 
 
+get_prompt() {
+    local chosen_p="$1"
+
+    local prompt=""
+    if [ "chromecast" = "${chosen_p}" ]; then
+        local yt_info=$(cast.sh -i)
+        local status=$(awk '{printf $4}' FS="|" <<< "${yt_info}")
+        local playtime=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
+        
+        playtime=$(echo "$playtime/60" | bc)
+        prompt="${playtime}Min - ${status}"
+
+
+        printf "Chrome: %s" "${prompt}"
+    else
+        local position="$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)"
+        if [ ! -z "${position}" ]; then
+            prompt="${position} Min"
+        fi
+        local artist="$(playerctl -p $chosen_p metadata artist)"
+        
+        if [ ! -z "${artist}" ]; then
+            prompt="${prompt} - ${artist}"
+        fi
+        local title=$(playerctl -p $chosen_p metadata title)
+        if [ ! -z "${title}" ]; then
+            prompt="${prompt} - ${title:0:30}"
+        fi
+
+        printf "%s" "${prompt}"
+    fi
+
+   #${position}$(playerctl -p $chosen_p metadata artist) - ${title:0:30} 
+}
+
 
 if [ ! -z $chosen_p ]; then
-    position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
-    title=$(playerctl -p $chosen_p metadata title)
-    chosen=$(printf "play ▶⏸\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume " | dmenu -i -p "${position}Min:$(playerctl -p $chosen_p metadata artist) - ${title:0:30}" -y 16 -z 950 -bw 2)
+    #position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
+    prompt=$(get_prompt "${chosen_p}")
+    if [ "$chosen_p" = "chromecast" ]; then
+        chosen=$(printf "stop \\nuncastﲈ" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
+    else
+        chosen=$(printf "play ▶⏸\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume \\ncast " | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
+    fi
 
     case "$chosen" in
         "play ▶⏸") playerctl -p $chosen_p play-pause;;
@@ -114,6 +181,8 @@ if [ ! -z $chosen_p ]; then
         "save") save $chosen_p;;
         "asvideo") invert "$chosen_p" "0";;
         "asaudio") invert "$chosen_p" "1";;
+        "cast ") cast "$chosen_p";;
+        "uncastﲈ") uncast;;
         *) go_to_position ${chosen};;
     esac
 fi

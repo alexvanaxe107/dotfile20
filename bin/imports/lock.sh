@@ -1,2 +1,2 @@
-FONT="Graduate":pixelsize=18
+FONT=Iceland:pixelsize=29
 SAVER=saver_mpv

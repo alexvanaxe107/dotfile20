@@ -2,7 +2,7 @@
 
 CONFIG_URL="$HOME/.config/wm/tmp"
 INDICATOR_CAST_FILE=$HOME/.config/indicators/casting.ind
-
+ICON=""
 cast_url(){
     local url_to_cast="$1"
 
@@ -24,7 +24,7 @@ cast_url(){
     else
         catt cast -s "${subtitle}" "$url_to_cast"
     fi
-    echo "C" > "${INDICATOR_CAST_FILE}"
+    echo "${ICON}" > "${INDICATOR_CAST_FILE}"
 }
 
 cast_stop(){
@@ -35,7 +35,12 @@ cast_stop(){
 cast_info(){
     local info="$(catt info)"
 
-    echo "$info" | grep "content_id" | grep -o " .*" | xargs
+    content_id="$(echo "$info" | grep "content_id" | grep -o " .*" | xargs)"
+    current_time="$(echo "$info" | grep "current_time" | grep -o " .*" | xargs)"
+    content_type="$(echo "$info" | grep "content_type" | grep -o " .*" | xargs)"
+    status_text="$(echo "$info" | grep "status_text" | grep -o " .*" | xargs)"
+
+    printf "%s|%s|%s|%s" "${content_id}" "${current_time}" "${content_type}" "${status_text}"
 
     #awk '{print $2}' FS=':' <<< "${info}"
 }

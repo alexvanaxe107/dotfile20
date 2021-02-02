@@ -27,13 +27,32 @@
 # Generates sparklines.
 #
 # $1 - The data we'd like to graph.
+
+red="$(tput setaf 1)"
+green="$(tput setaf 2)"
+yellow="$(tput setaf 3)"
+blue="$(tput setaf 4)"
+magenta="$(tput setaf 5)"
+cyan="$(tput setaf 6)"
+white="$(tput setaf 7)"
+b="$(tput bold)"
+reset="$(tput sgr0)"
+
+count=16
+count_begin=16
+count_end=30
+
+#count=88
+#count_begin=88
+#count_end=100
+
 _echo()
 {
   if [ "X$1" = "X-n" ]; then
     shift
-    printf "%s" "$*"
+    printf "\e[38;5;${count}m%s" "$*"
   else
-    printf "%s\n" "$*"
+    printf "\e[38;5;${count}m%s\n" "$*"
   fi
 }
 
@@ -66,6 +85,10 @@ spark()
 
   for n in $numbers
   do
+    if [[ $count -eq $count_end ]]; then
+        count=$count_begin  
+    fi
+    count=$((count+1))
     _echo -n ${ticks[$(( ((($n-$min)<<8)/$f) ))]}
   done
   _echo
