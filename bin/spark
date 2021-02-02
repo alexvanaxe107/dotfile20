@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #
-# spark
-# https://github.com/holman/spark
+# spark # https://github.com/holman/spark
 #
 # Generates sparklines for a set of data.
 #
@@ -28,19 +27,24 @@
 #
 # $1 - The data we'd like to graph.
 
-red="$(tput setaf 1)"
-green="$(tput setaf 2)"
-yellow="$(tput setaf 3)"
-blue="$(tput setaf 4)"
-magenta="$(tput setaf 5)"
-cyan="$(tput setaf 6)"
-white="$(tput setaf 7)"
-b="$(tput bold)"
-reset="$(tput sgr0)"
+regex_color="433F38"
+count=0
+count_begin=1
+count_end=
+color=
+percent="0.1"
 
-count=16
-count_begin=16
-count_end=30
+fromhex(){
+    hex=${1#"#"}
+    r=$(printf '0x%0.2s' "$hex")
+    g=$(printf '0x%0.2s' ${hex#??})
+    b=$(printf '0x%0.2s' ${hex#????})
+    printf '%3d' "$(( (r<75?0:(r-35)/40)*6*6 +
+                       (g<75?0:(g-35)/40)*6   +
+                       (b<75?0:(b-35)/40)     + 16 ))"
+}
+
+user_color=$(fromhex "$regex_color")
 
 #count=88
 #count_begin=88
@@ -50,9 +54,9 @@ _echo()
 {
   if [ "X$1" = "X-n" ]; then
     shift
-    printf "\e[38;5;${count}m%s" "$*"
+    printf "\e[38;5;${color}m%s" "$*"
   else
-    printf "\e[38;5;${count}m%s\n" "$*"
+    printf "\e[38;5;${color}m%s\n" "$*"
   fi
 }
 
@@ -83,12 +87,21 @@ spark()
   local f=$(( (($max-$min)<<8)/(${#ticks[@]}-1) ))
   (( f < 1 )) && f=1
 
+  total_numbers="${#@}"
+  initial_color=$(echo "$total_numbers*${percent} / 1" | bc)
+  final_color=$(echo "$total_numbers-$initial_color" | bc)
+
+  color="$(($user_color-$initial_color))"
+
   for n in $numbers
   do
-    if [[ $count -eq $count_end ]]; then
-        count=$count_begin  
+    count="$((count+1))"
+    if [[ $count -le $initial_color ]]; then
+        color="$((color+1))"
     fi
-    count=$((count+1))
+    if [[ $final_color -lt $count ]]; then
+        color="$((color+1))"
+    fi
     _echo -n ${ticks[$(( ((($n-$min)<<8)/$f) ))]}
   done
   _echo

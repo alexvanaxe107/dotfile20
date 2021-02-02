@@ -1,10 +1,6 @@
 #!/bin/bash
 # A basic summary of my sales report
 
-select selected in carro uva abacaxi
-do
-    teste=$selected
-    break
-done
+teste=(1 2 3 4 5)
 
-echo $teste
+echo ${#teste[@]}
