@@ -55,25 +55,25 @@ invert(){
     yt_link=$(playerctl -p "${player}" metadata xesam:url)
     position=$(playerctl -p ${player} position)
     
-    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9_]{11}')
+    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9_-]{11}')
     
     if [ ! -z "${video_rash}" ]; then
         if [ "${asaudio}" = "1" ]; then
             playerctl -p $player stop;
-            play_radio.sh -sp "https://youtu.be/${video_rash}?t=${position}"
+            play_radio.sh -sp "https://youtu.be/${video_rash}?t=${position}"&
         else
             playerctl -p $player stop;
-            play_radio.sh -p "https://youtu.be/${video_rash}?t=${position}"
+            play_radio.sh -p "https://youtu.be/${video_rash}?t=${position}"&
         fi
     else
         yt_link=$(playerctl -p "${player}" metadata xesam:url)
 
         if [ "${asaudio}" = "1" ]; then
             playerctl -p $player stop;
-            play_radio.sh -sp "${yt_link}"
+            play_radio.sh -sp "${yt_link}"&
         else
             playerctl -p $player stop;
-            play_radio.sh -p "${yt_link}"
+            play_radio.sh -p "${yt_link}"&
         fi
     fi
 }
@@ -81,8 +81,15 @@ invert(){
 cast(){
     player="$1"
     local media_url="$(playerctl -p "${player}" metadata xesam:url)"
-
+    local position=$(playerctl -p ${player} position)
     cast.sh "${media_url}"
+    status=""
+
+    while [ -z "$status" ]; do
+        local yt_info=$(cast.sh -i)
+        local status=$(awk '{printf $4}' FS="|" <<< "${yt_info}")
+    done
+    cast.sh -g "${position}"
     playerctl -p $player stop;
 }
 
@@ -94,10 +101,11 @@ uncast(){
     if [ "${video_id}" = "x-youtube/video" ]; then
         local video_position=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
         
-        play_radio.sh -p "https://youtu.be/${video_rash}?t=${video_position}"
+        play_radio.sh -p "https://youtu.be/${video_rash}?t=${video_position}"&
+        cast.sh -S
     else
-        echo "Opening ${video_rash}"
-        play_radio.sh -p "${video_rash}"
+        play_radio.sh -p "${video_rash}"&
+        cast.sh -S
     fi
 }
 
@@ -108,6 +116,26 @@ stop_play(){
     if [ "$chosen_p" = "chromecast" ]; then
         if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
             cast.sh -S
+        fi
+    fi
+}
+
+play_pause(){
+    playerctl -p $chosen_p play-pause
+
+    if [ "$chosen_p" = "chromecast" ]; then
+        if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+            cast.sh -p
+        fi
+    fi
+}
+
+forward(){
+    playerctl -p $chosen_p next
+
+    if [ "$chosen_p" = "chromecast" ]; then
+        if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+            cast.sh -n
         fi
     fi
 }
@@ -167,14 +195,14 @@ if [ ! -z $chosen_p ]; then
     #position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
     prompt=$(get_prompt "${chosen_p}")
     if [ "$chosen_p" = "chromecast" ]; then
-        chosen=$(printf "stop \\nuncastﲈ" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
+        chosen=$(printf "play ▶⏸\nforward ▶▶\\nclear \\nstop \\nuncastﲈ" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
     else
         chosen=$(printf "play ▶⏸\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume \\ncast " | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
     fi
 
     case "$chosen" in
-        "play ▶⏸") playerctl -p $chosen_p play-pause;;
-        "forward ▶▶") playerctl -p $chosen_p next;;
+        "play ▶⏸") play_pause;;
+        "forward ▶▶") forward;;
         "back ◀◀") playerctl -p $chosen_p previous;;
         "stop ") stop_play;;
         "volume ") adjust_volume $chosen_p;;
@@ -182,6 +210,7 @@ if [ ! -z $chosen_p ]; then
         "asvideo") invert "$chosen_p" "0";;
         "asaudio") invert "$chosen_p" "1";;
         "cast ") cast "$chosen_p";;
+        "clear ") cast.sh -c;;
         "uncastﲈ") uncast;;
         *) go_to_position ${chosen};;
     esac

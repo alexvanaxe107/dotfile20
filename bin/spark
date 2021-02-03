@@ -27,12 +27,12 @@
 #
 # $1 - The data we'd like to graph.
 
-regex_color="115167"
+regex_color="7E7A6A"
 count=0
 count_begin=1
 count_end=
 color=
-percent="0.1"
+percent="0.07"
 
 fromhex(){
     hex=${1#"#"}
@@ -98,9 +98,10 @@ spark()
     count="$((count+1))"
     if [[ $count -le $initial_color ]]; then
         color="$((color+1))"
-    fi
-    if [[ $final_color -lt $count ]]; then
+    elif [[ $final_color -lt $count ]]; then
         color="$((color+1))"
+    else
+        color="${user_color}"
     fi
     _echo -n ${ticks[$(( ((($n-$min)<<8)/$f) ))]}
   done
