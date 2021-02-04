@@ -56,9 +56,10 @@ font() {
     sed -i "s/FONT=.*/FONT=\"${font_name}\":pixelsize=$(($size3+7))/" ${HOME}/bin/imports/lock.sh
     
 
+    #Change the conk font
     for file in ${HOME}/.config/conky/*.conf; do
         if [ ${NOT_MONO} != "NM" ]; then
-            sed -i "s/font=.*/font='${font_name}:size=${size3}',/" ${file}
+            sed -i "s/font=.*/font='${font_name}:${style}:size=${size3}',/" ${file}
         fi
         sed -i "s/TITLEFONT/${font_name}/g" ${file}
     done
