@@ -160,15 +160,15 @@ get_prompt() {
 
     local prompt=""
     if [ "chromecast" = "${chosen_p}" ]; then
-        local yt_info=$(cast.sh -i)
-        local status=$(awk '{printf $4}' FS="|" <<< "${yt_info}")
-        local playtime=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
+        #local yt_info=$(cast.sh -i)
+        #local status=$(awk '{printf $4}' FS="|" <<< "${yt_info}")
+        #local playtime=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
         
-        playtime=$(echo "$playtime/60" | bc)
-        prompt="${playtime}Min - ${status}"
+        #playtime=$(echo "$playtime/60" | bc)
+        #prompt="${playtime}Min - ${status}"
 
 
-        printf "Chrome: %s" "${prompt}"
+        printf "Chrome: Playing something... I think.. =/ %s" "${prompt}"
     else
         local position="$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)"
         if [ ! -z "${position}" ]; then

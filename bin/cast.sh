@@ -20,6 +20,7 @@ cast_info(){
 cast_url(){
     local url_to_cast="$1"
 
+    echo "${ICON}" > "${INDICATOR_CAST_FILE}"
     local search='*.pls'
     if [[ "$url_to_cast" == $search ]]; then
         if [[ ! -d "${CONFIG_URL}" ]]; then
@@ -50,7 +51,6 @@ cast_url(){
     else
         catt cast -s "${subtitle}" "$url_to_cast"
     fi
-    echo "${ICON}" > "${INDICATOR_CAST_FILE}"
 }
 
 cast_stop(){

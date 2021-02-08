@@ -297,7 +297,7 @@ done
 
 if [ "$command" != "param" ]
 then
-    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop\\nCast" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 900)
+    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nCast" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 900)
 fi
 
 case "$chosen_mode" in
