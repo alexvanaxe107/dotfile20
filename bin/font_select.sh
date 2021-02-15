@@ -112,7 +112,7 @@ case $CHOSEN in
     "Cartoon") font "Pointfree" Bold 9 9 12 1;;
     "Cute") font "Overpass Mono" Bold 10 10 12 0;;
     "Space") font "Unispace" Bold 8 8 12 2;;
-    "Noir") font "SyneMono-Regular" Regular 10 10 12 1;;
+    "Noir") font "Syne Mono" Regular 10 10 12 1;;
     "Computer") font "Terminus \(TTF\)" Bold 10 10 13 2;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
