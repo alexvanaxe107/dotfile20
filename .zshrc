@@ -73,3 +73,5 @@ bindkey '^ ' autosuggest-accept
 bindkey '^o' autosuggest-toggle
 bindkey ^f forward-word
 bindkey -M vicmd ' ' vi-easy-motion
+
+colorscript -r

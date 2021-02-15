@@ -14,23 +14,28 @@ LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 
 INDICATOR_FILE=$HOME/.config/indicators/play_radio.ind
 
-PLAYLIST_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt
+PLAYLIST_FILE=/home/alexvanaxe/Documents/Dropbox/stuffs/wm/yt_pl.txt
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
 
+only_sound="0"
+cast="0"
+
 show_help() {
-    echo "Enjoy easly a music your stylish desktop."
+    echo "Enjoy easly a music on your stylish desktop."
     echo "-r [n]           Play a radio of yout selection."
     echo "-l               Get the list of the available radios."
     echo "-p [url]         Play the video supplied."
     echo "-P               Play the from your clipboard."
-    echo "-a [url]         Play only the audio of the supplied video."
-    echo "-A               Play only the audio from your clipboard."
+    echo "-a [url]         Play only the audio of the supplied video. (deprecated)"
+    echo "-A               Play only the audio from your clipboard.(deprecated)"
     echo "-q [item]        Queue an item to be played later."
     echo "-Q               Play the queue"
     echo "-S               Stop all"
     echo "-h               This help message."
+    echo "-s               Flag to play only the sound" 
+    echo "-C               Cast to chromecase beta" 
 }
 
 set_indicator() {
@@ -50,10 +55,15 @@ save_last_played() {
 }
 
 play_local () {
-    url=$1
+    url="$1"
     notify-send -u normal  "Playing..." "Playing your radio now. Enjoy! =)"
-    set_indicator
 
+    if [ "$cast" = "1" ]; then
+        cast.sh "$url"
+        exit 0
+    fi
+
+    set_indicator
     if [ $url = *"pls"* ]; then
         echo "mpv -playlist=$url" > ${PLAY_BKP};
         mpv -playlist=$url
@@ -64,11 +74,7 @@ play_local () {
 
     notify-send -u normal  "Finished" "Media stoped. Bye."
     remove_indicator
-    exit
-}
-
-play_cast(){
-    castnow --quiet $url&
+    exit 0
 }
 
 stop_all(){
@@ -119,23 +125,6 @@ play_playlist(){
     notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
-play(){
-    notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
-    set_indicator
-    result=$1
-
-    if [ -z "${result}" ]; then
-        result="$(clipster -o)"
-    fi
-
-    echo "mpv $result" > ${PLAY_BKP};
-    mpv "$result"
-
-    notify-send -u normal  "Done" "Hopefully your media was played =/"
-    remove_indicator
-    exit
-}
-
 play_quality(){
     set_indicator
     
@@ -167,6 +156,39 @@ play_quality(){
     exit
 }
 
+play(){
+    result=$1
+
+    if [ -z "${result}" ]; then
+        result="$(clipster -o)"
+    fi
+
+    if [ "${only_sound}" = "1" ]; then
+        notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
+        set_indicator
+        if [ "${cast}" = "0" ]; then
+            echo "mpv --no-video $result" > ${PLAY_BKP};
+            mpv --no-video "$result"
+        else
+            cast.sh "$result"
+        fi
+    else
+        notify-send -u normal  "Trying to play..." "Playing your media now the best way we can. Enjoy."
+        set_indicator
+        if [ "${cast}" = "0" ]; then
+            echo "mpv $result" > ${PLAY_BKP};
+            mpv "$result"
+        else
+            cast.sh "$result"
+        fi
+
+    fi
+
+    notify-send -u normal  "Done" "Hopefully your media was played =/"
+    remove_indicator
+    exit
+}
+
 play_audio(){
     notify-send -u normal  "Trying to play..." "Playing your media as audio now the best way we can. Enjoy."
     set_indicator
@@ -187,8 +209,13 @@ resume() {
     set_indicator
 
     url=$(cat $LAST_LOCATION_PLAYED)
-    echo "mpv ${url}" > ${PLAY_BKP};
-    mpv "$url"
+    if [ "${only_sound}" = "1" ]; then
+        echo "mpv --no-video ${url}" > ${PLAY_BKP};
+        mpv --no-video "$url"
+    else
+        echo "mpv ${url}" > ${PLAY_BKP};
+        mpv "$url"
+    fi
 
     remove_indicator
     notify-send -u normal  "Done" "Hopefully your media was played =/"
@@ -230,7 +257,6 @@ play_radio() {
 
 pl_len() {
     pl_len=$(wc -l "${PLAYLIST_FILE}" | awk '{print $1}')
-    echo $(<$PLAYLIST_FILE) > teste.txt
     echo $pl_len
 }
 
@@ -242,11 +268,19 @@ list_radio() {
     cat $HOME/.config/play_radio/config | nl
 }
 
+play_cast() {
+    cast=1
+    echo "Playing $1    Cast - $cast"
+    play_radio "$1"
+}
+
 command=$1
 
-while getopts "hmlr:Pp:Aa:q:QcS" opt; do
+while getopts "hsmlr:Pp:Aa:q:QcSC" opt; do
     case "$opt" in
         h) command="param"; show_help;;
+        s) only_sound="1";;
+        C) cast="1";;
         m) command="param"; chosen_mode="$2"; option=$3;;
         r) command="param"; chosen_mode="Radio"; option=$OPTARG;;
         P) command="param"; chosen_mode="Play";;
@@ -263,10 +297,11 @@ done
 
 if [ "$command" != "param" ]
 then
-    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nStop" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 850)
+    chosen_mode=$(printf "Radio\\nPlay\\nPlay Audio\\nPlay Quality\\n+PL\\nPlay PL\\nResume\\nCast" | dmenu -i -p "How to play? ($(pl_len))" -bw 2 -y 16 -z 900)
 fi
 
 case "$chosen_mode" in
+    "Cast") play_cast "$option";;
     "Radio") play_radio "$option";;
     "Play") play "$option";;
     "Play Quality") play_quality "$option";;

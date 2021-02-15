@@ -97,20 +97,18 @@ order_list() {
 }
 
 black_or_white() {
-    colors=$1
+    local wallpaper=$1
+    local color=$(convert "${wallpaper}" -crop 0x100+0+0 -scale 1x1! -format "%c" histogram:info:- | grep -o "#......")
 
-    index=$2
-    
-    local colors_abc=($(order_list $colors))
-    lums=($(echo -e ${colors_lum[@]}  | sort -n | awk '{print $1}' | cut -d "#" -f 2))
 
-    lum=${lums[$index]}
-    echo $lum
-    if (( $(echo "$lum  > 200000" |bc -l) )); then
-        echo black
-    fi
-    if (( $(echo "$lum  <= 200000" |bc -l) )); then
-        echo light
+    local lum=$(colorToLum "${color}")
+
+    local lum="$(grep -oE "[[:digit:]]*" <<< "${lum}" | head -n 1)"
+
+    if [[ $lum -gt 120 ]]; then
+        echo "black"
+    else
+        echo "white"
     fi
 }
 

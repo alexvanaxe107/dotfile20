@@ -122,6 +122,7 @@ panel_pivot_struts = 0
 panel_position = center right vertical
 panel_layer = normal
 panel_monitor = 1
+primary_monitor_first = 1
 panel_shrink = 0
 autohide = 0
 autohide_show_timeout = 0

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-action=$(echo "" | dmenu -p "What do you want to do?")
+action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850)
 
 if [ -z "${action}" ]; then
     exit 0
@@ -8,13 +8,30 @@ fi
 
 search='*time*'
 if [[ "$action" == $search ]]; then
-    speach.sh -t "The time now is $(date +"%H:%M")"
+    speach.sh -t "The current time is $(date +"%H:%M")"
+    exit 0
+fi
+
+search='*creation*'
+if [[ "$action" == $search ]]; then
+    bspwm_desktop_manager.sh -t 
     exit 0
 fi
 
 search='*wallpaper*'
 if [[ "$action" == $search ]]; then
     wallpaper_changer.sh 
+    exit 0
+fi
+
+search='*read*'
+if [[ "$action" == $search ]]; then
+    command=$(echo "$action" | grep -e "read")
+
+    query=$(echo $action | sed 's/read//g' | xargs)
+
+    read_book.sh -b "${query}"
+
     exit 0
 fi
 
@@ -101,7 +118,7 @@ if [[ "$action" == $search ]]; then
 
     pomot=$(pomodoro status -f '%r')
     if [ ! -z "${pomot}" ]; then
-        speach.sh -t "There are ${pomot} minutes left"
+        speach.sh -t "Your current pomodoro has ${pomot} minutes left"
     else
         speach.sh -t "There is no pomodoro running."
     fi
@@ -132,6 +149,12 @@ search='*reset*'
 if [[ "$action" == $search ]]; then
     reset_monitors.sh
     notify-send "Monitor" "Monitor reseted"
+    exit 0
+fi
+
+search='*unhide*'
+if [[ "$action" == $search ]]; then
+    bspc_node_manager.sh -aI
     exit 0
 fi
 

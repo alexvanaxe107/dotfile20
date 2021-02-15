@@ -1,11 +1,8 @@
 #!/bin/dash
 
-MONITOR1=$(monitors_info.sh -n 1)
-MONITOR2=$(monitors_info.sh -n 0)
-
-if [ -z $MONITOR1 ]; then
-    MONITOR1=$(monitors_info.sh -n 0)
-    unset MONITOR2
+if [ -z "${PREFERENCE}" ]; then
+    MONITOR1=$(monitors_info.sh -t 0)
+    MONITOR2=$(monitors_info.sh -t 1)
 fi
 
 TARGET=$1
@@ -20,6 +17,7 @@ toggle_tint(){
         bspc config -m $MONITOR2 right_padding 0
         kill $pid
     else
+        sed -i "s/panel_monitor.*/panel_monitor = ${MONITOR1}/" ${HOME}/.config/tint2/tint2rc
         #bspc config -m $MONITOR1 right_padding 203
         tint2 >> /tmp/tint2.log 2>&1 &
     fi

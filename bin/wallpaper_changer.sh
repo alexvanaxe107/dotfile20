@@ -12,17 +12,18 @@ WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape
 MONITOR_NUMBER=$(monitors_info.sh -q)
 
 show_options(){
-    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "save") | dmenu -y 16 -bw 2 -z 550 -p "How rice it?")
+    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "\nsave") | dmenu -y 16 -bw 2 -z 550 -p "How rice it?")
     echo $option
 }
 
 change_all(){
-    for monitor in $(monitors_info.sh -im); do
-        is_wide="$(monitors_info.sh -iw $monitor)"
+    for monitor in $(monitors_info.sh -m); do
+        is_wide="$(monitors_info.sh -w $monitor)"
+        index=$(monitors_info.sh -ib ${monitor})
         if [ "${is_wide}" = "yes" ]; then
-            nitrogen --head=$monitor --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
+            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
         else
-            nitrogen --head=$monitor --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
         fi
     done
     notify-send -u normal "All wallpapers setted. Enjoy."
@@ -31,7 +32,7 @@ change_all(){
 }
 
 get_scene() {
-        scene=$(printf "${WALLPAPER_SCENES}" | dmenu -i -y 16 -bw 2 -z 550 -l 20 -p "Choose the scene:")
+        scene="$(printf "${WALLPAPER_SCENES}" | dmenu -i -y 16 -bw 2 -z 550 -l 20 -p "Choose the scene:")"
         if [ -z "${scene}" ];then
             exit 0
         fi
@@ -44,7 +45,6 @@ get_scene() {
 }
 
 download(){
-    count=0
 
     if [ ${MONITOR_NUMBER} -ge 2 ]; then
         monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu -y 16 -bw 2 -z 550 -p "Which monitor?")
@@ -66,15 +66,15 @@ download(){
                 notify-send -u normal "Downloading wallpaper to all monitors"
 
                 for monitor_all in $(monitors_info.sh -m); do
+                    index=$(monitors_info.sh -ib ${monitor_all})
                     if [ "Chromecast" = "${option}" ]; then
                         path=$(wallfinder.py -e c)
-                        nitrogen --head=${count} --save --set-zoom-fill ${path}
+                        nitrogen --head=${index} --save --set-zoom-fill ${path}
                     fi
                     if [ "Bing" = "${option}" ]; then
                         path=$(wallfinder.py -e b)
-                        nitrogen --head=${count} --save --set-zoom-fill ${path}
+                        nitrogen --head=${index} --save --set-zoom-fill ${path}
                     fi
-                    count=$(($count+1))
                 done
                 exit 0
             fi
@@ -82,32 +82,32 @@ download(){
             scene=$(get_scene)
             notify-send -u normal "Downloading wallpaper to all monitors"
             for monitor_all in $(monitors_info.sh -m); do
+                index=$(monitors_info.sh -ib ${monitor_all})
                 if [ "Luck" = "${option}" ]; then
                     path=$(wallfinder.py -s "${scene}")
-                    nitrogen --head=${count} --save --set-zoom-fill ${path}
+                    nitrogen --head=${index} --save --set-zoom-fill ${path}
                 fi
                 if [ "Ratio" = "${option}" ]; then
                     path=$(wallfinder.py -r -m ${monitor_all} -s "${scene}")
-                    nitrogen --head=${count} --save --set-scaled ${path}
+                    nitrogen --head=${index} --save --set-scaled ${path}
                 fi
                 if [ "Resolution" = "${option}" ]; then
                     path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
-                    nitrogen --head=${count} --save --set-scaled ${path}
+                    nitrogen --head=${index} --save --set-scaled ${path}
                 fi
-                count=$(($count+1))
             done
         else
             if [[ "$notsceneoptions" == *$option* ]]; then
                 if [ "Chromecast" = "${option}" ]; then
                     notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
                     path=$(wallfinder.py -e c)
-                    selected=$(monitors_info.sh -in ${monitor})
+                    selected=$(monitors_info.sh -ib ${monitor})
                     nitrogen --head=${selected} --save --set-zoom-fill ${path}
                 fi
                 if [ "Bing" = "${option}" ]; then
                     notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
                     path=$(wallfinder.py -e b)
-                    selected=$(monitors_info.sh -in ${monitor})
+                    selected=$(monitors_info.sh -ib ${monitor})
                     nitrogen --head=${selected} --save --set-zoom-fill ${path}
                 fi
                 exit 0
@@ -117,19 +117,19 @@ download(){
             if [ "Luck" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
                 path=$(wallfinder.py -s "${scene}")
-                selected=$(monitors_info.sh -in ${monitor})
+                selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-zoom-fill ${path}
             fi
             if [ "Ratio" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
                 path=$(wallfinder.py -r -m ${monitor} -s "${scene}")
-                selected=$(monitors_info.sh -in ${monitor})
+                selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
             fi
             if [ "Resolution" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
                 path=$(wallfinder.py -m ${monitor} -s "${scene}")
-                selected=$(monitors_info.sh -in ${monitor})
+                selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
             fi
         fi
@@ -141,10 +141,10 @@ download(){
 
 change_wallpaper(){
     monitor_name=$1
-    selected=$(monitors_info.sh -in ${monitor_name})
+    selected=$(monitors_info.sh -ib ${monitor_name})
 
     if [ ! -z "$selected" ]; then
-        is_wide=$(monitors_info.sh -iw ${selected})
+        is_wide=$(monitors_info.sh -w ${monitor_name})
         if [ "${is_wide}" = "yes" ]; then
             nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
         else
@@ -152,7 +152,7 @@ change_wallpaper(){
         fi
     fi
 
-    notify-send -u normal "Wallpaper ${selected} changed. Enjoy."
+    notify-send -u normal "Wallpaper ${monitor_name} changed. Enjoy."
     option=$(show_options)
     echo $option
 }

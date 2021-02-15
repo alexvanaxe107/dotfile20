@@ -1,12 +1,6 @@
 #!/bin/bash
 # A basic summary of my sales report
 
-teste="chromecastbing"
+teste=(1 2 3 4 5)
 
-option=*$1*
-if [[ "$teste" == $option ]]; then
-    echo "Esta dentro"
-else
-    echo "NAO esta"
-fi
-
+echo ${#teste[@]}
