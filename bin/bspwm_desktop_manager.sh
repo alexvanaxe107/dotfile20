@@ -23,12 +23,14 @@ goto(){
     desk_togo="$1"
     if [ "${creation_mode}" = "auto" ]; then
         togo_name=$(get_name ${desk_togo})
-        togo_code="$(bspc query --desktops --desktop ${togo_name})"
+        togo_code="$(bspc query --desktops --desktop ${togo_name} 2> /dev/null)"
         nodes="$(bspc query --nodes --node .leaf --desktop)"
 
         desktop="$(bspc query --desktops --desktop)"
 
         bspc desktop -f "${togo_name}"
+
+	echo "CODE: ${togo_code}"
 
         if [ -z "${togo_code}" ]; then
             bspc monitor focused --add-desktops "$(get_name ${desk_togo})"

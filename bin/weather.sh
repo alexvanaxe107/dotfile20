@@ -6,6 +6,8 @@ weather_show(){
     if [ -z "$retorna" ]
     then
         echo "$temp"
+    else
+	echo ":/"
     fi
 }
 
