@@ -15,6 +15,7 @@ export reset="$(tput sgr0)"
 
 if [ "${pomodoro_status}" = "0:00" ]; then
     pomodoro finish
+    notify-send -u normal "Pomodoro" "Pomodoro Finished. Go take a break"
     speach.sh -t "Its time to take a breake now, go for a walk and drink some water."
 fi
 

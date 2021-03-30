@@ -1,3 +1,4 @@
+# Restart pkill -USR1 -x sxhkd
 # Start the terminal
 super + shift + Return
 	alacritty
@@ -178,6 +179,10 @@ super + t
 #Send node to the other monitor and follow it
 super + ctrl + t
 	bspc node focused --to-monitor next --follow
+
+#Send the desktop to another monitor and follow it
+super + alt + t
+	bspc desktop focused --to-monitor next --follow
 
 # Send to other desktop and follow it
 super + control + {1-9,0}
