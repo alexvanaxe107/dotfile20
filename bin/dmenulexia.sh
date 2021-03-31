@@ -158,4 +158,16 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
+
+search='*mouse off*'
+if [[ "$action" == $search ]]; then
+    unclutter --timeout 5 -b
+    exit 0
+fi
+
+search='*mouse on*'
+if [[ "$action" == $search ]]; then
+    killall unclutter
+    exit 0
+fi
 notify-send "Sorry" "Sorry, could not do what you asked"

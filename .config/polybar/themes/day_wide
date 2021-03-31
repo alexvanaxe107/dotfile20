@@ -228,6 +228,8 @@ format-background = ${colors.content-fill}
 [module/bspwm]
 type = internal/bspwm
 
+pin-workspaces = false
+
 #label-focused = %index%
 label-focused = %icon%
 label-focused-background = ${colors.content-fill}

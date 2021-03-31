@@ -1,6 +1,8 @@
 #!/bin/bash
 # A basic summary of my sales report
+#!/bin/bash
+counter=0
 
-teste=(1 2 3 4 5)
-
-echo ${#teste[@]}
+bspc query -D --names | while read -r name; do
+  printf 'ws-icon-%i = "%s;<insert-icon-here>"\n' $((counter++)) $name
+done

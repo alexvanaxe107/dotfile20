@@ -189,6 +189,8 @@ format-padding = ${format.padding_border}
 [module/bspwm]
 type = internal/bspwm
 
+pin-workspaces = false
+
 #label-focused = %index%
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
