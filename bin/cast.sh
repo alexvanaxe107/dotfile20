@@ -53,7 +53,16 @@ cast_url(){
     fi
 }
 
+record_time(){
+    local info=$(cast_info)
+    local time=$(awk '{printf $2}' FS="|" <<< "${info}")
+    local filen=$(awk '{printf $4}' FS="|" <<< "${info}")
+    filen="${filen:9}"
+    echo "${time}" > "${CONFIG_URL}/${filen}"
+}
+
 cast_stop(){
+    #record_time
     catt stop
     rm "${INDICATOR_CAST_FILE}"
 }
@@ -61,8 +70,18 @@ cast_stop(){
 
 go_to_location() {
     position="$1"
-    position="$(echo "$position /1" | bc)"
 
+    if [ "${resume}" = 1 ]; then
+        local info=$(cast_info)
+        local time=$(awk '{printf $2}' FS="|" <<< "${info}")
+        local filen=$(awk '{printf $4}' FS="|" <<< "${info}")
+        filen="${filen:9}"
+        
+        cur_time="$(<"$CONFIG_URL/$filen")"
+        position=$cur_time
+    fi
+
+    position="$(echo "$position /1" | bc)"
     catt seek "${position}"
 }
 
@@ -86,22 +105,26 @@ show_help() {
     echo "S                             Stop to cast"
     echo "c                             Clear the yt queue"
     echo "i                             Info of the casting"
+    echo "t                             Record status"
 }
 
 subtitle=""
+resume="0"
 
 req_command=""
 
-while getopts "h?is:Sgpnc" opt; do
+while getopts "h?is:Sgpncrt" opt; do
     case "${opt}" in
         h|\?) show_help ;;
         s) subtitle="$OPTARG";;
+        r) resume="1";;
         i) req_command="i";;
         S) req_command="S";;
         g) req_command="g";;
         p) req_command="p";;
         n) req_command="n";;
         c) req_command="c";;
+        t) req_command="t";;
     esac
 done
 
@@ -114,6 +137,7 @@ case "${req_command}" in
     "p") pause_play;;
     "n") next_video;;
     "c") clear_yt_queue;;
+    "t") record_time;;
     *) cast_url "$1";;
 esac
 

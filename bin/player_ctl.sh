@@ -29,6 +29,16 @@ go_to_position() {
    
     goto=$(echo "${time}" | bc)
     playerctl position "${goto}"
+
+    if [ "$chosen_p" = "chromecast" ]; then
+        if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+            if [ "${goto}" = "0" ]; then
+                cast.sh -rg "33"
+            else
+                cast.sh -g "${goto}"
+            fi
+        fi
+    fi
 }
 
 save() {
@@ -43,6 +53,12 @@ save() {
     else
         yt_link=$(playerctl -p "${player}" metadata xesam:url)
         echo "${yt_link}" > ${LAST_LOCATION_PLAYED} 
+    fi
+
+    if [ "$chosen_p" = "chromecast" ]; then
+        if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+            cast.sh -t
+        fi
     fi
 
     notify-send -u normal  "Saved" "Location saved"
