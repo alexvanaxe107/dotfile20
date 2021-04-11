@@ -8,7 +8,7 @@ fi
 
 search='*time*'
 if [[ "$action" == $search ]]; then
-    speach.sh -t "The current time is $(date +"%H:%M")"
+    speach.sh -t "Now it is $(date +"%H hours and %M minutes.")"
     exit 0
 fi
 
