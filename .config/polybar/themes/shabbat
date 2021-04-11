@@ -192,7 +192,7 @@ type = internal/bspwm
 #label-focused = %index%
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
-label-focused-foreground = ${colors.background}
+label-focused-foreground = ${colors.foreground}
 label-focused-underline= ${colors.ws}
 label-focused-padding = ${format.bspadding}
 

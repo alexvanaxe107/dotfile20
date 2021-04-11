@@ -170,4 +170,17 @@ if [[ "$action" == $search ]]; then
     killall unclutter
     exit 0
 fi
+
+search='*silent on*'
+if [[ "$action" == $search ]]; then
+    silent_mode.sh -s
+    exit 0
+fi
+
+search='*silent off*'
+if [[ "$action" == $search ]]; then
+    silent_mode.sh -n
+    exit 0
+fi
+
 notify-send "Sorry" "Sorry, could not do what you asked"
