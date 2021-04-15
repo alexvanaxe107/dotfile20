@@ -75,6 +75,25 @@ moto(){
     fi
 }
 
+mofoto(){
+    desk_togo="$1"
+    if [ "${creation_mode}" = "auto" ]; then
+        togo_name=$(get_name ${desk_togo})
+        togo_code="$(bspc query --desktops --desktop ${togo_name})"
+
+        if [ -z "${togo_code}" ]; then
+            bspc monitor focused --add-desktops "${togo_name}"
+        fi
+
+        bspc node -d "${togo_name}"
+        goto "$1"
+    fi
+
+    if [ "${creation_mode}" = "manual" ]; then
+        bspc node -d "focused:^${desk_togo}" --follow
+    fi
+}
+
 rename_desktop(){
     new_name=$(get_name $1)
     if [ -z "${new_name}" ]; then
@@ -99,17 +118,21 @@ show_help() {
     echo "Manipulate the monitors."; echo ""
     echo "g                             go to desktop number"
     echo "m                             move to desktop number"
+    echo "f                             move and follow to desktop number"
     echo "t                             Toggle mode (manual or auto)"
     echo "r                             Rename desktop"
+
 }
 
-while getopts "h?g:m:tr:" opt; do
+while getopts "h?g:m:tr:f:" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
     g) goto ${OPTARG}
         ;;
     m) moto ${OPTARG}
+        ;;
+    f) mofoto ${OPTARG}
         ;;
     t) toggle_mode ${OPTARG}
         ;;

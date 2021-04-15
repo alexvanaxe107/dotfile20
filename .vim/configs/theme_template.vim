@@ -9,3 +9,5 @@ colorscheme base16-greenscreen
 let g:airline_theme="base16_greenscreen"
 "hi Normal ctermbg=None
 "let g:airline_theme="gruvbox"
+
+set guifont=Fantasque\ Sans\ Mono:h15

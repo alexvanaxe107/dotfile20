@@ -1,6 +1,5 @@
 #! /bin/dash
 
-
 bring_all="0"
 hide_node() {
     marked_node=$(bspc query --desktop focused -N -n .leaf.marked)
