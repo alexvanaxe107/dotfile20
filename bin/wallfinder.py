@@ -314,15 +314,16 @@ class WallHaven():
         try:
             url = wallpapers.json()['data'][0]['path']
         except IndexError:
-            query="?"
-            query += "sorting=random"
-            if search:
-                query += "&q={}".format(search)
-                wallpapers = requests.get(self.WALLHAVEN_URL+query)
-                try:
-                    url = wallpapers.json()['data'][0]['path']
-                except(IndexError):
-                    return ""
+            url = ""
+            # query="?"
+            # query += "sorting=random"
+            # if search:
+                # query += "&q={}".format(search)
+                # wallpapers = requests.get(self.WALLHAVEN_URL+query)
+                # try:
+                    # url = wallpapers.json()['data'][0]['path']
+                # except(IndexError):
+                    # return ""
 
         return url
 
