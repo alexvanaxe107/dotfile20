@@ -123,6 +123,6 @@ case $CHOSEN in
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;
     "NM-Softer") font "Lerton" Regular 10 10 13 2;;
-    "teste") font "Texturina" Bold 10 10 12 0;;
+    "teste") font "Passion One" Bold 10 10 12 0;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac
