@@ -186,7 +186,7 @@ super + alt + t
 
 # Send to other desktop and follow it
 super + control + {1-9,0}
-	bspc node -d  'focused:^{1-9,10}' --follow
+	$HOME/bin/bspwm_desktop_manager.sh -f '{1-9,10}'
 
 # Cycle through nodes
 super + control + {j,k}

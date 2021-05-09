@@ -8,7 +8,7 @@ fi
 
 search='*time*'
 if [[ "$action" == $search ]]; then
-    speach.sh -t "The current time is $(date +"%H:%M")"
+    speach.sh -t "Now it is $(date +"%-H hours and %-M minutes.")"
     exit 0
 fi
 
@@ -116,7 +116,7 @@ if [[ "$action" == $search ]]; then
         exit 0
     fi
 
-    pomot=$(pomodoro status -f '%r')
+    pomot=$(pomodoro_stats.sh)
     if [ ! -z "${pomot}" ]; then
         speach.sh -t "Your current pomodoro has ${pomot} minutes left"
     else
@@ -170,4 +170,17 @@ if [[ "$action" == $search ]]; then
     killall unclutter
     exit 0
 fi
+
+search='*silent on*'
+if [[ "$action" == $search ]]; then
+    silent_mode.sh -s
+    exit 0
+fi
+
+search='*silent off*'
+if [[ "$action" == $search ]]; then
+    silent_mode.sh -n
+    exit 0
+fi
+
 notify-send "Sorry" "Sorry, could not do what you asked"

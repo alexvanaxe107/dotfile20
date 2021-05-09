@@ -1,6 +1,6 @@
 #!/bin/dash
 
-pomodoro_status="$(pomodoro status -f '%r')"
+. /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 
 # Set colors for terminal output
 export red="$(tput setaf 1)"
@@ -13,15 +13,9 @@ export white="$(tput setaf 7)"
 export b="$(tput bold)"
 export reset="$(tput sgr0)"
 
-if [ "${pomodoro_status}" = "0:00" ]; then
-    pomodoro finish
-    notify-send -u normal "Pomodoro" "Pomodoro Finished. Go take a break"
-    speach.sh -t "Its time to take a breake now, go for a walk and drink some water."
-fi
-
-status="$(pomodoro status -f '%!r⏱  %c%!g🍅')"
+status="$(pomodoro-client.py status)"
 if [ ! -z "${status}" ]; then
-    printf "%s" "${status}" 
+    printf "%s" "${status##Pomodoro }"
 else
     echo ""
 fi

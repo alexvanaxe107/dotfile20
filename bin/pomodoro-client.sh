@@ -9,8 +9,7 @@ show_help() {
 }
 
 start_pomodoro(){
-    notify-send -u normal "Pomodoro" "Focus on your task"
-    pomodoro start
+    pomodoro-client.py start
 }
 
 while getopts "hsf" opt; do
@@ -25,6 +24,6 @@ if [ -z "$1" ]; then
     chosen=$(printf "▶\n⏹" | dmenu -i -y 16 -bw 2 -z 470 -p "Pomodoro: $(pomodoro_stats.sh) ")
     case "$chosen" in
         "▶") $(start_pomodoro);;
-        "⏹") pomodoro finish;;
+        "⏹") pomodoro-client.py stop;;
     esac
 fi

@@ -34,6 +34,7 @@ speak() {
     #speak-ng -v ${voice} -s ${rate} -p 64 "$1"
 }
 
+
 while getopts "ht:" opt; do
     case "$opt" in
         h) command="param"; show_help;;

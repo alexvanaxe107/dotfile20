@@ -1,4 +1,9 @@
-call plug#begin('~/.vim/plugged')
+
+if has('nvim')
+	call plug#begin('~/.config/nvim/plugins')
+else
+	call plug#begin('~/.vim/plugged')
+endif
 " #### Helpers
 Plug 'gantheory/vim-easymotion'
 Plug 'tpope/vim-speeddating'
@@ -12,7 +17,9 @@ Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'
-Plug 'tpope/vim-dispatch'
+if !has('nvim')
+    Plug 'tpope/vim-dispatch'
+endif
 Plug 'scrooloose/nerdcommenter', {'for': ['python', 'html', 'typescript', 'sh']}
 Plug 'Yggdroot/indentLine' " Ident guides
 Plug 'tpope/vim-fugitive'
@@ -26,11 +33,15 @@ Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
 Plug 'prettier/vim-prettier' " Formatting
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Quramy/tsuquyomi'
+endif
 
 " Javascript/Typescript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
 
 " html
 Plug 'mattn/emmet-vim' " Generate code html

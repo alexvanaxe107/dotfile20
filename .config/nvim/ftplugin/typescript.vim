@@ -1,101 +1,43 @@
-filetype indent on
-
-"let g:typescript_compiler_binary = 'tsc'
-"let g:typescript_compiler_options = ''
-"autocmd QuickFixCmdPost [^l]* nested cwindow
-"autocmd QuickFixCmdPost    l* nested lwindow
-
-" let g:nvim_typescript#default_mappings = 1
-
-setlocal ruler         " show the cursor position all the time
-setlocal sw=2
-setlocal ts=2
-setlocal sts=2
+" Spacing
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2
 setlocal expandtab
-" Make it obvious where 80 characters is
-setlocal textwidth=80
-setlocal colorcolumn=+1
+setlocal autoindent
+setlocal fileformat=unix
 
+setlocal colorcolumn=79
+setlocal ruler
 " Numbers
 setlocal number
 setlocal relativenumber
-" set numberwidth=5
 
-" filetype plugin indent on
 "set UTF-8 encoding
 setlocal enc=utf-8
 setlocal fenc=utf-8
 setlocal termencoding=utf-8
 
-" use indentation of previous line
-setlocal autoindent
-" use intelligent indentation for programming
-setlocal smartindent
+" Indentation
+filetype indent on
+setlocal autoindent " use indentation of previous line
+setlocal smartindent " use intelligent indentation for programming
 
-" wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
-setlocal textwidth=120
-" turn syntax highlighting on
-" set t_Co=256 " Comentado para testar em uma maquina decente
+" Enable syntax
 syntax on
 syntax enable
 
 " highlight matching braces
 setlocal showmatch
 
-" Deoplete -----------------------------
+" Set formatter
+setlocal formatprg=prettier\ --parser\ typescript
 
-" Use deoplete.
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-" complete with words from any opened file
-let g:context_filetype#same_filetypes = {}
-let g:context_filetype#same_filetypes._ = '_'
-let g:nvim_typescript#diagnostics_enable = get(g:, 'nvim_typescript#diagnostics_enable', 0)
-let g:nvim_typescript#expand_snippet = get(g:, 'nvim_typescript#expand_snippet', 0)
-let g:nvim_typescript#follow_dir_change = get(g:, 'nvim_typescript#follow_dir_change', 0)
-let g:nvim_typescript#suggestions_enabled = get(g:, 'nvim_typescript#suggestions_enabled', 0)
+nmap <leader>o :TsuImport<CR>
 
-" When writing a buffer (no delay).
-call neomake#configure#automake('w')
-" When writing a buffer (no delay), and on normal mode changes (after 750ms).
-" call neomake#configure#automake('nw', 750)
-" When reading a buffer (after 1s), and when writing (no delay).
-" call neomake#configure#automake('rw', 1000)
-" Full config: when writing or reading a buffer, and on changes in insert and
-" normal mode (after 1s; no delay when writing).
-" call neomake#configure#automake('nrwi', 500)
-
-" needed so deoplete can auto select the first suggestion
-" setlocal completeopt+=noinsert
-
-" comment this line to enable autocompletion preview window
-" (displays documentation related to the selected completion option)
-" setlocal completeopt-=preview
-
-" autocompletion of files and commands behaves like shell
-" (complete only the common part, list the options that match)
-" set wildmode=list:longest
-"
-
-" Comments
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_typescript = 1
-
-" Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'  }  }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
+" ##### Plugins ######
+" Vim typescript
+let g:typescript_indent_disable = 1
+" Tsu...
+let g:tsuquyomi_single_quote_import= 1
+let tsuquyomi_single_quote_import=1
+"hi Normal ctermbg=None
