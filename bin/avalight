@@ -64,6 +64,22 @@ HDMI1() {
     notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
+HDMI2() {
+    killall clight
+    echo "" > ${INDICATOR_FILE}
+
+    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+
+    SOFT=$(_get_soft_brigtness "$BT")
+
+    if [ ! -z "${SOFT}" ]; then
+        xrandr --output ${GS} --brightness ${SOFT}
+    else
+        ddcutil setvcp -d 1 10 ${BT}
+    fi
+    notify-send -u low "Light" "Screen monitor set to $GS"
+}
+
 both() {
     if [ ! -z "$GS" ]; then
         killall clight
@@ -73,6 +89,7 @@ both() {
 
         if [ ! -z "${SOFT}" ]; then
             xrandr --output HDMI1 --brightness ${SOFT}
+            xrandr --output HDMI-2 --brightness ${SOFT}
             xrandr --output eDP1 --brightness ${SOFT}
             xrandr --output DP1 --brightness ${SOFT}
         else
@@ -111,6 +128,7 @@ case "$GS" in
     "eDP1") eDP1;;
     "DP1") DP1;;
     "HDMI1") HDMI1;;
+    "HDMI-2") HDMI2;;
     "xrandr") _xrandr;;
     *) both;;
 esac
