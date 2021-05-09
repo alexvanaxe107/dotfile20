@@ -116,7 +116,7 @@ if [[ "$action" == $search ]]; then
         exit 0
     fi
 
-    pomot=$(pomodoro status -f '%r')
+    pomot=$(pomodoro_stats.sh)
     if [ ! -z "${pomot}" ]; then
         speach.sh -t "Your current pomodoro has ${pomot} minutes left"
     else

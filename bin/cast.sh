@@ -58,6 +58,9 @@ record_time(){
     local time=$(awk '{printf $2}' FS="|" <<< "${info}")
     local filen=$(awk '{printf $4}' FS="|" <<< "${info}")
     filen="${filen:9}"
+    if [ -z "${filen}" ]; then
+        filen="tmpsave"
+    fi
     echo "${time}" > "${CONFIG_URL}/${filen}"
 }
 
@@ -76,6 +79,10 @@ go_to_location() {
         local time=$(awk '{printf $2}' FS="|" <<< "${info}")
         local filen=$(awk '{printf $4}' FS="|" <<< "${info}")
         filen="${filen:9}"
+
+        if [ -z "${filen}" ]; then
+            filen=tmpsave
+        fi
         
         cur_time="$(<"$CONFIG_URL/$filen")"
         position=$cur_time
