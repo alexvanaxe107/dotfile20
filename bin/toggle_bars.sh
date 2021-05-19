@@ -30,7 +30,7 @@ toggle_full(){
         kill $pid
     else
         if [ ! -z "${dim}" ]; then
-            bspc config -m $MONITOR1 top_padding 16
+            bspc config -m $MONITOR1 top_padding 23
         fi
         MONITOR1=$MONITOR1 polybar -q default  >>/tmp/polybar1.log 2>&1 &
     fi
@@ -75,7 +75,7 @@ toggle_all(){
         kill $pid_simple
     else
         if [ ! -z "${dim}" ]; then
-            bspc config -m $MONITOR1 top_padding 16
+            bspc config -m $MONITOR1 top_padding 23
         fi
         bspc config -m $MONITOR2 top_padding 0
         MONITOR1=$MONITOR1 polybar -q default >>/tmp/polybar1.log 2>&1 &
