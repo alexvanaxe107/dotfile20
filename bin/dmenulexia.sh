@@ -183,4 +183,15 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
+search='*rofi*'
+if [[ "$action" == $search ]]; then
+    command=$(echo "${action}" | grep -e "off")
+    if [[ -z "${command}" ]]; then
+        sed -i "s/use_rofi=.*/use_rofi=1/" ${HOME}/.config/wm/bspwm.conf
+    else
+        sed -i "s/use_rofi=.*/use_rofi=0/" ${HOME}/.config/wm/bspwm.conf
+    fi
+    exit 0
+fi
+
 notify-send "Sorry" "Sorry, could not do what you asked"

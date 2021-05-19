@@ -1,10 +1,21 @@
 #!/bin/sh
 
 . ~/.config/bspwm/themes/bsp.cfg
+. ~/.config/wm/bspwm.conf
 
-if [ -z "${theme_name}" ]
+if [ "${use_rofi}" = "0" ]
 then
-	/usr/bin/dmenu "$@"
+    if [ -z "${theme_name}" ]
+    then
+        /usr/bin/dmenu "$@"
+    else
+        /usr/bin/dmenu -h "${DMENU_H}" -nb "${DMENU_NB}" -nf "${DMENU_NF}" -sb "${DMENU_SB}" -sf "${DMENU_SF}" -fn "${DMENU_FN}" -shb "${DMENU_SB}" -nhb "${DMENU_NB}" -nhf "${DMENU_NHF}" -shf "${DMENU_SHF}" "$@"
+    fi
 else
-	/usr/bin/dmenu -h "${DMENU_H}" -nb "${DMENU_NB}" -nf "${DMENU_NF}" -sb "${DMENU_SB}" -sf "${DMENU_SF}" -fn "${DMENU_FN}" -shb "${DMENU_SB}" -nhb "${DMENU_NB}" -nhf "${DMENU_NHF}" -shf "${DMENU_SHF}" "$@"
+    if [ -z "${theme_name}" ]
+    then
+        /usr/bin/dmenu "$@"
+    else
+        /usr/bin/rofi -dmenu "$@"
+    fi
 fi

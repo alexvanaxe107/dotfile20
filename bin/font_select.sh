@@ -74,6 +74,8 @@ font() {
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml 
     fi
 
+    sed -i "s/font-default:.*/font-default: \"${font_name} ${style} ${size3}\";/" ${HOME}/.config/rofi/config.rasi
+
     killall -qw dunst
     killall -qw twmnd
     if [ "${theme_name}" = "night" ]; then
