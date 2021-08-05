@@ -1,9 +1,15 @@
 #!/bin/sh
 
-chosen=$(printf "Turnoff monitor\nSleep\nRestart\nPoweroff\nHibernate" | dmenu -i -p "Power:")
+source $HOME/.config/wm/bspwm.conf
+
+if [ "${use_rofi}" = 1 ]; then
+    chosen=$(printf "⏽\n⏾\n⭘\n⏻\n" | dmenu -i -p "Power:" -theme ${rofi_item2})
+else
+    chosen=$(printf "Turnoff monitor\nSleep\nRestart\nPoweroff\nHibernate" | dmenu -i -p "Power:")
+fi
 
 poweroff() { \
-	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+	confirm="$(printf "No\nYes" | dmenu -i -p "Power off?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
 	if [ "Yes" = "$confirm" ]
 	then
 		systemctl poweroff
@@ -11,7 +17,7 @@ poweroff() { \
 }
 
 chibernate() { \
-	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+	confirm="$(printf "No\nYes" | dmenu -i -p "Hibernate?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
 	if [ "Yes" = "$confirm" ]
 	then
 		lock.sh -d
@@ -31,7 +37,7 @@ csuspend() { \
 }
 
 crestart() { \
-	confirm="$(printf "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )"
+	confirm="$(printf "No\nYes" | dmenu -i -p "Restart?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
 	if [ "Yes" = "$confirm" ]
 	then
 		systemctl reboot
@@ -40,8 +46,13 @@ crestart() { \
 
 case "$chosen" in
 	"Turnoff monitor") monitor ;;
+	"⏽") monitor ;;
 	"Sleep") csuspend ;;
+	"⏾") csuspend ;;
 	"Restart") crestart ;;
+	"⭘") crestart ;;
 	"Poweroff") poweroff ;;
+	"⏻") poweroff ;;
 	"Hibernate") chibernate ;;
+	"") chibernate ;;
 esac

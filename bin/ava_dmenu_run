@@ -7,5 +7,5 @@ if [ "${use_rofi}" = "0" ]
 then
     dmenu_path | dmenu | ${SHELL:-"/bin/sh"} &
 else
-    rofi -combi-modi window,drun,run -show combi
+    rofi -combi-modi window,drun,run -show combi -theme $HOME/.config/rofi/bspwm.rasi
 fi

@@ -74,7 +74,7 @@ font() {
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml 
     fi
 
-    sed -i "s/font-default:.*/font-default: \"${font_name} ${style} ${size3}\";/" ${HOME}/.config/rofi/config.rasi
+    sed -i "s/font-default:.*/font-default: \"${font_name} ${style} ${size1}\";/" ${HOME}/.config/rofi/bspwm.rasi
 
     killall -qw dunst
     killall -qw twmnd

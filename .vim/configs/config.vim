@@ -14,7 +14,7 @@ set encoding=utf-8
 set wildmenu
 
 set undofile " Maintain undo history between sessions not so eternally!
-set undodir=$HOME/.vim/history
+set undodir=$HOME/.config/.nvim/history
 set number
 set relativenumber
 

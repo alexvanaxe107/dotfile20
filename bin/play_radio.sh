@@ -8,6 +8,8 @@
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
+source $HOME/.config/wm/bspwm.conf
+
 TMP_LOCATION=$HOME/.config/tmp
 LAST_PLAYED_FILE="${TMP_LOCATION}/last_played"
 LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"

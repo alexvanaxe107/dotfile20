@@ -1,2 +1,2 @@
-FONT="Larabiefont Rg":pixelsize=19
+FONT="NovaMono":pixelsize=21
 SAVER=saver_mpv

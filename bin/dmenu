@@ -3,8 +3,21 @@
 . ~/.config/bspwm/themes/bsp.cfg
 . ~/.config/wm/bspwm.conf
 
+is_theme() {
+    for arg do
+      [ "$arg" = "-theme" ] && echo "1" && break
+    done
+}
+
 if [ "${use_rofi}" = "0" ]
 then
+    for arg do
+      shift
+      [ "$arg" = "-theme" ] && apagar=1 && continue
+      [ "$apagar" = "1" ] && apagar=0 && continue
+      set -- "$@" "$arg"
+    done
+
     if [ -z "${theme_name}" ]
     then
         /usr/bin/dmenu "$@"
@@ -14,8 +27,19 @@ then
 else
     if [ -z "${theme_name}" ]
     then
+        for arg do
+          shift
+          [ "$arg" = "-theme" ] && apagar=1 && continue
+          [ "$apagar" = "1" ] && apagar=0 && continue
+          set -- "$@" "$arg"
+        done
         /usr/bin/dmenu "$@"
     else
-        /usr/bin/rofi -dmenu "$@"
+        is_theme="$(is_theme $@)"
+        if [ "${is_theme}" = "1" ]; then
+            /usr/bin/rofi -dmenu "$@"
+        else
+            /usr/bin/rofi -theme $HOME/.config/rofi/bspwm.rasi -dmenu "$@"
+        fi
     fi
 fi

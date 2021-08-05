@@ -20,10 +20,6 @@ filetype indent on
 setlocal autoindent " use indentation of previous line
 setlocal smartindent " use intelligent indentation for programming
 
-" Enable syntax
-syntax on
-syntax enable
-
 " highlight matching braces
 setlocal showmatch
 "setlocal background=dark
