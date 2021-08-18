@@ -96,6 +96,22 @@ order_list() {
     echo "${colors_lum[@]}"
 }
 
+black_or_white_rex() {
+    local color="$1"
+
+    local lum=$(colorToLum "${color}")
+
+    local lum="$(grep -oE "[[:digit:]]*" <<< "${lum}" | head -n 1)"
+
+    echo ${lum} >> ~/color.txt
+
+    if [[ $lum -gt 85 ]]; then
+        echo "black"
+    else
+        echo "white"
+    fi
+}
+
 black_or_white() {
     local wallpaper=$1
     local color=$(convert "${wallpaper}" -crop 0x100+0+0 -scale 1x1! -format "%c" histogram:info:- | grep -o "#......")

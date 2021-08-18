@@ -188,7 +188,7 @@ save_wallpaper(){
             dest="${WALLPAPER_ROOT}/${theme}/"
         fi
 
-        index=$(monitors_info.sh -in ${option})
+        index=$(monitors_info.sh -ib ${option})
         index=$(($index + 1))
 
         wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)

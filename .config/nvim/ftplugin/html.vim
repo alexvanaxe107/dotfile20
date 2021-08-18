@@ -20,10 +20,6 @@ filetype indent on
 setlocal autoindent " use indentation of previous line
 setlocal smartindent " use intelligent indentation for programming
 
-" Enable syntax
-syntax on
-syntax enable
-
 setlocal formatprg=js-beautify\ --type\ html
 
 " highlight matching braces

@@ -1,6 +1,7 @@
 #!/bin/bash
 . /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 
+source $HOME/.config/wm/bspwm.conf
 
 show_help() {
     echo "Manage the pomodoro"
@@ -21,7 +22,7 @@ while getopts "hsf" opt; do
 done
 
 if [ -z "$1" ]; then
-    chosen=$(printf "▶\n⏹" | dmenu -i -y 16 -bw 2 -z 470 -p "Pomodoro: $(pomodoro_stats.sh) ")
+    chosen=$(printf "▶\n⏹" | dmenu -i -y 16 -bw 2 -z 470 -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
     case "$chosen" in
         "▶") $(start_pomodoro);;
         "⏹") pomodoro-client.py stop;;

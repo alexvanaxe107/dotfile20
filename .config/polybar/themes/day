@@ -49,7 +49,7 @@ bspadding=1
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 100%
-height = 17
+height = 22
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0

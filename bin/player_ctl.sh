@@ -5,6 +5,8 @@ LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 PLAY_BKP=$HOME/.config/tmp/play_bkp
 INDICATOR_CAST_FILE=$HOME/.config/indicators/casting.ind
 
+source $HOME/.config/wm/bspwm.conf
+
 get_titles(){
     for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
         teste="$(playerctl -p "$player" metadata title 2> /dev/null | awk -v player=$player '{print player,$0}' OFS=" - ")"
@@ -211,23 +213,23 @@ if [ ! -z $chosen_p ]; then
     #position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
     prompt=$(get_prompt "${chosen_p}")
     if [ "$chosen_p" = "chromecast" ]; then
-        chosen=$(printf "play ▶⏸\nforward ▶▶\\nclear \\nstop \\nuncastﲈ" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
+        chosen=$(printf "⏯\n⏭\\n⏹\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
     else
-        chosen=$(printf "play ▶⏸\\nforward ▶▶\\nback ◀◀\\nstop \\nvolume \\ncast " | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2)
+        chosen=$(printf "⏯\\n⏭\\n⏮\\n⏹\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
     fi
 
     case "$chosen" in
-        "play ▶⏸") play_pause;;
-        "forward ▶▶") forward;;
-        "back ◀◀") playerctl -p $chosen_p previous;;
-        "stop ") stop_play;;
-        "volume ") adjust_volume $chosen_p;;
+        "⏯") play_pause;;
+        "⏭") forward;;
+        "⏮") playerctl -p $chosen_p previous;;
+        "⏹") stop_play;;
+        "") adjust_volume $chosen_p;;
         "save") save $chosen_p;;
         "asvideo") invert "$chosen_p" "0";;
         "asaudio") invert "$chosen_p" "1";;
-        "cast ") cast "$chosen_p";;
-        "clear ") cast.sh -c;;
-        "uncastﲈ") uncast;;
+        "") cast "$chosen_p";;
+        "") cast.sh -c;;
+        "") uncast;;
         *) go_to_position ${chosen};;
     esac
 fi

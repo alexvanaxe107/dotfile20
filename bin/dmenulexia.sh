@@ -1,6 +1,8 @@
 #! /bin/bash
 
-action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850)
+source $HOME/.config/wm/bspwm.conf
+
+action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850 -theme ${rofi_item5})
 
 if [ -z "${action}" ]; then
     exit 0
@@ -180,6 +182,17 @@ fi
 search='*silent off*'
 if [[ "$action" == $search ]]; then
     silent_mode.sh -n
+    exit 0
+fi
+
+search='*rofi*'
+if [[ "$action" == $search ]]; then
+    command=$(echo "${action}" | grep -e "off")
+    if [[ -z "${command}" ]]; then
+        sed -i "s/use_rofi=.*/use_rofi=1/" ${HOME}/.config/wm/bspwm.conf
+    else
+        sed -i "s/use_rofi=.*/use_rofi=0/" ${HOME}/.config/wm/bspwm.conf
+    fi
     exit 0
 fi
 
