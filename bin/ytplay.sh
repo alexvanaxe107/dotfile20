@@ -1,6 +1,5 @@
 #! /bin/bash
 
-
 play() {
     link="$1"
     if [ "${audio}" = "1" ]; then
