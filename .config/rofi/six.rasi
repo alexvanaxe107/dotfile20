@@ -1,0 +1,91 @@
+/*
+ *
+ * Author  : Aditya Shakya
+ * Mail    : adi1090x@gmail.com
+ * Github  : @adi1090x
+ * Twitter : @adi1090x
+ *
+ */
+
+configuration {
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+}
+
+@import "colors.rasi"
+
+* {
+    background-color:               @listbgcolor;
+    text-color:                     @foreground-tpl;
+}
+
+window {
+    transparency:                   "real";
+    border-radius:                  12px;
+    width:                          100px;
+    location:                       west;
+    y-offset:                       0px;
+    background-color: @transparent;
+}
+
+listview {
+    lines:							6;
+    margin:                         8px;
+    spacing:                        8px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @listbgcolor;
+    children:                       [ listview ];
+}
+
+element {
+    background-color:               @inputbarcolor;
+    text-color:                     @foreground;
+    orientation:                    vertical;
+    border-radius:                  12px;
+}
+
+element-text {
+	font:							"feather 20";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0;
+    margin:                         10px 10px 33px 10px;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @off;
+    text-color:                     @listbgcolor;
+    border-radius:                  10px;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @on;
+    text-color:                     @listbgcolor;
+}
+
+element selected {
+    background-color:               @activeItem;
+    text-color:                     @listbgcolor;
+    border:                  		0px;
+    border-radius:                  10px;
+    border-color:                  	@border;
+}
+
+element selected.urgent {
+    background-color:               @on;
+    text-color:                     @listbgcolor;
+}
+
+element selected.active {
+    background-color:               @off;
+    color:                          @listbgcolor;
+}
