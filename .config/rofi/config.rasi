@@ -1,0 +1,10 @@
+configuration {
+	modi: "window,run,drun,file-browser,combi";
+	width: 80;
+	lines: 5;
+	columns: 2;
+	disable-history: false;
+	sidebar-mode: false;
+	hide-scrollbar: true;
+	fullscreen: false;
+}
