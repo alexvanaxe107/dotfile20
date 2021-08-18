@@ -10,7 +10,7 @@ choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 
 if [ ! -z "$choosen" ]; then
     cp ${HOME}/.vim/configs/theme_template.vim  ${HOME}/.vim/configs/theme.vim
-    alacritty-colorscheme -a "${choosen}"
+    alacritty-colorscheme apply "${choosen}"
 fi
 
 vim_theme=$(basename -s .yaml "$choosen")
