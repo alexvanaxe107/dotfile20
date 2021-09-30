@@ -111,7 +111,7 @@ border_color_pressed = #ffffff 60
 
 #-------------------------------------
 # Panel
-panel_items = C:EEEEEEEE:T:S
+panel_items = C:EEEEEEEEE:T:S
 panel_size = 99% 8%
 panel_margin = 0 0
 panel_padding = 2 2 2

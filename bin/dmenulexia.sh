@@ -78,7 +78,7 @@ if [[ "$action" == $search ]]; then
     command=$(echo "${action}" | grep -e "as audio")
     if [ ! -z "${command}" ]; then
         playwhat="${command:5:-9 }"
-        url=$(ytsearch.py -s "${playwhat}")
+        url=$(ytsearch.py "${playwhat}")
         play_radio.sh -a "${url}"&
         exit 0
     fi
@@ -99,7 +99,7 @@ if [[ "$action" == $search ]]; then
     fi
 
     playwhat="${action#play }"
-    url=$(ytsearch.py -s "${playwhat}")
+    url=$(ytsearch.py "${playwhat}")
     play_radio.sh -p "${url}"&
     exit 0
 fi
@@ -140,7 +140,7 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
-search='*keyb*'
+search='kb'
 if [[ "$action" == $search ]]; then
     setkmap
     notify-send "Keyboard" "Keyboard reconfigured"

@@ -295,7 +295,7 @@ class WallHaven():
 
 
     def retrieve_url_wallapaper(self, resolution, search):
-        query="?sorting=random"
+        query="?sorting=random&categories=100"
         if resolution:
             if self.config.ratio:
                 query += "&ratio={}".format(resolution)
@@ -314,16 +314,15 @@ class WallHaven():
         try:
             url = wallpapers.json()['data'][0]['path']
         except IndexError:
-            url = ""
-            # query="?"
-            # query += "sorting=random"
-            # if search:
-                # query += "&q={}".format(search)
-                # wallpapers = requests.get(self.WALLHAVEN_URL+query)
-                # try:
-                    # url = wallpapers.json()['data'][0]['path']
-                # except(IndexError):
-                    # return ""
+            query="?"
+            query += "sorting=random"
+            if search:
+                query += "&q={}".format(search)
+                wallpapers = requests.get(self.WALLHAVEN_URL+query)
+                try:
+                    url = wallpapers.json()['data'][0]['path']
+                except(IndexError):
+                    return ""
 
         return url
 

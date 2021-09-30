@@ -105,7 +105,7 @@ add_playlist(){
     result=$1
     if [ -z "${result}" ]
     then
-        result=$(clipster -o)
+        result=$(clipster -oc)
     fi
 
     echo ${result} >> ${PLAYLIST_FILE}
@@ -133,7 +133,7 @@ play_quality(){
     result=$1
 
     if [ -z "${result}" ]; then
-        result="$(clipster -o)"
+        result="$(clipster -oc)"
     fi
 
     local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
@@ -162,7 +162,7 @@ play(){
     result=$1
 
     if [ -z "${result}" ]; then
-        result="$(clipster -o)"
+        result="$(clipster -oc)"
     fi
 
     if [ "${only_sound}" = "1" ]; then
@@ -197,7 +197,7 @@ play_audio(){
     result=$1
 
     if [ -z "${result}" ]; then
-        result="$(clipster -o)"
+        result="$(clipster -oc)"
     fi
     echo "mpv \"$result\" --no-video --shuffle" > ${PLAY_BKP};
     mpv "$result" --no-video --shuffle
@@ -241,7 +241,7 @@ play_radio() {
 
     if [ -z "$chosen" ]
     then
-        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 20 -bw 2 -y 16 -z 850)
+        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 50 -bw 2 -y 16 -z 850)
         index=$(echo $chosen | awk '{print $1}')
     else
         index=$chosen
