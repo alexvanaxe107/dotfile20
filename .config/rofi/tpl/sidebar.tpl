@@ -90,6 +90,10 @@ listview {
     lines: 0;
     background-color: @listbgcolor;
 }
+element-text {
+ background-color: inherit;
+ text-color: inherit;
+}
 element selected  normal {
     background-color: @activeItem;
 }

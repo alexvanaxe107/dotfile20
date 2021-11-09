@@ -1,27 +1,27 @@
-#!/usr/bin/env python3
-
 import requests
-import argparse
+import os
 import re
 import pathlib
 import random
 import math
 from datetime import datetime
-from tabulate import tabulate
+from google_images_search import GoogleImagesSearch
 
-from Xlib import X, display
+from Xlib import display
 from Xlib.ext import randr
 
-CONFIG_PATH="/home/alexvanaxe/.config/wallfinder"
+CONFIG_PATH = "/home/alexvanaxe/.config/wallfinder"
+
 
 class Config(object):
     pass
 
 
 def find_mode(id, modes):
-   for mode in modes:
-       if id == mode.id:
-           return "{}x{}".format(mode.width, mode.height)
+    for mode in modes:
+        if id == mode.id:
+            return "{}x{}".format(mode.width, mode.height)
+
 
 def _get_monitor_res(monitor):
     monitors = get_display_info()
@@ -33,9 +33,10 @@ def _get_monitor_res(monitor):
         else:
             return ""
 
-    resolution=monitor_plugged['resolution']
+    resolution = monitor_plugged['resolution']
 
     return resolution
+
 
 def _get_monitor_info(monitor):
     monitors = get_display_info()
@@ -45,14 +46,14 @@ def _get_monitor_info(monitor):
         if len(monitors) == 1:
             monitor_plugged = list(monitors.values())[0]
         else:
-            raise BaseException("Multiple monitors connected. Please inform monitor with -m")
+            raise BaseException("Multiple monitors connected. Please inform\
+                                monitor with -m")
 
     return monitor_plugged
 
+
 def get_display_info():
     d = display.Display(':0')
-    screen_count = d.screen_count()
-    default_screen = d.get_default_screen()
     result = {}
     screen = 0
     info = d.screen(screen)
@@ -62,24 +63,23 @@ def get_display_info():
     for output in res.outputs:
         params = d.xrandr_get_output_info(output, res.config_timestamp)
         if not params.crtc:
-           continue
+            continue
         crtc = d.xrandr_get_crtc_info(params.crtc, res.config_timestamp)
-        modes = set()
 
-        kind=""
-        ratio_w=""
-        ratio_h=""
+        kind = ""
+        ratio_w = ""
+        ratio_h = ""
         if crtc.width >= 2560:
-            kind="ultra"
+            kind = "ultra"
         else:
-            kind="normal"
+            kind = "normal"
 
         if kind == "normal":
-            ratio_w="16"
-            ratio_h="9"
+            ratio_w = "16"
+            ratio_h = "9"
         else:
-            ratio_w="21"
-            ratio_h="9"
+            ratio_w = "21"
+            ratio_h = "9"
 
         result[params.name] = {
             'name': params.name,
@@ -93,14 +93,14 @@ def get_display_info():
 
     return result
 
+
 class Bing():
-    BING_URL="https://bing.biturl.top/"
+    BING_URL = "https://bing.biturl.top/"
+
     def get_wallpaper(self, monitor, scene, config):
         url = self.retrieve_url()
 
         return self.download(url)
-
-        
         
     def download(self, url):
         file_to_save = self.file_name(url)
@@ -109,14 +109,13 @@ class Bing():
 
         return file_to_save
 
-
     def retrieve_url(self):
-        json_resp = requests.get(self.BING_URL);
+        json_resp = requests.get(self.BING_URL)
         if json_resp.status_code == 200:
             return json_resp.json()['url']
 
     def file_name(self, url):
-        path="bing"
+        path = "bing"
         suffix = pathlib.PurePath(url).suffix
         today = datetime.today().strftime('%Y%m%d')
 
@@ -124,7 +123,7 @@ class Bing():
         filepath = "{}/{}".format(CONFIG_PATH, path)
         pathlib.Path(filepath).mkdir(parents=True, exist_ok=True)
 
-        path="{}/{}".format(filepath, filename)
+        path = "{}/{}".format(filepath, filename)
 
         return path
 
@@ -132,7 +131,8 @@ class Bing():
 class Chromecast():
     """ Get a wallpaper from the chromecast, unfurtunelly cant use monitor and
     scene since it is totally random. """
-    CHROME_URL="https://raw.githubusercontent.com/dconnolly/chromecast-backgrounds/master/README.md"
+    CHROME_URL = "https://raw.githubusercontent.com/dconnolly/chromecast-backgrounds/master/README.md"
+
     def get_wallpaper(self, monitor, scene, config):
         wallpapers = requests.get(self.CHROME_URL)
         imagens = wallpapers.text.splitlines()
@@ -150,18 +150,17 @@ class Chromecast():
         return file_to_save
 
     def get_file_name(self, url):
-        path="googlechrome"
+        path = "googlechrome"
         filename = pathlib.PurePath(url)
-        savename="{}/{}/{}".format(CONFIG_PATH, path, filename.name)
-        file_path="{}/{}".format(CONFIG_PATH,path)
+        savename = "{}/{}/{}".format(CONFIG_PATH, path, filename.name)
+        file_path = "{}/{}".format(CONFIG_PATH, path)
         pathlib.Path(file_path).mkdir(parents=True, exist_ok=True)
         return savename
 
 
-
 class Alpha():
-    ALPHA_URL="https://wall.alphacoders.com/api2.0/get.php"
-    ALPHA_KEY="e33fa5bbf58d48763cee4c57258e0749"
+    ALPHA_URL = "https://wall.alphacoders.com/api2.0/get.php"
+    ALPHA_KEY = "e33fa5bbf58d48763cee4c57258e0749"
 
     def get_wallpaper(self, monitor, scene, config):
         downloaded = ""
@@ -175,34 +174,29 @@ class Alpha():
 
         if monitor_info:
             path += "/{}".format("{}x{}".format(monitor_info['width'],
-                                             monitor_info['height']))
+                                                monitor_info['height']))
 
         filename = self.getFileName(url)
         downloaded = self.download(url, path, filename)
         return downloaded
 
-
     def get_wallpapers_alpha_search(self, monitor_info, scene):
-        search="search"
-
-        url="{}?auth={}".format(
+        url = "{}?auth={}".format(
             self.ALPHA_URL,
             self.ALPHA_KEY)
 
         if monitor_info:
-            url+="&width={}&height={}".format(
-            monitor_info['width'],
-            monitor_info['height'])
+            url = url + "&width={}&height={}".format(
+                monitor_info['width'],
+                monitor_info['height'])
 
         if scene:
-            url+="&term={}&method={}".format(
+            url = url + "&term={}&method={}".format(
                 scene, "search")
         else:
-            url+="&method={}".format(
-                scene, "random")
+            url = url + "&method={}".format("random")
 
-
-        url+="&info_level=1"
+        url = url + "&info_level=1"
 
         wallpapers = requests.get(url)
         json = wallpapers.json()
@@ -211,14 +205,13 @@ class Alpha():
         if not indexes:
             return ""
 
-        url+="&page={}".format(
+        url = url + "&page={}".format(
             indexes['page'])
 
         wallpapers = requests.get(url)
         json = wallpapers.json()
 
         return json['wallpapers'][indexes['index_in_page']]['url_image']
-
 
     def get_random_from_return(self, json):
         total_match = 0
@@ -230,7 +223,6 @@ class Alpha():
             result['index_in_page'] = 0
             result['page'] = 0
             return result
-
 
         if int(total_match) == 0:
             return None
@@ -246,14 +238,14 @@ class Alpha():
 
         return result
 
-
     def download(self, url, dirname, filename):
         url_int = url
         if not url:
             return ""
         r = requests.get(url_int, allow_redirects=True)
-        savename="{}/{}/{}".format(CONFIG_PATH, dirname, filename)
-        pathlib.Path("{}/{}".format(CONFIG_PATH, dirname)).mkdir(parents=True, exist_ok=True)
+        savename = "{}/{}/{}".format(CONFIG_PATH, dirname, filename)
+        pathlib.Path("{}/{}".format(CONFIG_PATH, dirname)).\
+            mkdir(parents=True, exist_ok=True)
         open(savename, 'wb').write(r.content)
         return savename
 
@@ -261,8 +253,65 @@ class Alpha():
         filename = pathlib.PurePath(url)
         return filename.name
 
+
+class GImages():
+    def get_wallpaper(self, monitor, scene, config):
+        """ Basic interface implementation"""
+        resolution = {}
+        if monitor:
+            monitor_info = _get_monitor_info(monitor)
+            resolution = monitor_info
+
+        return self.retrieve_url_wallapaper(resolution, scene)
+
+    def retrieve_url_wallapaper(self, resolution, scene):
+        gis = GoogleImagesSearch('AIzaSyDkO6Yitk9x_22eNmyB5MTcEYA7PQBPMaM',
+                                 '46a14224dfb4f74bd')
+
+        theme_name = os.environ['theme_name']
+
+        img_size = 20
+
+        color = ""
+        if theme_name == "night":
+            color = random.choice(['black', 'purple'])
+
+        _search_params = {
+            'q': scene,
+            'num': img_size,
+            # 'safe': 'high|medium|off',
+            # 'fileType': 'jpg|gif|png',
+            # 'imgType': 'clipart|face|lineart|news|photo',
+            # 'imgSize': 'huge|icon|large|medium|small|xlarge|xxlarge',
+            'imgSize': 'XLARGE',
+            # 'imgDominantColor': 'black|blue|brown|gray|green|orange|pink|purple|red|teal|white|yellow',
+            'imgDominantColor': color,
+            # 'imgColorType': 'color|gray|mono|trans',
+            # 'rights': 'cc_publicdomain|cc_attribute|cc_sharealike|cc_noncommercial|cc_nonderived'
+        }
+
+        path_to_save = self.get_path("gimages")
+
+        if resolution:
+            gis.search(search_params=_search_params, path_to_dir=path_to_save,
+                       width=resolution['width'], height=resolution['height'])
+
+        image_index = random.randint(1, img_size)
+
+        if gis.results():
+            return gis.results()[image_index].path
+        else:
+            return ""
+
+    def get_path(self, dirname):
+        savename = "{}/{}/{}/".format(CONFIG_PATH, "gimages", dirname)
+        pathlib.Path(savename).mkdir(parents=True, exist_ok=True)
+        return savename
+
+
 class WallHaven():
-    WALLHAVEN_URL="https://wallhaven.cc/api/v1/search"
+    WALLHAVEN_URL = "https://wallhaven.cc/api/v1/search"
+
     def get_wallpaper(self, monitor, scene, config):
         resolution = None
         self.config = config
@@ -270,11 +319,11 @@ class WallHaven():
             monitor_info = _get_monitor_info(monitor)
 
             if config.ratio:
-                resolution="{}x{}".format(monitor_info['ratio_w'],
-                                          monitor_info['ratio_h'])
+                resolution = "{}x{}".format(monitor_info['ratio_w'],
+                                            monitor_info['ratio_h'])
             else:
-                resolution="{}x{}".format(monitor_info['width'],
-                                          monitor_info['height'])
+                resolution = "{}x{}".format(monitor_info['width'],
+                                            monitor_info['height'])
 
         url = self.retrieve_url_wallapaper(resolution, scene)
         filename = self.getFileName(url)
@@ -283,7 +332,7 @@ class WallHaven():
         first = True
 
         if resolution:
-            path += ("{}" if first else "\{}").format(resolution)
+            path += ("{}" if first else "{}").format(resolution)
             first = False
 
         if (url):
@@ -293,9 +342,8 @@ class WallHaven():
 
         return downloaded
 
-
     def retrieve_url_wallapaper(self, resolution, search):
-        query="?sorting=random&categories=100"
+        query = "?sorting=random&categories=100"
         if resolution:
             if self.config.ratio:
                 query += "&ratio={}".format(resolution)
@@ -314,7 +362,7 @@ class WallHaven():
         try:
             url = wallpapers.json()['data'][0]['path']
         except IndexError:
-            query="?"
+            query = "?"
             query += "sorting=random"
             if search:
                 query += "&q={}".format(search)
@@ -329,14 +377,21 @@ class WallHaven():
     def download(self, url, dirname, filename):
         url_int = url
         r = requests.get(url_int, allow_redirects=True)
-        savename="{}/{}/{}/{}".format(CONFIG_PATH, "haven", dirname, filename)
-        pathlib.Path("{}/{}/{}".format(CONFIG_PATH, "haven", dirname)).mkdir(parents=True, exist_ok=True)
+        savename = "{}/{}/{}/{}".format(CONFIG_PATH,
+                                        "haven",
+                                        dirname,
+                                        filename)
+        pathlib.Path("{}/{}/{}".format(CONFIG_PATH,
+                                       "haven",
+                                       dirname)).mkdir(parents=True,
+                                                       exist_ok=True)
         open(savename, 'wb').write(r.content)
         return savename
 
     def getFileName(self, url):
         filename = pathlib.PurePath(url)
         return filename.name
+
 
 def _parse_arguments():
     import argparse
@@ -351,10 +406,16 @@ def _parse_arguments():
     parser.add_argument('-s', '--scene', type=str,
                         help='What is the scene')
     parser.add_argument('-e', '--engine', type=str,
-                        help='Use a for alpha, h for haven, c for chromecast and b for Bing')
+                        help='Use a for alpha, h for haven, c for\
+                        chromecast\
+                        , b for Bing and i for Google Images.\
+                        Skipping will search between alpha\
+                        and\
+                        haven')
 
     options = parser.parse_args()
     return options
+
 
 def get_engine(engine):
     if engine:
@@ -362,17 +423,24 @@ def get_engine(engine):
             return Alpha()
         if engine == "h":
             return WallHaven()
+        if engine == "i":
+            return GImages()
         if engine == "c":
             return Chromecast()
         if engine == "b":
             return Bing()
 
-    return WallHaven()
+    choice = random.choice(['alpha', 'haven']) 
+
+    if choice == 'haven':
+        return WallHaven()
+
+    if choice == 'alpha':
+        return Alpha()
 
 
 def _main():
     options = _parse_arguments()
-    resolution = options.dimension
     monitor = options.monitor
     scene = options.scene
     engine = options.engine
@@ -383,16 +451,16 @@ def _main():
     if ratio:
         config.ratio = True
 
-
     # wallservice = WallHaven()
     wallservice = get_engine(engine)
     downloaded = wallservice.get_wallpaper(monitor, scene, config)
 
-    if  not downloaded and not engine:
+    if not downloaded and not engine:
         wallservice = get_engine('h')
         downloaded = wallservice.get_wallpaper(monitor, scene, config)
 
     print(downloaded)
+
 
 if __name__ == '__main__':
     _main()

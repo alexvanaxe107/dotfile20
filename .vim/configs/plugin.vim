@@ -11,6 +11,7 @@ Plug 'arielrossanigo/dir-configs-override.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'freitass/todo.txt-vim'
+Plug 'preservim/vimux'
 
 " #### IDE
 Plug 'majutsushi/tagbar'
@@ -32,6 +33,7 @@ Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
 Plug 'prettier/vim-prettier' " Formatting
+Plug 'mkitt/tabline.vim'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -91,6 +93,8 @@ Plug 'wadackel/vim-dogrun'
 Plug 'arzg/vim-corvine'
 Plug 'zanglg/nova.vim'
 Plug 'reedes/vim-colors-pencil'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'jnurmine/Zenburn'
 
 "Vimwiki
 Plug 'vimwiki/vimwiki'

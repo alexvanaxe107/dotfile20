@@ -27,7 +27,7 @@ setlocal showmatch
 
 " ###### Plugins configs ######
 " Jedi
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 1
 let g:ale_linters = {'python': ['flake8',]}
 let g:ale_echo_msg_format = '%linter% says %s'
 "hi Normal ctermbg=None

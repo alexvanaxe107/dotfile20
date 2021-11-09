@@ -22,7 +22,7 @@
 
 [global]
   # Defines color of the frame around the notification window.
-  frame_color = "#8EC07C"
+  frame_color = "#000005"
 
   # Define a color for the separator.
   # possible values are:
