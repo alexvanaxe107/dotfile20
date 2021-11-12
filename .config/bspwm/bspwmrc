@@ -24,6 +24,7 @@ bspc config pointer_follows_monitor true
 
 # App rules
 bspc rule -a Gimp state=floating follow=on
+bspc rule -a Emacs state=tiled
 bspc rule -a ffplay state=floating
 bspc rule -a Gpick state=floating
 bspc rule -a qutebrowser desktop=^2
