@@ -7,8 +7,17 @@ PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 output_file=""
 id_only=0
 
-monitors=$(bspc query --monitors --names)
 all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
+
+__mount_monitors__() {
+    first=$(xrandr | grep "+0+0" | cut -d " " -f 1)
+
+    all_monitors_less_first=$(xrandr | grep -w connected | cut -d " " -f 1 | grep -v -w "${first}")
+
+    printf "%s\n%s" "$first" "$all_monitors_less_first"
+}
+
+monitors="$(__mount_monitors__)"
 
 print_primary_information() {
     if [ ${id_only} -eq 0 ]; then
@@ -16,6 +25,18 @@ print_primary_information() {
     else
         xrandr --listmonitors | awk 'NR==2 {print $1$2}' | cut -d ":" -f 1
     fi
+}
+
+emacs_string() {
+    count=0
+    emonitor=""
+    for monitor in ${monitors}; do
+	emonitor="${emonitor}${count} ${monitor} "
+	count=$((count + 1))
+    done
+
+    # printf "${emonitor}" | xargs
+    echo "$(__mount_monitors__)"
 }
 
 name_by_id_nitrogen(){
@@ -175,9 +196,10 @@ show_help() {
     echo "-t {id}                        Get Monitors acording prefered order."
     echo "-it {name}                     Get Monitors acording prefered order."
     echo "-d {name}                      Get Monitor dimension by its name"
+    echo "-e                             Get the emacs string to configure the exwm"
 }
 
-while getopts "h?mcpqift:w:n:ab:sd:" opt; do
+while getopts "h?mcpqift:w:n:ab:sd:e" opt; do
     case "$opt" in
     h|\?)
         show_help
@@ -207,6 +229,8 @@ while getopts "h?mcpqift:w:n:ab:sd:" opt; do
     w)  is_wide $OPTARG
         ;;
     s)  secundary_wide
+        ;;
+    e)  emacs_string
         ;;
     esac
 done

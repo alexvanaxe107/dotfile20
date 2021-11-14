@@ -1,5 +1,5 @@
 #+title AVA Extra Configs
-#+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/extra.el :results none
+#+PROPERTY: header-args:emacs-lisp :tangle /home/alexvanaxe/.emacs.d/extra.el :results none
 
 * Personal Configurations
 
@@ -122,13 +122,14 @@ Configure no littering so we can make the .emacs.d directory clean.
 
 #+begin_src emacs-lisp
 
-;; NOTE: If you want to move everything out of the ~/.emacs.d folder
-;; reliably, set `user-emacs-directory` before loading no-littering!
-(setq user-emacs-directory "~/Documents/.emacs")
+  ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
+  ;; reliably, set `user-emacs-directory` before loading no-littering!
+  (setq user-emacs-directory "~/Documents/.emacs")
+  (setq user-emacs-configs-directory (concat (getenv "HOME") "/.emacs.d/"))
 
-(use-package no-littering)
+  (use-package no-littering)
 
-(setq backup-directory-alist '(("." . "/home/alexvanaxe/Documents/.emacs_save")))
+  (setq backup-directory-alist '(("." . "/home/alexvanaxe/Documents/.emacs_save")))
 
 #+end_src
 
@@ -167,8 +168,7 @@ Configure no littering so we can make the .emacs.d directory clean.
         (use-package which-key
         :defer 0
         :diminish which-key-mode
-        :config
-        (which-key-mode)
+        :config (which-key-mode)
         (setq which-key-idle-delay 1))
 
         (use-package counsel
@@ -201,7 +201,7 @@ Configure no littering so we can make the .emacs.d directory clean.
         :after evil
         :config
         (general-create-definer ava/leader-keys
-        :keymaps '(normal)
+        :keymaps '(normal emacs)
         :prefix ava/leader-key)
         (ava/leader-keys
             "t"  '(:ignore t :which-key "Tabs Handling")
@@ -306,19 +306,29 @@ Configure no littering so we can make the .emacs.d directory clean.
         )
 
         (use-package org
+        :pin org
+        :commands (org-capture org-agenda)
         :hook (org-mode . ava/org-mode-setup)
         :config
-        (setq org-ellipsis " ")
-        )
+        (setq org-ellipsis " ▾")
+
+        (setq org-agenda-start-with-log-mode t)
+        (setq org-log-done 'time)
+        (setq org-log-into-drawer t)
+
+        (setq org-agenda-files
+                '("~/Documents/Projects/orgs/rice.org"))
 
         (use-package org-bullets
         :hook (org-mode . org-bullets-mode)
         :custom
-        (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+        (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
 
 
     (use-package visual-fill-column
-      :hook (org-mode . ava/org-mode-visual-fill))
+      :init 
+            (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
+            (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
 
 
         ;; (use-package company-box
@@ -381,6 +391,37 @@ Session with eshell config
 
 #+end_src
 
+* Dired configs
+
+#+begin_src emacs-lisp
+
+  (use-package dired
+    :ensure nil
+    :commands (dired dired-jump)
+    :bind (("C-x C-j" . dired-jump))
+    :custom ((dired-listing-switches "-l --group-directories-first"))
+    :config
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-single-up-directory
+      "l" 'dired-single-buffer))
+
+  (setq dired-dwim-target t)
+
+  (use-package dired-single
+    :commands (dired dired-jump))
+
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode))
+
+  (use-package dired-hide-dotfiles
+    :hook (dired-mode . dired-hide-dotfiles-mode)
+    :config
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "H" 'dired-hide-dotfiles-mode))
+
+
+#+end_src
+
 * Cosmetic Packages 
 Here are the configs for the cosmetic packages.
 
@@ -429,10 +470,12 @@ Personal funcitions to deal with the interface.
 #+end_src
 
 * Configs
+
 Here goes the configurations
 
-#+begin_src emacs-lisp
+** Random Configs
 
+#+begin_src emacs-lisp
 
   (defun ava/org-mode-setup ()
   (org-indent-mode)
@@ -440,6 +483,10 @@ Here goes the configurations
 
   (defun ava/org-mode-visual-fill ()
   (setq visual-fill-column-width 150)
+  (visual-fill-column-mode 1))
+
+  (defun ava/dired-mode-visual-fill ()
+  (setq visual-fill-column-width 080)
   (visual-fill-column-mode 1))
 
   (with-eval-after-load 'org
@@ -474,7 +521,11 @@ Here goes the configurations
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
 
+#+end_src
 
+** Org configs
+
+#+begin_src emacs-lisp
 
 #+end_src
 
@@ -526,15 +577,12 @@ This snippet adds a hook to =org-mode= buffers so that =ava/org-babel-tangle-con
 
 #+begin_src emacs-lisp
 
-  ;; Automatically tangle our Emacs.org config file when we save it
-(defun ava/org-babel-tangle-config()
-  "If the current file is in '~/.dotfiles', the code blocks are tangled"
-  (when (equal (file-name-directory (directory-file-name buffer-file-name))
-               (concat (getenv "HOME") "/.emacs.d/"))
-    (org-babel-tangle)
-    (message "%s tangled" buffer-file-name)))
+  (defun ava/org-babel-tangle-config ()
+    (when (string-equal (file-name-directory (buffer-file-name)) user-emacs-configs-directory))
+        (org-babel-tangle)
+        (message "tangled"))
 
-(add-hook 'after-save-hook #'ava/org-babel-tangle-config)
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'ava/org-babel-tangle-config)))
 
 
 #+end_src

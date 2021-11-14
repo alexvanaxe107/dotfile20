@@ -44,6 +44,6 @@ export GDK_BACKEND=x11
 #exec /home/alexvanaxe/bin/startdwm
 #exec i3
 #exec dwm
-exec bspwm
-
+#exec bspwm
+exec tdm --xstart
 #exec gnome-session
