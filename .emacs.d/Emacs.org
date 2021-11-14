@@ -16,8 +16,8 @@
   (defvar ava/default-font-size 105)
   (defvar ava/default-variable-font-size 105)
 
-  (defvar ava/transparency-level '(95 . 95))
-  (defvar ava/transparency-level-list '(alpha . (95 . 95)))
+  (defvar ava/transparency-level '(85 . 85))
+  (defvar ava/transparency-level-list '(alpha . (85 . 85)))
 
   (defvar ava/leader-key "SPC")
 
@@ -482,7 +482,8 @@ Here goes the configurations
   (visual-line-mode 1))
 
   (defun ava/org-mode-visual-fill ()
-  (setq visual-fill-column-width 150)
+  (setq visual-fill-column-width 150
+    visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
   (defun ava/dired-mode-visual-fill ()
