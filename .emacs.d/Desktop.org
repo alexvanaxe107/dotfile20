@@ -29,6 +29,13 @@
     (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights))))
     result)
 
+  (defun ava/exwm-rename-buffer ()
+    (interactive)
+    (exwm-workspace-rename-buffer
+     (concat exwm-class-name ":"
+             (if (<= (length exwm-title) 50) exwm-title
+               (concat (substring exwm-title 0 49) "...")))))
+
 #+end_src
 
 
@@ -88,7 +95,11 @@
     (add-hook 'exwm-update-class-hook #'ava/exwm-update-class)
 
     ;; When window title updates, use it to set the buffer name
-    (add-hook 'exwm-update-title-hook #'ava/exwm-update-title)
+    ;; (add-hook 'exwm-update-title-hook #'ava/exwm-update-title)
+
+    ;; Add these hooks in a suitable place (e.g., as done in exwm-config-default)
+    (add-hook 'exwm-update-class-hook 'ava/exwm-rename-buffer)
+    (add-hook 'exwm-update-title-hook 'ava/exwm-rename-buffer)
 
     ;; Configure windows as they're created
     ;; (add-hook 'exwm-manage-finish-hook #'ava/configure-window-by-class)
@@ -156,9 +167,8 @@ The idea is to start a server and then start a session with the client. It will 
   fi
 
 
-  exec dbus-launch --exit-with-session emacs --daemon -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el 
+  emacs --daemon -bg "#000000" -fg "#ffffff" -mm --debug-init
 
-  # emacs -bg "#000000" -fg "#ffffff" --execute "(with-eval-after-load 'doom-themes (load-theme 'doom-city-lights t))"
 
 #+end_src
 
@@ -179,25 +189,6 @@ Start the client.
 
 
   exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el 
-
-#+end_src
-
-** Theme select
-
-Select the appropriated theme for night and day from the list.
-
-#+begin_src python :tangle /home/alexvanaxe/bin/emacs_theme.py :tangle-mode (identity #o700)
-
-    #! /bin/python
-
-  import os
-
-  theme_name = os.getenv("theme_name")
-
-
-
-
-
 
 #+end_src
 

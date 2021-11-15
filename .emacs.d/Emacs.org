@@ -137,211 +137,240 @@ Configure no littering so we can make the .emacs.d directory clean.
 
   #+begin_src emacs-lisp
 
-        (use-package command-log-mode
-          :disabled)
+            (use-package command-log-mode
+              :disabled)
 
-        (use-package ivy
-        :diminish
-        :bind (("C-s" . swiper)
-                :map ivy-minibuffer-map
-                ("TAB" . ivy-alt-done)	
-                ("C-l" . ivy-alt-done)
-                ("C-j" . ivy-next-line)
-                ("C-k" . ivy-previous-line)
-                :map ivy-switch-buffer-map
-                ("C-k" . ivy-previous-line)
-                ("C-l" . ivy-done)
-                ("C-d" . ivy-switch-buffer-kill)
-                :map ivy-reverse-i-search-map
-                ("C-k" . ivy-previous-line)
-                ("C-d" . ivy-reverse-i-search-kill))
-        :config
-        (ivy-mode 1))
-
-        (use-package rainbow-delimiters
-        :hook (prog-mode . rainbow-delimiters-mode))
-
-        (use-package hydra
-            :after general)
-
-
-        (use-package which-key
-        :defer 0
-        :diminish which-key-mode
-        :config (which-key-mode)
-        (setq which-key-idle-delay 1))
-
-        (use-package counsel
-        :bind (("<f5>" . 'counsel-switch-buffer)
-                :map minibuffer-local-map
-                ("C-q" . 'counsel-minibuffer-history))
-        :custom
-        (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-        :config
-        (counsel-mode 1))
-
-        (use-package ivy-rich
-        :after ivy
-        :init
-        (ivy-rich-mode 1))
-
-        (use-package helpful
-        :commands (helpful-callable helpful-variable helpful-command helpful-key)
-        :custom
-        (counsel-describe-function-function #'helpful-callable)
-        (counsel-describe-variable-function #'helpful-variable)
-        :bind
-        ([remap describe-function] . counsel-describe-function)
-        ([remap describe-command] . helpful-command)
-        ([remap describe-variable] . counsel-describe-variable)
-        ([remap describe-key] . helpful-key))
-
-
-        (use-package general
-        :after evil
-        :config
-        (general-create-definer ava/leader-keys
-        :keymaps '(normal emacs)
-        :prefix ava/leader-key)
-        (ava/leader-keys
-            "t"  '(:ignore t :which-key "Tabs Handling")
-            "tt" '(tab-new :which-key "New tab")
-            "td" '(tab-close :which-key "Close the tab")
-            "tc" '(tab-bar-mode :which-key "Hide the tab panel")
-            "tn" '(tab-next :which-key "Go to the next tab")
-            "tg" '(tab-bar-select-tab-by-name :which-key "Select the tab")
-
-            "i1" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
-            "i2" '(lambda() (interactive)(find-file "~/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch/money_auth/views.py")))
-        )
-
-        (use-package evil
-        :init
-        (setq evil-want-integration t)
-        (setq evil-want-keybinding nil)
-        (setq evil-want-C-u-scroll t)
-        (setq evil-want-C-i-jump nil)
-        :config
-        (evil-mode 1)
-        (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-        (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-        (define-key evil-normal-state-map (kbd (concat ava/leader-key " %")) 'evil-window-vsplit)
-        (define-key evil-normal-state-map (kbd (concat ava/leader-key " \"")) 'evil-window-split)
-        (define-key evil-normal-state-map (kbd (concat ava/leader-key " l")) 'evil-window-right)
-        (define-key evil-normal-state-map (kbd (concat ava/leader-key " h")) 'evil-window-left)
-        (define-key evil-normal-state-map (kbd (concat ava/leader-key " j")) 'evil-window-down)
-        (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
-
-        ;; Use visual line motions even outside of visual-line-mode buffers
-        ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-        ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-        (evil-set-initial-state 'messages-buffer-mode 'normal)
-        (evil-set-initial-state 'dashboard-mode 'normal))
-
-        (use-package evil-collection
-        :after evil
-        :config
-        (evil-collection-init))
-
-        (use-package projectile
-        :diminish projectile-mode
-        :config (projectile-mode)
-        :custom ((projectile-completion-system 'ivy))
-        :bind-keymap
-        ("<f4>" . projectile-command-map))
-        :init
-        ;; NOTE: Set this to the folder where you keep your Git repos!
-        (when (file-directory-p "~/Documents/Projects/")
-        (setq projectile-project-search-path '("~/Documents/Projects/")))
-
-        (setq projectile-switch-project-action #'projectile-dired)
-
-        (use-package counsel-projectile
-        :after projectile
-        :config (counsel-projectile-mode))
-
-        (use-package magit
-        :commands magit-status)
-        ;; NOTE: Make sure to configure a GitHub token before using this package!
-        ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
-        ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
-
-        ;; (use-package forge
-        ;;  :after magit)
-
-        (use-package lsp-mode
-        :init
-        ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-        (setq lsp-keymap-prefix "C-c l")
-        :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-                (python-mode . lsp-deferred)
-                ;; if you want which-key integration
-                )
-        :commands lsp-deferred)
-
-        (use-package lsp-jedi
-        :after lsp-mode
-        :ensure t
-        :config
-        (with-eval-after-load "lsp-mode"
-            (add-to-list 'lsp-disabled-clients 'pyls)
-            (add-to-list 'lsp-enabled-clients 'jedi)))
-
-        (use-package lsp-ivy 
-            :after lsp-mode
-            :commands lsp-ivy-workspace-symbol)
-
-        (use-package lsp-ui
-            :after lsp-mode
+            (use-package ivy
+            :diminish
+            :bind (("C-s" . swiper)
+                    :map ivy-minibuffer-map
+                    ("TAB" . ivy-alt-done)	
+                    ("C-l" . ivy-alt-done)
+                    ("C-j" . ivy-next-line)
+                    ("C-k" . ivy-previous-line)
+                    :map ivy-switch-buffer-map
+                    ("C-k" . ivy-previous-line)
+                    ("C-l" . ivy-done)
+                    ("C-d" . ivy-switch-buffer-kill)
+                    :map ivy-reverse-i-search-map
+                    ("C-k" . ivy-previous-line)
+                    ("C-d" . ivy-reverse-i-search-kill))
             :config
-            (setq lsp-ui-doc-position 'bottom))
+            (ivy-mode 1))
 
-        (use-package company
-        :after lsp-mode
-        :hook (lsp-mode . company-mode)
-        :bind ("C-c c" . company-complete)
-        :config
-        (setq company-idle-delay nil)
-        )
+            (use-package rainbow-delimiters
+            :hook (prog-mode . rainbow-delimiters-mode))
 
-        (use-package org
-        :pin org
-        :commands (org-capture org-agenda)
-        :hook (org-mode . ava/org-mode-setup)
-        :config
-        (setq org-ellipsis " ▾")
-
-        (setq org-agenda-start-with-log-mode t)
-        (setq org-log-done 'time)
-        (setq org-log-into-drawer t)
-
-        (setq org-agenda-files
-                '("~/Documents/Projects/orgs/rice.org"))
-
-        (use-package org-bullets
-        :hook (org-mode . org-bullets-mode)
-        :custom
-        (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
+            (use-package hydra
+                :after general)
 
 
-    (use-package visual-fill-column
-      :init 
-            (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
-            (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
+            (use-package which-key
+            :defer 0
+            :diminish which-key-mode
+            :config (which-key-mode)
+            (setq which-key-idle-delay 1))
+
+            (use-package counsel
+            :bind (("<f5>" . 'counsel-switch-buffer)
+                    :map minibuffer-local-map
+                    ("C-q" . 'counsel-minibuffer-history))
+            :custom
+            (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+            :config
+            (counsel-mode 1))
+
+            (use-package ivy-rich
+            :after ivy
+            :init
+            (ivy-rich-mode 1))
+
+            (use-package helpful
+            :commands (helpful-callable helpful-variable helpful-command helpful-key)
+            :custom
+            (counsel-describe-function-function #'helpful-callable)
+            (counsel-describe-variable-function #'helpful-variable)
+            :bind
+            ([remap describe-function] . counsel-describe-function)
+            ([remap describe-command] . helpful-command)
+            ([remap describe-variable] . counsel-describe-variable)
+            ([remap describe-key] . helpful-key))
 
 
-        ;; (use-package company-box
-        ;;   :hook (company-mode . company-mode-box)
-        ;;   )
+            (use-package general
+            :after evil
+            :config
+            (general-create-definer ava/leader-keys
+            :keymaps '(normal emacs)
+            :prefix ava/leader-key)
+            (ava/leader-keys
+                "t"  '(:ignore t :which-key "Tabs Handling")
+                "tt" '(tab-new :which-key "New tab")
+                "td" '(tab-close :which-key "Close the tab")
+                "tc" '(tab-bar-mode :which-key "Hide the tab panel")
+                "tn" '(tab-next :which-key "Go to the next tab")
+                "tg" '(tab-bar-select-tab-by-name :which-key "Select the tab")
+
+                "i1" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
+                "i2" '(lambda() (interactive)(find-file "~/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch/money_auth/views.py")))
+            )
+
+            (use-package evil
+            :init
+            (setq evil-want-integration t)
+            (setq evil-want-keybinding nil)
+            (setq evil-want-C-u-scroll t)
+            (setq evil-want-C-i-jump nil)
+            :config
+            (evil-mode 1)
+            (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+            (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+            (define-key evil-normal-state-map (kbd (concat ava/leader-key " %")) 'evil-window-vsplit)
+            (define-key evil-normal-state-map (kbd (concat ava/leader-key " \"")) 'evil-window-split)
+            (define-key evil-normal-state-map (kbd (concat ava/leader-key " l")) 'evil-window-right)
+            (define-key evil-normal-state-map (kbd (concat ava/leader-key " h")) 'evil-window-left)
+            (define-key evil-normal-state-map (kbd (concat ava/leader-key " j")) 'evil-window-down)
+            (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
+
+            ;; Use visual line motions even outside of visual-line-mode buffers
+            ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+            ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+            (evil-set-initial-state 'messages-buffer-mode 'normal)
+            (evil-set-initial-state 'dashboard-mode 'normal))
+
+            (use-package evil-collection
+            :after evil
+            :config
+            (evil-collection-init))
+
+            (use-package projectile
+            :diminish projectile-mode
+            :config (projectile-mode)
+            :custom ((projectile-completion-system 'ivy))
+            :bind-keymap
+            ("<f4>" . projectile-command-map))
+            :init
+            ;; NOTE: Set this to the folder where you keep your Git repos!
+            (when (file-directory-p "~/Documents/Projects/")
+            (setq projectile-project-search-path '("~/Documents/Projects/")))
+
+            (setq projectile-switch-project-action #'projectile-dired)
+
+            (use-package counsel-projectile
+            :after projectile
+            :config (counsel-projectile-mode))
+
+            (use-package magit
+            :commands magit-status)
+            ;; NOTE: Make sure to configure a GitHub token before using this package!
+            ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
+            ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
+
+            ;; (use-package forge
+            ;;  :after magit)
+
+            (use-package lsp-mode
+            :init
+            ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+            (setq lsp-keymap-prefix "C-c l")
+            :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+                    (python-mode . lsp-deferred)
+                    (typescript-mode . lsp-deferred)
+                    ;; if you want which-key integration
+                    )
+            :commands lsp-deferred
+            :config
+                (lsp-enable-which-key-integration t))
+
+            (use-package lsp-jedi
+            :after lsp-mode
+            :ensure t
+            :config
+            (with-eval-after-load "lsp-mode"
+                (add-to-list 'lsp-disabled-clients 'pyls)
+                (add-to-list 'lsp-enabled-clients 'jedi)))
+
+            (use-package lsp-ivy 
+                :after lsp-mode
+                :commands lsp-ivy-workspace-symbol)
+
+            (use-package lsp-ui
+                :after lsp-mode
+                :config
+                (setq lsp-ui-doc-position 'bottom))
+
+            (use-package company
+            :after lsp-mode
+            :hook (lsp-mode . company-mode)
+            :bind ("C-c c" . company-complete)
+            :config
+            (setq company-idle-delay nil)
+            )
+
+            (use-package org
+            :pin org
+            :commands (org-capture org-agenda)
+            :hook (org-mode . ava/org-mode-setup)
+            :config
+            (setq org-ellipsis " ▾")
+
+            (setq org-agenda-start-with-log-mode t)
+            (setq org-log-done 'time)
+            (setq org-log-into-drawer t)
+
+            (setq org-agenda-files
+                    '("~/Documents/Projects/orgs/rice.org"))
+
+            (use-package org-bullets
+            :hook (org-mode . org-bullets-mode)
+            :custom
+            (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
 
 
-        ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-        ;; (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-        ;; (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-        ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+        (use-package visual-fill-column
+          :init 
+                (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
+                (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
+
+
+            ;; (use-package company-box
+            ;;   :hook (company-mode . company-mode-box)
+            ;;   )
+
+
+            ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+            ;; (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+            ;; (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+            ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
   #+end_src
   
+* Typescript Config
+
+Configuration of the typescript language. We add a hook in the typescript-mode-hook.
+
+#+begin_src emacs-lisp
+
+    (use-package typescript-mode
+      :after lsp-mode
+      :mode "\\.ts\\'"
+      :hook (typescript-mode . lsp-deferred)
+      :config
+    (with-eval-after-load "lsp-mode"
+      (setq typescript-indent-level 2)
+      (add-to-list 'lsp-enabled-clients 'ts-ls)
+  ))
+
+#+end_src
+
+*For this to work the server needs be installed on the machine*
+
+#+begin_src shell
+
+paru -S typescript-language-server
+
+#+end_src
+
 * Vim diff like?
 
 The diff vim like style
@@ -440,7 +469,6 @@ Here are the configs for the cosmetic packages.
           :custom ((doom-modeline-height 10)))
 
 #+end_src
-
 
 * Funcions Definitions 
 Personal funcitions to deal with the interface.
