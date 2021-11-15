@@ -441,14 +441,6 @@ Here are the configs for the cosmetic packages.
 
 #+end_src
 
-** Base16 Colors
-
-#+begin_src emacs-lisp
-
-(use-package base16-theme
-  :ensure t)
-
-#+end_src
 
 * Funcions Definitions 
 Personal funcitions to deal with the interface.
@@ -543,6 +535,7 @@ Here goes the configurations
   ("f" nil "finished" :exit t))
 
   (ava/leader-keys
+      "y" '(counsel-load-theme :which-key "choose theme")
       "r" '(window-resize/body :which-key "Resize the window")
       "b" '(toggle-transparency :which-key "Toggle transparency")
   ))

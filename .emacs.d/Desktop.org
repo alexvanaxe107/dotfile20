@@ -13,18 +13,54 @@
 
 #+end_src
 
+
+** Functions definitions
+
+#+begin_src emacs-lisp
+
+  (defun random-choice (items)
+    (let* ((size (length items))
+           (index (random size)))
+      (nth index items)))
+
+
+  (defun get-theme()
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-ligth doom-one-light))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights))))
+    result)
+
+#+end_src
+
+
 ** The init Hook
 
 #+begin_src emacs-lisp
 
-  (defun ava/exwm-init-hook ()
-    ;; (start-process-shell-command "set_wallpaper" nil "wallpaper_changer.sh")
-    ;; (start-process-shell-command "set_theme" nil "theme_select.sh -emacs")
-    ;;(ava/run-in-background "setkmap")
-  )
+      (defun ava/exwm-init-hook ()
+        ;; (start-process-shell-command "set_wallpaper" nil "wallpaper_changer.sh")
+        ;; (start-process-shell-command "set_theme" nil "theme_select.sh -emacs")
+        (ava/run-in-background "nitrogen --restore")
+        (with-eval-after-load 'doom-themes (load-theme (get-theme) t))
+        )
 
+      (defun ava/exwm-update-class ()
+        (exwm-workspace-rename-buffer exwm-class-name))
+
+      (defun ava/exwm-update-title ()
+        (pcase exwm-class-name
+          ("Firefox" (exwm-workspace-rename-buffer (format "Firefox: %s" exwm-title)))))
+
+      ;; (defun ava/configure-window-by-class ()
+      ;;   (interactive)
+      ;;   (pcase exwm-class-name
+      ;;     ("Firefox" (exwm-workspace-move-window 2))
+      ;;     ("Sol" (exwm-workspace-move-window 3))
+      ;;     ("mpv" (exwm-floating-toggle-floating)
+      ;;      (exwm-layout-toggle-mode-line))))
 
 #+end_src
+
+
 
 ** Use Package for exwm
 
@@ -33,7 +69,7 @@
   (use-package exwm
     :config
     ;; Set the default number of workspaces
-    (setq exwm-workspace-number 5)
+    (setq exwm-workspace-number 10)
 
     ;; These keys should always pass through to Emacs
     (setq exwm-input-prefix-keys
@@ -48,9 +84,18 @@
             ?\C-\ ))  ;; Ctrl+Space
 
 
+    ;; When window "class" updates, use it to set the buffer name
+    (add-hook 'exwm-update-class-hook #'ava/exwm-update-class)
+
+    ;; When window title updates, use it to set the buffer name
+    (add-hook 'exwm-update-title-hook #'ava/exwm-update-title)
+
+    ;; Configure windows as they're created
+    ;; (add-hook 'exwm-manage-finish-hook #'ava/configure-window-by-class)
+
+
     ;; When EXWM starts up, do some extra confifuration
     (add-hook 'exwm-init-hook #'ava/exwm-init-hook)
-
 
     (require 'exwm-randr)
     (exwm-randr-enable)
@@ -61,17 +106,18 @@
 
     (setq exwm-randr-workspace-output-plist '(1 "HDMI1" 0 "eDP1" 9 "eDP1"))
 
-
     ;; Ctrl+Q will enable the next key to be sent directly
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
     ;; Set up global key bindings.  These always work, no matter the input state!
     (setq exwm-input-global-keys
-          `(([?\s-r] . exwm-reset)
+          `(
+            ([?\s-r] . exwm-reset)
+            ([?\s-d] . counsel-linux-app)
 
             ;; Launch applications via shell command
-            ([?\s-d] . (lambda (command)
-                        (interactive (list (read-shell-command "$ ")))
-                        (start-process-shell-command command nil command)))
+            ([?\s-$] . (lambda (command)
+                         (interactive (list (read-shell-command "$ ")))
+                         (start-process-shell-command command nil command)))
 
 
             ;; Movement keys
@@ -87,7 +133,7 @@
                             (interactive)
                             (exwm-workspace-switch-create ,i))))
                       (number-sequence 0 9))))
-        (exwm-enable)
+    (exwm-enable)
 
     )
 
@@ -95,17 +141,63 @@
 
 * Non Lisp files
 
-** The shell loader
+** The shell server
 
-#+begin_src sh :tangle /home/alexvanaxe/bin/wms/emacs.sh
+The idea is to start a server and then start a session with the client. It will in theory make the process a lot faster.
 
-#! /bin/dash
+#+begin_src sh :tangle /home/alexvanaxe/bin/emacs-server.sh :tangle-mode (identity #o700)
 
-export WM_RUNNING="emacs"
+  #! /bin/bash
 
-start_picom.sh
+  export WM_RUNNING="emacs"
 
-exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
+  if [ "${theme_name}" = "day" ]; then
+    theme="doom-gruvbox-light"
+  fi
+
+
+  exec dbus-launch --exit-with-session emacs --daemon -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el 
+
+  # emacs -bg "#000000" -fg "#ffffff" --execute "(with-eval-after-load 'doom-themes (load-theme 'doom-city-lights t))"
+
+#+end_src
+
+** Start script. Lets try it.
+
+Start the client.
+
+#+begin_src sh :tangle /home/alexvanaxe/bin/wms/start-emacs.sh :tangle-mode (identity #o700)
+
+  #! /bin/bash
+
+  export WM_RUNNING="emacs"
+  start_picom.sh
+
+  if [ "${theme_name}" = "day" ]; then
+    theme="doom-gruvbox-light"
+  fi
+
+
+  exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el 
+
+#+end_src
+
+** Theme select
+
+Select the appropriated theme for night and day from the list.
+
+#+begin_src python :tangle /home/alexvanaxe/bin/emacs_theme.py :tangle-mode (identity #o700)
+
+    #! /bin/python
+
+  import os
+
+  theme_name = os.getenv("theme_name")
+
+
+
+
+
 
 #+end_src
 
