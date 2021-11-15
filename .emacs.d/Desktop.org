@@ -18,17 +18,6 @@
 
 #+begin_src emacs-lisp
 
-  (defun random-choice (items)
-    (let* ((size (length items))
-           (index (random size)))
-      (nth index items)))
-
-
-  (defun get-theme()
-    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-ligth doom-one-light))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights))))
-    result)
-
   (defun ava/exwm-rename-buffer ()
     (interactive)
     (exwm-workspace-rename-buffer

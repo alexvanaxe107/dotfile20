@@ -76,21 +76,10 @@ A Hook used to mesure the time emacs takes to startup. It is usefull so as we wi
 
     (setq doom-modeline-modal-icon t)
 
-    (set-face-attribute 'default nil :font "Hack" :height ava/default-font-size)
 
     ;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height ava/default-variable-font-size :weight 'regular)
 
   #+end_src
-
-** Transparency Stuffs related
-#+begin_src emacs-lisp
-
- ;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
- ;;(set-frame-parameter (selected-frame) 'alpha <both>)
- (set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
- (add-to-list 'default-frame-alist ava/transparency-level-list)
-
-#+end_src
 
 * Use Packages Initial Config
 ** Basic Use Packages Config
@@ -133,12 +122,107 @@ Configure no littering so we can make the .emacs.d directory clean.
 
 #+end_src
 
+* Imports
+
+Some imports to make the config less acoplated.
+
+#+begin_src emacs-lisp
+
+(setq extra-config-file "~/.emacs.d/rice.el")
+(load extra-config-file)
+
+#+end_src
+
+* Funcions Definitions 
+Personal funcitions to deal with the interface.
+
+#+begin_src emacs-lisp
+
+    ;; Function to get a random value from the list passed 
+    (defun random-choice (items)
+    (let* ((size (length items))
+            (index (random size)))
+        (nth index items)))
+
+    (defun get-theme()
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-light doom-one-light
+                    spacemacs-light kaolin-breeze kaolin-valley-light doom-nord-light))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights
+                    kaolin-aurora kaolin-eclipse kaolin-valley-dark doom-moonlight doom-city-lights doom-material
+                    doom-dracula doom-palenight))))
+    result)
+
+    (defun get-font()
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Envy Code R"))))
+    result2)
+
+  (defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+  (set-frame-parameter
+  nil 'alpha
+  (if (eql (cond ((numberp alpha) alpha)
+  ((numberp (cdr alpha)) (cdr alpha))
+        ;; Also handle undocumented (<active> <inactive>) form.
+        ((numberp (cadr alpha)) (cadr alpha))) 100)
+        ava/transparency-level '(100 . 100)))))
+
+#+end_src
+
+* Rice Configs 
+** Rice related stuffs
+This is tangled in another file and hooked to start so we can manipulate outside emacs easier
+
+#+begin_src emacs-lisp :tangle /home/alexvanaxe/.emacs.d/rice.el
+
+  (defvar ava/default-font-size 105)
+  (defvar ava/default-variable-font-size 105)
+
+  (defun ava/rice-the-emacs ()
+      (load-theme (get-theme) t)
+      (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size)
+  )
+#+end_src 
+
+** Transparency Stuffs related
+#+begin_src emacs-lisp
+
+ ;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+ ;;(set-frame-parameter (selected-frame) 'alpha <both>)
+ (set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
+ (add-to-list 'default-frame-alist ava/transparency-level-list)
+
+#+end_src
+
+** Rice Hooks
+Hooks to rice the emacs
+
+#+begin_src emacs-lisp
+
+
+  (add-hook 'emacs-startup-hook #'ava/rice-the-emacs)
+
+#+end_src
+
 * Required System packages
+
+** Log Keys
+
+Package to display the keys clicked. It is mostly used for presentations.
 
   #+begin_src emacs-lisp
 
             (use-package command-log-mode
               :disabled)
+
+#+end_src
+
+** ZFZ like support
+
+Provides better selections for the emacs, searchable with fuzzy logic. There is a concorrent I never tested called *Helm*.
+
+#+begin_src emacs-lisp
 
             (use-package ivy
             :diminish
@@ -158,18 +242,42 @@ Configure no littering so we can make the .emacs.d directory clean.
             :config
             (ivy-mode 1))
 
+#+end_src
+
+** Better parenthesis
+
+Putting some colors on parenthesis to try to help find where the corresponding closing-opening are. (Don't know for sure if works with {[...)
+
+#+begin_src emacs-lisp
+
             (use-package rainbow-delimiters
             :hook (prog-mode . rainbow-delimiters-mode))
 
             (use-package hydra
                 :after general)
 
+#+end_src
+
+** More information
+
+Provides more information when a key is pressed like C-x.
+
+
+#+begin_src emacs-lisp
 
             (use-package which-key
             :defer 0
             :diminish which-key-mode
             :config (which-key-mode)
             (setq which-key-idle-delay 1))
+
+#+end_src
+
+** Counseleir
+
+Package related to ivy. It shows more information for the exec instructions and other stuffs. *Try to explore more*
+
+#+begin_src emacs-lisp
 
             (use-package counsel
             :bind (("<f5>" . 'counsel-switch-buffer)
@@ -180,10 +288,26 @@ Configure no littering so we can make the .emacs.d directory clean.
             :config
             (counsel-mode 1))
 
+#+end_src
+
+** More ivy
+
+Tries to provide more friendly interface for ivy. (*Trying to see the difference!*)
+
+#+begin_src emacs-lisp
+
             (use-package ivy-rich
             :after ivy
             :init
             (ivy-rich-mode 1))
+
+#+end_src
+
+** Documentation
+
+Providing some more info in the documentations
+
+#+begin_src emacs-lisp
 
             (use-package helpful
             :commands (helpful-callable helpful-variable helpful-command helpful-key)
@@ -196,6 +320,13 @@ Configure no littering so we can make the .emacs.d directory clean.
             ([remap describe-variable] . counsel-describe-variable)
             ([remap describe-key] . helpful-key))
 
+#+end_src
+
+** Keymaping general
+
+Great package to facilitate the settings of the custom keys configuration. Mapped to SPC. It provides a lot of my mappings like move windows integration with hydra and etc...
+
+#+begin_src emacs-lisp
 
             (use-package general
             :after evil
@@ -215,134 +346,158 @@ Configure no littering so we can make the .emacs.d directory clean.
                 "i2" '(lambda() (interactive)(find-file "~/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch/money_auth/views.py")))
             )
 
-            (use-package evil
-            :init
-            (setq evil-want-integration t)
-            (setq evil-want-keybinding nil)
-            (setq evil-want-C-u-scroll t)
-            (setq evil-want-C-i-jump nil)
-            :config
-            (evil-mode 1)
-            (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-            (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-            (define-key evil-normal-state-map (kbd (concat ava/leader-key " %")) 'evil-window-vsplit)
-            (define-key evil-normal-state-map (kbd (concat ava/leader-key " \"")) 'evil-window-split)
-            (define-key evil-normal-state-map (kbd (concat ava/leader-key " l")) 'evil-window-right)
-            (define-key evil-normal-state-map (kbd (concat ava/leader-key " h")) 'evil-window-left)
-            (define-key evil-normal-state-map (kbd (concat ava/leader-key " j")) 'evil-window-down)
-            (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
+#+end_src
 
-            ;; Use visual line motions even outside of visual-line-mode buffers
-            ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-            ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+** Evil mode
 
-            (evil-set-initial-state 'messages-buffer-mode 'normal)
-            (evil-set-initial-state 'dashboard-mode 'normal))
+VI key mappings for emacs.
 
-            (use-package evil-collection
-            :after evil
-            :config
-            (evil-collection-init))
+#+begin_src emacs-lisp
 
-            (use-package projectile
-            :diminish projectile-mode
-            :config (projectile-mode)
-            :custom ((projectile-completion-system 'ivy))
-            :bind-keymap
-            ("<f4>" . projectile-command-map))
-            :init
-            ;; NOTE: Set this to the folder where you keep your Git repos!
-            (when (file-directory-p "~/Documents/Projects/")
-            (setq projectile-project-search-path '("~/Documents/Projects/")))
+      (use-package evil
+      :init
+      (setq evil-want-integration t)
+      (setq evil-want-keybinding nil)
+      (setq evil-want-C-u-scroll t)
+      (setq evil-want-C-i-jump nil)
+      :config
+      (evil-mode 1)
+      (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+      (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+      (define-key evil-normal-state-map (kbd (concat ava/leader-key " %")) 'evil-window-vsplit)
+      (define-key evil-normal-state-map (kbd (concat ava/leader-key " \"")) 'evil-window-split)
+      (define-key evil-normal-state-map (kbd (concat ava/leader-key " l")) 'evil-window-right)
+      (define-key evil-normal-state-map (kbd (concat ava/leader-key " h")) 'evil-window-left)
+      (define-key evil-normal-state-map (kbd (concat ava/leader-key " j")) 'evil-window-down)
+      (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
 
-            (setq projectile-switch-project-action #'projectile-dired)
+      ;; Use visual line motions even outside of visual-line-mode buffers
+      ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+      ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-            (use-package counsel-projectile
-            :after projectile
-            :config (counsel-projectile-mode))
+      (evil-set-initial-state 'messages-buffer-mode 'normal)
+      (evil-set-initial-state 'dashboard-mode 'normal))
 
-            (use-package magit
-            :commands magit-status)
-            ;; NOTE: Make sure to configure a GitHub token before using this package!
-            ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
-            ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
+      (use-package evil-collection
+      :after evil
+      :config
+      (evil-collection-init))
 
-            ;; (use-package forge
-            ;;  :after magit)
+#+end_src
 
-            (use-package lsp-mode
-            :init
-            ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-            (setq lsp-keymap-prefix "C-c l")
-            :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-                    (python-mode . lsp-deferred)
-                    (typescript-mode . lsp-deferred)
-                    ;; if you want which-key integration
-                    )
-            :commands lsp-deferred
-            :config
-                (lsp-enable-which-key-integration t))
+** IDEs stuffs.
 
-            (use-package lsp-jedi
-            :after lsp-mode
-            :ensure t
-            :config
-            (with-eval-after-load "lsp-mode"
-                (add-to-list 'lsp-disabled-clients 'pyls)
-                (add-to-list 'lsp-enabled-clients 'jedi)))
+Making IDE understand the git projects and treat them as projects.
 
-            (use-package lsp-ivy 
-                :after lsp-mode
-                :commands lsp-ivy-workspace-symbol)
+#+begin_src emacs-lisp
 
-            (use-package lsp-ui
-                :after lsp-mode
-                :config
-                (setq lsp-ui-doc-position 'bottom))
+      (use-package projectile
+      :diminish projectile-mode
+      :config (projectile-mode)
+      :custom ((projectile-completion-system 'ivy))
+      :bind-keymap
+      ("<f4>" . projectile-command-map))
+      :init
+      ;; NOTE: Set this to the folder where you keep your Git repos!
+      (when (file-directory-p "~/Documents/Projects/")
+      (setq projectile-project-search-path '("~/Documents/Projects/")))
 
-            (use-package company
-            :after lsp-mode
-            :hook (lsp-mode . company-mode)
-            :bind ("C-c c" . company-complete)
-            :config
-            (setq company-idle-delay nil)
-            )
+      (setq projectile-switch-project-action #'projectile-dired)
 
-            (use-package org
-            :pin org
-            :commands (org-capture org-agenda)
-            :hook (org-mode . ava/org-mode-setup)
-            :config
-            (setq org-ellipsis " ▾")
+      (use-package counsel-projectile
+      :after projectile
+      :config (counsel-projectile-mode))
 
-            (setq org-agenda-start-with-log-mode t)
-            (setq org-log-done 'time)
-            (setq org-log-into-drawer t)
+#+end_src
 
-            (setq org-agenda-files
-                    '("~/Documents/Projects/orgs/rice.org"))
+** GIT INtegration
 
-            (use-package org-bullets
-            :hook (org-mode . org-bullets-mode)
-            :custom
-            (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
+Provides a very good git integration. Forge is disabled, look more info in it capabilities.
+
+#+begin_src emacs-lisp
+
+      (use-package magit
+      :commands magit-status)
+      ;; NOTE: Make sure to configure a GitHub token before using this package!
+      ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
+      ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
+
+      ;; (use-package forge
+      ;;  :after magit)
+
+      (use-package lsp-mode
+      :init
+      ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+      (setq lsp-keymap-prefix "C-c l")
+      :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+              (python-mode . lsp-deferred)
+              (typescript-mode . lsp-deferred)
+              ;; if you want which-key integration
+              )
+      :commands lsp-deferred
+      :config
+          (lsp-enable-which-key-integration t))
+
+      (use-package lsp-jedi
+      :after lsp-mode
+      :ensure t
+      :config
+      (with-eval-after-load "lsp-mode"
+          (add-to-list 'lsp-disabled-clients 'pyls)
+          (add-to-list 'lsp-enabled-clients 'jedi)))
+
+      (use-package lsp-ivy 
+          :after lsp-mode
+          :commands lsp-ivy-workspace-symbol)
+
+      (use-package lsp-ui
+          :after lsp-mode
+          :config
+          (setq lsp-ui-doc-position 'bottom))
+
+      (use-package company
+      :after lsp-mode
+      :hook (lsp-mode . company-mode)
+      :bind ("C-c c" . company-complete)
+      :config
+      (setq company-idle-delay nil)
+      )
+
+      (use-package org
+      :pin org
+      :commands (org-capture org-agenda)
+      :hook (org-mode . ava/org-mode-setup)
+      :config
+      (setq org-ellipsis " ▾")
+
+      (setq org-agenda-start-with-log-mode t)
+      (setq org-log-done 'time)
+      (setq org-log-into-drawer t)
+
+      (setq org-agenda-files
+              '("~/Documents/Projects/orgs/rice.org"))
+
+      (use-package org-bullets
+      :hook (org-mode . org-bullets-mode)
+      :custom
+      (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
 
 
-        (use-package visual-fill-column
-          :init 
-                (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
-                (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
+  (use-package visual-fill-column
+    :init 
+          (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
+          (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
 
 
-            ;; (use-package company-box
-            ;;   :hook (company-mode . company-mode-box)
-            ;;   )
+      ;; (use-package company-box
+      ;;   :hook (company-mode . company-mode-box)
+      ;;   )
 
 
-            ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-            ;; (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-            ;; (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-            ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+      ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+      ;; (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+      ;; (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+      ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
   #+end_src
   
 * Typescript Config
@@ -470,22 +625,20 @@ Here are the configs for the cosmetic packages.
 
 #+end_src
 
-* Funcions Definitions 
-Personal funcitions to deal with the interface.
+** Kaolin themes
 
 #+begin_src emacs-lisp
 
- (defun toggle-transparency ()
-   (interactive)
-   (let ((alpha (frame-parameter nil 'alpha)))
-     (set-frame-parameter
-      nil 'alpha
-      (if (eql (cond ((numberp alpha) alpha)
-                     ((numberp (cdr alpha)) (cdr alpha))
-                     ;; Also handle undocumented (<active> <inactive>) form.
-                     ((numberp (cadr alpha)) (cadr alpha)))
-               100)
-          ava/transparency-level '(100 . 100)))))
+;; Or if you have use-package installed
+(use-package kaolin-themes)
+
+#+end_src
+
+** Cyberpunk
+
+#+begin_src emacs-lisp
+
+(use-package cyberpunk-theme)
 
 #+end_src
 
@@ -494,9 +647,20 @@ Personal funcitions to deal with the interface.
 Here goes the configurations
 
 ** Random Configs
+*** Column indicator
+
+Set the size of the column indicator. I can add later some hooks if want different size depending on the language.
 
 #+begin_src emacs-lisp
 
+  (setq display-fill-column-indicator-column 100)
+
+#+end_src
+
+*** Random of Randoms
+
+#+begin_src emacs-lisp
+  
   (defun ava/org-mode-setup ()
   (org-indent-mode)
   (visual-line-mode 1))
