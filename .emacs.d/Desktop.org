@@ -32,27 +32,28 @@
 
 #+begin_src emacs-lisp
 
-      (defun ava/exwm-init-hook ()
-        ;; (start-process-shell-command "set_wallpaper" nil "wallpaper_changer.sh")
-        ;; (start-process-shell-command "set_theme" nil "theme_select.sh -emacs")
-        (ava/run-in-background "nitrogen --restore")
-        (with-eval-after-load 'doom-themes (load-theme (get-theme) t))
-        )
+  ;; Put here the inital programs to run
+  (defun ava/exwm-init-hook ()
+    ;; (start-process-shell-command "set_wallpaper" nil "wallpaper_changer.sh")
+    ;; (start-process-shell-command "set_theme" nil "theme_select.sh -emacs")
+    (ava/run-in-background "nitrogen --restore")
+    (with-eval-after-load 'doom-themes (load-theme (get-theme) t))
+    )
 
-      (defun ava/exwm-update-class ()
-        (exwm-workspace-rename-buffer exwm-class-name))
+  (defun ava/exwm-update-class ()
+    (exwm-workspace-rename-buffer exwm-class-name))
 
-      (defun ava/exwm-update-title ()
-        (pcase exwm-class-name
-          ("Firefox" (exwm-workspace-rename-buffer (format "Firefox: %s" exwm-title)))))
+  (defun ava/exwm-update-title ()
+    (pcase exwm-class-name
+      ("Firefox" (exwm-workspace-rename-buffer (format "Firefox: %s" exwm-title)))))
 
-      ;; (defun ava/configure-window-by-class ()
-      ;;   (interactive)
-      ;;   (pcase exwm-class-name
-      ;;     ("Firefox" (exwm-workspace-move-window 2))
-      ;;     ("Sol" (exwm-workspace-move-window 3))
-      ;;     ("mpv" (exwm-floating-toggle-floating)
-      ;;      (exwm-layout-toggle-mode-line))))
+  ;; (defun ava/configure-window-by-class ()
+  ;;   (interactive)
+  ;;   (pcase exwm-class-name
+  ;;     ("Firefox" (exwm-workspace-move-window 2))
+  ;;     ("Sol" (exwm-workspace-move-window 3))
+  ;;     ("mpv" (exwm-floating-toggle-floating)
+  ;;      (exwm-layout-toggle-mode-line))))
 
 #+end_src
 
@@ -139,6 +140,19 @@
 
 #+end_src
 
+* Testing packages
+
+This session is packages that were tested and the comments with the results of the tests
+
+** Dmenu
+It is good to replace counsel, it seems not to have all the functionalities from dmenu (At list I couldnt figure it out) so it will not be used because it don't worth it.
+
+#+begin_src emacs-lisp
+
+  ;; (use-package dmenu)
+
+#+end_src
+
 * Non Lisp files
 
 ** The shell server
@@ -161,7 +175,7 @@ The idea is to start a server and then start a session with the client. It will 
 
 #+end_src
 
-** Start script. Lets try it.
+** Start script.
 
 Start the client.
 
@@ -170,14 +184,9 @@ Start the client.
   #! /bin/bash
 
   export WM_RUNNING="emacs"
-  start_picom.sh
+  start_picom.sh "emacs"
 
-  if [ "${theme_name}" = "day" ]; then
-    theme="doom-gruvbox-light"
-  fi
-
-
-  exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el 
+  exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
 
 #+end_src
 

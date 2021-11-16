@@ -130,6 +130,8 @@ Some imports to make the config less acoplated.
 
 (setq extra-config-file "~/.emacs.d/rice.el")
 (load extra-config-file)
+(setq ava-cool-stuffs "~/.emacs.d/cool.el")
+(load ava-cool-stuffs)
 
 #+end_src
 
@@ -155,7 +157,7 @@ Personal funcitions to deal with the interface.
     (defun get-font()
     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
     (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Envy Code R"))))
-    result2)
+    result)
 
   (defun toggle-transparency ()
   (interactive)
@@ -199,7 +201,6 @@ This is tangled in another file and hooked to start so we can manipulate outside
 Hooks to rice the emacs
 
 #+begin_src emacs-lisp
-
 
   (add-hook 'emacs-startup-hook #'ava/rice-the-emacs)
 
@@ -500,6 +501,27 @@ Provides a very good git integration. Forge is disabled, look more info in it ca
       ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
   #+end_src
   
+** Fly
+Better code analyses
+
+#+begin_src emacs-lisp
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+#+end_src
+  
+** Pyenv Integration
+#+begin_src emacs-lisp
+
+  (use-package pyvenv
+    :ensure t
+    :init
+    (setenv "WORKON_HOME" "~/.pyenv/versions"))
+
+#+end_src
+
 * Typescript Config
 
 Configuration of the typescript language. We add a hook in the typescript-mode-hook.
@@ -526,7 +548,7 @@ paru -S typescript-language-server
 
 #+end_src
 
-* Vim diff like?
+* Vim diff like!
 
 The diff vim like style
 
@@ -543,35 +565,43 @@ Session with eshell config
 
 #+begin_src emacs-lisp
 
-(defun ava/configure-eshell ()
-  ;; Save command history when commands are entered
-  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+  (defun ava/configure-eshell ()
+    ;; Save command history when commands are entered
+    (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
-  ;; Truncate buffer for performance
-  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+    ;; Truncate buffer for performance
+    (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
-  ;; Bind some useful keys for evil-mode
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
-  (evil-normalize-keymaps)
+    ;; Bind some useful keys for evil-mode
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+    (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+    (evil-normalize-keymaps)
 
-  (setq eshell-history-size         10000
-        eshell-buffer-maximum-lines 10000
-        eshell-hist-ignoredups t
-        eshell-scroll-to-bottom-on-input t))
+    (setq eshell-history-size         10000
+          eshell-buffer-maximum-lines 10000
+          eshell-hist-ignoredups t
+          eshell-scroll-to-bottom-on-input t))
 
-(use-package eshell-git-prompt
-  :after eshell)
+  (use-package eshell-git-prompt
+    :after eshell)
 
-(use-package eshell
-  :hook (eshell-first-time-mode . ava/configure-eshell)
+  (use-package eshell
+    :hook (eshell-first-time-mode . ava/configure-eshell)
+    :config
+
+    (with-eval-after-load 'esh-opt
+      (setq eshell-destroy-buffer-when-process-dies t)
+      (setq eshell-visual-commands '("htop" "zsh" "vim"))))
+
+    ;(eshell-git-prompt-use-theme 'powerline))
+
+    ;; Try to use the vterm
+  (use-package vterm
+  :commands vterm
   :config
-
-  (with-eval-after-load 'esh-opt
-    (setq eshell-destroy-buffer-when-process-dies t)
-    (setq eshell-visual-commands '("htop" "zsh" "vim"))))
-
-  ;(eshell-git-prompt-use-theme 'powerline))
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  ;; Set this to match your custom shell prompt
+  ;;(setq vterm-shell "zsh")                       ;; Set this to customize the shell to launch
+  (setq vterm-max-scrollback 10000))
 
 #+end_src
 
@@ -620,8 +650,8 @@ Here are the configs for the cosmetic packages.
       (use-package all-the-icons)
 
       (use-package doom-modeline
-          :init (doom-modeline-mode 1)
-          :custom ((doom-modeline-height 10)))
+          :init (doom-modeline-mode 1))
+          ;:custom ((doom-modeline-height 10)))
 
 #+end_src
 
@@ -642,6 +672,33 @@ Here are the configs for the cosmetic packages.
 
 #+end_src
 
+* Presentations
+
+Turn your emac in your powerponint!
+
+#+begin_src emacs-lisp
+
+
+    (use-package org-present
+       :after org
+       :init
+        (defun ava/present-mode-enter()
+                            (org-present-big)
+                            (org-display-inline-images)
+                            (org-present-hide-cursor)
+                            (org-present-read-only))
+
+        (defun ava/present-mode-quit()
+                            (org-present-small)
+                            (org-remove-inline-images)
+                            (org-present-show-cursor)
+                            (org-present-read-write))
+        (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
+        (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
+
+
+#+end_src
+
 * Configs
 
 Here goes the configurations
@@ -653,7 +710,12 @@ Set the size of the column indicator. I can add later some hooks if want differe
 
 #+begin_src emacs-lisp
 
-  (setq display-fill-column-indicator-column 100)
+  (use-package visual-fill-column 
+      :after lsp-mode
+      :config
+        (setq fill-column 120)
+        (display-fill-column-indicator-mode t) 
+      )
 
 #+end_src
 
@@ -717,20 +779,26 @@ Set the size of the column indicator. I can add later some hooks if want differe
 * Keymappings
 #+begin_src emacs-lisp
 
-(with-eval-after-load 'general
-  (defhydra window-resize (global-map "<F8>")
-  "Resize the window"
-  ("k" enlarge-window)
-  ("j" shrink-window)
-  ("l" enlarge-window-horizontally)
-  ("h" shrink-window-horizontally)
-  ("f" nil "finished" :exit t))
+  (with-eval-after-load 'general
+    (defhydra window-resize (global-map "<F8>")
+    "Resize the window"
+    ("k" enlarge-window)
+    ("j" shrink-window)
+    ("l" enlarge-window-horizontally)
+    ("h" shrink-window-horizontally)
+    ("f" nil "finished" :exit t))
 
-  (ava/leader-keys
-      "y" '(counsel-load-theme :which-key "choose theme")
-      "r" '(window-resize/body :which-key "Resize the window")
-      "b" '(toggle-transparency :which-key "Toggle transparency")
-  ))
+    (ava/leader-keys
+        "c"  '(:ignore c :which-key "Some cool stuffs")
+        "y" '(counsel-load-theme :which-key "choose theme")
+        "r" '(window-resize/body :which-key "Resize the window")
+        "b" '(toggle-transparency :which-key "Toggle transparency")
+        "cr" '((lambda () (interactive) (play_radio)) :which-key "Play some music")
+        "ci" '((lambda () (interactive) (change-light)) :which-key "Change the light of the screens")
+        "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play what is in the clipboard")
+        "cpa" '((lambda () (interactive) (play_paste_audio)) :which-key "Play what is in the clipboard")
+    ))
+
 
 #+end_src
 

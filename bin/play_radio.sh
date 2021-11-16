@@ -267,7 +267,7 @@ clear_playlist() {
 }
 
 list_radio() {
-    cat $HOME/.config/play_radio/config | nl
+    cat $HOME/.config/play_radio/config | nl 
 }
 
 play_cast() {

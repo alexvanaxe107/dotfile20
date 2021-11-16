@@ -13,3 +13,4 @@ jellyfin http://localhost:8096/web/index.html#!/home.html
 check https://check.torproject.org/
 A https://www.google.com/
 quickquote https://www.msclegacycorp.com/quick-quote/
+ELisp Cookbook https://www.emacswiki.org/emacs/ElispCookbook

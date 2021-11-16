@@ -1,0 +1,58 @@
+#+title AVA Cool Stuffs
+#+PROPERTY: header-args:emacs-lisp :tangle ./cool.el
+
+* Play this!
+
+** Play a radio in emacs! This is COooOl!
+
+#+begin_src emacs-lisp
+
+  (defun play_radio()
+        (let (
+	      (output (split-string (shell-command-to-string "play_radio.sh -l") "\n")))
+	    (let ( 
+	      (choosen_radio (completing-read "Choose an station to listen, and enjoy some good music." output)))
+
+          (save-match-data ; is usually a good idea
+              (and (string-match "[[:space:]]*\\([0-9]*\\).*" choosen_radio)
+                  (setq indice (match-string 1 choosen_radio)
+                        ) ))
+          (shell-command (concat "play_radio.sh -r " indice " &") nil)
+          )))
+
+#+end_src
+
+
+** Play the copied text
+
+#+begin_src emacs-lisp
+
+  (defun play_paste()
+     (shell-command "play_radio.sh -P" nil)
+   )
+
+#+end_src
+
+
+** Play the copied text as audio
+
+#+begin_src emacs-lisp
+
+  (defun play_paste_audio()
+     (shell-command "play_radio.sh -sP" nil)
+   )
+
+#+end_src
+
+* Change the light
+
+Function to change the light of the monitors. Today it is the simplest most common form. Later can be upgraded.
+
+#+begin_src emacs-lisp
+
+(defun change-light ()
+(let (
+        (light-str (completing-read "Light Number (0-100): " '())))
+    (shell-command (concat "avalight.sh -I " light-str))))
+
+#+end_src
