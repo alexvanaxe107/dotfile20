@@ -16,8 +16,8 @@
   (defvar ava/default-font-size 105)
   (defvar ava/default-variable-font-size 105)
 
-  (defvar ava/transparency-level '(85 . 85))
-  (defvar ava/transparency-level-list '(alpha . (85 . 85)))
+  (defvar ava/transparency-level '(93 . 93))
+  (defvar ava/transparency-level-list '(alpha . (93 . 93)))
 
   (defvar ava/leader-key "SPC")
 
@@ -27,6 +27,9 @@
 A Hook used to mesure the time emacs takes to startup. It is usefull so as we will add some more stuffs in it we can mesure time.
 
 #+begin_src emacs-lisp
+
+;; The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
 
 (defun efs/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
@@ -149,14 +152,18 @@ Personal funcitions to deal with the interface.
     (defun get-theme()
     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-light doom-one-light
                     spacemacs-light kaolin-breeze kaolin-valley-light doom-nord-light))))
+    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(spacemacs-light kaolin-breeze kaolin-valley-light))))
     (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights
                     kaolin-aurora kaolin-eclipse kaolin-valley-dark doom-moonlight doom-city-lights doom-material
                     doom-dracula doom-palenight))))
     result)
 
     (defun get-font()
-    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Envy Code R"))))
+     ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
+      ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
+     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
+     (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Space Mono"))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Envy Code R" "Iosevka" "Monoid"))))
     result)
 
   (defun toggle-transparency ()
@@ -409,6 +416,11 @@ Making IDE understand the git projects and treat them as projects.
       :after projectile
       :config (counsel-projectile-mode))
 
+      (use-package evil-surround
+      :defer 0
+      :config
+      (global-evil-surround-mode 1))
+
 #+end_src
 
 ** GIT INtegration
@@ -433,10 +445,12 @@ Provides a very good git integration. Forge is disabled, look more info in it ca
       :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
               (python-mode . lsp-deferred)
               (typescript-mode . lsp-deferred)
+              (sh-mode . lsp-deferred)
               ;; if you want which-key integration
               )
       :commands lsp-deferred
       :config
+          (add-to-list 'lsp-enabled-clients 'bash-ls)
           (lsp-enable-which-key-integration t))
 
       (use-package lsp-jedi
@@ -776,6 +790,19 @@ Set the size of the column indicator. I can add later some hooks if want differe
 
 #+end_src
 
+** Windows placement
+This session is commented because we will not be needing it now, I have to use more emacs to feel what needs to be adjusted.
+
+#+begin_src emacs-lisp
+
+;;(setq display-buffer-base-action
+;;      '((display-buffer-reuse-window
+;;	 display-buffer-reuse-mode-window
+;;	 display-buffer-same-window
+;;	 display-buffer-in-previous-window)))
+
+#+end_src
+
 * Keymappings
 #+begin_src emacs-lisp
 
@@ -790,14 +817,19 @@ Set the size of the column indicator. I can add later some hooks if want differe
 
     (ava/leader-keys
         "c"  '(:ignore c :which-key "Some cool stuffs")
-        "y" '(counsel-load-theme :which-key "choose theme")
+        "cp"  '(:ignore c :which-key "Lounge center.")
+        "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
         "r" '(window-resize/body :which-key "Resize the window")
         "b" '(toggle-transparency :which-key "Toggle transparency")
-        "cr" '((lambda () (interactive) (play_radio)) :which-key "Play some music")
-        "ci" '((lambda () (interactive) (change-light)) :which-key "Change the light of the screens")
-        "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play what is in the clipboard")
-        "cpa" '((lambda () (interactive) (play_paste_audio)) :which-key "Play what is in the clipboard")
-    ))
+        "ci" '((lambda () (interactive) (change-light)) :which-key "Screens light")
+        "cpr" '((lambda () (interactive) (play_radio)) :which-key "The old radio")
+        "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play clipboard")
+        "cpa" '((lambda () (interactive) (play_paste_audio)) :which-key "Play clipboard as audio")
+        "cpp" '((lambda () (interactive) (player-ctl "play_pause")) :which-key "Play/Pause player")
+        "cps" '((lambda () (interactive) (player-ctl "stop")) :which-key "Stop player")
+        ;; Esse o emacs nao consegue rodar. Muita pressao pra ele
+        "cpA" '((lambda () (interactive) (player-ctl "asaudio")) :which-key "Invert audio/video")
+        ))
 
 
 #+end_src

@@ -141,6 +141,8 @@ stop_play(){
 play_pause(){
     playerctl -p $chosen_p play-pause
 
+    echo "${chosen_p}"
+
     if [ "$chosen_p" = "chromecast" ]; then
         if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
             cast.sh -p

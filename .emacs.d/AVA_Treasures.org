@@ -44,6 +44,37 @@
 
 #+end_src
 
+
+** Control player
+
+Play and pause the player. It is a ongoing migration...
+
+#+begin_src emacs-lisp
+
+(defun player-ctl (action)
+    (when (equal action "play_pause")
+    (let (
+	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+    (let (
+	    (chosen_player (completing-read "Chose: " players)))
+	    (shell-command (concat "player-ctl.sh -p " chosen_player)) )))
+
+    (when (equal action "stop")
+    (let (
+	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+    (let (
+	    (chosen_player (completing-read "Chose: " players)))
+	    (shell-command (concat "player-ctl.sh -s " chosen_player)) )))
+    (when (equal action "asaudio")
+    (let (
+	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+    (let (
+	    (chosen_player (completing-read "Chose: " players)))
+	    (shell-command (concat "player-ctl.sh -i 1 " chosen_player)) )))
+    )
+  
+#+end_src
+
 * Change the light
 
 Function to change the light of the monitors. Today it is the simplest most common form. Later can be upgraded.
@@ -54,5 +85,34 @@ Function to change the light of the monitors. Today it is the simplest most comm
 (let (
         (light-str (completing-read "Light Number (0-100): " '())))
     (shell-command (concat "avalight.sh -I " light-str))))
+
+#+end_src
+
+* Change the theme
+
+This will be worked with time. For time being it will do the following:
+- Change the theme for the day
+- Change the fonts of the theme
+
+Later it is on the road map:
+- Choose a font map.
+- Maybe choose a theme and select the wp and fonts that is cool with the theme.
+
+
+#+begin_src emacs-lisp
+
+  (defun disable-all-themes()
+    "Disable all active themes"
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme)))
+
+
+  (defun change-theme()
+    "First disable all themes and then chose a theme and font"
+    (shell-command "nitrogen --restore")
+    (disable-all-themes)
+    (load-theme (get-theme) t)
+    (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))
+
 
 #+end_src

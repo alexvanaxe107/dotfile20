@@ -100,12 +100,17 @@
 
     (require 'exwm-randr)
     (exwm-randr-enable)
+    ;; Setup the display and set the HDMI1 as primary
     (start-process-shell-command "xrandr" nil "display_manager.sh -o \"HDMI1 eDP1\"")
     (start-process-shell-command "primary" nil "display_manager.sh -p \"HDMI1\"")
 
+    ;; Configure the kmap and change caps for control
     (start-process-shell-command "kmap" nil "setkmap")
 
-    (setq exwm-randr-workspace-output-plist '(1 "HDMI1" 0 "eDP1" 9 "eDP1"))
+    ;; Turnoff the sleep timer of the monitor
+    (start-process-shell-command "nosleep" nil "saver.sh &")
+    ;; Give three monitors to the second screen. It can be changed on time.
+    (setq exwm-randr-workspace-output-plist '(0 "eDP1" 9 "eDP1" 8 "eDP1"))
 
     ;; Ctrl+Q will enable the next key to be sent directly
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
@@ -126,6 +131,7 @@
             ([?\s-l] . windmove-right)
             ([?\s-k] . windmove-up)
             ([?\s-j] . windmove-down)
+            ([?\s-v] . exwm-workspace-delete)
 
             ([?\s-w] . exwm-workspace-switch)
             ,@(mapcar (lambda (i)
@@ -136,6 +142,30 @@
                       (number-sequence 0 9))))
     (exwm-enable)
 
+    )
+
+#+end_src
+
+* Desktop enviroment
+
+Configure the special functions like sound, brightes etc...
+This guy is not good on programming, so it is hard to change the keys. So this thing is necessary to change the lockscreen.
+
+#+begin_src emacs-lisp
+
+  (use-package desktop-environment
+    :after exwm
+    :config
+    (progn
+    (unbind-key "s-l" desktop-environment-mode-map)
+    (bind-key "s-x" 'desktop-environment-lock-screen)
+    (desktop-environment-mode))
+    :custom
+    (desktop-environment-brightness-small-increment "2%+")
+    (desktop-environment-brightness-small-decrement "2%-")
+    (desktop-environment-brightness-normal-increment "5%+")
+    (desktop-environment-brightness-normal-decrement "5%-")
+    (exwm-input--update-global-prefix-keys)
     )
 
 #+end_src
