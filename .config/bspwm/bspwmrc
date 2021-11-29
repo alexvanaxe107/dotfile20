@@ -4,6 +4,7 @@
 killall sxhkd; sxhkd >>/tmp/sxhkcd.log 2>&1 &
 $HOME/.config/i3/monitor/saver.sh &
 killall clipster; clipster -d &
+#inputplug -c setkmap
 
 $HOME/bin/bspwm_layout_manager.sh clear
 

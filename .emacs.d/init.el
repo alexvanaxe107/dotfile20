@@ -3,3 +3,4 @@
 
 (setq extra-config-file "~/.emacs.d/extra.el")
 (load extra-config-file)
+(put 'dired-find-alternate-file 'disabled nil)

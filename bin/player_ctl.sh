@@ -215,16 +215,16 @@ if [ ! -z $chosen_p ]; then
     #position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
     prompt=$(get_prompt "${chosen_p}")
     if [ "$chosen_p" = "chromecast" ]; then
-        chosen=$(printf "⏯\n⏭\\n⏹\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
+        chosen=$(printf "\n\\n\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
     else
-        chosen=$(printf "⏯\\n⏭\\n⏮\\n⏹\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
+        chosen=$(printf "\\n\\n\\n\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
     fi
 
     case "$chosen" in
-        "⏯") play_pause;;
-        "⏭") forward;;
-        "⏮") playerctl -p $chosen_p previous;;
-        "⏹") stop_play;;
+        "") play_pause;;
+        "") forward;;
+        "") playerctl -p $chosen_p previous;;
+        "") stop_play;;
         "") adjust_volume $chosen_p;;
         "save") save $chosen_p;;
         "asvideo") invert "$chosen_p" "0";;

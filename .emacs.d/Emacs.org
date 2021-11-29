@@ -2,12 +2,7 @@
 #+PROPERTY: header-args:emacs-lisp :tangle /home/alexvanaxe/.emacs.d/extra.el :results none
 
 * Personal Configurations
-
- Here is my emacs configs personalizations. 
-
- The tangle is done to an extra file that is imported on the init.el.
- The results from the babel are set to none, are silenced.
-
+Here is my emacs configs personalizations. The tangle is done to an extra file that is imported on the init.el. The results from the babel are set to none, are silenced.
 * Configs parametters 
 
 #+begin_src emacs-lisp
@@ -143,6 +138,15 @@ Personal funcitions to deal with the interface.
 
 #+begin_src emacs-lisp
 
+    (defun ava/configure-python()
+        (setq fill-column 80)
+        (display-fill-column-indicator-mode t) 
+    )
+
+    (defun ava/configure-column()
+        (setq fill-column 120)
+        (display-fill-column-indicator-mode t) 
+    )
     ;; Function to get a random value from the list passed 
     (defun random-choice (items)
     (let* ((size (length items))
@@ -213,9 +217,7 @@ Hooks to rice the emacs
 
 #+end_src
 
-* Required System packages
-
-** Log Keys
+* Log Keys
 
 Package to display the keys clicked. It is mostly used for presentations.
 
@@ -226,9 +228,39 @@ Package to display the keys clicked. It is mostly used for presentations.
 
 #+end_src
 
-** ZFZ like support
+* Better parenthesis
 
-Provides better selections for the emacs, searchable with fuzzy logic. There is a concorrent I never tested called *Helm*.
+Putting some colors on parenthesis to try to help find where the corresponding closing-opening are. (Don't know for sure if works with {[...)
+
+#+begin_src emacs-lisp
+
+            (use-package rainbow-delimiters
+            :hook (prog-mode . rainbow-delimiters-mode))
+
+            (use-package hydra
+                :after general)
+
+#+end_src
+
+* More information
+
+Provides more information when a key is pressed like C-x.
+
+
+#+begin_src emacs-lisp
+
+            (use-package which-key
+            :defer 0
+            :diminish which-key-mode
+            :config (which-key-mode)
+            (setq which-key-idle-delay 1))
+
+#+end_src
+
+* Ivy - The ZFZ like support
+
+Provides better selections for the emacs, searchable with fuzzy logic.
+There is a concorrent I never tested called *Helm*.
 
 #+begin_src emacs-lisp
 
@@ -252,36 +284,7 @@ Provides better selections for the emacs, searchable with fuzzy logic. There is 
 
 #+end_src
 
-** Better parenthesis
-
-Putting some colors on parenthesis to try to help find where the corresponding closing-opening are. (Don't know for sure if works with {[...)
-
-#+begin_src emacs-lisp
-
-            (use-package rainbow-delimiters
-            :hook (prog-mode . rainbow-delimiters-mode))
-
-            (use-package hydra
-                :after general)
-
-#+end_src
-
-** More information
-
-Provides more information when a key is pressed like C-x.
-
-
-#+begin_src emacs-lisp
-
-            (use-package which-key
-            :defer 0
-            :diminish which-key-mode
-            :config (which-key-mode)
-            (setq which-key-idle-delay 1))
-
-#+end_src
-
-** Counseleir
+* Counseleir
 
 Package related to ivy. It shows more information for the exec instructions and other stuffs. *Try to explore more*
 
@@ -298,7 +301,7 @@ Package related to ivy. It shows more information for the exec instructions and 
 
 #+end_src
 
-** More ivy
+* More ivy
 
 Tries to provide more friendly interface for ivy. (*Trying to see the difference!*)
 
@@ -311,7 +314,7 @@ Tries to provide more friendly interface for ivy. (*Trying to see the difference
 
 #+end_src
 
-** Documentation
+* Documentation
 
 Providing some more info in the documentations
 
@@ -330,70 +333,81 @@ Providing some more info in the documentations
 
 #+end_src
 
-** Keymaping general
+* Keymaping general
 
 Great package to facilitate the settings of the custom keys configuration. Mapped to SPC. It provides a lot of my mappings like move windows integration with hydra and etc...
 
 #+begin_src emacs-lisp
+    (windmove-default-keybindings 'meta)
 
-            (use-package general
-            :after evil
-            :config
-            (general-create-definer ava/leader-keys
-            :keymaps '(normal emacs)
-            :prefix ava/leader-key)
-            (ava/leader-keys
-                "t"  '(:ignore t :which-key "Tabs Handling")
-                "tt" '(tab-new :which-key "New tab")
-                "td" '(tab-close :which-key "Close the tab")
-                "tc" '(tab-bar-mode :which-key "Hide the tab panel")
-                "tn" '(tab-next :which-key "Go to the next tab")
-                "tg" '(tab-bar-select-tab-by-name :which-key "Select the tab")
+    (use-package general
+    :after evil
+    :config
+    (general-define-key
+      "M-h" 'windmove-left
+      "M-l" 'windmove-right
+      "M-k" 'windmove-down
+      "M-j" 'windmove-up
+     )
 
-                "i1" '(lambda() (interactive)(find-file "~/.emacs.d/init.el"))
-                "i2" '(lambda() (interactive)(find-file "~/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch/money_auth/views.py")))
-            )
+    (general-create-definer ava/leader-keys
+    :keymaps '(normal emacs)
+    :prefix ava/leader-key)
+
+    (ava/leader-keys
+        "t"  '(:ignore t :which-key "Tabs Handling")
+        "tt" '(tab-new :which-key "New tab")
+        "td" '(tab-close :which-key "Close the tab")
+        "tc" '(tab-bar-mode :which-key "Hide the tab panel")
+        "tn" '(tab-next :which-key "Go to the next tab")
+        "tg" '(tab-bar-select-tab-by-name :which-key "Select the tab")
+        "i1" '(lambda() (interactive)(find-file "~/.emacs.d/init.el")))
+    )
+  
 
 #+end_src
 
-** Evil mode
+* Evil mode
 
 VI key mappings for emacs.
 
 #+begin_src emacs-lisp
 
-      (use-package evil
-      :init
-      (setq evil-want-integration t)
-      (setq evil-want-keybinding nil)
-      (setq evil-want-C-u-scroll t)
-      (setq evil-want-C-i-jump nil)
-      :config
-      (evil-mode 1)
-      (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-      (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-      (define-key evil-normal-state-map (kbd (concat ava/leader-key " %")) 'evil-window-vsplit)
-      (define-key evil-normal-state-map (kbd (concat ava/leader-key " \"")) 'evil-window-split)
-      (define-key evil-normal-state-map (kbd (concat ava/leader-key " l")) 'evil-window-right)
-      (define-key evil-normal-state-map (kbd (concat ava/leader-key " h")) 'evil-window-left)
-      (define-key evil-normal-state-map (kbd (concat ava/leader-key " j")) 'evil-window-down)
-      (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
+  (use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+  (define-key evil-normal-state-map (kbd (concat ava/leader-key " %")) 'evil-window-vsplit)
+  (define-key evil-normal-state-map (kbd (concat ava/leader-key " \"")) 'evil-window-split)
+  (define-key evil-normal-state-map (kbd (concat ava/leader-key " l")) 'evil-window-right)
+  (define-key evil-normal-state-map (kbd (concat ava/leader-key " h")) 'evil-window-left)
+  (define-key evil-normal-state-map (kbd (concat ava/leader-key " j")) 'evil-window-down)
+  (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
+  (define-key evil-insert-state-map (kbd "C-f") 'company-files)
+  
 
-      ;; Use visual line motions even outside of visual-line-mode buffers
-      ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-      ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-      (evil-set-initial-state 'messages-buffer-mode 'normal)
-      (evil-set-initial-state 'dashboard-mode 'normal))
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-      (use-package evil-collection
-      :after evil
-      :config
-      (evil-collection-init))
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
 #+end_src
 
-** IDEs stuffs.
+* Project stuffs.
 
 Making IDE understand the git projects and treat them as projects.
 
@@ -423,7 +437,31 @@ Making IDE understand the git projects and treat them as projects.
 
 #+end_src
 
-** GIT INtegration
+* Yasnippet Coding template
+
+Do for us the boilerplate codes.
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :hook (lsp-mode . yas-minor-mode)
+    :config
+    (yas-reload-all))
+
+  (use-package yasnippet-snippets
+    :after yasnipped)
+
+
+#+end_src
+
+* Minimap
+Set an minimap so you can see where you are on the code.
+
+#+begin_src emacs-lisp
+  (use-package minimap
+    :defer 0)
+#+end_src
+
+* GIT INtegration
 
 Provides a very good git integration. Forge is disabled, look more info in it capabilities.
 
@@ -437,6 +475,14 @@ Provides a very good git integration. Forge is disabled, look more info in it ca
 
       ;; (use-package forge
       ;;  :after magit)
+
+#+end_src
+
+* LSP
+
+LSP is the language server that provides code completion, auto imports and many features. The ui is commented because it sucks.
+
+#+begin_src emacs-lisp
 
       (use-package lsp-mode
       :init
@@ -465,18 +511,35 @@ Provides a very good git integration. Forge is disabled, look more info in it ca
           :after lsp-mode
           :commands lsp-ivy-workspace-symbol)
 
-      (use-package lsp-ui
-          :after lsp-mode
-          :config
-          (setq lsp-ui-doc-position 'bottom))
+;;      (use-package lsp-ui
+;;          :after lsp-mode
+;;          :config
+;;          (setq lsp-ui-doc-position 'bottom))
 
-      (use-package company
+#+end_src
+
+* Company
+
+Company is a completion box more efficient. It can be configured to autocomplete instantly, just take a look at my emacs roam.
+
+#+begin_src emacs-lisp
+
+(use-package company
       :after lsp-mode
       :hook (lsp-mode . company-mode)
       :bind ("C-c c" . company-complete)
       :config
       (setq company-idle-delay nil)
       )
+
+
+#+end_src
+
+* ORG Configs
+
+My config for org is minimal. I don't use it much.
+
+#+begin_src emacs-lisp
 
       (use-package org
       :pin org
@@ -496,9 +559,15 @@ Provides a very good git integration. Forge is disabled, look more info in it ca
       :hook (org-mode . org-bullets-mode)
       :custom
       (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
+#+end_src
 
+* Visual fill column
 
-  (use-package visual-fill-column
+This configuration just sets the org mode to be centered.
+
+#+begin_src emacs-lisp
+
+(use-package visual-fill-column
     :init 
           (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
           (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
@@ -515,24 +584,61 @@ Provides a very good git integration. Forge is disabled, look more info in it ca
       ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
   #+end_src
   
-** Fly
+* Fly
 Better code analyses
 
 #+begin_src emacs-lisp
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+    (use-package flycheck
+      :ensure t
+      :init (global-flycheck-mode)
+      :config
+         (setq lsp-diagnostic-package :none))
 
 #+end_src
   
-** Pyenv Integration
+* Pyenv Integration
 #+begin_src emacs-lisp
 
   (use-package pyvenv
     :ensure t
     :init
     (setenv "WORKON_HOME" "~/.pyenv/versions"))
+
+#+end_src
+
+* Zoom
+
+Makes a zoom like tmux
+
+#+begin_src emacs-lisp
+
+      (use-package zoom-window
+      :defer 0
+      :custom
+      (zoom-window-mode-line-color "black"))
+  
+#+end_src
+
+* Org stuffs
+The idea is to transfer all org stuffs to here.
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Documents/orgs")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
 
 #+end_src
 
@@ -725,11 +831,9 @@ Set the size of the column indicator. I can add later some hooks if want differe
 #+begin_src emacs-lisp
 
   (use-package visual-fill-column 
-      :after lsp-mode
-      :config
-        (setq fill-column 120)
-        (display-fill-column-indicator-mode t) 
-      )
+      :hook ((python-mode . ava/configure-python)
+             (typescript-mode . ava/configure-column)
+             ))
 
 #+end_src
 
@@ -829,6 +933,8 @@ This session is commented because we will not be needing it now, I have to use m
         "cps" '((lambda () (interactive) (player-ctl "stop")) :which-key "Stop player")
         ;; Esse o emacs nao consegue rodar. Muita pressao pra ele
         "cpA" '((lambda () (interactive) (player-ctl "asaudio")) :which-key "Invert audio/video")
+        "z" '(zoom-window-zoom :which-key "Tmux zoom like")
+        "n" '(zoom-window-next :which-key "Next zoom window")
         ))
 
 
@@ -864,9 +970,9 @@ This snippet adds a hook to =org-mode= buffers so that =ava/org-babel-tangle-con
 #+begin_src emacs-lisp
 
   (defun ava/org-babel-tangle-config ()
-    (when (string-equal (file-name-directory (buffer-file-name)) user-emacs-configs-directory))
+    (when (string-equal (file-name-directory (buffer-file-name)) user-emacs-configs-directory)
         (org-babel-tangle)
-        (message "tangled"))
+        (message "tangled")))
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'ava/org-babel-tangle-config)))
 

@@ -36,13 +36,12 @@ def _main():
     if time:
         allSearch = CustomSearch(search, VideoSortOrder.uploadDate)
     if channel:
-        allSearch = ChannelsSearch(search)
+        allSearch = ChannelsSearch(str(search))
     else:
         allSearch = VideosSearch(search)
 
-
-    result = allSearch.result()
-    result_json = json.loads(result)
+    result = allSearch.result();
+    result_json = result
 
     loop = range(0, quantity)
     for i in loop:

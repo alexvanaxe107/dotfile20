@@ -13,7 +13,6 @@
 
 #+end_src
 
-
 ** Functions definitions
 
 #+begin_src emacs-lisp
@@ -26,7 +25,6 @@
                (concat (substring exwm-title 0 49) "...")))))
 
 #+end_src
-
 
 ** The init Hook
 
@@ -58,7 +56,6 @@
 #+end_src
 
 
-
 ** Use Package for exwm
 
 #+begin_src emacs-lisp
@@ -71,14 +68,8 @@
     ;; These keys should always pass through to Emacs
     (setq exwm-input-prefix-keys
           '(?\C-x
-            ?\C-u
-            ?\C-h
-            ?\M-x
-            ?\M-`
-            ?\M-&
-            ?\M-:
-            ?\C-\M-j  ;; Buffer list
-            ?\C-\ ))  ;; Ctrl+Space
+            f5
+            ))  ;; Ctrl+Space
 
 
     ;; When window "class" updates, use it to set the buffer name
@@ -131,6 +122,9 @@
             ([?\s-l] . windmove-right)
             ([?\s-k] . windmove-up)
             ([?\s-j] . windmove-down)
+            ([?\s-%] . evil-window-vsplit)
+            ([?\s-\"] . evil-window-split)
+            ([?\s-q] . kill-buffer-and-window)
             ([?\s-v] . exwm-workspace-delete)
 
             ([?\s-w] . exwm-workspace-switch)
@@ -141,7 +135,7 @@
                             (exwm-workspace-switch-create ,i))))
                       (number-sequence 0 9))))
     (exwm-enable)
-
+    
     )
 
 #+end_src
@@ -177,11 +171,12 @@ This session is packages that were tested and the comments with the results of t
 ** Dmenu
 It is good to replace counsel, it seems not to have all the functionalities from dmenu (At list I couldnt figure it out) so it will not be used because it don't worth it.
 
-#+begin_src emacs-lisp
+#+begin_src shell
 
   ;; (use-package dmenu)
 
 #+end_src
+
 
 * Non Lisp files
 
@@ -219,36 +214,3 @@ Start the client.
   exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
 
 #+end_src
-
-** Guardado
-    ;; Keep in mind that changing this list after EXWM initializes has no effect.
-    (setq exwm-input-global-keys
-          ;; Move between windows
-          '(
-
-
-            ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
-            ([?\s-r] . exwm-reset)
-          
-            ;; Movement keys
-            ([?\s-h] . windmove-left)
-            ([?\s-l] . windmove-right)
-            ([?\s-k] . windmove-up)
-            ([?\s-j] . windmove-down)
-
-            ;; Switch workspace
-            ([?\s-w] . exwm-workspace-switch)
-
-            ([?\s-w] . exwm-workspace-switch)
-                    ,@(mapcar (lambda (i)
-                                `(,(kbd (format "s-%d" i)) .
-                                (lambda ()
-                                    (interactive)
-                                    (exwm-workspace-switch-create ,i))))
-                            (number-sequence 0 9))
-
-            ))
-
-    (exwm-enable)
-    )
-
