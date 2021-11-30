@@ -147,7 +147,18 @@ Personal funcitions to deal with the interface.
         (setq fill-column 120)
         (display-fill-column-indicator-mode t) 
     )
-    ;; Function to get a random value from the list passed 
+
+    ;; Configure the django for specific projects
+    (defun ava/django-config()
+        (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
+            (pyvenv-workon "money")
+            (pyvenv-mode t)
+            (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
+            (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
+            (djangonaut-mode t)
+            (message "Django Configured.")))
+
+  ;;Function to get a random value from the list passed 
     (defun random-choice (items)
     (let* ((size (length items))
             (index (random size)))
@@ -413,27 +424,31 @@ Making IDE understand the git projects and treat them as projects.
 
 #+begin_src emacs-lisp
 
-      (use-package projectile
-      :diminish projectile-mode
-      :config (projectile-mode)
-      :custom ((projectile-completion-system 'ivy))
-      :bind-keymap
-      ("<f4>" . projectile-command-map))
-      :init
-      ;; NOTE: Set this to the folder where you keep your Git repos!
-      (when (file-directory-p "~/Documents/Projects/")
-      (setq projectile-project-search-path '("~/Documents/Projects/")))
+    (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :bind-keymap
+    ("<f4>" . projectile-command-map))
+    :init
+    ;; NOTE: Set this to the folder where you keep your Git repos!
+    (when (file-directory-p "~/Documents/Projects/")
+    (setq projectile-project-search-path '("~/Documents/Projects/")))
 
-      (setq projectile-switch-project-action #'projectile-dired)
+    (setq projectile-switch-project-action #'projectile-dired)
 
-      (use-package counsel-projectile
-      :after projectile
-      :config (counsel-projectile-mode))
+    (use-package counsel-projectile
+    :after projectile
+    :config (counsel-projectile-mode))
 
-      (use-package evil-surround
-      :defer 0
-      :config
-      (global-evil-surround-mode 1))
+    (use-package evil-surround
+    :defer 0
+    :config
+    (global-evil-surround-mode 1))
+
+    (use-package emmet-mode
+      :hook ((sgml-mode-hook . emmet-mode))
+             (css-mode-hook . emmet-mode))
 
 #+end_src
 
@@ -597,6 +612,20 @@ Better code analyses
 
 #+end_src
   
+* Django
+
+Django integration.
+
+#+begin_src emacs-lisp
+
+      (use-package djangonaut
+        :ensure t
+        :defer t
+        :init
+        (add-hook 'python-mode-hook #'ava/django-config))
+
+#+end_src
+
 * Pyenv Integration
 #+begin_src emacs-lisp
 
@@ -830,10 +859,10 @@ Set the size of the column indicator. I can add later some hooks if want differe
 
 #+begin_src emacs-lisp
 
-  (use-package visual-fill-column 
-      :hook ((python-mode . ava/configure-python)
-             (typescript-mode . ava/configure-column)
-             ))
+    (use-package visual-fill-column 
+        :hook ((typescript-mode . ava/configure-column)
+               (python-mode . ava/configure-python)
+               ))
 
 #+end_src
 

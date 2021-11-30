@@ -10,6 +10,18 @@ TARGET=$1
 dim=$(grep ";dim-value" -w $HOME/.config/polybar/config)
 dim_simple=$(grep ";dim-value" -w $HOME/.config/polybar/config_simple)
 
+toggle_light() {
+    pid=$(ps aux | egrep "[l]emonbar" | awk '{print $2}')
+
+    if [ ! -z "$pid" ]; then
+        bspc config -m $MONITOR1 bottom_padding 0
+        bspc config -m $MONITOR2 bottom_padding 0
+        kill $pid
+    else
+        lemonbar.sh | lemonbar -b -o "$MONITOR2" 2>&1 &
+    fi
+}
+
 toggle_tint(){
     pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
     if [ ! -z "$pid" ]; then
@@ -106,6 +118,7 @@ case "$TARGET" in
     "--target2") $(toggle_simple);;
     "--target1") $(toggle_full);;
     "--tint") $(toggle_tint);;
+    "--light") $(toggle_light);;
     "--restart") restart_bar;;
     "--autohide") auto_hide;;
     *) $(toggle_all);;
