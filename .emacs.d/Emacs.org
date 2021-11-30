@@ -697,6 +697,15 @@ paru -S typescript-language-server
 
 #+end_src
 
+* SASS Config
+
+#+begin_src emacs-lisp
+
+  (use-package sass-mode
+    :after typescript-mode)
+
+#+end_src
+
 * Vim diff like!
 
 The diff vim like style
@@ -799,8 +808,12 @@ Here are the configs for the cosmetic packages.
       (use-package all-the-icons)
 
       (use-package doom-modeline
-          :init (doom-modeline-mode 1))
-          ;:custom ((doom-modeline-height 10)))
+          :init (doom-modeline-mode 1)
+          :custom (
+                   (doom-modeline-height 0)
+                   (doom-modeline-bar-width 4)
+                   (doom-modeline-window-width-limit fill-column)
+                   ))
 
 #+end_src
 

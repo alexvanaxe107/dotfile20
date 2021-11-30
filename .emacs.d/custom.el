@@ -33,7 +33,7 @@
  '(org-fontify-done-headline nil)
  '(org-fontify-todo-headline nil)
  '(package-selected-packages
-   '(djangonaut python-django emmet-mode org-roam zoom-window python-mode yasnippet-snippets yasnippet minimap bash-mode sh-mode desktop-environment evil-surround flycheck vterm pyenv-mode pyvenv frog-menu frog-menu-read org-present dmenu epresent cyberpunk-theme spacemacs-theme kaolin-themes typescript-mode exwm dired-hide-dotfiles all-the-icons-dired dired-single base16-theme eshell-git-prompt vdiff magit no-littering doom-modeline all-the-icons doom-themes hydra visual-fill-column org-bullets company-box companu-box company lsp-ui lsp-ivy lsp-jedi lsp-mode forge counsel-projectile projectile evil-collection evil general helpful counsel ivy-rich which-key rainbow-delimiters ivy command-log-mode use-package))
+   '(sass-mode djangonaut python-django emmet-mode org-roam zoom-window python-mode yasnippet-snippets yasnippet minimap bash-mode sh-mode desktop-environment evil-surround flycheck vterm pyenv-mode pyvenv frog-menu frog-menu-read org-present dmenu epresent cyberpunk-theme spacemacs-theme kaolin-themes typescript-mode exwm dired-hide-dotfiles all-the-icons-dired dired-single base16-theme eshell-git-prompt vdiff magit no-littering doom-modeline all-the-icons doom-themes hydra visual-fill-column org-bullets company-box companu-box company lsp-ui lsp-ivy lsp-jedi lsp-mode forge counsel-projectile projectile evil-collection evil general helpful counsel ivy-rich which-key rainbow-delimiters ivy command-log-mode use-package))
  '(pdf-view-midnight-colors (cons "#A0B3C5" "#1D252C"))
  '(pos-tip-background-color "#332433")
  '(pos-tip-foreground-color "#d4d4d6")

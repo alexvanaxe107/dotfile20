@@ -69,6 +69,7 @@
     (setq exwm-input-prefix-keys
           '(?\C-x
             ?\M-x
+            ?\s-d
             f5
             ))  ;; Ctrl+Space
 
