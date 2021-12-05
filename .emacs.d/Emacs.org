@@ -11,8 +11,8 @@ Here is my emacs configs personalizations. The tangle is done to an extra file t
   (defvar ava/default-font-size 105)
   (defvar ava/default-variable-font-size 105)
 
-  (defvar ava/transparency-level '(93 . 93))
-  (defvar ava/transparency-level-list '(alpha . (93 . 93)))
+  ;; (defvar ava/transparency-level '(93 . 93))
+  ;; (defvar ava/transparency-level-list '(alpha . (93 . 93)))
 
   (defvar ava/leader-key "SPC")
 
@@ -138,59 +138,74 @@ Personal funcitions to deal with the interface.
 
 #+begin_src emacs-lisp
 
-    (defun ava/configure-python()
-        (setq fill-column 80)
-        (display-fill-column-indicator-mode t) 
-    )
+      (defun ava/configure-python()
+          (setq fill-column 80)
+          (display-fill-column-indicator-mode t) 
+      )
 
-    (defun ava/configure-column()
-        (setq fill-column 120)
-        (display-fill-column-indicator-mode t) 
-    )
+      (defun ava/configure-column()
+          (setq fill-column 120)
+          (display-fill-column-indicator-mode t) 
+      )
 
-    ;; Configure the django for specific projects
-    (defun ava/django-config()
-        (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
-            (pyvenv-workon "money")
-            (pyvenv-mode t)
-            (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
-            (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
-            (djangonaut-mode t)
-            (message "Django Configured.")))
+      ;; Configure the django for specific projects
+      (defun ava/django-config()
+          (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
+              (pyvenv-workon "money")
+              (pyvenv-mode t)
+              (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
+              (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
+              (djangonaut-mode t)
+              (message "Django Configured.")))
 
-  ;;Function to get a random value from the list passed 
-    (defun random-choice (items)
-    (let* ((size (length items))
-            (index (random size)))
-        (nth index items)))
+    ;;Function to get a random value from the list passed 
+      (defun random-choice (items)
+      (let* ((size (length items))
+              (index (random size)))
+          (nth index items)))
 
-    (defun get-theme()
-    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-light doom-one-light
-                    spacemacs-light kaolin-breeze kaolin-valley-light doom-nord-light))))
-    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(spacemacs-light kaolin-breeze kaolin-valley-light))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights
-                    kaolin-aurora kaolin-eclipse kaolin-valley-dark doom-moonlight doom-city-lights doom-material
-                    doom-dracula doom-palenight))))
-    result)
+      (defun ava/update-transparency()
+          (when (string-equal (getenv "theme_name") "day")
+              (defvar ava/transparency-level '(93 . 93))
+              (defvar ava/transparency-level-list '(alpha . (93 . 93))))
 
-    (defun get-font()
-     ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
-      ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
-     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
-     (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Space Mono"))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Envy Code R" "Iosevka" "Monoid"))))
-    result)
+          (when (string-equal (getenv "theme_name") "shabbat")
+              (defvar ava/transparency-level '(93 . 93))
+              (defvar ava/transparency-level-list '(alpha . (93 . 93))))
 
-  (defun toggle-transparency ()
-  (interactive)
-  (let ((alpha (frame-parameter nil 'alpha)))
-  (set-frame-parameter
-  nil 'alpha
-  (if (eql (cond ((numberp alpha) alpha)
-  ((numberp (cdr alpha)) (cdr alpha))
-        ;; Also handle undocumented (<active> <inactive>) form.
-        ((numberp (cadr alpha)) (cadr alpha))) 100)
-        ava/transparency-level '(100 . 100)))))
+          (when (string-equal (getenv "theme_name") "night")
+              (message "Night updating")
+              (setq ava/transparency-level '(80 . 80))
+              (setq ava/transparency-level-list '(alpha . (80 . 80)))))
+
+
+      (defun get-theme()
+      (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-light doom-one-light
+                      spacemacs-light kaolin-breeze kaolin-valley-light doom-nord-light))))
+      (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(spacemacs-light kaolin-breeze kaolin-valley-light))))
+      (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights
+                      kaolin-aurora kaolin-eclipse kaolin-valley-dark doom-moonlight doom-city-lights doom-material
+                      doom-dracula doom-palenight))))
+      result)
+
+      (defun get-font()
+       ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
+        ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
+       (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
+       (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Space Mono"))))
+       (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka"))))
+      result)
+
+    (defun toggle-transparency ()
+    (interactive)
+    (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+    nil 'alpha
+    (if (eql (cond ((numberp alpha) alpha)
+    ((numberp (cdr alpha)) (cdr alpha))
+          ;; Also handle undocumented (<active> <inactive>) form.
+          ((numberp (cadr alpha)) (cadr alpha))) 100)
+          ava/transparency-level '(100 . 100)))))
 
 #+end_src
 
@@ -204,8 +219,7 @@ This is tangled in another file and hooked to start so we can manipulate outside
   (defvar ava/default-variable-font-size 105)
 
   (defun ava/rice-the-emacs ()
-      (load-theme (get-theme) t)
-      (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size)
+      (change-theme)
   )
 #+end_src 
 
@@ -214,8 +228,8 @@ This is tangled in another file and hooked to start so we can manipulate outside
 
  ;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
  ;;(set-frame-parameter (selected-frame) 'alpha <both>)
- (set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
- (add-to-list 'default-frame-alist ava/transparency-level-list)
+ ;;(set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
+ ;;(add-to-list 'default-frame-alist ava/transparency-level-list)
 
 #+end_src
 
@@ -424,32 +438,37 @@ Making IDE understand the git projects and treat them as projects.
 
 #+begin_src emacs-lisp
 
-    (use-package projectile
-    :diminish projectile-mode
-    :config (projectile-mode)
-    :custom ((projectile-completion-system 'ivy))
-    :bind-keymap
-    ("<f4>" . projectile-command-map))
-    :init
-    ;; NOTE: Set this to the folder where you keep your Git repos!
-    (when (file-directory-p "~/Documents/Projects/")
-    (setq projectile-project-search-path '("~/Documents/Projects/")))
+  (use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("<f4>" . projectile-command-map))
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Documents/Projects/")
+  (setq projectile-project-search-path '("~/Documents/Projects/")))
 
-    (setq projectile-switch-project-action #'projectile-dired)
+  (setq projectile-switch-project-action #'projectile-dired)
 
-    (use-package counsel-projectile
-    :after projectile
-    :config (counsel-projectile-mode))
+  (use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
 
-    (use-package evil-surround
-    :defer 0
+  (use-package evil-surround
+  :defer 0
+  :config
+  (global-evil-surround-mode 1))
+
+  (use-package emmet-mode
+    :hook ((sgml-mode-hook . emmet-mode))
+           (css-mode-hook . emmet-mode))
+
+  (use-package highlight-indent-guides
     :config
-    (global-evil-surround-mode 1))
-
-    (use-package emmet-mode
-      :hook ((sgml-mode-hook . emmet-mode))
-             (css-mode-hook . emmet-mode))
-
+    (setq highlight-indent-guides-method 'character)
+    (setq highlight-indent-guides-character ?▎)
+    :hook (prog-mode . highlight-indent-guides-mode))
 #+end_src
 
 * Yasnippet Coding template
@@ -544,7 +563,7 @@ Company is a completion box more efficient. It can be configured to autocomplete
       :hook (lsp-mode . company-mode)
       :bind ("C-c c" . company-complete)
       :config
-      (setq company-idle-delay nil)
+      (setq company-idle-delay 0) ;; To disable set to nil
       )
 
 
@@ -834,6 +853,14 @@ Here are the configs for the cosmetic packages.
 
 #+end_src
 
+** Hide modebar
+A good package to hide the modebar where it is not needed. Taken from doom emacs.
+
+#+begin_src emacs-lisp
+  (use-package hide-mode-line
+    :ensure t)
+#+end_src
+
 * Presentations
 
 Turn your emac in your powerponint!
@@ -967,6 +994,7 @@ This session is commented because we will not be needing it now, I have to use m
         "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
         "r" '(window-resize/body :which-key "Resize the window")
         "b" '(toggle-transparency :which-key "Toggle transparency")
+        "v" '(hide-mode-line-mode :which-key "Hides the modebar to get more room.")
         "ci" '((lambda () (interactive) (change-light)) :which-key "Screens light")
         "cpr" '((lambda () (interactive) (play_radio)) :which-key "The old radio")
         "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play clipboard")

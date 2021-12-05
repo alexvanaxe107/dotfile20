@@ -127,8 +127,9 @@
             ([?\s-%] . evil-window-vsplit)
             ([?\s-\"] . evil-window-split)
             ([?\s-q] . kill-buffer-and-window)
-            ([?\s-v] . exwm-workspace-delete)
-
+            ;; ([?\s-v] . exwm-workspace-delete)
+            ([?\s-v] . hide-mode-line-mode)
+            ([?\s-a] . exwm-workspace-add)
             ([?\s-w] . exwm-workspace-switch)
             ,@(mapcar (lambda (i)
                         `(,(kbd (format "s-%d" i)) .

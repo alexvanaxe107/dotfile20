@@ -101,7 +101,7 @@ case $CHOSEN in
     "Elegant2") font "NovaMono" Normal 9 9 12 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 9 9 12 2;;
-    "War") font "American Stencil" Regular 9 10 12 1;;
+    "War") font "American Stencil" Regular 9 9 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 12 1;;
     "Cursive") font "Z003" "Medium Italic" 13 12 15 2;;
     "Soft") font "mononoki" Regular 9 9 12 2;;

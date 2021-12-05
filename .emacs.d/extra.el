@@ -2,8 +2,8 @@
 (defvar ava/default-font-size 105)
 (defvar ava/default-variable-font-size 105)
 
-(defvar ava/transparency-level '(93 . 93))
-(defvar ava/transparency-level-list '(alpha . (93 . 93)))
+;; (defvar ava/transparency-level '(93 . 93))
+;; (defvar ava/transparency-level-list '(alpha . (93 . 93)))
 
 (defvar ava/leader-key "SPC")
 
@@ -110,6 +110,21 @@
           (index (random size)))
       (nth index items)))
 
+  (defun ava/update-transparency()
+      (when (string-equal (getenv "theme_name") "day")
+          (defvar ava/transparency-level '(93 . 93))
+          (defvar ava/transparency-level-list '(alpha . (93 . 93))))
+
+      (when (string-equal (getenv "theme_name") "shabbat")
+          (defvar ava/transparency-level '(93 . 93))
+          (defvar ava/transparency-level-list '(alpha . (93 . 93))))
+
+      (when (string-equal (getenv "theme_name") "night")
+          (message "Night updating")
+          (setq ava/transparency-level '(80 . 80))
+          (setq ava/transparency-level-list '(alpha . (80 . 80)))))
+
+
   (defun get-theme()
   (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-light doom-one-light
                   spacemacs-light kaolin-breeze kaolin-valley-light doom-nord-light))))
@@ -124,7 +139,7 @@
     ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Space Mono"))))
-  (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Envy Code R" "Iosevka" "Monoid"))))
+   (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka"))))
   result)
 
 (defun toggle-transparency ()
@@ -140,8 +155,8 @@ nil 'alpha
 
 ;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
 ;;(set-frame-parameter (selected-frame) 'alpha <both>)
-(set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
-(add-to-list 'default-frame-alist ava/transparency-level-list)
+;;(set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
+;;(add-to-list 'default-frame-alist ava/transparency-level-list)
 
 (add-hook 'emacs-startup-hook #'ava/rice-the-emacs)
 
@@ -287,6 +302,12 @@ nil 'alpha
   :hook ((sgml-mode-hook . emmet-mode))
          (css-mode-hook . emmet-mode))
 
+(use-package highlight-indent-guides
+  :config
+  (setq highlight-indent-guides-method 'character)
+  (setq highlight-indent-guides-character ?▎)
+  :hook (prog-mode . highlight-indent-guides-mode))
+
 (use-package yasnippet
   :hook (lsp-mode . yas-minor-mode)
   :config
@@ -344,7 +365,7 @@ nil 'alpha
       :hook (lsp-mode . company-mode)
       :bind ("C-c c" . company-complete)
       :config
-      (setq company-idle-delay nil)
+      (setq company-idle-delay 0) ;; To disable set to nil
       )
 
 (use-package org
@@ -517,6 +538,9 @@ nil 'alpha
 
 (use-package cyberpunk-theme)
 
+(use-package hide-mode-line
+  :ensure t)
+
 (use-package org-present
    :after org
    :init
@@ -606,6 +630,7 @@ nil 'alpha
       "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
       "r" '(window-resize/body :which-key "Resize the window")
       "b" '(toggle-transparency :which-key "Toggle transparency")
+      "v" '(hide-mode-line-mode :which-key "Hides the modebar to get more room.")
       "ci" '((lambda () (interactive) (change-light)) :which-key "Screens light")
       "cpr" '((lambda () (interactive) (play_radio)) :which-key "The old radio")
       "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play clipboard")

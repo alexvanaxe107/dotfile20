@@ -1,2 +1,2 @@
 
-let g:dracula_colorterm = 0
+let g:afterglow_inherit_background=1

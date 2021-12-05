@@ -53,22 +53,41 @@ invert() {
 
 }
 
+uncast(){
+    local yt_info=$(cast.sh -i)
+    local video_id=$(awk '{printf $3}' FS="|" <<< "${yt_info}")
+    local video_rash=$(awk '{printf $1}' FS="|" <<< "${yt_info}")
+
+    if [ "${video_id}" = "x-youtube/video" ]; then
+        local video_position=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
+        
+        play_radio.sh -p "https://youtu.be/${video_rash}?t=${video_position}"&
+        cast.sh -S
+    else
+        play_radio.sh -p "${video_rash}"&
+        cast.sh -S
+    fi
+}
+
 show_help() {
     echo "Control the player cool version."
-    echo "-s                         Configure to change in xrandr instead of the monitor"
+    echo "-s                         Stop the selected play"
     echo "-p                         Play or Pause the player"
     echo "-i                         Invert the audio/video"
+    echo "-u                         Cast the video"
+    
 }
 
 rcommand=""
 option=""
-while getopts "h?vpsi:" opt; do
+while getopts "h?vpsi:u" opt; do
     case "${opt}" in
         h|\?) show_help ;;
 	v) rcommand="v" ;;
 	p) rcommand="p";;
 	s) rcommand="s";;
 	i) rcommand="i";option=${OPTARG};;
+    u) rcommand="u";;
     esac
 done
 
@@ -79,4 +98,5 @@ case "${rcommand}" in
     "p") play_pause "$1";;
     "s") stop_selected "$1";;
     "i") invert "$1";;
+    "u") uncast;;
 esac
