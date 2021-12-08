@@ -98,7 +98,7 @@
           ([?\s-j] . windmove-down)
           ([?\s-%] . evil-window-vsplit)
           ([?\s-\"] . evil-window-split)
-          ([?\s-q] . kill-buffer-and-window)
+          ([?\s-q] . kill-buffer)
           ;; ([?\s-v] . exwm-workspace-delete)
           ([?\s-v] . hide-mode-line-mode)
           ([?\s-a] . exwm-workspace-add)

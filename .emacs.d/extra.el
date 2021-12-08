@@ -203,9 +203,16 @@ nil 'alpha
 (counsel-mode 1))
 
 (use-package ivy-rich
-:after ivy
-:init
-(ivy-rich-mode 1))
+  :after ivy
+  :init
+  (ivy-rich-mode 1))
+
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map ("C-c C-;" . flyspell-correct-wrapper)))
+
+(use-package flyspell-correct-ivy
+  :after flyspell-correct)
 
 (use-package helpful
 :commands (helpful-callable helpful-variable helpful-command helpful-key)
@@ -626,6 +633,7 @@ nil 'alpha
 
   (ava/leader-keys
       "c"  '(:ignore c :which-key "Some cool stuffs")
+      "o"  '(:ignore o :which-key "Org shortcuts")
       "cp"  '(:ignore c :which-key "Lounge center.")
       "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
       "r" '(window-resize/body :which-key "Resize the window")
@@ -641,6 +649,13 @@ nil 'alpha
       "cpA" '((lambda () (interactive) (player-ctl "asaudio")) :which-key "Invert audio/video")
       "z" '(zoom-window-zoom :which-key "Tmux zoom like")
       "n" '(zoom-window-next :which-key "Next zoom window")
+      ;; Org keymaps
+      "oci" '(org-clock-in :which-key "Start the clock in current task")
+      "oco" '(org-clock-out :which-key "Stop the clock in current task")
+      "occ" '(org-clock-cancel :which-key "Cancel the timer")
+      "ocg" '(org-clock-goto :which-key "Go to the clock entry or last one")
+      "otb" '((lambda() (interactive) (org-timer-set-timer 25)) :which-key "Start a pomodoro")
+      "ots" '(org-timer-stop :which-key "Stop a timer")
       ))
 
 (defun ava/org-babel-tangle-config ()
