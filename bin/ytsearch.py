@@ -34,11 +34,11 @@ def _main():
     quantity = options.quantity
 
     if time:
-        allSearch = CustomSearch(search, VideoSortOrder.uploadDate)
+        allSearch = CustomSearch(str(search), VideoSortOrder.uploadDate)
     if channel:
         allSearch = ChannelsSearch(str(search))
     else:
-        allSearch = VideosSearch(search)
+        allSearch = VideosSearch(str(search))
 
     result = allSearch.result();
     result_json = result

@@ -1,9 +1,12 @@
 #!/bin/bash
 
+TMP_LOCATION=$HOME/.config/tmp
+LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
+
 get_titles(){
     for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
         teste="$(playerctl -p "$player" metadata title 2> /dev/null | awk -v player=$player '{print player,$0}' OFS=" - ")"
-	
+
         if [[ ! -z $teste ]]; then
             printf "%s\n" "$teste"
         fi
@@ -12,14 +15,38 @@ get_titles(){
 
 play_pause() {
     chosen_p=$1
-    chosen_p=$(echo $chosen_p | awk '{print $1}') 
+    chosen_p=$(echo $chosen_p | awk '{print $1}')
     playerctl -p ${chosen_p} play-pause
 }
 
 stop_selected() {
     chosen_p=$1
-    chosen_p=$(echo $chosen_p | awk '{print $1}') 
+    chosen_p=$(echo $chosen_p | awk '{print $1}')
     playerctl -p ${chosen_p} stop
+}
+
+save() {
+    player="$1"
+    player=$(echo $player | awk '{print $1}')
+    yt_link=$(playerctl -p "${player}" metadata xesam:url)
+    position=$(playerctl -p ${player} position)
+
+    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9_-]{11}')
+
+    if [ ! -z ${video_rash} ]; then
+        echo "https://youtu.be/${video_rash}?t=${position}" > ${LAST_LOCATION_PLAYED}
+    else
+        yt_link=$(playerctl -p "${player}" metadata xesam:url)
+        echo "${yt_link}" > ${LAST_LOCATION_PLAYED}
+    fi
+
+    if [ "$chosen_p" = "chromecast" ]; then
+        if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
+            cast.sh -t
+        fi
+    fi
+
+    notify-send -u normal  "Saved" "Location saved"
 }
 
 invert() {
@@ -28,9 +55,9 @@ invert() {
 
     yt_link=$(playerctl -p "${player}" metadata xesam:url)
     position=$(playerctl -p ${player} position)
-    
+
     video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9_-]{11}')
-    
+
     if [ ! -z "${video_rash}" ]; then
         if [ "${asaudio}" = "1" ]; then
             playerctl -p $player stop;
@@ -60,7 +87,7 @@ uncast(){
 
     if [ "${video_id}" = "x-youtube/video" ]; then
         local video_position=$(awk '{printf $2}' FS="|" <<< "${yt_info}")
-        
+
         play_radio.sh -p "https://youtu.be/${video_rash}?t=${video_position}"&
         cast.sh -S
     else
@@ -75,18 +102,19 @@ show_help() {
     echo "-p                         Play or Pause the player"
     echo "-i                         Invert the audio/video"
     echo "-u                         Cast the video"
-    
+    echo "-S                         Save the video to watch later"
 }
 
 rcommand=""
 option=""
-while getopts "h?vpsi:u" opt; do
+while getopts "h?vpsi:uS" opt; do
     case "${opt}" in
-        h|\?) show_help ;;
-	v) rcommand="v" ;;
-	p) rcommand="p";;
-	s) rcommand="s";;
-	i) rcommand="i";option=${OPTARG};;
+    h|\?) show_help ;;
+    v) rcommand="v" ;;
+    p) rcommand="p";;
+    s) rcommand="s";;
+    S) rcommand="S";;
+    i) rcommand="i";option=${OPTARG};;
     u) rcommand="u";;
     esac
 done
@@ -98,5 +126,6 @@ case "${rcommand}" in
     "p") play_pause "$1";;
     "s") stop_selected "$1";;
     "i") invert "$1";;
+    "S") save "$1";;
     "u") uncast;;
 esac

@@ -1,3 +1,4 @@
+(server-start)
 (defun ava/run-in-background (command)
 (let ((command-parts (split-string command "[ ]+")))
     (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
@@ -65,10 +66,6 @@
 
   (require 'exwm-randr)
   (exwm-randr-enable)
-  ;; Setup the display and set the HDMI1 as primary
-  (start-process-shell-command "xrandr" nil "display_manager.sh -o \"HDMI1 eDP1\"")
-  (start-process-shell-command "primary" nil "display_manager.sh -p \"HDMI1\"")
-
   ;; Configure the kmap and change caps for control
   (start-process-shell-command "kmap" nil "setkmap")
 
@@ -79,6 +76,7 @@
 
   ;; Ctrl+Q will enable the next key to be sent directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
   ;; Set up global key bindings.  These always work, no matter the input state!
   (setq exwm-input-global-keys
         `(
@@ -90,15 +88,22 @@
                        (interactive (list (read-shell-command "$ ")))
                        (start-process-shell-command command nil command)))
 
-
-          ;; Movement keys
+          ;; Move Window keys
           ([?\s-h] . windmove-left)
           ([?\s-l] . windmove-right)
           ([?\s-k] . windmove-up)
           ([?\s-j] . windmove-down)
+          ;; Movement keys
+          ([?\s-H] . windower-swap-left)
+          ([?\s-L] . windower-swap-right)
+          ([?\s-K] . windower-swap-above)
+          ([?\s-J] . windower-swap-below)
+
           ([?\s-%] . evil-window-vsplit)
           ([?\s-\"] . evil-window-split)
-          ([?\s-q] . kill-buffer)
+          ([?\s-Q] . kill-buffer)
+          ([?\s-q] . evil-quit)
+          ([?\s-i] . exwm-input-toggle-keyboard)
           ;; ([?\s-v] . exwm-workspace-delete)
           ([?\s-v] . hide-mode-line-mode)
           ([?\s-a] . exwm-workspace-add)

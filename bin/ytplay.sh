@@ -71,8 +71,9 @@ play_parameter() {
 
     if [ "${multiple}" = "1" ]; then
         local videos="$(ytsearch.py -to -q 5 "${choosen_theme}")"
-        video=$(awk '{printf "%s", $1}' FS="-" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s-%s-%s\n", $2, $3, $4}' FS=";" <<< $videos)))
+        video=$(awk '{printf "%s", $1}' FS="@" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s@%s+%s\n", $2, $3, $4}' FS=";" <<< $videos)))
 
+        echo "$video"
         if [ -z "${video}" ];then
             exit 0
         fi

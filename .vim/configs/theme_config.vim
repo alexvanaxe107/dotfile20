@@ -1,2 +1,2 @@
 
-let g:afterglow_inherit_background=1
+let g:pencil_terminal_italics = 1

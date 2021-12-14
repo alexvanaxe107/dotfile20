@@ -57,6 +57,8 @@ if [[ "$action" == $search ]]; then
         if [ ! -z "${command}" ]; then
             param="${param} -m"
         fi
+
+        echo "${param}"
         ytplay.sh ${param} -T "${query}"& 
         exit 0
     elif [ ! -z "${command}" ]; then
@@ -67,7 +69,7 @@ if [[ "$action" == $search ]]; then
         param="${param} -t"
     fi
 
-    echo ${param}
+    echo "${param}"
      
     ytplay.sh ${param}& 
     exit 0

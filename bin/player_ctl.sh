@@ -45,17 +45,11 @@ go_to_position() {
 
 save() {
     player=$1
-    yt_link=$(playerctl -p "${player}" metadata xesam:url)
     position=$(playerctl -p ${player} position)
 
-    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -o "v.*" | awk 'BEGIN { FS = "=" }{print $2}')
-    
-    if [ ! -z ${video_rash} ]; then
-        echo "https://youtu.be/${video_rash}?t=${position}" > ${LAST_LOCATION_PLAYED}
-    else
-        yt_link=$(playerctl -p "${player}" metadata xesam:url)
-        echo "${yt_link}" > ${LAST_LOCATION_PLAYED} 
-    fi
+    video_rash=$(playerctl -p ${player} metadata xesam:url | grep -Eo '[a-zA-Z0-9_-]{11}')
+
+    echo "https://youtu.be/${video_rash}?t=${position}" > ${LAST_LOCATION_PLAYED}
 
     if [ "$chosen_p" = "chromecast" ]; then
         if [[ -f "${INDICATOR_CAST_FILE}" ]]; then

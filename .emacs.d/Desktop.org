@@ -2,11 +2,10 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./desktop.el
 
 * EMACS Desktop configs
-
 ** Basic stuffs
 
 #+begin_src emacs-lisp
-
+  (server-start)
   (defun ava/run-in-background (command)
   (let ((command-parts (split-string command "[ ]+")))
       (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
@@ -55,7 +54,6 @@
 
 #+end_src
 
-
 ** Use Package for exwm
 
 #+begin_src emacs-lisp
@@ -93,10 +91,6 @@
 
     (require 'exwm-randr)
     (exwm-randr-enable)
-    ;; Setup the display and set the HDMI1 as primary
-    (start-process-shell-command "xrandr" nil "display_manager.sh -o \"HDMI1 eDP1\"")
-    (start-process-shell-command "primary" nil "display_manager.sh -p \"HDMI1\"")
-
     ;; Configure the kmap and change caps for control
     (start-process-shell-command "kmap" nil "setkmap")
 
@@ -107,6 +101,7 @@
 
     ;; Ctrl+Q will enable the next key to be sent directly
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
     ;; Set up global key bindings.  These always work, no matter the input state!
     (setq exwm-input-global-keys
           `(
@@ -118,15 +113,22 @@
                          (interactive (list (read-shell-command "$ ")))
                          (start-process-shell-command command nil command)))
 
-
-            ;; Movement keys
+            ;; Move Window keys
             ([?\s-h] . windmove-left)
             ([?\s-l] . windmove-right)
             ([?\s-k] . windmove-up)
             ([?\s-j] . windmove-down)
+            ;; Movement keys
+            ([?\s-H] . windower-swap-left)
+            ([?\s-L] . windower-swap-right)
+            ([?\s-K] . windower-swap-above)
+            ([?\s-J] . windower-swap-below)
+
             ([?\s-%] . evil-window-vsplit)
             ([?\s-\"] . evil-window-split)
-            ([?\s-q] . kill-buffer)
+            ([?\s-Q] . kill-buffer)
+            ([?\s-q] . evil-quit)
+            ([?\s-i] . exwm-input-toggle-keyboard)
             ;; ([?\s-v] . exwm-workspace-delete)
             ([?\s-v] . hide-mode-line-mode)
             ([?\s-a] . exwm-workspace-add)
@@ -143,8 +145,8 @@
 
 #+end_src
 
-* Desktop enviroment
 
+* Desktop enviroment
 Configure the special functions like sound, brightes etc...
 This guy is not good on programming, so it is hard to change the keys. So this thing is necessary to change the lockscreen.
 
@@ -167,8 +169,8 @@ This guy is not good on programming, so it is hard to change the keys. So this t
 
 #+end_src
 
-* Testing packages
 
+* Testing packages
 This session is packages that were tested and the comments with the results of the tests
 
 ** Dmenu
@@ -182,24 +184,36 @@ It is good to replace counsel, it seems not to have all the functionalities from
 
 
 * Non Lisp files
-
 ** The shell server
 
 The idea is to start a server and then start a session with the client. It will in theory make the process a lot faster.
+*NOTE*: It didn't work. But I will mandain the config here just because it is usefull.
 
 #+begin_src sh :tangle /home/alexvanaxe/bin/emacs-server.sh :tangle-mode (identity #o700)
 
   #! /bin/bash
+  iswmmode="$1"
 
-  export WM_RUNNING="emacs"
-
-  if [ "${theme_name}" = "day" ]; then
-    theme="doom-gruvbox-light"
+  if [ -z "${iswmmode}" ]; then
+    emacs --daemon -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
+  else
+    emacs --daemon -bg "#000000" -fg "#ffffff" -mm --debug-init
   fi
+  #exec dbus-launch --exit-with-session emacsclient -c
+
+#+end_src
 
 
-  emacs --daemon -bg "#000000" -fg "#ffffff" -mm --debug-init
+Start the client
+#+begin_src sh :tangle /home/alexvanaxe/bin/wms/emacs-client.sh :tangle-mode (identity #o700)
+#! /bin/bash
 
+export WM_RUNNING="emacs"
+$HOME/.config/i3/monitor/saver.sh &
+display_manager.sh -o "HDMI1 eDP1"
+display_manager.sh -p "HDMI1"
+start_picom.sh "emacs"
+exec dbus-launch --exit-with-session emacsclient -c
 
 #+end_src
 
@@ -211,9 +225,12 @@ Start the client.
 
   #! /bin/bash
 
-  export WM_RUNNING="emacs"
-  start_picom.sh "emacs"
+export WM_RUNNING="emacs"
+$HOME/.config/i3/monitor/saver.sh &
+display_manager.sh -o "HDMI1 eDP1"
+display_manager.sh -p "HDMI1"
+start_picom.sh "emacs"
 
-  exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
+exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
 
 #+end_src

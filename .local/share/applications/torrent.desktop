@@ -1,4 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Torrent
-Exec=/usr/bin/env /home/alexvanaxe/Documents/Scripts/transadd %U

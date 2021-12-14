@@ -186,6 +186,7 @@ format-background = ${colors.content-fill}
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:80:...%
+format-foreground = ${colors.foreground-fill}
 
 [module/xkeyboard]
 type = internal/xkeyboard

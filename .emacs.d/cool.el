@@ -1,8 +1,13 @@
+(defun choose-player()
+  (let (
+  (players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+      (completing-read "Chose: " players)))
+
 (defun play_radio()
       (let (
-	    (output (split-string (shell-command-to-string "play_radio.sh -l") "\n")))
-	  (let ( 
-	    (choosen_radio (completing-read "Choose an station to listen, and enjoy some good music." output)))
+      (output (split-string (shell-command-to-string "play_radio.sh -l") "\n")))
+    (let (
+      (choosen_radio (completing-read "Choose an station to listen, and enjoy some good music." output)))
 
         (save-match-data ; is usually a good idea
             (and (string-match "[[:space:]]*\\([0-9]*\\).*" choosen_radio)
@@ -20,19 +25,22 @@
  )
 
 (defun player-ctl (action)
+    (when (equal action "save")
+        (shell-command (concat "player-ctl.sh -S " "'" (choose-player) "'") nil))
+
     (when (equal action "play_pause")
     (let (
 	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
     (let (
 	    (chosen_player (completing-read "Chose: " players)))
-	    (shell-command (concat "player-ctl.sh -p " chosen_player)) )))
+	    (shell-command (concat "player-ctl.sh -p " "'" chosen_player "'")) )))
 
     (when (equal action "stop")
     (let (
 	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
     (let (
 	    (chosen_player (completing-read "Chose: " players)))
-	    (shell-command (concat "player-ctl.sh -s " chosen_player)) )))
+	    (shell-command (concat "player-ctl.sh -s " "'" chosen_player "'")) )))
     (when (equal action "asaudio")
     (let (
 	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
@@ -55,6 +63,7 @@
 (defun change-theme()
   "First disable all themes and then chose a theme and font"
   (shell-command "nitrogen --restore")
+  (shell-command "start_picom.sh \"emacs\"")
   (ava/update-transparency)
   (disable-all-themes)
   (load-theme (get-theme) t)

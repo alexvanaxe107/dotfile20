@@ -19,6 +19,116 @@
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
+;; Initialize package sources
+(require 'package)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                        ("org" . "https://orgmode.org/elpa/")
+                        ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+(package-refresh-contents))
+
+;; Initialize use-package on non-Linux platforms
+(unless (package-installed-p 'use-package)
+(package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; NOTE: If you want to move everything out of the ~/.emacs.d folder
+;; reliably, set `user-emacs-directory` before loading no-littering!
+(setq user-emacs-directory "~/Documents/.emacs")
+(setq user-emacs-configs-directory (concat (getenv "HOME") "/.emacs.d/"))
+
+(use-package no-littering)
+
+(setq backup-directory-alist '(("." . "/home/alexvanaxe/Documents/.emacs_save")))
+
+(setq extra-config-file "~/.emacs.d/rice.el")
+(load extra-config-file)
+(setq ava-cool-stuffs "~/.emacs.d/cool.el")
+(load ava-cool-stuffs)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(use-package lolsmacs
+  :disabled
+  :straight (:host github
+             :repo "grettke/lolsmacs"
+             :files ("*.el"))
+  :init
+  (require 'lolsmacs)
+  (lolsmacs-init)
+  :config
+  (desktop-save-mode 0)
+  (setq lolsmacs-save-on-hooks nil)
+)
+
+(set-charset-priority 'unicode)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+(setq-default
+   help-window-select t        ;; Focus new help windows when opened
+   debug-on-error nil
+   indent-tabs-mode nil        ;; Adjust indent using 'space', not 'tab'
+   jit-lock-defer-time 0       ;; Defer fontification while there is input pending
+   window-combination-resize t ;; Resize windows proportionally
+   history-delete-duplicates t
+   auto-save-default nil
+   make-backup-files nil
+   auto-save-default nil
+   savehist-save-minibuffer-history t
+   indicate-buffer-boundaries 'left
+   show-paren-style 'parenthesis  ;; Hightlights all the contents. It is somewhat usefull but sometimes ugly Maybe put an lisp hook?
+   scroll-preserve-screen-position t
+   scroll-conservatively 101
+   make-pointer-invisible t
+   history-delete-duplicates t
+   large-file-warning-threshold (* 1024 1024)
+  )
+
+    (setq savehist-additional-variables
+          '(kill-ring
+            search-ring
+            regexp-search-ring
+            last-kbd-macro
+            kmacro-ring
+            shell-command-history))
+    (savehist-mode t)
+    (auto-save-visited-mode t)
+
+    (show-paren-mode t)
+    (global-hl-line-mode t)
+    (setq prettify-symbols-unprettify-at-point 'right-edge)
+    (global-prettify-symbols-mode)
+
+    (electric-pair-mode) ;; Maybe not worth it
+    (save-place-mode t)
+
+(with-current-buffer "*scratch*"
+    (emacs-lock-mode 'kill))
+
 (setq inhibit-startup-message t)
 (setq visible-bell t) ;; Set up the visible bell
 
@@ -52,46 +162,57 @@
 
 ;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height ava/default-variable-font-size :weight 'regular)
 
-;; Initialize package sources
-(require 'package)
+; START TABS CONFIG
+;; Create a variable for our preferred tab width
+(setq custom-tab-width 4)
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                        ("org" . "https://orgmode.org/elpa/")
-                        ("elpa" . "https://elpa.gnu.org/packages/")))
+;; Two callable functions for enabling/disabling tabs in Emacs
+(defun disable-tabs () (setq indent-tabs-mode nil))
+(defun enable-tabs  ()
+  (local-set-key (kbd "TAB") 'tab-to-tab-stop)
+  (setq indent-tabs-mode t)
+  (setq tab-width custom-tab-width))
 
-(package-initialize)
-(unless package-archive-contents
-(package-refresh-contents))
+;; Hooks to Enable Tabs
+(add-hook 'prog-mode-hook 'disable-tabs)
+(add-hook 'mhtml-mode-hook 'disable-tabs)
+;; Hooks to Disable Tabs
+(add-hook 'lisp-mode-hook 'disable-tabs)
+(add-hook 'emacs-lisp-mode-hook 'disable-tabs)
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-(package-install 'use-package))
+;; Language-Specific Tweaks
+(setq-default python-indent-offset custom-tab-width) ;; Python
+(setq-default js-indent-level custom-tab-width)      ;; Javascript
 
-(require 'use-package)
-(setq use-package-always-ensure t)
+;; Making electric-indent behave sanely
+(setq-default electric-indent-inhibit t)
 
-;; NOTE: If you want to move everything out of the ~/.emacs.d folder
-;; reliably, set `user-emacs-directory` before loading no-littering!
-(setq user-emacs-directory "~/Documents/.emacs")
-(setq user-emacs-configs-directory (concat (getenv "HOME") "/.emacs.d/"))
+;; Make the backspace properly erase the tab instead of
+;; removing 1 space at a time.
+(setq backward-delete-char-untabify-method 'hungry)
 
-(use-package no-littering)
-
-(setq backup-directory-alist '(("." . "/home/alexvanaxe/Documents/.emacs_save")))
-
-(setq extra-config-file "~/.emacs.d/rice.el")
-(load extra-config-file)
-(setq ava-cool-stuffs "~/.emacs.d/cool.el")
-(load ava-cool-stuffs)
+;; (OPTIONAL) Shift width for evil-mode users
+;; For the vim-like motions of ">>" and "<<".
+(setq-default evil-shift-width custom-tab-width)
+;; WARNING: This will change your life
+;; (OPTIONAL) Visualize tabs as a pipe character - "|"
+;; This will also show trailing characters as they are useful to spot.
+(setq whitespace-style '(face tabs tab-mark trailing))
+(custom-set-faces
+ '(whitespace-tab ((t (:foreground "#636363")))))
+(setq whitespace-display-mappings
+  '((tab-mark 9 [124 9] [92 9]))) ; 124 is the ascii ID for '\|'
+(global-whitespace-mode) ; Enable whitespace mode everywhere
+; END TABS CONFIG
 
 (defun ava/configure-python()
       (setq fill-column 80)
-      (display-fill-column-indicator-mode t) 
+      (display-fill-column-indicator-mode t)
   )
 
   (defun ava/configure-column()
       (setq fill-column 120)
-      (display-fill-column-indicator-mode t) 
+      (display-fill-column-indicator-mode t)
   )
 
   ;; Configure the django for specific projects
@@ -104,7 +225,7 @@
           (djangonaut-mode t)
           (message "Django Configured.")))
 
-;;Function to get a random value from the list passed 
+;;Function to get a random value from the list passed
   (defun random-choice (items)
   (let* ((size (length items))
           (index (random size)))
@@ -112,8 +233,8 @@
 
   (defun ava/update-transparency()
       (when (string-equal (getenv "theme_name") "day")
-          (defvar ava/transparency-level '(93 . 93))
-          (defvar ava/transparency-level-list '(alpha . (93 . 93))))
+          (defvar ava/transparency-level '(75 . 75))
+          (defvar ava/transparency-level-list '(alpha . (75 . 75))))
 
       (when (string-equal (getenv "theme_name") "shabbat")
           (defvar ava/transparency-level '(93 . 93))
@@ -121,25 +242,22 @@
 
       (when (string-equal (getenv "theme_name") "night")
           (message "Night updating")
-          (setq ava/transparency-level '(80 . 80))
-          (setq ava/transparency-level-list '(alpha . (80 . 80)))))
+          (setq ava/transparency-level '(87 . 87))
+          (setq ava/transparency-level-list '(alpha . (87 . 87)))))
 
 
   (defun get-theme()
-  (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(doom-gruvbox-light doom-one-light
-                  spacemacs-light kaolin-breeze kaolin-valley-light doom-nord-light))))
-  (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(spacemacs-light kaolin-breeze kaolin-valley-light))))
-  (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-gruvbox doom-one doom-city-lights
-                  kaolin-aurora kaolin-eclipse kaolin-valley-dark doom-moonlight doom-city-lights doom-material
-                  doom-dracula doom-palenight))))
+  (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-breeze))))
+  (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
+  (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
   result)
 
   (defun get-font()
    ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
     ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
-   (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"))))
-   (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Space Mono"))))
-   (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka"))))
+   (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
+   (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Fantasque Sans Mono"))))
+   (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Fixed"))))
   result)
 
 (defun toggle-transparency ()
@@ -224,6 +342,11 @@ nil 'alpha
 ([remap describe-command] . helpful-command)
 ([remap describe-variable] . counsel-describe-variable)
 ([remap describe-key] . helpful-key))
+
+(use-package windower
+  :ensure t
+  :config
+  (add-to-list 'package-selected-packages 'windower))
 
 (windmove-default-keybindings 'meta)
 
@@ -336,85 +459,87 @@ nil 'alpha
 ;;  :after magit)
 
 (use-package lsp-mode
-      :init
-      ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-      (setq lsp-keymap-prefix "C-c l")
-      :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-              (python-mode . lsp-deferred)
-              (typescript-mode . lsp-deferred)
-              (sh-mode . lsp-deferred)
-              ;; if you want which-key integration
-              )
-      :commands lsp-deferred
-      :config
-          (add-to-list 'lsp-enabled-clients 'bash-ls)
-          (lsp-enable-which-key-integration t))
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (python-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         (sh-mode . lsp-deferred)
+         (mhtml-mode . lsp-deferred)
+         ;; if you want which-key integration
+         )
+  :commands lsp-deferred
+  :config
+  (add-to-list 'lsp-enabled-clients 'bash-ls)
+  (add-to-list 'lsp-enabled-clients 'angular-ls)
+  (lsp-enable-which-key-integration t))
 
-      (use-package lsp-jedi
-      :after lsp-mode
-      :ensure t
-      :config
-      (with-eval-after-load "lsp-mode"
-          (add-to-list 'lsp-disabled-clients 'pyls)
-          (add-to-list 'lsp-enabled-clients 'jedi)))
+(use-package lsp-jedi
+  :after lsp-mode
+  :ensure t
+  :config
+  (with-eval-after-load "lsp-mode"
+    (add-to-list 'lsp-disabled-clients 'pyls)
+    (add-to-list 'lsp-enabled-clients 'jedi)))
 
-      (use-package lsp-ivy 
-          :after lsp-mode
-          :commands lsp-ivy-workspace-symbol)
+(use-package lsp-ivy 
+  :after lsp-mode
+  :commands lsp-ivy-workspace-symbol)
 
-;;      (use-package lsp-ui
-;;          :after lsp-mode
-;;          :config
-;;          (setq lsp-ui-doc-position 'bottom))
+(use-package lsp-ui
+  :after lsp-mode
+  :config
+  (setq lsp-ui-doc-position 'bottom))
 
 (use-package company
-      :after lsp-mode
-      :hook (lsp-mode . company-mode)
-      :bind ("C-c c" . company-complete)
-      :config
-      (setq company-idle-delay 0) ;; To disable set to nil
-      )
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind ("C-c c" . company-complete)
+  :config
+  (setq company-idle-delay 0) ;; To disable set to nil
+  )
 
 (use-package org
-:pin org
-:commands (org-capture org-agenda)
-:hook (org-mode . ava/org-mode-setup)
-:config
-(setq org-ellipsis " ▾")
+  :pin org
+  :commands (org-capture org-agenda)
+  :hook (org-mode . ava/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾")
 
-(setq org-agenda-start-with-log-mode t)
-(setq org-log-done 'time)
-(setq org-log-into-drawer t)
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
 
-(setq org-agenda-files
+  (setq org-agenda-files
         '("~/Documents/Projects/orgs/rice.org"))
 
-(use-package org-bullets
-:hook (org-mode . org-bullets-mode)
-:custom
-(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
+  (use-package org-bullets
+    :hook (org-mode . org-bullets-mode)
+    :custom
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
 
 (use-package visual-fill-column
-    :init 
-          (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
-          (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
+  :init 
+  (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
+  (add-hook 'dired-mode-hook #'ava/dired-mode-visual-fill))
 
 
-      ;; (use-package company-box
-      ;;   :hook (company-mode . company-mode-box)
-      ;;   )
+;; (use-package company-box
+;;   :hook (company-mode . company-mode-box)
+;;   )
 
 
-      ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-      ;; (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-      ;; (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-      ;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+;; Ensure that anything that should be fixed-pitch in Org files appears that way
+;; (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+;; (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+;; (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
 
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
   :config
-     (setq lsp-diagnostic-package :none))
+  (setq lsp-diagnostic-package :none))
 
 (use-package djangonaut
   :ensure t
@@ -428,34 +553,34 @@ nil 'alpha
   (setenv "WORKON_HOME" "~/.pyenv/versions"))
 
 (use-package zoom-window
-:defer 0
-:custom
-(zoom-window-mode-line-color "black"))
+  :defer 0
+  :custom
+  (zoom-window-mode-line-color "black"))
 
 (use-package org-roam
-:ensure t
-:init
-(setq org-roam-v2-ack t)
-:custom
-(org-roam-directory "~/Documents/orgs")
-(org-roam-completion-everywhere t)
-:bind (("C-c n l" . org-roam-buffer-toggle)
-       ("C-c n f" . org-roam-node-find)
-       ("C-c n i" . org-roam-node-insert)
-       :map org-mode-map
-       ("C-M-i" . completion-at-point))
-:config
-(org-roam-setup))
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Documents/orgs")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
 
 (use-package typescript-mode
-    :after lsp-mode
-    :mode "\\.ts\\'"
-    :hook (typescript-mode . lsp-deferred)
-    :config
+  :after lsp-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
   (with-eval-after-load "lsp-mode"
     (setq typescript-indent-level 2)
     (add-to-list 'lsp-enabled-clients 'ts-ls)
-))
+    ))
 
 (use-package sass-mode
   :after typescript-mode)
@@ -492,15 +617,15 @@ nil 'alpha
     (setq eshell-destroy-buffer-when-process-dies t)
     (setq eshell-visual-commands '("htop" "zsh" "vim"))))
 
-  ;(eshell-git-prompt-use-theme 'powerline))
+                                        ;(eshell-git-prompt-use-theme 'powerline))
 
-  ;; Try to use the vterm
+;; Try to use the vterm
 (use-package vterm
-:commands vterm
-:config
-(setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  ;; Set this to match your custom shell prompt
-;;(setq vterm-shell "zsh")                       ;; Set this to customize the shell to launch
-(setq vterm-max-scrollback 10000))
+  :commands vterm
+  :config
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  ;; Set this to match your custom shell prompt
+  ;;(setq vterm-shell "zsh")                       ;; Set this to customize the shell to launch
+  (setq vterm-max-scrollback 10000))
 
 (use-package dired
   :ensure nil
@@ -527,18 +652,22 @@ nil 'alpha
     "H" 'dired-hide-dotfiles-mode))
 
 (use-package doom-themes)
-    ;; Removing theme for testing porposes
+;; Removing theme for testing porposes
 ;;        :init (load-theme 'doom-city-lights t))
 
-    (use-package all-the-icons)
+(use-package all-the-icons)
 
-    (use-package doom-modeline
-        :init (doom-modeline-mode 1)
-        :custom (
-                 (doom-modeline-height 0)
-                 (doom-modeline-bar-width 4)
-                 (doom-modeline-window-width-limit fill-column)
-                 ))
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom (
+           (doom-modeline-height 0)
+           (doom-modeline-bar-width 4)
+           (doom-modeline-window-width-limit fill-column)
+           ))
+
+(use-package telephone-line
+  :disabled
+  :init (telephone-line-mode 1))
 
 ;; Or if you have use-package installed
 (use-package kaolin-themes)
@@ -549,70 +678,70 @@ nil 'alpha
   :ensure t)
 
 (use-package org-present
-   :after org
-   :init
-    (defun ava/present-mode-enter()
-                        (org-present-big)
-                        (org-display-inline-images)
-                        (org-present-hide-cursor)
-                        (org-present-read-only))
+  :after org
+  :init
+  (defun ava/present-mode-enter()
+    (org-present-big)
+    (org-display-inline-images)
+    (org-present-hide-cursor)
+    (org-present-read-only))
 
-    (defun ava/present-mode-quit()
-                        (org-present-small)
-                        (org-remove-inline-images)
-                        (org-present-show-cursor)
-                        (org-present-read-write))
-    (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
-    (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
+  (defun ava/present-mode-quit()
+    (org-present-small)
+    (org-remove-inline-images)
+    (org-present-show-cursor)
+    (org-present-read-write))
+  (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
+  (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
 
 (use-package visual-fill-column 
-    :hook ((typescript-mode . ava/configure-column)
-           (python-mode . ava/configure-python)
-           ))
+  :hook ((typescript-mode . ava/configure-column)
+         (python-mode . ava/configure-python)
+         ))
 
 (defun ava/org-mode-setup ()
-(org-indent-mode)
-(visual-line-mode 1))
+  (org-indent-mode)
+  (visual-line-mode 1))
 
 (defun ava/org-mode-visual-fill ()
-(setq visual-fill-column-width 150
-  visual-fill-column-center-text t)
-(visual-fill-column-mode 1))
+  (setq visual-fill-column-width 150
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
 
 (defun ava/dired-mode-visual-fill ()
-(setq visual-fill-column-width 080)
-(visual-fill-column-mode 1))
+  (setq visual-fill-column-width 080)
+  (visual-fill-column-mode 1))
 
 (with-eval-after-load 'org
-;; This is needed as of Org 9.2
-(require 'org-tempo)
+  ;; This is needed as of Org 9.2
+  (require 'org-tempo)
 
-(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("py" . "src python"))
-(add-to-list 'org-structure-template-alist '("json" . "src js")))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("json" . "src js")))
 
 (with-eval-after-load 'org-faces
-    (dolist (face '((org-level-1 . 1.2)
-                    (org-level-2 . 1.1)
-                    (org-level-3 . 1.05)
-                    (org-level-4 . 1.0)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
     (set-face-attribute (car face) nil :weight 'regular :height (cdr face))))
-    ;; (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))))
+;; (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face))))
 (setq org-confirm-babel-evaluate nil)
 
 (with-eval-after-load 'org
   (org-babel-do-load-languages
-      'org-babel-load-languages
-      '((emacs-lisp . t)
-      (python . t)
-      (js . t)))
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (js . t)))
 
-(push '("conf-unix" . conf-unix) org-src-lang-modes))
+  (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
 
 
@@ -624,43 +753,49 @@ nil 'alpha
 
 (with-eval-after-load 'general
   (defhydra window-resize (global-map "<F8>")
-  "Resize the window"
-  ("k" enlarge-window)
-  ("j" shrink-window)
-  ("l" enlarge-window-horizontally)
-  ("h" shrink-window-horizontally)
-  ("f" nil "finished" :exit t))
+    "Resize the window"
+    ("k" enlarge-window)
+    ("j" shrink-window)
+    ("l" enlarge-window-horizontally)
+    ("h" shrink-window-horizontally)
+    ("f" nil "finished" :exit t))
 
   (ava/leader-keys
-      "c"  '(:ignore c :which-key "Some cool stuffs")
-      "o"  '(:ignore o :which-key "Org shortcuts")
-      "cp"  '(:ignore c :which-key "Lounge center.")
-      "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
-      "r" '(window-resize/body :which-key "Resize the window")
-      "b" '(toggle-transparency :which-key "Toggle transparency")
-      "v" '(hide-mode-line-mode :which-key "Hides the modebar to get more room.")
-      "ci" '((lambda () (interactive) (change-light)) :which-key "Screens light")
-      "cpr" '((lambda () (interactive) (play_radio)) :which-key "The old radio")
-      "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play clipboard")
-      "cpa" '((lambda () (interactive) (play_paste_audio)) :which-key "Play clipboard as audio")
-      "cpp" '((lambda () (interactive) (player-ctl "play_pause")) :which-key "Play/Pause player")
-      "cps" '((lambda () (interactive) (player-ctl "stop")) :which-key "Stop player")
-      ;; Esse o emacs nao consegue rodar. Muita pressao pra ele
-      "cpA" '((lambda () (interactive) (player-ctl "asaudio")) :which-key "Invert audio/video")
-      "z" '(zoom-window-zoom :which-key "Tmux zoom like")
-      "n" '(zoom-window-next :which-key "Next zoom window")
-      ;; Org keymaps
-      "oci" '(org-clock-in :which-key "Start the clock in current task")
-      "oco" '(org-clock-out :which-key "Stop the clock in current task")
-      "occ" '(org-clock-cancel :which-key "Cancel the timer")
-      "ocg" '(org-clock-goto :which-key "Go to the clock entry or last one")
-      "otb" '((lambda() (interactive) (org-timer-set-timer 25)) :which-key "Start a pomodoro")
-      "ots" '(org-timer-stop :which-key "Stop a timer")
-      ))
+    "c"  '(:ignore c :which-key "Some cool stuffs")
+    "o"  '(:ignore o :which-key "Org shortcuts")
+    "cp"  '(:ignore c :which-key "Lounge center.")
+    "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
+    "r" '(window-resize/body :which-key "Resize the window")
+    "b" '(toggle-transparency :which-key "Toggle transparency")
+    "v" '(hide-mode-line-mode :which-key "Hides the modebar to get more room.")
+    "ci" '((lambda () (interactive) (change-light)) :which-key "Screens light")
+    "cpr" '((lambda () (interactive) (play_radio)) :which-key "The old radio")
+    "cpn" '((lambda () (interactive) (play_paste)) :which-key "Play clipboard")
+    "cpa" '((lambda () (interactive) (play_paste_audio)) :which-key "Play clipboard as audio")
+    "cpp" '((lambda () (interactive) (player-ctl "play_pause")) :which-key "Play/Pause player")
+    "cps" '((lambda () (interactive) (player-ctl "stop")) :which-key "Stop player")
+    "cpS" '((lambda () (interactive) (player-ctl "save")) :which-key "Save the play for later")
+    ;; Esse o emacs nao consegue rodar. Muita pressao pra ele
+    "cpA" '((lambda () (interactive) (player-ctl "asaudio")) :which-key "Invert audio/video")
+    "z" '(zoom-window-zoom :which-key "Tmux zoom like")
+    "n" '(zoom-window-next :which-key "Next zoom window")
+    ;; Org keymaps
+    "oci" '(org-clock-in :which-key "Start the clock in current task")
+    "oco" '(org-clock-out :which-key "Stop the clock in current task")
+    "occ" '(org-clock-cancel :which-key "Cancel the timer")
+    "ocg" '(org-clock-goto :which-key "Go to the clock entry or last one")
+    "otb" '((lambda() (interactive) (org-timer-set-timer 25)) :which-key "Start a pomodoro")
+    "ots" '(org-timer-stop :which-key "Stop a timer")
+    ;; Move windows arround
+    "H" '(windower-swap-left :which-key "Swap left")
+    "J" '(windower-swap-bellow :which-key "Swap bellow")
+    "K" '(windower-swap-above :which-key "Swap above")
+    "L" '(windower-swap-right :which-key "Swap right")
+    ))
 
 (defun ava/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name)) user-emacs-configs-directory)
-      (org-babel-tangle)
-      (message "tangled")))
+    (org-babel-tangle)
+    (message "tangled")))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'ava/org-babel-tangle-config)))

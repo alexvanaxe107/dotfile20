@@ -25,7 +25,7 @@ only_sound="0"
 cast="0"
 
 show_help() {
-    echo "Enjoy easly a music on your stylish desktop."
+    echo "Enjoy a good music on your stylish desktop and many more!"
     echo "-r [n]           Play a radio of yout selection."
     echo "-l               Get the list of the available radios."
     echo "-p [url]         Play the video supplied."
@@ -35,9 +35,10 @@ show_help() {
     echo "-q [item]        Queue an item to be played later."
     echo "-Q               Play the queue"
     echo "-S               Stop all"
-    echo "-h               This help message."
     echo "-s               Flag to play only the sound" 
+    echo "-c               Resume the saved" 
     echo "-C               Cast to chromecase beta" 
+    echo "-h               This help message."
 }
 
 set_indicator() {
@@ -120,7 +121,8 @@ play_playlist(){
     while read line
     do
         notify-send -u low "Playing..." "$line"
-        mpv "${line}"
+        echo "mpv --no-video ${line}" > ${PLAY_BKP}
+        mpv --no-video "${line}"
         sed -i '1d' $file_ps 
     done < $file_ps
     remove_indicator

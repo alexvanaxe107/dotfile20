@@ -9,7 +9,7 @@ export EDITOR=vim
 
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 typeset -U path
-path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin $path[@])
+path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin ~/Documents/development/npm/bin $path[@])
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
