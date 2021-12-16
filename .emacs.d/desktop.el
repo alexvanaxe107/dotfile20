@@ -3,6 +3,17 @@
 (let ((command-parts (split-string command "[ ]+")))
     (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
 
+(defun change-theme()
+  "First disable all themes and then chose a theme and font"
+  (shell-command "nitrogen --restore")
+  (shell-command "start_picom.sh \"emacs\"")
+  (ava/update-transparency)
+  (disable-all-themes)
+  (load-theme (get-theme) t)
+  (set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
+  (add-to-list 'default-frame-alist ava/transparency-level-list)
+  (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))
+
 (defun ava/exwm-rename-buffer ()
   (interactive)
   (exwm-workspace-rename-buffer

@@ -62,11 +62,7 @@
 
 (defun change-theme()
   "First disable all themes and then chose a theme and font"
-  (shell-command "nitrogen --restore")
-  (shell-command "start_picom.sh \"emacs\"")
-  (ava/update-transparency)
   (disable-all-themes)
   (load-theme (get-theme) t)
-  (set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
-  (add-to-list 'default-frame-alist ava/transparency-level-list)
+  (ava/update-transparency)
   (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))

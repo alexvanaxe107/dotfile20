@@ -295,71 +295,71 @@ Personal funcitions to deal with the interface.
 
 #+begin_src emacs-lisp
 
-      (defun ava/configure-python()
-          (setq fill-column 80)
-          (display-fill-column-indicator-mode t)
-      )
+    (defun ava/configure-python()
+        (setq fill-column 80)
+        (display-fill-column-indicator-mode t)
+    )
 
-      (defun ava/configure-column()
-          (setq fill-column 120)
-          (display-fill-column-indicator-mode t)
-      )
+    (defun ava/configure-column()
+        (setq fill-column 120)
+        (display-fill-column-indicator-mode t)
+    )
 
-      ;; Configure the django for specific projects
-      (defun ava/django-config()
-          (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
-              (pyvenv-workon "money")
-              (pyvenv-mode t)
-              (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
-              (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
-              (djangonaut-mode t)
-              (message "Django Configured.")))
+    ;; Configure the django for specific projects
+    (defun ava/django-config()
+        (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
+            (pyvenv-workon "money")
+            (pyvenv-mode t)
+            (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
+            (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
+            (djangonaut-mode t)
+            (message "Django Configured.")))
 
-    ;;Function to get a random value from the list passed
-      (defun random-choice (items)
-      (let* ((size (length items))
-              (index (random size)))
-          (nth index items)))
+  ;;Function to get a random value from the list passed
+    (defun random-choice (items)
+    (let* ((size (length items))
+            (index (random size)))
+        (nth index items)))
 
-      (defun ava/update-transparency()
-          (when (string-equal (getenv "theme_name") "day")
-              (defvar ava/transparency-level '(75 . 75))
-              (defvar ava/transparency-level-list '(alpha . (75 . 75))))
+    (defun ava/update-transparency()
+        (when (string-equal (getenv "theme_name") "day")
+            (defvar ava/transparency-level '(85 . 85))
+            (defvar ava/transparency-level-list '(alpha . (85 . 85))))
 
-          (when (string-equal (getenv "theme_name") "shabbat")
-              (defvar ava/transparency-level '(93 . 93))
-              (defvar ava/transparency-level-list '(alpha . (93 . 93))))
+        (when (string-equal (getenv "theme_name") "shabbat")
+            (defvar ava/transparency-level '(93 . 93))
+            (defvar ava/transparency-level-list '(alpha . (93 . 93))))
 
-          (when (string-equal (getenv "theme_name") "night")
-              (message "Night updating")
-              (setq ava/transparency-level '(87 . 87))
-              (setq ava/transparency-level-list '(alpha . (87 . 87)))))
+        (when (string-equal (getenv "theme_name") "night")
+            (message "Night updating")
+            (setq ava/transparency-level '(87 . 87))
+            (setq ava/transparency-level-list '(alpha . (87 . 87)))))
 
 
-      (defun get-theme()
-      (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-breeze))))
-      (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
-      (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
-      result)
+    (defun get-theme()
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-breeze))))
+    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
+    result)
 
-      (defun get-font()
-       ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
-        ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
-       (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
-       (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Fantasque Sans Mono"))))
-       (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Fixed"))))
-      result)
+    (defun get-font()
+     ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
+      ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
+     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
+     (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Fantasque Sans Mono"))))
+     (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Fixed"))))
+    result)
 
-    (defun toggle-transparency ()
-    (interactive)
-    (let ((alpha (frame-parameter nil 'alpha)))
-    (set-frame-parameter
-    nil 'alpha
-    (if (eql (cond ((numberp alpha) alpha)
-    ((numberp (cdr alpha)) (cdr alpha))
-          ;; Also handle undocumented (<active> <inactive>) form.
-          ((numberp (cadr alpha)) (cadr alpha))) 100)
-          ava/transparency-level '(100 . 100)))))
+  (defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+  (set-frame-parameter
+  nil 'alpha
+  (if (eql (cond ((numberp alpha) alpha)
+  ((numberp (cdr alpha)) (cdr alpha))
+        ;; Also handle undocumented (<active> <inactive>) form.
+        ((numberp (cadr alpha)) (cadr alpha))) 100)
+        ava/transparency-level '(100 . 100)))))
 
 #+end_src
 
@@ -640,7 +640,7 @@ Making IDE understand the git projects and treat them as projects.
   (use-package highlight-indent-guides
     :config
     (setq highlight-indent-guides-method 'character)
-    (setq highlight-indent-guides-character ?▎)
+    (setq highlight-indent-guides-character ?|)
     :hook (prog-mode . highlight-indent-guides-mode))
 #+end_src
 

@@ -1,11 +1,13 @@
 #!/bin/bash
 
-URL="$QUTE_URL"
+URL="$1"
+
+if [ -z "$URL" ]; then
+    URL="$QUTE_URL"
+fi
 
 if [ -z "$URL" ]; then
     URL="$VIMB_URI"
 fi
-
-echo $URL
 
 play_radio.sh -p "${URL}"

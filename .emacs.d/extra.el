@@ -233,8 +233,8 @@
 
   (defun ava/update-transparency()
       (when (string-equal (getenv "theme_name") "day")
-          (defvar ava/transparency-level '(75 . 75))
-          (defvar ava/transparency-level-list '(alpha . (75 . 75))))
+          (defvar ava/transparency-level '(85 . 85))
+          (defvar ava/transparency-level-list '(alpha . (85 . 85))))
 
       (when (string-equal (getenv "theme_name") "shabbat")
           (defvar ava/transparency-level '(93 . 93))
@@ -435,7 +435,7 @@ nil 'alpha
 (use-package highlight-indent-guides
   :config
   (setq highlight-indent-guides-method 'character)
-  (setq highlight-indent-guides-character ?▎)
+  (setq highlight-indent-guides-character ?|)
   :hook (prog-mode . highlight-indent-guides-mode))
 
 (use-package yasnippet

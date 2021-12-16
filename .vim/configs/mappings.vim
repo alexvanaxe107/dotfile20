@@ -40,6 +40,9 @@ nnoremap <leader><F7> :set foldmethod=syntax<cr>
 nnoremap <leader><F8> :set foldmethod=manual<cr>zE
 nnoremap <leader><F5> :wa<cr>
 
+" Remap GF to go even to non existing files
+map gf :edit <cfile><cr>
+
 " HL search toggle
 nnoremap <F10> :set hlsearch!<CR>
 nmap <leader>ms :BookmarkSave .vim-bookmarks

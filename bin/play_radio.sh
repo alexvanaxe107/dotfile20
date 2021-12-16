@@ -28,12 +28,14 @@ show_help() {
     echo "Enjoy a good music on your stylish desktop and many more!"
     echo "-r [n]           Play a radio of yout selection."
     echo "-l               Get the list of the available radios."
+    echo "-L               List the stored itens on playlist"
     echo "-p [url]         Play the video supplied."
     echo "-P               Play the from your clipboard."
     echo "-a [url]         Play only the audio of the supplied video. (deprecated)"
     echo "-A               Play only the audio from your clipboard.(deprecated)"
     echo "-q [item]        Queue an item to be played later."
-    echo "-Q               Play the queue"
+    echo "-Q               Play the queue [Depecrated]"
+    echo "-F               Play the queue(Fila)"
     echo "-S               Stop all"
     echo "-s               Flag to play only the sound" 
     echo "-c               Resume the saved" 
@@ -109,8 +111,33 @@ add_playlist(){
         result=$(clipster -oc)
     fi
 
-    echo ${result} >> ${PLAYLIST_FILE}
-    notify-send -u normal  "Added" "Added ${result} to play later"
+    if [ -z "${secondcmd}" ];then
+        secondcmd=$(printf "" | dmenu -p "Bookmark Comment:" -bw 2 -y 16 -z 900)
+    fi
+
+    echo  "${secondcmd},${result}" >> ${PLAYLIST_FILE}
+    notify-send -u normal  "${secondcmd}" "Added ${result} to play later"
+}
+
+list_playlist() {
+    cat "${PLAYLIST_FILE}" | nl
+}
+
+play_playlist_f(){
+    index=$1 
+    if [ -z "${index}" ]; then
+        chosen=$(cat "${PLAYLIST_FILE}" | awk '{print NR,$1}' FS="," | dmenu -p "Choose a radio:" -i -l 50 -bw 2 -y 16 -z 850)
+        index=$(echo $chosen | awk '{print $1}')
+    fi
+
+    notify-send -u normal "Playing PL" "Playing the playlist saved."
+    set_indicator
+
+    url=$(cat ${PLAYLIST_FILE} | awk -v IND=${index} 'NR==IND {print $2}' FS=",")
+
+    play "${url}"
+    remove_indicator
+    notify-send -u normal "End PL" "The playlist has come to the end."
 }
 
 play_playlist(){
@@ -120,9 +147,15 @@ play_playlist(){
     cp ${PLAYLIST_FILE} ${PLAYLIST_FILE_BKP}
     while read line
     do
-        notify-send -u low "Playing..." "$line"
-        echo "mpv --no-video ${line}" > ${PLAY_BKP}
-        mpv --no-video "${line}"
+        if [ "${only_sound}" = "1" ]; then
+            notify-send -u low "Playing..." "$line"
+            echo "mpv --no-video ${line}" > ${PLAY_BKP}
+            mpv --no-video "${line}"
+        else
+            echo "mpv ${line}" > ${PLAY_BKP}
+            mpv "${line}"
+        fi
+
         sed -i '1d' $file_ps 
     done < $file_ps
     remove_indicator
@@ -165,6 +198,14 @@ play(){
 
     if [ -z "${result}" ]; then
         result="$(clipster -oc)"
+    fi
+
+    is_spotify=$(grep -o spotify <<< "${result}")
+
+    if [ ! -z "${is_spotify}" ];then
+        notify-send -u normal  "Trying to play..." "Playing a spotify link."
+        spotify --uri="${result}" &
+        exit 0
     fi
 
     if [ "${only_sound}" = "1" ]; then
@@ -279,8 +320,9 @@ play_cast() {
 }
 
 command=$1
+secondcmd=$3
 
-while getopts "hsmlr:Pp:Aa:q:QcSC" opt; do
+while getopts "hsmlr:Pp:Aa:q:QcSCFL" opt; do
     case "$opt" in
         h) command="param"; show_help;;
         s) only_sound="1";;
@@ -292,10 +334,12 @@ while getopts "hsmlr:Pp:Aa:q:QcSC" opt; do
         A) command="param"; chosen_mode="Play Audio";;
         a) command="param"; chosen_mode="Play Audio"; option=$OPTARG;;
         Q) command="param"; chosen_mode="Play PL";;
+        F) command="param"; chosen_mode="Play PL F";;
         q) command="param"; chosen_mode="+PL"; option=$OPTARG;;
         c) command="param"; chosen_mode="Resume";;
         S) command="param"; chosen_mode="stopall";;
         l) command="param"; chosen_mode="list";;
+        L) command="param"; chosen_mode="list_playlist";;
     esac
 done
 
@@ -311,7 +355,8 @@ case "$chosen_mode" in
     "Play Quality") play_quality "$option";;
     "Play Audio") play_audio "$option";;
     "+PL") add_playlist "$option";;
-    "Play PL") play_playlist;;
+    "Play PL") play_playlist_f $2;;
+    "Play PL F") play_playlist_f "$2";;
     "Stop") $(stop_one);;
     "stopall") $(stop_all);;
     "Resume") resume;;
@@ -319,6 +364,7 @@ case "$chosen_mode" in
     "replay") replay;;
     "play") play_local "$option";;
     "list") list_radio;;
+    "list_playlist") list_playlist "$2";;
     *) exit;;
 esac
 
