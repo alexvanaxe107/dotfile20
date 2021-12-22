@@ -49,6 +49,11 @@
   ;; Set the default number of workspaces
   (setq exwm-workspace-number 10)
 
+  ;; Total focus
+  (setq exwm-workspace-minibuffer-position 'top)
+
+  ;; Char mode by default
+  (setq exwm-manage-configurations '((t char-mode t)))
   ;; These keys should always pass through to Emacs
   (setq exwm-input-prefix-keys
         '(?\C-x
@@ -91,6 +96,7 @@
   ;; Set up global key bindings.  These always work, no matter the input state!
   (setq exwm-input-global-keys
         `(
+          ([f5] . persp-counsel-switch-buffer)
           ([?\s-r] . exwm-reset)
           ([?\s-d] . counsel-linux-app)
 
@@ -110,10 +116,10 @@
           ([?\s-K] . windower-swap-above)
           ([?\s-J] . windower-swap-below)
 
-          ([?\s-%] . evil-window-vsplit)
-          ([?\s-\"] . evil-window-split)
+          ([?\s-%] . split-window-right)
+          ([?\s-\"] . split-window-below)
           ([?\s-Q] . kill-buffer)
-          ([?\s-q] . evil-quit)
+          ([?\s-q] . delete-window)
           ([?\s-i] . exwm-input-toggle-keyboard)
           ;; ([?\s-v] . exwm-workspace-delete)
           ([?\s-v] . hide-mode-line-mode)

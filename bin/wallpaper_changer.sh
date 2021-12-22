@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /home/alexvanaxe/.pyenv/versions/chamaleon/bin/activate
+. /home/alexvanaxe/.pyenv/versions/wm/bin/activate
 
 set -o errexit
 # Source the theme

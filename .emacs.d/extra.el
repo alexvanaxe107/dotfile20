@@ -129,6 +129,12 @@
 (with-current-buffer "*scratch*"
     (emacs-lock-mode 'kill))
 
+(customize-set-variable 'display-buffer-base-action
+  '((display-buffer-reuse-window display-buffer-same-window)
+    (reusable-frames . t)))
+
+(customize-set-variable 'even-window-sizes nil)     ; avoid resizing
+
 (setq inhibit-startup-message t)
 (setq visible-bell t) ;; Set up the visible bell
 
@@ -294,36 +300,36 @@ nil 'alpha
 (setq which-key-idle-delay 1))
 
 (use-package ivy
-:diminish
-:bind (("C-s" . swiper)
-        :map ivy-minibuffer-map
-        ("TAB" . ivy-alt-done)	
-        ("C-l" . ivy-alt-done)
-        ("C-j" . ivy-next-line)
-        ("C-k" . ivy-previous-line)
-        :map ivy-switch-buffer-map
-        ("C-k" . ivy-previous-line)
-        ("C-l" . ivy-done)
-        ("C-d" . ivy-switch-buffer-kill)
-        :map ivy-reverse-i-search-map
-        ("C-k" . ivy-previous-line)
-        ("C-d" . ivy-reverse-i-search-kill))
-:config
-(ivy-mode 1))
+  :diminish
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)	
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
 
 (use-package counsel
-:bind (("<f5>" . 'counsel-switch-buffer)
-        :map minibuffer-local-map
-        ("C-q" . 'counsel-minibuffer-history))
-:custom
-(counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-:config
-(counsel-mode 1))
+  :bind (("<f6>" . 'counsel-switch-buffer)
+         :map minibuffer-local-map
+         ("C-q" . 'counsel-minibuffer-history))
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+  :config
+  (counsel-mode 1))
 
 (use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
+    :after ivy
+    :init
+    (ivy-rich-mode 1))
 
 (use-package flyspell-correct
   :after flyspell
@@ -347,6 +353,14 @@ nil 'alpha
   :ensure t
   :config
   (add-to-list 'package-selected-packages 'windower))
+
+(use-package perspective
+  :bind
+  (("<f9>" . persp-list-buffers)
+   ("<f8>" . persp-switch)
+   ("<f5>" . persp-counsel-switch-buffer))   ; or use a nicer switcher, see below
+  :config
+  (persp-mode))
 
 (windmove-default-keybindings 'meta)
 
@@ -407,35 +421,37 @@ nil 'alpha
 (evil-collection-init))
 
 (use-package projectile
-:diminish projectile-mode
-:config (projectile-mode)
-:custom ((projectile-completion-system 'ivy))
-:bind-keymap
-("<f4>" . projectile-command-map))
-:init
-;; NOTE: Set this to the folder where you keep your Git repos!
-(when (file-directory-p "~/Documents/Projects/")
-(setq projectile-project-search-path '("~/Documents/Projects/")))
-
-(setq projectile-switch-project-action #'projectile-dired)
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("<f4>" . projectile-command-map))
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Documents/Projects/")
+  (setq projectile-project-search-path '("~/Documents/Projects/")))
+  (setq projectile-switch-project-action #'projectile-dired)
 
 (use-package counsel-projectile
-:after projectile
-:config (counsel-projectile-mode))
+  :after projectile
+  :config (counsel-projectile-mode))
 
 (use-package evil-surround
-:defer 0
-:config
-(global-evil-surround-mode 1))
+  :defer 0
+  :config
+  (global-evil-surround-mode 1))
 
 (use-package emmet-mode
   :hook ((sgml-mode-hook . emmet-mode))
-         (css-mode-hook . emmet-mode))
+  (css-mode-hook . emmet-mode))
 
 (use-package highlight-indent-guides
   :config
   (setq highlight-indent-guides-method 'character)
-  (setq highlight-indent-guides-character ?|)
+  (setq highlight-indent-guides-character ?┆)
+  (setq highlight-indent-guides-auto-odd-face-perc 15)
+  (setq highlight-indent-guides-auto-even-face-perc 15)
+  (setq highlight-indent-guides-auto-character-face-perc 15)
   :hook (prog-mode . highlight-indent-guides-mode))
 
 (use-package yasnippet
@@ -500,25 +516,6 @@ nil 'alpha
   (setq company-idle-delay 0) ;; To disable set to nil
   )
 
-(use-package org
-  :pin org
-  :commands (org-capture org-agenda)
-  :hook (org-mode . ava/org-mode-setup)
-  :config
-  (setq org-ellipsis " ▾")
-
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-
-  (setq org-agenda-files
-        '("~/Documents/Projects/orgs/rice.org"))
-
-  (use-package org-bullets
-    :hook (org-mode . org-bullets-mode)
-    :custom
-    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
-
 (use-package visual-fill-column
   :init 
   (add-hook 'org-mode-hook #'ava/org-mode-visual-fill)
@@ -557,6 +554,35 @@ nil 'alpha
   :custom
   (zoom-window-mode-line-color "black"))
 
+(use-package org
+  :pin org
+  :commands (org-capture org-agenda)
+  :hook (org-mode . ava/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾")
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  (setq org-agenda-files
+        '("~/Documents/Projects/orgs/rice.org"))
+
+  (use-package org-bullets
+    :hook (org-mode . org-bullets-mode)
+    :custom
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))))
+
+;; INSERT THE CODE BELOW WHEN SOME SPECIAL CAPTURE IS NEEDED
+  ;(org-roam-capture-templates
+  ; '(("d" "default" plain "%?" :target
+  ;    (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+  ;    :unnarrowed t)))
+  ; ("p" "projeto" plain
+  ;  "Testing new template ${title}  %^{valor1}   %?" :target
+  ;  (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+  ;  :unnarrowed t))
+
 (use-package org-roam
   :ensure t
   :init
@@ -571,6 +597,23 @@ nil 'alpha
          ("C-M-i" . completion-at-point))
   :config
   (org-roam-setup))
+
+(use-package org-present
+  :after org
+  :init
+  (defun ava/present-mode-enter()
+    (org-present-big)
+    (org-display-inline-images)
+    (org-present-hide-cursor)
+    (org-present-read-only))
+
+  (defun ava/present-mode-quit()
+    (org-present-small)
+    (org-remove-inline-images)
+    (org-present-show-cursor)
+    (org-present-read-write))
+  (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
+  (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
 
 (use-package typescript-mode
   :after lsp-mode
@@ -659,14 +702,20 @@ nil 'alpha
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
+  :disabled
   :custom (
            (doom-modeline-height 0)
            (doom-modeline-bar-width 4)
            (doom-modeline-window-width-limit fill-column)
            ))
 
-(use-package telephone-line
+(use-package smart-mode-line
   :disabled
+  :init (sml/setup)
+  :custom
+  (sml/theme 'respectful))
+
+(use-package telephone-line
   :init (telephone-line-mode 1))
 
 ;; Or if you have use-package installed
@@ -676,23 +725,6 @@ nil 'alpha
 
 (use-package hide-mode-line
   :ensure t)
-
-(use-package org-present
-  :after org
-  :init
-  (defun ava/present-mode-enter()
-    (org-present-big)
-    (org-display-inline-images)
-    (org-present-hide-cursor)
-    (org-present-read-only))
-
-  (defun ava/present-mode-quit()
-    (org-present-small)
-    (org-remove-inline-images)
-    (org-present-show-cursor)
-    (org-present-read-write))
-  (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
-  (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
 
 (use-package visual-fill-column 
   :hook ((typescript-mode . ava/configure-column)
@@ -743,13 +775,11 @@ nil 'alpha
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
-
-
-;;(setq display-buffer-base-action
-;;      '((display-buffer-reuse-window
-;;	 display-buffer-reuse-mode-window
-;;	 display-buffer-same-window
-;;	 display-buffer-in-previous-window)))
+(setq display-buffer-base-action
+      '((display-buffer-reuse-window
+         display-buffer-reuse-mode-window
+         display-buffer-same-window
+         display-buffer-in-previous-window)))
 
 (with-eval-after-load 'general
   (defhydra window-resize (global-map "<F8>")
@@ -765,6 +795,7 @@ nil 'alpha
     "o"  '(:ignore o :which-key "Org shortcuts")
     "cp"  '(:ignore c :which-key "Lounge center.")
     "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
+    "Y" '((lambda () (interactive) (reload-theme)) :which-key "Yay! Change the theme")
     "r" '(window-resize/body :which-key "Resize the window")
     "b" '(toggle-transparency :which-key "Toggle transparency")
     "v" '(hide-mode-line-mode :which-key "Hides the modebar to get more room.")
@@ -791,6 +822,9 @@ nil 'alpha
     "J" '(windower-swap-bellow :which-key "Swap bellow")
     "K" '(windower-swap-above :which-key "Swap above")
     "L" '(windower-swap-right :which-key "Swap right")
+    ;; Perspective (Others are set on the plugin config)
+    ">" '(persp-next :which-key "Move to the next perspective")
+    "<" '(persp-prev :which-key "Move to the prev perspective")
     ))
 
 (defun ava/org-babel-tangle-config ()

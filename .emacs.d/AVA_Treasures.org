@@ -115,6 +115,9 @@ Later it is on the road map:
     (dolist (theme custom-enabled-themes)
       (disable-theme theme)))
 
+  (defun reload-theme()
+    (dolist (theme custom-enabled-themes)
+      (load-theme theme)))
 
   (defun change-theme()
     "First disable all themes and then chose a theme and font"

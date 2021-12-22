@@ -175,18 +175,6 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
-search='*silent on*'
-if [[ "$action" == $search ]]; then
-    silent_mode.sh -s
-    exit 0
-fi
-
-search='*silent off*'
-if [[ "$action" == $search ]]; then
-    silent_mode.sh -n
-    exit 0
-fi
-
 search='*rofi*'
 if [[ "$action" == $search ]]; then
     command=$(echo "${action}" | grep -e "off")
@@ -195,6 +183,12 @@ if [[ "$action" == $search ]]; then
     else
         sed -i "s/use_rofi=.*/use_rofi=0/" ${HOME}/.config/wm/bspwm.conf
     fi
+    exit 0
+fi
+
+search='*cp*'
+if [[ "$action" == $search ]]; then
+    dmclipster
     exit 0
 fi
 

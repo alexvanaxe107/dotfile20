@@ -42,6 +42,7 @@ nnoremap <leader><F5> :wa<cr>
 
 " Remap GF to go even to non existing files
 map gf :edit <cfile><cr>
+cnoremap  W silent !mkdir -p %:h<cr>
 
 " HL search toggle
 nnoremap <F10> :set hlsearch!<CR>

@@ -13,7 +13,7 @@ secrecy() {
     iptables-restore $HOME/tor/torrify
     ip6tables-restore $HOME/tor/torrify
 
-    cp /etc/resolv.conf.bak /etc/resolv.conf
+    cp /etc/resolv.conf.sec /etc/resolv.conf
 }
 
 normal() {

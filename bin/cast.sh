@@ -29,16 +29,15 @@ cast_url(){
             mkdir -p "${CONFIG_URL}"
         fi
 
-        wget -O "${CONFIG_URL}/file.txt" "${url_to_cast}" 
+        wget -O "${CONFIG_URL}/file.txt" "${url_to_cast}"
 
         local url_to_cast="$(cat "${CONFIG_URL}/file.txt" | grep -o "http.*" | head -n 1)"
-        
         #rm -rf "${CONFIG_URL}"
     fi
 
     if [ -z "${subtitle}" ]; then
         video_rash=$(echo ${url_to_cast} | grep -Eo '[a-zA-Z0-9_-]{11}')
-      
+
         if [ ! -z "${video_rash}" ]; then
             local yt_info=$(cast_info)
             local video_id=$(awk '{printf $3}' FS="|" <<< "${yt_info}")
@@ -85,7 +84,7 @@ go_to_location() {
         if [ -z "${filen}" ]; then
             filen=tmpsave
         fi
-        
+
         cur_time="$(<"$CONFIG_URL/$filen")"
         position=$cur_time
     fi

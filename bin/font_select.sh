@@ -118,7 +118,7 @@ case $CHOSEN in
     "Noir") font "Syne Mono" Regular 10 10 11 1;;
     "Computer") font "Terminus \(TTF\)" Bold 10 10 13 2;;
     "Gothic") font "NanumGothicCoding" Bold 10 10 12 1;;
-    "SteamPunk") font "Major Mono Display" Regular 9 9 11 1;;
+    "SteamPunk") font "Roboto Condensed" Semibold 10 10 11 1;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
     "NM-Japan") font "Shojumaru" Bold 9 9 11 0;;
