@@ -113,12 +113,12 @@ case $CHOSEN in
     "Stock") font "Share Tech Mono" Bold 9 9 13 1;;
     "Wasteland") font "Beccaria" Bold 11 11 13 1;;
     "Cartoon") font "Pointfree" Bold 8 8 10 1;;
-    "Cute") font "Overpass Mono" Bold 10 10 12 0;;
+    "Cute") font "Overpass Mono" Bold 9 9 12 0;;
     "Space") font "Unispace" Bold 8 8 10 2;;
     "Noir") font "Syne Mono" Regular 10 10 11 1;;
     "Computer") font "Terminus \(TTF\)" Bold 10 10 13 2;;
     "Gothic") font "NanumGothicCoding" Bold 10 10 12 1;;
-    "SteamPunk") font "Roboto Condensed" Semibold 10 10 11 1;;
+    "SteamPunk") font "Roboto Condensed" Semibold 10 10 11;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
     "NM-Japan") font "Shojumaru" Bold 9 9 11 0;;

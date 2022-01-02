@@ -47,3 +47,4 @@ export GDK_BACKEND=x11
 #exec bspwm
 exec tdm --xstart
 #exec gnome-session
+#exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el

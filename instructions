@@ -11,6 +11,9 @@ rfkill
 
 tldr - Comando com exemplo de comandos
 
+Para desligar o caps lock
+xdotool key Caps_Lock
+
 In order to install from these lists you can do
 
 sudo pacman -S --needed $(comm -12 <(pacman -Slq|sort) <(sort pkglist.txt) )

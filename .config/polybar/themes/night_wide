@@ -80,8 +80,9 @@ font-3 = symbola:pixelsize=10;1
 ;%{F#RRGGBB}|%{F-}
 ;separator =%{B#8763E5ED}⏽%{B-}
 
-modules-left = bspwm nweather pomodoro torrent xwindow
-modules-right = indicators wlan memory cpu temperature ava_load date pulseaudio 
+modules-left = date pomodoro nweather torrent bspwm 
+modules-center = xwindow
+modules-right = indicators wlan memory cpu temperature ava_load pulseaudio 
 
 ;tray-position = right
 ;tray-padding = 2
@@ -224,12 +225,12 @@ label-occupied-padding = ${format.bspadding}
 #label-urgent = %index%!
 #label-urgent = %icon%!
 #label-urgent-background = ${colors.alert}
-#label-urgent-padding = ${format.bspadding}
+label-urgent-padding = ${format.bspadding}
 
 #label-empty = %index%
 #label-empty = %index%%icon%
 #label-empty = %icon%
-#label-empty-padding = ${format.bspadding}
+label-empty-padding = ${format.bspadding}
 #label-empty-foreground = ${colors.foreground-alt2}
 #label-empty-background = ${colors.background}
 

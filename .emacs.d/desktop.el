@@ -60,7 +60,7 @@
           ?\M-x
           ?\s-d
           f5
-          ))  ;; Ctrl+Space
+          ))
 
 
   ;; When window "class" updates, use it to set the buffer name
@@ -133,7 +133,7 @@
                     (number-sequence 0 9))))
   (exwm-enable)
 
-  )
+ )
 
 (use-package desktop-environment
   :after exwm

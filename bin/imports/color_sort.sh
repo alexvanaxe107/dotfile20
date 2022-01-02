@@ -103,8 +103,6 @@ black_or_white_rex() {
 
     local lum="$(grep -oE "[[:digit:]]*" <<< "${lum}" | head -n 1)"
 
-    echo ${lum} >> ~/color.txt
-
     if [[ $lum -gt 85 ]]; then
         echo "black"
     else

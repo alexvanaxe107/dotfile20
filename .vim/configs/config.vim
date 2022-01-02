@@ -71,3 +71,6 @@ let g:indentLine_char = '.'
 let g:deoplete#enable_at_startup = 1
 
 let test#strategy = "vimux"
+
+" Configure the transparency
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
