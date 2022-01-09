@@ -106,6 +106,7 @@
    make-pointer-invisible t
    history-delete-duplicates t
    large-file-warning-threshold (* 1024 1024)
+   create-lockfiles nil
   )
 
     (setq savehist-additional-variables
@@ -212,80 +213,80 @@
 ; END TABS CONFIG
 
 (defun ava/configure-python()
-      (setq fill-column 80)
-      (display-fill-column-indicator-mode t)
-  )
+    (setq fill-column 80)
+    (display-fill-column-indicator-mode t)
+)
 
-  (defun ava/configure-column()
-      (setq fill-column 120)
-      (display-fill-column-indicator-mode t)
-  )
+;; Configure the django for specific projects
+(defun ava/django-config()
+    (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
+        (pyvenv-workon "money")
+        (pyvenv-mode t)
+        (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
+        (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
+        (djangonaut-mode t)
+        (message "Django Configured.")))
 
-  ;; Configure the django for specific projects
-  (defun ava/django-config()
-      (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
-          (pyvenv-workon "money")
-          (pyvenv-mode t)
-          (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
-          (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
-          (djangonaut-mode t)
-          (message "Django Configured.")))
+(defun ava/configure-column()
+    (setq fill-column 120)
+    (display-fill-column-indicator-mode t)
+)
 
 ;;Function to get a random value from the list passed
-  (defun random-choice (items)
-  (let* ((size (length items))
-          (index (random size)))
-      (nth index items)))
+(defun random-choice (items)
+(let* ((size (length items))
+        (index (random size)))
+    (nth index items)))
 
-  (defun ava/update-transparency()
-      (when (string-equal (getenv "theme_name") "day")
-          (defvar ava/transparency-level '(85 . 85))
-          (defvar ava/transparency-level-list '(alpha . (85 . 85))))
+(defun ava/load-transparency()
+(set-frame-parameter (selected-frame) 'alpha ava/transparency-level))
 
-      (when (string-equal (getenv "theme_name") "shabbat")
-          (defvar ava/transparency-level '(93 . 93))
-          (defvar ava/transparency-level-list '(alpha . (93 . 93))))
+;; TODO Ver depois, nao funfa
+(defun ava/change-transparency(changer)
+        (setq ava/transparency-level (cons(+ changer (car ava/transparency-level)) (+ changer (car ava/transparency-level))))
+        (ava/load-transparency)
+        )
 
-      (when (string-equal (getenv "theme_name") "night")
-          (message "Night updating")
-          (setq ava/transparency-level '(87 . 87))
-          (setq ava/transparency-level-list '(alpha . (87 . 87)))))
+(defun ava/update-transparency()
+    (when (string-equal (getenv "theme_name") "day")
+        (setq ava/transparency-level '(85 . 85))
+        (setq ava/transparency-level-list '(alpha . (85 . 85))))
 
+    (when (string-equal (getenv "theme_name") "shabbat")
+        (setq ava/transparency-level '(93 . 93))
+        (setq ava/transparency-level-list '(alpha . (93 . 93))))
 
-  (defun get-theme()
-  (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-breeze))))
-  (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
-  (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
-  result)
+    (when (string-equal (getenv "theme_name") "night")
+        (message "Night updating")
+        (setq ava/transparency-level '(87 . 87))
+        (setq ava/transparency-level-list '(alpha . (87 . 87)))))
 
-  (defun get-font()
-   ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
+    (defun get-theme()
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-valley-light))))
+    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
+    result)
+
+    (defun get-font()
+    ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
     ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
-   (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
-   (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Fantasque Sans Mono"))))
-   (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Fixed"))))
-  result)
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
+    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Fantasque Sans Mono"))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Fixed"))))
+    result)
 
 (defun toggle-transparency ()
-(interactive)
-(let ((alpha (frame-parameter nil 'alpha)))
-(set-frame-parameter
-nil 'alpha
-(if (eql (cond ((numberp alpha) alpha)
-((numberp (cdr alpha)) (cdr alpha))
-      ;; Also handle undocumented (<active> <inactive>) form.
-      ((numberp (cadr alpha)) (cadr alpha))) 100)
-      ava/transparency-level '(100 . 100)))))
-
-;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
-;;(set-frame-parameter (selected-frame) 'alpha <both>)
-;;(set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
-;;(add-to-list 'default-frame-alist ava/transparency-level-list)
+    (interactive)
+    (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+        nil 'alpha
+        (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha))) 100)
+            ava/transparency-level '(100 . 100)))))
 
 (add-hook 'emacs-startup-hook #'ava/rice-the-emacs)
-
-(use-package command-log-mode
-  :disabled)
 
 (use-package rainbow-delimiters
 :hook (prog-mode . rainbow-delimiters-mode))
@@ -406,8 +407,6 @@ nil 'alpha
 (define-key evil-normal-state-map (kbd (concat ava/leader-key " k")) 'evil-window-up)
 (define-key evil-insert-state-map (kbd "C-f") 'company-files)
 
-
-
 ;; Use visual line motions even outside of visual-line-mode buffers
 ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
 ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -419,6 +418,14 @@ nil 'alpha
 :after evil
 :config
 (evil-collection-init))
+
+(use-package key-chord
+  :init
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-mode 1)
+  :custom
+  (key-chord-two-keys-delay 0.5)
+)
 
 (use-package projectile
   :diminish projectile-mode
@@ -482,13 +489,16 @@ nil 'alpha
          (python-mode . lsp-deferred)
          (typescript-mode . lsp-deferred)
          (sh-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
          (mhtml-mode . lsp-deferred)
          ;; if you want which-key integration
          )
   :commands lsp-deferred
   :config
   (add-to-list 'lsp-enabled-clients 'bash-ls)
+  (add-to-list 'lsp-enabled-clients 'html-ls)
   (add-to-list 'lsp-enabled-clients 'angular-ls)
+  (add-to-list 'lsp-enabled-clients 'ts-ls)
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-jedi
@@ -499,7 +509,7 @@ nil 'alpha
     (add-to-list 'lsp-disabled-clients 'pyls)
     (add-to-list 'lsp-enabled-clients 'jedi)))
 
-(use-package lsp-ivy 
+(use-package lsp-ivy
   :after lsp-mode
   :commands lsp-ivy-workspace-symbol)
 
@@ -547,6 +557,14 @@ nil 'alpha
     (setq typescript-indent-level 2)
     (add-to-list 'lsp-enabled-clients 'ts-ls)
     ))
+
+(use-package vue-mode
+  :after lsp-mode
+  :mode "\\.vue\\'"
+  :hook (vue-mode . lsp-deferred)
+  :config
+  (with-eval-after-load "lsp-mode"
+    (add-to-list 'lsp-enabled-clients 'vls)))
 
 (use-package sass-mode
   :after typescript-mode)
@@ -625,7 +643,6 @@ nil 'alpha
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :disabled
   :custom (
            (doom-modeline-height 0)
            (doom-modeline-bar-width 4)
@@ -639,7 +656,11 @@ nil 'alpha
   (sml/theme 'respectful))
 
 (use-package telephone-line
+  :disabled
   :init (telephone-line-mode 1))
+
+(use-package base16-theme
+  :ensure t)
 
 ;; Or if you have use-package installed
 (use-package kaolin-themes)
@@ -668,6 +689,12 @@ nil 'alpha
     ("l" enlarge-window-horizontally)
     ("h" shrink-window-horizontally)
     ("f" nil "finished" :exit t))
+  (defhydra transparency-change (global-map "<F8>")
+    "Resize the window"
+    ("u" (ava/change-transparency +5))
+    ("d" (ava/change-transparency -5))
+    ("f" nil "finished" :exit t))
+  )
 
   (ava/leader-keys
     "c"  '(:ignore c :which-key "Some cool stuffs")
@@ -677,6 +704,7 @@ nil 'alpha
     "y" '((lambda () (interactive) (change-theme)) :which-key "Yay! Change the theme")
     "Y" '((lambda () (interactive) (reload-theme)) :which-key "Yay! Change the theme")
     "r" '(window-resize/body :which-key "Resize the window")
+    "T" '(transparency-change/body :which-key "Change transparency")
     "b" '(toggle-transparency :which-key "Toggle transparency")
     "v" '(hide-mode-line-mode :which-key "Hides the modebar to get more room.")
     "ci" '((lambda () (interactive) (change-light)) :which-key "Screens light")
@@ -705,7 +733,7 @@ nil 'alpha
     ;; Perspective (Others are set on the plugin config)
     ">" '(persp-next :which-key "Move to the next perspective")
     "<" '(persp-prev :which-key "Move to the prev perspective")
-    ))
+    )
 
 (defun ava/org-babel-tangle-config ()
   (when (string-equal (file-name-directory (buffer-file-name)) user-emacs-configs-directory)

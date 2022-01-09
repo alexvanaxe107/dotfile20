@@ -82,5 +82,5 @@ bindkey '^o' autosuggest-toggle
 bindkey ^f forward-word
 bindkey -M vicmd ' ' vi-easy-motion
 
-colorscript -r
+#colorscript -r
 eval "$(pyenv init -)"

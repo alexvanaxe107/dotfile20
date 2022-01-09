@@ -34,7 +34,7 @@ read_book(){
     echo "$format"
     echo "$book"
     echo "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)"
-
+    
     case "$format" in
         PDF) found="1";llpp "$(find ~/../media/Books -name "${book}*.pdf" | head -n 1)" 2>&1 &;;
         AZW3) found="1";foliate "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)" 2>&1 &;;

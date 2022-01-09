@@ -4,11 +4,11 @@ alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d ~/.config/todo/config'
 
 export EDITOR=vim
-#export XDG_SESSION_DESKTOP=i3
-#export XDG_CURRENT_DESKTOP=i3
+export XDG_SESSION_DESKTOP=i3
+export XDG_CURRENT_DESKTOP=i3
 
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
-typeset -U path
+#typeset -U path
 path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin ~/Documents/development/npm/bin $path[@])
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1

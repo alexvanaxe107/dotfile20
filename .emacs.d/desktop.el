@@ -92,6 +92,8 @@
 
   ;; Ctrl+Q will enable the next key to be sent directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+  (setq exwm-workspace-show-all-buffers t)
+  (setq exwm-layout-show-all-buffers t)
 
   ;; Set up global key bindings.  These always work, no matter the input state!
   (setq exwm-input-global-keys

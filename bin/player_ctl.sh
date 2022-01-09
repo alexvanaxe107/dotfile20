@@ -218,7 +218,7 @@ if [ ! -z $chosen_p ]; then
         if [ "${use_rofi}" = 1 ]; then
             chosen=$(printf "\\n\\n\\n\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
         else
-            chosen=$(printf " play/pause\\n next\\n prev\\n stop\\n vol\\n cast" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
+            chosen=$(printf " play/pause\\n   next\\n   prev\\n  stop\\n  vol\\n  cast" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
         fi
     fi
 
@@ -226,18 +226,18 @@ if [ ! -z $chosen_p ]; then
         "") play_pause;;
         " play/pause") play_pause;;
         "") forward;;
-        " next") forward;;
+        "   next") forward;;
         " ") playerctl -p $chosen_p previous;;
-        " prev") playerctl -p $chosen_p previous;;
+        "   prev") playerctl -p $chosen_p previous;;
         "") stop_play;;
-        " stop") stop_play;;
-        " vol") adjust_volume $chosen_p;;
+        "  stop") stop_play;;
+        "  vol") adjust_volume $chosen_p;;
         "") adjust_volume $chosen_p;;
         "save") save $chosen_p;;
         "asvideo") invert "$chosen_p" "0";;
         "asaudio") invert "$chosen_p" "1";;
         "") cast "$chosen_p";;
-        " cast") cast "$chosen_p";;
+        "  cast") cast "$chosen_p";;
         "") cast.sh -c;;
         "") uncast;;
         *) go_to_position ${chosen};;
