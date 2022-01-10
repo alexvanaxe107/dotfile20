@@ -2,7 +2,7 @@
 
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd >>/tmp/sxhkcd.log 2>&1 &
-$HOME/.config/i3/monitor/saver.sh &
+$HOME/bin/saver.sh &
 killall clipster; clipster -d &
 #inputplug -c setkmap
 
