@@ -2,6 +2,8 @@
 
 source $HOME/.config/wm/bspwm.conf
 
+. $HOME/.pyenv/versions/wm/bin/activate
+
 action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850 -theme ${rofi_item5})
 
 if [ -z "${action}" ]; then
@@ -80,7 +82,7 @@ if [[ "$action" == $search ]]; then
     command=$(echo "${action}" | grep -e "as audio")
     if [ ! -z "${command}" ]; then
         playwhat="${command:5:-9 }"
-        url=$(ytsearch.py "${playwhat}")
+        url=$(python $HOME/bin/ytsearch.py "${playwhat}")
         play_radio.sh -a "${url}"&
         exit 0
     fi
@@ -101,7 +103,7 @@ if [[ "$action" == $search ]]; then
     fi
 
     playwhat="${action#play }"
-    url=$(ytsearch.py "${playwhat}")
+    url=$(python $HOME/bin/ytsearch.py "${playwhat}")
     play_radio.sh -p "${url}"&
     exit 0
 fi

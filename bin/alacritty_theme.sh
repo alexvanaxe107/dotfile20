@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PATH=/home/alexvanaxe/.pyenv/versions/wm/bin/:$PATH
+PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
 ALACRITTY_FILE=$HOME/.config/wm/alacritty.conf
 

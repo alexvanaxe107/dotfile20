@@ -1,6 +1,6 @@
 #!/bin/dash
 
-. /home/alexvanaxe/.pyenv/versions/wm/bin/activate
+. $HOME/.pyenv/versions/wm/bin/activate
 
 # Set colors for terminal output
 export red="$(tput setaf 1)"

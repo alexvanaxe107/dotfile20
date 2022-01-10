@@ -1,5 +1,3 @@
-#! /home/alexvanaxe/.pyenv/versions/wm/bin/python
-
 from youtubesearchpython import VideosSearch, ChannelsSearch, CustomSearch, VideoSortOrder
 
 import json

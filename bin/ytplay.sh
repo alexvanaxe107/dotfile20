@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. $HOME/.pyenv/versions/wm/bin/activate
+
 play() {
     link="$1"
     if [ "${audio}" = "1" ]; then
@@ -16,7 +18,7 @@ search_live() {
         local search="$line"
         local search_query=$(awk '{print $1}' FS=";" <<< "${search}")
         local search_refiner=$(awk '{print $2}' FS=";"<<< "${search}")
-        lives="$(ytsearch.py -to -q 3 "${search_query} ${search_refiner}")"
+        lives="$(python $HOME/bin/ytsearch.py -to -q 3 "${search_query} ${search_refiner}")"
         while read -r live; do
             lives_tmp+="$(echo "$live" | grep ";Live$")\n"
         done <<<${lives}
@@ -70,7 +72,7 @@ play_parameter() {
     fi
 
     if [ "${multiple}" = "1" ]; then
-        local videos="$(ytsearch.py -to -q 5 "${choosen_theme}")"
+        local videos="$(python $HOME/bin/ytsearch.py -to -q 5 "${choosen_theme}")"
         video=$(awk '{printf "%s", $1}' FS="@" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s@%s+%s\n", $2, $3, $4}' FS=";" <<< $videos)))
 
         echo "$video"
@@ -90,7 +92,7 @@ play_parameter() {
         exit 0
     fi
 
-    local link=$(ytsearch.py -o "${choosen_theme}")
+    local link=$(python $HOME/bin/ytsearch.py -o "${choosen_theme}")
 
     play ${link}
 }
@@ -104,7 +106,7 @@ play_by_list() {
         exit 0
     fi
     
-    videos="$(ytsearch.py -to -q 10 "${search_query} ${search_refiner}")"
+    videos="$(python $HOME/bin/ytsearch.py -to -q 10 "${search_query} ${search_refiner}")"
     video=""
     if [ "${cli}" = "1" ]; then
         local IFS=$'\n'
@@ -143,13 +145,13 @@ play_by_theme() {
         exit 0
     fi
 
-    local link=$(ytsearch.py -o "${search_query} ${search_refiner}")
+    local link=$(python $HOME/bin/ytsearch.py -o "${search_query} ${search_refiner}")
     play "$link"
 }
 
 channel_search() {
     local channel_filter="$1"
-    options="$(ytsearch.py -c -q 5 "${channel_filter}")"
+    options="$(python $HOME/bin/ytsearch.py -c -q 5 "${channel_filter}")"
     local IFS=$'\n'
     select selected in $options
     do
