@@ -37,6 +37,8 @@ pacman -S ttf-joypixels
 pacman -S ttf-roboto-mono
 pikaur -S ttf-mononoki
 pikaur -S ttf-graduate-git
+paru -S ttf-jetbrains-mono
+paru -S ttc-iosevka
 paru -S psuinfo
 
 ### to set the size in the monitor
