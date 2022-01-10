@@ -1,4 +1,3 @@
-(server-start)
 (defun ava/run-in-background (command)
 (let ((command-parts (split-string command "[ ]+")))
     (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
@@ -50,7 +49,7 @@
   (setq exwm-workspace-number 10)
 
   ;; Total focus
-  (setq exwm-workspace-minibuffer-position 'top)
+  (setq exwm-workspace-minibuffer-position 'bottom)
 
   ;; Char mode by default
   (setq exwm-manage-configurations '((t char-mode t)))

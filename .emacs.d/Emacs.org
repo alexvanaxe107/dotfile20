@@ -993,6 +993,7 @@ Here are the configs for the cosmetic packages.
   (use-package all-the-icons)
 
   (use-package doom-modeline
+    :disabled
     :init (doom-modeline-mode 1)
     :custom (
              (doom-modeline-height 0)
@@ -1013,12 +1014,10 @@ Here are the configs for the cosmetic packages.
 
 #+end_src
 
-
 ** Telephone
 Testing telephone instead of doomline
 #+begin_src emacs-lisp
   (use-package telephone-line
-    :disabled
     :init (telephone-line-mode 1))
 #+end_src
 
@@ -1110,8 +1109,8 @@ There are a lot of keymaps here. The goal is to set all the keymaps here.
       ("f" nil "finished" :exit t))
     (defhydra transparency-change (global-map "<F8>")
       "Resize the window"
-      ("u" (ava/change-transparency +5))
-      ("d" (ava/change-transparency -5))
+      ("u" (ava/change-transparency +2))
+      ("d" (ava/change-transparency -2))
       ("f" nil "finished" :exit t))
     )
 

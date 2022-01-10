@@ -642,6 +642,7 @@
 (use-package all-the-icons)
 
 (use-package doom-modeline
+  :disabled
   :init (doom-modeline-mode 1)
   :custom (
            (doom-modeline-height 0)
@@ -656,7 +657,6 @@
   (sml/theme 'respectful))
 
 (use-package telephone-line
-  :disabled
   :init (telephone-line-mode 1))
 
 (use-package base16-theme
@@ -691,8 +691,8 @@
     ("f" nil "finished" :exit t))
   (defhydra transparency-change (global-map "<F8>")
     "Resize the window"
-    ("u" (ava/change-transparency +5))
-    ("d" (ava/change-transparency -5))
+    ("u" (ava/change-transparency +2))
+    ("d" (ava/change-transparency -2))
     ("f" nil "finished" :exit t))
   )
 
