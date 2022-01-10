@@ -2,6 +2,8 @@
 
 source $HOME/.config/wm/bspwm.conf
 
+. $HOME/.pyenv/versions/wm/bin/activate
+
 action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850 -theme ${rofi_item5})
 
 if [ -z "${action}" ]; then
@@ -57,6 +59,8 @@ if [[ "$action" == $search ]]; then
         if [ ! -z "${command}" ]; then
             param="${param} -m"
         fi
+
+        echo "${param}"
         ytplay.sh ${param} -T "${query}"& 
         exit 0
     elif [ ! -z "${command}" ]; then
@@ -67,7 +71,7 @@ if [[ "$action" == $search ]]; then
         param="${param} -t"
     fi
 
-    echo ${param}
+    echo "${param}"
      
     ytplay.sh ${param}& 
     exit 0
@@ -78,7 +82,7 @@ if [[ "$action" == $search ]]; then
     command=$(echo "${action}" | grep -e "as audio")
     if [ ! -z "${command}" ]; then
         playwhat="${command:5:-9 }"
-        url=$(ytsearch.py -s "${playwhat}")
+        url=$(python $HOME/bin/ytsearch.py "${playwhat}")
         play_radio.sh -a "${url}"&
         exit 0
     fi
@@ -99,7 +103,7 @@ if [[ "$action" == $search ]]; then
     fi
 
     playwhat="${action#play }"
-    url=$(ytsearch.py -s "${playwhat}")
+    url=$(python $HOME/bin/ytsearch.py "${playwhat}")
     play_radio.sh -p "${url}"&
     exit 0
 fi
@@ -140,7 +144,7 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
-search='*keyb*'
+search='kb'
 if [[ "$action" == $search ]]; then
     setkmap
     notify-send "Keyboard" "Keyboard reconfigured"
@@ -173,18 +177,6 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
-search='*silent on*'
-if [[ "$action" == $search ]]; then
-    silent_mode.sh -s
-    exit 0
-fi
-
-search='*silent off*'
-if [[ "$action" == $search ]]; then
-    silent_mode.sh -n
-    exit 0
-fi
-
 search='*rofi*'
 if [[ "$action" == $search ]]; then
     command=$(echo "${action}" | grep -e "off")
@@ -193,6 +185,12 @@ if [[ "$action" == $search ]]; then
     else
         sed -i "s/use_rofi=.*/use_rofi=0/" ${HOME}/.config/wm/bspwm.conf
     fi
+    exit 0
+fi
+
+search='*cp*'
+if [[ "$action" == $search ]]; then
+    dmclipster
     exit 0
 fi
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. $HOME/.pyenv/versions/wm/bin/activate
+
 set -o errexit
 # Source the theme
 . ${HOME}/.config/bspwm/themes/bsp.cfg
@@ -55,7 +57,7 @@ download(){
     if [ -z "$monitor" ]; then
         exit 0
     else
-        option=$(printf "Resolution\nRatio\nLuck\nChromecast\nBing" | dmenu -i -y 16 -bw 2 -z 780 -p "Wanna try your luck?")
+        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing" | dmenu -i -y 16 -bw 2 -z 780 -p "Wanna try your luck?")
         notsceneoptions="ChromecastBing"
         if [ -z "${option}" ]; then
             exit 0
@@ -68,11 +70,11 @@ download(){
                 for monitor_all in $(monitors_info.sh -m); do
                     index=$(monitors_info.sh -ib ${monitor_all})
                     if [ "Chromecast" = "${option}" ]; then
-                        path=$(wallfinder.py -e c)
+                        path=$(python $HOME/bin/wallfinder.py -e c)
                         nitrogen --head=${index} --save --set-zoom-fill ${path}
                     fi
                     if [ "Bing" = "${option}" ]; then
-                        path=$(wallfinder.py -e b)
+                        path=$(python $HOME/bin/wallfinder.py -e b)
                         nitrogen --head=${index} --save --set-zoom-fill ${path}
                     fi
                 done
@@ -84,15 +86,19 @@ download(){
             for monitor_all in $(monitors_info.sh -m); do
                 index=$(monitors_info.sh -ib ${monitor_all})
                 if [ "Luck" = "${option}" ]; then
-                    path=$(wallfinder.py -s "${scene}")
+                    path=$(python $HOME/bin/wallfinder.py -s "${scene}")
                     nitrogen --head=${index} --save --set-zoom-fill ${path}
                 fi
                 if [ "Ratio" = "${option}" ]; then
-                    path=$(wallfinder.py -r -m ${monitor_all} -s "${scene}")
+                    path=$(python $HOME/bin/wallfinder.py -r -m ${monitor_all} -s "${scene}")
                     nitrogen --head=${index} --save --set-scaled ${path}
                 fi
                 if [ "Resolution" = "${option}" ]; then
-                    path=$(wallfinder.py -m ${monitor_all} -s "${scene}")
+                    path=$(python $HOME/bin/wallfinder.py -m ${monitor_all} -s "${scene}")
+                    nitrogen --head=${index} --save --set-scaled ${path}
+                fi
+                if [ "Google" = "${option}" ]; then
+                    path=$(python $HOME/bin/wallfinder.py -e i -m ${monitor_all} -s "${scene}")
                     nitrogen --head=${index} --save --set-scaled ${path}
                 fi
             done
@@ -100,13 +106,13 @@ download(){
             if [[ "$notsceneoptions" == *$option* ]]; then
                 if [ "Chromecast" = "${option}" ]; then
                     notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                    path=$(wallfinder.py -e c)
+                    path=$(python $HOME/bin/wallfinder.py -e c)
                     selected=$(monitors_info.sh -ib ${monitor})
                     nitrogen --head=${selected} --save --set-zoom-fill ${path}
                 fi
                 if [ "Bing" = "${option}" ]; then
                     notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                    path=$(wallfinder.py -e b)
+                    path=$(python $HOME/bin/wallfinder.py -e b)
                     selected=$(monitors_info.sh -ib ${monitor})
                     nitrogen --head=${selected} --save --set-zoom-fill ${path}
                 fi
@@ -116,19 +122,25 @@ download(){
             scene=$(get_scene)
             if [ "Luck" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(wallfinder.py -s "${scene}")
+                path=$(python $HOME/bin/wallfinder.py -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-zoom-fill ${path}
             fi
             if [ "Ratio" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(wallfinder.py -r -m ${monitor} -s "${scene}")
+                path=$(python $HOME/bin/wallfinder.py -r -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
             fi
             if [ "Resolution" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(wallfinder.py -m ${monitor} -s "${scene}")
+                path=$(python $HOME/bin/wallfinder.py -m ${monitor} -s "${scene}")
+                selected=$(monitors_info.sh -ib ${monitor})
+                nitrogen --head=${selected} --save --set-scaled ${path}
+            fi
+            if [ "Google" = "${option}" ]; then
+                notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
+                path=$(python $HOME/bin/wallfinder.py -e i -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
             fi

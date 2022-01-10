@@ -83,7 +83,7 @@ font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Erica Type:style=Bold:pixelsize=9
 font-2 = FontAwesome:style=Bold:pixelsize=9
 font-3 = symbola:style=Bold:pixelsize=9;1
-font-4 = Symbols Nerd Font:pixelsize=25;4
+font-4 = Symbols Nerd Font:pixelsize=27;4
 
 ;separator = 
 
@@ -186,6 +186,7 @@ format-background = ${colors.content-fill}
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:80:...%
+format-foreground = ${colors.foreground-fill}
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -243,7 +244,7 @@ label-focused-padding-right = 1
 #label-occupied = %index%%icon%
 label-occupied = %icon%
 label-occupied-padding = ${format.bspadding}
-label-occupied-foreground = ${colors.foreground-fill}
+label-occupied-foreground = ${colors.foreground-alt2}
 label-occupied-background = ${colors.content-fill}
 label-occupied-padding-left = 1
 label-occupied-padding-right = 1
@@ -258,7 +259,7 @@ label-urgent-padding = ${format.bspadding}
 label-empty = %icon%
 label-empty-padding = ${format.bspadding}
 label-empty-background = ${colors.content-fill}
-label-empty-foreground = ${colors.foreground-fill}
+label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding-left = 1
 label-empty-padding-right = 1
 

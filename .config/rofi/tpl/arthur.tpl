@@ -111,6 +111,7 @@ listview {
     border-color: @foreground;
     border: 0px 2px 2px 2px;
     background-color: @listbgcolor;
+    foreground: #ffffff;
     dynamic: false;
     columns: 2;
     lines: 10;
@@ -123,6 +124,10 @@ element {
     background-color: transparent;
     color: @foreground;
     font:inherit;
+}
+element-text {
+ background-color: inherit;
+ text-color: inherit;
 }
 element selected.normal {
     background-color: @activeItem;

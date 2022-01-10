@@ -22,7 +22,7 @@
 
 [global]
   # Defines color of the frame around the notification window.
-  frame_color = "#8EC07C"
+  frame_color = "#000005"
 
   # Define a color for the separator.
   # possible values are:
@@ -36,8 +36,24 @@
   icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
 
 
-  geometry = "420x100-15+15"
-  #          [{width}]x{height}[+/-{x}+/-{y}]
+  # dynamic width from 0 to 300
+  # width = (0, 300)
+  # constant width of 300
+  width = 420
+
+  # The maximum height of a single notification, excluding the frame.
+  height = 300
+
+  # Position the notification in the top right corner
+  origin = top-left
+
+  scale=0
+
+  font = mononoki,Regular 9
+
+  # Turn on the progess bar. It appears when a progress hint is passed with
+  # for example dunstify -h int:value:12
+  progress_bar = true
 
   font = Anonymous Pro Minus,Bold 9
 
@@ -59,7 +75,6 @@
 
   frame_width = 3
   separator_height = 2
-  notification_height = 0
   padding = 6
   horizontal_padding = 6
   transparency = 31
@@ -82,7 +97,6 @@
 
   # Scale larger icons down to this size, set to 0 to disable
   max_icon_size = 120
-
 
 
   # Which monitor should the notifications be displayed on.
@@ -130,7 +144,6 @@
   always_run_script = true
   title = Dunst
   class = Dunst
-  startup_notification = false
   force_xinerama = false
 
 [experimental]

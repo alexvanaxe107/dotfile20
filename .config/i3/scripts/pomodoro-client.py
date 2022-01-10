@@ -8,13 +8,12 @@ from gi.repository import GLib
 import click
 import i3ipc
 
-
 bus = SessionBus()
 
 
 def get_notification_proxy():
     return bus.get(
-        "org.freedesktop.Notifications", "/org/freedesktop/Notifications")
+        "org.freedesktop.Notifications", "/org/freedesktop/Notifications")      
 
 
 def get_pomodoro_proxy():

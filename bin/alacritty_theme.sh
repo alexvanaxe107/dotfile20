@@ -1,10 +1,10 @@
 #!/bin/bash
 
-PATH=/home/alexvanaxe/.pyenv/versions/wm/bin/:$PATH
+PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
 ALACRITTY_FILE=$HOME/.config/wm/alacritty.conf
 
-choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -y 16 -bw 2 -z 850 -l 35 -p "Choose the terminal theme")
+choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i -y 16 -bw 2 -z 850 -l 55 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 
@@ -23,6 +23,12 @@ if [ "$vim_theme" == "breeze" ]; then
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "Codeschool.light" ]; then
+    sed -i 's/^colorscheme.*/colorscheme OceanicNextLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="oceanicnextlight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "Brewer.light.yml" ]; then
     sed -i 's/^colorscheme.*/colorscheme OceanicNextLight/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="oceanicnextlight"/' ${HOME}/.vim/configs/theme.vim
@@ -33,6 +39,12 @@ if [ "$vim_theme" == "papercolor_light" ]; then
     sed -i 's/^colorscheme.*/colorscheme PaperColor/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="papercolor"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
+if [ "$vim_theme" == "Zenburn" ]; then
+    sed -i 's/^colorscheme.*/colorscheme zenburn/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="zenburn"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
 if [ "$vim_theme" == "pencil_dark" ]; then
@@ -176,6 +188,12 @@ if [ "$vim_theme" == "ayu_dark" ]; then
     sed -i '5s/^/let ayucolor="dark"\n/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "Chalk" ]; then
+    sed -i 's/^colorscheme.*/colorscheme onehalflight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="onehalflight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+
 if [ "$vim_theme" == "base16_default_dark" ]; then
     sed -i 's/^colorscheme.*/colorscheme base16-default-dark/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="base16_ashes"/' ${HOME}/.vim/configs/theme.vim
@@ -189,6 +207,12 @@ if [ "$vim_theme" == "dracula" ]; then
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     echo "" > ${HOME}/.vim/configs/theme_config.vim
     echo "let g:dracula_colorterm = 0" >> ${HOME}/.vim/configs/theme_config.vim
+fi
+
+if [ "$vim_theme" == "dracula_deep_space" ]; then
+    sed -i 's/^colorscheme.*/colorscheme deep-space/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="deep_space"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
 if [ "$vim_theme" == "oceanic_next" ]; then
@@ -224,6 +248,11 @@ fi
 if [ "$vim_theme" == "Embers.light.yml" ]; then
     sed -i 's/^colorscheme.*/colorscheme corvine_light/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="Atelier_HeathLight"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+fi
+if [ "$vim_theme" == "Paraiso.light" ]; then
+    sed -i 's/^colorscheme.*/colorscheme github/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="github"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 

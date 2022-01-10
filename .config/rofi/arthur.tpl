@@ -59,7 +59,7 @@ window {
     padding: 250px;
     border:  0px;
     border-radius: 10px;
-    color: @magenta;
+    color: #000000;
     background-color: @transparent;
     spacing: 0;
     children:  [mainbox];
@@ -71,6 +71,8 @@ window {
 mainbox {
     spacing: 0;
     children: [ inputbar, message, listview ];
+    color:#000000;
+
 }
 
 message {
@@ -79,20 +81,21 @@ message {
 //    border-radius: 10px;
     padding: 5;
     background-color: @tcyan;
+    text-color:#000000;
 }
 message {
     font: "Source Code Pro 8";
-    color: @black;
+    color:#000000;
 }
 
-inputbar {
-    color: #inputbarfn;
+    color: #00
     padding: 11px;
     background-color: @tlightblack;
     border: 2px 2px 2px 2px;
     border-radius:  15px 15px 0px 0px;
     border-color: @foreground;
     font: "Source Code Pro 18";
+    text-color:#000000;
 }
 entry,prompt,case-indicator {
     text-font: inherit;
@@ -100,15 +103,17 @@ entry,prompt,case-indicator {
 }
 prompt {
     margin:     0px 0.3em 0em 0em ;
+    text-color:#000000;
 }
 listview {
     padding: 8px;
     border-radius: 0px 0px 15px 15px;
     border-color: @foreground;
     border: 0px 2px 2px 2px;
-    background-color: #listbgcolor;
+    background-color: #ffffff;
     dynamic: false;
     columns: 2;
+    text-color: #ffffff;
     lines: 10;
 }
 element {
@@ -117,29 +122,38 @@ element {
 //    border: 2px;
     border-radius: 4px;
     background-color: transparent;
-    color: @foreground;
+    text-color: #ffffff;
     font:inherit;
 }
 element selected.normal {
-    background-color: #activeItem;
+    background-color: #ffffff;
     color: #selectedFgActiveItem;
+    text-color: #ffffff;
 }
 element normal active {
+    background-color: #ffffff;
     foreground: #activeItem;
+    text-color: #ffffff;
 }
 element normal urgent {
     foreground: @lightred;
+    text-color: #ffffff;
 }
 element alternate normal {
+    background-color: #ffffff;
+    text-color: #ffffff;
 }
 element alternate active {
+    background-color: #ffffff;
     foreground: @lightblue;
+    text-color: #ffffff;
 }
 element alternate urgent {
     foreground: @lightred;
 }
 element selected active {
-    background-color: #selectedActiveItem;
+    text-color: #ffffff;
+    background-color: #ffffff;
     color: #selectedFgActiveItem;
 }
 element selected urgent {
@@ -148,6 +162,9 @@ element selected urgent {
     highlight: #highlightActive;
 }
 element normal normal {
+
+    background-color: #ffffff;
+    text-color: #ffffff;
 
 }
 

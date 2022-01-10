@@ -31,8 +31,12 @@ read_book(){
     local format="$(echo ${bookname} | awk '{print $2}' FS="|")"
 
     found="0"
+    echo "$format"
+    echo "$book"
+    echo "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)"
+    
     case "$format" in
-        PDF) found="1";mupdf "$(find ~/../media/Books -name "${book}*.pdf" | head -n 1)" 2>&1 &;;
+        PDF) found="1";llpp "$(find ~/../media/Books -name "${book}*.pdf" | head -n 1)" 2>&1 &;;
         AZW3) found="1";foliate "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)" 2>&1 &;;
         EPUB) found="1";foliate "$(find ~/../media/Books -name "${book}*.epub" | head -n 1)" 2>&1 &;;
         #MOBI) found="1";foliate "$(find ~/../media/Books -name "${book}*.mobi")" 2>&1 &;;

@@ -1,5 +1,5 @@
 #!/bin/bash
-. /home/alexvanaxe/.pyenv/versions/wm/bin/activate
+. $HOME/.pyenv/versions/wm/bin/activate
 
 source $HOME/.config/wm/bspwm.conf
 

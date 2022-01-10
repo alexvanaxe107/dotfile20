@@ -103,6 +103,10 @@ element {
     border: 						0px;
     padding: 						1px;
 }
+element-text {
+ background-color: inherit;
+ text-color: inherit;
+}
 element normal.normal {
     background-color: 				@bg;
     text-color:       				@fg;

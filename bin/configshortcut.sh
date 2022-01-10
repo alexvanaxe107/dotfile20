@@ -1,7 +1,7 @@
 #!/bin/dash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nsxhkd\nbspwm\nradio\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\nmonitors\nytpl" | dmenu -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nsxhkd\nbspwm\nradio\npl\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\nmonitors\nytpl" | dmenu -y 16 -bw 2 -z 950 -p "Select config to edit")
 
 process_wallpaper(){
     sxiv $HOME/Documents/Pictures/Wallpapers/$theme_name&

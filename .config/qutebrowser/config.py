@@ -26,11 +26,11 @@ import dracula.draw
 config.load_autoconfig()
 
 dracula.draw.blood(c, {
-    'spacing': {
-        'vertical': 6,
-        'horizontal': 8
-    }
-})
+     'spacing': {
+         'vertical': 3,
+         'horizontal': 4
+     }
+ })
 
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
 

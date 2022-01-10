@@ -1,6 +1,6 @@
 #!/bin/sh
 
-result=$(transmission-remote -l 2> /dev/null | grep % |
+result=$(transmission-remote http://192.168.0.50:9091/transmission -l 2> /dev/null | grep % |
 	sed " # This first sed command is to ensure a desirable order with sort
 	s/.*Stopped.*/A/g;
 	s/.*Seeding.*/Z/g;

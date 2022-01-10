@@ -1,0 +1,129 @@
+#+title AVA Cool Stuffs
+#+PROPERTY: header-args:emacs-lisp :tangle ./cool.el
+
+* Play this!
+
+** Play a radio in emacs! This is COooOl!
+
+#+begin_src emacs-lisp
+
+  (defun choose-player()
+    (let (
+    (players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+        (completing-read "Chose: " players)))
+
+  (defun play_radio()
+        (let (
+        (output (split-string (shell-command-to-string "play_radio.sh -l") "\n")))
+      (let (
+        (choosen_radio (completing-read "Choose an station to listen, and enjoy some good music." output)))
+
+          (save-match-data ; is usually a good idea
+              (and (string-match "[[:space:]]*\\([0-9]*\\).*" choosen_radio)
+                  (setq indice (match-string 1 choosen_radio)
+                        ) ))
+          (shell-command (concat "play_radio.sh -r " indice " &") nil)
+          )))
+
+
+#+end_src
+
+
+** Play the copied text
+
+#+begin_src emacs-lisp
+
+  (defun play_paste()
+     (shell-command "play_radio.sh -P" nil)
+   )
+
+#+end_src
+
+
+** Play the copied text as audio
+
+#+begin_src emacs-lisp
+
+  (defun play_paste_audio()
+     (shell-command "play_radio.sh -sP" nil)
+   )
+
+#+end_src
+
+
+** Control player
+
+Play and pause the player. It is a ongoing migration...
+
+#+begin_src emacs-lisp
+
+(defun player-ctl (action)
+    (when (equal action "save")
+        (shell-command (concat "player-ctl.sh -S " "'" (choose-player) "'") nil))
+
+    (when (equal action "play_pause")
+    (let (
+	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+    (let (
+	    (chosen_player (completing-read "Chose: " players)))
+	    (shell-command (concat "player-ctl.sh -p " "'" chosen_player "'")) )))
+
+    (when (equal action "stop")
+    (let (
+	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+    (let (
+	    (chosen_player (completing-read "Chose: " players)))
+	    (shell-command (concat "player-ctl.sh -s " "'" chosen_player "'")) )))
+    (when (equal action "asaudio")
+    (let (
+	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+    (let (
+	    (chosen_player (completing-read "Chose: " players)))
+	    (shell-command (concat "player-ctl.sh -i 1 " chosen_player)) )))
+    )
+
+#+end_src
+
+* Change the light
+
+Function to change the light of the monitors. Today it is the simplest most common form. Later can be upgraded.
+
+#+begin_src emacs-lisp
+
+(defun change-light ()
+(let (
+        (light-str (completing-read "Light Number (0-100): " '())))
+    (shell-command (concat "avalight.sh -I " light-str))))
+
+#+end_src
+
+* Change the theme
+
+This will be worked with time. For time being it will do the following:
+- Change the theme for the day
+- Change the fonts of the theme
+
+Later it is on the road map:
+- Choose a font map.
+- Maybe choose a theme and select the wp and fonts that is cool with the theme.
+
+
+#+begin_src emacs-lisp
+
+  (defun disable-all-themes()
+    "Disable all active themes"
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme)))
+
+  (defun reload-theme()
+    (dolist (theme custom-enabled-themes)
+      (load-theme theme)))
+
+  (defun change-theme()
+    "First disable all themes and then chose a theme and font"
+    (disable-all-themes)
+    (load-theme (get-theme) t)
+    (ava/update-transparency)
+    (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))
+
+#+end_src

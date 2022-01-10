@@ -5,23 +5,24 @@ else
 	call plug#begin('~/.vim/plugged')
 endif
 " #### Helpers
+source /home/alexvanaxe/.vim/configs/plugins/goyo.vim
 Plug 'gantheory/vim-easymotion'
 Plug 'tpope/vim-speeddating'
 Plug 'arielrossanigo/dir-configs-override.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'freitass/todo.txt-vim'
+Plug 'preservim/vimux'
 
 " #### IDE
+source /home/alexvanaxe/.vim/configs/plugins/indentline.vim
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'janko-m/vim-test'
+source /home/alexvanaxe/.vim/configs/plugins/tests.vim
 if !has('nvim')
     Plug 'tpope/vim-dispatch'
 endif
 Plug 'scrooloose/nerdcommenter', {'for': ['python', 'html', 'typescript', 'sh']}
-Plug 'Yggdroot/indentLine' " Ident guides
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
@@ -32,13 +33,17 @@ Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
 Plug 'prettier/vim-prettier' " Formatting
+Plug 'mkitt/tabline.vim'
+source /home/alexvanaxe/.vim/configs/plugins/rainbow.vim
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  source /home/alexvanaxe/.vim/configs/plugins/deoplete.vim
 else
   Plug 'Quramy/tsuquyomi'
 endif
 
+" LSP Configs
+source /home/alexvanaxe/.vim/configs/plugins/lspconfig.vim
 " Javascript/Typescript
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -56,10 +61,10 @@ Plug 'reedes/vim-pencil', { 'for': ['text', 'notes', 'markdown', 'mkd'] }
 Plug 'junegunn/limelight.vim'
 
 " #### EYECANDY
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+source /home/alexvanaxe/.vim/configs/plugins/airline.vim
 Plug 'guns/xterm-color-table.vim'
-Plug 'miyakogi/seiya.vim'
+source /home/alexvanaxe/.vim/configs/plugins/seiya.vim
 
 "Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -91,8 +96,15 @@ Plug 'wadackel/vim-dogrun'
 Plug 'arzg/vim-corvine'
 Plug 'zanglg/nova.vim'
 Plug 'reedes/vim-colors-pencil'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'jnurmine/Zenburn'
 
 "Vimwiki
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
+
+lua << EOF
+require 'lspconfig'
+require 'lspconfig'.bashls.setup{}
+EOF

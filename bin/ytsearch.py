@@ -1,5 +1,3 @@
-#! /home/alexvanaxe/.pyenv/versions/wm/bin/python
-
 from youtubesearchpython import VideosSearch, ChannelsSearch, CustomSearch, VideoSortOrder
 
 import json
@@ -34,15 +32,14 @@ def _main():
     quantity = options.quantity
 
     if time:
-        allSearch = CustomSearch(search, VideoSortOrder.uploadDate)
+        allSearch = CustomSearch(str(search), VideoSortOrder.uploadDate)
     if channel:
-        allSearch = ChannelsSearch(search)
+        allSearch = ChannelsSearch(str(search))
     else:
-        allSearch = VideosSearch(search)
+        allSearch = VideosSearch(str(search))
 
-
-    result = allSearch.result()
-    result_json = json.loads(result)
+    result = allSearch.result();
+    result_json = result
 
     loop = range(0, quantity)
     for i in loop:

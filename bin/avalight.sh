@@ -1,4 +1,4 @@
-#! /bin/dash
+#! /bin/bash
 
 monitors() {
     monitors=$(monitors_info.sh -m)

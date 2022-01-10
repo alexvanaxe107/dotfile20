@@ -2,8 +2,9 @@
 
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd >>/tmp/sxhkcd.log 2>&1 &
-$HOME/.config/i3/monitor/saver.sh &
+$HOME/bin/saver.sh &
 killall clipster; clipster -d &
+#inputplug -c setkmap
 
 $HOME/bin/bspwm_layout_manager.sh clear
 
@@ -24,6 +25,7 @@ bspc config pointer_follows_monitor true
 
 # App rules
 bspc rule -a Gimp state=floating follow=on
+bspc rule -a Emacs state=tiled
 bspc rule -a ffplay state=floating
 bspc rule -a Gpick state=floating
 bspc rule -a qutebrowser desktop=^2
