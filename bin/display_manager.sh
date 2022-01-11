@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/bash
 remoteHScreen=1366
 remoteVScreen=768
 refreshRate=60
@@ -52,6 +52,19 @@ define_order() {
     ${command}
 }
 
+rotate() {
+    direction=$2
+    monitor=$1
+
+    options='leftrightinvertednormal'
+    if [[ $options != *"${direction}"* ]]; then
+      echo "The value must be left, right, inverted or normal" >&2
+      exit 1
+    fi
+    
+    xrandr --output "${monitor}" --rotate "${direction}"
+}
+
 add_virtual() {
     params=$(gtf ${remoteHScreen} ${remoteVScreen} ${refreshRate} | grep Modeline | sed 's/^\s\sModeline \".*\"\s*//g')
 
@@ -79,14 +92,15 @@ show_help() {
     echo "Manipulate the monitors."; echo ""
     echo "-p [name]                             Define wich monitor is the primary."
     echo "-t [name]                             Toggle monitor on and off"
-    echo "-o [order]                            List with the order of the monitors"
+    echo "-o [order]                            Send a list with the order of the monitors"
+    echo "-r [direction]                        Rotate the monitor to the desired location - normal, left, right or inverted "
     echo "-v                                    Add virtual monitor"
     echo "-d                                    Dimension of the monitor"
     echo "-V [monitor]                          remove a virtual monitor"
     echo "-a                                    Turn on all monitors."
 }
 
-while getopts "h?ap:t:o:vV:d:" opt; do
+while getopts "h?ap:t:o:vV:d:r:" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
@@ -95,6 +109,8 @@ while getopts "h?ap:t:o:vV:d:" opt; do
     t) toggle_monitor $OPTARG
         ;;
     o) define_order "$OPTARG"
+        ;;
+    r) rotate "$OPTARG" $3
         ;;
     V) remove_virtual "$OPTARG"
         ;;

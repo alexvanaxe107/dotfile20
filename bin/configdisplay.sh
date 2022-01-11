@@ -1,6 +1,6 @@
 #!/bin/dash
 
-option=$(printf "%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: " -bw 2 -y 16 -z 850)
+option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: " -bw 2 -y 26 -z 850)
 
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 
@@ -12,6 +12,13 @@ toggle() {
     fi
 
     display_manager.sh -t ${monitor}
+}
+
+rotate() {
+    monitor=$(monitors_info.sh -m | dmenu -p "Which monitor rotate?" -bw 2 -y 16 -z 850)
+    direction=$(printf "%s\n%s\n%s" "left" "right" "normal" | dmenu -p "Which monitor rotate?" -bw 2 -y 16 -z 850)
+
+    display_manager.sh -r "${monitor}" "${direction}"
 }
 
 set_primary() {
@@ -99,6 +106,8 @@ case "$option" in
     "Order") set_monitors
     ;;
     "Primary") set_primary
+    ;;
+    "Rotate") rotate
     ;;
     "Add Virtual") add_virtual
     ;;
