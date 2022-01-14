@@ -60,6 +60,7 @@
 
     (setq org-todo-keywords
           '((sequence "TODO(t)" "|" "DONE(d!)")
+            (sequence "WAITING(w)" "READING(r)" "|" "READ(c!)")
             (sequence "LONGEST(o)" "LONG(l)" "SHORT(s)" "|" "FINISHED(f!)")))
   ;;          (sequence "BACKLOG(b)" "PLAN(p)" "|" "COMPLETED(c)")))
 
