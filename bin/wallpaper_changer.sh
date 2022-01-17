@@ -21,9 +21,12 @@ show_options(){
 change_all(){
     for monitor in $(monitors_info.sh -m); do
         is_wide="$(monitors_info.sh -w $monitor)"
+        is_rotated="$(monitors_info.sh -r $monitor)"
         index=$(monitors_info.sh -ib ${monitor})
         if [ "${is_wide}" = "yes" ]; then
             nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
+        elif [ "${is_rotated}" = "yes" ]; then
+            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/rotted/$theme_name
         else
             nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
         fi
@@ -157,8 +160,11 @@ change_wallpaper(){
 
     if [ ! -z "$selected" ]; then
         is_wide=$(monitors_info.sh -w ${monitor_name})
+        is_rotated=$(monitors_info.sh -r ${monitor_name})
         if [ "${is_wide}" = "yes" ]; then
             nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
+        elif [ "${is_rotated}" = "yes" ]; then
+            nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name
         else
             nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
         fi

@@ -13,7 +13,7 @@ secrecy() {
     iptables-restore $HOME/tor/torrify
     ip6tables-restore $HOME/tor/torrify
 
-    cp /etc/resolv.conf.sec /etc/resolv.conf
+    echo "nameserver 127.0.0.1" > /etc/resolv.conf
 }
 
 normal() {

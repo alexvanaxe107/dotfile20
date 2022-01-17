@@ -1,19 +1,22 @@
 #! /bin/bash
 
-monitors() {
+get_monitors() {
     monitors=$(monitors_info.sh -m)
 
     echo "$monitors"
 }
 
-reset_auto() {
+reset_lightness() {
     killall clight
-
-    local monitors="$(monitors)"
+    local monitors="$(get_monitors)"
 
     for monitor in ${monitors}; do
-        xrandr --output ${monitor} --brightness 1 
+        xrandr --output ${monitor} --brightness 1
     done
+}
+
+reset_auto() {
+    killall clight
 }
 
 eDP() {
@@ -26,23 +29,32 @@ eDP() {
     esac
 }
 
+change_hdmi_font() {
+    monitor="$1"
+
+    monitor_num="$(($(monitors_info.sh -in "${monitor}") + 1))"
+
+    ddcutil setvcp -d "${monitor_num}" 10 ${val}
+}
+
+
 HDMI() {
     local val="$1"
     local monitor="$2"
 
     case "${soft}" in
-        0) ddcutil setvcp -d 1 10 ${val};;
+        0) $(change_hdmi_font "${monitor}");;
         1) xrandr --output ${monitor} --brightness $(echo "${val}/100" | bc -l);;
     esac
 }
 
 adjust_brightness() {
-   reset_auto 
+    reset_auto
     local val="$1"
     local monitors="$2"
 
     if [ -z "${monitors}" ]; then
-        monitors="$(monitors)"
+        monitors="$(get_monitors)"
     fi
 
     for monitor in ${monitors}
@@ -89,5 +101,5 @@ shift $((OPTIND-1))
 case "${rcommand}" in
     "i") adjust_brightness "$1" "$2";;
     "a") autob;;
-    "r") reset_auto;;
+    "r") reset_lightness;;
 esac

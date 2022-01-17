@@ -6,6 +6,7 @@ PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 # Initialize our own variables:
 output_file=""
 id_only=0
+external=0
 
 all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
 
@@ -162,7 +163,16 @@ monitors_plugged(){
     echo $(($monitors - 1))
 }
 
+is_rotated(){
+    local monitor=$1
+    local rotated="$(xrandr | grep "${monitor}" | grep "t (")"
 
+    if [ -z "${rotated}" ];then
+        echo "no"
+    else
+        echo "yes"
+    fi
+}
 
 secundary_wide() {
     sec=$(name_by_prefered 0)
@@ -181,6 +191,7 @@ get_dimensions() {
 show_help() {
     echo "Get monitor information." echo ""
     echo "-m                             Get a list with the monitors name (primary first)"
+    echo "-g                             Get the (g)ear names - The external monitors"
     echo "-f                             Get a list of the favorite order monitors."
     echo "-a                             Get monitors info for the nitrogen."
     echo "-c                             Get a list of connected monitors"
@@ -189,6 +200,7 @@ show_help() {
     echo "-n {id}                        Get name by id"
     echo "-b {id}                        Get name by id for nitrogen"
     #echo "-r {id}                        Get resolution of id"
+    echo "r {name}                       Detect if the monitor is rotated"
     echo "-in {name}                     Get name by id"
     echo "-w {[id, name, nothing}        The monitor is wide? If id is blank check any wide"
     echo "-q                             How many monitors are plugged?"
@@ -199,12 +211,14 @@ show_help() {
     echo "-e                             Get the emacs string to configure the exwm"
 }
 
-while getopts "h?mcpqift:w:n:ab:sd:e" opt; do
+while getopts "h?mcpqift:w:n:ab:sd:er:g" opt; do
     case "$opt" in
     h|\?)
         show_help
         ;;
     i)  id_only=1
+        ;;
+    g)  external=1
         ;;
     m)  monitors_information
         ;;
@@ -227,6 +241,8 @@ while getopts "h?mcpqift:w:n:ab:sd:e" opt; do
     b)  name_by_id_nitrogen $OPTARG
         ;;
     w)  is_wide $OPTARG
+        ;;
+    r)  is_rotated $OPTARG
         ;;
     s)  secundary_wide
         ;;
