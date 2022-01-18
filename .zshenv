@@ -9,7 +9,9 @@ export XDG_CURRENT_DESKTOP=i3
 
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 #typeset -U path
-path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin ~/Documents/development/npm/bin $path[@])
+export PYENV_ROOT="$HOME/.pyenv"
+path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin $PYENV_ROOT/bin ~/Documents/development/npm/bin $path[@])
+eval "$(pyenv init --path)"
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
@@ -25,5 +27,6 @@ alias clear="clear;echo"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export FZF_DEFAULT_COMMAND='fd -I --type f'
 export HISTCONTROL=ignoreboth
+eval "$(pyenv init -)"
 
 source ~/.profile
