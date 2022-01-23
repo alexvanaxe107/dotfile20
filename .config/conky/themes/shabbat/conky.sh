@@ -2,6 +2,10 @@
 
 monitor=$(monitors_info.sh -if | awk 'NR==2')
 
+if [ -z "${monitor}" ]; then
+    monitor=0
+fi
+
 pid=$(pidof conky)
 if [ -z "$pid" ]
 then
