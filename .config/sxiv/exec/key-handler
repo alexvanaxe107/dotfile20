@@ -9,7 +9,7 @@ do
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
         "C-p")
-            magick convert "$file" -resize 1366x768\! "$file".png ;;
+            convert "$file" -resize 1366x768^ -gravity Center -extent 1366x768 "$file";;
         "C-s")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
         "C-l")
