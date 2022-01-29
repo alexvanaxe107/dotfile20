@@ -49,7 +49,7 @@
   (setq exwm-workspace-number 10)
 
   ;; Total focus
-  (setq exwm-workspace-minibuffer-position 'bottom)
+  ;;(setq exwm-workspace-minibuffer-position 'bottom)
 
   ;; Char mode by default
   (setq exwm-manage-configurations '((t char-mode t)))
