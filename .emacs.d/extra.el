@@ -500,6 +500,7 @@
   (add-to-list 'lsp-enabled-clients 'html-ls)
   (add-to-list 'lsp-enabled-clients 'angular-ls)
   (add-to-list 'lsp-enabled-clients 'ts-ls)
+  (add-to-list 'lsp-enabled-clients 'pylsp)
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-ivy

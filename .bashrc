@@ -197,7 +197,7 @@ export FZF_DEFAULT_COMMAND='fd -I --type f'
 set -o vi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
+#export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 export _JAVA_AWT_WM_NONREPARENTING=1
 #export XDG_SESSION_DESKTOP=i3
 #export XDG_CURRENT_DESKTOP=i3

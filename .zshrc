@@ -83,4 +83,4 @@ bindkey ^f forward-word
 bindkey -M vicmd ' ' vi-easy-motion
 
 #colorscript -r
-eval "$(pyenv init -)"
+#eval "$(pyenv init -)"

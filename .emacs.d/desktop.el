@@ -2,6 +2,15 @@
 (let ((command-parts (split-string command "[ ]+")))
     (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
 
+(defun ava/inc-volume()
+  (shell-command "pulseaudio-ctl up 2"))
+
+(defun ava/dec-volume()
+  (shell-command "pulseaudio-ctl down 2"))
+
+(defun ava/mute-volume()
+  (shell-command "pulseaudio-ctl mute"))
+
 (defun change-theme()
   "First disable all themes and then chose a theme and font"
   (shell-command "nitrogen --restore")
@@ -86,8 +95,16 @@
 
   ;; Turnoff the sleep timer of the monitor
   (start-process-shell-command "nosleep" nil "saver.sh &")
+
+  ;; Get the second monitor
+  (let (
+        (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1")))
+
+    (setq exwm-randr-workspace-output-plist (list 0 monitor 9 monitor 8 monitor))
+
+    )
+
   ;; Give three monitors to the second screen. It can be changed on time.
-  (setq exwm-randr-workspace-output-plist '(0 "eDP1" 9 "eDP1" 8 "eDP1"))
 
   ;; Ctrl+Q will enable the next key to be sent directly
   (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
@@ -111,6 +128,11 @@
           ([?\s-l] . windmove-right)
           ([?\s-k] . windmove-up)
           ([?\s-j] . windmove-down)
+
+          ([XF86AudioMute] . (lambda () (interactive)(ava/mute-volume)))
+          ([XF86AudioRaiseVolume] . (lambda () (interactive)(ava/inc-volume)))
+          ([XF86AudioLowerVolume] . (lambda () (interactive)(ava/dec-volume)))
+
           ;; Movement keys
           ([?\s-H] . windower-swap-left)
           ([?\s-L] . windower-swap-right)
@@ -137,6 +159,7 @@
  )
 
 (use-package desktop-environment
+  :disabled
   :after exwm
   :config
   (progn
