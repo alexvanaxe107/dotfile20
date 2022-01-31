@@ -83,7 +83,7 @@
     (setq exwm-workspace-number 10)
 
     ;; Total focus
-    (setq exwm-workspace-minibuffer-position 'bottom)
+;;    (setq exwm-workspace-minibuffer-position 'bottom)
 
     ;; Char mode by default
     (setq exwm-manage-configurations '((t char-mode t)))
@@ -139,7 +139,10 @@
     ;; Set up global key bindings.  These always work, no matter the input state!
     (setq exwm-input-global-keys
           `(
-            ([f5] . persp-counsel-switch-buffer)
+            ([f5] . persp-ivy-switch-buffer)
+            ([f9] . persp-list-buffers)
+            ([f8] . persp-switch)
+            ([?\s-f] . persp-forget-buffer)
             ([?\s-r] . exwm-reset)
             ([?\s-d] . counsel-linux-app)
 
@@ -270,7 +273,7 @@ export WM_RUNNING="emacs"
 $HOME/.config/i3/monitor/saver.sh &
 display_manager.sh -o "DVI-1 HDMI-2"
 display_manager.sh -p "DVI-1"
-display_manager.sh -r "HDMI-2" "left"
+#display_manager.sh -r "HDMI-2" "left"
 start_picom.sh "emacs"
 
 #exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el

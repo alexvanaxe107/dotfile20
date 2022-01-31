@@ -45,7 +45,7 @@
   height = 300
 
   # Position the notification in the top right corner
-  origin = top-left
+  origin = top-right
 
   scale=0
 

@@ -1,9 +1,10 @@
 #! /bin/bash
 
 export WM_RUNNING="emacs"
-$HOME/bin/saver.sh &
-display_manager.sh -o "HDMI1 eDP1"
-display_manager.sh -p "HDMI1"
+$HOME/.config/i3/monitor/saver.sh &
+display_manager.sh -o "DVI-1 HDMI-2"
+display_manager.sh -p "DVI-1"
+#display_manager.sh -r "HDMI-2" "left"
 start_picom.sh "emacs"
 
 #exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el

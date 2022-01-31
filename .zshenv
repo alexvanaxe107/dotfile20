@@ -10,7 +10,7 @@ export XDG_CURRENT_DESKTOP=i3
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 #typeset -U path
 export PYENV_ROOT="$HOME/.pyenv"
-path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin $PYENV_ROOT/bin ~/Documents/development/npm/bin $path[@])
+path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin $PYENV_ROOT/bin ~/Documents/npm/bin $path[@])
 eval "$(pyenv init --path)"
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
