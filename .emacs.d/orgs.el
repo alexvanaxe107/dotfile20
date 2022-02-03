@@ -143,6 +143,7 @@
 (setq org-habit-graph-column 60)
 
 (use-package org-present
+  :disabled
   :after org
   :init
   (defun ava/present-mode-enter()
@@ -158,6 +159,21 @@
     (org-present-read-write))
   (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
   (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
+
+(defun ava/presentation-setup ()
+  (text-scale-set 1)
+  (setq text-scale-mode-amount 3)
+  (org-display-inline-images)
+  (text-scale-mode 1))
+
+(defun ava/presentation-end ()
+  (text-scale-mode 0))
+
+(use-package org-tree-slide
+  :hook ((org-tree-slide-play . ava/presentation-setup)
+         (org-tree-slide-stop . ava/presentation-end))
+  :custom
+  (org-image-actual-width nil))
 
 (use-package visual-fill-column
   :init

@@ -118,9 +118,10 @@
             ([f9] . persp-list-buffers)
             ([f8] . persp-switch)
             ([?\s-f] . persp-forget-buffer)
-            ([?\s-r] . exwm-reset)
+            ([?\s-R] . exwm-reset)
             ([?\s-d] . counsel-linux-app)
 
+            ([?\s-r] . window-resize/body)
             ;; Launch applications via shell command
             ([?\s-$] . (lambda (command)
                          (interactive (list (read-shell-command "$ ")))

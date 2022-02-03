@@ -637,6 +637,7 @@ This is used to map esc to jk (hopefully).
   (use-package key-chord
     :init
     (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map "jw" 'save-buffer)
     (key-chord-mode 1)
     :custom
     (key-chord-two-keys-delay 0.5)
@@ -1019,6 +1020,7 @@ Here are the configs for the cosmetic packages.
 Testing telephone instead of doomline
 #+begin_src emacs-lisp
   (use-package telephone-line
+    :disabled
     :init (telephone-line-mode 1))
 #+end_src
 

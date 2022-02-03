@@ -77,114 +77,115 @@
 
 #+begin_src emacs-lisp
 
-  (use-package exwm
-    :config
-    ;; Set the default number of workspaces
-    (setq exwm-workspace-number 10)
+    (use-package exwm
+      :config
+      ;; Set the default number of workspaces
+      (setq exwm-workspace-number 10)
 
-    ;; Total focus
-;;    (setq exwm-workspace-minibuffer-position 'bottom)
+      ;; Total focus
+  ;;    (setq exwm-workspace-minibuffer-position 'bottom)
 
-    ;; Char mode by default
-    (setq exwm-manage-configurations '((t char-mode t)))
-    ;; These keys should always pass through to Emacs
-    (setq exwm-input-prefix-keys
-          '(?\C-x
-            ?\M-x
-            ?\s-d
-            f5
-            ))
-
-
-    ;; When window "class" updates, use it to set the buffer name
-    (add-hook 'exwm-update-class-hook #'ava/exwm-update-class)
-
-    ;; When window title updates, use it to set the buffer name
-    ;; (add-hook 'exwm-update-title-hook #'ava/exwm-update-title)
-
-    ;; Add these hooks in a suitable place (e.g., as done in exwm-config-default)
-    (add-hook 'exwm-update-class-hook 'ava/exwm-rename-buffer)
-    (add-hook 'exwm-update-title-hook 'ava/exwm-rename-buffer)
-
-    ;; Configure windows as they're created
-    ;; (add-hook 'exwm-manage-finish-hook #'ava/configure-window-by-class)
+      ;; Char mode by default
+      (setq exwm-manage-configurations '((t char-mode t)))
+      ;; These keys should always pass through to Emacs
+      (setq exwm-input-prefix-keys
+            '(?\C-x
+              ?\M-x
+              ?\s-d
+              f5
+              ))
 
 
-    ;; When EXWM starts up, do some extra confifuration
-    (add-hook 'exwm-init-hook #'ava/exwm-init-hook)
+      ;; When window "class" updates, use it to set the buffer name
+      (add-hook 'exwm-update-class-hook #'ava/exwm-update-class)
 
-    (require 'exwm-randr)
-    (exwm-randr-enable)
-    ;; Configure the kmap and change caps for control
-    (start-process-shell-command "kmap" nil "setkmap")
+      ;; When window title updates, use it to set the buffer name
+      ;; (add-hook 'exwm-update-title-hook #'ava/exwm-update-title)
 
-    ;; Turnoff the sleep timer of the monitor
-    (start-process-shell-command "nosleep" nil "saver.sh &")
+      ;; Add these hooks in a suitable place (e.g., as done in exwm-config-default)
+      (add-hook 'exwm-update-class-hook 'ava/exwm-rename-buffer)
+      (add-hook 'exwm-update-title-hook 'ava/exwm-rename-buffer)
 
-    ;; Get the second monitor
-    (let (
-          (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1")))
+      ;; Configure windows as they're created
+      ;; (add-hook 'exwm-manage-finish-hook #'ava/configure-window-by-class)
 
-      (setq exwm-randr-workspace-output-plist (list 0 monitor 9 monitor 8 monitor))
 
-      )
+      ;; When EXWM starts up, do some extra confifuration
+      (add-hook 'exwm-init-hook #'ava/exwm-init-hook)
 
-    ;; Give three monitors to the second screen. It can be changed on time.
+      (require 'exwm-randr)
+      (exwm-randr-enable)
+      ;; Configure the kmap and change caps for control
+      (start-process-shell-command "kmap" nil "setkmap")
 
-    ;; Ctrl+Q will enable the next key to be sent directly
-    (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
-    (setq exwm-workspace-show-all-buffers t)
-    (setq exwm-layout-show-all-buffers t)
+      ;; Turnoff the sleep timer of the monitor
+      (start-process-shell-command "nosleep" nil "saver.sh &")
 
-    ;; Set up global key bindings.  These always work, no matter the input state!
-    (setq exwm-input-global-keys
-          `(
-            ([f5] . persp-ivy-switch-buffer)
-            ([f9] . persp-list-buffers)
-            ([f8] . persp-switch)
-            ([?\s-f] . persp-forget-buffer)
-            ([?\s-r] . exwm-reset)
-            ([?\s-d] . counsel-linux-app)
+      ;; Get the second monitor
+      (let (
+            (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1")))
 
-            ;; Launch applications via shell command
-            ([?\s-$] . (lambda (command)
-                         (interactive (list (read-shell-command "$ ")))
-                         (start-process-shell-command command nil command)))
+        (setq exwm-randr-workspace-output-plist (list 0 monitor 9 monitor 8 monitor))
 
-            ;; Move Window keys
-            ([?\s-h] . windmove-left)
-            ([?\s-l] . windmove-right)
-            ([?\s-k] . windmove-up)
-            ([?\s-j] . windmove-down)
+        )
 
-            ([XF86AudioMute] . (lambda () (interactive)(ava/mute-volume)))
-            ([XF86AudioRaiseVolume] . (lambda () (interactive)(ava/inc-volume)))
-            ([XF86AudioLowerVolume] . (lambda () (interactive)(ava/dec-volume)))
+      ;; Give three monitors to the second screen. It can be changed on time.
 
-            ;; Movement keys
-            ([?\s-H] . windower-swap-left)
-            ([?\s-L] . windower-swap-right)
-            ([?\s-K] . windower-swap-above)
-            ([?\s-J] . windower-swap-below)
+      ;; Ctrl+Q will enable the next key to be sent directly
+      (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+      (setq exwm-workspace-show-all-buffers t)
+      (setq exwm-layout-show-all-buffers t)
 
-            ([?\s-%] . split-window-right)
-            ([?\s-\"] . split-window-below)
-            ([?\s-Q] . kill-buffer)
-            ([?\s-q] . delete-window)
-            ([?\s-i] . exwm-input-toggle-keyboard)
-            ;; ([?\s-v] . exwm-workspace-delete)
-            ([?\s-v] . hide-mode-line-mode)
-            ([?\s-a] . exwm-workspace-add)
-            ([?\s-w] . exwm-workspace-switch)
-            ,@(mapcar (lambda (i)
-                        `(,(kbd (format "s-%d" i)) .
-                          (lambda ()
-                            (interactive)
-                            (exwm-workspace-switch-create ,i))))
-                      (number-sequence 0 9))))
-    (exwm-enable)
+      ;; Set up global key bindings.  These always work, no matter the input state!
+      (setq exwm-input-global-keys
+            `(
+              ([f5] . persp-ivy-switch-buffer)
+              ([f9] . persp-list-buffers)
+              ([f8] . persp-switch)
+              ([?\s-f] . persp-forget-buffer)
+              ([?\s-R] . exwm-reset)
+              ([?\s-d] . counsel-linux-app)
 
-   )
+              ([?\s-r] . window-resize/body)
+              ;; Launch applications via shell command
+              ([?\s-$] . (lambda (command)
+                           (interactive (list (read-shell-command "$ ")))
+                           (start-process-shell-command command nil command)))
+
+              ;; Move Window keys
+              ([?\s-h] . windmove-left)
+              ([?\s-l] . windmove-right)
+              ([?\s-k] . windmove-up)
+              ([?\s-j] . windmove-down)
+
+              ([XF86AudioMute] . (lambda () (interactive)(ava/mute-volume)))
+              ([XF86AudioRaiseVolume] . (lambda () (interactive)(ava/inc-volume)))
+              ([XF86AudioLowerVolume] . (lambda () (interactive)(ava/dec-volume)))
+
+              ;; Movement keys
+              ([?\s-H] . windower-swap-left)
+              ([?\s-L] . windower-swap-right)
+              ([?\s-K] . windower-swap-above)
+              ([?\s-J] . windower-swap-below)
+
+              ([?\s-%] . split-window-right)
+              ([?\s-\"] . split-window-below)
+              ([?\s-Q] . kill-buffer)
+              ([?\s-q] . delete-window)
+              ([?\s-i] . exwm-input-toggle-keyboard)
+              ;; ([?\s-v] . exwm-workspace-delete)
+              ([?\s-v] . hide-mode-line-mode)
+              ([?\s-a] . exwm-workspace-add)
+              ([?\s-w] . exwm-workspace-switch)
+              ,@(mapcar (lambda (i)
+                          `(,(kbd (format "s-%d" i)) .
+                            (lambda ()
+                              (interactive)
+                              (exwm-workspace-switch-create ,i))))
+                        (number-sequence 0 9))))
+      (exwm-enable)
+
+     )
 
 #+end_src
 

@@ -422,6 +422,7 @@
 (use-package key-chord
   :init
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-define evil-insert-state-map "jw" 'save-buffer)
   (key-chord-mode 1)
   :custom
   (key-chord-two-keys-delay 0.5)
@@ -658,6 +659,7 @@
   (sml/theme 'respectful))
 
 (use-package telephone-line
+  :disabled
   :init (telephone-line-mode 1))
 
 (use-package base16-theme

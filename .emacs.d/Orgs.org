@@ -213,9 +213,8 @@ This is to remember case we want to use later
 Turn your emac in your powerponint!
 
 #+begin_src emacs-lisp
-
-
   (use-package org-present
+    :disabled
     :after org
     :init
     (defun ava/present-mode-enter()
@@ -231,8 +230,24 @@ Turn your emac in your powerponint!
       (org-present-read-write))
     (add-hook 'org-present-mode-hook #'ava/present-mode-enter)
     (add-hook 'org-present-mode-quit-hook #'ava/present-mode-quit))
+#+end_src
 
 
+#+begin_src emacs-lisp
+  (defun ava/presentation-setup ()
+    (text-scale-set 1)
+    (setq text-scale-mode-amount 3)
+    (org-display-inline-images)
+    (text-scale-mode 1))
+
+  (defun ava/presentation-end ()
+    (text-scale-mode 0))
+
+  (use-package org-tree-slide
+    :hook ((org-tree-slide-play . ava/presentation-setup)
+           (org-tree-slide-stop . ava/presentation-end))
+    :custom
+    (org-image-actual-width nil))
 #+end_src
 
 * Visual fill column
