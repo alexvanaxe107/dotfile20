@@ -2,8 +2,8 @@
 
 export WM_RUNNING="emacs"
 $HOME/.config/i3/monitor/saver.sh &
-display_manager.sh -o "DVI-1 HDMI-2"
-display_manager.sh -p "DVI-1"
+display_manager.sh -o "HDMI-2 DisplayPort-1"
+display_manager.sh -p "HDMI-2"
 #display_manager.sh -r "HDMI-2" "left"
 start_picom.sh "emacs"
 
