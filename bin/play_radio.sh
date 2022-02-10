@@ -176,7 +176,7 @@ play_quality(){
         result="$(clipster -oc)"
     fi
 
-    local option="$(youtube-dl --list-formats "${result}" | sed -n '6,$p')"
+    local option="$(yt-dlp --list-formats "${result}" | sed -n '8,$p')"
 
     local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the quality:" -bw 2 -y 16 -z 850)
 
@@ -327,7 +327,7 @@ command=$1
 secondcmd=$3
 
 
-while getopts "hsmxlr:Pp:Aa:q:QcCSRFL" opt; do
+while getopts "hsmxlr:Pp:Aa:q:QcCSRFLo:" opt; do
     case "$opt" in
         h) command="param"; show_help;;
         s) only_sound="1";;
@@ -337,6 +337,7 @@ while getopts "hsmxlr:Pp:Aa:q:QcCSRFL" opt; do
         r) command="param"; chosen_mode="Radio"; option=$OPTARG;;
         P) command="param"; chosen_mode="Play";;
         p) command="param"; chosen_mode="Play"; option=$OPTARG;;
+        o) command="param"; chosen_mode="Play Quality"; option=$OPTARG;;
         A) command="param"; chosen_mode="Play Audio";;
         a) command="param"; chosen_mode="Play Audio"; option=$OPTARG;;
         Q) command="param"; chosen_mode="PP";;
