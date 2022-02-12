@@ -1,4 +1,10 @@
 #!/bin/sh
+resize_img(){
+    #imgsize="$(monitors_info.sh -d 'DVI-1')"
+    imgsize="1080x1920"
+    convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
+}
+
 while read file
 do
     case "$1" in
@@ -8,8 +14,8 @@ do
             echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
-        "C-p")
-            convert "$file" -resize 1366x768^ -gravity Center -extent 1366x768 "$file";;
+        "C-p") 
+            resize_img "$file";;
         "C-s")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
         "C-l")

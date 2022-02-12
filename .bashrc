@@ -65,11 +65,17 @@ export PS1="\[\e[36m\]\u\[\e[m\]@\[\e[36m\]\h\[\e[m\] \A [\[\e[36m\]\W\[\e[m\]] 
 alias path='echo -e ${PATH//:/\\n}'
 
 #-----------------------------
+# npm configs
+#-----------------------------
+export PATH="$HOME/Documents/npm/bin:$PATH"
+
+#-----------------------------
 # Pyenv configs
 #-----------------------------
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$HOME/bin:$PYENV_ROOT/bin:/home/alexvanaxe/.fdir:$HOME/.gem/ruby/2.5.0/bin:$PATH"
 eval "$(pyenv init -)"
+
 
 # Add colors for filetype and  human-readable sizes by default on 'ls':
 alias ls='ls -h --color'

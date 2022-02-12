@@ -223,7 +223,7 @@
         (pyvenv-workon "money")
         (pyvenv-mode t)
         (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
-        (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/MoneyWatch/coding-steps/MoneyWatch-api/money_watch"))
+        (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/moneydevel/MoneyWatch-api/money_watch/"))
         (djangonaut-mode t)
         (message "Django Configured.")))
 
@@ -319,7 +319,7 @@
   (ivy-mode 1))
 
 (use-package counsel
-  :bind (("<f6>" . 'counsel-switch-buffer)
+  :bind (("<f6>" . 'switch-to-buffer)
          :map minibuffer-local-map
          ("C-q" . 'counsel-minibuffer-history))
   :custom
@@ -359,7 +359,7 @@
   :bind
   (("<f9>" . persp-list-buffers)
    ("<f8>" . persp-switch)
-   ("<f5>" . persp-counsel-switch-buffer))   ; or use a nicer switcher, see below
+   ("<f5>" . persp-ivy-switch-buffer))   ; or use a nicer switcher, see below
   :config
   (persp-mode))
 
@@ -422,6 +422,7 @@
 (use-package key-chord
   :init
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-define evil-insert-state-map "jw" 'save-buffer)
   (key-chord-mode 1)
   :custom
   (key-chord-two-keys-delay 0.5)
@@ -636,7 +637,6 @@
 (use-package all-the-icons)
 
 (use-package doom-modeline
-  :disabled
   :init (doom-modeline-mode 1)
   :custom (
            (doom-modeline-height 0)
@@ -651,6 +651,7 @@
   (sml/theme 'respectful))
 
 (use-package telephone-line
+  :disabled
   :init (telephone-line-mode 1))
 
 (use-package base16-theme
@@ -727,6 +728,9 @@
     ;; Perspective (Others are set on the plugin config)
     ">" '(persp-next :which-key "Move to the next perspective")
     "<" '(persp-prev :which-key "Move to the prev perspective")
+    "s" '(persp-switch-to-scratch-buffer :which-key "Switch to the buffer")
+    "f" '(persp-forget-buffer :which-key "Forget the buffer of the persp")
+    "A" '(persp-set-buffer :which-key "Set the buffer to this persp and remove from the other")
     )
 
 (defun ava/org-babel-tangle-config ()

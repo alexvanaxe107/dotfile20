@@ -1,27 +1,29 @@
 #! /bin/bash
 
+running_sink="$(pactl list sinks | grep -C 1 "RUNNING" | tail -n 1 | cut -d ' ' -f 2)"
+
 do_mute() {
-    pactl set-sink-mute $(pactl info | grep Sink | cut -d ' ' -f 3) 'toggle'
+    pactl set-sink-mute ${running_sink} 'toggle'
 }
 
 do_up() {
     step="$1" 
-    cur_vol="$(pactl get-sink-volume $(pactl info | grep Sink | cut -d ' ' -f 3) | cut -d "/" -f 2 | head -n 1 | grep -oP "\d+")"
+    cur_vol="$(pactl get-sink-volume ${running_sink} | cut -d "/" -f 2 | head -n 1 | grep -oP "\d+")"
     new_vol=$(echo "${cur_vol}+${step}" | bc)
 
-    echo "Change volume to ${new_vol}"
+    echo "Volume set to ${new_vol}"
 
-    pactl set-sink-volume $(pactl info | grep Sink | cut -d ' ' -f 3) "${new_vol}%"
+    pactl set-sink-volume ${running_sink} "${new_vol}%"
 }
 
 do_down() {
     step="$1" 
-    cur_vol="$(pactl get-sink-volume $(pactl info | grep Sink | cut -d ' ' -f 3) | cut -d "/" -f 2 | head -n 1 | grep -oP "\d+")"
+    cur_vol="$(pactl get-sink-volume ${running_sink} | cut -d "/" -f 2 | head -n 1 | grep -oP "\d+")"
     new_vol=$(echo "${cur_vol}-${step}" | bc)
 
     echo "Change volume to ${new_vol}"
 
-    pactl set-sink-volume $(pactl info | grep Sink | cut -d ' ' -f 3) "${new_vol}%"
+    pactl set-sink-volume ${running_sink} "${new_vol}%"
 }
 
 command="$1"

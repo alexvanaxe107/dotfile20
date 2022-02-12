@@ -12,7 +12,8 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
 
-#window:
+window:
+  window.opacity: 0.8
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -290,7 +291,6 @@ colors:
     magenta: '0x8959A8'
     cyan: '0x3E999F'
     white: '0xF5F5F5'
-background_opacity: 0.8
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
