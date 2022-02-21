@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nsxhkd\nbspwm\nradio\npl\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\nmonitors\nytpl" | dmenu -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nsxhkd\nbspwm\nradio\npl\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\nmonitors\nsxiv\nytpl" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -53,6 +53,7 @@ case $file in
     "fonts") alacritty -e $EDITOR $HOME/bin/font_select.sh;;
     "monitors") alacritty -e $EDITOR $HOME/.config/wm/monitors.conf;;
     "ytpl") alacritty -e $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;
+    "sxiv") alacritty -e $EDITOR $HOME/.config/sxiv/exec/key-handler;;
     "wallpaper") process_wallpaper;;
 esac
 

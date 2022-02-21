@@ -1,7 +1,7 @@
 #!/bin/sh
 resize_img(){
-    #imgsize="$(monitors_info.sh -d 'DVI-1')"
-    imgsize="1080x1920"
+    imgsize="$(monitors_info.sh -d 'HDMI-1')"
+    #imgsize="1080x1920"
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
