@@ -172,28 +172,32 @@ Some cool defaults
      history-delete-duplicates t
      large-file-warning-threshold (* 1024 1024)
      create-lockfiles nil
+     history-length 25
+     use-dialog-box nil
     )
 
-      (setq savehist-additional-variables
-            '(kill-ring
-              search-ring
-              regexp-search-ring
-              last-kbd-macro
-              kmacro-ring
-              shell-command-history))
-      (savehist-mode t)
-      (auto-save-visited-mode t)
 
-      (show-paren-mode t)
-      (global-hl-line-mode t)
-      (setq prettify-symbols-unprettify-at-point 'right-edge)
-      (global-prettify-symbols-mode)
+  (setq savehist-additional-variables
+        '(kill-ring
+          search-ring
+          regexp-search-ring
+          last-kbd-macro
+          kmacro-ring
+          shell-command-history))
 
-      (electric-pair-mode) ;; Maybe not worth it
-      (save-place-mode t)
+  (auto-save-visited-mode t)
+  (savehist-mode 1)
+  (electric-pair-mode 1)
+  (save-place-mode 1)
+  (recentf-mode 1)
+
+  (show-paren-mode t)
+  (global-hl-line-mode t)
+  (setq prettify-symbols-unprettify-at-point 'right-edge)
+  (global-prettify-symbols-mode)
 
   (with-current-buffer "*scratch*"
-      (emacs-lock-mode 'kill))
+    (emacs-lock-mode 'kill))
 
 #+end_src
 
