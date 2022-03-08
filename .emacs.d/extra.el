@@ -696,7 +696,7 @@
     ("h" shrink-window-horizontally)
     ("f" nil "finished" :exit t))
   (defhydra transparency-change (global-map "<F8>")
-    "Resize the window"
+    "Transparency"
     ("u" (ava/change-transparency +2))
     ("d" (ava/change-transparency -2))
     ("f" nil "finished" :exit t))

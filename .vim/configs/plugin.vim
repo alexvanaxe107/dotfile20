@@ -19,6 +19,8 @@ Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 source /home/alexvanaxe/.vim/configs/plugins/tests.vim
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 if !has('nvim')
     Plug 'tpope/vim-dispatch'
 endif
@@ -36,23 +38,25 @@ Plug 'prettier/vim-prettier' " Formatting
 Plug 'mkitt/tabline.vim'
 source /home/alexvanaxe/.vim/configs/plugins/rainbow.vim
 
-if has('nvim')
-  source /home/alexvanaxe/.vim/configs/plugins/deoplete.vim
-else
-  Plug 'Quramy/tsuquyomi'
-endif
+"if has('nvim')
+"  source /home/alexvanaxe/.vim/configs/plugins/deoplete.vim
+"else
+"  Plug 'Quramy/tsuquyomi'
+"endif
 
 " LSP Configs
 source /home/alexvanaxe/.vim/configs/plugins/lspconfig.vim
+source /home/alexvanaxe/.vim/configs/plugins/cmp.vim
+
 " Javascript/Typescript
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
+"Plug 'pangloss/vim-javascript'
+"Plug 'leafgarland/typescript-vim'
 
 " html
 Plug 'mattn/emmet-vim' " Generate code html
 
 " Python
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Vimjas/vim-python-pep8-indent'
 
@@ -103,8 +107,3 @@ Plug 'jnurmine/Zenburn'
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
-
-lua << EOF
-require 'lspconfig'
-require 'lspconfig'.bashls.setup{}
-EOF
