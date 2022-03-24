@@ -9,7 +9,7 @@ set -o errexit
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
-WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nCity Night\nCity Landscape\nScience Fiction\nMinimalism\nSpace\nWar\nApocalypse\nartwork\ndigital art\nfantasy art\nnature"
+WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nCity Night\nCity Landscape\nscience fiction\nMinimalism\nSpace\nWar\nApocalypse\nartwork\ndigital art\nfantasy art\nnature\ntilt shift\nindoors\noutdoors\nsimple background\nwater\ndepth of field\ndark\nlight\nWLOP"
 
 MONITOR_NUMBER=$(monitors_info.sh -q)
 

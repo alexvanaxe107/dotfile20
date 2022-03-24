@@ -36,6 +36,8 @@ Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
 Plug 'prettier/vim-prettier' " Formatting
 Plug 'mkitt/tabline.vim'
+" Syntax hightlight plugin
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 source /home/alexvanaxe/.vim/configs/plugins/rainbow.vim
 
 "if has('nvim')
@@ -69,6 +71,9 @@ Plug 'junegunn/limelight.vim'
 source /home/alexvanaxe/.vim/configs/plugins/airline.vim
 Plug 'guns/xterm-color-table.vim'
 source /home/alexvanaxe/.vim/configs/plugins/seiya.vim
+
+" ICONS
+Plug 'ryanoasis/vim-devicons'
 
 "Colorschemes
 Plug 'dracula/vim', { 'as': 'dracula' }

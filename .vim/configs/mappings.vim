@@ -1,4 +1,5 @@
-:let mapleader = ","
+:let mapleader = " "
+:let maplocalleader = " "
 
 ino <down> <Nop>
 ino <left> <Nop>

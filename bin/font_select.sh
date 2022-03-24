@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nNM-Terminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -119,11 +119,11 @@ case $CHOSEN in
     "Computer") font "Terminus \(TTF\)" Bold 10 10 13 2;;
     "Gothic") font "NanumGothicCoding" Bold 10 10 12 1;;
     "SteamPunk") font "Roboto Condensed" Semibold 10 10 11;;
+    "Terminator") font "Digital\-7 Mono" Bold 9 9 12 0;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
     "NM-Japan") font "Shojumaru" Bold 9 9 11 0;;
     "NM-Watedland") font "Special Elite" Bold 11 11 12 0;;
-    "NM-Terminator") font "01 DigitMono" Bold 9 9 12 0;;
     "NM-Celtic") font "A.D. MONO" Bold 12 12 12 0;;
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;

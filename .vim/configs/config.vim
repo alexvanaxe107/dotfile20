@@ -1,6 +1,9 @@
 filetype on
+
 filetype plugin on
 syntax on
+
+set backspace=indent,eol,start " Testing some configs
 
 " Fix tmux background
 if &term =~ '256color'
@@ -17,6 +20,9 @@ set undofile " Maintain undo history between sessions not so eternally!
 set undodir=$HOME/.config/.nvim/history
 set number
 set relativenumber
+set signcolumn=yes
+
+set cursorline
 
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
@@ -26,7 +32,7 @@ set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitigno
 set showcmd       " display incomplete commands
 " highlight matching braces
 set showmatch
-" set incsearch     " do incremental searching
+set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 " set autowrite     " Automatically :write before running commands
 

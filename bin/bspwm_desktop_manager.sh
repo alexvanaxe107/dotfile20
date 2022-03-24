@@ -30,8 +30,6 @@ goto(){
 
         bspc desktop -f "${togo_name}"
 
-	echo "CODE: ${togo_code}"
-
         if [ -z "${togo_code}" ]; then
             bspc monitor focused --add-desktops "$(get_name ${desk_togo})"
             # Go to the last desktop
@@ -44,6 +42,11 @@ goto(){
 
     if [ "${creation_mode}" = "manual" ]; then
         bspc desktop -f "focused:^${desk_togo}"
+    fi
+
+    if [ "${creation_mode}" = "mixed" ]; then
+        togo_name=$(get_name ${desk_togo})
+        bspc desktop -f "${togo_name}"
     fi
 }
 
@@ -73,6 +76,11 @@ moto(){
     if [ "${creation_mode}" = "manual" ]; then
         bspc node -d "focused:^${desk_togo}"
     fi
+
+    if [ "${creation_mode}" = "mixed" ]; then
+        togo_name=$(get_name ${desk_togo})
+        bspc node -d "${togo_name}"
+    fi
 }
 
 mofoto(){
@@ -92,6 +100,11 @@ mofoto(){
     if [ "${creation_mode}" = "manual" ]; then
         bspc node -d "focused:^${desk_togo}" --follow
     fi
+
+    if [ "${creation_mode}" = "mixed" ]; then
+        togo_name=$(get_name ${desk_togo})
+        bspc node -d "${togo_name}" --follow
+    fi
 }
 
 rename_desktop(){
@@ -105,11 +118,15 @@ rename_desktop(){
 toggle_mode(){
     if [ "${creation_mode}" = "auto" ]; then
         sed -i "s/auto/manual/g" ${CONFIG_PATH}
-        echo "" > $HOME/.config/indicators/creation.ind
+        echo "MA" > $HOME/.config/indicators/creation.ind
     fi
     if [ "${creation_mode}" = "manual" ]; then
-        sed -i "s/manual/auto/g" ${CONFIG_PATH}
-        echo "🛡" > $HOME/.config/indicators/creation.ind
+        sed -i "s/manual/mixed/g" ${CONFIG_PATH}
+        echo "MI" > $HOME/.config/indicators/creation.ind
+    fi
+    if [ "${creation_mode}" = "mixed" ]; then
+        sed -i "s/mixed/auto/g" ${CONFIG_PATH}
+        echo "AU" > $HOME/.config/indicators/creation.ind
     fi
 
 }
