@@ -13,6 +13,7 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'freitass/todo.txt-vim'
 Plug 'preservim/vimux'
 
+
 " #### IDE
 source /home/alexvanaxe/.vim/configs/plugins/indentline.vim
 Plug 'majutsushi/tagbar'

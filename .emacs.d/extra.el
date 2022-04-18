@@ -504,16 +504,15 @@
   (add-to-list 'lsp-enabled-clients 'html-ls)
   (add-to-list 'lsp-enabled-clients 'angular-ls)
   (add-to-list 'lsp-enabled-clients 'ts-ls)
-  (add-to-list 'lsp-enabled-clients 'pylsp)
+  (add-to-list 'lsp-enabled-clients 'pyright)
   (lsp-enable-which-key-integration t))
 
-(use-package lsp-jedi
-  :after lsp-mode
-  :ensure t
-  :config
-  (with-eval-after-load "lsp-mode"
-    (add-to-list 'lsp-disabled-clients 'pyls)
-    (add-to-list 'lsp-enabled-clients 'jedi)))
+(use-package lsp-pyright
+:ensure t
+:hook (python-mode . (lambda ()
+                        (require 'lsp-pyright)
+                        (lsp-deferred))))  ; or lsp-deferred
+
 
 (use-package lsp-ivy
   :after lsp-mode

@@ -45,7 +45,7 @@ c.tabs.background = True
 # Dont know, but seems cool
 c.scrolling.smooth = True
 
-c.url.searchengines = {"DEFAULT": "https://duckduckgo.com/?q={}", "y": "http://www.youtube.com/results?search_query={}", "g": "http://www.google.com/search?q={}"}
+c.url.searchengines = {"DEFAULT": "http://www.google.com/search?q={}", "y": "http://www.youtube.com/results?search_query={}", "g": "http://www.google.com/search?q={}"}
 
 ## END OF PERSONAL CONFIGS
 
@@ -2030,7 +2030,7 @@ c.changelog_after_upgrade = 'minor'
 ## Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 ## for a blank page.
 ## Type: FuzzyUrl
-# c.url.default_page = 'https://start.duckduckgo.com/'
+c.url.default_page = 'https://start.me/p/lL4GXr/inicio'
 
 ## URL segments where `:navigate increment/decrement` will search for a
 ## number.
@@ -2071,7 +2071,7 @@ c.changelog_after_upgrade = 'minor'
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
-# c.url.start_pages = ['https://start.duckduckgo.com']
+c.url.start_pages = ['https://start.me/p/lL4GXr/inicio']
 
 ## URL parameters to strip with `:yank url`.
 ## Type: List of String

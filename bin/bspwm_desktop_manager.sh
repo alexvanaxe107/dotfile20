@@ -118,15 +118,15 @@ rename_desktop(){
 toggle_mode(){
     if [ "${creation_mode}" = "auto" ]; then
         sed -i "s/auto/manual/g" ${CONFIG_PATH}
-        echo "MA" > $HOME/.config/indicators/creation.ind
+        echo "" > $HOME/.config/indicators/creation.ind
     fi
     if [ "${creation_mode}" = "manual" ]; then
         sed -i "s/manual/mixed/g" ${CONFIG_PATH}
-        echo "MI" > $HOME/.config/indicators/creation.ind
+        echo "" > $HOME/.config/indicators/creation.ind
     fi
     if [ "${creation_mode}" = "mixed" ]; then
         sed -i "s/mixed/auto/g" ${CONFIG_PATH}
-        echo "AU" > $HOME/.config/indicators/creation.ind
+        echo "" > $HOME/.config/indicators/creation.ind
     fi
 
 }
