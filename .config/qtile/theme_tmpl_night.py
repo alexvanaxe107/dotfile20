@@ -6,6 +6,13 @@ bar_configs = dict(
     padding=5
     )
 
+bar_graph = dict(
+    fill_color='#222222',
+    graph_color='#333333',
+    border_color='#444444'
+)
+
+
 colors = {
     "active_border": '#ffffff',
     "border_normal": '#000000',

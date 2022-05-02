@@ -11,6 +11,9 @@ from bar import myBar
 mod = "mod4"
 terminal = guess_terminal()
 
+auto_fullscreen = False
+cursor_warp = False  # could be nice. Testing out...
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -34,11 +37,12 @@ keys = [
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 
-    Key([mod, "control"], "right", lazy.layout.grow_main(), desc="Grow window down"),
-    Key([mod, "control"], "left", lazy.layout.shrink_main(), desc="Grow window down"),
+    Key([mod, "control"], "Right", lazy.layout.grow_main(), desc="Grow window down"),
+    Key([mod, "control"], "Left", lazy.layout.shrink_main(), desc="Grow window down"),
     Key([mod], "o", lazy.layout.maximize()),
     Key([mod, "control"], "f", lazy.layout.flip()),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
+    Key([mod], "u", lazy.window.toggle_floating(), desc="Toggle floating"),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -53,7 +57,8 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Go to previous layout"),
+    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),

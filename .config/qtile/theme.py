@@ -1,18 +1,18 @@
-theme_name = "night"
+theme_name = "light"
 
 bar_configs = dict(
-    font="Pointfree",
-    fontsize=10,
-    padding=5
+    font='VT323',
+    fontsize=15,
+    padding=2
     )
 
 colors = {
-    "active_border": '#B6B7C4',
-    "border_normal": '#49536E',
-    "bar_background": '#293345B7',
-    "bar_foreground": '#B6B7C4'
+    "active_border": '#ffffff',
+    "border_normal": '#000000',
+    "bar_background": '#000033',
+    "bar_foreground": '#eeeeee',
 }
 
 values = {
-    "gap_size": 8,
+    "gap_size": 15,
 }

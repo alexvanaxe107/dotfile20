@@ -1,16 +1,16 @@
 theme_name = "light"
 
 bar_configs = dict(
-    font='Erica Type',
-    fontsize=12,
+    font='VT323',
+    fontsize=15,
     padding=2
     )
 
 colors = {
     "active_border": '#ffffff',
     "border_normal": '#000000',
-    "bar_background": '#111111',
-    "bar_foreground": '#eeeeee'
+    "bar_background": '#000033',
+    "bar_foreground": '#eeeeee',
 }
 
 values = {
