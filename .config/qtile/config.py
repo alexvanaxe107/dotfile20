@@ -1,4 +1,4 @@
-from libqtile.config import Key, Group
+from libqtile.config import Key, Group, KeyChord
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -77,7 +77,31 @@ keys = [
     Key([mod, "shift"], "u", lazy.spawn("configshortcut.sh"), desc="Change some configs"),
     Key([mod, "shift"], "d", lazy.spawn("configdisplay.sh"), desc="Config the display"),
     Key([mod, "shift"], "o", lazy.spawn("alacritty_theme.sh"), desc="Change the alacritty theme"),
+    Key([mod, "shift"], "e", lazy.spawn("powercontrol.sh"), desc="Turn off, hibernate... etc"),
+    Key([mod, "shift"], "b", lazy.spawn("toggle_bars.sh"), desc="Turn off/on polybars"),
+    Key([mod, "shift"], "c", lazy.spawn("$HOME/.config/conky/conky.sh"), desc="Toggle conky"),
+    Key([mod, "shift"], "i", lazy.spawn("avalight"), desc="Change the light"),
+    Key([mod], "a", lazy.spawn("dmenulexia.sh"), desc="Change the alacritty theme"),
     Key([mod], "d", lazy.spawn("dmenu_run"), desc="Run the programs"),
+
+        # Volume
+    Key([], "XF86AudioMute",
+        lazy.spawn("pulseaudio-ctl mute"),
+        desc='Mute audio'
+        ),
+    Key([], "XF86AudioLowerVolume",
+        lazy.spawn("pulseaudio-ctl down 2"),
+        desc='Volume down'
+        ),
+    Key([], "XF86AudioRaiseVolume",
+        lazy.spawn("pulseaudio-ctl up 2"),
+        desc='Volume up'
+        ),
+
+    # Chords to start some programs
+    KeyChord([mod], "g", [
+        Key([], "k", lazy.spawn("setkmap"))
+    ])
 ]
 
 groups = []
