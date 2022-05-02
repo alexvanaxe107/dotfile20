@@ -67,7 +67,7 @@ alias path='echo -e ${PATH//:/\\n}'
 #-----------------------------
 # npm configs
 #-----------------------------
-export PATH="$HOME/Documents/npm/bin:$PATH"
+export PATH="$HOME/Documents/npm/bin:$HOME/.local/bin/:$PATH"
 
 #-----------------------------
 # Pyenv configs

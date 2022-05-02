@@ -197,7 +197,7 @@ super + control + {j,k}
 
 # focus the node in the given direction
 super + shift + {h,j,k,l}
-	bspc node -s {west,south,north,east}
+	bspc node -s {west.local,south.local,north.local,east.local}
 
 # Navigate in the desktops
 super + ctrl + {comma,period}
@@ -250,11 +250,11 @@ super + m
 
 # focus the node in the given direction
 super + {h,j,k,l}
-	bspc node -f {west,south,north,east}
+	bspc node -f {west.local,south.local,north.local,east.local}
 
 # move the node in the given direction
 super + shift + control + {h,j,k,l}
-	bspc node --to-node {west,south,north,east}
+	bspc node --to-node {west.local,south.local,north.local,east.local}
 
 #
 # preselect

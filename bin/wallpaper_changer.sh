@@ -24,11 +24,14 @@ change_all(){
         is_rotated="$(monitors_info.sh -r $monitor)"
         index=$(monitors_info.sh -ib ${monitor})
         if [ "${is_wide}" = "yes" ]; then
-            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled $wallpaper
         elif [ "${is_rotated}" = "yes" ]; then
-            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/rotted/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled $wallpaper
         else
-            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled $wallpaper
         fi
     done
     notify-send -u normal "All wallpapers setted. Enjoy."

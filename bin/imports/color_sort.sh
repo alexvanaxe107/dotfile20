@@ -21,11 +21,17 @@ set_wallpaper()
 	count="$(monitors_info.sh -ib "$n")"
 
         if [ "${is_wide}" = "yes" ]; then
-            nitrogen --head=$count --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled "$wallpaper"
+            python $HOME/bin/qtile/wallpapers.py "$wallpaper" 0
         elif [ "${is_rotated}" = "yes" ]; then
-            nitrogen --head=$count --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled "$wallpaper"
+            python $HOME/bin/qtile/wallpapers.py "$wallpaper" 1
         else
-            nitrogen --head=$count --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled "$wallpaper"
+            python $HOME/bin/qtile/wallpapers.py "$wallpaper" 1
         fi
     done <<< "$(monitors_info.sh -m)"
 }

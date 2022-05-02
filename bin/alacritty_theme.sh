@@ -234,8 +234,8 @@ if [ "$vim_theme" == "tango_dark" ]; then
 fi
 
 if [ "$vim_theme" == "Nova.yml" ]; then
-    sed -i 's/^colorscheme.*/colorscheme nova/' ${HOME}/.vim/configs/theme.vim
-    sed -i 's/airline_theme.*/airline_theme="nova"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme Atelier_CaveLight/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="Atelier_CaveLight"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 

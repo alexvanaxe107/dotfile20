@@ -569,7 +569,10 @@
   :hook (vue-mode . lsp-deferred)
   :config
   (with-eval-after-load "lsp-mode"
-    (add-to-list 'lsp-enabled-clients 'vls)))
+    (add-to-list 'lsp-enabled-clients 'vls)
+    (add-to-list 'lsp-enabled-clients 'volar-api)
+    (add-to-list 'lsp-enabled-clients 'volar-doc)
+    (add-to-list 'lsp-enabled-clients 'volar-html)))
 
 (use-package sass-mode
   :after typescript-mode)
@@ -665,6 +668,7 @@
   :init (telephone-line-mode 1))
 
 (use-package base16-theme
+  :disabled
   :ensure t)
 
 ;; Or if you have use-package installed

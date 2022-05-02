@@ -13,6 +13,7 @@ secrecy() {
     iptables-restore $HOME/tor/torrify
     ip6tables-restore $HOME/tor/torrify
 
+    cp /etc/resolv.conf /etc/resolv.conf.tor
     echo "nameserver 127.0.0.1" > /etc/resolv.conf
 }
 
@@ -20,7 +21,8 @@ normal() {
     iptables-restore $HOME/tor/clean_rules
     ip6tables-restore $HOME/tor/clean_rules
 
-    resolvconf -u
+    cp /etc/resolv.conf.tor /etc/resolv.conf
+    #resolvconf -u
 }
 
 while getopts "h?sn" opt; do

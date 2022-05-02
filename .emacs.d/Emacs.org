@@ -812,7 +812,7 @@ Better code analyses
     (setq lsp-diagnostic-package :none))
 
 #+end_src
-  
+
 * Django
 
 Django integration.
@@ -891,7 +891,10 @@ This config enable the lsp server also. There are a lot of lsp servers running h
     :hook (vue-mode . lsp-deferred)
     :config
     (with-eval-after-load "lsp-mode"
-      (add-to-list 'lsp-enabled-clients 'vls)))
+      (add-to-list 'lsp-enabled-clients 'vls)
+      (add-to-list 'lsp-enabled-clients 'volar-api)
+      (add-to-list 'lsp-enabled-clients 'volar-doc)
+      (add-to-list 'lsp-enabled-clients 'volar-html)))
 
 #+end_src
 
@@ -1045,6 +1048,7 @@ Telephone custom with gradient.
 #+begin_src emacs-lisp
 
   (use-package base16-theme
+    :disabled
     :ensure t)
 
 #+end_src

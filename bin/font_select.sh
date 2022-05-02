@@ -34,6 +34,10 @@ font() {
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
     fi
 
+    #Change the qtile font
+    sed -i "s/font=.*/font=\"${font_name}\",/" ${HOME}/.config/qtile/theme.py
+    sed -i "s/fontsize=.*/fontsize=${size3},/" ${HOME}/.config/qtile/theme.py
+
     #Change the dmenu font
     sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
@@ -84,6 +88,10 @@ font() {
         dunst&
     fi
     toggle_bars.sh --restart
+
+    #Refresh the qtile
+    python $HOME/bin/qtile/restart.py
+
     notify-send -u normal "${CHOSEN}" "Enjoy the ${font_name}"
 }
 
