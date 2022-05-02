@@ -13,6 +13,8 @@ colors = {
     "bar_background_dark": '#888888',
     "bar_foreground": '#eeeeee',
     "bar_foreground2": '#444444',
+    "bar_hl_act": '#999999',
+    "bar_hl_normal": '#aaaaaa',
     "cpu_bk": '#222222',
     "memory_bk": '#333333',
     "swap_bk": '#555555',

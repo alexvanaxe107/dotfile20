@@ -14,6 +14,8 @@ set -o pipefail
 
 source $HOME/bin/imports/color_sort.sh
 
+is_bspc=$(bspc wm --get-status)
+
 show_help () {
     echo "Yay! Change the theme of the desktop"
     echo "-t          The theme name"

@@ -1,8 +1,9 @@
+import os
 from libqtile.config import Key, Group, KeyChord
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from layouts import layouts
+from layouts import layouts, floating_layout
 from workspaces import workspaces
 from theme import theme_name
 
@@ -79,7 +80,7 @@ keys = [
     Key([mod, "shift"], "o", lazy.spawn("alacritty_theme.sh"), desc="Change the alacritty theme"),
     Key([mod, "shift"], "e", lazy.spawn("powercontrol.sh"), desc="Turn off, hibernate... etc"),
     Key([mod, "shift"], "b", lazy.spawn("toggle_bars.sh"), desc="Turn off/on polybars"),
-    Key([mod, "shift"], "c", lazy.spawn("$HOME/.config/conky/conky.sh"), desc="Toggle conky"),
+    Key([mod, "shift"], "c", lazy.spawn(os.path.expanduser("~/.config/conky/conky.sh")), desc="Toggle conky"),
     Key([mod, "shift"], "i", lazy.spawn("avalight"), desc="Change the light"),
     Key([mod], "a", lazy.spawn("dmenulexia.sh"), desc="Change the alacritty theme"),
     Key([mod], "d", lazy.spawn("dmenu_run"), desc="Run the programs"),
@@ -109,6 +110,7 @@ groups = []
 for workspace in workspaces:
     groups.append(Group(workspace["name"]))
     keys.append(Key([mod], workspace["key"], lazy.group[workspace["name"]].toscreen()))
+    keys.append(Key([mod, "shift"], workspace["key"], lazy.window.togroup(workspace["name"])))
 
 for i in range(2):
     keys.extend([Key([mod, "control"], str(i+1), lazy.window.toscreen(i))])

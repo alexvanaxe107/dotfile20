@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 volume=$(pulseaudio-ctl full-status | awk '{print $1}')
 is_muted=$(pulseaudio-ctl full-status | awk '{print $2}')
