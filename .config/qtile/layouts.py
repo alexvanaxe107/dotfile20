@@ -12,9 +12,11 @@ layout_theme = {"border_width": 3,
 layouts = [
     layout.MonadTall(**layout_theme, margin=values['gap_size'], single_border_width=0, ratio=0.6),
     layout.MonadTall(**layout_theme, single_border_width=0, ratio=0.6),
-    # layout.MonadThreeCol(**layout_theme, margin=values['gap_size'], single_border_width=0, ratio=0.6),
-    # layout.Stack(num_stacks=2, **layout_theme),
+    # layout.Stack(num_stacks=2, **layout_theme, margin=values['gap_size']),
     layout.Max(**layout_theme, margin=values['gap_size']),
+    layout.MonadThreeCol(**layout_theme, margin=values['gap_size'],
+                         single_border_width=0, ratio=0.6,
+                         new_client_position='bottom'),
     # Try more layouts by unleashing below layouts.
     # layout.Bsp(**layout_theme),
     # layout.Columns(**layout_theme),
@@ -47,11 +49,10 @@ layouts = [
     # ], **layout_theme),
     layout.Matrix(**layout_theme, columns=3, margin=values['gap_size']),
     layout.VerticalTile(**layout_theme, margin=values['gap_size']),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
+    #layout.MonadWide(**layout_theme, margin=values['gap_size'], ratio=0.6),
+    #layout.RatioTile(),
+    #layout.Tile(),
     # layout.TreeTab(),
-    # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 

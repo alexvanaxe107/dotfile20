@@ -7,7 +7,7 @@ from layouts import layouts, floating_layout
 from workspaces import workspaces
 from theme import theme_name
 
-from bar import myBar
+from bar import myBar, myOtherBar
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -117,8 +117,9 @@ for i in range(2):
 
 if theme_name == "day":
     screens = [Screen(top=myBar)]
+    screens.append(Screen())
 else:
     screens = [Screen(bottom=myBar)]
+    screens.append(Screen(bottom=myOtherBar))
 
-screens.append(Screen())
 

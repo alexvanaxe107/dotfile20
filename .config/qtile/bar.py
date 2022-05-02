@@ -49,6 +49,7 @@ if theme_name == "night":
                         name_transform=lambda name: name.upper(),
                     ),
                     widget.Spacer(),
+                    widget.HDDBusyGraph(**bar_graph),
                     widget.CPUGraph(**bar_graph),
                     widget.MemoryGraph(**bar_graph),
                     widget.Spacer(),
@@ -78,6 +79,32 @@ if theme_name == "night":
                 # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
                 # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
             )
+
+    myOtherBar = bar.Bar(
+                [
+                    widget.CurrentLayoutIcon(scale=0.7, foreground=colors['bar_foreground']),
+                    widget.CurrentScreen(active_text='', inactive_text='',),
+                    get_separator(),
+                    widget.CurrentLayout(foreground=colors['bar_foreground'],
+                                         **bar_configs),
+
+                    widget.GroupBox(**bar_configs,
+                                    foreground=colors['bar_foreground'],
+                                    inactive=colors['bar_foreground'],
+                                    this_current_screen_border=colors['bar_hl_normal'],
+                                    other_current_screen_border=colors['bar_hl_normal'],
+                                    this_screen_border=colors['bar_hl_act'],
+                                    other_screen_border=colors['bar_hl_act']),
+                    get_separator(True)
+                ],
+                24,
+                background=colors['bar_background'],
+                margin=[0, 212, 0, 212] # Margin = N E S W
+                
+                # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+                # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            )
+
 elif theme_name == "day":
     myBar = bar.Bar(
                 [

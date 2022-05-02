@@ -100,7 +100,7 @@ case $CHOSEN in
     "Night Original") font "Iceland" Regular 11 11 12 0;;
     "Old Terminal") font "VT323" Regular 12 12 19 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
-    "Clear") font "TeX Gyre Cursor" Bold 9 9 11 1;;
+    "Clear") font "TeX Gyre Cursor" Bold 9 9 13 1;;
     "Nature") font "CQ Mono" Bold 10 10 12 1;;
     "Modern")  font "Audimat Mono" Regular 10 10 12 1;;
     "Russian") font "Iosevka" "Bold" 10 10 13 1;;
