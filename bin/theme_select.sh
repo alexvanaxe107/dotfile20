@@ -14,6 +14,8 @@ set -o pipefail
 
 source $HOME/bin/imports/color_sort.sh
 
+is_bspc=$(bspc wm --get-status)
+
 show_help () {
     echo "Yay! Change the theme of the desktop"
     echo "-t          The theme name"
@@ -61,6 +63,9 @@ begin(){
     bspc config active_border_color             "${active_border_color}"
     bspc config normal_border_color             "${normal_border_color}"
     bspc config presel_feedback_color           "${presel_feedback_color}"
+
+    # Refresh qtile to refresh everything
+    python $HOME/bin/qtile/restart.py 
 }
 
 # Try to copy the config where is the themename
@@ -80,6 +85,7 @@ function reset_configs(){
     cp ${HOME}/.config/conky/themes/${theme_name}/clock_rings.lua ${HOME}/.config/conky/clock_rings.lua
     cp ${HOME}/.config/conky/themes/${theme_name}/calendar_widgets.lua ${HOME}/.config/conky/calendar_widgets.lua
     cp ${HOME}/.config/conky/themes/${theme_name}/calendar.conf ${HOME}/.config/conky/calendar.conf
+    cp ${HOME}/.config/qtile/theme_tmpl_${theme_name}.py ${HOME}/.config/qtile/theme.py
     cp ${HOME}/.config/vis/colors/theme_tpl ${HOME}/.config/vis/colors/theme
     cp ${HOME}/.config/tint2/tint2rc.tpl ${HOME}/.config/tint2/tint2rc
     cp ${HOME}/bin/imports/lock.sh.tmpl ${HOME}/bin/imports/lock.sh

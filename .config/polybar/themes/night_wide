@@ -229,7 +229,7 @@ label-urgent-padding = ${format.bspadding}
 
 #label-empty = %index%
 #label-empty = %index%%icon%
-#label-empty = %icon%
+label-empty =
 label-empty-padding = ${format.bspadding}
 #label-empty-foreground = ${colors.foreground-alt2}
 #label-empty-background = ${colors.background}

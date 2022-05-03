@@ -27,6 +27,8 @@ toggle_tint(){
     if [ ! -z "$pid" ]; then
         bspc config -m $MONITOR1 right_padding 0
         bspc config -m $MONITOR2 right_padding 0
+        bspc config -m $MONITOR1 left_padding 0
+        bspc config -m $MONITOR2 left_padding 0
         kill $pid
     else
         sed -i "s/panel_monitor.*/panel_monitor = ${MONITOR1}/" ${HOME}/.config/tint2/tint2rc

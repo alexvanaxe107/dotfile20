@@ -70,20 +70,53 @@ HDMI1() {
     notify-send -u low "Light" "Screen monitor set to $GS"
 }
 
+generic() {
+    killall clight
+    echo "" > ${INDICATOR_FILE}
+    local monitorC="$1"
+
+    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+
+    SOFT=$(_get_soft_brigtness "$BT")
+
+    if [ ! -z "${SOFT}" ]; then
+        avalight.sh -Is "${SOFT}" "${monitorC}"
+    else
+        avalight.sh -I "${BT}" "${monitorC}"
+    fi
+
+    #SOFT=$(_get_soft_brigtness "$BT")
+
+    #if [ ! -z "${SOFT}" ]; then
+        #xrandr --output ${GS} --brightness ${SOFT}
+    #else
+        #ddcutil setvcp -d 2 10 ${BT}
+    #fi
+
+    notify-send -u low "Light" "Screen monitor "${monitorC}" set to $BT"
+}
+
 both() {
-    if [ ! -z "$GS" ]; then
-        killall clight
-        echo "" > ${INDICATOR_FILE}
+    local is_number="$(echo ${GS} | grep -xP '\d*')" 
 
-        SOFT=$(_get_soft_brigtness "$GS")
+    if [ ! -z "${GS}" ]; then
+	    if [ ! -z "${is_number}" ]; then
+		killall clight
+		echo "" > ${INDICATOR_FILE}
 
-        if [ ! -z "${SOFT}" ]; then
-	    avalight.sh -Is "${GS}"
-        else
-	    avalight.sh -I "${GS}"
-        fi
+		SOFT=$(_get_soft_brigtness "$GS")
 
-        notify-send -u low "Light" "Screen monitor set to $GS"
+		if [ ! -z "${SOFT}" ]; then
+		    avalight.sh -Is "${GS}"
+		else
+		    avalight.sh -I "${GS}"
+		fi
+
+		notify-send -u low "Light" "Screen monitor set to $GS"
+	    else
+	    	echo "CHANGING..."
+		generic "${GS}"
+	    fi
     fi
 }
 
@@ -104,9 +137,6 @@ auto() {
 
 case "$GS" in
     "auto") auto;;
-    "eDP1") eDP1;;
-    "DP1") DP1;;
-    HDMI*) HDMI1;;
     "xrandr") _xrandr;;
     *) both;;
 esac

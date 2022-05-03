@@ -4,4 +4,6 @@
 #display_manager.sh -p "HDMI-2"
 #display_manager.sh -r "HDMI-2" "left"
 
-exec bspwm
+systemd --user
+
+exec dbus-launch --exit-with-session bspwm

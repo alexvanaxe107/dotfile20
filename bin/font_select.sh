@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nNM-Terminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -33,6 +33,10 @@ font() {
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
     fi
+
+    #Change the qtile font
+    sed -i "s/font=.*/font=\"${font_name}\",/" ${HOME}/.config/qtile/theme.py
+    sed -i "s/fontsize=.*/fontsize=${size3},/" ${HOME}/.config/qtile/theme.py
 
     #Change the dmenu font
     sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
@@ -84,21 +88,25 @@ font() {
         dunst&
     fi
     toggle_bars.sh --restart
+
+    #Refresh the qtile
+    python $HOME/bin/qtile/restart.py
+
     notify-send -u normal "${CHOSEN}" "Enjoy the ${font_name}"
 }
 
 case $CHOSEN in
     "Day Original") font "Erica Type" Bold 9 10 12 0;;
-    "Night Original") font "Iceland" Regular 12 12 15 0;;
+    "Night Original") font "Iceland" Regular 11 11 14 0;;
     "Old Terminal") font "VT323" Regular 12 12 19 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
-    "Clear") font "TeX Gyre Cursor" Bold 9 9 11 1;;
+    "Clear") font "TeX Gyre Cursor" Bold 9 9 13 1;;
     "Nature") font "CQ Mono" Bold 10 10 12 1;;
     "Modern")  font "Audimat Mono" Regular 10 10 12 1;;
     "Russian") font "Iosevka" "Bold" 10 10 13 1;;
-    "Futuristic") font "Larabiefont Rg" Bold 9 9 12 2;;
-    "Elegant") font "Unica One" Regular 10 10 12 1;;
-    "Elegant2") font "NovaMono" Normal 9 9 12 2;;
+    "Futuristic") font "Larabiefont Rg" Bold 9 9 9 2;;
+    "Elegant") font "Unica One" Regular 10 10 13 1;;
+    "Elegant2") font "NovaMono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 9 9 12 2;;
     "War") font "American Stencil" Regular 9 9 12 1;;
@@ -119,11 +127,11 @@ case $CHOSEN in
     "Computer") font "Terminus \(TTF\)" Bold 10 10 13 2;;
     "Gothic") font "NanumGothicCoding" Bold 10 10 12 1;;
     "SteamPunk") font "Roboto Condensed" Semibold 10 10 11;;
+    "Terminator") font "Digital\-7 Mono" Bold 9 9 12 0;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
     "NM-80s ScyFi") font "Audiowide" Bold 9 9 12 0;;
     "NM-Japan") font "Shojumaru" Bold 9 9 11 0;;
     "NM-Watedland") font "Special Elite" Bold 11 11 12 0;;
-    "NM-Terminator") font "01 DigitMono" Bold 9 9 12 0;;
     "NM-Celtic") font "A.D. MONO" Bold 12 12 12 0;;
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;

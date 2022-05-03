@@ -9,7 +9,7 @@ set -o errexit
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
-WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nCity Night\nCity Landscape\nScience Fiction\nMinimalism\nSpace\nWar\nApocalypse\nartwork\ndigital art\nfantasy art\nnature"
+WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape Night\nCity Night\nCity Landscape\nscience fiction\nMinimalism\nSpace\nWar\nApocalypse\nartwork\ndigital art\nfantasy art\nnature\ntilt shift\nindoors\noutdoors\nsimple background\nwater\ndepth of field\ndark\nlight\nWLOP"
 
 MONITOR_NUMBER=$(monitors_info.sh -q)
 
@@ -24,11 +24,14 @@ change_all(){
         is_rotated="$(monitors_info.sh -r $monitor)"
         index=$(monitors_info.sh -ib ${monitor})
         if [ "${is_wide}" = "yes" ]; then
-            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled $wallpaper
         elif [ "${is_rotated}" = "yes" ]; then
-            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/rotted/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled $wallpaper
         else
-            nitrogen --head=$index --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
+            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/$theme_name/*)"
+            nitrogen --head=$count --save --set-scaled $wallpaper
         fi
     done
     notify-send -u normal "All wallpapers setted. Enjoy."

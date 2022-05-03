@@ -107,28 +107,32 @@
    history-delete-duplicates t
    large-file-warning-threshold (* 1024 1024)
    create-lockfiles nil
+   history-length 25
+   use-dialog-box nil
   )
 
-    (setq savehist-additional-variables
-          '(kill-ring
-            search-ring
-            regexp-search-ring
-            last-kbd-macro
-            kmacro-ring
-            shell-command-history))
-    (savehist-mode t)
-    (auto-save-visited-mode t)
 
-    (show-paren-mode t)
-    (global-hl-line-mode t)
-    (setq prettify-symbols-unprettify-at-point 'right-edge)
-    (global-prettify-symbols-mode)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+        regexp-search-ring
+        last-kbd-macro
+        kmacro-ring
+        shell-command-history))
 
-    (electric-pair-mode) ;; Maybe not worth it
-    (save-place-mode t)
+(auto-save-visited-mode t)
+(savehist-mode 1)
+(electric-pair-mode 1)
+(save-place-mode 1)
+(recentf-mode 1)
+
+(show-paren-mode t)
+(global-hl-line-mode t)
+(setq prettify-symbols-unprettify-at-point 'right-edge)
+(global-prettify-symbols-mode)
 
 (with-current-buffer "*scratch*"
-    (emacs-lock-mode 'kill))
+  (emacs-lock-mode 'kill))
 
 (customize-set-variable 'display-buffer-base-action
   '((display-buffer-reuse-window display-buffer-same-window)
@@ -497,12 +501,18 @@
   :commands lsp-deferred
   :config
   (add-to-list 'lsp-enabled-clients 'bash-ls)
-  (add-to-list 'lsp-enabled-clients 'pylsp)
   (add-to-list 'lsp-enabled-clients 'html-ls)
   (add-to-list 'lsp-enabled-clients 'angular-ls)
   (add-to-list 'lsp-enabled-clients 'ts-ls)
-  (add-to-list 'lsp-enabled-clients 'pylsp)
+  (add-to-list 'lsp-enabled-clients 'pyright)
   (lsp-enable-which-key-integration t))
+
+(use-package lsp-pyright
+:ensure t
+:hook (python-mode . (lambda ()
+                        (require 'lsp-pyright)
+                        (lsp-deferred))))  ; or lsp-deferred
+
 
 (use-package lsp-ivy
   :after lsp-mode
@@ -559,7 +569,10 @@
   :hook (vue-mode . lsp-deferred)
   :config
   (with-eval-after-load "lsp-mode"
-    (add-to-list 'lsp-enabled-clients 'vls)))
+    (add-to-list 'lsp-enabled-clients 'vls)
+    (add-to-list 'lsp-enabled-clients 'volar-api)
+    (add-to-list 'lsp-enabled-clients 'volar-doc)
+    (add-to-list 'lsp-enabled-clients 'volar-html)))
 
 (use-package sass-mode
   :after typescript-mode)
@@ -655,6 +668,7 @@
   :init (telephone-line-mode 1))
 
 (use-package base16-theme
+  :disabled
   :ensure t)
 
 ;; Or if you have use-package installed
@@ -685,7 +699,7 @@
     ("h" shrink-window-horizontally)
     ("f" nil "finished" :exit t))
   (defhydra transparency-change (global-map "<F8>")
-    "Resize the window"
+    "Transparency"
     ("u" (ava/change-transparency +2))
     ("d" (ava/change-transparency -2))
     ("f" nil "finished" :exit t))

@@ -1,7 +1,7 @@
 #!/bin/sh
 resize_img(){
-    #imgsize="$(monitors_info.sh -d 'DVI-1')"
-    imgsize="1080x1920"
+    imgsize="$(monitors_info.sh -d 'HDMI-1')"
+    #imgsize="1080x1920"
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
@@ -25,11 +25,14 @@ do
         "C-d")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
         "C-0")
-            nitrogen --head=0 --save --set-scaled --random "$file";;
+            nitrogen --head=0 --save --set-scaled --random "$file"
+            python $HOME/bin/qtile/wallpapers.py "$file" 0;;
         "C-1")
-            nitrogen --head=1 --save --set-scaled --random "$file";;
+            nitrogen --head=1 --save --set-scaled --random "$file"
+            python $HOME/bin/qtile/wallpapers.py "$file" 1;;
         "C-2")
-            nitrogen --head=2 --save --set-scaled --random "$file";;
+            nitrogen --head=2 --save --set-scaled --random "$file"
+            python $HOME/bin/qtile/wallpapers.py "$file" 2;;
         "C-a")
             rm "$file" ;;
     esac

@@ -35,11 +35,12 @@ read_book(){
     echo "$book"
     echo "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)"
     
+  . $HOME/.pyenv/versions/wm/bin/activate
     case "$format" in
         PDF) found="1";llpp "$(find ~/../media/Books -name "${book}*.pdf" | head -n 1)" 2>&1 &;;
-        AZW3) found="1";foliate "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)" 2>&1 &;;
-        EPUB) found="1";foliate "$(find ~/../media/Books -name "${book}*.epub" | head -n 1)" 2>&1 &;;
-        MOBI) found="1";foliate "$(find ~/../media/Books -name "${book}*.mobi")" 2>&1 &;;
+        AZW3) found="1";alacritty -e epy "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)" 2>&1 &;;
+        EPUB) found="1";alacritty -e epy "$(find ~/../media/Books -name "${book}*.epub" | head -n 1)" 2>&1 &;;
+        MOBI) found="1";alacritty -e epy "$(find ~/../media/Books -name "${book}*.mobi")" 2>&1 &;;
     esac
 
     if [ "${found}" = "0" ]; then

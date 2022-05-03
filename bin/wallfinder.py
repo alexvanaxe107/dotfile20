@@ -431,7 +431,7 @@ def get_engine(engine):
         if engine == "b":
             return Bing()
 
-    choice = random.choice(['alpha', 'haven']) 
+    choice = random.choice(['haven'])
 
     if choice == 'haven':
         return WallHaven()
