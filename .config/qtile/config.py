@@ -4,21 +4,20 @@ from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import hook
-from layouts import layouts, floating_layout
-from workspaces import workspaces
-from theme import theme_name, bar_configs
 from libqtile import extension
 from libqtile.log_utils import logger
 
+from theme import theme_name, bar_configs
+from layouts import layouts, floating_layout
+from workspaces import workspaces
 from bar import myBar
+from display import get_display_count
 
 mod = "mod4"
 terminal = guess_terminal()
 
 auto_fullscreen = False
 cursor_warp = False  # could be nice. Testing out...
-
-logger.warn("STARTING NOW!!!")
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -138,11 +137,14 @@ for i in range(2):
 
 if theme_name == "day":
     screens = [Screen(top=myBar)]
-    screens.append(Screen(top=myOtherBar))
+    if get_display_count() > 1:
+        screens.append(Screen(top=myOtherBar))
 elif theme_name == "light":
     screens = [Screen()]
-    screens.append(Screen())
+    if get_display_count() > 1:
+        screens.append(Screen())
 else:
     screens = [Screen(bottom=myBar)]
-    screens.append(Screen(bottom=myOtherBar))
+    if get_display_count() > 1:
+        screens.append(Screen(bottom=myOtherBar))
 
