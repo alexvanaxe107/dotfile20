@@ -1,4 +1,3 @@
-import os
 import subprocess
 
 from libqtile import bar, widget
@@ -40,8 +39,8 @@ if theme_name == "night":
                                     this_screen_border=colors['bar_hl_act'],
                                     other_screen_border=colors['bar_hl_act']),
 
-                    widget.Prompt(foreground=colors['bar_foreground'], **bar_configs),
                     get_separator(True),
+                    widget.Prompt(foreground=colors['bar_foreground']),
                     widget.Chord(
                         chords_colors={
                             "launch": ("#ff0000", "#ffffff"),
@@ -99,7 +98,7 @@ if theme_name == "night":
                     get_separator(True),
                     widget.Spacer(bar.STRETCH),
                 ],
-                24,
+                20,
                 background=colors['bar_background'],
                 margin=[0, 0, 0, 0] # Margin = N E S W
                 
@@ -112,12 +111,12 @@ elif theme_name == "day":
                 [
                     widget.CurrentScreen(active_text='', inactive_text='', background=colors['bar_background_dark']),
                     widget.CurrentLayoutIcon(scale=0.7, foreground=colors['bar_foreground'], background=colors['bar_background_dark']),
-                    widget.CurrentLayout(foreground=colors['bar_foreground'],
+                    widget.CurrentLayout(foreground=colors['bar_foreground2'],
                                          background=colors['bar_background_dark'],
                                          **bar_configs),
 
                     widget.GroupBox(**bar_configs,
-                                    foreground=colors['bar_foreground'],
+                                    foreground=colors['bar_foreground2'],
                                     inactive=colors['bar_foreground'],
                                     background=colors['bar_background_dark'],
                                     this_current_screen_border=colors['bar_hl_normal'],
