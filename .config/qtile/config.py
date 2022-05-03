@@ -6,7 +6,8 @@ from libqtile.utils import guess_terminal
 from libqtile import hook
 from layouts import layouts, floating_layout
 from workspaces import workspaces
-from theme import theme_name
+from theme import theme_name, bar_configs
+from libqtile import extension
 from libqtile.log_utils import logger
 
 from bar import myBar, myOtherBar
@@ -74,6 +75,7 @@ keys = [
     Key([mod, "shift"], "r", lazy.spawn("play_radio.sh"), desc="Play some music"),
     Key([mod, "shift"], "s", lazy.spawn("player_ctl.sh"), desc="Control the player"),
     Key([mod, "shift"], "p", lazy.spawn("pomodoro-client.sh"), desc="Start a pomodoro"),
+    Key([mod], "p", lazy.run_extension(extension.WindowList(font=bar_configs['font'], item_format='{group}: {window}')), desc="Show the wl?"),
     Key([mod, "shift"], "y", lazy.spawn("theme_select.sh"), desc="Yay! Change the theme"),
     Key([mod, "shift"], "f", lazy.spawn("font_select.sh"), desc="Change the font"),
     Key([mod, "shift"], "w", lazy.spawn("wallpaper_changer.sh"), desc="Change the font"),
@@ -81,7 +83,7 @@ keys = [
     Key([mod, "shift"], "d", lazy.spawn("configdisplay.sh"), desc="Config the display"),
     Key([mod, "shift"], "o", lazy.spawn("alacritty_theme.sh"), desc="Change the alacritty theme"),
     Key([mod, "shift"], "e", lazy.spawn("powercontrol.sh"), desc="Turn off, hibernate... etc"),
-    Key([mod, "shift"], "b", lazy.spawn("toggle_bars.sh"), desc="Turn off/on polybars"),
+    Key([mod, "shift"], "b", lazy.hide_show_bar(), desc="Turn off/on polybars"),
     Key([mod, "shift"], "c", lazy.spawn(os.path.expanduser("~/.config/conky/conky.sh")), desc="Toggle conky"),
     Key([mod, "shift"], "i", lazy.spawn("avalight"), desc="Change the light"),
     Key([mod], "a", lazy.spawn("dmenulexia.sh"), desc="Change the alacritty theme"),
