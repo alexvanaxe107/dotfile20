@@ -3,9 +3,11 @@ from libqtile.config import Key, Group, KeyChord
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile import hook
 from layouts import layouts, floating_layout
 from workspaces import workspaces
 from theme import theme_name
+from libqtile.log_utils import logger
 
 from bar import myBar, myOtherBar
 
@@ -107,6 +109,22 @@ keys = [
 
 groups = []
 
+@hook.subscribe.startup
+def setBarProperty():
+    if theme_name == "night":
+        myBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
+        myOtherBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
+        return
+
+    if theme_name == "day":
+        myBar.window.window.set_property("_QTILEBAR_DAY", 1, "CARDINAL", 32)
+        myOtherBar.window.window.set_property("_QTILEBAR_DAY", 1, "CARDINAL", 32)
+        return
+
+    myBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
+    myOtherBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
+
+
 for workspace in workspaces:
     groups.append(Group(workspace["name"]))
     keys.append(Key([mod], workspace["key"], lazy.group[workspace["name"]].toscreen()))
@@ -117,9 +135,11 @@ for i in range(2):
 
 if theme_name == "day":
     screens = [Screen(top=myBar)]
+    screens.append(Screen(top=myOtherBar))
+elif theme_name == "light":
+    screens = [Screen()]
     screens.append(Screen())
 else:
     screens = [Screen(bottom=myBar)]
     screens.append(Screen(bottom=myOtherBar))
-
 

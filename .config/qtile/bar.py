@@ -80,6 +80,7 @@ if theme_name == "night":
                 # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
             )
 
+
     myOtherBar = bar.Bar(
                 [
                     widget.CurrentLayoutIcon(scale=0.7, foreground=colors['bar_foreground']),
@@ -95,11 +96,12 @@ if theme_name == "night":
                                     other_current_screen_border=colors['bar_hl_normal'],
                                     this_screen_border=colors['bar_hl_act'],
                                     other_screen_border=colors['bar_hl_act']),
-                    get_separator(True)
+                    get_separator(True),
+                    widget.Spacer(bar.STRETCH),
                 ],
                 24,
                 background=colors['bar_background'],
-                margin=[0, 212, 0, 212] # Margin = N E S W
+                margin=[0, 0, 0, 0] # Margin = N E S W
                 
                 # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
                 # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
@@ -143,6 +145,33 @@ elif theme_name == "day":
                 24,
                 background=colors['bar_background'],
                 margin=[0, 16, 0, 16] # Margin = N E S W
+                
+                # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+                # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            )
+    myOtherBar = bar.Bar(
+                [
+                    widget.CurrentScreen(active_text='', inactive_text='', background=colors['bar_background_dark']),
+                    widget.CurrentLayoutIcon(scale=0.7, foreground=colors['bar_foreground'], background=colors['bar_background_dark']),
+                    widget.CurrentLayout(foreground=colors['bar_foreground'],
+                                         background=colors['bar_background_dark'],
+                                         **bar_configs),
+
+                    widget.GroupBox(**bar_configs,
+                                    foreground=colors['bar_foreground'],
+                                    inactive=colors['bar_foreground'],
+                                    background=colors['bar_background_dark'],
+                                    this_current_screen_border=colors['bar_hl_normal'],
+                                    other_current_screen_border=colors['bar_hl_normal'],
+                                    this_screen_border=colors['bar_hl_act'],
+                                    other_screen_border=colors['bar_hl_act']),
+                    widget.WindowName(**bar_configs,
+                                      background=colors['bar_background'],
+                                      foreground=colors['bar_background_dark']),
+                ],
+                24,
+                background=colors['bar_background'],
+                margin=[0, 0, 0, 0] # Margin = N E S W
                 
                 # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
                 # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
