@@ -10,13 +10,15 @@ from theme import theme_name, bar_configs
 from libqtile import extension
 from libqtile.log_utils import logger
 
-from bar import myBar, myOtherBar
+from bar import myBar
 
 mod = "mod4"
 terminal = guess_terminal()
 
 auto_fullscreen = False
 cursor_warp = False  # could be nice. Testing out...
+
+logger.warn("STARTING NOW!!!")
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -47,6 +49,7 @@ keys = [
     Key([mod, "control"], "f", lazy.layout.flip()),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
     Key([mod], "u", lazy.window.toggle_floating(), desc="Toggle floating"),
+    Key([mod], "p", lazy.run_extension(extension.WindowList(font=bar_configs['font'], item_format='{group}: {window}')), desc="Show the wl?"),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -75,7 +78,6 @@ keys = [
     Key([mod, "shift"], "r", lazy.spawn("play_radio.sh"), desc="Play some music"),
     Key([mod, "shift"], "s", lazy.spawn("player_ctl.sh"), desc="Control the player"),
     Key([mod, "shift"], "p", lazy.spawn("pomodoro-client.sh"), desc="Start a pomodoro"),
-    Key([mod], "p", lazy.run_extension(extension.WindowList(font=bar_configs['font'], item_format='{group}: {window}')), desc="Show the wl?"),
     Key([mod, "shift"], "y", lazy.spawn("theme_select.sh"), desc="Yay! Change the theme"),
     Key([mod, "shift"], "f", lazy.spawn("font_select.sh"), desc="Change the font"),
     Key([mod, "shift"], "w", lazy.spawn("wallpaper_changer.sh"), desc="Change the font"),
@@ -114,17 +116,16 @@ groups = []
 @hook.subscribe.startup
 def setBarProperty():
     if theme_name == "night":
+        from bar import myBar, myOtherBar
         myBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
         myOtherBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
         return
 
     if theme_name == "day":
+        from bar import myBar, myOtherBar
         myBar.window.window.set_property("_QTILEBAR_DAY", 1, "CARDINAL", 32)
         myOtherBar.window.window.set_property("_QTILEBAR_DAY", 1, "CARDINAL", 32)
         return
-
-    myBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
-    myOtherBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
 
 
 for workspace in workspaces:
