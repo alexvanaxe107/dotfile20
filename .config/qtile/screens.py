@@ -1,17 +1,26 @@
 from theme import theme_name
 from libqtile.config import Screen
+from bar import get_bars
+
+from libqtile.log_utils import logger
 
 screens = []
 
 if theme_name == "day":
-    from bar import myBar, myOtherBar
-    screens.append(Screen(top=myBar))
-    screens.append(Screen(top=myOtherBar))
+    bars = get_bars()
+    for bar in get_bars():
+        screens.append(Screen(top=bar))
 elif theme_name == "light":
     screens.append(Screen())
     screens.append(Screen())
-else:
-    from bar import myBar, myOtherBar
-    screens.append(Screen(bottom=myBar))
-    screens.append(Screen(bottom=myOtherBar))
+elif theme_name == "night":
+    bars = get_bars()
+    for bar in get_bars():
+        screens.append(Screen(bottom=bar))
+elif theme_name == "shabbat":
+    for bar in get_bars():
+        screens.append(Screen(top=bar))
 
+
+else:
+    screens.append(Screen())

@@ -3,6 +3,7 @@ import subprocess
 from libqtile import hook
 
 from theme import theme_name
+from bar import get_bars
 
 
 @hook.subscribe.startup_once
@@ -14,13 +15,6 @@ def autostart():
 @hook.subscribe.startup
 def setBarProperty():
     if theme_name == "night":
-        from bar import myBar, myOtherBar
-        myBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
-        myOtherBar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
-        return
-
-    if theme_name == "day":
-        from bar import myBar, myOtherBar
-        myBar.window.window.set_property("_QTILEBAR_DAY", 1, "CARDINAL", 32)
-        myOtherBar.window.window.set_property("_QTILEBAR_DAY", 1, "CARDINAL", 32)
-        return
+        bars = get_bars()
+        for bar in bars:
+            bar.window.window.set_property("_QTILEBAR", 1, "CARDINAL", 32)
