@@ -30,8 +30,10 @@ if theme_name == "night":
                                        func=lambda: subprocess.check_output("weather.sh").decode("utf-8")),
                     widget.CurrentLayout(foreground=colors['bar_foreground'],
                                          **bar_configs),
-
-                    widget.GroupBox(**bar_configs,
+                    widget.GroupBox(font="Symbols Nerd Font",
+                                    fontsize=13,
+                                    background=colors['bar_background_fill'],
+                                    padding=5,
                                     foreground=colors['bar_foreground'],
                                     inactive=colors['bar_foreground'],
                                     this_current_screen_border=colors['bar_hl_normal'],
@@ -87,8 +89,10 @@ if theme_name == "night":
                     get_separator(),
                     widget.CurrentLayout(foreground=colors['bar_foreground'],
                                          **bar_configs),
-
-                    widget.GroupBox(**bar_configs,
+                    widget.GroupBox(font="Symbols Nerd Font",
+                                    fontsize=13,
+                                    background=colors['bar_background_fill'],
+                                    padding=5,
                                     foreground=colors['bar_foreground'],
                                     inactive=colors['bar_foreground'],
                                     this_current_screen_border=colors['bar_hl_normal'],
@@ -126,7 +130,8 @@ elif theme_name == "day":
 
                     widget.Prompt(foreground=colors['bar_foreground'], background=colors['bar_background_dark'], **bar_configs),
                     widget.GenPollText(update_interval=6000, **bar_configs, background=colors['bar_background_dark'], func=lambda: subprocess.check_output("weather.sh").decode("utf-8")),
-                    widget.WindowName(**bar_configs, foreground=colors['bar_background_dark']),
+                    widget.WindowName(**bar_configs,
+                                      foreground=colors['bar_foreground2']),
                     widget.Chord(
                         chords_colors={
                             "launch": ("#ff0000", "#ffffff"),
@@ -165,8 +170,7 @@ elif theme_name == "day":
                                     this_screen_border=colors['bar_hl_act'],
                                     other_screen_border=colors['bar_hl_act']),
                     widget.WindowName(**bar_configs,
-                                      background=colors['bar_background'],
-                                      foreground=colors['bar_background_dark']),
+                                      foreground=colors['bar_foreground2']),
                 ],
                 24,
                 background=colors['bar_background'],
