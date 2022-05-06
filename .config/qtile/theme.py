@@ -7,14 +7,14 @@ bar_configs = dict(
     )
 
 colors = {
-    "active_border": '#ABA395',
-    "border_normal": '#30312B',
-    "bar_background": '#3342369F',
+    "active_border": '#BBCCDB',
+    "border_normal": '#5A5B5D',
+    "bar_background": '#75889872',
     "bar_background_dark": '#888888',
-    "bar_foreground": '#ABA395',
-    "bar_foreground2": '#A08F71',
-    "bar_hl_act": '#71706B',
-    "bar_hl_normal": '#ABA395',
+    "bar_foreground": '#ffffff',
+    "bar_foreground2": '#AFB9D3',
+    "bar_hl_act": '#CFD1DB',
+    "bar_hl_normal": '#98AAB8',
     "cpu_bk": '#222222',
     "memory_bk": '#333333',
     "swap_bk": '#555555',
@@ -23,5 +23,5 @@ colors = {
 }
 
 values = {
-    "gap_size": 12,
+    "gap_size": 7,
 }

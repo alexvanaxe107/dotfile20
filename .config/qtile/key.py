@@ -79,6 +79,7 @@ keys = [
     Key([mod, "shift"], "b", lazy.hide_show_bar(), desc="Turn off/on polybars"),
     Key([mod, "shift"], "c", lazy.spawn(os.path.expanduser("~/.config/conky/conky.sh")), desc="Toggle conky"),
     Key([mod, "shift"], "i", lazy.spawn("avalight"), desc="Change the light"),
+    Key([mod, "shift"], "x", lazy.spawn("lock.sh"), desc="Lock the screen"),
     Key([mod], "a", lazy.spawn("dmenulexia.sh"), desc="Change the alacritty theme"),
     Key([mod], "d", lazy.spawn("dmenu_run"), desc="Run the programs"),
 

@@ -94,7 +94,7 @@ modules-right = ava_load recording memory cpu temperature wlan date indicators
 wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
