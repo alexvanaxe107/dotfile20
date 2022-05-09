@@ -1,6 +1,6 @@
 # Restart pkill -USR1 -x sxhkd
 # Start the terminal
-super + shift + Return
+super + Return
 	alacritty
 
 # start dmenu
