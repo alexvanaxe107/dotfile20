@@ -31,11 +31,11 @@ font() {
     #Change the polybar
     if [ ${NOT_MONO} != "NM" ]; then sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
+	#Change the qtile font
+	sed -i "s/font=.*/font=\"${font_name}\",/" ${HOME}/.config/qtile/theme.py
+	sed -i "s/fontsize=.*/fontsize=${size3},/" ${HOME}/.config/qtile/theme.py
     fi
 
-    #Change the qtile font
-    sed -i "s/font=.*/font=\"${font_name}\",/" ${HOME}/.config/qtile/theme.py
-    sed -i "s/fontsize=.*/fontsize=${size3},/" ${HOME}/.config/qtile/theme.py
 
     #Change the dmenu font
     sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg

@@ -5,9 +5,9 @@ set background=light
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme PaperColor
-let g:airline_theme="papercolor"
+colorscheme corvine_light
+let g:airline_theme="Atelier_HeathLight"
 "hi Normal ctermbg=None
-"let g:airline_theme="papercolor"
+"let g:airline_theme="Atelier_HeathLight"
 
 set guifont=Fantasque\ Sans\ Mono:h15

@@ -58,7 +58,7 @@ workspaces = [
         "spawn": [],
     },
     {
-        "name": " ₈",
+        "name": " ₈",
         "key": "8",
         "matches": [
         ],
@@ -68,6 +68,14 @@ workspaces = [
     {
         "name": " ₉",
         "key": "9",
+        "matches": [
+        ],
+        "layout": "monadtall",
+        "spawn": [],
+    },
+    {
+        "name": " ₀",
+        "key": "0",
         "matches": [
         ],
         "layout": "monadtall",
