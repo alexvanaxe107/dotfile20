@@ -49,7 +49,7 @@ layouts = [
     # ], **layout_theme),
    # layout.Matrix(**layout_theme, columns=3, margin=values['gap_size']),
     layout.VerticalTile(**layout_theme, margin=values['gap_size']),
-    #layout.MonadWide(**layout_theme, margin=values['gap_size'], ratio=0.6),
+    layout.MonadWide(**layout_theme, margin=values['gap_size'], ratio=0.6),
     # layout.RatioTile(),
     layout.Zoomy(**layout_theme, margin=values['gap_size']),
     layout.Slice(**layout_theme, margin=values['gap_size'], side="right",

@@ -37,6 +37,7 @@ workspaces = [
         "name": " ₅",
         "key": "5",
         "matches": [
+            Match(wm_class='mpv'),
         ],
         "layout": "monadtall",
         "spawn": [],
@@ -45,6 +46,7 @@ workspaces = [
         "name": " ₆",
         "key": "6",
         "matches": [
+            Match(wm_class='llpp'),
         ],
         "layout": "monadtall",
         "spawn": [],
@@ -61,6 +63,7 @@ workspaces = [
         "name": " ₈",
         "key": "8",
         "matches": [
+            Match(wm_class='telegram-desktop'),
         ],
         "layout": "monadtall",
         "spawn": [],
