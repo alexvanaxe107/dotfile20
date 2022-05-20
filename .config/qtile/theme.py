@@ -7,14 +7,14 @@ bar_configs = dict(
     )
 
 colors = {
-    "active_border": '#ABA395',
-    "border_normal": '#30312B',
-    "bar_background": '#334236AF',
+    "active_border": '#CBAF91',
+    "border_normal": '#221314',
+    "bar_background": '#3A3344AF',
     "bar_background_dark": '#888888',
     "bar_foreground": '#ffffff',
-    "bar_foreground2": '#A08F71',
-    "bar_hl_act": '#71706B',
-    "bar_hl_normal": '#ABA395',
+    "bar_foreground2": '#91745F',
+    "bar_hl_act": '#5D5764',
+    "bar_hl_normal": '#B49F8A',
     "cpu_bk": '#222222',
     "memory_bk": '#333333',
     "swap_bk": '#555555',
