@@ -1,27 +1,27 @@
-theme_name = "day"
+theme_name = "shabbat"
 
 bar_configs = dict(
-    font="mononoki",
+    font='Bookerly',
     fontsize=12,
     padding=8
     )
 
 colors = {
-    "active_border": '#CCBBA8',
-    "border_normal": '#9F3F32',
-    "bar_background": '#DDDCCC87',
-    "bar_background_dark": '#5D443387',
-    "bar_foreground": '#DDDCCC',
-    "bar_foreground2": '#ffffff',
-    "bar_hl_act": '#99896D',
-    "bar_hl_normal": '#DDDCCC',
-    "cpu_bk": '#5D4433',
-    "memory_bk": '#9F3F32',
-    "swap_bk": '#6E5E4E',
-    "clock_bk": '#896D54',
-    "vol_bk": '#985746',
+    "active_border": '#ABA395',
+    "border_normal": '#30312B',
+    "bar_background": '#334236AF',
+    "bar_background_dark": '#888888',
+    "bar_foreground": '#ffffff',
+    "bar_foreground2": '#A08F71',
+    "bar_hl_act": '#71706B',
+    "bar_hl_normal": '#ABA395',
+    "cpu_bk": '#222222',
+    "memory_bk": '#333333',
+    "swap_bk": '#555555',
+    "clock_bk": '#666666',
+    "vol_bk": '#777777',
 }
 
 values = {
-    "gap_size": 15,
+    "gap_size": 12,
 }

@@ -71,13 +71,13 @@ play_local () {
     fi
 
     set_indicator
-    if [ $url = *"pls"* ]; then
-        echo "mpv -playlist=$url" > ${PLAY_BKP};
-        mpv -playlist=$url
-    else
-        echo "mpv $url --no-video" > ${PLAY_BKP};
-        mpv "$url" --no-video
-    fi
+    #if [ $url = *"pls"* ]; then
+        #echo "mpv -playlist=$url" > ${PLAY_BKP};
+        #mpv -playlist=$url
+    #else
+    echo "mpv --shuffle $url --no-video" > ${PLAY_BKP};
+    mpv --shuffle "$url" --no-video
+    #fi
 
     notify-send -u normal  "Finished" "Media stoped. Bye."
     remove_indicator
