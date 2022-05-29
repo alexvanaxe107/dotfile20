@@ -18,9 +18,10 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
+transparent= #00000000
 background = #B705080F
 background-alt = #040C38
-background-talt = #B7040C38
+background-talt = #040C38
 ;foreground = ${xrdb:color7:#222}
 ;Generated bg colors
 
@@ -54,12 +55,12 @@ fixed-center = true
 bottom = true
 enable-ipc = true
 
-background = ${colors.background}
+background = ${colors.transparent}
 foreground = ${colors.foreground}
 
-overline-size = 2
-;line-size = 2
-;line-color = #f00
+underline-size = 3
+line-size = 2
+line-color = #f00
 
 border-size = 0
 border-color = #00000000
@@ -74,16 +75,17 @@ font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Iceland:style=Regular:pixelsize=12;1
 font-2 = FontAwesome:pixelsize=9;1
 font-3 = symbola:pixelsize=10;1
+font-4 = Symbols Nerd Font:pixelsize=28;7
 ;font-1 = "Noto Color Emoji:scale=14"
 
 ;separator = ⏽
 ;%{F#RRGGBB}|%{F-}
 ;separator =%{B#8763E5ED}⏽%{B-}
 
-modules-left = desktop date pomodoro nweather torrent bspwm 
-modules-center = 
-modules-right = xwindow indicators wlan memory cpu temperature ava_load pulseaudio 
-
+modules-left = start-top middle-top date pomodoro nweather torrent middle-top end-top
+modules-center = start-top middle-top desktop bspwm middle-top end-top
+modules-right = start-top middle-top wlan memory cpu temperature ava_load indicators pulseaudio middle-top end-top
+ 
 ;tray-position = right
 ;tray-padding = 2
 ;tray-background = #0063ff
@@ -105,8 +107,38 @@ scroll-down = bspwm-deskprev
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[module/glyph]
+type = custom/text
+format-padding = 0
+content-background = ${colors.transparent}
+content-foreground = ${colors.background}
+
+[module/sep-top]
+inherit = module/glyph
+content = "%{T5}%{T-}"
+
+[module/middle-top]
+inherit = module/glyph
+content = "%{T5}%{T-}"
+
+[module/start-top]
+inherit = module/glyph
+content = "  %{T5}%{T-}"
+
+[module/end-top]
+inherit = module/glyph
+content = "%{T5}%{T-}  "
+
+[module/start-bottom]
+inherit = module/glyph
+content = 
+
+[module/end-bottom]
+inherit = module/glyph
+content = 
+
 [format]
-padding = 8
+padding = 3
 bspadding = 2
 
 [module/pomodoro]
@@ -114,9 +146,10 @@ type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro_stats.sh
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-pomodoro}
-format-prefix-foreground = ${colors.foreground-pomodoro}
+format-background = ${colors.background}
+format-prefix-foreground = ${colors.foreground-clock}
 format-padding = ${format.padding}
+format-underline = ${colors.background-talt}
 
 [module/ava_load]
 type = custom/script
@@ -124,7 +157,9 @@ interval = 20
 exec = /home/alexvanaxe/bin/load
 
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-load}
+format-background = ${colors.background}
+format-underline = ${colors.background-talt}
+format-prefix-foreground = ${colors.foreground-clock}
 
 format-prefix = " "
 format-padding = ${format.padding}
@@ -134,16 +169,18 @@ type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/indicators.sh
 format-padding = ${format.padding}
-format-background = ${colors.foreground-temp}
-format-foreground = ${colors.foreground-alt2}
+format-background = ${colors.background}
+format-foreground = ${colors.foreground-clock}
+format-underline = ${colors.background-talt}
 
 [module/torrent]
 type = custom/script
 interval = 10
 exec = /home/alexvanaxe/bin/torrent
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-torrent}
+format-background = ${colors.background}
 format-padding = ${format.padding}
+format-underline = ${colors.background-talt}
 
 [module/desktop]
 type = custom/script
@@ -151,7 +188,7 @@ interval = 1
 exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
 format-padding = ${format.padding}
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-cpu}
+format-background = ${colors.background}
 
 [module/recording]
 type = custom/script
@@ -164,8 +201,9 @@ type = custom/script
 interval = 1200
 exec = weather.sh
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-weather}
+format-background = ${colors.background}
 format-padding = ${format.padding}
+format-underline = ${colors.background-talt}
 
 [module/xwindow]
 type = internal/xwindow
@@ -178,7 +216,7 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground-clock}
 format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
@@ -208,28 +246,28 @@ type = internal/bspwm
 pin-workspaces = false
 
 #label-focused = %index%
-label-focused = %icon% %name%
+label-focused = %icon%
 label-focused-foreground = ${colors.foreground-alt2}
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.foreground-pomodoro}
 label-focused-padding = ${format.bspadding}
 
-label-dimmed-focused-background = ${colors.foreground-pomodoro}
+label-dimmed-focused-background = ${colors.background}
 
-#label-occupied = %index%
+label-occupied = %icon%
 #label-occupied = %index%%icon%
-label-occupied = 
+#label-occupied = 
 label-occupied-padding = ${format.bspadding}
-#label-occupied-foreground = ${colors.foreground-alt2}
-#label-occupied-background = ${colors.foreground-load}
+label-occupied-foreground = ${colors.foreground-alt2}
+label-occupied-background = ${colors.foreground-load}
 
 #label-urgent = %index%!
 #label-urgent = %icon%!
 #label-urgent-background = ${colors.alert}
 label-urgent-padding = ${format.bspadding}
 
-#label-empty = %index%
+label-empty = %icon%
 #label-empty = %index%%icon%
-label-empty =
+#label-empty =
 label-empty-padding = ${format.bspadding}
 #label-empty-foreground = ${colors.foreground-alt2}
 #label-empty-background = ${colors.background}
@@ -347,18 +385,22 @@ format-padding = ${format.padding}
 type = internal/cpu
 interval = 2
 format-prefix = " " 
+format-prefix-foreground = ${colors.foreground-clock}
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-cpu}
+format-background = ${colors.background}
 format-padding = ${format.padding}
+format-underline = ${colors.background-talt}
 label = %percentage:02%%
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
+format-prefix-foreground = ${colors.foreground-clock}
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-memory}
+format-background = ${colors.background}
 format-padding = ${format.padding}
+format-underline = ${colors.background-talt}
 label = %percentage_used%%
 
 [module/wlan]
@@ -379,8 +421,9 @@ format-disconnected-prefix = 
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 format-connected-foreground = ${colors.foreground-alt2}
-format-connected-background = ${colors.foreground-sound}
+format-connected-background = ${colors.background}
 format-connected-padding = ${format.padding}
+format-underline = ${colors.background-talt}
 
 ramp-signal-0 = 𝋡
 ramp-signal-1 = 𝋢
@@ -396,7 +439,7 @@ interval = 3.0
 
 format-connected-underline = #55aa55
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.foreground-clock}
 label-connected = %local_ip%
 
 format-disconnected =
@@ -409,7 +452,8 @@ format-disconnected =
 type = internal/date
 interval = 5
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-clock}
+format-background = ${colors.background}
+format-underline = ${colors.background-talt}
 
 date =
 date-alt = " %Y-%m-%d"
@@ -418,6 +462,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
+format-prefix-foreground = ${colors.foreground-clock}
 
 format-padding = ${format.padding}
 
@@ -429,8 +474,10 @@ type = internal/pulseaudio
 format-volume = <label-volume>
 label-volume =  %percentage%%
 label-volume-foreground = ${colors.foreground-alt2}
-label-volume-background = ${colors.foreground-sound}
+label-volume-background = ${colors.background}
 label-volume-padding = ${format.padding}
+format-volume-underline = ${colors.background-talt}
+
 
 label-muted = 🔇 %percentage%%
 label-muted-foreground = ${colors.foreground-alt2}
@@ -524,8 +571,9 @@ format-padding = ${format.padding}
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
-format-background = ${colors.foreground-temp}
+format-background = ${colors.background}
 format-foreground = ${colors.foreground-alt2}
+format-underline = ${colors.background-talt}
 
 label = %temperature-c%
 label-warn = %temperature-c%
