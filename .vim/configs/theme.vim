@@ -1,13 +1,13 @@
 "if (has("termguicolors"))
   set termguicolors
 "endif
-set background=dark
+set background=light
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme synthwave84
-let g:airline_theme="synthwave84"
+colorscheme corvine_light
+let g:airline_theme="Atelier_HeathLight"
 "hi Normal ctermbg=None
-"let g:airline_theme="synthwave84"
+"let g:airline_theme="Atelier_HeathLight"
 
 set guifont=Fantasque\ Sans\ Mono:h15

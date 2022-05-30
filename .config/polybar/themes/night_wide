@@ -58,7 +58,7 @@ enable-ipc = true
 background = ${colors.transparent}
 foreground = ${colors.foreground}
 
-underline-size = 3
+underline-size = 0
 line-size = 2
 line-color = #f00
 
@@ -82,9 +82,9 @@ font-4 = Symbols Nerd Font:pixelsize=28;7
 ;%{F#RRGGBB}|%{F-}
 ;separator =%{B#8763E5ED}⏽%{B-}
 
-modules-left = start-top middle-top date pomodoro nweather torrent middle-top end-top
-modules-center = start-top middle-top desktop bspwm middle-top end-top
-modules-right = start-top middle-top wlan memory cpu temperature ava_load indicators pulseaudio middle-top end-top
+modules-left = start-top middle-top-start date middle-top-ending pomodoro nweather torrent end-top
+modules-center = start-top desktop bspwm end-top
+modules-right = start-top middle-top-start wlan memory cpu temperature ava_load middle-top-ending middle-top-start indicators pulseaudio middle-top-ending end-top
  
 ;tray-position = right
 ;tray-padding = 2
@@ -117,17 +117,25 @@ content-foreground = ${colors.background}
 inherit = module/glyph
 content = "%{T5}%{T-}"
 
-[module/middle-top]
-inherit = module/glyph
+[module/middle-top-ending]
+type = custom/text
+format-padding = 0
 content = "%{T5}%{T-}"
+content-background = ${colors.background}
+
+[module/middle-top-start]
+type = custom/text
+format-padding = 0
+content = "%{T5}%{T-}"
+content-background = ${colors.background}
 
 [module/start-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5}%{T-}"
 
 [module/end-top]
 inherit = module/glyph
-content = "%{T5}%{T-}  "
+content = "%{T5}%{T-}  "
 
 [module/start-bottom]
 inherit = module/glyph

@@ -36,7 +36,7 @@ Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale' " Linting
 Plug 'prettier/vim-prettier' " Formatting
-Plug 'mkitt/tabline.vim'
+" Plug 'mkitt/tabline.vim'
 " Syntax hightlight plugin
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 source /home/alexvanaxe/.vim/configs/plugins/rainbow.vim
@@ -69,7 +69,12 @@ Plug 'junegunn/limelight.vim'
 
 " #### EYECANDY
 
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+
 source /home/alexvanaxe/.vim/configs/plugins/airline.vim
+" source /home/alexvanaxe/.vim/configs/plugins/feline.vim
 Plug 'guns/xterm-color-table.vim'
 source /home/alexvanaxe/.vim/configs/plugins/seiya.vim
 
