@@ -1,3 +1,3 @@
-Plug 'janko-m/vim-test'
+Plug 'vim-test/vim-test'
 
-let test#strategy = "vimux"
+let test#strategy = "make"

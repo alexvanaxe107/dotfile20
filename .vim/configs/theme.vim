@@ -5,9 +5,9 @@ set background=dark
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme gruvbox
-let g:airline_theme="gruvbox"
+colorscheme base16-grayscale-dark
+let g:airline_theme="base16_grayscale_dark"
 "hi Normal ctermbg=None
-"let g:airline_theme="gruvbox"
+"let g:airline_theme="base16_grayscale_dark"
 
 set guifont=Fantasque\ Sans\ Mono:h15

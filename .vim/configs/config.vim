@@ -64,6 +64,7 @@ let g:ale_sign_warning = ''
 lua << EOF
 require('bufferline').setup {
      options = {
+        mode = "tabs", -- set to buffers for default
         buffer_close_icon = '',
 	close_icon = '',
      }
