@@ -1,2 +1,2 @@
 
-let g:dracula_colorterm = 0
+let g:pencil_terminal_italics = 1

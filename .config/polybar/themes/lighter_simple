@@ -74,7 +74,7 @@ modules-left = desktop bspwm
 ;wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 separator = "|"
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev

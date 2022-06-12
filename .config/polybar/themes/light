@@ -80,7 +80,7 @@ modules-right =  pulseaudio memory cpu temperature ava_load date
 wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
@@ -504,7 +504,7 @@ compositing-border = over
 ;pseudo-transparency = false
 
 [global/wm]
-margin-top = 25
-margin-bottom = 25
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini

@@ -50,7 +50,7 @@ height = 22
 radius = 0.0
 fixed-center = true
 
-bottom = false
+bottom = true
 enable-ipc = true
 
 background = ${colors.background}
@@ -90,7 +90,7 @@ modules-right = indicators wlan memory cpu temperature ava_load date pulseaudio
 wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
@@ -105,7 +105,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [format]
-padding = 2
+padding = 8
 bspadding = 1
 
 [module/pomodoro]

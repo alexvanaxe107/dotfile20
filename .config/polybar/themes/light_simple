@@ -73,7 +73,7 @@ modules-left = desktop bspwm
 #wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 separator = "|"
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
@@ -491,7 +491,7 @@ screenchange-reload = true
 ;pseudo-transparency = false
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini

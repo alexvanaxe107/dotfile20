@@ -55,6 +55,30 @@ let g:python3_host_prog = '/home/alexvanaxe/.pyenv/versions/3.9.7/bin/python'
 "set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
+" In your init.lua or init.vim
+set termguicolors
+
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
+
+lua << EOF
+require('bufferline').setup {
+     options = {
+        mode = "tabs", -- set to buffers for default
+        buffer_close_icon = '',
+	close_icon = '',
+     }
+  }
+EOF
+
+lua << EOF
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+EOF
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {

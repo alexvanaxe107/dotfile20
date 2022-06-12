@@ -325,11 +325,11 @@ Configuring the coding standards.
 
     ;; Configure the django for specific projects
     (defun ava/django-config()
-        (when (string-match-p "money_watch" (file-name-directory (buffer-file-name)))
-            (pyvenv-workon "money")
+        (when (string-match-p "zentrader" (file-name-directory (buffer-file-name)))
+            (pyvenv-workon "zentrader")
             (pyvenv-mode t)
-            (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=money_watch.settings"))
-            (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Projects/moneydevel/MoneyWatch-api/money_watch/"))
+            (setq python-shell-process-environment '("DJANGO_SETTINGS_MODULE=zentrader.settings"))
+            (setq python-shell-extra-pythonpaths '("/home/alexvanaxe/Documents/Development/zentrader/source/zentrader_api"))
             (djangonaut-mode t)
             (message "Django Configured.")))
 

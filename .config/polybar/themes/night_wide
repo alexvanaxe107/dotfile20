@@ -51,7 +51,7 @@ radius = 0.0
 fixed-center = true
 
 ;dim-value = 0.0
-bottom = false
+bottom = true
 enable-ipc = true
 
 background = ${colors.background}
@@ -80,9 +80,9 @@ font-3 = symbola:pixelsize=10;1
 ;%{F#RRGGBB}|%{F-}
 ;separator =%{B#8763E5ED}⏽%{B-}
 
-modules-left = date pomodoro nweather torrent bspwm 
-modules-center = xwindow
-modules-right = indicators wlan memory cpu temperature ava_load pulseaudio 
+modules-left = desktop date pomodoro nweather torrent bspwm 
+modules-center = 
+modules-right = xwindow indicators wlan memory cpu temperature ava_load pulseaudio 
 
 ;tray-position = right
 ;tray-padding = 2
@@ -91,7 +91,7 @@ modules-right = indicators wlan memory cpu temperature ava_load pulseaudio
 wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
@@ -106,7 +106,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [format]
-padding = 3
+padding = 4
 bspadding = 2
 
 [module/pomodoro]
@@ -124,7 +124,7 @@ interval = 20
 exec = /home/alexvanaxe/bin/load
 
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-load}
+format-background = ${colors.foreground-sound}
 
 format-prefix = " "
 format-padding = ${format.padding}
@@ -134,7 +134,7 @@ type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/indicators.sh
 format-padding = ${format.padding}
-format-background = ${colors.foreground-temp}
+format-background = ${colors.foreground-sound}
 format-foreground = ${colors.foreground-alt2}
 
 [module/torrent]
@@ -142,7 +142,7 @@ type = custom/script
 interval = 10
 exec = /home/alexvanaxe/bin/torrent
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-torrent}
+format-background = ${colors.foreground-load}
 format-padding = ${format.padding}
 
 [module/desktop]
@@ -164,7 +164,7 @@ type = custom/script
 interval = 1200
 exec = weather.sh
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-weather}
+format-background = ${colors.foreground-load}
 format-padding = ${format.padding}
 
 [module/xwindow]
@@ -348,7 +348,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " " 
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-cpu}
+format-background = ${colors.foreground-sound}
 format-padding = ${format.padding}
 label = %percentage:02%%
 
@@ -357,7 +357,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-memory}
+format-background = ${colors.foreground-sound}
 format-padding = ${format.padding}
 label = %percentage_used%%
 
@@ -409,7 +409,7 @@ format-disconnected =
 type = internal/date
 interval = 5
 format-foreground = ${colors.foreground-alt2}
-format-background = ${colors.foreground-clock}
+format-background = ${colors.foreground-load}
 
 date =
 date-alt = " %Y-%m-%d"
@@ -429,7 +429,7 @@ type = internal/pulseaudio
 format-volume = <label-volume>
 label-volume =  %percentage%%
 label-volume-foreground = ${colors.foreground-alt2}
-label-volume-background = ${colors.foreground-sound}
+label-volume-background = ${colors.foreground-cpu}
 label-volume-padding = ${format.padding}
 
 label-muted = 🔇 %percentage%%
@@ -524,7 +524,7 @@ format-padding = ${format.padding}
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
-format-background = ${colors.foreground-temp}
+format-background = ${colors.foreground-sound}
 format-foreground = ${colors.foreground-alt2}
 
 label = %temperature-c%
@@ -593,4 +593,3 @@ margin-top = 0
 margin-bottom = 0
 
 ; vim:ft=dosini
-

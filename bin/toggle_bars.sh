@@ -41,10 +41,12 @@ toggle_full(){
     pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
     if [ ! -z "$pid" ]; then
         bspc config -m $MONITOR1 top_padding 0
+        bspc config -m $MONITOR1 bottom_padding 0
         kill $pid
     else
         if [ ! -z "${dim}" ]; then
-            bspc config -m $MONITOR1 top_padding 26
+            bspc config -m $MONITOR1 top_padding 0
+            bspc config -m $MONITOR1 bottom_padding 0
         fi
         MONITOR1=$MONITOR1 polybar -q default  >>/tmp/polybar1.log 2>&1 &
     fi
@@ -85,13 +87,16 @@ toggle_all(){
     pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
     if [ ! -z $pid ]; then
         bspc config top_padding 0
+        bspc config bottom_padding 0
         kill $pid
         kill $pid_simple
     else
         if [ ! -z "${dim}" ]; then
-            bspc config -m $MONITOR1 top_padding 26
+            bspc config -m $MONITOR1 top_padding 0
+            bspc config -m $MONITOR1 bottom_padding 0
         fi
         bspc config -m $MONITOR2 top_padding 0
+        bspc config -m $MONITOR2 bottom_padding 0
         MONITOR1=$MONITOR1 polybar -q default >>/tmp/polybar1.log 2>&1 &
         #if [ ! -z ${MONITOR2} ]; then
             #MONITOR2=$MONITOR2 polybar -q -c $HOME/.config/polybar/config_simple simple >>/tmp/polybar2.log 2>&1 &

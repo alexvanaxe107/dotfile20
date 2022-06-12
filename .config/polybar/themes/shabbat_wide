@@ -49,9 +49,9 @@ bspadding=2
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 98%
-height = 23
+height = 26
 offset-x = 1%
-;offset-y = 1%
+offset-y = 1%
 radius = 6.0
 fixed-center = true
 
@@ -75,11 +75,10 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Symbols Nerd Font:pixelsize=10;2
-font-1 = Kingthings Trypewriter 2:style=Bold:pixelsize=9
-font-2 = "Noto Color Emoji:scale=12"
-font-3 = FontAwesome:style=Bold:pixelsize=9
-font-4 = symbola:style=Bold:pixelsize=9;1
+font-0 = Kingthings Trypewriter 2:style=Bold:pixelsize=9
+font-1 = Symbols Nerd Font:pixelsize=10;2
+font-2 = FontAwesome:style=Bold:pixelsize=9
+font-3 = symbola:style=Bold:pixelsize=9;1
 
 separator = " | "
 
@@ -94,7 +93,7 @@ modules-right = ava_load recording memory cpu temperature wlan date indicators
 wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+override-redirect = false
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
@@ -203,7 +202,7 @@ label-focused-padding = ${format.bspadding}
 label-occupied = %icon%
 label-occupied-padding = ${format.bspadding}
 label-occupied-foreground = ${colors.foreground-alt}
-label-occupied-background = ${colors.foreground-alt2}
+label-occupied-background = ${colors.background-talt}
 
 #label-urgent = %index%!
 label-urgent = %icon%!

@@ -8,11 +8,11 @@ bar_configs = dict(
 
 colors = {
     "active_border": '#ffffff',
-    "border_normal": '#000000',
+    "border_normal": '#555555',
     "bar_background": '#000033',
     "bar_foreground": '#eeeeee',
 }
 
 values = {
-    "gap_size": 15,
+    "gap_size": 0,
 }

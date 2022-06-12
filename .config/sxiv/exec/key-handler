@@ -1,7 +1,19 @@
 #!/bin/sh
 resize_img(){
-    imgsize="$(monitors_info.sh -d 'HDMI-1')"
+    #imgsize="$(monitors_info.sh -d 'HDMI-1')"
     #imgsize="1080x1920"
+    #convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
+    monitor="$(grep -o "ultra\|rotated" <<< "$file")"
+
+    case "$monitor" in
+        "rotated")
+            imgsize="1080x1920";;
+        "ultra")
+            imgsize="2560x1080";;
+        *)  
+            imgsize="1920x1080";;
+    esac
+
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
