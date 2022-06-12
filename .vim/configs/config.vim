@@ -46,7 +46,7 @@ set shell=/bin/zsh
 set timeout!
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
-let g:python3_host_prog = '/home/alexvanaxe/.pyenv/versions/3.6.5/bin/python'
+let g:python3_host_prog = '/home/alexvanaxe/.pyenv/versions/3.9.7/bin/python'
 
 " Hide de guy menus
 "set guioptions -=m
