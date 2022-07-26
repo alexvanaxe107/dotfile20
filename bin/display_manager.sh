@@ -1,9 +1,11 @@
 #!/bin/bash
+
 remoteHScreen=1366
 remoteVScreen=768
 refreshRate=60
 
 dimension=""
+exclude=""
 
 define_primary() {
     primary=$1
@@ -72,6 +74,17 @@ rotate() {
     fi
 }
 
+# This function adds a monitor that acts as a span. It considers multiple monitors like one.
+# Make it more configurable?
+manage_span() {
+        local sum="$(monitors_info.sh -D)"
+        if [[ ! -z "${exclude}" ]]; then
+            bspc monitor SPAN -r
+        else
+            bspc wm -a SPAN ${sum}x1080+0+0
+        fi
+}
+
 add_virtual() {
     params=$(gtf ${remoteHScreen} ${remoteVScreen} ${refreshRate} | grep Modeline | sed 's/^\s\sModeline \".*\"\s*//g')
 
@@ -104,12 +117,17 @@ show_help() {
     echo "-v                                    Add virtual monitor"
     echo "-d                                    Dimension of the monitor"
     echo "-V [monitor]                          remove a virtual monitor"
+    echo "-s                                    Create a span monitor"
     echo "-a                                    Turn on all monitors."
+    echo "-x                                    Flag to exclude the monitor"
 }
 
-while getopts "h?ap:t:o:vV:d:r:" opt; do
+
+while getopts "h?ap:t:o:vV:d:r:sx" opt; do
     case "$opt" in
     h|\?) show_help
+        ;;
+    x) exclude="1"
         ;;
     p) define_primary $OPTARG
         ;;
@@ -126,6 +144,8 @@ while getopts "h?ap:t:o:vV:d:r:" opt; do
     v) add_virtual
         ;;
     a) all_on
+        ;;
+    s) manage_span
         ;;
     esac
 done

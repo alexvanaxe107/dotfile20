@@ -5,9 +5,9 @@ set background=light
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme OceanicNextLight
-let g:airline_theme="oceanicnextlight"
+colorscheme gruvbox
+let g:airline_theme="gruvbox"
 "hi Normal ctermbg=None
-"let g:airline_theme="oceanicnextlight"
+"let g:airline_theme="gruvbox"
 
 set guifont=Fantasque\ Sans\ Mono:h15
