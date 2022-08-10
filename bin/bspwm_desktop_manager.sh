@@ -116,19 +116,31 @@ rename_desktop(){
 }
 
 toggle_mode(){
-    if [ "${creation_mode}" = "auto" ]; then
-        sed -i "s/auto/manual/g" ${CONFIG_PATH}
-        echo "" > $HOME/.config/indicators/creation.ind
-    fi
+    local chosen_mode="$1"
+    sed -i "s/creation_mode=.*/creation_mode=\"${chosen_mode}\"/g" ${CONFIG_PATH}
+    changed="0"
+
+    . "${CONFIG_PATH}"
     if [ "${creation_mode}" = "manual" ]; then
-        sed -i "s/manual/mixed/g" ${CONFIG_PATH}
-        echo "" > $HOME/.config/indicators/creation.ind
+        echo "" > $HOME/.config/indicators/creation.ind
+        changed="1"
     fi
     if [ "${creation_mode}" = "mixed" ]; then
-        sed -i "s/mixed/auto/g" ${CONFIG_PATH}
+        echo "" > $HOME/.config/indicators/creation.ind
+        changed="1"
+    fi
+    if [ "${creation_mode}" = "auto" ]; then
         echo "" > $HOME/.config/indicators/creation.ind
+        changed="1"
     fi
 
+    if [ ${changed} = "0" ]; then
+        notify-send "Mode NOT changed" "Please select auto, mixed or manual"
+    else
+        notify-send "Mode changed" "Mode set to ${chosen_mode}"
+    fi
+
+    
 }
 
 show_help() {
@@ -141,7 +153,7 @@ show_help() {
 
 }
 
-while getopts "h?g:m:tr:f:" opt; do
+while getopts "h?g:m:t:r:f:" opt; do
     case "$opt" in
     h|\?) show_help
         ;;

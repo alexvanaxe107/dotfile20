@@ -106,6 +106,8 @@ return require('packer').startup(function()
     use 'reedes/vim-colors-pencil'
     --use 'sonph/onehalf', { 'rtp': 'vim' }
     use 'jnurmine/Zenburn'
+    -- If you are using Packer
+    use 'marko-cerovac/material.nvim'
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'

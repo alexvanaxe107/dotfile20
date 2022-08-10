@@ -17,7 +17,8 @@ fi
 
 search='*creation*'
 if [[ "$action" == $search ]]; then
-    bspwm_desktop_manager.sh -t 
+    option=$(echo "$action" | awk '{print $2}')
+    bspwm_desktop_manager.sh -t "${option}"
     exit 0
 fi
 
