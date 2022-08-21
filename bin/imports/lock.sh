@@ -1,2 +1,2 @@
-FONT="Audimat Mono":pixelsize=19
+FONT="CQ Mono":pixelsize=19
 SAVER=saver_mpv

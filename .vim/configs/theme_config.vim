@@ -1,2 +1,2 @@
 
-let g:material_style = "lighter"
+let g:pencil_terminal_italics = 1

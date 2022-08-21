@@ -63,11 +63,9 @@ return require('packer').startup(function()
 
       -- Autopair
       use {
-        'windwp/nvim-autopairs',
-        config = function()
-          require('nvim-autopairs').setup{}
-        end
-      }
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
 
     use 'mattn/emmet-vim'
 
@@ -108,6 +106,7 @@ return require('packer').startup(function()
     use 'jnurmine/Zenburn'
     -- If you are using Packer
     use 'marko-cerovac/material.nvim'
+    use 'drewtempelmeyer/palenight.vim'
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'

@@ -19,6 +19,12 @@ map('', '<down>', '<nop>')
 map('', '<left>', '<nop>')
 map('', '<right>', '<nop>')
 
+-- Map resize windows
+map('n', '<C-up>', ':resize +2<CR>')
+map('n', '<C-down>', ':resize -2<CR>')
+map('n', '<C-left>', ':vertical resize -2<CR>')
+map('n', '<C-right>', ':vertical resize +2<CR>')
+
 -- Go to another tab
 map('n', 't1', ':tabn 1<CR>')
 map('n', 't2', ':tabn 2<CR>')
