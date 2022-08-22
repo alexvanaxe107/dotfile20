@@ -2030,7 +2030,7 @@ c.changelog_after_upgrade = 'minor'
 ## Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 ## for a blank page.
 ## Type: FuzzyUrl
-c.url.default_page = 'https://start.me/p/lL4GXr/inicio'
+c.url.default_page = 'https://web.tabliss.io/'
 
 ## URL segments where `:navigate increment/decrement` will search for a
 ## number.
@@ -2071,7 +2071,7 @@ c.url.default_page = 'https://start.me/p/lL4GXr/inicio'
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = ['https://start.me/p/lL4GXr/inicio']
+c.url.start_pages = ['https://web.tabliss.io/']
 
 ## URL parameters to strip with `:yank url`.
 ## Type: List of String

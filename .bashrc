@@ -216,6 +216,9 @@ source $HOME/.profile
 
 alias tdm="tdm --disable-xrunning-check"
 
+# Sound issues on steam no more?
+PULSE_LATENCY_MSEC=60
+
 # Config for emacs vterm
 vterm_printf(){
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then

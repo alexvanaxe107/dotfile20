@@ -41,16 +41,20 @@ time = #000008
 wlan = #000009
 temp = #000010
 
+content-fill = #000011
+foreground-fill = #000012
+empty-fill = #000013
+
 [format]
-padding=1
-padding_border=1
-bspadding=1
+padding=2
+padding_border=3
+bspadding=0
 
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 100%
-height = 22
-;offset-x = 1%
+height = 26
+;offset-x = 0%
 ;offset-y = 1%
 radius = 0.0
 fixed-center = true
@@ -72,20 +76,19 @@ border-color = ${colors.desktop}
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 1
+module-margin-left = 0
+module-margin-right = 0
 
 font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Erica Type:style=Bold:pixelsize=9
-font-2 = "Noto Color Emoji:scale=12"
-font-3 = FontAwesome:style=Bold:pixelsize=9
-font-4 = symbola:style=Bold:pixelsize=9;1
+font-2 = FontAwesome:style=Bold:pixelsize=9
+font-3 = symbola:style=Bold:pixelsize=9;1
+font-4 = Symbols Nerd Font:pixelsize=36;4
 
-separator = 
+;separator = 
 
-modules-left = bspwm pulseaudio
-modules-center = pomodoro torrent
-modules-right = ava_load recording memory temperature date indicators
+modules-left = desktop bspwm pomodoro nweather torrent xwindow
+modules-right = ava_load recording memory cpu temperature wlan date pulseaudio indicators
 
 ;tray-position = right
 ;tray-padding = 2
@@ -104,39 +107,71 @@ scroll-down = bspwm-deskprev
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[module/glyph]
+type = custom/text
+format-padding = 0
+content-background = ${colors.background}
+content-foreground = ${colors.content-fill}
+
+[module/left-end-top]
+inherit = module/glyph
+content = "  %{T5}%{T-}"
+
+[module/right-end-top]
+inherit = module/glyph
+content = "%{T5}%{T-}  "
+
+[module/left-end-bottom]
+inherit = module/glyph
+content = 
+
+[module/right-end-bottom]
+inherit = module/glyph
+content = 
+
 [module/pomodoro]
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro_stats.sh
 #format-underline = ${colors.pomodoro}
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/ava_load]
 type = custom/script
 interval = 20
 exec = /home/alexvanaxe/bin/load
-format-prefix = "📉 "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "Load: "
+format-prefix-foreground = ${colors.foreground-fill}
 #format-underline = ${colors.load}
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/indicators]
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/indicators.sh
 format-padding = ${format.padding_border}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/torrent]
 type = custom/script
 interval = 10
 exec = /home/alexvanaxe/bin/torrent
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/recording]
 type = custom/script
 interval = 3
 exec = cat ~/.dwm/recording
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/nweather]
 type = custom/script
@@ -144,10 +179,13 @@ interval = 1200
 exec = weather.sh
 #format-underline = ${colors.weather}
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:80:...%
+format-foreground = ${colors.foreground-fill}
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -183,25 +221,32 @@ format-padding = ${format.padding}
 type = custom/script
 interval = 1
 exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
-format-background = ${colors.desktop}
 format-padding = ${format.padding_border}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/bspwm]
 type = internal/bspwm
 
+pin-workspaces = false
+
 #label-focused = %index%
 label-focused = %icon%
-label-focused-background = ${colors.background-alt}
-label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.content-fill}
+label-focused-foreground = ${colors.foreground-fill}
 label-focused-underline= ${colors.ws}
 label-focused-padding = ${format.bspadding}
+label-focused-padding-left = 1
+label-focused-padding-right = 1
 
 #label-occupied = %index%
 #label-occupied = %index%%icon%
 label-occupied = %icon%
 label-occupied-padding = ${format.bspadding}
-label-occupied-foreground = ${colors.foreground-alt}
-label-occupied-background = ${colors.foreground-alt2}
+label-occupied-foreground = ${colors.foreground-alt2}
+label-occupied-background = ${colors.content-fill}
+label-occupied-padding-left = 1
+label-occupied-padding-right = 1
 
 #label-urgent = %index%!
 label-urgent = %icon%!
@@ -212,6 +257,10 @@ label-urgent-padding = ${format.bspadding}
 #label-empty = %index%%icon%
 label-empty = %icon%
 label-empty-padding = ${format.bspadding}
+label-empty-background = ${colors.content-fill}
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding-left = 1
+label-empty-padding-right = 1
 
 ws-icon-0 = terminal;1🔲
 ws-icon-1 = web;2🌍
@@ -325,20 +374,24 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "🏿 " 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "CPU:" 
+format-prefix-foreground = ${colors.foreground-fill}
 #format-underline = ${colors.cpu}
 label = %percentage:02%%
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "👣 "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "Mem:"
+format-prefix-foreground = ${colors.foreground-fill}
 #format-underline = ${colors.mem}
 label = %percentage_used%%
 format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/wlan]
 type = internal/network
@@ -362,7 +415,9 @@ ramp-signal-1 = 👎
 ramp-signal-2 = 👌
 ramp-signal-3 = 👍
 ramp-signal-4 = 👏
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-foreground = ${colors.foreground-fill}
+format-connected-background = ${colors.content-fill}
+label-connected-foreground = ${colors.foreground-fill}
 
 [module/eth]
 type = internal/network
@@ -390,23 +445,28 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 🕑
-format-prefix-foreground = ${colors.foreground-alt}
-#format-underline = ${colors.time}
+;format-prefix = 🕑
+;format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = ${colors.time}
 format-padding = ${format.padding}
 
 label = %date% %time%
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
 format-padding = ${format.padding}
-format-volume = <label-volume> <bar-volume>
+;format-volume = <label-volume> <bar-volume>
+format-volume = <label-volume>
 label-volume = 🔊 %percentage%%
-label-volume-foreground = ${colors.foreground-alt}
+label-volume-foreground = ${colors.foreground-fill}
+label-volume-background = ${colors.content-fill}
 
 label-muted = 🔇 muted
-label-muted-foreground = #666
+label-muted-foreground = ${colors.foreground-fill}
+label-muted-background = ${colors.content-fill}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -498,15 +558,17 @@ format-warn = <ramp> <label-warn>
 #format-warn-underline = ${self.format-underline}
 format-warn-padding = ${format.padding}
 
-label = %temperature-c%
-label-warn = %temperature-c%
+label = Temp:%temperature-c%
+label-warn = Warn:%temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = ⛄
-ramp-1 = ✅
-ramp-2 = 🔥
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 format-ramp-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/powermenu]
 type = custom/menu
@@ -558,7 +620,7 @@ compositing-border = over
 pseudo-transparency = false
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini

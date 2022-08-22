@@ -133,6 +133,14 @@ if [ "$vim_theme" == "material_theme" ]; then
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "material_theme_light" ]; then
+    sed -i 's/^colorscheme.*/colorscheme material/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="material"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:material_style = \"lighter\"" >> ${HOME}/.vim/configs/theme_config.vim
+fi
+
 if [ "$vim_theme" == "nord" ]; then
     sed -i 's/^colorscheme.*/colorscheme nord/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="nord"/' ${HOME}/.vim/configs/theme.vim

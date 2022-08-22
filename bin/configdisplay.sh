@@ -83,6 +83,14 @@ set_monitors() {
 }
 
 add_virtual() {
+    display_manager.sh -s
+}
+
+rm_virtual() {
+    display_manager.sh -xs
+}
+
+add_virtual_old() {
     local dim="$(printf "1366x768\n1920x1080" | dmenu -p "Choose a screen dimension" -bw 2 -y 16 -z 850)"
     if [ -z "${dim}" ]; then
         exit 0
@@ -90,7 +98,7 @@ add_virtual() {
     display_manager.sh -d "${dim}" -v
 }
 
-rm_virtual() {
+rm_virtual_old() {
     local virtual=$(monitors_info.sh -c | grep VIRTUAL | dmenu)
 
     if [ -z "${virtual}" ]; then

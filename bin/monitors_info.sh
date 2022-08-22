@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/bash
 # A POSIX variable
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
@@ -188,6 +188,12 @@ get_dimensions() {
     echo "${dim}" 
 }
 
+# Pega a soma dos monitors
+get_sum_dimensions() {
+        local sum=$(xrandr | grep -w connected | grep -oP '(\d*)x' | grep -oP '\d*' | awk '{s+=$1} END {print s}')
+        echo "${sum}"
+}
+
 show_help() {
     echo "Get monitor information." echo ""
     echo "-m                             Get a list with the monitors name (primary first)"
@@ -208,10 +214,11 @@ show_help() {
     echo "-t {id}                        Get Monitors acording prefered order."
     echo "-it {name}                     Get Monitors acording prefered order."
     echo "-d {name}                      Get Monitor dimension by its name"
+    echo "-D                             Get the sum of the dimensions. Used to span the windows"
     echo "-e                             Get the emacs string to configure the exwm"
 }
 
-while getopts "h?mcpqift:w:n:ab:sd:er:g" opt; do
+while getopts "h?mcpqift:w:n:ab:sd:er:gD" opt; do
     case "$opt" in
     h|\?)
         show_help
@@ -229,6 +236,8 @@ while getopts "h?mcpqift:w:n:ab:sd:er:g" opt; do
     t)  name_by_prefered $OPTARG
         ;;
     d)  get_dimensions $OPTARG
+        ;;
+    D)  get_sum_dimensions
         ;;
     c)  monitors_connected
         ;;

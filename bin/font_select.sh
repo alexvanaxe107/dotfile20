@@ -8,7 +8,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 35 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -107,10 +107,12 @@ case $CHOSEN in
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
     "Amazon") font "Bookerly" Normal 9 9 13 2;;
+    "Fantasy") font "CascadiaMonoPL" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 9 9 12 2;;
     "War") font "American Stencil" Regular 9 9 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 12 1;;
+    "Retro") font "hermit" Bold 8 8 12 1;;
     "Cursive") font "Z003" "Medium Italic" 13 12 15 2;;
     "Soft") font "mononoki" Regular 9 9 12 2;;
     "80s") font "Press Start 2P" Regular 6 6 9 2;;

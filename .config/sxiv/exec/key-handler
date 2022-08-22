@@ -3,7 +3,9 @@ resize_img(){
     #imgsize="$(monitors_info.sh -d 'HDMI-1')"
     #imgsize="1080x1920"
     #convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
-    monitor="$(grep -o "ultra\|rotated" <<< "$file")"
+    local file_location=$(dirname $(realpath ${file}))
+    monitor="$(grep -o "ultra\|rotated" <<< "${file_location}")"
+
 
     case "$monitor" in
         "rotated")
