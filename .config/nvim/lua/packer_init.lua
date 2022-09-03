@@ -101,6 +101,7 @@ return require('packer').startup(function()
     use 'wadackel/vim-dogrun'
     use 'arzg/vim-corvine'
     use 'zanglg/nova.vim'
+    use 'folke/tokyonight.nvim'
     use 'reedes/vim-colors-pencil'
     --use 'sonph/onehalf', { 'rtp': 'vim' }
     use 'jnurmine/Zenburn'
