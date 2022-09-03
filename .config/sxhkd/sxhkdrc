@@ -1,7 +1,7 @@
 # Restart pkill -USR1 -x sxhkd
 # Start the terminal
 super + Return
-	source ~/.config/bspwm/themes/bsp.cfg; wezterm
+	alacritty
 
 # start dmenu
 super + d
