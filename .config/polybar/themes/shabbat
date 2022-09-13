@@ -77,13 +77,13 @@ module-margin-right = 0
 
 font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Kingthings Trypewriter 2:style=Bold:pixelsize=9
-font-2 = "Noto Color Emoji:scale=14"
+font-2 = "Noto Color Emoji:scale=17"
 font-3 = FontAwesome:style=Bold:pixelsize=9
 font-4 = symbola:style=Bold:pixelsize=9;1
 
-separator = |✡|
+separator = |
 
-modules-left = bspwm pulseaudio
+modules-left = logo desktop bspwm pulseaudio
 modules-center = pomodoro nweather torrent
 modules-right = ava_load recording memory cpu temperature date indicators
 
@@ -103,6 +103,11 @@ scroll-down = bspwm-deskprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/logo]
+type = custom/text
+content = 
+content-padding = 1
 
 [module/pomodoro]
 type = custom/script
