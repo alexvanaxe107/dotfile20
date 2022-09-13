@@ -87,8 +87,8 @@ font-4 = Symbols Nerd Font:pixelsize=36;4
 
 ;separator = 
 
-modules-left = desktop bspwm pomodoro nweather torrent xwindow
-modules-right = ava_load recording memory cpu temperature wlan date pulseaudio indicators
+modules-left = desktop bspwm pomodoro nweather torrent
+modules-right = ava_load memory cpu temperature wlan date pulseaudio indicators
 
 ;tray-position = right
 ;tray-padding = 2
