@@ -89,7 +89,7 @@ font-4 = Symbols Nerd Font:pixelsize=36;4
 
 modules-left = left-end-top desktop bspwm right-end-top xwindow
 modules-center = left-end-top pomodoro nweather torrent right-end-top
-modules-right = left-end-top ava_load recording memory cpu temperature wlan right-end-top left-end-top date pulseaudio indicators right-end-top
+modules-right = left-end-top ava_load memory cpu temperature wlan right-end-top left-end-top date pulseaudio indicators right-end-top
 
 ;tray-position = right
 ;tray-padding = 2
@@ -116,11 +116,11 @@ content-foreground = ${colors.content-fill}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "%{T5}%{T-}  "
+content = "%{T5}%{T-}  "
 
 [module/left-end-bottom]
 inherit = module/glyph
