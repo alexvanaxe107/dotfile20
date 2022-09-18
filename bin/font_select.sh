@@ -96,7 +96,7 @@ font() {
 
 case $CHOSEN in
     "Day Original") font "Erica Type" Bold 9 10 12 0;;
-    "Night Original") font "Iceland" Regular 11 11 14 0;;
+    "Night Original") font "Iceland" Regular 13 13 14 0;;
     "Old Terminal") font "VT323" Regular 12 12 19 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
     "Clear") font "TeX Gyre Cursor" Bold 9 9 13 1;;
@@ -109,7 +109,7 @@ case $CHOSEN in
     "Amazon") font "Bookerly" Normal 9 9 13 2;;
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
-    "Rock") font "Targa MS" Regular 9 9 12 2;;
+    "Rock") font "Targa MS" Regular 11 11 12 2;;
     "War") font "American Stencil" Regular 9 9 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 12 1;;
     "Retro") font "hermit" Bold 8 8 12 1;;

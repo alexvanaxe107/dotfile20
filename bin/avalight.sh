@@ -32,6 +32,8 @@ eDP() {
 change_hdmi_font() {
     monitor="$1"
 
+    echo $monitor
+
     monitor_num="$(($(monitors_info.sh -in "${monitor}") + 1))"
 
     ddcutil setvcp -d "${monitor_num}" 10 ${val}
@@ -43,7 +45,7 @@ HDMI() {
     local monitor="$2"
 
     case "${soft}" in
-        0) $(change_hdmi_font "${monitor}");;
+        0) change_hdmi_font "${monitor}";;
         1) xrandr --output ${monitor} --brightness $(echo "${val}/100" | bc -l);;
     esac
 }
@@ -63,7 +65,7 @@ adjust_brightness() {
             eDP*) $(eDP $val $monitor)
             ;;
             # A principio todos os outros metodos sao os mesmos, ir testando e refazendo
-            *) $(HDMI $val $monitor)
+            *) HDMI $val $monitor
             ;;
         esac
     done

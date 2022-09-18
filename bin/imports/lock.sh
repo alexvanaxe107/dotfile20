@@ -1,2 +1,2 @@
-FONT=Iceland:pixelsize=29
+FONT="Iceland":pixelsize=21
 SAVER=saver_mpv

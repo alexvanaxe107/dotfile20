@@ -21,6 +21,7 @@
 background = #B705080F
 background-alt = #040C38
 background-talt = #B7040C38
+background-transparent = #FF000000
 ;foreground = ${xrdb:color7:#222}
 ;Generated bg colors
 
@@ -74,7 +75,7 @@ font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Iceland:style=Regular:pixelsize=12;1
 font-2 = FontAwesome:pixelsize=9;1
 font-3 = symbola:pixelsize=10;1
-font-4 = Symbols Nerd Font:pixelsize=17;2
+font-4 = Symbols Nerd Font:pixelsize=24;0
 ;font-1 = "Noto Color Emoji:scale=14"
 
 ;separator = ⏽
@@ -113,16 +114,16 @@ bspadding = 4
 [module/glyph]
 type = custom/text
 format-padding = 0
-content-background = ${colors.background-talt}
-content-foreground = ${colors.foreground-alt2}
+content-background = ${colors.background-transparent}
+content-foreground = ${colors.foreground-cpu}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5}%{T-}"
 
 [module/pomodoro]
 type = custom/script

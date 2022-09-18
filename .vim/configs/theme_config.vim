@@ -1,2 +1,2 @@
 
-let g:gruvbox_italic=1
+let g:dracula_colorterm = 0

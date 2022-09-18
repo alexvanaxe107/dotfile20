@@ -1,13 +1,13 @@
 "if (has("termguicolors"))
   set termguicolors
 "endif
-set background=light
+set background=dark
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme gruvbox
-let g:airline_theme="gruvbox"
+colorscheme dracula
+let g:airline_theme="dracula"
 "hi Normal ctermbg=None
-"let g:airline_theme="gruvbox"
+"let g:airline_theme="dracula"
 
 set guifont=Fantasque\ Sans\ Mono:h15
