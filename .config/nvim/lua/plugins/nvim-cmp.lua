@@ -79,6 +79,9 @@ vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {
 require 'lspconfig'
 require 'lspconfig'.bashls.setup{}
 
+-- Enable HTML
+require'lspconfig'.html.setup{}
+
 -- Activate the python setup
 require'lspconfig'.pyright.setup{}
 

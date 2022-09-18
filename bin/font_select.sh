@@ -107,7 +107,7 @@ case $CHOSEN in
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
     "Amazon") font "Bookerly" Normal 9 9 13 2;;
-    "Fantasy") font "CascadiaMonoPL" Normal 9 9 13 2;;
+    "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 9 9 12 2;;
     "War") font "American Stencil" Regular 9 9 12 1;;

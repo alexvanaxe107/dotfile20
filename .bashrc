@@ -202,7 +202,6 @@ alias tmuxa='tmux attach-session -t shell'
 export FZF_DEFAULT_COMMAND='fd -I --type f'
 set -o vi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 #export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 export _JAVA_AWT_WM_NONREPARENTING=1
 #export XDG_SESSION_DESKTOP=i3
@@ -231,3 +230,5 @@ vterm_printf(){
         printf "\e]%s\e\\" "$1"
     fi
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

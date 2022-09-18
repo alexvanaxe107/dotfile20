@@ -42,18 +42,18 @@ process_wallpaper(){
     }
 
 case $file in
-    "config") alacritty -e $EDITOR $0;;
-    "sxhkd") alacritty -e $EDITOR $HOME/.config/sxhkd/sxhkdrc;;
-    "bspwm") alacritty -e $EDITOR $HOME/.config/bspwm/bspwmrc;;
-    "radio") alacritty -e $EDITOR $HOME/.config/play_radio/config;;
-    "config") alacritty -e $EDITOR $HOME/bin/configshortcut.sh;;
-    "zshrc") alacritty -e $EDITOR $HOME/.zshrc;;
-    "vim") alacritty -e $EDITOR $HOME/.vim/configs;;
-    "fish") alacritty -e $EDITOR $HOME/.config/fish/config.fish;;
-    "fonts") alacritty -e $EDITOR $HOME/bin/font_select.sh;;
-    "monitors") alacritty -e $EDITOR $HOME/.config/wm/monitors.conf;;
-    "ytpl") alacritty -e $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;
-    "sxiv") alacritty -e $EDITOR $HOME/.config/sxiv/exec/key-handler;;
+    "config") wezterm start $EDITOR $0;;
+    "sxhkd") wezterm start $EDITOR $HOME/.config/sxhkd/sxhkdrc;;
+    "bspwm") wezterm start $EDITOR $HOME/.config/bspwm/bspwmrc;;
+    "radio") wezterm start $EDITOR $HOME/.config/play_radio/config;;
+    "config") wezterm start $EDITOR $HOME/bin/configshortcut.sh;;
+    "zshrc") wezterm start $EDITOR $HOME/.zshrc;;
+    "vim") wezterm start $EDITOR $HOME/.vim/configs;;
+    "fish") wezterm start $EDITOR $HOME/.config/fish/config.fish;;
+    "fonts") wezterm start $EDITOR $HOME/bin/font_select.sh;;
+    "monitors") wezterm start $EDITOR $HOME/.config/wm/monitors.conf;;
+    "ytpl") wezterm start $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;
+    "sxiv") wezterm start $EDITOR $HOME/.config/sxiv/exec/key-handler;;
     "wallpaper") process_wallpaper;;
 esac
 

@@ -74,15 +74,16 @@ font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Iceland:style=Regular:pixelsize=12;1
 font-2 = FontAwesome:pixelsize=9;1
 font-3 = symbola:pixelsize=10;1
+font-4 = Symbols Nerd Font:pixelsize=17;2
 ;font-1 = "Noto Color Emoji:scale=14"
 
 ;separator = ⏽
 ;%{F#RRGGBB}|%{F-}
 ;separator =%{B#8763E5ED}⏽%{B-}
 
-modules-left = desktop date pomodoro nweather torrent bspwm 
+modules-left = left-end-top desktop date pomodoro nweather torrent bspwm 
 modules-center = 
-modules-right = xwindow indicators wlan memory cpu temperature ava_load pulseaudio 
+modules-right = xwindow indicators wlan memory cpu temperature ava_load pulseaudio right-end-top
 
 ;tray-position = right
 ;tray-padding = 2
@@ -107,7 +108,21 @@ cursor-scroll = ns-resize
 
 [format]
 padding = 4
-bspadding = 2
+bspadding = 4
+
+[module/glyph]
+type = custom/text
+format-padding = 0
+content-background = ${colors.background-talt}
+content-foreground = ${colors.foreground-alt2}
+
+[module/left-end-top]
+inherit = module/glyph
+content = "  %{T5}%{T-}"
+
+[module/right-end-top]
+inherit = module/glyph
+content = "  %{T5}%{T-}"
 
 [module/pomodoro]
 type = custom/script

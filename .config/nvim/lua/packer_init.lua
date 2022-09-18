@@ -10,12 +10,22 @@ return require('packer').startup(function()
     ---------------------------------------------------
     -- GENERAL
     ---------------------------------------------------
-    use 'junegunn/fzf.vim'
     use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
     -- or                            , branch = '0.1.x',
       requires = { 'nvim-lua/plenary.nvim' }
     }
+
+    -- fzf
+	use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
+	use {'junegunn/fzf.vim'}
+
+	-- skim
+	-- use {'lotabout/skim', dir = '~/.skim', run = './install' }
+	-- use 'lotabout/skim.vim'
+
+	-- GoYo
+	use 'junegunn/goyo.vim'
 
     -- Using the native fzf, so we can increase performance
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -68,6 +78,9 @@ return require('packer').startup(function()
     }
 
     use 'mattn/emmet-vim'
+
+    use {'scrooloose/nerdcommenter', 
+     ft = {'python', 'html', 'typescript', 'sh'}}
 
     ---------------------------------------------------
     -- EYECANDY

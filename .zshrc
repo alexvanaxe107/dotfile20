@@ -22,7 +22,6 @@ zstyle ':completion:*:killall:*'   force-list always
 source $HOME/.fdirrc
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 setopt COMPLETE_ALIASES
 #setopt correctall
@@ -84,3 +83,5 @@ bindkey -M vicmd ' ' vi-easy-motion
 
 #colorscript -r
 #eval "$(pyenv init -)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

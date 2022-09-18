@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 
 toReturn = {}
 
-theme_name = "neobones_light"
+theme_name = "Gruvbox Light"
 if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"
 elseif os.getenv("theme_name") == "night" then
@@ -13,7 +13,7 @@ end
 
 toReturn['color_scheme'] = theme_name
 toReturn['font'] = wezterm.font(font_name)
-toReturn['font_size'] = 11
+toReturn['font_size'] = 11 
 toReturn['window_decorations'] = "NONE"
 toReturn['hide_tab_bar_if_only_one_tab'] = true
 
