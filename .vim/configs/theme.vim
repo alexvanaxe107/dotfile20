@@ -5,9 +5,9 @@ set background=dark
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme dracula
-let g:airline_theme="dracula"
+colorscheme gruvbox
+let g:airline_theme="gruvbox"
 "hi Normal ctermbg=None
-"let g:airline_theme="dracula"
+"let g:airline_theme="gruvbox"
 
 set guifont=Fantasque\ Sans\ Mono:h15
