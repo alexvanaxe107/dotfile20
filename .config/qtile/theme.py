@@ -1,25 +1,25 @@
 theme_name = "day"
 
 bar_configs = dict(
-    font="Share Tech Mono",
-    fontsize=13,
+    font="CQ Mono",
+    fontsize=12,
     padding=8
     )
 
 colors = {
-    "active_border": '#DDDDDD',
-    "border_normal": '#888888',
-    "bar_background": '#EEEEEE87',
-    "bar_background_dark": '#88888887',
-    "bar_foreground": '#FFFFFF',
+    "active_border": '#F9D3BB',
+    "border_normal": '#3C4490',
+    "bar_background": '#E49EAF87',
+    "bar_background_dark": '#312A6887',
+    "bar_foreground": '#FEE8CC',
     "bar_foreground2": '#ffffff',
-    "bar_hl_act": '#999999',
-    "bar_hl_normal": '#FFFFFF',
-    "cpu_bk": '#888888',
-    "memory_bk": '#888888',
-    "swap_bk": '#555555',
-    "clock_bk": '#888888',
-    "vol_bk": '#888888',
+    "bar_hl_act": '#906CAC',
+    "bar_hl_normal": '#FEE8CC',
+    "cpu_bk": '#312A68',
+    "memory_bk": '#3C4490',
+    "swap_bk": '#504676',
+    "clock_bk": '#4498CC',
+    "vol_bk": '#645BA5',
 }
 
 values = {
