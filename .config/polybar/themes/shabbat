@@ -206,7 +206,7 @@ label-focused-padding = ${format.bspadding}
 label-occupied = %icon%
 label-occupied-padding = ${format.bspadding}
 label-occupied-foreground = ${colors.foreground-alt}
-label-occupied-background = ${colors.foreground-alt2}
+label-occupied-background = ${colors.background-talt}
 
 #label-urgent = %index%!
 label-urgent = %icon%!

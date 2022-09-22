@@ -193,7 +193,7 @@ source ~/.ng-completion
 #POWERLINE_BASH_SELECT=1
 #. /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 
-export EDITOR=vim
+export EDITOR=nvim
 
 source /home/alexvanaxe/.fdirrc
 
