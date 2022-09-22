@@ -1,7 +1,7 @@
 "if (has("termguicolors"))
   set termguicolors
 "endif
-set background=dark
+set background=light
 
 source ~/.vim/configs/theme_config.vim
 
