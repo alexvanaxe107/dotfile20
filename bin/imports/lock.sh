@@ -1,2 +1,2 @@
-FONT="Roboto Mono":pixelsize=19
+FONT=Iceland:pixelsize=29
 SAVER=saver_mpv
