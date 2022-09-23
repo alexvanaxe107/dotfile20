@@ -62,3 +62,7 @@ map('n', '<F7>', ':Snippets<CR>')
 map('n', '<F2>', '<cmd>Telescope find_files<cr>')
 map('n', '<F5>', '<cmd>Telescope buffers<cr>')
 map('n', '<F6>', '<cmd>Telescope live_grep<cr>')
+
+-- Exit with jk
+map('i', 'jk', '<esc>')
+

@@ -81,7 +81,7 @@ font-3 = symbola:pixelsize=10;1
 ;separator =%{B#8763E5ED}⏽%{B-}
 
 modules-left = desktop bspwm nweather pomodoro torrent
-modules-right = ava_load cpu temperature date indicators pulseaudio 
+modules-right = ava_load cpu temperature indicators pulseaudio date 
 
 ;tray-position = right
 ;tray-padding = 2
@@ -206,7 +206,7 @@ type = internal/bspwm
 #label-focused = %index%
 label-focused = %icon%
 label-focused-foreground = ${colors.foreground-alt2}
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.foreground-clock}
 label-focused-padding = ${format.bspadding}
 
 label-dimmed-focused-background = ${colors.foreground-pomodoro}
