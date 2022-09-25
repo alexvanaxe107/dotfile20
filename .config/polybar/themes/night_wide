@@ -82,7 +82,7 @@ font-4 = Symbols Nerd Font:pixelsize=24;0
 ;%{F#RRGGBB}|%{F-}
 ;separator =%{B#8763E5ED}⏽%{B-}
 
-modules-left = left-end-top desktop date pomodoro nweather torrent bspwm 
+modules-left = left-end-top logo desktop date pomodoro nweather torrent bspwm 
 modules-center = 
 modules-right = xwindow indicators wlan memory cpu temperature ava_load pulseaudio right-end-top
 
@@ -111,19 +111,25 @@ cursor-scroll = ns-resize
 padding = 4
 bspadding = 4
 
+[module/logo]
+type = custom/text
+content = 
+content-padding = 3
+content-background = ${colors.background}
+
 [module/glyph]
 type = custom/text
 format-padding = 0
 content-background = ${colors.background-transparent}
-content-foreground = ${colors.foreground-cpu}
+content-foreground = ${colors.background}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5} %{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5}ﮋ%{T-}"
 
 [module/pomodoro]
 type = custom/script
