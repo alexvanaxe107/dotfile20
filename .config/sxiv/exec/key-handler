@@ -45,7 +45,7 @@ crop_rimg(){
     #Normalizing width to further crop resize to work
     convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
 
-    convert "$file" -resize "1080x1920"^ -gravity East -extent "1080x1920" "crp_R_$file"
+    convert "$file" -resize "1080x1920"^ -gravity East -extent "1080x1920" "crp_$(basename -s .jpg $file)-2.jpg"
 
     #rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "$(monitors_info.sh -p)" | awk 'BEGIN {FS="x"}; {print $2}')"
     #Normalizing width to further crop resize to work

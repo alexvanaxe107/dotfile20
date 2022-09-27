@@ -75,7 +75,7 @@ font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Iceland:style=Regular:pixelsize=12;1
 font-2 = FontAwesome:pixelsize=9;1
 font-3 = symbola:pixelsize=10;1
-font-4 = Symbols Nerd Font:pixelsize=24;0
+font-4 = Symbols Nerd Font:pixelsize=34;0
 ;font-1 = "Noto Color Emoji:scale=14"
 
 ;separator = ⏽
@@ -125,7 +125,7 @@ content-foreground = ${colors.background}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "%{T5} %{T-}"
+content = "%{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
