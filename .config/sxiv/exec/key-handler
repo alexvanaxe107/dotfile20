@@ -19,6 +19,48 @@ resize_img(){
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
+crop_img(){
+    rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "$(monitors_info.sh -p)" | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
+
+    imgsize="$(monitors_info.sh -d "$(monitors_info.sh -p)")"
+
+    convert "tmp_$file" -crop ${imgsize} -gravity West "crp_${file}"
+
+    rm "tmp_${file}"
+
+    crop_rimg $file
+}
+
+crop_rimg(){
+    local rotable="DP-1"
+    rotated_w="$(monitors_info.sh -D)-$(echo "$(monitors_info.sh -d ${rotable})" | sed 's/x/-/' | bc)"
+    rotated_w=$(echo ${rotated_w} | bc)
+
+    rescale_dim="$(echo ${rotated_w})x$(echo $(monitors_info.sh -d ${rotable}) | awk 'BEGIN {FS="x"} ; {print $1}')"
+
+    echo $rescale_dim
+
+    #Normalizing width to further crop resize to work
+    convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
+
+    convert "$file" -resize "1080x1920"^ -gravity East -extent "1080x1920" "crp_R_$file"
+
+    #rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "$(monitors_info.sh -p)" | awk 'BEGIN {FS="x"}; {print $2}')"
+    #Normalizing width to further crop resize to work
+    #convert "tmp_$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
+
+
+    #imgsize="$(monitors_info.sh -d "$(monitors_info.sh -p)")"
+    #convert "tmp_$file" -crop ${imgsize} -gravity West "crp_${file}"
+
+    rm "tmp_$file"
+    #rm *-1.jpg
+
+}
+
+
 while read file
 do
     case "$1" in
@@ -30,6 +72,10 @@ do
             nitrogen --save --set-zoom-fill "$file" ;;
         "C-p") 
             resize_img "$file";;
+        "C-o")
+            crop_img "$file";;
+        "C-i")
+            crop_rimg "$file";;
         "C-s")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
         "C-l")

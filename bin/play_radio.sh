@@ -75,8 +75,8 @@ play_local () {
         #echo "mpv -playlist=$url" > ${PLAY_BKP};
         #mpv -playlist=$url
     #else
-    echo "mpv --shuffle $url --no-video" > ${PLAY_BKP};
-    mpv --shuffle "$url" --no-video
+    echo "mpv --shuffle $url" > ${PLAY_BKP};
+    mpv --shuffle "$url"
     #fi
 
     notify-send -u normal  "Finished" "Media stoped. Bye."

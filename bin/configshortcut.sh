@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nsxhkd\nbspwm\nradio\npl\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\nmonitors\nsxiv\nytpl" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nsxhkd\nbspwm\nradio\npl\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\ndual\nmonitors\nsxiv\nytpl" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -55,5 +55,6 @@ case $file in
     "ytpl") wezterm start $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;
     "sxiv") wezterm start $EDITOR $HOME/.config/sxiv/exec/key-handler;;
     "wallpaper") process_wallpaper;;
+    "dual") sxiv $HOME/Documents/Pictures/Wallpapers/dual/$theme_name&;;
 esac
 

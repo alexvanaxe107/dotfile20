@@ -44,9 +44,9 @@ alert = #bd2c40
 
 [bar/default]
 monitor = ${env:MONITOR1}
-width = 100%
+width = 98%
 height = 23
-;offset-x = 1%
+offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
 fixed-center = true
@@ -125,11 +125,11 @@ content-foreground = ${colors.background}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "  %{T5} %{T-}"
+content = "%{T5} %{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "  %{T5}ﮋ%{T-}"
+content = "%{T5}ﮋ%{T-}"
 
 [module/pomodoro]
 type = custom/script
