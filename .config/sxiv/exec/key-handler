@@ -20,8 +20,13 @@ resize_img(){
 }
 
 crop_imgs(){
-    crop_img "HDMI-1" "0" "West"
-    crop_img "DP-1" "1" "East"
+    # Rescaling to match all monitors
+
+    rm /tmp/tmp_*
+    rm /tmp/crp_*
+
+    crop_img "HDMI-1" "0" "West" "$direction"
+    crop_img "DP-1" "1" "East" "$direction"
     #crop_rimg "DP-1" "2" "East"
     #crop_rimg "HDMI-1" "3" "West"
 }
@@ -31,6 +36,9 @@ crop_img(){
     index="$2"
     gravity="$3"
 
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+
     temp_file="/tmp/tmp_$file"
 
     rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
@@ -38,13 +46,11 @@ crop_img(){
     xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
     yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
-    # Rescaling to match all monitors
-    direction="$(printf "Center\nSouth\nNorthWest\nSouthWest\nNorthEast\nSouthEast" | dmenu -p "Choose the direction")"
-    convert "$file" -resize "${rescale_dim}"^ -gravity ${direction} -extent "${rescale_dim}" -quality 100 "${temp_file}"
+    convert "$file" -filter Triangle -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}+0${resize}" -quality 100 "${temp_file}"
 
     # Resize to the choosen monitor
     file_location="/tmp/crp_${index}_${file}"
-    convert "${temp_file}" -resize ${xvalue}x${yvalue}^ -gravity ${gravity} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
+    convert "${temp_file}" -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${gravity} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
     nitrogen --head=${index} --save --set-scaled "${file_location}"
 }
 
