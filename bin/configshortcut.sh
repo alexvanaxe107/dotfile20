@@ -55,6 +55,6 @@ case $file in
     "ytpl") wezterm start $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;
     "sxiv") wezterm start $EDITOR $HOME/.config/sxiv/exec/key-handler;;
     "wallpaper") process_wallpaper;;
-    "dual") sxiv $HOME/Documents/Pictures/Wallpapers/dual/$theme_name&;;
+    "dual") cd $HOME/Documents/Pictures/Wallpapers/dual/$theme_name;sxiv *;;
 esac
 

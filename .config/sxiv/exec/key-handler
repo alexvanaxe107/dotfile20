@@ -19,45 +19,52 @@ resize_img(){
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
+crop_imgs(){
+    crop_img "HDMI-1" "0" "West"
+    crop_img "DP-1" "1" "East"
+    #crop_rimg "DP-1" "2" "East"
+    #crop_rimg "HDMI-1" "3" "West"
+}
+
 crop_img(){
-    rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "$(monitors_info.sh -p)" | awk 'BEGIN {FS="x"}; {print $2}')"
+    monitor="$1"
+    index="$2"
+    gravity="$3"
 
-    convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
+    temp_file="/tmp/tmp_$file"
 
-    imgsize="$(monitors_info.sh -d "$(monitors_info.sh -p)")"
+    rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
-    convert "tmp_$file" -crop ${imgsize} -gravity West "crp_${file}"
+    xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
+    yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
-    rm "tmp_${file}"
+    # Rescaling to match all monitors
+    direction="$(printf "Center\nSouth\nNorthWest\nSouthWest\nNorthEast\nSouthEast" | dmenu -p "Choose the direction")"
+    convert "$file" -resize "${rescale_dim}"^ -gravity ${direction} -extent "${rescale_dim}" -quality 100 "${temp_file}"
 
-    crop_rimg $file
+    # Resize to the choosen monitor
+    file_location="/tmp/crp_${index}_${file}"
+    convert "${temp_file}" -resize ${xvalue}x${yvalue}^ -gravity ${gravity} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
+    nitrogen --head=${index} --save --set-scaled "${file_location}"
 }
 
 crop_rimg(){
-    local rotable="DP-1"
-    rotated_w="$(monitors_info.sh -D)-$(echo "$(monitors_info.sh -d ${rotable})" | sed 's/x/-/' | bc)"
+    monitor="$1"
+    index="$2"
+    gravity="$3"
+
+    rotated_w="$(monitors_info.sh -D)-$(echo "$(monitors_info.sh -d ${monitor})" | sed 's/x/-/' | bc)"
     rotated_w=$(echo ${rotated_w} | bc)
 
-    rescale_dim="$(echo ${rotated_w})x$(echo $(monitors_info.sh -d ${rotable}) | awk 'BEGIN {FS="x"} ; {print $1}')"
+    xval="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
+    yval="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
-    echo $rescale_dim
+    rescale_dim="$(echo ${rotated_w})x$(echo $(monitors_info.sh -d ${monitor}) | awk 'BEGIN {FS="x"} ; {print $1}')"
 
-    #Normalizing width to further crop resize to work
-    convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
-
-    convert "$file" -resize "1080x1920"^ -gravity East -extent "1080x1920" "crp_$(basename -s .jpg $file)-2.jpg"
-
-    #rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "$(monitors_info.sh -p)" | awk 'BEGIN {FS="x"}; {print $2}')"
-    #Normalizing width to further crop resize to work
-    #convert "tmp_$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" "tmp_$file"
-
-
-    #imgsize="$(monitors_info.sh -d "$(monitors_info.sh -p)")"
-    #convert "tmp_$file" -crop ${imgsize} -gravity West "crp_${file}"
+    convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" -quality 100 "tmp_$file"
+    convert "$file" -resize "${yval}x${xval}"^ -gravity ${gravity} -extent "${yval}x${xval}" -quality 100 "crp_${index}_$file"
 
     rm "tmp_$file"
-    #rm *-1.jpg
-
 }
 
 
@@ -73,7 +80,7 @@ do
         "C-p") 
             resize_img "$file";;
         "C-o")
-            crop_img "$file";;
+            crop_imgs "$file";;
         "C-i")
             crop_rimg "$file";;
         "C-s")

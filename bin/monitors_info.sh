@@ -184,7 +184,7 @@ secundary_wide() {
 
 get_dimensions() {
     local monitor="$1"
-    dim="$(xrandr | grep -A 1 -i "${monitor}" | tail -n 1 | grep -o "[[:digit:]]*x[[:digit:]]*" | head -n 1)"
+    dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
     echo "${dim}" 
 }
 
