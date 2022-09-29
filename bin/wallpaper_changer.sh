@@ -14,7 +14,7 @@ WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape
 MONITOR_NUMBER=$(monitors_info.sh -q)
 
 show_options(){
-    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "\nsave") | dmenu -y 16 -bw 2 -z 550 -p "How rice it?")
+    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "\nsave\ndual") | dmenu -y 16 -bw 2 -z 650 -p "How rice it?")
     echo $option
 }
 
@@ -63,7 +63,7 @@ download(){
     if [ -z "$monitor" ]; then
         exit 0
     else
-        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing" | dmenu -i -y 16 -bw 2 -z 780 -p "Wanna try your luck?")
+        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing\nUsplash" | dmenu -i -y 16 -bw 2 -z 780 -p "Wanna try your luck?")
         notsceneoptions="ChromecastBing"
         if [ -z "${option}" ]; then
             exit 0
@@ -107,6 +107,10 @@ download(){
                     path=$(python $HOME/bin/wallfinder.py -e i -m ${monitor_all} -s "${scene}")
                     nitrogen --head=${index} --save --set-scaled ${path}
                 fi
+                if [ "Usplash" = "${option}" ]; then
+                    path=$(python $HOME/bin/wallfinder.py -e u -m ${monitor_all} -s "${scene}")
+                    nitrogen --head=${index} --save --set-zoom-fill ${path}
+                fi
             done
         else
             if [[ "$notsceneoptions" == *$option* ]]; then
@@ -149,6 +153,12 @@ download(){
                 path=$(python $HOME/bin/wallfinder.py -e i -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 nitrogen --head=${selected} --save --set-scaled ${path}
+            fi
+            if [ "Usplash" = "${option}" ]; then
+                notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
+                path=$(python $HOME/bin/wallfinder.py -e u -m ${monitor} -s "${scene}")
+                selected=$(monitors_info.sh -ib ${monitor})
+                nitrogen --head=${selected} --save --set-zoom-fill ${path}
             fi
         fi
     fi
@@ -221,6 +231,11 @@ save_wallpaper(){
     echo $option
 }
 
+process_dual(){
+    wallpaper_dual_changer.sh -d
+    option=""
+    echo $option
+}
 
 option=$(show_options)
 
@@ -229,6 +244,7 @@ while [ "true" ]; do
         "All") option=$(change_all);;
         "Download") option=$(download);;
         "save") save_wallpaper;;
+        "dual") option="$(process_dual)";;
         "") exit 0;;
         *) option=$(change_wallpaper $option);
     esac

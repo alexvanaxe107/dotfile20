@@ -326,7 +326,6 @@ play_cast() {
 command=$1
 secondcmd=$3
 
-
 while getopts "hsmxlr:Pp:Aa:q:QcCSRFLo:" opt; do
     case "$opt" in
         h) command="param"; show_help;;
