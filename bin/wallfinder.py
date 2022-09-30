@@ -16,8 +16,9 @@ user = os.environ['HOME']
 CONFIG_PATH = "%s/%s" % (user, ".config/wallfinder")
 
 class Config(object):
-    def __init__(self, ratio=False) -> None:
+    def __init__(self, ratio=False, dimension="") -> None:
         self.ratio = ratio
+        self.dimension = dimension
 
 
 
@@ -337,6 +338,9 @@ class WallHaven():
                 resolution = "{}x{}".format(monitor_info['width'],
                                             monitor_info['height'])
 
+        if config.dimension:
+            resolution = config.dimension
+
         url = self.retrieve_url_wallapaper(resolution, scene)
         filename = self.getFileName(url)
 
@@ -410,24 +414,30 @@ class Unsplash():
     ACCESS_KEY = 'N13vTby_fBE3bLrvzmTqT6cmkBhmX6ehODyFh4tuUCs'
 
     def get_wallpaper(self, monitor, scene, config):
-        monitor_info = _get_monitor_info(monitor)
-        request = self.mount_request(monitor_info, scene)
+        orientation="landscape"
+
+        if not config.dimension:
+            monitor_info = _get_monitor_info(monitor)
+            orientation=monitor_info['orientation']
+
+        request = self.mount_request(orientation, scene)
         response = self.get_json(request)
 
         url = self.get_url(response)
         file_name = self.get_file_name(response)
 
-        wallpaper = self.download(url, monitor_info['orientation'], file_name)
+
+        wallpaper = self.download(url, orientation, file_name)
 
         return wallpaper
 
-    def mount_request(self, monitor_info, scene):
+    def mount_request(self, orientation, scene):
         request = self.SERVICE_URL
         # Request base
         request += ("{}").format("photos/random?")
 
         # set the query parametter
-        request += ("orientation={}").format(monitor_info['orientation'])
+        request += ("orientation={}").format(orientation)
         if scene:
             request += ("&query={}").format(scene)
 
@@ -513,12 +523,14 @@ def get_engine(engine):
 def _main():
     options = _parse_arguments()
     monitor = options.monitor
+    dimension = options.dimension
     scene = options.scene
     engine = options.engine
     ratio = options.ratio
 
     config = Config()
     config.ratio = False
+    config.dimension = dimension
     if ratio:
         config.ratio = True
 

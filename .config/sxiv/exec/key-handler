@@ -38,6 +38,7 @@ crop_img(){
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
     resize="$(printf "+0\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n+100\n+200\n+300" | dmenu -p "Set the horizontal deviation")"
 
     temp_file="/tmp/tmp_$file"
 
@@ -46,7 +47,7 @@ crop_img(){
     xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
     yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
-    convert "$file" -filter Triangle -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}+0${resize}" -quality 100 "${temp_file}"
+    convert "$file" -filter Triangle -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}${horizontal}${resize}" -quality 100 "${temp_file}"
 
     # Resize to the choosen monitor
     file_location="/tmp/crp_${index}_${file}"

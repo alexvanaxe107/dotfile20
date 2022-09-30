@@ -65,6 +65,7 @@ set_wallpaper() {
 wallhaven(){
     scene="$1"
     monitor="$(monitors_info.sh -p)"
+    dimension="$(printf "2560x1440\n3840x2160\n2560x1080\n1920x1080" | dmenu -i -y 16 -bw 2 -z 550 -p "Select a dimension")"
     path=$(python $HOME/bin/wallfinder.py -e h -m ${monitor} -s "${scene}")
     file="$path"
     $(crop_imgs)
@@ -81,7 +82,7 @@ alpha(){
 usplash(){
     scene="$1"
     monitor="$(monitors_info.sh -p)"
-    path=$(python $HOME/bin/wallfinder.py -e u -m ${monitor} -s "${scene}")
+    path=$(python $HOME/bin/wallfinder.py -e u -d "2560x1080" -s "${scene}")
     file="$path"
     $(crop_imgs)
 }
