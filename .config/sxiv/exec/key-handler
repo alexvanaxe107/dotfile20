@@ -19,6 +19,25 @@ resize_img(){
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
+resize_img_plus(){
+    #imgsize="$(monitors_info.sh -d 'HDMI-1')"
+    #imgsize="1080x1920"
+    #convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
+
+    temp_file="pre_tmp_$file"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    imgsize="$(printf "5120x3250\n4480x1280\n3640x1920\n3000x2660" | dmenu -p "Choose the direction")"
+
+    adjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the adjustment")"
+
+    convert "$file" -resize "${imgsize}"^ -quality 100 -gravity ${direction} -extent "${imgsize}+0+${adjust}" "/tmp/$temp_file"
+
+    cd /tmp/
+
+    sxiv $temp_file &
+}
+
 crop_imgs(){
     # Rescaling to match all monitors
 
@@ -37,8 +56,8 @@ crop_img(){
     gravity="$3"
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    resize="$(printf "+0\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n+100\n+200\n+300" | dmenu -p "Set the horizontal deviation")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300" | dmenu -p "Set the horizontal deviation")"
 
     temp_file="/tmp/tmp_$file"
 
@@ -78,18 +97,20 @@ crop_rimg(){
 while read file
 do
     case "$1" in
-        "C-r")
-            convert -rotate 90 "$file" "$file" ;;
+        #"C-r")
+            #convert -rotate 90 "$file" "$file" ;;
         "C-c")
             echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
+        "C-r") 
+            resize_img_plus "$file";;
         "C-p") 
             resize_img "$file";;
         "C-o")
             crop_imgs "$file";;
         "C-i")
-            crop_rimg "$file";;
+            convert -flop "$file" "$file";;
         "C-s")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
         "C-l")
