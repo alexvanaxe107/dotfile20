@@ -5,9 +5,9 @@ set background=dark
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme base16-greenscreen
-let g:airline_theme="base16_greenscreen"
+colorscheme gotham
+let g:airline_theme="gotham"
 "hi Normal ctermbg=None
-"let g:airline_theme="gruvbox"
+"let g:airline_theme="gotham"
 
 set guifont=Fantasque\ Sans\ Mono:h15

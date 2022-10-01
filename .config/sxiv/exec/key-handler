@@ -19,17 +19,98 @@ resize_img(){
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
+resize_img_plus(){
+    #imgsize="$(monitors_info.sh -d 'HDMI-1')"
+    #imgsize="1080x1920"
+    #convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
+
+    temp_file="pre_tmp_$file"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    imgsize="$(printf "5120x3250\n4480x1280\n3640x1920\n3000x2660" | dmenu -p "Choose the direction")"
+
+    adjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the adjustment")"
+
+    convert "$file" -resize "${imgsize}"^ -quality 100 -gravity ${direction} -extent "${imgsize}+0+${adjust}" "/tmp/$temp_file"
+
+    cd /tmp/
+
+    sxiv $temp_file &
+}
+
+crop_imgs(){
+    # Rescaling to match all monitors
+
+    rm /tmp/tmp_*
+    rm /tmp/crp_*
+
+    crop_img "HDMI-1" "0" "West" "$direction"
+    crop_img "DP-1" "1" "East" "$direction"
+    #crop_rimg "DP-1" "2" "East"
+    #crop_rimg "HDMI-1" "3" "West"
+}
+
+crop_img(){
+    monitor="$1"
+    index="$2"
+    gravity="$3"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300" | dmenu -p "Set the horizontal deviation")"
+
+    temp_file="/tmp/tmp_$file"
+
+    rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
+    yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    convert "$file" -filter Triangle -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}${horizontal}${resize}" -quality 100 "${temp_file}"
+
+    # Resize to the choosen monitor
+    file_location="/tmp/crp_${index}_${file}"
+    convert "${temp_file}" -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${gravity} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
+    nitrogen --head=${index} --save --set-scaled "${file_location}"
+}
+
+crop_rimg(){
+    monitor="$1"
+    index="$2"
+    gravity="$3"
+
+    rotated_w="$(monitors_info.sh -D)-$(echo "$(monitors_info.sh -d ${monitor})" | sed 's/x/-/' | bc)"
+    rotated_w=$(echo ${rotated_w} | bc)
+
+    xval="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
+    yval="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    rescale_dim="$(echo ${rotated_w})x$(echo $(monitors_info.sh -d ${monitor}) | awk 'BEGIN {FS="x"} ; {print $1}')"
+
+    convert "$file" -resize "${rescale_dim}"^ -gravity Center -extent "${rescale_dim}" -quality 100 "tmp_$file"
+    convert "$file" -resize "${yval}x${xval}"^ -gravity ${gravity} -extent "${yval}x${xval}" -quality 100 "crp_${index}_$file"
+
+    rm "tmp_$file"
+}
+
+
 while read file
 do
     case "$1" in
-        "C-r")
-            convert -rotate 90 "$file" "$file" ;;
+        #"C-r")
+            #convert -rotate 90 "$file" "$file" ;;
         "C-c")
             echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
+        "C-r") 
+            resize_img_plus "$file";;
         "C-p") 
             resize_img "$file";;
+        "C-o")
+            crop_imgs "$file";;
+        "C-i")
+            convert -flop "$file" "$file";;
         "C-s")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
         "C-l")

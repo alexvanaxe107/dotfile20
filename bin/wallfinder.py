@@ -4,6 +4,7 @@ import re
 import pathlib
 import random
 import math
+import json
 from datetime import datetime
 from google_images_search import GoogleImagesSearch
 
@@ -15,7 +16,10 @@ user = os.environ['HOME']
 CONFIG_PATH = "%s/%s" % (user, ".config/wallfinder")
 
 class Config(object):
-    pass
+    def __init__(self, ratio=False, dimension="") -> None:
+        self.ratio = ratio
+        self.dimension = dimension
+
 
 
 def find_mode(id, modes):
@@ -41,6 +45,7 @@ def _get_monitor_res(monitor):
 
 def _get_monitor_info(monitor):
     monitors = get_display_info()
+
     if monitor:
         monitor_plugged = monitors[monitor]
     else:
@@ -62,6 +67,7 @@ def get_display_info():
 
     res = randr.get_screen_resources(window)
     for output in res.outputs:
+        orientation = "landscape"
         params = d.xrandr_get_output_info(output, res.config_timestamp)
         if not params.crtc:
             continue
@@ -82,6 +88,11 @@ def get_display_info():
             ratio_w = "21"
             ratio_h = "9"
 
+        if crtc.width < crtc.height:
+            orientation = "portrait"
+        elif crtc.width == crtc.height:
+            orientation = "squarish"
+
         result[params.name] = {
             'name': params.name,
             'kind': kind,
@@ -89,7 +100,8 @@ def get_display_info():
             'width': crtc.width,
             'height': crtc.height,
             'ratio_w': ratio_w,
-            'ratio_h': ratio_h
+            'ratio_h': ratio_h,
+            'orientation' : orientation
         }
 
     return result
@@ -326,6 +338,9 @@ class WallHaven():
                 resolution = "{}x{}".format(monitor_info['width'],
                                             monitor_info['height'])
 
+        if config.dimension:
+            resolution = config.dimension
+
         url = self.retrieve_url_wallapaper(resolution, scene)
         filename = self.getFileName(url)
 
@@ -393,6 +408,67 @@ class WallHaven():
         filename = pathlib.PurePath(url)
         return filename.name
 
+class Unsplash():
+    SERVICE_URL = 'https://api.unsplash.com/'
+    CLIENT_ID = '_xacj1gjFWlFq7fBuGVwQ5DyFLkZQXOwo5n4oGg7toc'
+    ACCESS_KEY = 'N13vTby_fBE3bLrvzmTqT6cmkBhmX6ehODyFh4tuUCs'
+
+    def get_wallpaper(self, monitor, scene, config):
+        orientation="landscape"
+
+        if not config.dimension:
+            monitor_info = _get_monitor_info(monitor)
+            orientation=monitor_info['orientation']
+
+        request = self.mount_request(orientation, scene)
+        response = self.get_json(request)
+
+        url = self.get_url(response)
+        file_name = self.get_file_name(response)
+
+
+        wallpaper = self.download(url, orientation, file_name)
+
+        return wallpaper
+
+    def mount_request(self, orientation, scene):
+        request = self.SERVICE_URL
+        # Request base
+        request += ("{}").format("photos/random?")
+
+        # set the query parametter
+        request += ("orientation={}").format(orientation)
+        if scene:
+            request += ("&query={}").format(scene)
+
+        return request
+
+    def get_json(self, request):
+        response = requests.get(request, headers={'Authorization': 'Client-ID ' + self.ACCESS_KEY})
+
+        return response.json()
+
+    def get_url(self, response):
+        url = response['urls']['raw']
+        return url
+
+    def get_file_name(self, response):
+        file_name = "{}{}".format(response["id"], ".jpg")
+        return file_name
+
+    def download(self, url, dirname, filename):
+        url_int = url
+        r = requests.get(url_int, allow_redirects=True)
+        savename = "{}/{}/{}/{}".format(CONFIG_PATH,
+                                        "usplash",
+                                        dirname,
+                                        filename)
+        pathlib.Path("{}/{}/{}".format(CONFIG_PATH,
+                                       "usplash",
+                                       dirname)).mkdir(parents=True,
+                                                       exist_ok=True)
+        open(savename, 'wb').write(r.content)
+        return savename
 
 def _parse_arguments():
     import argparse
@@ -430,6 +506,8 @@ def get_engine(engine):
             return Chromecast()
         if engine == "b":
             return Bing()
+        if engine == "u":
+            return Unsplash()
 
     choice = random.choice(['haven'])
 
@@ -439,16 +517,20 @@ def get_engine(engine):
     if choice == 'alpha':
         return Alpha()
 
+    return WallHaven()
+
 
 def _main():
     options = _parse_arguments()
     monitor = options.monitor
+    dimension = options.dimension
     scene = options.scene
     engine = options.engine
     ratio = options.ratio
 
     config = Config()
     config.ratio = False
+    config.dimension = dimension
     if ratio:
         config.ratio = True
 
