@@ -23,11 +23,13 @@ resize_img_plus(){
     filename="$(basename $file)"
     temp_file="rec_$filename"
 
-    local htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+100}')
+    local htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
+    local htoppls=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+100}')
     local optimal_rescale="$(monitors_info.sh -D)x${htop}"
+    local optimal_rescale_ppls="$(monitors_info.sh -D)x${htoppls}"
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    imgsize="$(printf "${optimal_rescale}\n5120x3250\n4480x1280\n3640x1920\n3000x2660" | dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale_ppls}\n"${optimal_rescale}"\n5120x3250\n4480x1280\n3640x1920\n3000x2660" | dmenu -p "Choose the dimension")"
 
     adjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the adjustment")"
 

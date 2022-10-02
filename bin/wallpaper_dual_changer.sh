@@ -76,6 +76,7 @@ alpha(){
     monitor="$(monitors_info.sh -p)"
     path=$(python $HOME/bin/wallfinder.py -e a -m ${monitor} -s "${scene}")
     file="$path"
+    echo "$file"
     sxiv ${file}&
 }
 
