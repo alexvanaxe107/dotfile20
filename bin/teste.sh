@@ -1,9 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-is_bspc=$(bspc wm --get-status)
+htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
 
-if [[ ! -z "$is_bspc" ]]; then
-    echo "is bspc"
-else
-    echo "no, it is not bspc"
-fi
+optimal_rescale="$(monitors_info.sh -D)x${htop}"
+
+printf $optimal_rescale
