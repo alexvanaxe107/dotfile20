@@ -76,10 +76,10 @@ do
             echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
-        "C-r") 
-            resize_img_plus "$file";;
         "C-p") 
             resize_img "$file";;
+        "C-r") 
+            resize_img_plus "$file";;
         "C-t")
             crop_img "0" "0" "West";;
         "C-y")
