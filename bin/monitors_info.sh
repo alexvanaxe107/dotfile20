@@ -176,16 +176,19 @@ is_rotated(){
 
 secundary_wide() {
     sec=$(name_by_prefered 0)
-
     wide=$(is_wide "${sec}")
-    
     echo "${wide}"
 }
 
 get_dimensions() {
-    local monitor="$1"
-    dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
-    echo "${dim}" 
+    if [ -z $1 ]; then
+        local dimensions=$(xrandr | grep -w connected | grep -oP '\d+x\d+')
+        echo $dimensions
+    else
+        local monitor="$1"
+        dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
+        echo "${dim}" 
+    fi
 }
 
 # Pega a soma dos monitors
@@ -218,7 +221,7 @@ show_help() {
     echo "-e                             Get the emacs string to configure the exwm"
 }
 
-while getopts "h?mcpqift:w:n:ab:sd:er:gD" opt; do
+while getopts "h?mcpqift:w:n:ab:sder:gD" opt; do
     case "$opt" in
     h|\?)
         show_help
@@ -235,7 +238,7 @@ while getopts "h?mcpqift:w:n:ab:sd:er:gD" opt; do
         ;;
     t)  name_by_prefered $OPTARG
         ;;
-    d)  get_dimensions $OPTARG
+    d)  get_dimensions $2
         ;;
     D)  get_sum_dimensions
         ;;
