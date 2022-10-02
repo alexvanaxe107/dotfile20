@@ -6,4 +6,5 @@ display_manager.sh -p "HDMI-1"
 
 systemd --user
 
-exec dbus-launch --exit-with-session bspwm
+#exec dbus-launch --exit-with-session bspwm
+exec bspwm
