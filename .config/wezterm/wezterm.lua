@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 
 toReturn = {}
 
-theme_name = "cyberpunk"
+theme_name = "Azu (Gogh)"
 if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"
 elseif os.getenv("theme_name") == "night" then

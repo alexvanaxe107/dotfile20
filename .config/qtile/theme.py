@@ -1,28 +1,28 @@
 theme_name = "night"
 
 colors = {
-    "active_border": '#A25599',
-    "border_normal": '#312249',
-    "bar_background": '#11112200',
-    "bar_background_fill": '#652370BF',
-    "bar_foreground": '#A25599',
+    "active_border": '#88A0C5',
+    "border_normal": '#191A45',
+    "bar_background": '#0C0E2900',
+    "bar_background_fill": '#475275BF',
+    "bar_foreground": '#88A0C5',
     "bar_foreground_alt": '#555555',
-    "icon_color": '#B842D5',
-    "bar_hl_normal": '#452250',
-    "bar_hl_act": '#111122'
+    "icon_color": '#88A0C5',
+    "bar_hl_normal": '#23234D',
+    "bar_hl_act": '#0C0E29'
 }
 
 bar_configs = dict(
-    font='Erica Type',
+    font="Targa MS",
     fontsize=12,
     background=colors['bar_background_fill'],
     padding=5
     )
 
 bar_graph = dict(
-    fill_color='#A25599',
-    graph_color='#312249',
-    border_color='#312249'
+    fill_color='#88A0C5',
+    graph_color='#191A45',
+    border_color='#191A45'
 )
 
 
