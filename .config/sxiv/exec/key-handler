@@ -24,16 +24,20 @@ resize_img_plus(){
     temp_file="rec_$filename"
 
     local htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
+    local ltop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"; TESTE=10000} {if ($2 < TESTE) TESTE=$2;} END {print TESTE}')
     local htoppls=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+100}')
     local optimal_rescale="$(monitors_info.sh -D)x${htop}"
-    local optimal_rescale_ppls="$(monitors_info.sh -D)x${htoppls}"
+    local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + 100 | bc)x${htoppls}"
+    local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
+
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    imgsize="$(printf "${optimal_rescale_ppls}\n"${optimal_rescale}"\n5120x3250\n4480x1280\n3640x1920\n3000x2660" | dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}" | dmenu -p "Choose the dimension")"
 
-    adjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the adjustment")"
+    vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical adjustment")"
+    hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the horizontal adjustment")"
 
-    convert "$file" -resize "${imgsize}"^ -quality 100 -gravity ${direction} -extent "${imgsize}+0+${adjust}" "/tmp/$temp_file"
+    convert "$file" -resize "${imgsize}"^ -quality 100 -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
 
     cd /tmp/
 
@@ -62,7 +66,7 @@ crop_img(){
 
     # Resize to the choosen monitor
     file_location="/tmp/crp_${index}_${filename}"
-    convert "${temp_file}" -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${gravity} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
+    convert "${temp_file}" -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${direction} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
     sxiv "${file_location}"&
     #nitrogen --head=${index} --save --set-scaled "${file_location}"
 }
