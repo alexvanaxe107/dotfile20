@@ -75,6 +75,9 @@ vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {
   end
 
 
+-- Start the lsp configs
+require('config/lsp_config')
+
 -- Activate the bash setup
 require 'lspconfig'
 require 'lspconfig'.bashls.setup{}
@@ -83,13 +86,13 @@ require 'lspconfig'.bashls.setup{}
 require'lspconfig'.html.setup{}
 
 -- Activate the python setup
-require'lspconfig'.pyright.setup{}
+require'lspconfig'.pyright.setup{on_attach=on_attach}
 
 -- Activate the angular setup
 require'lspconfig'.angularls.setup{}
 
 -- Activate the vue setup
-require'lspconfig'.volar.setup{}
+require'lspconfig'.volar.setup{on_attach=on_attach}
 
 --  Activate the typescript config
 require'lspconfig'.tsserver.setup({

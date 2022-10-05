@@ -182,8 +182,8 @@ secundary_wide() {
 
 get_dimensions() {
     if [ -z $1 ]; then
-        local dimensions=$(xrandr | grep -w connected | grep -oP '\d+x\d+')
-        echo $dimensions
+        local dimensions="$(xrandr | grep -w connected | grep -oP '\d+x\d+')"
+        printf "$dimensions"
     else
         local monitor="$1"
         dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
