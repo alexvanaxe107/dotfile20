@@ -65,6 +65,14 @@ if [ "$vim_theme" == "tokyonight" ]; then
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
+if [ "$vim_theme" == "PencilLight" ]; then
+    sed -i 's/^colorscheme.*/colorscheme pencil/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="pencil"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+    echo "" > ${HOME}/.vim/configs/theme_config.vim
+    echo "let g:pencil_terminal_italics = 1" >> ${HOME}/.vim/configs/theme_config.vim
+fi
+
 if [ "$vim_theme" == "PencilDark" ]; then
     sed -i 's/^colorscheme.*/colorscheme pencil/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="pencil"/' ${HOME}/.vim/configs/theme.vim
@@ -271,7 +279,7 @@ if [ "$vim_theme" == "Nova.yml" ]; then
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 
-if [ "$vim_theme" == "Grayscale.light.yml" ]; then
+if [ "$vim_theme" == "Grayscale (light) (terminal.sexy)" ]; then
     sed -i 's/^colorscheme.*/colorscheme base16-grayscale-light/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="base16_grayscale"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
