@@ -32,6 +32,12 @@ return require('packer').startup(function()
     -- Navigate with tmux
     use 'christoomey/vim-tmux-navigator'
 
+
+    ---------------------------------------------------
+    -- NAVIGATION
+    ---------------------------------------------------
+    use 'easymotion/vim-easymotion'
+
     ---------------------------------------------------
     -- UTILITIES
     ---------------------------------------------------

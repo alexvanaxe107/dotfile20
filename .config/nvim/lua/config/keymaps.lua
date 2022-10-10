@@ -58,10 +58,13 @@ map('n', '<F7>', ':Snippets<CR>')
 -- map('n', '<F8>', ':History:<CR>')
 -- map('n', '<F11>', ':Colors<CR>')
 
-
 map('n', '<F2>', '<cmd>Telescope find_files<cr>')
 map('n', '<F5>', '<cmd>Telescope buffers<cr>')
 map('n', '<F6>', '<cmd>Telescope live_grep<cr>')
+
+-- HL search toggle
+map('n', '<F10>', '<cmd>set hlsearch!<cr>')
+
 
 -- Exit with jk
 map('i', 'jk', '<esc>')
