@@ -43,7 +43,7 @@ return require('packer').startup(function()
     ---------------------------------------------------
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
-
+    use 'tpope/vim-fugitive'
 
     ---------------------------------------------------
     -- PROGRAMMING
