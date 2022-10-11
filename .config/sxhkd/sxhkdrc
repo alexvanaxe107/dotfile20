@@ -225,6 +225,10 @@ super + ctrl + i
 super + i
         $HOME/bin/bspc_node_manager.sh -g
 
+# Change the transparency of the current active window
+super + o : {d,u,r,R}
+    {picom-trans -c +5, picom-trans -c -5, picom-trans -c --delete, picom-trans -r}
+
 #
 # state/flags
 #
