@@ -71,6 +71,7 @@ font() {
 
     if [ "${update}" = "Yes" ]; then
         sed -i "s/family:.*/family: ${font_name}/" ${HOME}/.config/alacritty/alacritty.yml
+        sed -i "s/custom_term_font =.*/custom_term_font = '${font_name}'/" ${HOME}/.config/wezterm/wezterm.lua
         sed -i "s/#size:.*/size: ${size3}/" ${HOME}/.config/alacritty/alacritty.yml
     fi
     if [ -z "${update}" ]; then

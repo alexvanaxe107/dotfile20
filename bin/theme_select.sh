@@ -88,6 +88,7 @@ function reset_configs(){
     cp ${HOME}/.config/qtile/theme_tmpl_${theme_name}.py ${HOME}/.config/qtile/theme.py
     cp ${HOME}/.config/vis/colors/theme_tpl ${HOME}/.config/vis/colors/theme
     cp ${HOME}/.config/tint2/tint2rc.tpl ${HOME}/.config/tint2/tint2rc
+    cp ${HOME}/.config/wezterm/wezterm.lua.tmpl ${HOME}/.config/wezterm/wezterm.lua
     cp ${HOME}/bin/imports/lock.sh.tmpl ${HOME}/bin/imports/lock.sh
     if [ "${CHOSEN}" != "wallpaper" ]; then
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
