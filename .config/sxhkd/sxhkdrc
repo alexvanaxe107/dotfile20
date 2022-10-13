@@ -93,7 +93,7 @@ super + shift + a
 
 # Terminal theme
 super + shift + o
-	$HOME/bin/alacritty_theme.sh
+	$HOME/bin/terminal_theme.sh
 
 # Edit Config file
 super + shift + u

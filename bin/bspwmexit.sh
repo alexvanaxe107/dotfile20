@@ -1,6 +1,7 @@
 #!/bin/dash
+. $HOME/.config/wm/bspwm.conf
 
-confirm="$(printf "No\\nYes" | dmenu -i -p "$2" -nb darkred -sb red -sf white -nf gray )"
+confirm="$(printf "No\\nYes" | dmenu -i -p "$2" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2})"
 
 action=$1
 
