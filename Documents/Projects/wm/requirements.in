@@ -5,7 +5,6 @@ click
 i3ipc
 pydbus
 pycairo
-PyGObject
 pyttsx3
 beautifulsoup4
 grab

@@ -115,7 +115,7 @@ bspadding = 4
 type = custom/text
 content = 
 content-padding = 3
-content-background = ${colors.background}
+content-background = ${colors.foreground-alt2}
 
 [module/glyph]
 type = custom/text
@@ -129,7 +129,7 @@ content = "%{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "%{T5}ﮋ%{T-}"
+content = "%{T5}%{T-}"
 
 [module/pomodoro]
 type = custom/script

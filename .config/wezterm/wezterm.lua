@@ -6,7 +6,7 @@ end
 
 toReturn = {}
 
-theme_name = "Belafonte Day"
+theme_name = "PencilDark"
 custom_term_font = ""
 if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"

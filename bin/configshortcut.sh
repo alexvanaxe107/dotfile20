@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nradio\nfonts\nmonitors\nytpl\nwallpaper\ndual" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytpl\nwallpaper\ndual" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -44,7 +44,7 @@ process_wallpaper(){
 case $file in
     "config") wezterm start $EDITOR $0;;
     "sxhkd") wezterm start $EDITOR $HOME/.config/sxhkd/sxhkdrc;;
-    "bspwm") wezterm start $EDITOR $HOME/.config/bspwm/bspwmrc;;
+    "bspwm") wezterm start $EDITOR $HOME/.config/bspwm/themes/*;;
     "radio") wezterm start $EDITOR $HOME/.config/play_radio/config;;
     "config") wezterm start $EDITOR $HOME/bin/configshortcut.sh;;
     "zshrc") wezterm start $EDITOR $HOME/.zshrc;;
