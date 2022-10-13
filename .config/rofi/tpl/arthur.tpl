@@ -179,7 +179,6 @@ button {
     padding: 6px;
     border: 2px 0px 2px 2px;
     border-radius: 4px 0px 0px 4px;
-    background-color: @tlightblack;
     border-color: @foreground;
     color: @foreground;
     horizontal-align: 0.5;

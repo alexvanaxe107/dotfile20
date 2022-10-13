@@ -216,7 +216,7 @@ if [ ! -z $chosen_p ]; then
         fi
     else
         if [ "${use_rofi}" = 1 ]; then
-            chosen=$(printf "\\n\\n\\n\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
+            chosen=$(printf "\\n\\n\\n\\n\\n" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
         else
             chosen=$(printf " play/pause\\n   next\\n   prev\\n  stop\\n  vol\\n  cast" | dmenu -i -p "${prompt}" -y 16 -z 950 -bw 2 -theme ${rofi_item4})
         fi

@@ -102,6 +102,7 @@ return require('packer').startup(function()
     use 'lifepillar/vim-solarized8'
     use 'chriskempson/base16-vim'
     use 'fenetikm/falcon'
+    use 'TroyFletcher/vim-colors-synthwave'
     -- use 'kaicataldo/material.vim', { 'branch': 'main' }
     use 'fneu/breezy'
     use 'whatyouhide/vim-gotham'
@@ -127,6 +128,11 @@ return require('packer').startup(function()
     -- If you are using Packer
     use 'marko-cerovac/material.nvim'
     use 'drewtempelmeyer/palenight.vim'
+
+    use {
+	"catppuccin/nvim",
+        as = "catppuccin"
+}
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'

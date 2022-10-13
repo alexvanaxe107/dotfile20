@@ -80,6 +80,7 @@ window {
 mainbox {
     spacing: 0;
     children: [ inputbar, message, listview ];
+    background-color:               transparent;
 }
 
 inputbar {
@@ -87,7 +88,6 @@ inputbar {
     padding: 11px;
     background-color: @inputbarcolor;
     border: 0px 0px 0px 0px;
-    border-radius:  15px 15px 15px 15px;
     border-color: @foreground;
     font: "Source Code Pro 18";
 }
@@ -98,9 +98,7 @@ entry,prompt,case-indicator {
 prompt {
     margin:     0px 0.3em 0em 0em ;
 }
-mainbox {
-    background-color:               @background;
-}
+
 listview {
   enabled: false;
 }

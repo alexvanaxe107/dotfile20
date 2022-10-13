@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nsxhkd\nbspwm\nradio\npl\nconfig\nzshrc\nvim\nfish\nfonts\nwallpaper\ndual\nmonitors\nsxiv\nytpl" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nradio\nfonts\nmonitors\nytpl\nwallpaper\ndual" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -48,8 +48,6 @@ case $file in
     "radio") wezterm start $EDITOR $HOME/.config/play_radio/config;;
     "config") wezterm start $EDITOR $HOME/bin/configshortcut.sh;;
     "zshrc") wezterm start $EDITOR $HOME/.zshrc;;
-    "vim") wezterm start $EDITOR $HOME/.vim/configs;;
-    "fish") wezterm start $EDITOR $HOME/.config/fish/config.fish;;
     "fonts") wezterm start $EDITOR $HOME/bin/font_select.sh;;
     "monitors") wezterm start $EDITOR $HOME/.config/wm/monitors.conf;;
     "ytpl") wezterm start $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;

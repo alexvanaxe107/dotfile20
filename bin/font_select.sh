@@ -104,7 +104,7 @@ case $CHOSEN in
     "Nature") font "CQ Mono" Bold 10 10 12 1;;
     "Modern")  font "Audimat Mono" Regular 10 10 12 1;;
     "Russian") font "Iosevka" "Bold" 10 10 13 1;;
-    "Futuristic") font "Larabiefont Rg" Bold 9 9 9 2;;
+    "Futuristic") font "Larabiefont Compressed" Bold 14 14 17 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
     "Amazon") font "Bookerly" Normal 9 9 13 2;;

@@ -87,7 +87,7 @@ do
         "C-t")
             crop_img "0" "0" "West";;
         "C-y")
-            crop_img "1" "0" "East";;
+            crop_img "1" "1" "East";;
         "C-i")
             convert -flop "$file" "$file";;
         "C-s")
