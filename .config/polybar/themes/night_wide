@@ -115,7 +115,8 @@ bspadding = 4
 type = custom/text
 content = 
 content-padding = 3
-content-background = ${colors.foreground-alt2}
+content-background = ${colors.foreground-clock}
+content-foreground = ${colors.foreground-torrent}
 
 [module/glyph]
 type = custom/text

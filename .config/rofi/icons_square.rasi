@@ -91,7 +91,7 @@ element-text {
 	font:							"Symbols Nerd Font 20";
     expand:                         true;
     horizontal-align:               0.5;
-    vertical-align:                 0;
+    vertical-align:                 0.5;
     margin:                         3px 5px 3px 5px;
 }
 
