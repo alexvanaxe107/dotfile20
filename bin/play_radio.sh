@@ -110,7 +110,7 @@ add_playlist(){
     result=$1
     if [ -z "${result}" ]
     then
-        result=$(clipster -oc)
+        result=$(xclip -o -sel clipboard)
     fi
 
     if [ -z "${secondcmd}" ];then
@@ -173,7 +173,7 @@ play_quality(){
     result=$1
 
     if [ -z "${result}" ]; then
-        result="$(clipster -oc)"
+        result="$(xclip -o -sel clipboard)"
     fi
 
     local option="$(yt-dlp --list-formats "${result}" | sed -n '8,$p')"
@@ -202,7 +202,7 @@ play(){
     result=$1
 
     if [ -z "${result}" ]; then
-        result="$(clipster -oc)"
+        result="$(xclip -o -sel clipboard)"
     fi
 
     is_spotify=$(grep -o spotify <<< "${result}")
@@ -244,7 +244,7 @@ play_audio(){
     result=$1
 
     if [ -z "${result}" ]; then
-        result="$(clipster -oc)"
+        result="$(xclip -o -sel clipboard)"
     fi
     echo "mpv \"$result\" --no-video --shuffle" > ${PLAY_BKP};
     mpv "$result" --no-video --shuffle

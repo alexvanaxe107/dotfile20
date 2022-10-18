@@ -120,7 +120,7 @@ super + shift + g ; {k}
 	setkmap
 
 super + shift + g ; {t}
-	alacritty --hold --class translation -e translate.sh -t
+	. ~/.config/bspwm/themes/bsp.cfg;wezterm start --class translation translate.sh -t
 
 # Change wallpapers
 super + shift + w

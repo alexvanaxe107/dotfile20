@@ -2,11 +2,13 @@
 
 translate() {
     if [ -z "$1" ]; then
-        local trad="$(clipster -o)"
+        local trad="$(xclip -o -sel clipboard)"
         trans :pt "$trad"
     else
         trans :pt "$1"
     fi
+
+    read
 }
 
 show_help() {
