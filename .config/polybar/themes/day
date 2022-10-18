@@ -88,7 +88,7 @@ font-4 = Symbols Nerd Font:pixelsize=36;4
 ;separator = 
 
 modules-left = logo desktop bspwm pomodoro nweather torrent right-end-top
-modules-right = left-end-top ava_load memory cpu temperature wlan pulseaudio indicators date
+modules-right = left-end-top ava_load memory cpu temperature wlan pulseaudio indicators xkeyboard date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -197,17 +197,21 @@ format-foreground = ${colors.foreground-fill}
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
+#format-prefix = " "
+#format-prefix-foreground = ${colors.foreground-alt}
+#format-prefix-underline = ${colors.secondary}
+#
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+#label-layout-underline = ${colors.secondary}
+#
+#label-indicator-padding = 2
+#label-indicator-margin = 1
+#label-indicator-background = ${colors.secondary}
+#label-indicator-underline = ${colors.secondary}
 
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+format-padding = ${format.padding}
+format-foreground=${colors.foreground-fill}
+format-background = ${colors.content-fill}
 
 [module/filesystem]
 type = internal/fs
