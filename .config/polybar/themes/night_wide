@@ -84,7 +84,7 @@ font-4 = Symbols Nerd Font:pixelsize=23;0
 
 modules-left = left-end-top logo desktop date pomodoro nweather torrent bspwm 
 modules-center = 
-modules-right = xwindow indicators wlan memory cpu temperature ava_load pulseaudio right-end-top
+modules-right = xwindow indicators wlan memory cpu temperature ava_load xkeyboard pulseaudio right-end-top
 
 ;tray-position = right
 ;tray-padding = 2
@@ -138,7 +138,7 @@ interval = 3
 exec = /home/alexvanaxe/bin/pomodoro_stats.sh
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-pomodoro}
-format-prefix-foreground = ${colors.foreground-pomodoro}
+format-prefix-foreground = ${colors.foreground-alt}
 format-padding = ${format.padding}
 
 [module/ava_load]
@@ -148,6 +148,7 @@ exec = /home/alexvanaxe/bin/load
 
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-sound}
+format-prefix-foreground = ${colors.foreground-alt}
 
 format-prefix = " "
 format-padding = ${format.padding}
@@ -159,6 +160,7 @@ exec = /home/alexvanaxe/bin/indicators.sh
 format-padding = ${format.padding}
 format-background = ${colors.foreground-sound}
 format-foreground = ${colors.foreground-alt2}
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/torrent]
 type = custom/script
@@ -167,6 +169,7 @@ exec = /home/alexvanaxe/bin/torrent
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-load}
 format-padding = ${format.padding}
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/desktop]
 type = custom/script
@@ -175,6 +178,7 @@ exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
 format-padding = ${format.padding}
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-cpu}
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/recording]
 type = custom/script
@@ -189,6 +193,7 @@ exec = weather.sh
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-load}
 format-padding = ${format.padding}
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/xwindow]
 type = internal/xwindow
@@ -203,6 +208,10 @@ blacklist-0 = num lock
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.secondary}
+
+format-foreground = ${colors.foreground-alt2}
+format-background = ${colors.foreground-load}
+format-padding = ${format.padding}
 
 label-layout = %layout%
 label-layout-underline = ${colors.secondary}
@@ -372,6 +381,7 @@ interval = 2
 format-prefix = " " 
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-sound}
+format-prefix-foreground = ${colors.foreground-alt}
 format-padding = ${format.padding}
 label = %percentage:02%%
 
@@ -381,6 +391,7 @@ interval = 2
 format-prefix = " "
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-sound}
+format-prefix-foreground = ${colors.foreground-alt}
 format-padding = ${format.padding}
 label = %percentage_used%%
 
@@ -404,6 +415,7 @@ format-disconnected-prefix = 
 format-connected-foreground = ${colors.foreground-alt2}
 format-connected-background = ${colors.foreground-sound}
 format-connected-padding = ${format.padding}
+format-prefix-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 𝋡
 ramp-signal-1 = 𝋢
@@ -441,6 +453,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
 
 format-padding = ${format.padding}
 

@@ -82,9 +82,9 @@ font-3 = symbola:style=Bold:pixelsize=9;1
 
 separator = " | "
 
-modules-left = desktop bspwm pulseaudio xwindow
+modules-left = logo desktop bspwm pulseaudio xwindow
 modules-center = pomodoro nweather torrent
-modules-right = ava_load recording memory cpu temperature wlan date indicators
+modules-right = ava_load recording memory cpu temperature wlan xkeyboard date indicators
 
 ;tray-position = right
 ;tray-padding = 2
@@ -102,6 +102,11 @@ scroll-down = bspwm-deskprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/logo]
+type = custom/text
+content = 
+content-padding = 1
 
 [module/pomodoro]
 type = custom/script
@@ -152,12 +157,13 @@ label = %title:0:50:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+#format-prefix-underline = ${colors.secondary}
+format-padding = ${format.padding}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+#label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1

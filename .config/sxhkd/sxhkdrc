@@ -99,9 +99,13 @@ super + shift + o
 super + shift + u
 	$HOME/bin/configshortcut.sh
 
-# Start stop conky
-super + shift + c
-	$HOME/.config/conky/conky.sh
+# Change the configs
+super + c; {c,r,shift + r,m, shift + M}
+	{$HOME/.config/conky/conky.sh \
+    , dmenulexia.sh "rofi off" \
+    , dmenulexia.sh "rofi on" \
+    , dmenulexia.sh "mouse off" \
+    , dmenulexia.sh "mouse on" }
 
 super + Tab
 	$HOME/bin/bspc_node_manager.sh

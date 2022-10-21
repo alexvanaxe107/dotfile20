@@ -49,7 +49,7 @@ bspadding=1
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 98%
-height = 22
+height = 26
 offset-x = 1%
 offset-y = 1%
 radius = 6.0
@@ -85,7 +85,7 @@ separator = |
 
 modules-left = logo desktop bspwm pulseaudio
 modules-center = pomodoro nweather torrent
-modules-right = ava_load recording memory cpu temperature date indicators
+modules-right = ava_load recording memory cpu temperature xkeyboard date indicators
 
 ;tray-position = right
 ;tray-padding = 2
@@ -158,12 +158,13 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+#format-prefix-underline = ${colors.secondary}
+format-padding = ${format.padding}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+#label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
@@ -194,6 +195,7 @@ format-padding = ${format.padding_border}
 [module/bspwm]
 type = internal/bspwm
 
+pin-workspaces = false
 #label-focused = %index%
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
@@ -289,7 +291,7 @@ interval = 1
 format-prefix = "SPOTIFY: "
 format = <label>
 exec = python /home/alexvanaxe/.config/polybar/plugins/polybar-spotify/spotify_status.py -f '{play_pause} {song} - {artist}'
-#format-underline = #000003
+#format-underline = #BE673D
 
 [module/mpd]
 type = internal/mpd

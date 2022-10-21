@@ -74,8 +74,6 @@ crop_img(){
 while read file
 do
     case "$1" in
-        #"C-r")
-            #convert -rotate 90 "$file" "$file" ;;
         "C-c")
             echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
@@ -88,6 +86,8 @@ do
             crop_img "0" "0" "West";;
         "C-y")
             crop_img "1" "1" "East";;
+        "C-g")
+            convert -rotate 90 "$file" "$file" ;;
         "C-i")
             convert -flop "$file" "$file";;
         "C-s")
