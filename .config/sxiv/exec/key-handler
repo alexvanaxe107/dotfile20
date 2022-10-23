@@ -99,11 +99,11 @@ do
         "C-d")
             mv "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
         "C-0")
-            nitrogen --head=0 --save --set-scaled --random "$file"
+            nitrogen --head=0 --save --set-scaled --random "$file";;
         "C-1")
-            nitrogen --head=1 --save --set-scaled --random "$file"
+            nitrogen --head=1 --save --set-scaled --random "$file";;
         "C-2")
-            nitrogen --head=2 --save --set-scaled --random "$file"
+            nitrogen --head=2 --save --set-scaled --random "$file";;
         "C-a")
             rm "$file" ;;
     esac
