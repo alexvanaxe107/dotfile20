@@ -1,6 +1,5 @@
 #! /bin/dash
 
-
 # Exit on error inside any functions or subshells.
 #set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
@@ -31,11 +30,7 @@ font() {
     #Change the polybar
     if [ ${NOT_MONO} != "NM" ]; then sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
-	#Change the qtile font
-	sed -i "s/font=.*/font=\"${font_name}\",/" ${HOME}/.config/qtile/theme.py
-	sed -i "s/fontsize=.*/fontsize=${size3},/" ${HOME}/.config/qtile/theme.py
     fi
-
 
     #Change the dmenu font
     sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
@@ -48,7 +43,6 @@ font() {
     sed -i "s/font_size=.*/font_size=${size3}/" ${HOME}/.config/twmn/twmn.conf
 
     #Change the tint font
-
     if [ ${NOT_MONO} != "NM" ]; then
         sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
         sed -i "s/font =.*/font = ${font_name} ${style} ${size1}/" ${HOME}/.config/tint2/tint2rc
@@ -57,7 +51,6 @@ font() {
 
     #Change the lock screen font
     sed -i "s/FONT=.*/FONT=\"${font_name}\":pixelsize=$(($size3+7))/" ${HOME}/bin/imports/lock.sh
-    
 
     #Change the conk font
     for file in ${HOME}/.config/conky/*.conf; do
@@ -88,9 +81,6 @@ font() {
         dunst&
     fi
     toggle_bars.sh --restart
-
-    #Refresh the qtile
-    python $HOME/bin/qtile/restart.py
 
     notify-send -u normal "${CHOSEN}" "Enjoy the ${font_name}"
 }

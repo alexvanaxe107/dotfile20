@@ -110,7 +110,7 @@ cursor-scroll = ns-resize
 [module/logo]
 type = custom/text
 content-background = ${colors.time}
-content-foreground = ${colors.foreground}
+content-foreground = ${colors.pomodoro}
 content="  "
 
 [module/glyph]
@@ -461,7 +461,7 @@ time-alt = %H:%M:%S
 format-padding = ${format.padding}
 
 label = %date% %time%
-format-foreground=${colors.foreground}
+format-foreground=${colors.pomodoro}
 format-background = ${colors.time}
 
 [module/pulseaudio]
