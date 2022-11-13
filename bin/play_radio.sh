@@ -178,14 +178,19 @@ play_quality(){
 
     local option="$(yt-dlp --list-formats "${result}" | sed -n '8,$p')"
 
-    local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the quality:" -bw 2 -y 16 -z 850)
+    local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the video quality:" -bw 2 -y 16)
+    local chosen_p_audio=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the audio quality:" -bw 2 -y 16)
 
     local choosen_quality=$(echo ${chosen_p} | awk '{print $1}')
+    local choosen_audio_quality=$(echo ${chosen_p_audio} | awk '{print $1}')
 
     if [ -z "${choosen_quality}" ]; then
         notify-send -u normal  "Your choice" "None choice was made. Exiting"
         remove_indicator
         exit 0
+    fi
+    if [ ! -z "${choosen_audio_quality}" ]; then
+        choosen_quality="${choosen_quality}+${choosen_audio_quality}"
     fi
 
     notify-send -u normal  "Trying to play" "The media will be played soon... wait a little and enjoy."

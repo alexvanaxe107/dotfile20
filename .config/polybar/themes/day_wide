@@ -89,7 +89,7 @@ font-4 = Symbols Nerd Font:pixelsize=36;4
 
 modules-left = logo desktop bspwm right-end-top xwindow
 modules-center = left-end-top pomodoro nweather torrent right-end-top
-modules-right = left-end-top ava_load memory cpu temperature wlan right-end-top left-end-top xkeyboard pulseaudio indicators date
+modules-right = left-end-top ava_load memory cpu temperature wlan right-end-top left-end-top pulseaudio indicators xkeyboard date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -111,7 +111,7 @@ cursor-scroll = ns-resize
 [module/logo]
 type = custom/text
 content-background = ${colors.time}
-content-foreground = ${colors.pomodoro}
+content-foreground = ${colors.content-fill}
 content="  "
 
 [module/glyph]
@@ -462,7 +462,7 @@ time-alt = %H:%M:%S
 format-padding = ${format.padding}
 
 label = %date% %time%
-format-foreground=${colors.pomodoro}
+format-foreground=${colors.content-fill}
 format-background = ${colors.time}
 
 [module/pulseaudio]
@@ -559,7 +559,7 @@ animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
+thermal-zone = 2
 warn-temperature = 90
 format-padding = ${format.padding}
 

@@ -7,7 +7,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 29 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 29 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -101,6 +101,8 @@ case $CHOSEN in
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 11 11 12 2;;
+    "Jet") font "JetBrains Mono" Regular 10 10 12 2;;
+    "Hacking") font "Hack" Regular 10 10 12 2;;
     "War") font "American Stencil" Regular 9 9 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 12 1;;
     "Retro") font "hermit" Bold 8 8 12 1;;

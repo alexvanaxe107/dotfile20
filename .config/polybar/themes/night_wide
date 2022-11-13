@@ -45,7 +45,7 @@ alert = #bd2c40
 [bar/default]
 monitor = ${env:MONITOR1}
 width = 98%
-height = 23
+height = 26
 offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -553,7 +553,7 @@ animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
+thermal-zone = 2
 warn-temperature = 90
 
 format-padding = ${format.padding}

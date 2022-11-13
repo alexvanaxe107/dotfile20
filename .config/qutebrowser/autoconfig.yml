@@ -28,6 +28,6 @@ settings:
   content.blocking.enabled:
     global: false
   statusbar.show:
-    global: in-mode
+    global: always
   tabs.show:
-    global: never
+    global: multiple

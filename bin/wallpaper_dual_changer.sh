@@ -66,7 +66,7 @@ wallhaven(){
     scene="$1"
     monitor="$(monitors_info.sh -p)"
     dimension="$(printf "2560x1440\n3840x2160\n2560x1080\n1920x1080" | dmenu -i -y 16 -bw 2 -z 550 -p "Select a dimension")"
-    path=$(python $HOME/bin/wallfinder.py -e h -m ${monitor} -s "${scene}")
+    path=$(python $HOME/bin/wallfinder.py -e h -d ${dimension} -s "${scene}")
     file="$path"
     sxiv ${file}&
 }

@@ -370,22 +370,22 @@ fi
 
 if [ "$vim_theme" == "Catppuccin Latte" ]; then
     echo 'let g:catppuccin_flavour = "latte"' >> ${HOME}/.vim/configs/theme_config.vim
-    sed -i 's/^colorscheme.*/colorscheme catppuccin/' ${HOME}/.vim/configs/theme.vim
-    sed -i 's/airline_theme.*/airline_theme="catppuccin"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme catppuccin-latte/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="catppuccin-latte"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi
 
 if [ "$vim_theme" == "Catppuccin Mocha" ]; then
     echo 'let g:catppuccin_flavour = "mocha"' >> ${HOME}/.vim/configs/theme_config.vim
-    sed -i 's/^colorscheme.*/colorscheme catppuccin/' ${HOME}/.vim/configs/theme.vim
-    sed -i 's/airline_theme.*/airline_theme="catppuccin"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme catppuccin-mocha/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="catppuccin-mocha"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 
 if [ "$vim_theme" == "Catppuccin Macchiato" ]; then
     echo 'let g:catppuccin_flavour = "macchiato"' >> ${HOME}/.vim/configs/theme_config.vim
-    sed -i 's/^colorscheme.*/colorscheme catppuccin/' ${HOME}/.vim/configs/theme.vim
-    sed -i 's/airline_theme.*/airline_theme="catppuccin"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme catppuccin-macchiato/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="catppuccin-macchiato"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
 fi
 

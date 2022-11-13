@@ -19,6 +19,16 @@ resize_img(){
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
+save_img(){
+    local theme="$(printf "day\nnight\nshabbat" | dmenu -p "Choose the theme")"
+    local mode="$(printf "\nultra\ndual" | dmenu -p "Choose the modality")"
+
+    local save_location="$HOME/Documents/Pictures/Wallpapers/$mode/$theme/"
+    cp ${file} "${save_location}"
+
+    notify-send "Wallpaper saved" "Saved to ${save_location}"
+}
+
 resize_img_plus(){
     filename="$(basename $file)"
     temp_file="rec_$filename"
@@ -32,12 +42,12 @@ resize_img_plus(){
 
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}" | dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n2560x1080" | dmenu -p "Choose the dimension")"
 
     vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical adjustment")"
     hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the horizontal adjustment")"
 
-    convert "$file" -resize "${imgsize}"^ -quality 100 -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
+    convert "$file" -quality 100 -resize "${imgsize}"^ -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
 
     cd /tmp/
 
@@ -51,7 +61,7 @@ crop_img(){
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
     resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300" | dmenu -p "Set the horizontal deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
     
     filename="$(basename $file)"
 
@@ -62,13 +72,38 @@ crop_img(){
     xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
     yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
-    convert "$file" -filter Triangle -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}${horizontal}${resize}" -quality 100 "${temp_file}"
+    convert "$file" -filter Triangle -quality 100 -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}${horizontal}${resize}" "${temp_file}"
 
     # Resize to the choosen monitor
     file_location="/tmp/crp_${index}_${filename}"
-    convert "${temp_file}" -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${direction} -extent "${xvalue}x${yvalue}" -quality 100 "${file_location}"
+    convert "${temp_file}" -quality 100 -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${direction} -extent "${xvalue}x${yvalue}" "${file_location}"
     sxiv "${file_location}"&
     #nitrogen --head=${index} --save --set-scaled "${file_location}"
+}
+
+recort_img(){
+    monitor=$(monitors_info.sh -m | (printf "Custom\n" && cat) | dmenu -p "Choose the monitor to base the image")
+    index="$monitor"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
+    
+    filename="$(basename $file)"
+
+    if [ "${monitor}" == "Custom" ]; then
+        monitor_info="$(printf "2000x2000" | dmenu -p "Set the dimension")"
+    else
+        monitor_info="$(monitors_info.sh -d "${monitor}")"
+    fi
+
+    xvalue="$(echo $monitor_info | awk 'BEGIN {FS="x"}; {print $1}')"
+    yvalue="$(echo $monitor_info | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    # Resize to the choosen monitor
+    file_location="/tmp/crp_${index}_${filename}"
+    convert "${file}" -quality 100 -filter Triangle -gravity ${direction} -extent "${xvalue}x${yvalue}${horizontal}${resize}" -resize ${xvalue}x${yvalue}^ "${file_location}"
+    sxiv "${file_location}"&
 }
 
 while read file
@@ -80,6 +115,8 @@ do
             nitrogen --save --set-zoom-fill "$file" ;;
         "C-p") 
             resize_img "$file";;
+        "C-e")
+            recort_img "1" "1" "East";;
         "C-r") 
             resize_img_plus "$file";;
         "C-t")
@@ -91,7 +128,7 @@ do
         "C-i")
             convert -flop "$file" "$file";;
         "C-s")
-            mv "$file" $HOME/Documents/Pictures/Wallpapers/ultra/shabbat/ ;;
+            save_img;;
         "C-l")
             cp "$file" $HOME/Documents/Pictures/lock.png ;;
         "C-n")
