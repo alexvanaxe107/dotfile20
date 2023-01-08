@@ -43,7 +43,7 @@ crop_img(){
 }
 
 get_scene() {
-        scene="$(printf "${WALLPAPER_SCENES}" | dmenu -i -y 16 -bw 2 -z 550 -l 20 -p "Choose the scene:")"
+        scene="$(printf "${WALLPAPER_SCENES}" | dmenu -i    -l 20 -p "Choose the scene:")"
         if [ -z "${scene}" ];then
             exit 0
         fi
@@ -56,7 +56,7 @@ get_scene() {
 }
 
 set_wallpaper() {
-    source="$(printf "wallhaven\nusplash\nalpha" | dmenu -i -y 16 -bw 2 -z 550 -p "What is the source?" )"
+    source="$(printf "wallhaven\nusplash\nalpha" | dmenu -i    -p "What is the source?" )"
     scene=$(get_scene)
 
     $source "$scene"
@@ -65,7 +65,7 @@ set_wallpaper() {
 wallhaven(){
     scene="$1"
     monitor="$(monitors_info.sh -p)"
-    dimension="$(printf "2560x1440\n3840x2160\n2560x1080\n1920x1080" | dmenu -i -y 16 -bw 2 -z 550 -p "Select a dimension")"
+    dimension="$(printf "2560x1440\n3840x2160\n2560x1080\n1920x1080" | dmenu -i    -p "Select a dimension")"
     path=$(python $HOME/bin/wallfinder.py -e h -d ${dimension} -s "${scene}")
     file="$path"
     sxiv ${file}&

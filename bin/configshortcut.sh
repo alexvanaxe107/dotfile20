@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytpl\nwallpaper\ndual" | dmenu -l 30 -y 16 -bw 2 -z 950 -p "Select config to edit")
+file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytpl\nwallpaper\ndual" | dmenu -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){

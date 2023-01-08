@@ -5,7 +5,7 @@ source $HOME/.config/wm/bspwm.conf
 action="${1}"
 
 if [ -z "${action}" ]; then
-    action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850 -theme ${rofi_item5})
+    action=$(echo "" | dmenu -p "What do you want to do?"    -theme ${rofi_item5})
 fi
 
 if [ -z "${action}" ]; then
