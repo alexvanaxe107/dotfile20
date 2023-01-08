@@ -6,7 +6,7 @@ end
 
 toReturn = {}
 
-theme_name = "Atelierseaside (light) (terminal.sexy)"
+theme_name = ""
 custom_term_font = ""
 if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"

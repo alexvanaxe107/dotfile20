@@ -9,6 +9,8 @@ set -o nounset
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i -y 16 -bw 2 -z 550 -l 29 -p "Change the font: ")
 
+SIZE=$(printf "" | dmenu -i -p "Choose the size (bar dmenu conky vspace)")
+
 if [ -z "${CHOSEN}" ]; then
     exit
 fi
@@ -22,13 +24,24 @@ NOT_MONO=$(echo $CHOSEN | cut -d '-' -f 1)
 font() {
     font_name=$1
     style=$2
+
     size1=$3
     size2=$4
     size3=$5
     space=$6
 
+    if [ ! -z "${SIZE}" ]; then
+        size1="$(echo ${SIZE} | cut -d ' ' -f 1)"
+        size2="$(echo ${SIZE} | cut -d ' ' -f 2)"
+        size3="$(echo ${SIZE} | cut -d ' ' -f 3)"
+        space="$(echo ${SIZE} | cut -d ' ' -f 4)"
+    fi
+
     #Change the polybar
-    if [ ${NOT_MONO} != "NM" ]; then sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
+    if [ ${NOT_MONO} != "NM" ]; then 
+        sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
+        sed -i "s/height.*/height = $((size1 + 20))/" ${HOME}/.config/polybar/config
+
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
     fi
 
@@ -86,11 +99,11 @@ font() {
 }
 
 case $CHOSEN in
-    "Day Original") font "Erica Type" Bold 9 10 12 0;;
+    "Day Original") font "Erica Type" Bold 25 12 12 0;;
     "Night Original") font "Iceland" Regular 13 13 14 0;;
     "Old Terminal") font "VT323" Regular 12 12 19 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
-    "Clear") font "TeX Gyre Cursor" Bold 9 9 13 1;;
+    "Clear") font "TeX Gyre Cursor" Bold 14 12 13 1;;
     "Nature") font "CQ Mono" Bold 10 10 12 1;;
     "Modern")  font "Audimat Mono" Regular 10 10 12 1;;
     "Russian") font "Iosevka" "Bold" 10 10 13 1;;

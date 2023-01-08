@@ -1,7 +1,8 @@
 #!/bin/bash
 
-display_manager.sh -o "HDMI-A-0 DisplayPort-0"
-display_manager.sh -p "HDMI-A-0"
+display_manager.sh -o "DP-1 HDMI-1"
+display_manager.sh -o "HDMI-1"
+display_manager.sh -p "HDMI-1"
 
 #display_manager.sh -r "HDMI-2" "left"
 
