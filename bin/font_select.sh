@@ -9,11 +9,12 @@ set -o nounset
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 29 -p "Change the font: ")
 
-SIZE=$(printf "" | dmenu -i -p "Choose the size (bar dmenu conky vspace)")
-
 if [ -z "${CHOSEN}" ]; then
     exit
 fi
+
+SIZE=$(printf "" | dmenu -i -p "Choose the size (bar dmenu conky vspace)")
+
 
 NOT_MONO=$(echo $CHOSEN | cut -d '-' -f 1)
     
@@ -40,7 +41,7 @@ font() {
     #Change the polybar
     if [ ${NOT_MONO} != "NM" ]; then 
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
-        sed -i "s/height.*/height = $((size1 + 20))/" ${HOME}/.config/polybar/config
+        sed -i "s/height.*/height = $((size1 + 30))/" ${HOME}/.config/polybar/config
 
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
     fi
@@ -99,15 +100,15 @@ font() {
 }
 
 case $CHOSEN in
-    "Day Original") font "Erica Type" Bold 25 12 12 0;;
+    "Day Original") font "Erica Type" Bold 13 12 12 0;;
     "Night Original") font "Iceland" Regular 13 13 14 0;;
     "Old Terminal") font "VT323" Regular 12 12 19 1;;
     "Minimalist") font "Nouveau IBM Stretch" Bold 12 12 15 2;;
-    "Clear") font "TeX Gyre Cursor" Bold 14 12 13 1;;
+    "Clear") font "TeX Gyre Cursor" Bold 11 11 13 1;;
     "Nature") font "CQ Mono" Bold 10 10 12 1;;
     "Modern")  font "Audimat Mono" Regular 10 10 12 1;;
     "Russian") font "Iosevka" "Bold" 10 10 13 1;;
-    "Futuristic") font "Larabiefont Compressed" Bold 14 14 17 2;;
+    "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
     "Amazon") font "Bookerly" Normal 9 9 13 2;;

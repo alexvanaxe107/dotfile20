@@ -69,3 +69,8 @@ map('n', '<F10>', '<cmd>set hlsearch!<cr>')
 -- Exit with jk
 map('i', 'jk', '<esc>')
 
+-- Remap the tests
+map('n', '<leader>ta', '<cmd>TestSuite<cr>')
+map('n', '<leader>tn', '<cmd>TestNearest<cr>')
+map('n', '<leader>tf', '<cmd>TestFile<cr>')
+map('n', '<leader>tl', '<cmd>TestLast<cr>')

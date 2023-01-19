@@ -85,6 +85,8 @@ return require('packer').startup(function()
 
     use 'mattn/emmet-vim'
 
+    use 'vim-test/vim-test'
+
     use {'scrooloose/nerdcommenter', 
      ft = {'python', 'html', 'typescript', 'sh'}}
 
@@ -136,6 +138,9 @@ return require('packer').startup(function()
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
+
+    -- TopBar
+    use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
 
     -- Statusline
     use {

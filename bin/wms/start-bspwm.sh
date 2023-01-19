@@ -1,10 +1,13 @@
 #!/bin/bash
 
-display_manager.sh -o "DP-1 HDMI-1"
-display_manager.sh -o "HDMI-1"
-display_manager.sh -p "HDMI-1"
+DP="DisplayPort-0"
+HDMI="HDMI-A-0"
+
+display_manager.sh -o "$DP $HDMI"
+display_manager.sh -p "$DP"
 
 #display_manager.sh -r "HDMI-2" "left"
+xrandr --output $DP --mode "2560x1440"
 
 systemd --user
 

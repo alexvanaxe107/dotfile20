@@ -64,6 +64,9 @@ opt.shortmess:append "sI"
 -- CMP stuffs
 opt.completeopt="menu,menuone,noselect"
 
+-- Test configs
+g['test#strategy'] = "make"
+
 -- Enable powerline
 g.airline_powerline_fonts = true
 

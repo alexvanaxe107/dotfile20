@@ -30,6 +30,8 @@ if os.getenv("theme_name") == "day" then
     toReturn['window_background_opacity'] = 0.9
 elseif os.getenv("theme_name") == "night" then
     toReturn['window_background_opacity'] = 0.78
+elseif os.getenv("theme_name") == "shabbat" then
+    toReturn['window_background_opacity'] = 0.6
 else
     toReturn['window_background_opacity'] = 1.0
 end

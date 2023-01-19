@@ -7,6 +7,9 @@ export EDITOR=vim
 export XDG_SESSION_DESKTOP=i3
 export XDG_CURRENT_DESKTOP=i3
 
+# Set up Node Version Manager
+source /usr/share/nvm/init-nvm.sh
+
 #export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 #typeset -U path
 export PYENV_ROOT="$HOME/.pyenv"
@@ -25,7 +28,7 @@ alias clear="clear;echo"
 
 #alias i3cheatsheet='egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
 export _JAVA_AWT_WM_NONREPARENTING=1
-export FZF_DEFAULT_COMMAND='fd -I --type f'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export HISTCONTROL=ignoreboth
 eval "$(pyenv init -)"
 
