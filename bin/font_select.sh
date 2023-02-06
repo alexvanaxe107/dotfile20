@@ -1,4 +1,4 @@
-#! /bin/dash
+#! /bin/bash
 
 # Exit on error inside any functions or subshells.
 #set -o errtrace
@@ -7,7 +7,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 29 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 29 -p "Change the font: ")
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -39,11 +39,16 @@ font() {
     fi
 
     #Change the polybar
-    if [ ${NOT_MONO} != "NM" ]; then 
+    if [ "${NOT_MONO}" != "NM" ]; then 
+        height="$((size1 + 25))"
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
-        sed -i "s/height.*/height = $((size1 + 30))/" ${HOME}/.config/polybar/config
+        sed -i "s/height.*/height = ${height}/" ${HOME}/.config/polybar/config
 
-        sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
+        sed -Ei "s/(font-0.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
+        sed -Ei "s/(font-2.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
+        sed -Ei "s/(font-3.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
+        sed -Ei "s/(font-4.*=)[[:digit:]]{1,2}/\1${height}/"  ${HOME}/.config/polybar/config
+        #sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1}/" ${HOME}/.config/polybar/config_simple
     fi
 
     #Change the dmenu font
@@ -57,7 +62,7 @@ font() {
     sed -i "s/font_size=.*/font_size=${size3}/" ${HOME}/.config/twmn/twmn.conf
 
     #Change the tint font
-    if [ ${NOT_MONO} != "NM" ]; then
+    if [ "${NOT_MONO}" != "NM" ]; then
         sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
         sed -i "s/font =.*/font = ${font_name} ${style} ${size1}/" ${HOME}/.config/tint2/tint2rc
         sed -i "s/zont = Pomodoro.*/font = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
@@ -68,7 +73,7 @@ font() {
 
     #Change the conk font
     for file in ${HOME}/.config/conky/*.conf; do
-        if [ ${NOT_MONO} != "NM" ]; then
+        if [ "${NOT_MONO}" != "NM" ]; then
             sed -i "s/font=.*/font='${font_name}:${style}:size=${size3}',/" ${file}
         fi
         sed -i "s/TITLEFONT/${font_name}/g" ${file}
@@ -111,6 +116,7 @@ case $CHOSEN in
     "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
+    "ElegantAmz") font "futura" Medium 12 12 14 1;;
     "Amazon") font "Bookerly" Normal 9 9 13 2;;
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
@@ -133,7 +139,7 @@ case $CHOSEN in
     "Cute") font "Overpass Mono" Bold 9 9 12 0;;
     "Space") font "Unispace" Bold 8 8 10 2;;
     "Noir") font "Syne Mono" Regular 10 10 11 1;;
-    "Computer") font "Terminus \(TTF\)" Bold 10 10 13 2;;
+    "Computer") font "Terminus" Bold 10 10 13 2;;
     "Gothic") font "NanumGothicCoding" Bold 10 10 12 1;;
     "SteamPunk") font "Roboto Condensed" Semibold 10 10 11;;
     "Terminator") font "Digital\-7 Mono" Bold 9 9 12 0;;
@@ -145,6 +151,6 @@ case $CHOSEN in
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;
     "NM-Softer") font "Lerton" Regular 10 10 13 2;;
-    "teste") font "Major Mono Display" Regular 9 9 11 1;;
+    "teste") font "futura" Regular 19 18 14 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac

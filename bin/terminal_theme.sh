@@ -30,7 +30,7 @@ if [ "$vim_theme" == "Codeschool.light" ]; then
 fi
 
 if [ "$vim_theme" == "neobones_light" ]; then
-    sed -i 's/^colorscheme.*/colorscheme base16-harmonic-light/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme Atelier_SeasideLight/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="base16-harmonic-light"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi

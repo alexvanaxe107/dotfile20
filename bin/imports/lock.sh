@@ -1,2 +1,2 @@
-FONT="Bookerly":pixelsize=20
+FONT="JetBrains Mono":pixelsize=19
 SAVER=saver_mpv

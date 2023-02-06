@@ -19,6 +19,20 @@ resize_img(){
     convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
 }
 
+convert_file(){
+    filename="$(basename $file)"
+    convert $file /tmp/${filename}.jpg
+    sxiv /tmp/${filename}.jpg &
+    #convert ${file} ${file}.jpg
+}
+
+reverse_file(){
+    filename="$(basename $file)"
+    convert $file /tmp/${filename}.png
+    sxiv /tmp/${filename}.png &
+    #convert ${file} ${file}.jpg
+}
+
 save_img(){
     local theme="$(printf "day\nnight\nshabbat" | dmenu -p "Choose the theme")"
     local mode="$(printf "\nultra\ndual" | dmenu -p "Choose the modality")"
@@ -42,7 +56,8 @@ resize_img_plus(){
 
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n2560x1080" | dmenu -p "Choose the dimension")"
+    local resolutions=$(monitors_info.sh -d)
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n2560x1080\n${resolutions}" | dmenu -p "Choose the dimension")"
 
     vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical adjustment")"
     hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the horizontal adjustment")"
@@ -110,7 +125,9 @@ while read file
 do
     case "$1" in
         "C-c")
-            echo -n "$file" | xclip -selection clipboard ;;
+            convert_file ;;
+        "C-C")
+            reverse_file ;;
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
         "C-p") 

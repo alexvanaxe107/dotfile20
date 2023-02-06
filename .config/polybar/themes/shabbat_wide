@@ -63,7 +63,7 @@ foreground = ${colors.foreground}
 
 ;dim-value = 0.0
 
-line-size = 2
+line-size = 1
 line-color = #f00
 
 border-size = 0
@@ -113,7 +113,7 @@ content-padding = 1
 type = custom/script
 interval = 3
 exec = /home/alexvanaxe/bin/pomodoro_stats.sh
-#format-underline = ${colors.pomodoro}
+format-underline = ${colors.pomodoro}
 format-padding = ${format.padding}
 
 [module/ava_load]
@@ -122,7 +122,7 @@ interval = 20
 exec = /home/alexvanaxe/bin/load
 format-prefix = "📉 "
 format-prefix-foreground = ${colors.foreground-alt}
-#format-underline = ${colors.load}
+format-underline = ${colors.load}
 format-padding = ${format.padding}
 
 [module/indicators]
@@ -147,7 +147,7 @@ format-padding = ${format.padding}
 type = custom/script
 interval = 1200
 exec = weather.sh
-#format-underline = ${colors.weather}
+format-underline = ${colors.weather}
 format-padding = ${format.padding}
 
 [module/xwindow]
@@ -160,11 +160,11 @@ blacklist-0 = num lock
 
 format-prefix = "🎹 "
 format-prefix-foreground = ${colors.foreground-alt}
-#format-prefix-underline = ${colors.secondary}
+format-prefix-underline = ${colors.secondary}
 format-padding = ${format.padding}
 
 label-layout = %layout%
-#label-layout-underline = ${colors.secondary}
+label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
@@ -189,7 +189,8 @@ format-padding = ${format.padding}
 type = custom/script
 interval = 1
 exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
-format-background = ${colors.desktop}
+#format-background = ${colors.desktop}
+format-underline = ${colors.desktop}
 format-padding = ${format.padding_border}
 
 [module/bspwm]
@@ -202,6 +203,7 @@ label-focused = %icon%
 label-focused-background = ${colors.background-alt}
 label-focused-foreground = ${colors.foreground}
 label-focused-underline= ${colors.ws}
+label-focused-overline= ${colors.ws}
 label-focused-padding = ${format.bspadding}
 
 #label-occupied = %index%
@@ -293,7 +295,7 @@ interval = 1
 format-prefix = "SPOTIFY: "
 format = <label>
 exec = python /home/alexvanaxe/.config/polybar/plugins/polybar-spotify/spotify_status.py -f '{play_pause} {song} - {artist}'
-#format-underline = #000003
+format-underline = #000003
 
 [module/mpd]
 type = internal/mpd
@@ -335,7 +337,7 @@ type = internal/cpu
 interval = 2
 format-prefix = "🏿 " 
 format-prefix-foreground = ${colors.foreground-alt}
-#format-underline = ${colors.cpu}
+format-underline = ${colors.cpu}
 label = %percentage:02%%
 format-padding = ${format.padding}
 
@@ -344,7 +346,7 @@ type = internal/memory
 interval = 2
 format-prefix = "👣 "
 format-prefix-foreground = ${colors.foreground-alt}
-#format-underline = ${colors.mem}
+format-underline = ${colors.mem}
 label = %percentage_used%%
 format-padding = ${format.padding}
 
@@ -400,7 +402,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 🕑
 format-prefix-foreground = ${colors.foreground-alt}
-#format-underline = ${colors.time}
+format-underline = ${colors.time}
 format-padding = ${format.padding}
 
 label = %date% %time%
@@ -501,7 +503,7 @@ warn-temperature = 90
 format-padding = ${format.padding}
 
 format = <ramp> <label>
-#format-underline = ${colors.temp}
+format-underline = ${colors.temp}
 format-warn = <ramp> <label-warn>
 #format-warn-underline = ${self.format-underline}
 format-warn-padding = ${format.padding}

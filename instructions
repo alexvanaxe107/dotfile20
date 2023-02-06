@@ -42,3 +42,4 @@ paru -S psuinfo
 ### to set the size in the monitor
 fbset -xres 1280
 fbset -yres 730
+sudo mount -o remount,size=4G,noatime .cache/

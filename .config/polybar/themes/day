@@ -121,7 +121,7 @@ content-foreground = ${colors.content-fill}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "  %{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph

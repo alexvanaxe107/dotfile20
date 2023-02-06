@@ -140,7 +140,7 @@ return require('packer').startup(function()
     use 'kyazdani42/nvim-web-devicons'
 
     -- TopBar
-    use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
+  --  use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
 
     -- Statusline
     use {

@@ -2,7 +2,7 @@
 
 translate() {
     if [ -z "$1" ]; then
-        local trad="$(xclip -o -sel clipboard)"
+        local trad="$(xclip -o)"
         trans :pt "$trad"
     else
         trans :pt "$1"
