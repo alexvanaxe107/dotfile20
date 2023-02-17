@@ -109,7 +109,7 @@ cursor-scroll = ns-resize
 
 [format]
 padding = 2
-bspadding = 4
+bspadding = 2
 
 [module/logo]
 type = custom/text

@@ -76,35 +76,23 @@ vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {
 
 
 -- Start the lsp configs
-require('config/lsp_config')
+on_attach = require('config/lsp_config')
 
 -- Activate the bash setup
-require 'lspconfig'
-require 'lspconfig'.bashls.setup{}
+require('lspconfig')
+require('lspconfig')['bashls'].setup{on_attach=on_attach}
 
 -- Enable HTML
-require'lspconfig'.html.setup{}
+require'lspconfig'.html.setup{on_attach=on_attach}
 
 -- Activate the python setup
 require'lspconfig'.pyright.setup{on_attach=on_attach}
 
 -- Activate the angular setup
-require'lspconfig'.angularls.setup{}
+require('lspconfig')['angularls'].setup{on_attach=on_attach}
 
 -- Activate the vue setup
 require'lspconfig'.volar.setup{on_attach=on_attach}
 
 --  Activate the typescript config
-require'lspconfig'.tsserver.setup({
---    on_attach = function(client, bufnr)
---        client.resolved_capabilities.document_formatting = false
---        client.resolved_capabilities.document_range_formatting = false
---        local ts_utils = require("nvim-lsp-ts-utils")
---        ts_utils.setup({})
---        ts_utils.setup_client(client)
---        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
---        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
---        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
---        on_attach(client, bufnr)
---    end,
-})
+require'lspconfig'.tsserver.setup{on_attach=on_attach}

@@ -122,19 +122,19 @@ content-foreground = ${colors.content-fill}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "%{T5}🬫%{T-}"
+content = "%{T5}𝄛%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "%{T5}🬛%{T-}"
+content = "%{T5}%{T-}"
 
 [module/left-end-top2]
 inherit = module/glyph
-content = "%{T5}🮍%{T-}"
+content = "%{T5}◥%{T-}"
 
 [module/right-end-top2]
 inherit = module/glyph
-content = "%{T5}🮌%{T-}"
+content = "%{T5}◤%{T-}"
 
 [module/pomodoro]
 type = custom/script
@@ -191,7 +191,7 @@ format-background = ${colors.content-fill}
 
 [module/xwindow]
 type = internal/xwindow
-label = "  %title:0:80:...%"
+label = "%title:0:60:...%"
 format-foreground = ${colors.foreground-fill}
 
 [module/xkeyboard]
