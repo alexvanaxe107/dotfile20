@@ -5,9 +5,9 @@ set background=light
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme tokyonight
-let g:airline_theme="base16_greenscreen"
+colorscheme Atelier_DuneLight
+let g:airline_theme="Atelier_DuneLight"
 "hi Normal ctermbg=None
-"let g:airline_theme="gruvbox"
+"let g:airline_theme="Atelier_DuneLight"
 
 set guifont=Fantasque\ Sans\ Mono:h15
