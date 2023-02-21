@@ -34,8 +34,8 @@ reverse_file(){
 }
 
 save_img(){
-    local theme="$(printf "day\nnight\nshabbat" | dmenu -p "Choose the theme")"
-    local mode="$(printf "\nultra\ndual" | dmenu -p "Choose the modality")"
+    local theme="$(printf "day\nnight\nshabbat" | /usr/bin/dmenu -p "Choose the theme")"
+    local mode="$(printf "\nultra\ndual" | /usr/bin/dmenu -p "Choose the modality")"
 
     local save_location="$HOME/Documents/Pictures/Wallpapers/$mode/$theme/"
     cp ${file} "${save_location}"
@@ -55,12 +55,12 @@ resize_img_plus(){
     local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
 
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | /usr/bin/dmenu -p "Choose the direction")"
     local resolutions=$(monitors_info.sh -d)
-    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n2560x1080\n${resolutions}" | dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n2560x1080\n${resolutions}" | /usr/bin/dmenu -p "Choose the dimension")"
 
-    vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical adjustment")"
-    hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the horizontal adjustment")"
+    vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the vertical adjustment")"
+    hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the horizontal adjustment")"
 
     convert "$file" -quality 100 -resize "${imgsize}"^ -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
 
@@ -74,9 +74,9 @@ crop_img(){
     index="$2"
     gravity="$3"
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | /usr/bin/dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | /usr/bin/dmenu -p "Set the horizontal deviation")"
     
     filename="$(basename $file)"
 
@@ -97,17 +97,17 @@ crop_img(){
 }
 
 recort_img(){
-    monitor=$(monitors_info.sh -m | (printf "Custom\n" && cat) | dmenu -p "Choose the monitor to base the image")
+    monitor=$(monitors_info.sh -m | (printf "Custom\n" && cat) | /usr/bin/dmenu -p "Choose the monitor to base the image")
     index="$monitor"
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
-    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | /usr/bin/dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | /usr/bin/dmenu -p "Set the horizontal deviation")"
     
     filename="$(basename $file)"
 
     if [ "${monitor}" == "Custom" ]; then
-        monitor_info="$(printf "2000x2000" | dmenu -p "Set the dimension")"
+        monitor_info="$(printf "2000x2000" | /usr/bin/dmenu -p "Set the dimension")"
     else
         monitor_info="$(monitors_info.sh -d "${monitor}")"
     fi

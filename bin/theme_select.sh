@@ -91,7 +91,7 @@ function reset_configs(){
 }
 
 function get_wallpaper() {
-    selected_wallpaper=$(monitors_info.sh -a | /usr/bin/dmenu    -p "Extract color from wallpaper:" -n)
+    selected_wallpaper=$(monitors_info.sh -a | /usr/bin/dmenu -p "Extract color from wallpaper:" -n)
     selected_wallpaper=$(monitors_info.sh -ib "${selected_wallpaper}")
     selected_wallpaper=$((${selected_wallpaper} + 1))
     cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep file | awk -v SEL=$selected_wallpaper 'BEGIN {FS="="} NR==SEL {print $2}')
@@ -118,6 +118,11 @@ function refresh_theme() {
 function startup_theme(){
     refresh_theme
     configure_$CHOSEN
+}
+
+function finalize_theme(){
+    font_select.sh
+    terminal_theme.sh
 }
 
 function retrieve_color(){
