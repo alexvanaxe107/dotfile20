@@ -165,25 +165,40 @@ select_desktop() {
     goto $desktop
 }
 
+increase_gap() {
+    all="$2"
+
+    if [ "${all}" == "all" ]; then
+        bspc config window_gap $1
+    else
+        bspc config -d focused window_gap $1
+    fi
+}
+
 show_help() {
-    echo "Manipulate the monitors."; echo ""
+    echo "Manipulate the desktops and bspwm configs."; echo ""
     echo "g                             go to desktop number"
+    echo "s/S                           Increase the gap space"
     echo "m                             move to desktop number"
     echo "f                             move and follow to desktop number"
     echo "t                             Toggle mode (manual or auto)"
     echo "r                             Rename desktop"
-    echo "l                             List the desktop names - use dl to use dmenu"
+    echo "l/L                             List the desktop names - use dl to use dmenu"
 }
 
 use_dmenu="0"
 
-while getopts "h?g:m:t:r:f:dLl" opt; do
+while getopts "h?g:m:t:r:f:dLls:S:" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
     d) use_dmenu="1"
         ;;
     g) goto ${OPTARG}
+        ;;
+    s) increase_gap ${OPTARG}
+        ;;
+    S) increase_gap ${OPTARG} "all"
         ;;
     m) moto ${OPTARG}
         ;;

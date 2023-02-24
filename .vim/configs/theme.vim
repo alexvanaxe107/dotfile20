@@ -5,9 +5,9 @@ set background=light
 
 source ~/.vim/configs/theme_config.vim
 
-colorscheme gruvbox
-let g:airline_theme="gruvbox"
+colorscheme Atelier_SeasideLight
+let g:airline_theme="base16-harmonic-light"
 "hi Normal ctermbg=None
-"let g:airline_theme="gruvbox"
+"let g:airline_theme="base16-harmonic-light"
 
 set guifont=Fantasque\ Sans\ Mono:h15

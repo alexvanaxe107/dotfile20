@@ -204,7 +204,7 @@ change_wallpaper(){
 
 save_wallpaper(){
     count=0
-    option=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu    -p "What wallpaper to save?")
+    option=$(monitors_info.sh -m | dmenu    -p "What wallpaper to save?")
 
     theme=$(printf "day\nnight\nshabbat" | dmenu -i    -p "What theme you want this to go?")
 
@@ -212,35 +212,16 @@ save_wallpaper(){
         exit 0
     fi
     
+    dest="${WALLPAPER_ROOT}/dual/${theme}/"
 
-    if [ "$option" = "All" ]; then
-        for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do
-            is_wide=$(monitors_info.sh -iw ${count})
-            count=$(($count + 1))
+    index=$(monitors_info.sh -ib ${option})
+    index=$(($index + 1))
 
-            if [ "${is_wide}" = "yes" ]; then
-                dest="${WALLPAPER_ROOT}/ultra/${theme}/"
-            else
-                dest="${WALLPAPER_ROOT}/${theme}/"
-            fi
-        done
-    else
-        is_wide=$(monitors_info.sh -w ${option})
+    wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
 
-        if [ "${is_wide}" = "yes" ]; then
-            dest="${WALLPAPER_ROOT}/ultra/${theme}/"
-        else
-            dest="${WALLPAPER_ROOT}/${theme}/"
-        fi
+    cp "${wall}" "${dest}"
+    notify-send -u normal "Saved" "Wallpaper ${wall} saved to ${dest}."
 
-        index=$(monitors_info.sh -ib ${option})
-        index=$(($index + 1))
-
-        wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
-
-        cp "${wall}" "${dest}"
-        notify-send -u normal "Saved" "Wallpaper ${wall} saved to ${theme}."
-    fi
     option=$(show_options)
     echo $option
 }

@@ -25,6 +25,20 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
+search='*gap*'
+if [[ "$action" == $search ]]; then
+    option=$(echo "$action" | awk '{print $2}')
+    echo $option
+
+    if [ "${option}" == "all" ]; then
+        size=$(echo "$action" | awk '{print $3}')
+        bspwm_desktop_manager.sh -S "${size}"
+    else
+        bspwm_desktop_manager.sh -s "${option}"
+    fi
+    exit 0
+fi
+
 search='*wallpaper*'
 if [[ "$action" == $search ]]; then
     wallpaper_changer.sh 
