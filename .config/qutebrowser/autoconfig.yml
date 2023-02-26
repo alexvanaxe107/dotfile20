@@ -27,6 +27,8 @@ settings:
         cv: hint links userscript castvideo.sh
   content.blocking.enabled:
     global: true
+  content.notifications.enabled:
+    https://backiee.com: false
   statusbar.show:
     global: always
   tabs.show:
