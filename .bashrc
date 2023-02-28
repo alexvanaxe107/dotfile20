@@ -218,6 +218,39 @@ alias tdm="tdm --disable-xrunning-check"
 # Sound issues on steam no more?
 PULSE_LATENCY_MSEC=60
 
+#Use the amd vulkan
+AMD_VULKAN_ICD=RADV
+
+# AMDGPU 16x anisotropic filtering
+#export R600_TEX_ANISO=16
+
+#No MSAA
+#export EQAA=0,0,0
+
+#2x MSAA
+#export EQAA=2,2,2
+
+#2f4x EQAA
+#export EQAA=4,2,2
+
+#4x MSAA
+#export EQAA=4,4,4
+
+#2f8x EQAA
+#export EQAA=8,2,2
+
+#4f8x EQAA
+#export EQAA=8,4,4
+
+#4f16x EQAA
+#export EQAA=16,4,4
+
+#8x MSAA
+#export EQAA=8,8,8
+
+#8f16x EQAA
+#export EQAA=16,8,8
+
 # Config for emacs vterm
 vterm_printf(){
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
