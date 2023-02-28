@@ -44,9 +44,10 @@ temp = #000010
 content-fill = #000011
 foreground-fill = #000012
 empty-fill = #000013
+focused_ws = #000014
 
 [format]
-padding=2
+padding=4
 padding_border=3
 bspadding=0
 
@@ -80,15 +81,15 @@ module-margin-left = 0
 module-margin-right = 0
 
 font-0 = Symbols Nerd Font:pixelsize=10;2
-font-1 = Erica Type:style=Bold:pixelsize=9
-font-2 = FontAwesome:style=Bold:pixelsize=9
-font-3 = symbola:style=Bold:pixelsize=9;1
-font-4 = Symbols Nerd Font:pixelsize=36;4
+font-1 = Erica Type:style=Bold:pixelsize=10
+font-2 = FontAwesome:style=Bold:pixelsize=10;1
+font-3 = symbola:style=Bold:pixelsize=10;1
+font-4 = Symbola:pixelsize=26;5
 
 ;separator = 
 
 modules-left = logo desktop bspwm right-end-top xwindow
-modules-center = left-end-top pomodoro nweather torrent right-end-top
+modules-center = left-end-top2 pomodoro nweather torrent right-end-top2
 modules-right = left-end-top ava_load memory cpu temperature wlan right-end-top left-end-top pulseaudio indicators xkeyboard date
 
 ;tray-position = right
@@ -122,19 +123,19 @@ content-foreground = ${colors.content-fill}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "  %{T5}%{T-}"
+content = "%{T5}◥%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "%{T5}%{T-}  "
+content = "%{T5}◤%{T-}"
 
-[module/left-end-bottom]
+[module/left-end-top2]
 inherit = module/glyph
-content = 
+content = "%{T5}🬇🙿%{T-}"
 
-[module/right-end-bottom]
+[module/right-end-top2]
 inherit = module/glyph
-content = 
+content = "%{T5}🙾🬇%{T-}"
 
 [module/pomodoro]
 type = custom/script
@@ -191,8 +192,8 @@ format-background = ${colors.content-fill}
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:80:...%
-format-foreground = ${colors.foreground-fill}
+label = "%title:0:60:...%"
+format-foreground = ${colors.content-fill}
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -244,8 +245,8 @@ pin-workspaces = false
 #label-focused = %index%
 label-focused = %icon%
 label-focused-background = ${colors.content-fill}
-label-focused-foreground = ${colors.foreground-fill}
-label-focused-underline= ${colors.ws}
+label-focused-foreground = ${colors.focused_ws}
+label-focused-underline= ${colors.focused_ws}
 label-focused-padding = ${format.bspadding}
 label-focused-padding-left = 1
 label-focused-padding-right = 1
@@ -471,6 +472,7 @@ type = internal/pulseaudio
 format-padding = ${format.padding}
 ;format-volume = <label-volume> <bar-volume>
 format-volume = <label-volume>
+label-volume-padding = ${format.padding}
 label-volume = 🔊 %percentage%%
 label-volume-foreground = ${colors.foreground-fill}
 label-volume-background = ${colors.content-fill}

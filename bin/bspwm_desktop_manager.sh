@@ -1,4 +1,4 @@
-#! /bin/dash
+#! /bin/bash
 
 CONFIG_PATH="$HOME/.config/wm/bspwm.conf"
 
@@ -16,13 +16,15 @@ get_name(){
         8) echo "twitter";;
         9) echo "chat";;
         10) echo "audio";;
+        *) echo "$1";;
     esac
 }
 
 goto(){
     desk_togo="$1"
+    togo_name=$(get_name ${desk_togo})
+
     if [ "${creation_mode}" = "auto" ]; then
-        togo_name=$(get_name ${desk_togo})
         togo_code="$(bspc query --desktops --desktop ${togo_name} 2> /dev/null)"
         nodes="$(bspc query --nodes --node .leaf --desktop)"
 
@@ -41,11 +43,10 @@ goto(){
     fi
 
     if [ "${creation_mode}" = "manual" ]; then
-        bspc desktop -f "focused:^${desk_togo}"
+        bspc desktop -f "${togo_name}"
     fi
 
     if [ "${creation_mode}" = "mixed" ]; then
-        togo_name=$(get_name ${desk_togo})
         bspc desktop -f "${togo_name}"
     fi
 }
@@ -143,21 +144,61 @@ toggle_mode(){
     
 }
 
+select_desktop() {
+    all="$1"
+    if [ -z "${all}" ]; then
+        actv_monitors="$(bspc query -D --names --monitor focused)"
+    else
+        actv_monitors="$(bspc query -D --names)"
+    fi
+
+    if [[ "${use_dmenu}" == "0" ]]; then
+    select selected in ${actv_monitors}
+    do
+        desktop=$selected
+        break
+    done
+    else
+        desktop=$(dmenu -p "Select a desktop to go" -l 15 <<< ${actv_monitors})
+    fi
+
+    goto $desktop
+}
+
+increase_gap() {
+    all="$2"
+
+    if [ "${all}" == "all" ]; then
+        bspc config window_gap $1
+    else
+        bspc config -d focused window_gap $1
+    fi
+}
+
 show_help() {
-    echo "Manipulate the monitors."; echo ""
+    echo "Manipulate the desktops and bspwm configs."; echo ""
     echo "g                             go to desktop number"
+    echo "s/S                           Increase the gap space"
     echo "m                             move to desktop number"
     echo "f                             move and follow to desktop number"
     echo "t                             Toggle mode (manual or auto)"
     echo "r                             Rename desktop"
-
+    echo "l/L                             List the desktop names - use dl to use dmenu"
 }
 
-while getopts "h?g:m:t:r:f:" opt; do
+use_dmenu="0"
+
+while getopts "h?g:m:t:r:f:dLls:S:" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
+    d) use_dmenu="1"
+        ;;
     g) goto ${OPTARG}
+        ;;
+    s) increase_gap ${OPTARG}
+        ;;
+    S) increase_gap ${OPTARG} "all"
         ;;
     m) moto ${OPTARG}
         ;;
@@ -166,6 +207,10 @@ while getopts "h?g:m:t:r:f:" opt; do
     t) toggle_mode ${OPTARG}
         ;;
     r) rename_desktop ${OPTARG}
+        ;;
+    l) select_desktop
+        ;;
+    L) select_desktop "all"
         ;;
     esac
 done

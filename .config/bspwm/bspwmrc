@@ -35,7 +35,9 @@ bspc rule -a ffplay state=floating
 bspc rule -a Gpick state=floating
 bspc rule -a qutebrowser desktop=^2
 bspc rule -a translation state=floating rectangle=800x800+0+0 center=true follow=on
-bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0
+bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0 desktop="video"
+bspc rule -a Zathura desktop="book"
+bspc rule -a com-investcharts-InvestCharts desktop="trade"
 #bspc rule -a mpv desktop=\^5
 #bspc rule -a Alacritty:vis desktop=^5 state=tiled
 #bspc rule -a Alacritty:weechat desktop=^7 state=tiled

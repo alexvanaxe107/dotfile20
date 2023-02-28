@@ -13,6 +13,13 @@
 set_wallpaper()
 { 
     rm ${WALLPAPER_PATH}
+
+    sxiv $HOME/Documents/Pictures/Wallpapers/dual/$theme_name/*
+}
+
+set_wallpaper_old()
+{ 
+    rm ${WALLPAPER_PATH}
     while read n; do
 
         local is_wide="$(monitors_info.sh -w "$n")"

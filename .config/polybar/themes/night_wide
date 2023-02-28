@@ -109,7 +109,7 @@ cursor-scroll = ns-resize
 
 [format]
 padding = 2
-bspadding = 4
+bspadding = 2
 
 [module/logo]
 type = custom/text
@@ -247,24 +247,24 @@ label-focused-padding = ${format.bspadding}
 
 label-dimmed-focused-background = ${colors.foreground-pomodoro}
 
-#label-occupied = %index%
+label-occupied = %icon%
 #label-occupied = %index%%icon%
-label-occupied = 
+#label-occupied = 
 label-occupied-padding = ${format.bspadding}
-#label-occupied-foreground = ${colors.foreground-alt2}
-#label-occupied-background = ${colors.foreground-load}
+label-occupied-foreground = ${colors.foreground-alt2}
+label-occupied-background = ${colors.background-alt}
 
 #label-urgent = %index%!
 #label-urgent = %icon%!
 #label-urgent-background = ${colors.alert}
 label-urgent-padding = ${format.bspadding}
 
-#label-empty = %index%
+label-empty = %icon%
 #label-empty = %index%%icon%
-label-empty =
+#label-empty =
 label-empty-padding = ${format.bspadding}
-#label-empty-foreground = ${colors.foreground-alt2}
-#label-empty-background = ${colors.background}
+label-empty-foreground = ${colors.foreground-alt2}
+label-empty-background = ${colors.foreground-load}
 
 ws-icon-0 = terminal;1
 ws-icon-1 = web;2

@@ -182,6 +182,13 @@ super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 super + alt + {F}{1,2,3,4,5,6,7,8,9,10}
 	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
 
+# Go to desktop by list
+super + minus
+	$HOME/bin/bspwm_desktop_manager.sh -dl
+
+super + shift + minus
+	$HOME/bin/bspwm_desktop_manager.sh -dL
+
 # Send node to the other monitor
 super + t
 	bspc node focused --to-monitor next

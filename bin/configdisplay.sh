@@ -1,11 +1,11 @@
 #!/bin/dash
 
-option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: " -bw 2 -y 26 -z 850)
+option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: "   )
 
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 
 toggle() {
-    monitor=$(monitors_info.sh -c | dmenu -p "What monitor will be toggled?" -bw 2 -y 16 -z 850)
+    monitor=$(monitors_info.sh -c | dmenu -p "What monitor will be toggled?"   )
 
     if [ -z "${monitor}" ]; then
         exit 0
@@ -15,14 +15,14 @@ toggle() {
 }
 
 rotate() {
-    monitor=$(monitors_info.sh -m | dmenu -p "Which monitor rotate?" -bw 2 -y 16 -z 850)
-    direction=$(printf "%s\n%s\n%s" "left" "right" "normal" | dmenu -p "Which monitor rotate?" -bw 2 -y 16 -z 850)
+    monitor=$(monitors_info.sh -m | dmenu -p "Which monitor rotate?"   )
+    direction=$(printf "%s\n%s\n%s" "left" "right" "normal" | dmenu -p "Which monitor rotate?"   )
 
     display_manager.sh -r "${monitor}" "${direction}"
 }
 
 set_primary() {
-    monitor=$(monitors_info.sh -m | dmenu -p "What is the new primary?" -bw 2 -y 16 -z 850)
+    monitor=$(monitors_info.sh -m | dmenu -p "What is the new primary?"   )
 
     if [ ! -z "${monitor}" ]; then
         display_manager.sh -p ${monitor}
@@ -41,7 +41,7 @@ restart_conky() {
 }
 
 set_monitors() {
-    option=$(printf "%s\n%s" "Auto" "Manual" | dmenu -p "The method to use: " -bw 2 -y 16 -z 850)
+    option=$(printf "%s\n%s" "Auto" "Manual" | dmenu -p "The method to use: "   )
 
     if [ "$option" = "Auto" ]; then
         preferences="$(cat $PREFERENCE_FILE)"
@@ -61,7 +61,7 @@ set_monitors() {
         list_monitor=""
         count=1
         for monitor in $(monitors_info.sh -c); do
-            local mon_tmp=$(monitors_info.sh -c | dmenu -p "Select the ${count}:" -bw 2 -y 16 -z 850)
+            local mon_tmp=$(monitors_info.sh -c | dmenu -p "Select the ${count}:"   )
             if [ -z "${mon_tmp}" ]; then
                 break
             fi
@@ -91,7 +91,7 @@ rm_virtual() {
 }
 
 add_virtual_old() {
-    local dim="$(printf "1366x768\n1920x1080" | dmenu -p "Choose a screen dimension" -bw 2 -y 16 -z 850)"
+    local dim="$(printf "1366x768\n1920x1080" | dmenu -p "Choose a screen dimension"   )"
     if [ -z "${dim}" ]; then
         exit 0
     fi

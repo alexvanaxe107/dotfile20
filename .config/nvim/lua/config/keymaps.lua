@@ -62,6 +62,12 @@ map('n', '<F2>', '<cmd>Telescope find_files<cr>')
 map('n', '<F5>', '<cmd>Telescope buffers<cr>')
 map('n', '<F6>', '<cmd>Telescope live_grep<cr>')
 
+-- Config to turnoff the autocomplete
+map('n', '<leader>c', '<cmd>lua require("cmp").setup.buffer { enabled = false }<cr>')
+map('n', '<leader>C', '<cmd>lua require("cmp").setup.buffer { enabled = true }<cr>')
+map('n', '<leader>ca', '<cmd>lua require("cmp").setup { enabled = false }<cr>')
+map('n', '<leader>Ca', '<cmd>lua require("cmp").setup { enabled = true }<cr>')
+
 -- HL search toggle
 map('n', '<F10>', '<cmd>set hlsearch!<cr>')
 
@@ -69,3 +75,8 @@ map('n', '<F10>', '<cmd>set hlsearch!<cr>')
 -- Exit with jk
 map('i', 'jk', '<esc>')
 
+-- Remap the tests
+map('n', '<leader>ta', '<cmd>TestSuite<cr>')
+map('n', '<leader>tn', '<cmd>TestNearest<cr>')
+map('n', '<leader>tf', '<cmd>TestFile<cr>')
+map('n', '<leader>tl', '<cmd>TestLast<cr>')

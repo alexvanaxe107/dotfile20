@@ -5,7 +5,7 @@ PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 THEMES=$HOME/.config/wm/terminal.conf
 TERM_CONFIG=$HOME/.config/wezterm/wezterm.lua
 
-choosen_theme=$(cat $THEMES |  dmenu -i -y 16 -bw 2 -z 850 -l 27 -p "Choose the terminal theme")
+choosen_theme=$(cat $THEMES |  dmenu -i    -l 27 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 
@@ -30,7 +30,7 @@ if [ "$vim_theme" == "Codeschool.light" ]; then
 fi
 
 if [ "$vim_theme" == "neobones_light" ]; then
-    sed -i 's/^colorscheme.*/colorscheme base16-harmonic-light/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme Atelier_SeasideLight/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="base16-harmonic-light"/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
 fi

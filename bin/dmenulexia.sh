@@ -5,7 +5,7 @@ source $HOME/.config/wm/bspwm.conf
 action="${1}"
 
 if [ -z "${action}" ]; then
-    action=$(echo "" | dmenu -p "What do you want to do?" -bw 2 -y 16 -z 850 -theme ${rofi_item5})
+    action=$(echo "" | dmenu -p "What do you want to do?"    -theme ${rofi_item5})
 fi
 
 if [ -z "${action}" ]; then
@@ -22,6 +22,20 @@ search='*creation*'
 if [[ "$action" == $search ]]; then
     option=$(echo "$action" | awk '{print $2}')
     bspwm_desktop_manager.sh -t "${option}"
+    exit 0
+fi
+
+search='*gap*'
+if [[ "$action" == $search ]]; then
+    option=$(echo "$action" | awk '{print $2}')
+    echo $option
+
+    if [ "${option}" == "all" ]; then
+        size=$(echo "$action" | awk '{print $3}')
+        bspwm_desktop_manager.sh -S "${size}"
+    else
+        bspwm_desktop_manager.sh -s "${option}"
+    fi
     exit 0
 fi
 

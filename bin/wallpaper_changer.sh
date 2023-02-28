@@ -14,7 +14,7 @@ WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape
 MONITOR_NUMBER=$(monitors_info.sh -q)
 
 show_options(){
-    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "\nsave\ndual") | dmenu -y 16 -bw 2 -z 650 -p "How rice it?")
+    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "\nsave\ndual") | dmenu    -p "How rice it?")
     echo $option
 }
 
@@ -40,7 +40,7 @@ change_all(){
 }
 
 get_scene() {
-        scene="$(printf "${WALLPAPER_SCENES}" | dmenu -i -y 16 -bw 2 -z 550 -l 20 -p "Choose the scene:")"
+        scene="$(printf "${WALLPAPER_SCENES}" | dmenu -i    -l 20 -p "Choose the scene:")"
         if [ -z "${scene}" ];then
             exit 0
         fi
@@ -55,7 +55,7 @@ get_scene() {
 download(){
 
     if [ ${MONITOR_NUMBER} -ge 2 ]; then
-        monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu -y 16 -bw 2 -z 550 -p "Which monitor?")
+        monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu    -p "Which monitor?")
     else
         monitor=$(monitors_info.sh -p)
     fi
@@ -63,7 +63,7 @@ download(){
     if [ -z "$monitor" ]; then
         exit 0
     else
-        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing\nUsplash" | dmenu -i -y 16 -bw 2 -z 780 -p "Wanna try your luck?")
+        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing\nUsplash" | dmenu -i    -p "Wanna try your luck?")
         notsceneoptions="ChromecastBing"
         if [ -z "${option}" ]; then
             exit 0
@@ -204,43 +204,24 @@ change_wallpaper(){
 
 save_wallpaper(){
     count=0
-    option=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu -y 16 -bw 2 -z 550 -p "What wallpaper to save?")
+    option=$(monitors_info.sh -m | dmenu    -p "What wallpaper to save?")
 
-    theme=$(printf "day\nnight\nshabbat" | dmenu -i -y 16 -bw 2 -z 550 -p "What theme you want this to go?")
+    theme=$(printf "day\nnight\nshabbat" | dmenu -i    -p "What theme you want this to go?")
 
     if [ -z "${theme}" ]; then
         exit 0
     fi
     
+    dest="${WALLPAPER_ROOT}/dual/${theme}/"
 
-    if [ "$option" = "All" ]; then
-        for wallpaper in $(cat ${NITROGEN_CONFIG} | grep file | cut -d = -f 2); do
-            is_wide=$(monitors_info.sh -iw ${count})
-            count=$(($count + 1))
+    index=$(monitors_info.sh -ib ${option})
+    index=$(($index + 1))
 
-            if [ "${is_wide}" = "yes" ]; then
-                dest="${WALLPAPER_ROOT}/ultra/${theme}/"
-            else
-                dest="${WALLPAPER_ROOT}/${theme}/"
-            fi
-        done
-    else
-        is_wide=$(monitors_info.sh -w ${option})
+    wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
 
-        if [ "${is_wide}" = "yes" ]; then
-            dest="${WALLPAPER_ROOT}/ultra/${theme}/"
-        else
-            dest="${WALLPAPER_ROOT}/${theme}/"
-        fi
+    cp "${wall}" "${dest}"
+    notify-send -u normal "Saved" "Wallpaper ${wall} saved to ${dest}."
 
-        index=$(monitors_info.sh -ib ${option})
-        index=$(($index + 1))
-
-        wall=$(cat $HOME/.config/nitrogen/bg-saved.cfg | grep file | awk -v INDEX=$index 'NR==INDEX {print $2}' FS==)
-
-        cp "${wall}" "${dest}"
-        notify-send -u normal "Saved" "Wallpaper ${wall} saved to ${theme}."
-    fi
     option=$(show_options)
     echo $option
 }

@@ -25,7 +25,7 @@ search_live() {
     done < "${CONF}"
 
     echo -e "${lives_tmp}"
-    local choosen=$(echo -e "$lives_tmp" | grep ";Live" | awk '{printf "%s-%s\n", $2,$3}' FS=";" | dmenu -bw 2 -y 16 -z 1250  -l 30 -p "What do want to watch?")
+    local choosen=$(echo -e "$lives_tmp" | grep ";Live" | awk '{printf "%s-%s\n", $2,$3}' FS=";" | dmenu     -l 30 -p "What do want to watch?")
 
     if [ -z "${choosen}" ]; then
         exit 0
@@ -53,7 +53,7 @@ get_theme() {
     fi
    
     if [ "${cli}" == "0" ]; then
-        choosen_theme=$(dmenu -l 20 -bw 2 -y 16 -z 850 -p "Choose a channel/theme: " <<<  ${filtered_content})
+        choosen_theme=$(dmenu -l 20    -p "Choose a channel/theme: " <<<  ${filtered_content})
     fi
 
     if [ -z "${choosen_theme}" ]; then
@@ -73,7 +73,7 @@ play_parameter() {
 
     if [ "${multiple}" = "1" ]; then
         local videos="$(python $HOME/bin/ytsearch.py -to -q 5 "${choosen_theme}")"
-        video=$(awk '{printf "%s", $1}' FS="@" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s@%s+%s\n", $2, $3, $4}' FS=";" <<< $videos)))
+        video=$(awk '{printf "%s", $1}' FS="@" <<< $(dmenu -l 15    -p "Choose a video" <<< $(awk '{printf "%s@%s+%s\n", $2, $3, $4}' FS=";" <<< $videos)))
 
         echo "$video"
         if [ -z "${video}" ];then
@@ -117,7 +117,7 @@ play_by_list() {
         done
     fi
     if [ "${cli}" = "0" ]; then
-        video=$(awk '{printf "%s", $1}' FS="#" <<< $(dmenu -l 15 -bw 2 -y 16 -z 1250 -p "Choose a video" <<< $(awk '{printf "%s#%s#%s\n", $2, $3, $4}' FS=";" <<< $videos)))
+        video=$(awk '{printf "%s", $1}' FS="#" <<< $(dmenu -l 15    -p "Choose a video" <<< $(awk '{printf "%s#%s#%s\n", $2, $3, $4}' FS=";" <<< $videos)))
     fi
 
     

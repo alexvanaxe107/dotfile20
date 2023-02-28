@@ -3,27 +3,15 @@
 running_sink="$(pactl list sinks | grep -C 1 "RUNNING" | tail -n 1 | cut -d ' ' -f 2)"
 
 do_mute() {
-    pactl set-sink-mute ${running_sink} 'toggle'
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 }
 
 do_up() {
-    step="$1" 
-    cur_vol="$(pactl get-sink-volume ${running_sink} | cut -d "/" -f 2 | head -n 1 | grep -oP "\d+")"
-    new_vol=$(echo "${cur_vol}+${step}" | bc)
-
-    echo "Volume set to ${new_vol}"
-
-    pactl set-sink-volume ${running_sink} "${new_vol}%"
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%+
 }
 
 do_down() {
-    step="$1" 
-    cur_vol="$(pactl get-sink-volume ${running_sink} | cut -d "/" -f 2 | head -n 1 | grep -oP "\d+")"
-    new_vol=$(echo "${cur_vol}-${step}" | bc)
-
-    echo "Change volume to ${new_vol}"
-
-    pactl set-sink-volume ${running_sink} "${new_vol}%"
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%-
 }
 
 command="$1"
