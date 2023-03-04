@@ -14,6 +14,8 @@ set -o pipefail
 
 source $HOME/bin/imports/color_sort.sh
 
+TEMPLATES="$HOME/bin/templates/"
+
 is_bspc=$(bspc wm --get-status)
 
 show_help () {
@@ -67,8 +69,8 @@ begin(){
 # Try to copy the config where is the themename
 function reset_configs(){
     theme_name=$1
-    cp ${HOME}/bin/templates/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
-    cp ${HOME}/bin/templates/theme.vim ${HOME}/.vim/configs/theme.vim
+    cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
+    cp ${TEMPLATES}/theme.vim ${HOME}/.vim/configs/theme.vim
     cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
     cp ${HOME}/.config/twmn/twmn.conf.tmpl ${HOME}/.config/twmn/twmn.conf
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
@@ -83,7 +85,7 @@ function reset_configs(){
     cp ${HOME}/.config/conky/themes/${theme_name}/calendar.conf ${HOME}/.config/conky/calendar.conf
     cp ${HOME}/.config/vis/colors/theme_tpl ${HOME}/.config/vis/colors/theme
     cp ${HOME}/.config/tint2/tint2rc.tpl ${HOME}/.config/tint2/tint2rc
-    cp ${HOME}/.config/wezterm/wezterm.lua.tmpl ${HOME}/.config/wezterm/wezterm.lua
+    cp ${TEMPLATES}/wezterm/*.lua ${HOME}/.config/wezterm/
     cp ${HOME}/bin/imports/lock.sh.tmpl ${HOME}/bin/imports/lock.sh
     if [ "${CHOSEN}" != "wallpaper" ]; then
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
