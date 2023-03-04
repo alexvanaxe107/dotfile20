@@ -67,8 +67,8 @@ begin(){
 # Try to copy the config where is the themename
 function reset_configs(){
     theme_name=$1
-    cp ${HOME}/.config/bspwm/themes/${theme_name}.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
-    cp ${HOME}/.vim/configs/theme_template.vim ${HOME}/.vim/configs/theme.vim
+    cp ${HOME}/bin/templates/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
+    cp ${HOME}/bin/templates/theme.vim ${HOME}/.vim/configs/theme.vim
     cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
     cp ${HOME}/.config/twmn/twmn.conf.tmpl ${HOME}/.config/twmn/twmn.conf
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config

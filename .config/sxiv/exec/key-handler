@@ -35,9 +35,9 @@ reverse_file(){
 
 save_img(){
     local theme="$(printf "day\nnight\nshabbat" | /usr/bin/dmenu -p "Choose the theme")"
-    local mode="$(printf "\nultra\ndual" | /usr/bin/dmenu -p "Choose the modality")"
+    #local mode="$(printf "\nultra\ndual" | /usr/bin/dmenu -p "Choose the modality")"
 
-    local save_location="$HOME/Documents/Pictures/Wallpapers/$mode/$theme/"
+    local save_location="$HOME/Documents/Pictures/Wallpapers/dual/$theme/"
     cp ${file} "${save_location}"
 
     notify-send "Wallpaper saved" "Saved to ${save_location}"
@@ -148,10 +148,6 @@ do
             save_img;;
         "C-l")
             cp "$file" $HOME/Documents/Pictures/lock.png ;;
-        "C-n")
-            mv "$file" $HOME/Documents/Pictures/Wallpapers/night/ ;;
-        "C-d")
-            mv "$file" $HOME/Documents/Pictures/Wallpapers/day/ ;;
         "C-0")
             nitrogen --head=0 --save --set-scaled --random "$file";;
         "C-1")

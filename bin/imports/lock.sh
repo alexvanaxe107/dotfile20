@@ -1,2 +1,2 @@
-FONT="Share Tech Mono":pixelsize=20
+FONT="Audimat Mono":pixelsize=19
 SAVER=saver_mpv

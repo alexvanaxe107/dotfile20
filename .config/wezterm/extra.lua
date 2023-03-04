@@ -7,8 +7,8 @@ extra = {
     },
 
     colors = {
-        foreground = '#003345',
-        background = '#C8CFB9',
+        foreground = '#3F92C5',
+        background = '#112327',
     }
 }
 

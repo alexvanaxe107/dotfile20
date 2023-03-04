@@ -14,25 +14,15 @@ WALLPAPER_SCENES="Any\nCyberpunk\nFuturist\nAbstract\nCity\nLandscape\nLandscape
 MONITOR_NUMBER=$(monitors_info.sh -q)
 
 show_options(){
-    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat && printf "\nsave\ndual") | dmenu    -p "How rice it?")
+    option=$(monitors_info.sh -m | (printf "All\nDownload\n" && cat) | dmenu    -p "How rice it?")
     echo $option
 }
 
 change_all(){
     for monitor in $(monitors_info.sh -m); do
-        is_wide="$(monitors_info.sh -w $monitor)"
-        is_rotated="$(monitors_info.sh -r $monitor)"
         index=$(monitors_info.sh -ib ${monitor})
-        if [ "${is_wide}" = "yes" ]; then
-            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name/*)"
-            nitrogen --head=$index --save --set-scaled $wallpaper
-        elif [ "${is_rotated}" = "yes" ]; then
-            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name/*)"
-            nitrogen --head=$index --save --set-scaled $wallpaper
-        else
-            local wallpaper="$(shuf -n1 -e $HOME/Documents/Pictures/Wallpapers/$theme_name/*)"
-            nitrogen --head=$index --save --set-scaled $wallpaper
-        fi
+        local wallpaper="$(shuf -n1 -e ${WALLPAPER_ROOT}/dual/$theme_name/*)"
+        nitrogen --head=$index --save --set-scaled $wallpaper
     done
     notify-send -u normal "All wallpapers setted. Enjoy."
     option=$(show_options)
@@ -53,7 +43,6 @@ get_scene() {
 }
 
 download(){
-
     if [ ${MONITOR_NUMBER} -ge 2 ]; then
         monitor=$(monitors_info.sh -m | (printf "All\n" && cat) | dmenu    -p "Which monitor?")
     else
@@ -63,9 +52,16 @@ download(){
     if [ -z "$monitor" ]; then
         exit 0
     else
-        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing\nUsplash" | dmenu -i    -p "Wanna try your luck?")
+        option=$(printf "Resolution\nRatio\nLuck\nGoogle\nChromecast\nBing\nUsplash\nDual" | dmenu -i    -p "Wanna try your luck?")
         notsceneoptions="ChromecastBing"
         if [ -z "${option}" ]; then
+            exit 0
+        fi
+
+        if [ "${option}" == "Dual" ]; then
+            echo "Processing dual"
+            local result=$(process_dual)
+            echo $result
             exit 0
         fi
 
@@ -186,15 +182,8 @@ change_wallpaper(){
     selected=$(monitors_info.sh -ib ${monitor_name})
 
     if [ ! -z "$selected" ]; then
-        is_wide=$(monitors_info.sh -w ${monitor_name})
-        is_rotated=$(monitors_info.sh -r ${monitor_name})
-        if [ "${is_wide}" = "yes" ]; then
-            nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/ultra/$theme_name
-        elif [ "${is_rotated}" = "yes" ]; then
-            nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/rotated/$theme_name
-        else
-            nitrogen --head=$selected --save --set-scaled --random $HOME/Documents/Pictures/Wallpapers/$theme_name
-        fi
+        local wallpaper="$(shuf -n1 -e ${WALLPAPER_ROOT}/dual/$theme_name/*)"
+        nitrogen --head=$selected --save --set-scaled $wallpaper
     fi
 
     notify-send -u normal "Wallpaper ${monitor_name} changed. Enjoy."
