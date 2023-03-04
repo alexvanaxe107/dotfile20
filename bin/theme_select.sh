@@ -73,8 +73,7 @@ function reset_configs(){
     cp ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
     cp ${TEMPLATES}/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
     cp ${TEMPLATES}/twmn/twmn.conf ${HOME}/.config/twmn/twmn.conf
-    cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
-    cp ${HOME}/.config/polybar/themes/"${theme_name}"_simple ${HOME}/.config/polybar/config_simple
+    cp ${TEMPLATES}/polybar/${theme_name}/* ${HOME}/.config/polybar/
     cp ${HOME}/.config/conky/themes/${theme_name}/conky.sh ${HOME}/.config/conky/conky.sh
     cp ${HOME}/.config/conky/themes/${theme_name}/process.conf ${HOME}/.config/conky/process.conf
     cp ${HOME}/.config/conky/themes/${theme_name}/cpu.conf ${HOME}/.config/conky/cpu.conf
