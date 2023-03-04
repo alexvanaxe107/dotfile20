@@ -75,15 +75,7 @@ function reset_configs(){
     cp ${TEMPLATES}/twmn/twmn.conf ${HOME}/.config/twmn/twmn.conf
     cp ${TEMPLATES}/polybar/${theme_name}/* ${HOME}/.config/polybar/
     cp ${TEMPLATES}/conky/${theme_name}/* ${HOME}/.config/conky/
-    # cp ${HOME}/.config/conky/themes/${theme_name}/conky.sh ${HOME}/.config/conky/conky.sh
-    # cp ${HOME}/.config/conky/themes/${theme_name}/process.conf ${HOME}/.config/conky/process.conf
-    # cp ${HOME}/.config/conky/themes/${theme_name}/cpu.conf ${HOME}/.config/conky/cpu.conf
-    # cp ${HOME}/.config/conky/themes/${theme_name}/clock.conf ${HOME}/.config/conky/clock.conf
-    # cp ${HOME}/.config/conky/themes/${theme_name}/fortune.conf ${HOME}/.config/conky/fortune.conf
-    # cp ${HOME}/.config/conky/themes/${theme_name}/clock_rings.lua ${HOME}/.config/conky/clock_rings.lua
-    # cp ${HOME}/.config/conky/themes/${theme_name}/calendar_widgets.lua ${HOME}/.config/conky/calendar_widgets.lua
-    # cp ${HOME}/.config/conky/themes/${theme_name}/calendar.conf ${HOME}/.config/conky/calendar.conf
-    cp ${HOME}/.config/vis/colors/theme_tpl ${HOME}/.config/vis/colors/theme
+    cp ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
     cp ${HOME}/.config/tint2/tint2rc.tpl ${HOME}/.config/tint2/tint2rc
     cp ${TEMPLATES}/wezterm/*.lua ${HOME}/.config/wezterm/
     cp ${HOME}/bin/imports/lock.sh.tmpl ${HOME}/bin/imports/lock.sh
