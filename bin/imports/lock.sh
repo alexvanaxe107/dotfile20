@@ -1,2 +1,2 @@
-FONT="Targa MS":pixelsize=19
-SAVER=saver_mpv
+FONT=Iceland:pixelsize=29
+SAVER=saver_blank
