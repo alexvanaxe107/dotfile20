@@ -70,7 +70,7 @@ begin(){
 function reset_configs(){
     theme_name=$1
     cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
-    cp ${TEMPLATES}/theme.vim ${HOME}/.vim/configs/theme.vim
+    cp ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
     cp ${TEMPLATES}/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
     cp ${TEMPLATES}/twmn/twmn.conf ${HOME}/.config/twmn/twmn.conf
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
