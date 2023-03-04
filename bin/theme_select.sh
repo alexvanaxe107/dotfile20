@@ -76,7 +76,7 @@ function reset_configs(){
     cp ${TEMPLATES}/polybar/${theme_name}/* ${HOME}/.config/polybar/
     cp ${TEMPLATES}/conky/${theme_name}/* ${HOME}/.config/conky/
     cp ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
-    cp ${HOME}/.config/tint2/tint2rc.tpl ${HOME}/.config/tint2/tint2rc
+    cp ${TEMPLATES}/tint2/tint2rc ${HOME}/.config/tint2/tint2rc
     cp ${TEMPLATES}/wezterm/*.lua ${HOME}/.config/wezterm/
     cp ${HOME}/bin/imports/lock.sh.tmpl ${HOME}/bin/imports/lock.sh
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
