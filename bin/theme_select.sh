@@ -71,7 +71,7 @@ function reset_configs(){
     theme_name=$1
     cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp ${TEMPLATES}/theme.vim ${HOME}/.vim/configs/theme.vim
-    cp ${HOME}/.config/dunst/dunstrc_default ${HOME}/.config/dunst/dunstrc
+    cp ${TEMPLATES}/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
     cp ${HOME}/.config/twmn/twmn.conf.tmpl ${HOME}/.config/twmn/twmn.conf
     cp ${HOME}/.config/polybar/themes/${theme_name} ${HOME}/.config/polybar/config
     cp ${HOME}/.config/polybar/themes/"${theme_name}"_simple ${HOME}/.config/polybar/config_simple
