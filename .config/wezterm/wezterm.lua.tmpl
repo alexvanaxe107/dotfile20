@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local extra = require 'extra'
 
 local function isempty(s)
   return s == nil or s == ''
@@ -25,6 +26,10 @@ toReturn['font'] = wezterm.font(font_name)
 toReturn['font_size'] = 11 
 toReturn['window_decorations'] = "NONE"
 toReturn['hide_tab_bar_if_only_one_tab'] = true
+
+if extra.custom_colors == true then
+    toReturn['colors'] = extra.colors
+end
 
 if os.getenv("theme_name") == "day" then
     toReturn['window_background_opacity'] = 0.9
