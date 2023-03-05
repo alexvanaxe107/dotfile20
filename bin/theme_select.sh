@@ -80,9 +80,7 @@ function reset_configs(){
     cp ${TEMPLATES}/wezterm/*.lua ${HOME}/.config/wezterm/
     cp ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
-    if [ "${CHOSEN}" != "wallpaper" ]; then
-        cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
-    fi
+    cp ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
 }
 
 function get_wallpaper() {
