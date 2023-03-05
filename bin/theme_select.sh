@@ -78,7 +78,7 @@ function reset_configs(){
     cp ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
     cp ${TEMPLATES}/tint2/tint2rc ${HOME}/.config/tint2/tint2rc
     cp ${TEMPLATES}/wezterm/*.lua ${HOME}/.config/wezterm/
-    cp ${HOME}/bin/imports/lock.sh.tmpl ${HOME}/bin/imports/lock.sh
+    cp ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     if [ "${CHOSEN}" != "wallpaper" ]; then
         cp ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
