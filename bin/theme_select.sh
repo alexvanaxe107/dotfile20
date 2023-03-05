@@ -81,6 +81,7 @@ function reset_configs(){
     cp ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     cp ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
+    cp ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
 }
 
 function get_wallpaper() {
