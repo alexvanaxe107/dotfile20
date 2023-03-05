@@ -1,22 +1,11 @@
 #!/bin/sh
-resize_img(){
-    #imgsize="$(monitors_info.sh -d 'HDMI-1')"
-    #imgsize="1080x1920"
-    #convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
-    local file_location=$(dirname $(realpath ${file}))
-    monitor="$(grep -o "ultra\|rotated" <<< "${file_location}")"
 
+exit_if_none(){
+    local valor="$1"
 
-    case "$monitor" in
-        "rotated")
-            imgsize="1080x1920";;
-        "ultra")
-            imgsize="2560x1080";;
-        *)  
-            imgsize="1920x1080";;
-    esac
-
-    convert "$file" -resize "${imgsize}"^ -gravity Center -extent "${imgsize}" "$file"
+    if [ -z "${valor}" ]; then
+        exit 0
+    fi
 }
 
 convert_file(){
@@ -35,6 +24,8 @@ reverse_file(){
 
 save_img(){
     local theme="$(printf "day\nnight\nshabbat" | /usr/bin/dmenu -p "Choose the theme")"
+    exit_if_none "${theme}"
+
     #local mode="$(printf "\nultra\ndual" | /usr/bin/dmenu -p "Choose the modality")"
 
     local save_location="$HOME/Documents/Pictures/Wallpapers/dual/$theme/"
@@ -54,10 +45,18 @@ resize_img_plus(){
     local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + 100 | bc)x${htoppls}"
     local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
 
+    local img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1)
+    local width_img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1 | cut -d 'x' -f 1)
+    local sum=$(echo $(monitors_info.sh -D)+${htop} | bc)
+
+    local half_img="$((width_img_dimensions + ${sum}))x$((width_img_dimensions + ${sum}))"
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | /usr/bin/dmenu -p "Choose the direction")"
+    exit_if_none "$direction"
+
     local resolutions=$(monitors_info.sh -d)
-    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n2560x1080\n${resolutions}" | /usr/bin/dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | /usr/bin/dmenu -p "Choose the dimension")"
+    exit_if_none "$imgsize"
 
     vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the vertical adjustment")"
     hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the horizontal adjustment")"
@@ -75,6 +74,7 @@ crop_img(){
     gravity="$3"
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | /usr/bin/dmenu -p "Choose the direction")"
+    exit_if_none "${direction}"
     resize="$(printf "+0\n+65\n+100\n+200\n+300" | /usr/bin/dmenu -p "Set the vertical deviation")"
     horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | /usr/bin/dmenu -p "Set the horizontal deviation")"
     
@@ -130,8 +130,6 @@ do
             reverse_file ;;
         "C-w")
             nitrogen --save --set-zoom-fill "$file" ;;
-        "C-p") 
-            resize_img "$file";;
         "C-e")
             recort_img "1" "1" "East";;
         "C-r") 
