@@ -19,7 +19,7 @@ if [ "${choosen}" == "Theme off" ]; then
 fi
 
 if [ ! -z "$choosen" ]; then
-    cp ${HOME}/.vim/configs/theme_template.vim  ${HOME}/.vim/configs/theme.vim
+    cp ${HOME}/bin/templates/vim/theme.vim  ${HOME}/.vim/configs/theme.vim
 
     vim_theme=$(basename -s .yaml "$choosen")
     sed -i "s/^theme_name.*/theme_name = \"$vim_theme\"/" $TERM_CONFIG
