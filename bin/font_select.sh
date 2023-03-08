@@ -13,9 +13,6 @@ if [ -z "${CHOSEN}" ]; then
     exit
 fi
 
-SIZE=$(printf "" | dmenu -i -p "Choose the size (bar dmenu conky vspace)")
-
-
 NOT_MONO=$(echo $CHOSEN | cut -d '-' -f 1)
     
 
@@ -30,6 +27,8 @@ font() {
     size2=$4
     size3=$5
     space=$6
+
+    SIZE=$(printf "" | dmenu -i -p "Choose the size (bar(${size1}) dmenu(${size2}) conky(${size3}) vspace(${space}))")
 
     if [ ! -z "${SIZE}" ]; then
         size1="$(echo ${SIZE} | cut -d ' ' -f 1)"
