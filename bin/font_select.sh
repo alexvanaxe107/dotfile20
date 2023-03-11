@@ -9,6 +9,8 @@ set -o nounset
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 20 -p "Change the font: ")
 
+SPACE_SIZE=30
+
 if [ -z "${CHOSEN}" ]; then
     exit
 fi
@@ -39,7 +41,7 @@ font() {
 
     #Change the polybar
     if [ "${NOT_MONO}" != "NM" ]; then 
-        height="$((size1 + 25))"
+        height="$((size1 + ${SPACE_SIZE}))"
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/height.*/height = ${height}/" ${HOME}/.config/polybar/config
 
@@ -115,7 +117,7 @@ case $CHOSEN in
     "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
-    "ElegantAmz") font "futura" Medium 12 12 14 1;;
+    "ElegantAmz") font "futura" Regular 12 12 14 1;;
     "Amazon") font "Bookerly" Normal 9 9 13 2;;
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
