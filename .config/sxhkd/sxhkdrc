@@ -156,6 +156,10 @@ super + e
 super + {_,shift + }q
 	bspc node -{c,k}
 
+# Alternate between windows
+super + space
+    bspc desktop --focus last
+
 # Remove the current desktop
 super + Delete
 	bspc desktop focused --remove

@@ -41,15 +41,25 @@ define_order() {
     for monitor in $list; do
         left_of=$(echo "$list" | awk -v F=$count '{print $F}' FS=" ")
         count=$((${count}+1))
-        dim=$(xrandr | grep ${monitor} -A 1 | awk ' NR==2 {print $1}')
-        if [ ! -z "${left_of}" ]; then
-            command="${command} --output ${monitor} --left-of ${left_of} --mode ${dim}"
+        #dim="$(xrandr | grep "${monitor}" | grep -Po "\b\d+x\d+" | head -n 1)"
+
+        dim="$(xrandr | grep "${monitor}" -A 40 | grep "*" | head -n 1 | awk '{print $1}')"
+        if [ -z "${dim}" ]; then
+            dim="--auto"
         else
-            command="${command} --output ${monitor} --mode ${dim}"
+            dim="--mode ${dim}"
+        fi
+
+        if [ ! -z "${left_of}" ]; then
+            command="${command} --output ${monitor} --left-of ${left_of} ${dim}"
+        else
+            command="${command} --output ${monitor} ${dim}"
         fi
     done
 
     command="xrandr $command"
+
+    echo "$command"
 
     ${command}
 }
@@ -108,6 +118,19 @@ remove_virtual() {
     xrandr --rmmode "${remoteHScreen}x${remoteVScreen}"
 }
 
+set_dimension() {
+    local monitor="$1"
+    local dim="$2"
+
+    if [ -z "${dim}" ]; then
+        dim="--auto"
+    else
+        dim="--mode ${dim}"
+    fi
+    
+    xrandr --output ${monitor} ${dim}
+}
+
 show_help() {
     echo "Manipulate the monitors."; echo ""
     echo "-p [name]                             Define wich monitor is the primary."
@@ -115,7 +138,7 @@ show_help() {
     echo "-o [order]                            Send a list with the order of the monitors"
     echo "-r [direction]                        Rotate the monitor to the desired location - normal, left, right or inverted "
     echo "-v                                    Add virtual monitor"
-    echo "-d                                    Dimension of the monitor"
+    echo "-d                                    Redimension a monitor"
     echo "-V [monitor]                          remove a virtual monitor"
     echo "-s                                    Create a span monitor"
     echo "-a                                    Turn on all monitors."
@@ -139,7 +162,7 @@ while getopts "h?ap:t:o:vV:d:r:sx" opt; do
         ;;
     V) remove_virtual "$OPTARG"
         ;;
-    d) dimension="$OPTARG" 
+    d) set_dimension "$OPTARG" "$3"
         ;;
     v) add_virtual
         ;;

@@ -1,6 +1,6 @@
-#!/bin/dash
+#!/bin/bash
 
-option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: "   )
+option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Redimension" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: "   )
 
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 
@@ -98,6 +98,15 @@ add_virtual_old() {
     display_manager.sh -d "${dim}" -v
 }
 
+redimension() {
+    local monitor=$(monitors_info.sh -c | dmenu -p "Select the ${count}:"   )
+    local dim=$(xrandr | grep -P "\d+x\d+" | cut --output-delimiter=":" -s -d ' ' -f 1,4 | awk '{{if ($1 != "") val=$1}; {if ($1 == "") print val "x" $2}}' FS=':' | grep "${monitor}" | awk '{printf "%sx%s 1:%0.0f\n", $2,$3,$2/$3*10}' FS=x | dmenu -l 10)
+
+    dim=$(awk '{print $1}' <<< "${dim}")
+
+    display_manager.sh -d "${monitor}" "${dim}"
+}
+
 rm_virtual_old() {
     local virtual=$(monitors_info.sh -c | grep VIRTUAL | dmenu)
 
@@ -116,6 +125,8 @@ case "$option" in
     "Primary") set_primary
     ;;
     "Rotate") rotate
+    ;;
+    "Redimension") redimension
     ;;
     "Add Virtual") add_virtual
     ;;

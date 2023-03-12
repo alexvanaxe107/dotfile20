@@ -82,6 +82,13 @@ function reset_configs(){
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     cp ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
     cp ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
+    cp ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
+    cp ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
+    cp ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
+
+    # Overwiting only if it not exists
+    [ ! -f $HOME/.config/wm/bspwm.conf ] && cp ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf
+    [ ! -f $HOME/.config/wm/monitors.conf ] && cp ${TEMPLATES}/wm/monitors.conf ${HOME}/.config/wm/monitors.conf
 }
 
 function get_wallpaper() {
