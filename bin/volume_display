@@ -1,36 +1,46 @@
 #!/bin/bash
+is_muted() {
+    local vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+    if [[ "$vol" == *"MUTED"* ]]; then
+        echo "yes"
+    else
+        echo "no"
+    fi
+}
 
-volume=$(pulseaudio-ctl full-status | awk '{print $1}')
-is_muted=$(pulseaudio-ctl full-status | awk '{print $2}')
-is_speaker=$(pacmd list-sinks | grep -i active | grep -i speaker)
-icon=
+get_volume() {
+    local vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+    local vol="$(echo "$vol" | cut -d ' ' -f 2)"
+    vol=$(echo "${vol}*100/1" | bc)
 
-if [ "$volume" -eq "0" ]
-then
-	icon=""
-elif [ "$volume" -gt "50" ]
-then
-	icon=""
-elif [ "$volume" -eq "50" ]
-then
-	icon=""
-elif [ "$volume" -lt "50" ]
-then
-	icon=""
-fi
+    if [ "$(is_muted)" = "yes" ]
+    then
+        vol="$vol% MUTED"
+    fi
+    echo "$vol"
+}
 
-if [ "$is_muted" = "yes" ]
-then
-    icon=""
-fi
+_notify_volume() {
+    local volume="$(get_volume)"
+    local icon=""
+    if [ "$volume" -eq "0" ]
+    then
+        icon=""
+    elif [ "$volume" -gt "50" ]
+    then
+        icon=""
+    elif [ "$volume" -eq "50" ]
+    then
+        icon=""
+    elif [ "$volume" -lt "50" ]
+    then
+        icon=""
+    fi
 
-speaker_icon=""
+    if [ "$(is_muted)" = "yes" ]
+    then
+        icon=""
+    fi
+}
 
-if [ -z "$is_speaker" ]
-then
-    icon=" $icon"
-else
-    icon="$icon"
-fi
-
-printf "$icon $volume"
+get_volume

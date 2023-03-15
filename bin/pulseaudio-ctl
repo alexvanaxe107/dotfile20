@@ -4,14 +4,57 @@ running_sink="$(pactl list sinks | grep -C 1 "RUNNING" | tail -n 1 | cut -d ' ' 
 
 do_mute() {
     wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    _notify_volume
 }
 
 do_up() {
     wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%+
+    _notify_volume
 }
 
 do_down() {
     wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%-
+    _notify_volume
+}
+
+is_muted() {
+    local vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+    if [[ "$vol" == *"MUTED"* ]]; then
+        echo "yes"
+    else
+        echo "no"
+    fi
+}
+
+get_volume() {
+    local vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+    local vol="$(echo "$vol" | cut -d ' ' -f 2)"
+    vol=$(echo "${vol}*100/1" | bc)
+    echo "$vol"
+}
+
+_notify_volume() {
+    local volume="$(get_volume)"
+    local icon=""
+    if [ "$volume" -eq "0" ]
+    then
+        icon=""
+    elif [ "$volume" -gt "50" ]
+    then
+        icon=""
+    elif [ "$volume" -eq "50" ]
+    then
+        icon=""
+    elif [ "$volume" -lt "50" ]
+    then
+        icon=""
+    fi
+
+    if [ "$(is_muted)" = "yes" ]
+    then
+        icon=""
+    fi
+    dunstify -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
 }
 
 command="$1"
@@ -21,4 +64,5 @@ case "$command" in
     "mute") do_mute;;
     "up") do_up ${param};;
     "down") do_down ${param};;
+    "vol") get_volume;;
 esac
