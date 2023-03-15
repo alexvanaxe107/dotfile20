@@ -107,6 +107,16 @@ super + c; {c,r,shift + r,m, shift + M}
     , dmenulexia.sh "mouse off" \
     , dmenulexia.sh "mouse on" }
 
+# Show the status
+super + p; {c,t,l,m,v,w,a}
+	{status_notify.sh -c \
+    , status_notify.sh -t \
+    , status_notify.sh -l \
+    , status_notify.sh -m \
+    , status_notify.sh -v \
+    , status_notify.sh -w \
+    , status_notify.sh -ctlmvw }
+
 super + Tab
 	$HOME/bin/bspc_node_manager.sh
 
