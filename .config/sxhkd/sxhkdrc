@@ -108,13 +108,14 @@ super + c; {c,r,shift + r,m, shift + M}
     , dmenulexia.sh "mouse on" }
 
 # Show the status
-super + p; {c,t,l,m,v,w,a}
+super + p: {c,t,l,m,v,w,d,a}
 	{status_notify.sh -c \
     , status_notify.sh -t \
     , status_notify.sh -l \
     , status_notify.sh -m \
     , status_notify.sh -v \
     , status_notify.sh -w \
+    , status_notify.sh -d \
     , status_notify.sh -ctlmvw }
 
 super + Tab

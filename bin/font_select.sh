@@ -9,7 +9,7 @@ set -o nounset
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 20 -p "Change the font: ")
 
-SPACE_SIZE=30
+SPACE_SIZE=45
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -59,8 +59,10 @@ font() {
     sed -i "s/font =.*/font = ${font_name},${style} ${size1}/" ${HOME}/.config/dunst/dunstrc
 
     #Change the twmn font
+    height="$((size1 + ${SPACE_SIZE}))"
     sed -i "s/font=.*/font=${font_name}/" ${HOME}/.config/twmn/twmn.conf
-    sed -i "s/font_size=.*/font_size=${size3}/" ${HOME}/.config/twmn/twmn.conf
+    sed -i "s/font_size=.*/font_size=$((size1 + 10))/" ${HOME}/.config/twmn/twmn.conf
+    sed -i "s/height=.*/height=$((size1 + height))/" ${HOME}/.config/twmn/twmn.conf
 
     #Change the tint font
     if [ "${NOT_MONO}" != "NM" ]; then
@@ -93,8 +95,8 @@ font() {
 
     sed -i "s/font-default:.*/font-default: \"${font_name} ${style} ${size1}\";/" ${HOME}/.config/rofi/bspwm.rasi
 
-    killall -qw dunst
-    killall -qw twmnd
+    killall dunst
+    killall twmnd
     if [ "${theme_name}" = "night" ]; then
         twmnd&
     else

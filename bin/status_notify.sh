@@ -10,6 +10,7 @@ show_help() {
     echo "-m                         Show memory"
     echo "-v                         Show volume"
     echo "-w                         Show weather"
+    echo "-d                         Show time"
 }
 
 cpu() {
@@ -37,13 +38,17 @@ weather() {
     status="$status\nWeather = $(weather.sh)"
 }
 
+show_time() {
+    status="$status\nCurrent Time = $(date +%T)"
+}
+
 print_message() {
-    notify-send "status" "$status"
+    notify-send -t 15000 "status" "$status"
 }
 
 rcommand=""
 option=""
-while getopts "h?clmtvw" opt; do
+while getopts "h?clmtvwd" opt; do
     case "${opt}" in
     h|\?) show_help ;;
     c) cpu;;
@@ -52,6 +57,7 @@ while getopts "h?clmtvw" opt; do
     m) p_mem;;
     v) p_vol;;
     w) weather;;
+    d) show_time;;
     i) rcommand="i";option=${OPTARG};;
     esac
 done
