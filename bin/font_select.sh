@@ -95,8 +95,8 @@ font() {
 
     sed -i "s/font-default:.*/font-default: \"${font_name} ${style} ${size1}\";/" ${HOME}/.config/rofi/bspwm.rasi
 
-    killall dunst
-    killall twmnd
+    killall -qw dunst
+    killall -qw twmnd
     if [ "${theme_name}" = "night" ]; then
         twmnd&
     else

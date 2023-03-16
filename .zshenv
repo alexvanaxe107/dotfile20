@@ -1,7 +1,9 @@
 alias ls='ls -h --color'
 alias fdir='$HOME/.fdir/fdir.sh'
 alias fuck='sudo $(fc -ln -1)'
-alias todo.sh='todo.sh -d ~/.config/todo/config'
+alias todo.sh='todo.sh -d /home/media/todos/general/config/config'
+alias day.sh='todo.sh -d /home/media/todos/day/config/config'
+alias long.sh='todo.sh -d /home/media/todos/long/config/config'
 
 export EDITOR=vim
 export XDG_SESSION_DESKTOP=i3
