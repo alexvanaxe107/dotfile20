@@ -54,9 +54,10 @@ _notify_volume() {
     then
         icon=""
     fi
-    
-    pgrep dunst && dunstify -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
-    pgrep twmnd && notify-send -t 1 "$icon Volume:" "$(get_volume)%"
+    notify-send -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
+
+#    pgrep dunst && dunstify -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
+#    pgrep twmnd && notify-send -t 1 "$icon Volume:" "$(get_volume)%"
 }
 
 command="$1"
