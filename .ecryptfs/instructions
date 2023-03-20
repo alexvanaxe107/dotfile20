@@ -1,0 +1,11 @@
+add the sigs generated with ecryptfs-add-passphrase
+
+3124121 > secret.sig
+3124121 >> secret.sig
+
+Add the folders to secret.conf
+
+mount with:
+mount.ecryptfs_private secret
+
+I think that it is it.
