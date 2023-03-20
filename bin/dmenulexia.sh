@@ -133,6 +133,24 @@ if [[ "$action" == $search ]]; then
     exit 0
 fi
 
+search='*vol*'
+if [[ "$action" == $search ]]; then
+    command=$(echo "${action}" | grep -e "u")
+    if [ ! -z "${command}" ]; then
+        amount=$(echo "$action" | grep -oP "\d*")
+            pulseaudio-ctl up $amount
+        exit 0
+    fi
+
+    command=$(echo "${action}" | grep -e "d")
+    if [ ! -z "${command}" ]; then
+        amount=$(echo "$action" | grep -oP "\d*")
+            pulseaudio-ctl down $amount
+        exit 0
+    fi
+    exit 0
+fi
+
 search='*pomodoro*'
 if [[ "$action" == $search ]]; then
     command=$(echo "${action}" | grep -e "start")

@@ -185,8 +185,13 @@ get_prompt() {
         printf "Chrome: Playing something... I think.. =/ %s" "${prompt}"
     else
         local position="$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)"
+        local total_time="$(echo "$(playerctl -p ${chosen_p} metadata mpris:length)/1000000/60" | bc)"
+
         if [ ! -z "${position}" ]; then
             prompt="${position} Min"
+        fi
+        if [ ! -z "${total_time}" ]; then
+            prompt="${prompt}/${total_time} Min"
         fi
         local artist="$(playerctl -p $chosen_p metadata artist)"
         

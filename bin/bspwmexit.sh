@@ -10,5 +10,6 @@ then
     case "$action" in
         "-e") bspc quit;;
         "-r") bspc wm -r;;
+        "-x") pkill -USR1 -x sxhkd;;
     esac
 fi
