@@ -1,0 +1,4 @@
+remoteHScreen=1366
+remoteVScreen=768
+refreshRate=60
+existingScreenName="eDP1"
