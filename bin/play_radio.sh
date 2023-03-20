@@ -7,8 +7,11 @@
 #set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
+#
+shopt -s expand_aliases
 
 source $HOME/.config/wm/bspwm.conf
+alias mpv='mpv --ytdl=no'
 
 TMP_LOCATION=$HOME/.config/tmp
 LAST_PLAYED_FILE="${TMP_LOCATION}/last_played"
@@ -195,8 +198,9 @@ play_quality(){
 
     notify-send -u normal  "Trying to play" "The media will be played soon... wait a little and enjoy."
 
-    echo "mpv \"$result\" --ytdl-format=${choosen_quality}" > ${PLAY_BKP};
-    mpv "$result" --ytdl-format=${choosen_quality}
+    echo "mpv \"$result\"" > ${PLAY_BKP};
+    #mpv "$result" --ytdl-format=${choosen_quality}
+    mpv "$result"
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
