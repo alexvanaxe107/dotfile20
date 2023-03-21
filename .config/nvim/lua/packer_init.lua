@@ -24,8 +24,6 @@ return require('packer').startup(function()
 	-- use {'lotabout/skim', dir = '~/.skim', run = './install' }
 	-- use 'lotabout/skim.vim'
     
-    -- Simple tabbar
-    use 'drmingdrmer/vim-tabbar'
 
 	-- GoYo
 	use 'junegunn/goyo.vim'
