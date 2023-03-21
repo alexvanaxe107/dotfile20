@@ -1,5 +1,0 @@
-mpv
-mpv-mpris
-xsecurelock
-polybar
-picom-jonaburg-git
