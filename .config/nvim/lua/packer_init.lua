@@ -23,6 +23,9 @@ return require('packer').startup(function()
 	-- skim
 	-- use {'lotabout/skim', dir = '~/.skim', run = './install' }
 	-- use 'lotabout/skim.vim'
+    
+    -- Simple tabbar
+    use 'drmingdrmer/vim-tabbar'
 
 	-- GoYo
 	use 'junegunn/goyo.vim'
@@ -106,6 +109,7 @@ return require('packer').startup(function()
     use 'fenetikm/falcon'
     use 'TroyFletcher/vim-colors-synthwave'
     -- use 'kaicataldo/material.vim', { 'branch': 'main' }
+    use 'DaikyXendo/nvim-material-icon'
     use 'fneu/breezy'
     use 'whatyouhide/vim-gotham'
     use 'arcticicestudio/nord-vim'
