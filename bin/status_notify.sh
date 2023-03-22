@@ -51,7 +51,7 @@ show_top_10_mem() {
 }
 
 show_top_10_cpu() {
-    local top_10="$(ps axo comm,%mem --sort -%cpu | head -n 10)"
+    local top_10="$(ps axo comm,%cpu --sort -%cpu | head -n 10)"
     status="$status\n$top_10"
 }
 
