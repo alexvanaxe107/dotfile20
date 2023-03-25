@@ -7,8 +7,6 @@ end
 
 toReturn = {}
 
-theme_name = ""
-custom_term_font = ""
 if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"
 elseif os.getenv("theme_name") == "night" then
@@ -23,9 +21,9 @@ end
 toReturn['front_end'] = "WebGpu"
 toReturn['adjust_window_size_when_changing_font_size'] = false
 
-toReturn['color_scheme'] = theme_name
+toReturn['color_scheme'] = extra.theme_name
 toReturn['font'] = wezterm.font(font_name)
-toReturn['font_size'] = 11 
+toReturn['font_size'] = extra.font_size 
 toReturn['window_decorations'] = "NONE"
 toReturn['hide_tab_bar_if_only_one_tab'] = true
 

@@ -1,5 +1,8 @@
 extra = {
     custom_colors = false,
+    theme_name = "Green Screen (base16)",
+    custom_term_font = '',
+    font_size = 11,
 
     colors = {
         foreground = '#4ef5ad',

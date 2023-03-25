@@ -77,7 +77,6 @@ function reset_configs(){
     cp ${TEMPLATES}/conky/${theme_name}/* ${HOME}/.config/conky/
     cp ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
     cp ${TEMPLATES}/tint2/tint2rc ${HOME}/.config/tint2/tint2rc
-    cp ${TEMPLATES}/wezterm/*.lua ${HOME}/.config/wezterm/
     cp ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     cp ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
@@ -85,10 +84,12 @@ function reset_configs(){
     cp ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
     cp ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
     cp ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
+    cp ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
 
     # Overwiting only if it not exists
     [ ! -f $HOME/.config/wm/bspwm.conf ] && cp ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf
     [ ! -f $HOME/.config/wm/monitors.conf ] && cp ${TEMPLATES}/wm/monitors.conf ${HOME}/.config/wm/monitors.conf
+    [ ! -f $HOME/.config/wezterm/wezterm.lua ] && cp ${TEMPLATES}/wezterm/wezterm.lua ${HOME}/.config/wezterm/wezterm.lua
 }
 
 function get_wallpaper() {

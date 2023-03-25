@@ -3,7 +3,7 @@
 PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
 THEMES=$HOME/.config/wm/terminal.conf
-TERM_CONFIG=$HOME/.config/wezterm/wezterm.lua
+TERM_CONFIG=$HOME/.config/wezterm/extra.lua
 
 choosen_theme=$((printf "Theme on\nTheme off\n" && cat $THEMES) |  dmenu -i -l 27 -p "Choose the terminal theme")
 
@@ -22,7 +22,7 @@ if [ ! -z "$choosen" ]; then
     cp ${HOME}/bin/templates/vim/theme.vim  ${HOME}/.vim/configs/theme.vim
 
     vim_theme=$(basename -s .yaml "$choosen")
-    sed -i "s/^theme_name.*/theme_name = \"$vim_theme\"/" $TERM_CONFIG
+    sed -i "s/theme_name.*/theme_name = \"$vim_theme\",/" $TERM_CONFIG
 
     if [ "$vim_theme" == "Breeze" ]; then
         sed -i 's/^colorscheme.*/colorscheme breezy/' ${HOME}/.vim/configs/theme.vim
