@@ -84,13 +84,13 @@ font-0 = Symbols Nerd Font:pixelsize=10;2
 font-1 = Erica Type:style=Bold:pixelsize=10
 font-2 = FontAwesome:style=Bold:pixelsize=10;1
 font-3 = symbola:style=Bold:pixelsize=10;1
-font-4 = Symbola:pixelsize=26;5
+font-4 = Symbols Nerd Font:pixelsize=26;5
 
 ;separator = 
 
 modules-left = logo desktop bspwm right-end-top xwindow
 modules-center = left-end-top2 pomodoro nweather torrent right-end-top2
-modules-right = left-end-top ava_load memory cpu temperature wlan right-end-top left-end-top pulseaudio indicators xkeyboard date
+modules-right = left-end-top2 ava_load memory cpu temperature wlan right-end-top left-end-top pulseaudio indicators xkeyboard date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -118,24 +118,23 @@ content="  "
 [module/glyph]
 type = custom/text
 format-padding = 0
-content-background = ${colors.background}
 content-foreground = ${colors.content-fill}
 
 [module/left-end-top]
 inherit = module/glyph
-content = "%{T5}◥%{T-}"
+content = "%{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "%{T5}◤%{T-}"
+content = "%{T5}%{T-}"
 
 [module/left-end-top2]
 inherit = module/glyph
-content = "%{T5}🬇🙿%{T-}"
+content = "%{T5} ⏽ %{T-}"
 
 [module/right-end-top2]
 inherit = module/glyph
-content = "%{T5}🙾🬇%{T-}"
+content = "%{T5} ⏽ %{T-}"
 
 [module/pomodoro]
 type = custom/script
@@ -192,7 +191,7 @@ format-background = ${colors.content-fill}
 
 [module/xwindow]
 type = internal/xwindow
-label = "%title:0:60:...%"
+label = " %title:0:60:...%"
 format-foreground = ${colors.content-fill}
 
 [module/xkeyboard]

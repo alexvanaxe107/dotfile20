@@ -11,7 +11,7 @@
 shopt -s expand_aliases
 
 source $HOME/.config/wm/bspwm.conf
-alias mpv='mpv --ytdl=no'
+#alias mpv='mpv --ytdl=no'
 
 TMP_LOCATION=$HOME/.config/tmp
 LAST_PLAYED_FILE="${TMP_LOCATION}/last_played"

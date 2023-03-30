@@ -68,12 +68,20 @@ alias path='echo -e ${PATH//:/\\n}'
 # npm configs
 #-----------------------------
 export PATH="$HOME/Documents/npm/bin:$HOME/.local/bin/:$PATH"
+# The config below is not used, and it will be linked bellow
+#export npm_config_prefix="$HOME/Documents/npm/bin"
+source /usr/share/nvm/init-nvm.sh
+
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/Documents/.nvm"
+source /usr/share/nvm/nvm.sh
+source /usr/share/nvm/bash_completion
+source /usr/share/nvm/install-nvm-exec
 
 #-----------------------------
 # Pyenv configs
 #-----------------------------
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$HOME/bin:$PYENV_ROOT/bin:/home/alexvanaxe/.fdir:$HOME/.gem/ruby/2.5.0/bin:$PATH"
+export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.gem/ruby/2.5.0/bin:$PATH"
 eval "$(pyenv init -)"
 
 
@@ -181,8 +189,6 @@ alias pacimpl="pacman -D --asdep"	# Mark one or more installed packages as non e
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 alias pacro="pacman -Qtd > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
 
-alias fdir='fdir.sh'
-
 #Completion do Django
 source ~/.django_bash_completion
 source ~/.ng-completion
@@ -194,8 +200,6 @@ source ~/.ng-completion
 #. /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 
 export EDITOR=nvim
-
-source /home/alexvanaxe/.fdirrc
 
 alias fuck='sudo $(fc -ln -1)'
 alias tmuxa='tmux attach-session -t shell'

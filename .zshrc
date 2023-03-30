@@ -17,9 +17,6 @@ zstyle ':completion:*:killall:*'   force-list always
 #zstyle ':completion::complete:*' gain-privileges 1
 #
 
-source $HOME/.fdirrc
-
-
 
 setopt COMPLETE_ALIASES
 #setopt correctall

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DP="DisplayPort-0"
+DP="DisplayPort-2"
 HDMI="HDMI-A-0"
 
 display_manager.sh -o "$DP $HDMI"
