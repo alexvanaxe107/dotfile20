@@ -11,6 +11,8 @@ if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"
 elseif os.getenv("theme_name") == "night" then
     font_name = "Iosevka"
+elseif os.getenv("theme_name") == "shabbat" then
+    font_name = "Mononoki Nerd Font"
 else
     font_name = "JetBrains Mono"
 end

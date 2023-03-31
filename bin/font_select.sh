@@ -82,7 +82,7 @@ font() {
         sed -i "s/TITLEFONT/${font_name}/g" ${file}
     done
 
-    sed -i "s/font_size =.*/font_size = ${size3},/" ${HOME}/.config/wezterm/extra.lua
+    sed -i "s/font_size =.*/font_size = $((size1 - 1)),/" ${HOME}/.config/wezterm/extra.lua
 
     update=$(printf "Yes\nNo" | dmenu -i    -p "Update terminal font? (ESC go to default)")
 
@@ -121,8 +121,8 @@ case $CHOSEN in
     "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
-    "ElegantAmz") font "futura" Regular 12 12 14 1;;
-    "Amazon") font "Bookerly" Normal 9 9 13 2;;
+    "ElegantAmz") font "Amazon Ember" Regular 11 11 14 1;;
+    "Amazon") font "Bookerly" Regular 11 11 14 2;;
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;
     "Rock") font "Targa MS" Regular 11 11 12 2;;
@@ -156,6 +156,6 @@ case $CHOSEN in
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;
     "NM-Softer") font "Lerton" Regular 10 10 13 2;;
-    "teste") font "futura" Regular 19 18 14 1;;
+    "teste") font "Amazon Ember" Medium 10 10 13 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac

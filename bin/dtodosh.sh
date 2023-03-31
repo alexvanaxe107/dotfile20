@@ -1,6 +1,7 @@
 #!/bin/sh
 
-chosen=$(todo.sh -p | head -n -2 | dmenu     -l 20 -i -p "add: ")
+alias todo.sh='todo.sh -d /home/media/todos/day/config/config'
+chosen=$(todo.sh -p | head -n -2 | dmenu -l 20 -i -p "add: ")
 
 number=$(printf "$chosen" | awk '{print $1}')
 
