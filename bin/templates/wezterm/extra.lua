@@ -24,27 +24,27 @@ extra = {
         selection_fg = 'black',
         -- the background color of selected text
         selection_bg = '#fffacd',
-        ansi = {
-            'black',
-            'maroon',
-            'green',
-            'olive',
-            'navy',
-            'purple',
-            'teal',
-            'silver',
-        },
-        brights = {
-            'grey',
-            'red',
-            'lime',
-            'yellow',
-            'blue',
-            'fuchsia',
-            'aqua',
-            'white',
-
-        }
+--        ansi = {
+--            'black',
+--            'maroon',
+--            'green',
+--            'olive',
+--            'navy',
+--            'purple',
+--            'teal',
+--            'silver',
+--        },
+--        brights = {
+--            'grey',
+--            'red',
+--            'lime',
+--            'yellow',
+--            'blue',
+--            'fuchsia',
+--            'aqua',
+--            'white',
+--
+--        }
     }
 }
 
