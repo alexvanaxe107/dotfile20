@@ -14,6 +14,7 @@ show_help() {
     echo "-M                         Show top 10 memory process"
     echo "-C                         Show top 10 CPU process"
     echo "-s                         Show song status"
+    echo "-f                         Show a fortune or biblical message on shabbat"
 }
 
 cpu() {
@@ -61,13 +62,19 @@ show_song() {
     status="$status\n$prompt"
 }
 
+show_fortune() {
+    local prompt=$(fortune.sh)
+
+    status="$status\n$prompt"
+}
+
 print_message() {
     notify-send -t 15000 "status" "$status"
 }
 
 rcommand=""
 option=""
-while getopts "h?clmtvwdMCs" opt; do
+while getopts "h?clmtvwdMCsf" opt; do
     case "${opt}" in
     h|\?) show_help ;;
     c) cpu;;
@@ -80,6 +87,7 @@ while getopts "h?clmtvwdMCs" opt; do
     M) show_top_10_mem;;
     C) show_top_10_cpu;;
     s) show_song;;
+    f) show_fortune;;
     i) rcommand="i";option=${OPTARG};;
     esac
 done

@@ -64,6 +64,8 @@ font() {
     sed -i "s/font_size=.*/font_size=$((size1 + 10))/" ${HOME}/.config/twmn/twmn.conf
     sed -i "s/height=.*/height=$((size1 + height))/" ${HOME}/.config/twmn/twmn.conf
 
+    # Update the qutebrowser font size
+    sed -i "s/c.fonts.default_size=.*/c.fonts.default_size=\"$((size1 + 5))px\"/" ${HOME}/.config/qutebrowser/config.py
     #Change the tint font
     if [ "${NOT_MONO}" != "NM" ]; then
         sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
@@ -121,7 +123,7 @@ case $CHOSEN in
     "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
-    "ElegantAmz") font "Amazon Ember" Regular 11 11 14 1;;
+    "ElegantAmz") font "Amazon Ember" Medium 11 11 14 1;;
     "Amazon") font "Bookerly" Regular 11 11 14 2;;
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;

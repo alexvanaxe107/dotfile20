@@ -63,7 +63,7 @@ foreground = ${colors.foreground}
 
 ;dim-value = 0.0
 
-line-size = 1
+line-size = 0
 line-color = #f00
 
 border-size = 1
