@@ -7,6 +7,7 @@ cp /home/alexvanaxe/bin/start_tmp.sh ${tmp_start}
 dim=$(printf "%s\n%s\n%s\n" "3840x2160" "2560x1440" "1920x1080" | fzf)
 
 echo -e "xrandr --output $DP --mode '$dim'" >> ${tmp_start}
+echo -e "xrandr --output $DP --set TearFree on" >> ${tmp_start}
 openbox="$(which openbox)"
 
 if [ "$1" == "steam" ]; then
