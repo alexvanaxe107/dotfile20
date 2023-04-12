@@ -88,7 +88,7 @@ font-4 = Symbols Nerd Font:pixelsize=26;5
 
 ;separator = 
 
-modules-left = logo desktop bspwm right-end-top xwindow
+modules-left = logo desktop bspwm right-end-top2 xwindow
 modules-center = left-end-top2 pomodoro nweather torrent right-end-top2
 modules-right = left-end-top2 ava_load memory cpu temperature wlan right-end-top left-end-top pulseaudio indicators xkeyboard date
 
@@ -126,7 +126,7 @@ content = "%{T5}%{T-}"
 
 [module/right-end-top]
 inherit = module/glyph
-content = "%{T5}%{T-}"
+content = "%{T5}%{T-}"
 
 [module/left-end-top2]
 inherit = module/glyph
