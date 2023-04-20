@@ -198,9 +198,8 @@ play_quality(){
 
     notify-send -u normal  "Trying to play" "The media will be played soon... wait a little and enjoy."
 
-    echo "mpv \"$result\"" > ${PLAY_BKP};
-    #mpv "$result" --ytdl-format=${choosen_quality} This is giving an error at the moment. Try again another time
-    mpv "$result"
+    #echo "mpv \"$result\"" > ${PLAY_BKP};
+    mpv "$result" --ytdl-format=${choosen_quality}
 
     notify-send -u normal  "Done" "Hopefully your media was played =/"
     remove_indicator
