@@ -33,7 +33,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 #setxkbmap -model abnt2 -layout br -variant abnt2
 setxkbmap -option grp:alt_shift_toggle -model abnt2 -layout "br,il" -variant "abnt2,"
-xsetroot -cursor_name dot
+xsetroot -cursor_name left_ptr
 alias dmenu="ava_dmenu"
 source ~/.profile
 
