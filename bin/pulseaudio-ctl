@@ -17,6 +17,12 @@ do_down() {
     _notify_volume
 }
 
+change_default_sink() {
+    local sink="$(pactl list sinks short | awk '{print $2}' | dmenu -l 5 -p "Choose the default sink")"
+
+    pactl set-default-sink $sink
+}
+
 is_muted() {
     local vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
     if [[ "$vol" == *"MUTED"* ]]; then
@@ -68,4 +74,5 @@ case "$command" in
     "up") do_up ${param};;
     "down") do_down ${param};;
     "vol") get_volume;;
+    "sink") change_default_sink;;
 esac

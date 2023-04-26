@@ -100,12 +100,13 @@ super + shift + u
 	$HOME/bin/configshortcut.sh
 
 # Change the configs
-super + c; {c,r,shift + r,m, shift + M}
+super + c; {c,r,shift + r,m, shift + M,a}
 	{$HOME/.config/conky/conky.sh \
     , dmenulexia.sh "rofi off" \
     , dmenulexia.sh "rofi on" \
     , dmenulexia.sh "mouse off" \
-    , dmenulexia.sh "mouse on" }
+    , dmenulexia.sh "mouse on" \ 
+    , pulseaudio-ctl sink }
 
 # Show the status
 super + p; {c,t,l,m,v,w,C,M,s,f,a}
