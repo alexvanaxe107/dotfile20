@@ -179,7 +179,7 @@ play_quality(){
         result="$(xclip -o -sel clipboard)"
     fi
 
-    local option="$(yt-dlp --list-formats "${result}" | sed -n '8,$p')"
+    local option="$(yt-dlp -q --list-formats "${result}" | tail -n +3)"
 
     local chosen_p=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the video quality:")
     local chosen_p_audio=$(basename -a "${option}" | dmenu  -l 10 -i -p "Select the audio quality:")

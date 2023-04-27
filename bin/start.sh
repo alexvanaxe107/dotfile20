@@ -29,7 +29,7 @@ fi
 if [ "$1" == "steam" ]; then
     echo -e "${openbox}gamemoderun ${game}" -gamepadui >> ${tmp_start}
 else
-    echo -e "${openbox}gamemoderun ${game}" >> ${tmp_start}
+    echo -e "${openbox} ${game}" >> ${tmp_start}
 fi
 xsetroot -cursor_name left_ptr
 xinit ${tmp_start} -- :1 vt$XDG_VTNR || exit 1
