@@ -2,7 +2,7 @@
 
 # A script to use dmenu to change the light
 # FOR REFERENCE: xrandr --output eDP1 --brightness 1 
-GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1} END {printf "xrandr"}' | dmenu -f -y 16 -bw 2 -z 490 -p "Monitor: (`light`)")
+GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1} END {printf "xrandr"}' | dmenu -f -y 16 -bw 2 -p "Monitor: (`light`)")
 INDICATOR_PATH="$HOME/.config/indicators"
 INDICATOR_FILE="${INDICATOR_PATH}/light.ind"
 
