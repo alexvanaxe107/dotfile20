@@ -27,7 +27,7 @@ if [ ${is_openbox} == 1 ]; then
 fi
 
 if [ "$1" == "steam" ]; then
-    echo -e "${openbox}gamemoderun ${game}" -gamepadui >> ${tmp_start}
+    echo -e "${openbox}gamemoderun ${game}" >> ${tmp_start}
 else
     echo -e "${openbox} ${game}" >> ${tmp_start}
 fi

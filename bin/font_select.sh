@@ -9,7 +9,7 @@ set -o nounset
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 20 -p "Change the font: ")
 
-SPACE_SIZE=35
+SPACE_SIZE=40
 
 if [ -z "${CHOSEN}" ]; then
     exit
