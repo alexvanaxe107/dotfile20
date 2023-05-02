@@ -132,8 +132,10 @@ super + alt + Tab
 super + ctrl + b; {s,f,t,h}
 	{$HOME/bin/toggle_bars.sh --target2,$HOME/bin/toggle_bars.sh --target1,$HOME/bin/toggle_bars.sh --tint,$HOME/bin/toggle_bars.sh --autohide}
 
-super + shift + g ; {1,2,8,i,f,c,r,s,p,v,5,6,shift + 5}
-	{alacritty --command ranger,alacritty --command transmission-remote-cli,alacritty --class=weechat --command weechat,java -jar $HOME/Documents/Invests/InvestCharts.jar,qutebrowser,camera.sh,screeneaudio.sh play,screeneaudio.sh stop,sxiv ~/Documents/Pictures/*,alacritty --class=vis --command vis,screeneaudio.sh play,camera.sh,screeneaudio.sh stop}
+super + shift + g ; {g,f}
+	{start.sh -E \
+     , qutebrowser \
+    }
 
 super + shift + g ; {k}
 	setkmap
@@ -158,10 +160,6 @@ super + r : {Left,Down,Up,Right}
     STEP=20; SELECTION={1,2,3,4}; \
     bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
     bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
-
-# Make layout
-super + g
-	$HOME/bin/bspwm_layout_manager.sh
 
 # Exit the window manager asking confirmation
 super + e
