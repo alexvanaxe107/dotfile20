@@ -75,7 +75,7 @@ start_steam_deck() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    gamescope -h $dim -H $dim2 -O $DP -U -e -g -r 60 -f -- $program -gamepadui
+    gamescope -h $dim -H $dim2 -O $DP -U -e -- $program -gamepadui
 }
 
 start_embedded() {
