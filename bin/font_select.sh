@@ -9,7 +9,7 @@ set -o nounset
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 20 -p "Change the font: ")
 
-SPACE_SIZE=45
+SPACE_SIZE=25
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -68,9 +68,12 @@ font() {
     sed -i "s/c.fonts.default_size=.*/c.fonts.default_size=\"$((size1 + 5))px\"/" ${HOME}/.config/qutebrowser/config.py
     #Change the tint font
     if [ "${NOT_MONO}" != "NM" ]; then
-        sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
-        sed -i "s/font =.*/font = ${font_name} ${style} ${size1}/" ${HOME}/.config/tint2/tint2rc
-        sed -i "s/zont = Pomodoro.*/font = Pomodoro 10/" ${HOME}/.config/tint2/tint2rc
+    for file in ${HOME}/.config/tint2/*
+    do
+        sed -i "s/font = Pomodoro.*/zont = Pomodoro 10/" $file
+        sed -i "s/font =.*/font = ${font_name} ${style} ${size1}/" $file
+        sed -i "s/zont = Pomodoro.*/font = Pomodoro 10/" $file
+    done
     fi
 
     #Change the lock screen font

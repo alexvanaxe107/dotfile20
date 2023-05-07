@@ -59,7 +59,7 @@ start_xinit() {
 }
 
 start_steam_deck() {
-    local DP="DP-3"
+    local DP="eDP-1"
     local program="$1"
 
     # The total screen
@@ -75,7 +75,8 @@ start_steam_deck() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    gamescope -h $dim -H $dim2 -O $DP -U -e -- $program -gamepadui
+    pacman -Q | grep vulkan-intel && INTEL_DEBUG=norbc gamescope -h $dim -H $dim2 -O $DP -e -- $program -gamepadui
+    pacman -Q | grep vulkan-radeon && gamescope -h $dim -H $dim2 -O $DP -U -e -- $program -gamepadui
 }
 
 start_embedded() {
