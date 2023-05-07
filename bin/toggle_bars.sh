@@ -37,6 +37,23 @@ toggle_tint(){
     fi
 }
 
+toggle_tint_h(){
+    pid=$(ps aux | egrep "[t]int2" | awk '{print $2}')
+    if [ ! -z "$pid" ]; then
+        kill $pid
+        bspc config -m $MONITOR1 right_padding 0
+        bspc config -m $MONITOR2 right_padding 0
+        bspc config -m $MONITOR1 left_padding 0
+        bspc config -m $MONITOR2 left_padding 0
+        bspc config -m $MONITOR1 bottom_padding 0
+        bspc config -m $MONITOR2 bottom_padding 0
+    else
+        sed -i "s/panel_monitor.*/panel_monitor = ${MONITOR1}/" ${HOME}/.config/tint2/tint2rc_h1
+        #bspc config -m $MONITOR1 right_padding 203
+        tint2 -c ${HOME}/.config/tint2/tint2rc_h1 >> /tmp/tint2.log 2>&1 &
+    fi
+}
+
 toggle_full(){
     pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
     if [ ! -z "$pid" ]; then
@@ -125,6 +142,7 @@ case "$TARGET" in
     "--target2") $(toggle_simple);;
     "--target1") $(toggle_full);;
     "--tint") $(toggle_tint);;
+    "--tinth") $(toggle_tint_h);;
     "--light") $(toggle_light);;
     "--restart") restart_bar;;
     "--autohide") auto_hide;;

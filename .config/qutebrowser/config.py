@@ -39,7 +39,7 @@ c.content.headers.accept_language = "en-US,en;q=0.9"
 
 # Hide title bar when only one
 c.tabs.show = "multiple"
-c.fonts.default_size="14px"
+c.fonts.default_size="15px"
 
 c.tabs.background = True
 
