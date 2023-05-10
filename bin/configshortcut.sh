@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytpl\nwallpaper\npolybar\ntodo\ndunst" | dmenu -l 30    -p "Select config to edit")
+file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytq\nytpl\nwallpaper\npolybar\ntodo\ndunst" | dmenu -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -51,6 +51,7 @@ case $file in
     "fonts") wezterm start $EDITOR $HOME/bin/font_select.sh;;
     "monitors") wezterm start $EDITOR $HOME/.config/wm/monitors.conf;;
     "ytpl") wezterm start $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt;;
+    "ytq") wezterm start $EDITOR $HOME/Documents/Dropbox/stuffs/wm/yt_queue.txt;;
     "sxiv") wezterm start $EDITOR $HOME/.config/sxiv/exec/key-handler;;
     "polybar")  wezterm start $EDITOR $HOME/.config/polybar/config;;
     "todo")  wezterm start $EDITOR $HOME/todo.txt;;
