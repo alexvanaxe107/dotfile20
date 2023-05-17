@@ -1,2 +1,2 @@
-FONT="Share Tech Mono":pixelsize=20
+FONT="CaskaydiaCove Nerd Font Mono":pixelsize=20
 SAVER=saver_mpv
