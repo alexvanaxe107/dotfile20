@@ -1,0 +1,79 @@
+(defwindow pc_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "4%"
+                       :y "4%"
+                       :width "100px"
+                       :height "200px"
+                       :anchor "top left")
+    (pc_info_layout))
+
+
+(defwidget pc_info_layout []
+    (box :class "monitor_info" :orientation "v" :valign "start"
+        (header)
+        (cpu_info_layout)
+        (mem_info_layout)
+        (_cpu_temp)
+        (_gpu_temp)
+    ))
+
+
+(defwidget header []
+    (label :class "header_class" :text "MONITOR")
+)
+
+(defwidget cpu_info_layout []
+    (box :class "cpu_info_class"
+        (_cpu_info)
+        (_cpu_graph)
+        
+))
+
+(defwidget _cpu_info []
+    (box
+        (box
+            "CPU: ${round (EWW_CPU.avg, 2)}%"
+)
+))
+
+(defwidget _cpu_graph[]
+    (graph :value "${EWW_CPU.avg}"
+           :thickness 1
+           :time-range "120s"
+           :max 100
+           :line-style "round"
+           )
+)
+
+(defwidget mem_info_layout []
+    (box :class "mem_info_class"
+        (box
+            (_mem_info)
+            (_mem_graph)
+            )))
+
+(defwidget _mem_info []
+    (box
+        (box
+            "RAM: ${round(EWW_RAM.used_mem / 1000000000, 2)} GB/${round(EWW_RAM.total_mem / 1000000000,2) } GB")
+))
+
+(defwidget _cpu_temp []
+    (box :class "temp_info"
+        "CPU TEMP: ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
+    )
+)
+
+(defwidget _gpu_temp []
+    (box :class "temp_info"
+        "GPU TEMP: ${EWW_TEMPS.AMDGPU_EDGE}°C"
+    )
+)
+
+(defwidget _mem_graph []
+    (box :class "mem_graph"
+    (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
+)
+
