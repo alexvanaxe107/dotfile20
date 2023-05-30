@@ -144,7 +144,7 @@ toggle_mode(){
     
 }
 
-select_desktop() {
+get_desktop() {
     all="$1"
     if [ -z "${all}" ]; then
         actv_monitors="$(bspc query -D --names --monitor focused)"
@@ -159,10 +159,20 @@ select_desktop() {
         break
     done
     else
-        desktop=$(dmenu -p "Select a desktop to go" -l 15 <<< ${actv_monitors})
+        desktop=$(dmenu -p "Select a desktop" -l 15 <<< ${actv_monitors})
     fi
 
+    echo $desktop
+}
+
+select_desktop() {
+    local desktop="$(get_desktop $1)"
     goto $desktop
+}
+
+swap_desktop() {
+    local desktop="$(get_desktop 'all')"
+	bspc desktop focused --swap "$desktop" --follow
 }
 
 increase_gap() {
@@ -188,7 +198,7 @@ show_help() {
 
 use_dmenu="0"
 
-while getopts "h?g:m:t:r:f:dLls:S:" opt; do
+while getopts "h?g:m:t:r:f:dLls:S:p" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
@@ -211,6 +221,9 @@ while getopts "h?g:m:t:r:f:dLls:S:" opt; do
     l) select_desktop
         ;;
     L) select_desktop "all"
+        ;;
+
+    p) swap_desktop
         ;;
     esac
 done
