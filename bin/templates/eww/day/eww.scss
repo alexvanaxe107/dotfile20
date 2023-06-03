@@ -1,0 +1,72 @@
+$surface-bg: #555555;
+$surface-fg: #ffffff;
+$border-color: #000000;
+
+$general-font: "Erica Type";
+
+.monitor_info {
+}
+
+.style_class {
+    border: 0.2px solid $border-color;
+    background-color: rgba($surface-bg, 0.2);
+}
+
+.cpu_info_class {
+    border: 0.2px solid $border-color;
+    background-color: rgba($surface-bg, 0.2);
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.top {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.mem_graph {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0.2em;
+}
+
+.mem_info_class {
+    border: 0.2px solid $border-color;
+    background-color: rgba($surface-bg, 0.2);
+    font-size: 1.0em;
+    margin-bottom: 1em;
+}
+
+.temp_info {
+    border: 0.2px solid $border-color; 
+    background-color: rgba($surface-bg, 0.2);
+    padding: 0px;
+}
+
+.header_class {
+    font-size: 1.8em;
+}
+
+.bbuttons {
+    margin-top: 1em;
+    button {
+        margin: 0.2em;
+        label {
+            font-size: 1.5em;
+            color: #000000;
+        }
+    }
+}
+
+window {
+    font-family: $general-font;
+    background-color: unset;
+    label {
+       color: $surface-fg;
+    }
+    graph {
+        color: $surface-fg;
+    }
+}
+
+
