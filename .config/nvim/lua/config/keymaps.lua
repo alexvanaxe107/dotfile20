@@ -38,6 +38,8 @@ map('n', 't9', ':tabn 9<CR>')
 
 map('n', '<leader>t', '<cmd>TransparentToggle<cr>')
 
+map('n', '<leader>r', '<cmd>source ~/.vim/configs/theme.vim<cr>')
+
 -- Manipulate tabs
 map('n', 'tt', ':tabnew<CR>')
 map('n', 'tc', ':tabclose<CR>')

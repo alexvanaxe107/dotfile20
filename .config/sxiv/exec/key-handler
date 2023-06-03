@@ -1,5 +1,7 @@
 #!/bin/sh
 
+SCALE=230
+
 exit_if_none(){
     local valor="$1"
 
@@ -40,9 +42,9 @@ resize_img_plus(){
 
     local htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
     local ltop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"; TESTE=10000} {if ($2 < TESTE) TESTE=$2;} END {print TESTE}')
-    local htoppls=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+100}')
+    local htoppls=$(monitors_info.sh -d | awk -v SCALE=$SCALE 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+SCALE}')
     local optimal_rescale="$(monitors_info.sh -D)x${htop}"
-    local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + 100 | bc)x${htoppls}"
+    local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + $SCALE | bc)x${htoppls}"
     local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
 
     local img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1)

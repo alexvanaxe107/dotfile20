@@ -196,8 +196,8 @@ super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 	bspc {desktop -f, node -d} '^{1,2,3,4,5,6,7,8,9,10}'
 
 # Swap desktops
-super + alt + {F}{1,2,3,4,5,6,7,8,9,10}
-	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
+super + alt + {F}{1}
+	$HOME/bin/bspwm_desktop_manager.sh -dp
 
 # Go to desktop by list
 super + minus

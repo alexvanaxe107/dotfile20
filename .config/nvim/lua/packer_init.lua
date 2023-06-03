@@ -91,6 +91,8 @@ return require('packer').startup(function()
     use {'scrooloose/nerdcommenter', 
      ft = {'python', 'html', 'typescript', 'sh'}}
 
+    use {'bhurlow/vim-parinfer'}
+
     ---------------------------------------------------
     -- EYECANDY
     ---------------------------------------------------

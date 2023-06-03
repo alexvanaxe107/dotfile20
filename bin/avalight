@@ -2,7 +2,7 @@
 
 # A script to use dmenu to change the light
 # FOR REFERENCE: xrandr --output eDP1 --brightness 1 
-GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1} END {printf "xrandr"}' | dmenu -f -y 16 -bw 2 -p "Monitor: (`light`)")
+GS=$(xrandr  | grep -w connected | awk 'BEGIN {printf "auto\n"} {printf "%s\n", $1} END {printf "xrandr"}' | dmenu -p "Monitor: (`light`)")
 INDICATOR_PATH="$HOME/.config/indicators"
 INDICATOR_FILE="${INDICATOR_PATH}/light.ind"
 
@@ -20,7 +20,7 @@ eDP1() {
     killall clight
     echo "" > ${INDICATOR_FILE}
     
-    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+    BT=`printf "10\n50\n100" | dmenu -p "Set the brightness"`
     avalight.sh -I "${BT}" "eDP1"
 
     #SOFT=$(_get_soft_brigtness "$BT")
@@ -38,7 +38,7 @@ DP1() {
     killall clight
     echo "" > ${INDICATOR_FILE}
 
-    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+    BT=`printf "10\n50\n100" | dmenu -p "Set the brightness"`
     avalight.sh -I "${BT}" "DP1"
 
     #SOFT=$(_get_soft_brigtness "$BT")
@@ -56,7 +56,7 @@ HDMI1() {
     killall clight
     echo "" > ${INDICATOR_FILE}
 
-    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+    BT=`printf "10\n50\n100" | dmenu -p "Set the brightness"`
 
     avalight.sh -I "${BT}" "HDMI1"
 
@@ -75,7 +75,7 @@ generic() {
     echo "" > ${INDICATOR_FILE}
     local monitorC="$1"
 
-    BT=`printf "10\n50\n100" | dmenu -f -y 16 -bw 2 -z 490 -p "Set the brightness"`
+    BT=`printf "10\n50\n100" | dmenu -p "Set the brightness"`
 
     SOFT=$(_get_soft_brigtness "$BT")
 
