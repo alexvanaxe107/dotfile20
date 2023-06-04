@@ -59,7 +59,7 @@ start_xinit() {
 }
 
 start_steam_deck() {
-    local DP="eDP-1"
+    local DP="DP-3"
     local program="$1"
 
     # The total screen

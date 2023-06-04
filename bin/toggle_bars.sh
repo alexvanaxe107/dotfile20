@@ -99,6 +99,12 @@ restart_bar(){
     fi
 }
 
+toggle_eww() {
+    local panel="$1"
+
+    eww open --toggle $panel
+}
+
 toggle_all(){
     pid_simple=$(ps aux | egrep "[p]olybar.*simple" | awk '{print $2}')
     pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
@@ -142,6 +148,8 @@ case "$TARGET" in
     "--target2") $(toggle_simple);;
     "--target1") $(toggle_full);;
     "--tint") $(toggle_tint);;
+    "--eww1") $(toggle_eww "general_infos");;
+    "--eww2") $(toggle_eww "pc_infos");;
     "--tinth") $(toggle_tint_h);;
     "--light") $(toggle_light);;
     "--restart") restart_bar;;

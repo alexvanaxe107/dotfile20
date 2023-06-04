@@ -20,6 +20,7 @@ LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"
 INDICATOR_FILE=$HOME/.config/indicators/play_radio.ind
 
 PLAYLIST_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_pl.txt
+QUEUE_FILE=$HOME/Documents/Dropbox/stuffs/wm/yt_queue.txt
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
@@ -156,13 +157,11 @@ play_playlist_f(){
 play_playlist(){
     notify-send -u normal "Playing PL" "Playing the playlist saved."
     set_indicator
-    file_ps=${PLAYLIST_FILE}
+    file_ps=${QUEUE_FILE}
     cp ${PLAYLIST_FILE} ${PLAYLIST_FILE_BKP}
     while read line
     do
-        url=$(echo ${line} | awk  '{print $2}' FS=",")
-        echo "$url"
-        play "$url"
+        play "$line"
 
 #        sed -i '1d' $file_ps    #Dont exclude the file now
     done < $file_ps

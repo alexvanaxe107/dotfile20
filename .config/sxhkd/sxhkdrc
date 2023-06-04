@@ -129,8 +129,13 @@ super + alt + Tab
 	$HOME/bin/bspc_node_manager.sh -b
 
 # Toggle the top bar
-super + ctrl + b; {s,f,t,h}
-	{$HOME/bin/toggle_bars.sh --target2,$HOME/bin/toggle_bars.sh --target1,$HOME/bin/toggle_bars.sh --tint,$HOME/bin/toggle_bars.sh --autohide}
+super + ctrl + b; {s,f,t,h,g,p}
+	{$HOME/bin/toggle_bars.sh --target2 \
+    , $HOME/bin/toggle_bars.sh --target1 \
+    , $HOME/bin/toggle_bars.sh --tint \
+    , $HOME/bin/toggle_bars.sh --autohide \
+    , $HOME/bin/toggle_bars.sh --eww1 \
+    , $HOME/bin/toggle_bars.sh --eww2}
 
 super + shift + g ; {g,f}
 	{start.sh -E \
@@ -196,8 +201,8 @@ super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 	bspc {desktop -f, node -d} '^{1,2,3,4,5,6,7,8,9,10}'
 
 # Swap desktops
-super + alt + {F}{1,2,3,4,5,6,7,8,9,10}
-	bspc desktop focused --swap '^{1,2,3,4,5,6,7,8,9,10}'
+super + alt + {F}{1}
+	$HOME/bin/bspwm_desktop_manager.sh -dp
 
 # Go to desktop by list
 super + minus
