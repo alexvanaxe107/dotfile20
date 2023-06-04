@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#display_manager.sh -o "HDMI-2 DisplayPort-1"
+#display_manager.sh -p "HDMI-2"
+#display_manager.sh -r "HDMI-2" "left"
+
+<<<<<<< HEAD
+exec bspwm
+||||||| 7efbb74
+exec dbus-launch --exit-with-session bspwm
+=======
+systemd --user
+
+exec dbus-launch --exit-with-session bspwm
+>>>>>>> 09929af12765d3b815abd489a647962c23e653b2

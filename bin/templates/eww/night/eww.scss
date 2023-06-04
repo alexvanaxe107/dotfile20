@@ -1,0 +1,119 @@
+$surface-bg: #29314A;
+$cpu-bg: #25252E;
+$mem-bg: #403940;
+$cpu-temp-bg: #32465F;
+$mem-temp-bg: #4D575E;
+$surface-fg: #ADC5D7;
+$border-color: #000000;
+
+$general-font: "Targa MS";
+$transparency: 0.6;
+
+.monitor_info {
+}
+
+.style_class {
+    border: 0.2px solid $border-color;
+    background-color: rgba($surface-bg, $transparency);
+    padding: 0.4em;
+}
+
+.cpu_info_class {
+    border: 0.2px solid $border-color;
+    background-color: rgba($cpu-bg, $transparency);
+}
+
+.top {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.cpu_graph {
+    min-width: 8em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0.2em;
+}
+
+.mem_graph {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0.2em;
+}
+
+.mem_info_class {
+    background-color: rgba($mem-bg, $transparency);
+}
+
+.mem_usage_class {
+    border: 0.2px solid $border-color;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1.0em;
+}
+
+.cpu_perc_class{
+    min-width: 8em;
+}
+
+.cpu_temp_info {
+    border: 0.2px solid $border-color; 
+    background-color: rgba($cpu-temp-bg, $transparency);
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.mem_temp_info {
+    border: 0.2px solid $border-color; 
+    background-color: rgba($mem-temp-bg, $transparency);
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.header_class {
+    font-size: 1.8em;
+}
+
+.bbuttons_small {
+        margin-left: 1em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        background-color: rgba($surface-bg, 0.8);
+        background-image: unset;
+        border: unset;
+        label {
+            font-size: 0.7em;
+        }
+}
+
+.bbuttons {
+        background-color: rgba($surface-bg, 0.8);
+        background-image: unset;
+        margin: 0.5em;
+        border: unset;
+        min-width: 2em;
+        label {
+            font-size: 1.5em;
+        }
+}
+
+.pomodoro {
+    font-family: "Pomodoro";
+    border: 0.2px solid $border-color; 
+    background-color: rgba($mem-temp-bg, $transparency);
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+window {
+    font-family: $general-font;
+    background-color: unset;
+    label {
+       color: $surface-fg;
+    }
+    graph {
+        color: $surface-fg;
+    }
+}
+
+

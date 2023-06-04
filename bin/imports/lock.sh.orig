@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+FONT=Iceland:pixelsize=29
+SAVER=saver_blank
+||||||| 2d80b9e
+FONT="Share Tech Mono":pixelsize=20
+SAVER=saver_mpv
+=======
+FONT="Hack":pixelsize=19
+SAVER=saver_mpv
+>>>>>>> 7fdc02537b6f8e39e52862684943a0334b83ece1

@@ -1,0 +1,199 @@
+(defpoll time :interval "60s"
+  :initial '{"hour":"H","min":"M"}'
+  `date +'{"hour":"%H","min":"%M"}'`)
+
+(defpoll pomodoro_stat :interval "5s" :run-while cpu-check
+    `pomodoro_stats.sh`)
+
+(defpoll weather :interval "600s"
+  `weather.sh`)
+
+(defpoll volume :interval "1s"
+  `volume_display`)
+
+(defpoll playing-midia :interval "10s"
+  `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
+
+(defvar cpu-check false)
+
+(defpoll top_cpu :interval "5s" :run-while cpu-check
+    `ps axo comm,%cpu --no-headers --sort -%cpu | head -n 10`)
+
+(defpoll top_mem :interval "5s" :run-while cpu-check
+    `ps axo comm,%mem --no-headers --sort -%mem | head -n 10`)
+
+(defwindow general_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "1%"
+                       :y "-12%"
+                       :height "6%"
+                       :width "30%"
+                       :anchor "bottom left")
+    (normal_infos_layout))
+
+(defwidget normal_infos_layout []
+    (box :class "style_class"
+        (box :halign "start"
+            "  ${time.hour}:${time.min}"
+            (button :class "bbuttons_small" :onclick "eww open --toggle pomodoro_infos" "")
+        )
+        (box :halign "start"
+            "  ${volume}"
+            (button :class "bbuttons_small" :onclick "eww open --toggle midia_infos" "󰋋")
+        )
+        weather)
+)
+
+(defwindow pc_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "1%"
+                       :y "-5%"
+                       :width "100%"
+                       :height "6%"
+                       :anchor "bottom left")
+    (pc_info_layout))
+
+
+(defwidget pc_info_layout []
+    (box :class "monitor_info" :halign "start" :space-evenly false
+        (cpu_info_layout)
+        (mem_info_layout)
+        (_cpu_temp)
+        (_gpu_temp)
+    ))
+
+
+(defwidget cpu_info_layout []
+    (box :class "cpu_info_class" :space-evenly false
+        (_cpu_info)
+        (_cpu_graph)
+        (button :class "bbuttons" :onclick "eww open --toggle top_10_cpu" "")
+        
+))
+
+(defwidget _cpu_info []
+    (box :class "cpu_perc_class"
+        (box 
+            "CPU: ${round (EWW_CPU.avg, 2)}%"
+)
+))
+
+(defwidget _cpu_graph[]
+    (box :class "cpu_graph"
+        (graph :value "${EWW_CPU.avg}"
+               :thickness 1
+               :time-range "120s"
+               :max 100
+               :line-style "round"
+               )
+    )
+)
+
+(defwidget mem_info_layout []
+    (box :class "mem_info_class" :space-evenly false
+        (box :class "mem_usage_class" 
+            (_mem_info)
+        )
+            (button :class "bbuttons" :onclick "eww open --toggle top_10_mem" "")
+))
+
+(defwidget _mem_info []
+    (box
+        (box
+            "RAM: ${round(EWW_RAM.used_mem / 1000000000, 2)} GB/${round(EWW_RAM.total_mem / 1000000000,2) } GB")
+))
+
+(defwidget _cpu_temp []
+    (box :class "cpu_temp_info"
+        "CPU TEMP: ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
+    )
+)
+
+(defwidget _gpu_temp []
+    (box :class "mem_temp_info"
+        "GPU TEMP: ${EWW_TEMPS.AMDGPU_EDGE}°C"
+    )
+)
+
+(defwidget _mem_graph []
+    (box :class "mem_graph"
+        (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
+)
+
+(defwindow top_10_mem
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "35%"
+                       :y "-20%"
+                       :width "30%"
+                       :height "30%"
+                       :anchor "bottom left")
+    (_top_10_mem))
+
+(defwidget _top_10_mem []
+    (box :class "style_class" :orientation "v" :space-evenly false
+        (box :class "top"
+           "Top 10 memory processess")
+        (box :class "top"
+           top_mem )
+    )
+)
+
+(defwindow top_10_cpu
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "1%"
+                       :y "-20%"
+                       :height "30%"
+                       :width "30%"
+                       :anchor "bottom left")
+    (_top_10_cpu))
+
+(defwidget _top_10_cpu []
+    (box :class "style_class" :orientation "v" :space-evenly false
+        (box :class "top"
+       "Top 10 cpu processess")
+        (box :class "top"
+       top_cpu)
+    )
+)
+
+(defwindow midia_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "31%"
+                       :y "-12%"
+                       :height "6%"
+                       :width "40%"
+                       :anchor "bottom left")
+    (midia_info_layout))
+
+(defwidget midia_info_layout []
+    (box :class "style_class"
+        "󰋋 ${playing-midia}"
+        )
+)
+
+(defwindow pomodoro_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-5%"
+                       :width "10%"
+                       :height "6%"
+                       :anchor "bottom right")
+    (pomodoro_layout))
+
+
+(defwidget pomodoro_layout []
+        (box :class "pomodoro_class" :space-evenly false :halign "center"
+            (label :class "pomodoro" :text "${pomodoro_stat == "" ? "No pomodoro" : " ${pomodoro_stat}"}"))
+)
