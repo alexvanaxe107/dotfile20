@@ -85,6 +85,7 @@ function reset_configs(){
     cp ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
     cp ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
     cp ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
+    cp ${TEMPLATES}/eww/${theme_name}/* ${HOME}/.config/eww/
 
     # Overwiting only if it not exists
     [ ! -f $HOME/.config/wm/bspwm.conf ] && cp ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf

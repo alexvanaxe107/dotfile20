@@ -9,12 +9,12 @@ $general-font: "Erica Type";
 
 .style_class {
     border: 0.2px solid $border-color;
-    background-color: rgba($surface-bg, 0.2);
+    background-color: rgba($surface-bg, 0.7);
 }
 
 .cpu_info_class {
     border: 0.2px solid $border-color;
-    background-color: rgba($surface-bg, 0.2);
+    background-color: rgba($surface-bg, 0.7);
     font-size: 1.2em;
     margin-bottom: 1em;
 }
@@ -32,14 +32,14 @@ $general-font: "Erica Type";
 
 .mem_info_class {
     border: 0.2px solid $border-color;
-    background-color: rgba($surface-bg, 0.2);
+    background-color: rgba($surface-bg, 0.7);
     font-size: 1.0em;
     margin-bottom: 1em;
 }
 
 .temp_info {
     border: 0.2px solid $border-color; 
-    background-color: rgba($surface-bg, 0.2);
+    background-color: rgba($surface-bg, 0.7);
     padding: 0px;
 }
 
