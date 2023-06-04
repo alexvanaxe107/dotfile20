@@ -1,12 +1,65 @@
+(defpoll time :interval "60s"
+  :initial '{"hour":"H","min":"M"}'
+  `date +'{"hour":"%H","min":"%M"}'`)
+
+(defpoll weather :interval "600s"
+  `weather.sh`)
+
+(defvar cpu-check false)
+
+(defpoll pomodoro_stat :interval "5s" :run-while cpu-check
+    `pomodoro_stats.sh`)
+
+(defpoll top_cpu :interval "5s" :run-while cpu-check
+    `ps axo comm,%cpu --no-headers --sort -%cpu | head -n 10`)
+
+(defpoll cpu_load :interval "5s" :run-while cpu-check
+    `load`)
+
+(defpoll top_mem :interval "5s" :run-while cpu-check
+    `ps axo comm,%mem --no-headers --sort -%mem | head -n 10`)
+
+(defpoll todo_day :initial "" :interval "10s"
+    `todo.sh -d /home/media/todos/day/config/config | head -n 5`)
+
+(defpoll playing-midia :initial "" :interval "10s"
+  `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
+
+(defpoll volume :interval "1s"
+  `volume_display`)
+
+; (deflisten music :initial ""
+;   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defwindow general_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "10%"
+                       :height "30px"
+                       :width "30%"
+                       :anchor "top center")
+    (normal_infos_layout))
+
+(defwidget normal_infos_layout []
+    (box :orientation "v"
+    (box :class "header_class"
+        (_sundial)
+    ) 
+    (box :class "style_class"
+        "  ${time.hour}:${time.min}"
+        weather)
+))
+
 (defwindow pc_infos
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
-    :geometry (geometry :x "4%"
-                       :y "4%"
-                       :width "100px"
-                       :height "200px"
-                       :anchor "top left")
+    :geometry (geometry :x "0%"
+                       :y "18%"
+                       :width "30%"
+                       :anchor "top center")
     (pc_info_layout))
 
 
@@ -17,6 +70,7 @@
         (mem_info_layout)
         (_cpu_temp)
         (_gpu_temp)
+        (buttons)
     ))
 
 
@@ -25,8 +79,11 @@
 )
 
 (defwidget cpu_info_layout []
-    (box :class "cpu_info_class"
-        (_cpu_info)
+    (box :class "cpu_info_class" :orientation "v"
+        (box
+            (_cpu_info)
+            "${cpu_load}"
+        )
         (_cpu_graph)
         
 ))
@@ -48,8 +105,8 @@
 )
 
 (defwidget mem_info_layout []
-    (box :class "mem_info_class"
-        (box
+    (box :class "mem_info_class" 
+        (box :orientation "v"
             (_mem_info)
             (_mem_graph)
             )))
@@ -76,4 +133,111 @@
     (box :class "mem_graph"
     (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
 )
+
+(defwidget buttons []
+    (box :class "bbuttons" :halign "center" 
+        (button :onclick "eww open --toggle top_10_cpu" "")
+        (button :onclick "eww open --toggle top_10_mem" "")
+        (button :onclick "eww open --toggle midia_infos" "󰋋 ")
+        (button :onclick "eww open --toggle organazing" " ")
+    )
+)
+
+(defwindow top_10_mem
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "18%"
+                       :width "30%"
+                       :anchor "top right")
+    (_top_10_mem))
+
+(defwidget _top_10_mem []
+    (box :class "style_class" :orientation "v" :space-evenly false
+        (label :class "separator_down" :text "Top 10 memory processess")
+        (box :class "top"
+           top_mem )
+    )
+)
+
+(defwindow top_10_cpu
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "18%"
+                       :width "30%"
+                       :anchor "top left")
+    (_top_10_cpu))
+
+(defwidget _top_10_cpu []
+    (box :class "style_class" :orientation "v" :space-evenly false
+        (label :class "separator_down" :text "Top 10 cpu processess")
+        (box :class "top"
+       top_cpu)
+    )
+)
+
+(defwidget _sundial []
+  (label 
+         :text {time.hour >= 2 && time.hour <= 4 ? "Go sleep!" :
+               time.hour <= 5 ? "Good Morning!" :
+               time.hour >= 6
+                && (time.hour <= 8 && time.min <= 59)
+                  ? "Morning" :
+               time.hour >= 9
+                 && (time.hour <= 11 && time.min <= 59)
+                   ? "Good Day" :
+               time.hour == 12 && time.min <= 29
+                 ? "Good Launch" :
+               time.hour >= 12 && time.hour <= 16
+                 ? "Good Afternoon" :
+               time.hour > 16 && time.hour <= 17
+                 ? "Good end of Afternoon" :
+               (time.hour >= 17 && time.min <= 1)
+                 || (time.hour <= 18 && time.min <= 20)
+                   ? "Good Evening" :
+               time.hour >= 18 && time.hour <= 19
+                 ? "Good Night" :
+               time.hour > 19 && time.hour <= 21
+                 ? "Good Night" :
+               time.hour > 21 ? "Night" : "Midnight"}))
+
+(defwindow midia_infos
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-30%"
+                       :height "10%"
+                       :width "30%"
+                       :anchor "bottom left")
+    (midia_info_layout))
+
+(defwidget midia_info_layout []
+    (box :class "style_class" :spacing "20" :space-evenly false
+        (label :class "volume_display" :text "  ${volume}")
+        (label :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
+        )
+)
+
+(defwindow organazing
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-25%"
+                       :height "10%"
+                       :width "30%"
+                       :anchor "bottom right")
+    (organazing_layout))
+
+(defwidget organazing_layout []
+    (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
+        (label :class "header_class separator_down" :text "Organization")
+        (box :space-evenly false :halign "center"
+            (label :class "pomodoro" :text "${pomodoro_stat == "" ? "No pomodoro" : " ${pomodoro_stat}"}"))
+        (label :wrap true :class "todo_day" :text "${todo_day}")
+        ))
 

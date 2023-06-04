@@ -10,7 +10,7 @@ source $HOME/.config/wm/bspwm.conf
 get_titles(){
     for player in $(playerctl -l | awk '!seen[$1] {print $1} {++seen[$1]}'); do
         teste="$(playerctl -p "$player" metadata title 2> /dev/null | awk -v player=$player '{print player,$0}' OFS=" - ")"
-        if [ ! -z $teste ]; then
+        if [ ! -z "$teste" ]; then
             printf "%s\n" "$teste"
         fi
     done
