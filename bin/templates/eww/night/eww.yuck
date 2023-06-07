@@ -175,7 +175,7 @@
     (midia_info_layout))
 
 (defwidget midia_info_layout []
-    (box :class "style_class"
+    (box :class "style_class normal_info_class"
         "󰋋 ${playing-midia}"
         )
 )
