@@ -1,8 +1,9 @@
-$surface-bg: #EEEEEE;
-$surface-fg: #2A2B2C;
+$surface-bg: #B7AE98;
+$surface-fg: #424113;
 $border-color: #000000;
 
-$general-font: "Share Tech Mono";
+$general-font: "CQ Mono";
+$general-font-size: 1.4em;
 
 .monitor_info {
 }
@@ -18,16 +19,21 @@ $general-font: "Share Tech Mono";
     padding: 0.4em;
 }
 
+.midia_info_class {
+    font-size: $general-font-size;
+}
+
 .cpu_info_class {
     border: 0.2px solid $border-color;
     background-color: rgba($surface-bg, 0.7);
-    font-size: 1.2em;
+    font-size: $general-font-size;
     margin-bottom: 1em;
 }
 
 .top {
     margin-bottom: 0.5em;
     margin-top: 0.5em;
+    font-size: $general-font-size;
 }
 
 .mem_graph {
@@ -39,22 +45,27 @@ $general-font: "Share Tech Mono";
 .mem_info_class {
     border: 0.2px solid $border-color;
     background-color: rgba($surface-bg, 0.7);
-    font-size: 1.0em;
+    font-size: $general-font-size;
     margin-bottom: 1em;
+}
+
+.normal_info {
+    font-size: $general-font-size;
 }
 
 .temp_info {
     border: 0.2px solid $border-color; 
     background-color: rgba($surface-bg, 0.7);
     padding: 0px;
+    font-size: $general-font-size;
 }
 
 .header_class {
-    font-size: 1.8em;
+    font-size: $general-font-size + 0.5;
 }
 
 .volume_display {
-    font-size: 1.5em;
+    font-size: $general-font-size;
     margin-left: 1em;
     padding-right: 1em;
     border-right: 1 solid $border-color;
@@ -65,7 +76,7 @@ $general-font: "Share Tech Mono";
     button {
         margin: 0.2em;
         label {
-            font-size: 1.5em;
+            font-size: $general-font-size;
             color: #000000;
         }
     }
@@ -73,11 +84,12 @@ $general-font: "Share Tech Mono";
 
 .todo_day {
     margin: 1.4em;
+    font-size: $general-font-size;
 }
 
 .pomodoro {
     font-family: "Pomodoro";
-    font-size: 1.2em;
+    font-size: $general-font-size;
     border: 0.2px solid $border-color;
     padding: 0.4em;
 }

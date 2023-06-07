@@ -29,6 +29,7 @@ font() {
     size2=$4
     size3=$5
     space=$6
+    eww=""
 
     SIZE=$(printf "" | dmenu -i -p "Choose the size (bar(${size1}) dmenu(${size2}) conky(${size3}) vspace(${space}))")
 
@@ -37,6 +38,7 @@ font() {
         size2="$(echo ${SIZE} | cut -d ' ' -f 2)"
         size3="$(echo ${SIZE} | cut -d ' ' -f 3)"
         space="$(echo ${SIZE} | cut -d ' ' -f 4)"
+        eww="$(echo ${SIZE} | cut -d ' ' -f 5)"
     fi
 
     #Change the polybar
@@ -46,6 +48,9 @@ font() {
         sed -i "s/height.*/height = ${height}/" ${HOME}/.config/polybar/config
 
         sed -i "s/^\$general-font: .*;/\$general-font: \"${font_name}\";/" ${HOME}/.config/eww/eww.scss
+        if [ ! -z "${eww}" ]; then
+            sed -i "s/^\$general-font-size: .*;/\$general-font-size: ${eww};/" ${HOME}/.config/eww/eww.scss
+        fi
 
         sed -Ei "s/(font-0.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
         sed -Ei "s/(font-2.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config

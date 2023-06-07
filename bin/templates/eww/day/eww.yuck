@@ -38,7 +38,7 @@
     :geometry (geometry :x "0%"
                        :y "10%"
                        :height "30px"
-                       :width "30%"
+                       :width "25%"
                        :anchor "top center")
     (normal_infos_layout))
 
@@ -47,7 +47,7 @@
     (box :class "header_class"
         (_sundial)
     ) 
-    (box :class "style_class"
+    (box :class "style_class normal_info"
         "  ${time.hour}:${time.min}"
         weather)
 ))
@@ -58,7 +58,7 @@
     :wm-ignore false
     :geometry (geometry :x "0%"
                        :y "18%"
-                       :width "30%"
+                       :width "25%"
                        :anchor "top center")
     (pc_info_layout))
 
@@ -138,8 +138,8 @@
     (box :class "bbuttons" :halign "center" 
         (button :onclick "eww open --toggle top_10_cpu" "")
         (button :onclick "eww open --toggle top_10_mem" "")
-        (button :onclick "eww open --toggle midia_infos" "󰋋 ")
-        (button :onclick "eww open --toggle organazing" " ")
+        (button :onclick "eww open --toggle midia_infos" "󰋋")
+        (button :onclick "eww open --toggle organazing" "")
     )
 )
 
@@ -149,14 +149,14 @@
     :wm-ignore false
     :geometry (geometry :x "0%"
                        :y "18%"
-                       :width "30%"
+                       :width "25%"
                        :anchor "top right")
     (_top_10_mem))
 
 (defwidget _top_10_mem []
-    (box :class "style_class" :orientation "v" :space-evenly false
+    (box :class "style_class top" :orientation "v" :space-evenly false
         (label :class "separator_down" :text "Top 10 memory processess")
-        (box :class "top"
+        (box
            top_mem )
     )
 )
@@ -167,14 +167,14 @@
     :wm-ignore false
     :geometry (geometry :x "0%"
                        :y "18%"
-                       :width "30%"
+                       :width "25%"
                        :anchor "top left")
     (_top_10_cpu))
 
 (defwidget _top_10_cpu []
-    (box :class "style_class" :orientation "v" :space-evenly false
+    (box :class "style_class top" :orientation "v" :space-evenly false
         (label :class "separator_down" :text "Top 10 cpu processess")
-        (box :class "top"
+        (box
        top_cpu)
     )
 )
@@ -211,14 +211,14 @@
     :geometry (geometry :x "0%"
                        :y "-30%"
                        :height "10%"
-                       :width "30%"
+                       :width "25%"
                        :anchor "bottom left")
     (midia_info_layout))
 
 (defwidget midia_info_layout []
     (box :class "style_class" :spacing "20" :space-evenly false
         (label :class "volume_display" :text "  ${volume}")
-        (label :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
+        (label :class "midia_info_class" :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
         )
 )
 
@@ -229,7 +229,7 @@
     :geometry (geometry :x "0%"
                        :y "-25%"
                        :height "10%"
-                       :width "30%"
+                       :width "25%"
                        :anchor "bottom right")
     (organazing_layout))
 

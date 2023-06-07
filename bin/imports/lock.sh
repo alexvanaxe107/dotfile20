@@ -1,2 +1,2 @@
-FONT="Unispace":pixelsize=17
+FONT="CQ Mono":pixelsize=19
 SAVER=saver_mpv

@@ -1,12 +1,14 @@
-$surface-bg: #29314A;
-$cpu-bg: #25252E;
-$mem-bg: #403940;
-$cpu-temp-bg: #32465F;
-$mem-temp-bg: #4D575E;
-$surface-fg: #ADC5D7;
+$surface-bg: #332222;
+$cpu-bg: #280F0C;
+$mem-bg: #482411;
+$cpu-temp-bg: #4E2823;
+$mem-temp-bg: #59221B;
+$surface-fg: #FBEAA8;
 $border-color: #000000;
 
 $general-font: "Targa MS";
+$general-font-size: 1.5em;
+
 $transparency: 0.6;
 
 .monitor_info {
@@ -18,6 +20,15 @@ $transparency: 0.6;
     padding: 0.4em;
 }
 
+.normal_info_class {
+    font-size: $general-font-size;
+}
+
+.normal_int_class {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
 .cpu_info_class {
     border: 0.2px solid $border-color;
     background-color: rgba($cpu-bg, $transparency);
@@ -26,6 +37,7 @@ $transparency: 0.6;
 .top {
     margin-bottom: 0.5em;
     margin-top: 0.5em;
+    font-size: $general-font-size;
 }
 
 .cpu_graph {
@@ -49,15 +61,17 @@ $transparency: 0.6;
     border: 0.2px solid $border-color;
     padding-left: 1em;
     padding-right: 1em;
-    font-size: 1.0em;
+    font-size: $general-font-size;
 }
 
 .cpu_perc_class{
     min-width: 8em;
+    font-size: $general-font-size;
 }
 
 .cpu_temp_info {
     border: 0.2px solid $border-color; 
+    font-size: $general-font-size;
     background-color: rgba($cpu-temp-bg, $transparency);
     padding-left: 1em;
     padding-right: 1em;
@@ -65,40 +79,46 @@ $transparency: 0.6;
 
 .mem_temp_info {
     border: 0.2px solid $border-color; 
+    font-size: $general-font-size;
     background-color: rgba($mem-temp-bg, $transparency);
     padding-left: 1em;
     padding-right: 1em;
 }
 
 .header_class {
-    font-size: 1.8em;
+    font-size: $general-font-size + 0.5;
 }
 
 .bbuttons_small {
         margin-left: 1em;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+        margin-top: 1.0em;
+        margin-bottom: 1.0em;
+        padding-right: 1.0em;
+        padding-left: 1.0em;
         background-color: rgba($surface-bg, 0.8);
         background-image: unset;
         border: unset;
         label {
-            font-size: 0.7em;
+            font-size: $general-font-size - 0.4;
         }
 }
 
 .bbuttons {
         background-color: rgba($surface-bg, 0.8);
         background-image: unset;
-        margin: 0.5em;
+        margin: 1.3em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
         border: unset;
-        min-width: 2em;
+        font-size: $general-font-size - 0.5;
         label {
-            font-size: 1.5em;
+            font-size: $general-font-size;
         }
 }
 
 .pomodoro {
     font-family: "Pomodoro";
+    font-size: $general-font-size;
     border: 0.2px solid $border-color; 
     background-color: rgba($mem-temp-bg, $transparency);
     padding-left: 1em;
