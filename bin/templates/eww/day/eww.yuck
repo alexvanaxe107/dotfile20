@@ -7,6 +7,8 @@
 
 (defvar cpu-check false)
 
+(defvar default-monitor 1)
+
 (defpoll pomodoro_stat :interval "5s" :run-while cpu-check
     `pomodoro_stats.sh`)
 
@@ -16,11 +18,12 @@
 (defpoll cpu_load :interval "5s" :run-while cpu-check
     `load`)
 
+
 (defpoll top_mem :interval "5s" :run-while cpu-check
-    `ps axo comm,%mem --no-headers --sort -%mem | head -n 10`)
+    `ps axo comm,%mem,rss --no-headers --sort -%mem | head -n 10 | awk '{print $1,$2,$3/1024}' | column -t`)
 
 (defpoll todo_day :initial "" :interval "10s"
-    `todo.sh -d /home/media/todos/day/config/config | head -n 5`)
+    `todo.sh -p -d /home/media/todos/day/config/config | head -n 5`)
 
 (defpoll playing-midia :initial "" :interval "10s"
   `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
@@ -32,6 +35,7 @@
 ;   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
 (defwindow general_infos
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
@@ -42,6 +46,63 @@
                        :anchor "top center")
     (normal_infos_layout))
 
+(defwindow pc_infos
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "20%"
+                       :width "25%"
+                       :anchor "top center")
+    (pc_info_layout))
+
+(defwindow top_10_mem
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "18%"
+                       :width "25%"
+                       :anchor "top right")
+    (_top_10_mem))
+
+(defwindow top_10_cpu
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "18%"
+                       :width "25%"
+                       :anchor "top left")
+    (_top_10_cpu))
+
+(defwindow midia_infos
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-30%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "bottom left")
+    (midia_info_layout))
+
+(defwindow organazing
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-25%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "bottom right")
+    (organazing_layout))
+
 (defwidget normal_infos_layout []
     (box :orientation "v"
     (box :class "header_class"
@@ -51,17 +112,6 @@
         "  ${time.hour}:${time.min}"
         weather)
 ))
-
-(defwindow pc_infos
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "0%"
-                       :y "18%"
-                       :width "25%"
-                       :anchor "top center")
-    (pc_info_layout))
-
 
 (defwidget pc_info_layout []
     (box :class "monitor_info" :orientation "v" :valign "start"
@@ -114,7 +164,7 @@
 (defwidget _mem_info []
     (box
         (box
-            "RAM: ${round(EWW_RAM.used_mem / 1000000000, 2)} GB/${round(EWW_RAM.total_mem / 1000000000,2) } GB")
+            "RAM: ${round(EWW_RAM.used_mem / 1073741824, 2)} GB/${round(EWW_RAM.total_mem / 1073741824,2) } GB")
 ))
 
 (defwidget _cpu_temp []
@@ -143,15 +193,6 @@
     )
 )
 
-(defwindow top_10_mem
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "0%"
-                       :y "18%"
-                       :width "25%"
-                       :anchor "top right")
-    (_top_10_mem))
 
 (defwidget _top_10_mem []
     (box :class "style_class top" :orientation "v" :space-evenly false
@@ -161,15 +202,6 @@
     )
 )
 
-(defwindow top_10_cpu
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "0%"
-                       :y "18%"
-                       :width "25%"
-                       :anchor "top left")
-    (_top_10_cpu))
 
 (defwidget _top_10_cpu []
     (box :class "style_class top" :orientation "v" :space-evenly false
@@ -199,21 +231,11 @@
                  || (time.hour <= 18 && time.min <= 20)
                    ? "Good Evening" :
                time.hour >= 18 && time.hour <= 19
-                 ? "Good Night" :
+                 ? "Good Evening" :
                time.hour > 19 && time.hour <= 21
                  ? "Good Night" :
-               time.hour > 21 ? "Night" : "Midnight"}))
+               time.hour > 21 ? "Nighy night" : "Midnight"}))
 
-(defwindow midia_infos
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "0%"
-                       :y "-30%"
-                       :height "10%"
-                       :width "25%"
-                       :anchor "bottom left")
-    (midia_info_layout))
 
 (defwidget midia_info_layout []
     (box :class "style_class" :spacing "20" :space-evenly false
@@ -222,16 +244,6 @@
         )
 )
 
-(defwindow organazing
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "0%"
-                       :y "-25%"
-                       :height "10%"
-                       :width "25%"
-                       :anchor "bottom right")
-    (organazing_layout))
 
 (defwidget organazing_layout []
     (box :class "style_class" :orientation "v" :valign "start" :space-evenly false

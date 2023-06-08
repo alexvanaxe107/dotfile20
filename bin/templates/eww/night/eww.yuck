@@ -23,14 +23,75 @@
     `ps axo comm,%mem --no-headers --sort -%mem | head -n 10`)
 
 (defwindow general_infos
+    :monitor 1
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "-22%"
+                       :y "-25%"
                        :height "6%"
                        :anchor "bottom left")
     (normal_infos_layout))
+
+(defwindow pc_infos
+    :monitor 1
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "1%"
+                       :y "-17%"
+                       :width "100%"
+                       :height "6%"
+                       :anchor "bottom left")
+    (pc_info_layout))
+
+(defwindow top_10_mem
+    :monitor 1
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "27%"
+                       :y "3%"
+                       :width "25%"
+                       :height "30%"
+                       :anchor "top left")
+    (_top_10_mem))
+
+(defwindow top_10_cpu
+    :monitor 1
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "1%"
+                       :y "3%"
+                       :height "30%"
+                       :width "25%"
+                       :anchor "top left")
+    (_top_10_cpu))
+
+(defwindow midia_infos
+    :monitor 1
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "1%"
+                       :y "-10%"
+                       :height "6%"
+                       :width "40%"
+                       :anchor "bottom left")
+    (midia_info_layout))
+
+(defwindow pomodoro_infos
+    :monitor 1
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-5%"
+                       :width "10%"
+                       :height "6%"
+                       :anchor "bottom right")
+    (pomodoro_layout))
 
 (defwidget normal_infos_layout []
     (box :class "style_class normal_info_class" :space-evenly false
@@ -45,16 +106,6 @@
         weather)
 )
 
-(defwindow pc_infos
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "1%"
-                       :y "-15%"
-                       :width "100%"
-                       :height "6%"
-                       :anchor "bottom left")
-    (pc_info_layout))
 
 
 (defwidget pc_info_layout []
@@ -103,7 +154,7 @@
 (defwidget _mem_info []
     (box
         (box
-            "RAM: ${round(EWW_RAM.used_mem / 1000000000, 2)} GB/${round(EWW_RAM.total_mem / 1000000000,2) } GB")
+            "RAM: ${round(EWW_RAM.used_mem / 1073741824, 2)} GB/${round(EWW_RAM.total_mem / 1073741824,2) } GB")
 ))
 
 (defwidget _cpu_temp []
@@ -123,16 +174,6 @@
         (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
 )
 
-(defwindow top_10_mem
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "27%"
-                       :y "3%"
-                       :width "25%"
-                       :height "30%"
-                       :anchor "top left")
-    (_top_10_mem))
 
 (defwidget _top_10_mem []
     (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
@@ -143,16 +184,6 @@
     )
 )
 
-(defwindow top_10_cpu
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "1%"
-                       :y "3%"
-                       :height "30%"
-                       :width "25%"
-                       :anchor "top left")
-    (_top_10_cpu))
 
 (defwidget _top_10_cpu []
     (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
@@ -163,16 +194,6 @@
     )
 )
 
-(defwindow midia_infos
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "1%"
-                       :y "-8%"
-                       :height "6%"
-                       :width "40%"
-                       :anchor "bottom left")
-    (midia_info_layout))
 
 (defwidget midia_info_layout []
     (box :class "style_class normal_info_class"
@@ -180,16 +201,6 @@
         )
 )
 
-(defwindow pomodoro_infos
-    :stacking "bg"
-    :windowtype "desktop"
-    :wm-ignore false
-    :geometry (geometry :x "0%"
-                       :y "-5%"
-                       :width "10%"
-                       :height "6%"
-                       :anchor "bottom right")
-    (pomodoro_layout))
 
 
 (defwidget pomodoro_layout []

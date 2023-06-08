@@ -116,6 +116,7 @@ function refresh_theme() {
     killall -q tint2
     killall -q conky
     killall -q polybar
+    killall -q eww
 }
 
 function startup_theme(){
