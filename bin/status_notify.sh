@@ -62,11 +62,23 @@ show_song() {
     status="$status\n$prompt"
 }
 
+show_desktop() {
+    local window="$(xprop -id $(bspc query -N --node) WM_NAME | grep -o '".*"')"
+    local monitor="$(bspc query --monitor focused --monitors --names)"
+    local desktop="$(bspc query --desktops --names --desktop)"
+
+    local message="\n<b>$desktop</b> \n\n $window\n"
+
+    notify-send -t 1400  "$monitor" "$message"
+    exit
+}
+
 show_fortune() {
     local prompt=$(fortune.sh)
 
     status="$status\n$prompt"
 }
+
 
 print_message() {
     notify-send -t 15000 "status" "$status"
@@ -74,7 +86,7 @@ print_message() {
 
 rcommand=""
 option=""
-while getopts "h?clmtvwdMCsf" opt; do
+while getopts "h?clmtvwdMCsfq" opt; do
     case "${opt}" in
     h|\?) show_help ;;
     c) cpu;;
@@ -84,6 +96,7 @@ while getopts "h?clmtvwdMCsf" opt; do
     v) p_vol;;
     w) weather;;
     d) show_time;;
+    q) show_desktop;;
     M) show_top_10_mem;;
     C) show_top_10_cpu;;
     s) show_song;;
