@@ -1,0 +1,290 @@
+(defpoll time :interval "60s"
+  :initial '{"hour":"H","min":"M"}'
+  `date +'{"hour":"%H","min":"%M"}'`)
+
+(defpoll weather :interval "3600s"
+  `weather.sh`)
+
+(defpoll fortune_message :interval "600s"
+  `fortune.sh`)
+
+(defvar cpu-check false)
+
+(defvar default-monitor 1)
+
+(defpoll pomodoro_stat :interval "5s" :run-while cpu-check
+    `pomodoro_stats.sh`)
+
+(defpoll top_cpu :interval "5s" :run-while cpu-check
+    `ps axo comm,%cpu --no-headers --sort -%cpu | head -n 10`)
+
+(defpoll cpu_load :interval "5s" :run-while cpu-check
+    `load`)
+
+
+(defpoll top_mem :interval "5s" :run-while cpu-check
+    `ps axo comm,%mem,rss --no-headers --sort -%mem | head -n 10 | awk '{print $1,$2,$3/1024}' | column -t`)
+
+(defpoll todo_day :initial "" :interval "10s"
+    `todo.sh -p -d /home/media/todos/day/config/config | head -n 5`)
+
+(defpoll playing-midia :initial "" :interval "10s"
+  `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
+
+(defpoll volume :interval "1s"
+  `volume_display`)
+
+; (deflisten music :initial ""
+;   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defwindow general_infos
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "1%"
+                       :height "5%"
+                       :width "25%"
+                       :anchor "top center")
+    (normal_infos_layout))
+
+(defwindow pc_infos
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-8%"
+                       :height "19%"
+                       :width "25%"
+                       :anchor "bottom center")
+    (pc_info_layout))
+
+(defwindow midia_infos
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "-27%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "bottom center")
+    (midia_info_layout))
+
+(defwindow top_10_mem
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "-10%"
+                       :y "10%"
+                       :width "25%"
+                       :anchor "top right")
+    (_top_10_mem))
+
+(defwindow top_10_cpu
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "10%"
+                       :y "10%"
+                       :width "25%"
+                       :anchor "top left")
+    (_top_10_cpu))
+
+(defwindow wfortune
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "6%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "top center")
+    (fortune_layout))
+
+(defwindow organazing
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "30%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "top center")
+    (organazing_layout))
+
+
+(defwindow wbuttons
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "0%"
+                       :height "30px"
+                       :width "25%"
+                       :anchor "bottom center")
+    (buttons))
+        
+
+(defwidget normal_infos_layout []
+    (box :class "style_class normal_info"
+        "  ${time.hour}:${time.min}"
+        "Shabbat Shalom"
+        weather)
+)
+
+(defwidget pc_info_layout []
+    (box :class "monitor_info" :orientation "v" :valign "start"
+        (cpu_info_layout)
+        (mem_info_layout)
+        (temps_layout)
+    ))
+
+
+(defwidget header []
+    (label :class "header_class" :text "MONITOR")
+)
+
+(defwidget cpu_info_layout []
+    (box :class "cpu_info_class" :orientation "v"
+        (box
+            (_cpu_info)
+            "${cpu_load}"
+        )
+        (_cpu_graph)
+        
+))
+
+(defwidget temps_layout []
+    (box
+        (_cpu_temp)
+        (_gpu_temp)
+))
+
+(defwidget _cpu_info []
+    (box
+        (box
+            "CPU: ${round (EWW_CPU.avg, 2)}%"
+)
+))
+
+(defwidget _cpu_graph[]
+    (graph :value "${EWW_CPU.avg}"
+           :thickness 1
+           :time-range "120s"
+           :max 100
+           :line-style "round"
+           )
+)
+
+(defwidget mem_info_layout []
+    (box :class "mem_info_class" 
+        (box :orientation "v"
+            (_mem_info)
+            (_mem_graph)
+            )))
+
+(defwidget _mem_info []
+    (box
+        (box
+            "RAM: ${round(EWW_RAM.used_mem / 1073741824, 2)} GB/${round(EWW_RAM.total_mem / 1073741824,2) } GB")
+))
+
+(defwidget _cpu_temp []
+    (box :class "temp_info"
+        "CPU TEMP: ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
+    )
+)
+
+(defwidget _gpu_temp []
+    (box :class "temp_info"
+        "GPU TEMP: ${EWW_TEMPS.AMDGPU_EDGE}°C"
+    )
+)
+
+(defwidget _mem_graph []
+    (box :class "mem_graph"
+    (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
+)
+
+(defwidget buttons []
+    (box :class "bbuttons" :halign "center" 
+        (button :onclick "eww open --toggle top_10_cpu" "")
+        (button :onclick "eww open --toggle top_10_mem" "")
+        (button :onclick "eww open --toggle midia_infos" "󰋋")
+        (button :onclick "eww open --toggle organazing" "")
+        (button :onclick "eww open --toggle wfortune" "󰟷")
+    )
+)
+
+
+(defwidget _top_10_mem []
+    (box :class "style_class top" :orientation "v" :space-evenly false
+        (label :class "separator_down" :text "Top 10 memory processess")
+        (box
+           top_mem )
+    )
+)
+
+
+(defwidget _top_10_cpu []
+    (box :class "style_class top" :orientation "v" :space-evenly false
+        (label :class "separator_down" :text "Top 10 cpu processess")
+        (box
+       top_cpu)
+    )
+)
+
+(defwidget _sundial []
+  (label 
+         :text {time.hour >= 2 && time.hour <= 4 ? "Go sleep!" :
+               time.hour <= 5 ? "Good Morning!" :
+               time.hour >= 6
+                && (time.hour <= 8 && time.min <= 59)
+                  ? "Morning" :
+               time.hour >= 9
+                 && (time.hour <= 11 && time.min <= 59)
+                   ? "Good Day" :
+               time.hour == 12 && time.min <= 29
+                 ? "Good Launch" :
+               time.hour >= 12 && time.hour <= 16
+                 ? "Good Afternoon" :
+               time.hour > 16 && time.hour <= 17
+                 ? "Good end of Afternoon" :
+               (time.hour >= 17 && time.min <= 1)
+                 || (time.hour <= 18 && time.min <= 20)
+                   ? "Good Evening" :
+               time.hour >= 18 && time.hour <= 19
+                 ? "Good Evening" :
+               time.hour > 19 && time.hour <= 21
+                 ? "Good Night" :
+               time.hour > 21 ? "Nighy night" : "Midnight"}))
+
+
+(defwidget midia_info_layout []
+    (box :class "style_class midia_info_box_class " :space-evenly false
+        (label :class "volume_display" :text "  ${volume}")
+        (label :class "midia_info_class" :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
+        )
+)
+
+
+(defwidget organazing_layout []
+    (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
+        (box :space-evenly false :halign "center"
+            (label :class "pomodoro" :text "${pomodoro_stat == "" ? "No pomodoro" : " ${pomodoro_stat}"}"))
+        (label :wrap true :class "todo_day" :text "${todo_day}")
+        ))
+
+(defwidget fortune_layout []
+    (box :class "style_class fortune_class"
+        (label :wrap true :text fortune_message)
+    )
+)
