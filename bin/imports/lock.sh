@@ -1,2 +1,2 @@
-FONT="IosevkaTerm Nerd Font Mono":pixelsize=20
+FONT=Iceland:pixelsize=29
 SAVER=saver_mpv
