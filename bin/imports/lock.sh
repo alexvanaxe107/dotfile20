@@ -1,2 +1,2 @@
-FONT=Iceland:pixelsize=29
+FONT="Bookerly":pixelsize=20
 SAVER=saver_mpv
