@@ -3,6 +3,9 @@
 super + Return
 	source ~/.config/bspwm/themes/bsp.cfg; wezterm
 
+super + shift + Return
+	source ~/.config/bspwm/themes/bsp.cfg; alacritty
+
 # start dmenu
 super + d
     ava_dmenu_run
