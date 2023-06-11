@@ -9,6 +9,8 @@
 
 (defvar default-monitor 1)
 
+(defvar cur-player 1)
+
 (defpoll pomodoro_stat :interval "5s" :run-while cpu-check
     `pomodoro_stats.sh`)
 
@@ -25,8 +27,11 @@
 (defpoll todo_day :initial "" :interval "10s"
     `todo.sh -p -d /home/media/todos/day/config/config | head -n 5`)
 
+(defpoll player_count :initial 0 :interval "10s"
+  `music_info --count`)
+
 (defpoll playing-midia :initial "" :interval "10s"
-  `music_info --full`)
+  "music_info --full")
 
 (defpoll playing-cover :interval "10s"
   `music_info --cover`)
@@ -82,6 +87,20 @@
                        :anchor "top left")
     (_top_10_cpu))
 
+
+(defwindow change_player
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "0%"
+                       :y "55%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "top center")
+    (player_select_layout))
+
+
 (defwindow midia_infos
     :monitor 0
     :stacking "bg"
@@ -105,6 +124,12 @@
                        :width "25%"
                        :anchor "bottom center")
     (organazing_layout))
+
+(defwidget player_select_layout []
+    (box
+        (button :onclick "eww update cur-player=${cur-player < player_count ? cur-player + 1 : 1};echo ${cur-player < player_count ? cur-player + 1 : 1} > /tmp/cur.player" ">")
+    )
+)
 
 (defwidget normal_infos_layout []
     (box :orientation "v"
@@ -193,6 +218,7 @@
         (button :onclick "eww open --toggle top_10_mem" "")
         (button :onclick "eww open --toggle midia_infos" "󰋋")
         (button :onclick "eww open --toggle organazing" "")
+        (player_select_layout)
     )
 )
 

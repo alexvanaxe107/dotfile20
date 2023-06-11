@@ -1,3 +1,5 @@
+(defvar cur-player 1)
+
 (defpoll time :interval "60s"
   :initial '{"hour":"H","min":"M"}'
   `date +'{"hour":"%H","min":"%M"}'`)
@@ -11,8 +13,11 @@
 (defpoll volume :interval "1s"
   `volume_display`)
 
-(defpoll playing-midia :interval "10s"
-  `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
+(defpoll player_count :initial 0 :interval "10s"
+  `music_info --count`)
+
+(defpoll playing-midia :initial "" :interval "10s"
+  "music_info --full")
 
 (defpoll playing-cover :interval "10s"
   `music_info --cover`)
@@ -215,12 +220,20 @@
     )
 )
 
+(defwidget player_select_layout []
+    (box :class ""
+        (button :class "cplayer_select" :onclick "eww update cur-player=${cur-player < player_count ? cur-player + 1 : 1};echo ${cur-player < player_count ? cur-player + 1 : 1} > /tmp/cur.player" "❯")
+    )
+)
+
 (defwidget midia_info_layout []
     (box :class "midia_info_box" :space-evenly false
         (image :class "style_class image_class" :image-width 130 :image-height 130 :path "${playing-cover}")
-        (box :hexpand true :class "style_class normal_info_class"
-            "${playing-midia}"
-    ))
+        (box :hexpand true :class "style_class"
+            (label :wrap true :text "${playing-midia == "" ? "No media is playing." : "${playing-midia}" }")
+        )
+        (player_select_layout)
+        )
 )
 
 (defwidget pomodoro_layout []

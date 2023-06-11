@@ -1,12 +1,12 @@
-$surface-bg: #28145F;
-$cpu-bg: #2E0725;
-$mem-bg: #60154E;
-$cpu-temp-bg: #9B0963;
-$mem-temp-bg: #6C4C6A;
-$surface-fg: #D9AACB;
-$border-color: #5138A5;
+$surface-bg: #212F67;
+$cpu-bg: #22354B;
+$mem-bg: #264E74;
+$cpu-temp-bg: #2B4D99;
+$mem-temp-bg: #3A3EB9;
+$surface-fg: #D9A8FB;
+$border-color: #A55BFE;
 
-$general-font: "Audimat Mono";
+$general-font: "Share Tech Mono";
 $general-font-size: 1.5em;
 
 $transparency: 0.6;
@@ -36,7 +36,7 @@ $transparency: 0.6;
 }
 
 .midia_info_box {
-    font-size: $general-font-size;
+    font-size: $general-font-size - 0.3;
     border: 0.4em solid $border-color;
 }
 
@@ -96,6 +96,7 @@ $transparency: 0.6;
     padding-right: 1em;
 }
 
+
 .header_class {
     font-size: $general-font-size + 0.5;
 }
@@ -112,6 +113,15 @@ $transparency: 0.6;
         label {
             font-size: $general-font-size - 0.4;
         }
+}
+
+.cplayer_select {
+        background-color: rgba($surface-fg, 0.8);
+        background-image: unset;
+        label {
+            color: $surface-bg;
+        }
+
 }
 
 .image_class {
