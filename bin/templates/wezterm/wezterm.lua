@@ -17,8 +17,8 @@ else
     font_name = "JetBrains Mono"
 end
 
-if not isempty(custom_term_font) then
-    font_name = custom_term_font
+if not isempty(extra.custom_term_font) then
+    font_name = extra.custom_term_font
 end
 toReturn['front_end'] = "WebGpu"
 toReturn['adjust_window_size_when_changing_font_size'] = false
