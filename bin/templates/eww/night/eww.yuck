@@ -14,6 +14,9 @@
 (defpoll playing-midia :interval "10s"
   `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
 
+(defpoll playing-cover :interval "10s"
+  `music_info --cover`)
+
 (defvar cpu-check false)
 
 (defpoll top_cpu :interval "5s" :run-while cpu-check
@@ -22,8 +25,11 @@
 (defpoll top_mem :interval "5s" :run-while cpu-check
     `ps axo comm,%mem --no-headers --sort -%mem | head -n 10`)
 
+(defpoll fortune_message :interval "600s"
+  `fortune.sh`)
+
 (defwindow general_infos
-    :monitor 1
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
@@ -34,7 +40,7 @@
     (normal_infos_layout))
 
 (defwindow pc_infos
-    :monitor 1
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
@@ -46,7 +52,7 @@
     (pc_info_layout))
 
 (defwindow top_10_mem
-    :monitor 1
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
@@ -58,7 +64,7 @@
     (_top_10_mem))
 
 (defwindow top_10_cpu
-    :monitor 1
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
@@ -70,19 +76,19 @@
     (_top_10_cpu))
 
 (defwindow midia_infos
-    :monitor 1
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "-10%"
-                       :height "6%"
+                       :y "-1%"
+                       :height "7%"
                        :width "40%"
                        :anchor "bottom left")
     (midia_info_layout))
 
 (defwindow pomodoro_infos
-    :monitor 1
+    :monitor 0
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
@@ -92,6 +98,18 @@
                        :height "6%"
                        :anchor "bottom right")
     (pomodoro_layout))
+
+(defwindow wfortune
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "-2%"
+                       :y "6%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "top right")
+    (fortune_layout))
 
 (defwidget normal_infos_layout []
     (box :class "style_class normal_info_class" :space-evenly false
@@ -103,7 +121,12 @@
             "  ${volume}"
             (button :class "bbuttons_small" :onclick "eww open --toggle midia_infos" "󰋋")
         )
-        weather)
+        weather
+        (box :halign "start" :class "normal_int_class" :space-evenly false
+            "Fortunes here: "
+            (button :class "bbuttons_small" :onclick "eww open --toggle wfortune" "")
+        )
+        )
 )
 
 
@@ -174,7 +197,6 @@
         (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
 )
 
-
 (defwidget _top_10_mem []
     (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
         (box :class "top"
@@ -183,7 +205,6 @@
            top_mem )
     )
 )
-
 
 (defwidget _top_10_cpu []
     (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
@@ -194,16 +215,21 @@
     )
 )
 
-
 (defwidget midia_info_layout []
-    (box :class "style_class normal_info_class"
-        "󰋋 ${playing-midia}"
-        )
+    (box :class "midia_info_box" :space-evenly false
+        (image :class "style_class image_class" :image-width 130 :image-height 130 :path "${playing-cover}")
+        (box :hexpand true :class "style_class normal_info_class"
+            "${playing-midia}"
+    ))
 )
-
-
 
 (defwidget pomodoro_layout []
         (box :class "pomodoro_class" :space-evenly false :halign "center"
             (label :class "pomodoro" :text "${pomodoro_stat == "" ? "No pomodoro" : " ${pomodoro_stat}"}"))
+)
+
+(defwidget fortune_layout []
+    (box :class "style_class fortune_class"
+        (label :wrap true :text fortune_message)
+    )
 )

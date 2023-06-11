@@ -26,7 +26,10 @@
     `todo.sh -p -d /home/media/todos/day/config/config | head -n 5`)
 
 (defpoll playing-midia :initial "" :interval "10s"
-  `playerctl metadata --format "{{artist}} - {{title}}" | cut -c1-50`)
+  `music_info --full`)
+
+(defpoll playing-cover :interval "10s"
+  `music_info --cover`)
 
 (defpoll volume :interval "1s"
   `volume_display`)
@@ -85,10 +88,10 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "-30%"
+                       :y "55%"
                        :height "10%"
                        :width "25%"
-                       :anchor "bottom left")
+                       :anchor "top center")
     (midia_info_layout))
 
 (defwindow organazing
@@ -97,10 +100,10 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "-25%"
+                       :y "0%"
                        :height "10%"
                        :width "25%"
-                       :anchor "bottom right")
+                       :anchor "bottom center")
     (organazing_layout))
 
 (defwidget normal_infos_layout []
@@ -238,10 +241,14 @@
 
 
 (defwidget midia_info_layout []
-    (box :class "style_class" :spacing "20" :space-evenly false
-        (label :class "volume_display" :text "  ${volume}")
-        (label :class "midia_info_class" :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
+    (box :space-evenly false
+        (box :class "style_class" :spacing "20" :space-evenly false :hexpand true
+            (label :class "volume_display" :text "  ${volume}")
+            (label :class "midia_info_class" :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
         )
+        (box :halign "end"
+            (image :class "style_class image_class" :image-width 130 :image-height 130 :path "${playing-cover}")
+        ))
 )
 
 

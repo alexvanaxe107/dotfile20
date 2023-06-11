@@ -115,7 +115,7 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
 
-    if [ "$vim_theme" == "Gruvbox Dark" ]; then
+    if [ "$vim_theme" == "GruvboxDark" ]; then
         sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim

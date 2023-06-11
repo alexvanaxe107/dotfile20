@@ -4,14 +4,24 @@ PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
 ALACRITTY_FILE=$HOME/.config/wm/alacritty.conf
 
-choosen_theme=$(cat $ALACRITTY_FILE |  dmenu -i    -l 27 -p "Choose the terminal theme")
+choosen_theme=$((printf "Theme on\nTheme off\n" && cat $ALACRITTY_FILE) |  dmenu -i -l 27 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
+
+if [ "${choosen}" == "Theme on" ]; then
+    alacritty-colorscheme apply theme_on.yaml
+    exit
+fi
+if [ "${choosen}" == "Theme off" ]; then
+    alacritty-colorscheme toggle
+    exit
+fi
 
 if [ ! -z "$choosen" ]; then
     cp ${HOME}/.vim/configs/theme_template.vim  ${HOME}/.vim/configs/theme.vim
     alacritty-colorscheme apply "${choosen}"
 fi
+
 
 vim_theme=$(basename -s .yaml "$choosen")
 

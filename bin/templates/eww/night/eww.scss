@@ -1,12 +1,12 @@
-$surface-bg: #224477;
-$cpu-bg: #040C2A;
-$mem-bg: #193291;
-$cpu-temp-bg: #224AA3;
-$mem-temp-bg: #325EC9;
-$surface-fg: #F2DCFF;
-$border-color: #000000;
+$surface-bg: #28145F;
+$cpu-bg: #2E0725;
+$mem-bg: #60154E;
+$cpu-temp-bg: #9B0963;
+$mem-temp-bg: #6C4C6A;
+$surface-fg: #D9AACB;
+$border-color: #5138A5;
 
-$general-font: "IosevkaTerm Nerd Font Mono";
+$general-font: "Audimat Mono";
 $general-font-size: 1.5em;
 
 $transparency: 0.6;
@@ -27,6 +27,17 @@ $transparency: 0.6;
 .normal_int_class {
     padding-left: 2em;
     padding-right: 2em;
+}
+
+.fortune_class {
+    background-color: rgba($surface-bg, $transparency + 0.3);
+    font-size: $general-font-size;
+    border: 0.4em solid $border-color;
+}
+
+.midia_info_box {
+    font-size: $general-font-size;
+    border: 0.4em solid $border-color;
 }
 
 .cpu_info_class {
@@ -101,6 +112,11 @@ $transparency: 0.6;
         label {
             font-size: $general-font-size - 0.4;
         }
+}
+
+.image_class {
+    border-right: 1px solid $border-color;
+    background-color: rgba($cpu-bg, $transparency);
 }
 
 .bbuttons {

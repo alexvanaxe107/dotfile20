@@ -1,8 +1,8 @@
-$surface-bg: #EEFCFE;
-$surface-fg: #294765;
+$surface-bg: #9AAAA9;
+$surface-fg: #3F3A37;
 $border-color: #000000;
 
-$general-font: "IosevkaTerm Nerd Font Mono";
+$general-font: "Targa MS";
 $general-font-size: 1.3em;
 
 .monitor_info {
@@ -62,6 +62,9 @@ $general-font-size: 1.3em;
 
 .header_class {
     font-size: $general-font-size + 0.5;
+}
+
+.image_class {
 }
 
 .volume_display {

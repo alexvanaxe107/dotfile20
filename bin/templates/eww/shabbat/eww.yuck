@@ -46,7 +46,7 @@
                        :y "1%"
                        :height "5%"
                        :width "25%"
-                       :anchor "top center")
+                       :anchor "top left")
     (normal_infos_layout))
 
 (defwindow pc_infos
@@ -55,10 +55,10 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "-8%"
+                       :y "6%"
                        :height "19%"
                        :width "25%"
-                       :anchor "bottom center")
+                       :anchor "top right")
     (pc_info_layout))
 
 (defwindow midia_infos
@@ -67,10 +67,10 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "-27%"
-                       :height "10%"
+                       :y "1%"
+                       :height "5%"
                        :width "25%"
-                       :anchor "bottom center")
+                       :anchor "top right")
     (midia_info_layout))
 
 (defwindow top_10_mem
@@ -78,10 +78,10 @@
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
-    :geometry (geometry :x "-10%"
-                       :y "10%"
+    :geometry (geometry :x "0%"
+                       :y "1%"
                        :width "25%"
-                       :anchor "top right")
+                       :anchor "right center")
     (_top_10_mem))
 
 (defwindow top_10_cpu
@@ -89,10 +89,10 @@
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
-    :geometry (geometry :x "10%"
-                       :y "10%"
+    :geometry (geometry :x "0%"
+                       :y "0%"
                        :width "25%"
-                       :anchor "top left")
+                       :anchor "left center")
     (_top_10_cpu))
 
 (defwindow wfortune
@@ -104,7 +104,7 @@
                        :y "6%"
                        :height "10%"
                        :width "25%"
-                       :anchor "top center")
+                       :anchor "top left")
     (fortune_layout))
 
 (defwindow organazing
@@ -113,7 +113,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "30%"
+                       :y "1%"
                        :height "10%"
                        :width "25%"
                        :anchor "top center")
@@ -271,7 +271,7 @@
 (defwidget midia_info_layout []
     (box :class "style_class midia_info_box_class " :space-evenly false
         (label :class "volume_display" :text "  ${volume}")
-        (label :class "midia_info_class" :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
+        (label :limit-width 45 :class "midia_info_class" :wrap true :text " ${playing-midia == "" ? "No Music Playing. Put some music man!" : "󰋋  ${playing-midia}"}")
         )
 )
 

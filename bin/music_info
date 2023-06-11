@@ -1,0 +1,128 @@
+#!/bin/bash
+
+## Get data
+# STATUS="$(mpc status)"
+COVER="/tmp/.music_cover.jpg"
+MUSIC_DIR="$HOME/Music"
+
+get_full() {
+    metadata="$(playerctl metadata)"
+
+    if [ -z "${metadata}" ]; then
+        echo ""
+        exit 0
+    fi
+    song="$(get_song)"
+    artist="$(get_artist)"
+    ctime="$(get_ctime)"
+    ttime="$(get_ttime)"
+
+    full="(${ctime} min/${ttime} min) $artist - $song"
+
+    echo "$full"
+
+}
+
+## Get status
+get_status() {
+	if [[ $STATUS == *"[playing]"* ]]; then
+		echo ""
+	else
+		echo "喇"
+	fi
+}
+
+## Get song
+get_song() {
+    
+	song=`playerctl metadata --format "{{title}}"`
+	echo "$song"
+}
+
+## Get artist
+get_artist() {
+	artist=`playerctl metadata --format "{{artist}}"`
+	if [[ -z "$artist" ]]; then
+		echo "Unknown"
+	else
+		echo "$artist"
+	fi	
+}
+
+## Get time
+get_time() {
+	time=`mpc status | grep "%)" | awk '{print $4}' | tr -d '(%)'`
+	if [[ -z "$time" ]]; then
+		echo "0"
+	else
+		echo "$time"
+	fi	
+}
+get_ctime() {
+    ctime="$(echo "$(playerctl position) / 60" | bc)"
+	if [[ -z "$ctime" ]]; then
+		echo "0"
+	else
+		echo "$ctime"
+	fi	
+}
+get_ttime() {
+    ttime="$(echo "$(playerctl metadata mpris:length)/1000000/60" | bc)"
+	if [[ -z "$ttime" ]]; then
+		echo "0"
+	else
+		echo "$ttime"
+	fi	
+}
+
+## Get cover
+get_cover() {
+    metadata="$(playerctl metadata)"
+
+    if [ -z "${metadata}" ]; then
+		echo "/home/alexvanaxe/.config/wm/images/teste.png"
+        exit 0
+    fi
+
+    local coverurl="$(playerctl metadata mpris:artUrl)"
+
+	# Check if the file has a embbeded album art
+	if [ ! -z "$coverurl" ];then
+        local dld_cover="$(cat $HOME/tmp/actual_cover.txt)"
+
+        if [ "$coverurl" == "$dld_cover" ]; then
+            echo "$HOME/tmp/cover.png"
+        else
+            echo "$coverurl" > $HOME/tmp/actual_cover.txt
+            wget "$coverurl" --output-document $HOME/tmp/cover.png
+            echo "$HOME/tmp/cover.png"
+        fi
+	else
+		echo "/home/alexvanaxe/.config/wm/images/music.png"
+	fi
+}
+
+## Execute accordingly
+if [[ "$1" == "--song" ]]; then
+	get_song
+elif [[ "$1" == "--artist" ]]; then
+	get_artist
+elif [[ "$1" == "--status" ]]; then
+	get_status
+elif [[ "$1" == "--time" ]]; then
+	get_time
+elif [[ "$1" == "--ctime" ]]; then
+	get_ctime
+elif [[ "$1" == "--ttime" ]]; then
+	get_ttime
+elif [[ "$1" == "--cover" ]]; then
+	get_cover
+elif [[ "$1" == "--toggle" ]]; then
+	mpc -q toggle
+elif [[ "$1" == "--next" ]]; then
+	{ mpc -q next; get_cover; }
+elif [[ "$1" == "--prev" ]]; then
+	{ mpc -q prev; get_cover; }
+elif [[ "$1" == "--full" ]]; then
+	{ get_full; }
+fi
