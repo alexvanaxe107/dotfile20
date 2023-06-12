@@ -1,2 +1,2 @@
-FONT=Iceland:pixelsize=29
-SAVER=saver_blank
+FONT="Braciola MS":pixelsize=19
+SAVER=saver_mpv
