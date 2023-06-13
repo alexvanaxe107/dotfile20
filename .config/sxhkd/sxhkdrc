@@ -115,7 +115,7 @@ super + x
     status_notify.sh -q
 
 # Show the status
-super + p; {c,t,l,m,v,w,C,M,s,f,q,a}
+super + p; {c,t,l,m,v,w,C,M,s,f,q,p,a}
 	{status_notify.sh -c \
     , status_notify.sh -d \
     , status_notify.sh -l \
@@ -127,6 +127,7 @@ super + p; {c,t,l,m,v,w,C,M,s,f,q,a}
     , status_notify.sh -s \
     , status_notify.sh -f \
     , status_notify.sh -q \
+    , dunstctl set-paused toggle \
     , status_notify.sh -ctlmvw }
 
 super + Tab
