@@ -6,6 +6,8 @@
 
 config_version: 2
 settings:
+  backend:
+    global: webengine
   bindings.commands:
     global:
       normal:
