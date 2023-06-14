@@ -30,6 +30,9 @@
 (defpoll top_mem :interval "5s" :run-while cpu-check
     `ps axo comm,%mem --no-headers --sort -%mem | head -n 10`)
 
+(defpoll mem_info :interval "5s"
+    `mem.sh -j`)
+
 (defpoll fortune_message :interval "600s"
   `fortune.sh`)
 
@@ -182,7 +185,7 @@
 (defwidget _mem_info []
     (box
         (box
-            "RAM: ${round(EWW_RAM.used_mem / 1073741824, 2)} GB/${round(EWW_RAM.total_mem / 1073741824,2) } GB")
+            "RAM: ${round(mem_info.used, 2)} GB/${round(mem_info.total, 2) } GB")
 ))
 
 (defwidget _cpu_temp []
@@ -199,7 +202,7 @@
 
 (defwidget _mem_graph []
     (box :class "mem_graph"
-        (progress :value {EWW_RAM.used_mem/EWW_RAM.total_mem * 100}))
+    (progress :value {mem_info.percent}))
 )
 
 (defwidget _top_10_mem []
