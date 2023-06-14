@@ -135,7 +135,7 @@
 
 (defwidget normal_infos_layout []
     (box :orientation "v"
-    (box :class "header_class"
+    (box
         (_sundial)
     ) 
     (box :class "style_class normal_info"
@@ -162,16 +162,25 @@
     (box :class "cpu_info_class" :orientation "v"
         (box
             (_cpu_info)
-            "${cpu_load}"
+            (_load_info)
         )
         (_cpu_graph)
         
 ))
 
+(defwidget _load_info []
+    (box :halign "center"
+        (box :space-evenly false
+            (label :class "icon_class" :text "")
+            "${cpu_load}"
+)
+))
+
 (defwidget _cpu_info []
-    (box
-        (box
-            "CPU: ${round (EWW_CPU.avg, 2)}%"
+    (box :halign "center"
+        (box :space-evenly false
+            (label :class "icon_class" :text "")
+            "${round (EWW_CPU.avg, 2)}%"
 )
 ))
 
@@ -192,21 +201,28 @@
             )))
 
 (defwidget _mem_info []
-    (box
-        (box
-            "RAM: ${round(mem_info.used, 2)} GB/${round(mem_info.total, 2) } GB")
-))
+    (box :halign "center"
+        (box :space-evenly false
+            (label :class "icon_class" :text "󰌨")
+            "${round(mem_info.used, 2)} GB/${round(mem_info.total, 2) } GB"))
+)
 
 (defwidget _cpu_temp []
     (box :class "temp_info"
-        "CPU TEMP: ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
-    )
+        (box :halign "center"
+            (box :space-evenly false
+                 (label :class "icon_class" :text "")
+                "CPU ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
+    )))
 )
 
 (defwidget _gpu_temp []
     (box :class "temp_info"
-        "GPU TEMP: ${EWW_TEMPS.AMDGPU_EDGE}°C"
-    )
+        (box :halign "center"
+            (box :space-evenly false
+                 (label :class "icon_class" :text "")
+                "GPU: ${EWW_TEMPS.AMDGPU_EDGE}°C"
+    )))
 )
 
 (defwidget _mem_graph []
@@ -243,7 +259,7 @@
 )
 
 (defwidget _sundial []
-  (label 
+  (label  :class "header_class"
          :text {time.hour >= 2 && time.hour <= 4 ? "Go sleep!" :
                time.hour <= 5 ? "Good Morning!" :
                time.hour >= 6
