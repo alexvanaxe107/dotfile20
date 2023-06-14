@@ -1,2 +1,2 @@
-FONT="Share Tech Mono":pixelsize=20
+FONT="Orbitron":pixelsize=17
 SAVER=saver_mpv

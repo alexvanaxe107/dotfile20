@@ -214,7 +214,7 @@
 
 (defwidget buttons []
     (box :class "bbuttons" :halign "center" 
-        (button :onclick "eww open --toggle top_10_cpu" "")
+        (button :onclick "eww open --toggle top_10_cpu" "")
         (button :onclick "eww open --toggle top_10_mem" "")
         (button :onclick "eww open --toggle midia_infos" "󰋋")
         (button :onclick "eww open --toggle organazing" "")
