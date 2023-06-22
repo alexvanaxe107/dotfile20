@@ -69,6 +69,11 @@ begin(){
 # Try to copy the config where is the themename
 function reset_configs(){
     theme_name=$1
+
+    if [ ! -d $HOME/.config/bspwm/themes ]; then
+        mkdir -p "${HOME}/.config/bspwm/themes/bsp.cfg
+    fi
+    
     cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
     cp ${TEMPLATES}/dunst/dunstrc ${HOME}/.config/dunst/dunstrc

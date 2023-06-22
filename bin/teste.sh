@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [ -z "$(xrandr)" ]; then
-    echo "Sem xrandr"
+if [ ! -d $HOME/.config/bspwm/themes ]; then
+    echo "exite"
 else
-    echo "Com xrandr"
+    echo "nao exite"
 fi
