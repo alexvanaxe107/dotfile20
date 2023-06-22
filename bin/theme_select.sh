@@ -71,7 +71,7 @@ function reset_configs(){
     theme_name=$1
 
     if [ ! -d $HOME/.config/bspwm/themes ]; then
-        mkdir -p "${HOME}/.config/bspwm/themes/bsp.cfg
+        mkdir -p "${HOME}/.config/bspwm/themes/bsp.cfg"
     fi
     
     cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
