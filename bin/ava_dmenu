@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+. ~/.config/bspwm/themes/bsp.cfg
+. ~/.config/wm/bspwm.conf
+
+dmenu_cmd=$(which dmenu)
+
+is_theme() {
+    for arg do
+      [ "$arg" = "-theme" ] && echo "1" && break
+    done
+}
+
+if [ "${use_rofi}" = "0" ]
+then
+    for arg do
+      shift
+      [ "$arg" = "-theme" ] && apagar=1 && continue
+      [ "$apagar" = "1" ] && apagar=0 && continue
+      set -- "$@" "$arg"
+    done
+
+    if [ -z "${theme_name}" ]
+    then
+        $dmenu_cmd "$@"
+    else
+        $dmenu_cmd ${DMENU_PARAMS} -h "${DMENU_H}" -nb "${DMENU_NB}" -nf "${DMENU_NF}" -sb "${DMENU_SB}" -sf "${DMENU_SF}" -fn "${DMENU_FN}" -shb "${DMENU_SB}" -nhb "${DMENU_NB}" -nhf "${DMENU_NHF}" -shf "${DMENU_SHF}" "$@"
+    fi
+else
+    if [ -z "${theme_name}" ]
+    then
+        for arg do
+          shift
+          [ "$arg" = "-theme" ] && apagar=1 && continue
+          [ "$apagar" = "1" ] && apagar=0 && continue
+          set -- "$@" "$arg"
+        done
+        /usr/bin/dmenu "$@"
+    else
+        is_theme="$(is_theme $@)"
+        if [ "${is_theme}" = "1" ]; then
+            /usr/bin/rofi -dmenu "$@"
+        else
+            /usr/bin/rofi -theme $HOME/.config/rofi/bspwm.rasi -dmenu "$@"
+        fi
+    fi
+fi
