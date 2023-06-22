@@ -103,7 +103,7 @@ function reset_configs(){
     if [ ! -d ${HOME}/.config/wezterm ]; then
         mkdir -p "${HOME}/.config/wezterm"
     fi
-    if [ ! -d ${theme_name}/* ${HOME}/.config/eww ]; then
+    if [ ! -d ${HOME}/.config/eww ]; then
         mkdir -p "${HOME}/.config/eww"
     fi
     
