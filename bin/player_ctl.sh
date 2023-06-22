@@ -157,7 +157,7 @@ forward(){
 adjust_volume(){
   player=$1
 
-  volume=$(printf "0\n0.5\n1" | dmenu -i -p "Volume (0.0 - 1.0)"   )
+  volume=$(printf "0\n0.5\n1" | ava_dmenu -i -p "Volume (0.0 - 1.0)"   )
 
   if [ -z $player ]; then
       playerctl volume $volume 
@@ -166,7 +166,7 @@ adjust_volume(){
   fi
 }
 
-chosen_p=$(get_titles | dmenu -i -n -l 20 -p "Select the player:"   )
+chosen_p=$(get_titles | ava_dmenu -i -n -l 20 -p "Select the player:"   )
 chosen_p=$(echo $chosen_p | awk '{print $1}') 
 
 get_prompt() {
@@ -215,15 +215,15 @@ if [ ! -z $chosen_p ]; then
     prompt=$(get_prompt "${chosen_p}")
     if [ "$chosen_p" = "chromecast" ]; then
         if [ "${use_rofi}" = 1 ]; then
-            chosen=$(printf "\n\\n\\n\\n" | dmenu -i -p "${prompt}"    -theme ${rofi_item4})
+            chosen=$(printf "\n\\n\\n\\n" | ava_dmenu -i -p "${prompt}"    -theme ${rofi_item4})
         else
-            chosen=$(printf "\n\\n\\n\\n" | dmenu -i -p "${prompt}"    -theme ${rofi_item4})
+            chosen=$(printf "\n\\n\\n\\n" | ava_dmenu -i -p "${prompt}"    -theme ${rofi_item4})
         fi
     else
         if [ "${use_rofi}" = 1 ]; then
-            chosen=$(printf "\\n\\n\\n\\n\\n" | dmenu -i -p "${prompt}"    -theme ${rofi_item4})
+            chosen=$(printf "\\n\\n\\n\\n\\n" | ava_dmenu -i -p "${prompt}"    -theme ${rofi_item4})
         else
-            chosen=$(printf " play/pause\\n   next\\n   prev\\n  stop\\n  vol\\n  cast" | dmenu -i -p "${prompt}"    -theme ${rofi_item4})
+            chosen=$(printf " play/pause\\n   next\\n   prev\\n  stop\\n  vol\\n  cast" | ava_dmenu -i -p "${prompt}"    -theme ${rofi_item4})
         fi
     fi
 
