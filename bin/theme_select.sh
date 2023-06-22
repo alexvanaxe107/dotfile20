@@ -73,6 +73,39 @@ function reset_configs(){
     if [ ! -d $HOME/.config/bspwm/themes ]; then
         mkdir -p "${HOME}/.config/bspwm/themes/bsp.cfg"
     fi
+    if [ ! -d ${HOME}/.vim/configs ]; then
+        mkdir -p "${HOME}/.vim/configs/"
+    fi
+    if [ ! -d ${HOME}/.config/dunst ]; then
+        mkdir -p "${HOME}/.config/dunst/"
+    fi
+    if [ ! -d ${HOME}/.config/twmn ]; then
+        mkdir -p "${HOME}/.config/twmn"
+    fi
+    if [ ! -d ${HOME}/.config/polybar ]; then
+        mkdir -p "${HOME}/.config/polybar"
+    fi
+    if [ ! -d ${HOME}/.config/conky ]; then
+        mkdir -p "${HOME}/.config/conky"
+    fi
+    if [ ! -d ${HOME}/.config/vis/colors ]; then
+        mkdir -p "${HOME}/.config/vis/colors"
+    fi
+    if [ ! -d ${HOME}/.config/tint2 ]; then
+        mkdir -p "${HOME}/.config/tint2"
+    fi
+    if [ ! -d ${HOME}/.config/wm ]; then
+        mkdir -p "${HOME}/.config/wm"
+    fi
+    if [ ! -d ${HOME}/.config/rofi ]; then
+        mkdir -p "${HOME}/.config/rofi"
+    fi
+    if [ ! -d ${HOME}/.config/wezterm ]; then
+        mkdir -p "${HOME}/.config/wezterm"
+    fi
+    if [ ! -d ${theme_name}/* ${HOME}/.config/eww ]; then
+        mkdir -p "${HOME}/.config/eww"
+    fi
     
     cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
