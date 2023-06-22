@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env bash
 
 if [ -z "${PREFERENCE}" ]; then
     MONITOR1=$(monitors_info.sh -t 0)
