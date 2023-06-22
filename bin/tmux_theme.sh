@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 THEMES=$HOME/.config/wm/tmux.opt
 TMUX_CONFIG=$HOME/.config/.tmux.conf

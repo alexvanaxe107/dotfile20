@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 get_monitors() {
     monitors=$(monitors_info.sh -m)

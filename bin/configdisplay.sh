@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Redimension" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: "   )
 

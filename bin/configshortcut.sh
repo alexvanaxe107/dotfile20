@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytq\nytpl\nwallpaper\npolybar\ntodo\ndunst\neww" | dmenu -l 30    -p "Select config to edit")
+file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytq\nytpl\nwallpaper\npolybar\ntodo\ndunst\neww\nstellaris" | dmenu -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -57,6 +57,7 @@ case $file in
     "todo")  wezterm start $EDITOR $HOME/todo.txt;;
     "dunst")  wezterm start $EDITOR $HOME/.config/dunst/dunstrc;;
     "wallpaper") cd $HOME/Documents/Pictures/Wallpapers/dual/$theme_name;sxiv *;;
+    "stellaris") cd $HOME/Documents/Pictures/Wallpapers/stellaris;sxiv *;;
     "eww")  wezterm start $EDITOR $HOME/.config/eww/*;;
 esac
 

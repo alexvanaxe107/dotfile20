@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 CONFIG_PATH="$HOME/.config/wm/bspwm.conf"
 

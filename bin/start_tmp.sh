@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DP="DisplayPort-2"
 HDMI="HDMI-A-0"

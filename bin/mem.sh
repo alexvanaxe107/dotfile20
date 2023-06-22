@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 PERCENT=unset
 USED=unset

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #-------------- How to use -----------------#
 # 1 move this file to /usr/bin

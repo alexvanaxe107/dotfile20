@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 translate() {
     if [ -z "$1" ]; then

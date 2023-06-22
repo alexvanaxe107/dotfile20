@@ -1,2 +1,2 @@
-FONT="Share Tech Mono":pixelsize=20
+FONT="Targa MS":pixelsize=19
 SAVER=saver_mpv

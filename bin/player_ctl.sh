@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 TMP_LOCATION=$HOME/.config/tmp
 LAST_LOCATION_PLAYED="${TMP_LOCATION}/last_location_played"

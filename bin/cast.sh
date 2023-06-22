@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 source $HOME/.pyenv/versions/wm/bin/activate
 

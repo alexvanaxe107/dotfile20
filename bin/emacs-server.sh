@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 iswmmode="$1"
 
 if [ -z "${iswmmode}" ]; then

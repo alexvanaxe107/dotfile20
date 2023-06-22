@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 remoteHScreen=1366
 remoteVScreen=768

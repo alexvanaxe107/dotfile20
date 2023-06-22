@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # A POSIX variable
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"

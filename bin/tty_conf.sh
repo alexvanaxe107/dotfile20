@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 sudo fbset -xres 1280 -yres 730
 

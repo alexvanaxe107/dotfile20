@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
