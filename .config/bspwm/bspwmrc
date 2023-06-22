@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bashrc
 
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd >>/tmp/sxhkcd.log 2>&1 &
