@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # Exit on error. Append "|| true" if you expect an error.
 # Exit on error inside any functions or subshells.
