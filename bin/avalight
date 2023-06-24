@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env bash
 
 # A script to use dmenu to change the light
 # FOR REFERENCE: xrandr --output eDP1 --brightness 1 
