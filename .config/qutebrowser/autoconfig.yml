@@ -32,6 +32,6 @@ settings:
   content.notifications.enabled:
     https://backiee.com: false
   statusbar.show:
-    global: always
+    global: in-mode
   tabs.show:
     global: multiple
