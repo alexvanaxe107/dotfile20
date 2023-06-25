@@ -49,7 +49,6 @@ opt.updatetime = 700        -- ms to wait for trigger an event
 -- Other stuffs
 opt.timeout = false
 opt.listchars="eol:$,tab:>-,trail:~,extends:>,precedes:<"
-g.python3_host_prog = '/home/alexvanaxe/.pyenv/versions/neovim3/bin/python'
 
 -----------------------------------------------------------
 -- Startup

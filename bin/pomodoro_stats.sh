@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env bash
 
 # Set colors for terminal output
 export red="$(tput setaf 1)"
