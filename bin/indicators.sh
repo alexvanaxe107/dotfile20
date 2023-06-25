@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #set -o errexit
 # Exit on error inside any functions or subshells.

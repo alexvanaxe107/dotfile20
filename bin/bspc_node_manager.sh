@@ -1,4 +1,4 @@
-#! /bin/dash
+#!/usr/bin/env bash
 
 bring_all="0"
 hide_node() {
