@@ -201,6 +201,7 @@ source ~/.ng-completion
 
 export EDITOR=nvim
 
+alias dmenu=ava_dmenu
 alias fuck='sudo $(fc -ln -1)'
 alias tmuxa='tmux attach-session -t shell'
 export FZF_DEFAULT_COMMAND='fd -I --type f'

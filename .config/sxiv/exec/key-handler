@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SCALE=230
 
@@ -25,10 +25,10 @@ reverse_file(){
 }
 
 save_img(){
-    local theme="$(printf "day\nnight\nshabbat" | ava_dmenu -p "Choose the theme")"
+    local theme="$(printf "day\nnight\nshabbat" | dmenu -p "Choose the theme")"
     exit_if_none "${theme}"
 
-    #local mode="$(printf "\nultra\ndual" | ava_dmenu -p "Choose the modality")"
+    #local mode="$(printf "\nultra\ndual" | dmenu -p "Choose the modality")"
 
     local save_location="$HOME/Documents/Pictures/Wallpapers/dual/$theme/"
     cp ${file} "${save_location}"
@@ -53,15 +53,15 @@ resize_img_plus(){
 
     local half_img="$((width_img_dimensions + ${sum}))x$((width_img_dimensions + ${sum}))"
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | ava_dmenu -p "Choose the direction")"
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
     exit_if_none "$direction"
 
     local resolutions=$(monitors_info.sh -d)
-    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | ava_dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | dmenu -p "Choose the dimension")"
     exit_if_none "$imgsize"
 
-    vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | ava_dmenu -p "Set the vertical adjustment")"
-    hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | ava_dmenu -p "Set the horizontal adjustment")"
+    vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical adjustment")"
+    hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the horizontal adjustment")"
 
     convert "$file" -quality 100 -resize "${imgsize}"^ -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
 
@@ -75,10 +75,10 @@ crop_img(){
     index="$2"
     gravity="$3"
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | ava_dmenu -p "Choose the direction")"
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
     exit_if_none "${direction}"
-    resize="$(printf "+0\n+65\n+100\n+200\n+300" | ava_dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | ava_dmenu -p "Set the horizontal deviation")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
     
     filename="$(basename $file)"
 
@@ -99,17 +99,17 @@ crop_img(){
 }
 
 recort_img(){
-    monitor=$(monitors_info.sh -m | (printf "Custom\n" && cat) | ava_dmenu -p "Choose the monitor to base the image")
+    monitor=$(monitors_info.sh -m | (printf "Custom\n" && cat) | dmenu -p "Choose the monitor to base the image")
     index="$monitor"
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | ava_dmenu -p "Choose the direction")"
-    resize="$(printf "+0\n+65\n+100\n+200\n+300" | ava_dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | ava_dmenu -p "Set the horizontal deviation")"
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
     
     filename="$(basename $file)"
 
     if [ "${monitor}" == "Custom" ]; then
-        monitor_info="$(printf "2000x2000" | ava_dmenu -p "Set the dimension")"
+        monitor_info="$(printf "2000x2000" | dmenu -p "Set the dimension")"
     else
         monitor_info="$(monitors_info.sh -d "${monitor}")"
     fi
