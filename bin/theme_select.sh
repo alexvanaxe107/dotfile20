@@ -118,7 +118,6 @@ function reset_configs(){
     cp ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
     cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     cp ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
-    cp ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
     cp ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
     cp ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
     cp ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
@@ -126,6 +125,7 @@ function reset_configs(){
     cp ${TEMPLATES}/eww/${theme_name}/* ${HOME}/.config/eww/
 
     # Overwiting only if it not exists
+    [ ! -f $HOME/.tmux.conf ] && cp ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
     [ ! -f $HOME/.config/wm/bspwm.conf ] && cp ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf
     [ ! -f $HOME/.config/wm/monitors.conf ] && cp ${TEMPLATES}/wm/monitors.conf ${HOME}/.config/wm/monitors.conf
     [ ! -f $HOME/.config/wezterm/wezterm.lua ] && cp ${TEMPLATES}/wezterm/wezterm.lua ${HOME}/.config/wezterm/wezterm.lua
