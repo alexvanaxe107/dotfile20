@@ -1,0 +1,18 @@
+-- Configurar git para global store
+git config --global credential.helper store
+
+-- Configurar o plugin tpm do tmux
+
+-- configurar o packer. Rodar:
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+-- configurar pyenv - entao neovim virtual env com neovim
+
+*** Reconfigurar o ambiente
+- Teria que ter um ambiente para usuario, ou mais granular ainda, um apenas com o shell.
+
+- Melhor abordagem para o neovim:
+  1: Instalar o python no shell acima
+  2: Criar um sh com o python que chamaria o neovim (ruim)
+  3: Instalar o python no usuario
