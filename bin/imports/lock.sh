@@ -1,2 +1,2 @@
-FONT=Iceland:pixelsize=29
-SAVER=saver_blank
+FONT="Iosevka Nerd Font Mono":pixelsize=20
+SAVER=saver_mpv
