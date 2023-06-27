@@ -34,6 +34,7 @@ self: super:
     gnome.pomodoro = self.gnome.pomodoro;
     eww = self.eww;
     xclip = self.xclip;
+    fzf = self.fzf;
     # programming
     wezterm = self.wezterm;
 
