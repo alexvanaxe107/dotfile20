@@ -63,7 +63,7 @@ font() {
     fi
 
     #Change the ${dmenu} font
-    sed -i "s/${dmenu}_FN.*/${dmenu}_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
+    sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
     #Change the dunst font
     sed -i "s/font =.*/font = ${font_name},${style} ${size1}/" ${HOME}/.config/dunst/dunstrc
