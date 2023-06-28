@@ -1,5 +1,7 @@
 -- Configurar git para global store
 git config --global credential.helper store
+-- Ele trava as vezes quando o comit é grande. Entao fazemos:
+git config --global http.postBuffer 157286400
 
 -- Configurar o plugin tpm do tmux
 

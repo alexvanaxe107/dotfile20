@@ -1,4 +1,4 @@
-#! /bin/dash
+#!/usr/bin/env sh
 
 # Source the theme
 . ${HOME}/.config/bspwm/themes/bsp.cfg

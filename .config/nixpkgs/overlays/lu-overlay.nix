@@ -31,15 +31,19 @@ self: super:
     playerctl = self.playerctl;
 
     # utilities
-    gnome.pomodoro = self.gnome.pomodoro;
+    gnome_pomodoro = self.gnome.pomodoro;
     eww = self.eww;
     xclip = self.xclip;
     fzf = self.fzf;
+    xsecurelock = self.xsecurelock;
     # programming
     wezterm = self.wezterm;
 
     qutebrowser = self.qutebrowser;
     fd = self.fd;
+
+    # Nicities
+    fortune = self.fortune;
 
     mpv = super.mpv.override {
       scripts = [ self.mpvScripts.mpris ];

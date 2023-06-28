@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 . ~/.config/bspwm/themes/bsp.cfg
 

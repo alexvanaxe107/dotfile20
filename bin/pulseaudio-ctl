@@ -1,6 +1,4 @@
-#! /bin/bash
-
-running_sink="$(pactl list sinks | grep -C 1 "RUNNING" | tail -n 1 | cut -d ' ' -f 2)"
+#!/usr/bin/env bash
 
 do_mute() {
     wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle

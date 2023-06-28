@@ -7,7 +7,7 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCursive\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nGothic\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft\\nNM-Softer" | dmenu -i    -l 20 -p "Change the font: ")
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | dmenu -i    -l 20 -p "Change the font: ")
 
 SPACE_SIZE=30
 
@@ -144,7 +144,6 @@ case $CHOSEN in
     "War") font "American Stencil" Regular 9 9 12 1;;
     "Programming") font "Roboto Mono" Bold 8 8 12 1;;
     "Retro") font "hermit" Bold 8 8 12 1;;
-    "Cursive") font "Z003" "Medium Italic" 13 12 15 2;;
     "Soft") font "mononoki" Regular 9 9 12 2;;
     "80s") font "Press Start 2P" Regular 7 6 9 2;;
     "Cyberpunk") font "Braciola MS" "Regular Rg" 9 9 12 1;;
@@ -159,7 +158,6 @@ case $CHOSEN in
     "Space") font "Unispace" Bold 8 8 10 2;;
     "Noir") font "Syne Mono" Regular 10 10 11 1;;
     "Computer") font "Terminus" Bold 10 10 13 2;;
-    "Gothic") font "NanumGothicCoding" Bold 10 10 12 1;;
     "SteamPunk") font "Roboto Condensed" Semibold 10 10 11;;
     "Terminator") font "Digital\-7 Mono" Bold 9 9 12 0;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
@@ -169,7 +167,6 @@ case $CHOSEN in
     "NM-Celtic") font "A.D. MONO" Bold 12 12 12 0;;
     "NM-Space") font "Orbitron" Bold 9 9 10 0;;
     "NM-Soft") font "Texturina" Bold 10 10 10 0;;
-    "NM-Softer") font "Lerton" Regular 10 10 13 2;;
     "teste") font "Amazon Ember" Medium 10 10 13 1;;
     *) font "${CHOSEN}" Bold 9 10 11 0;;
 esac
