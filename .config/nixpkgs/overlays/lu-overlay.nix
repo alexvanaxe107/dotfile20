@@ -49,6 +49,7 @@ self: super:
       scripts = [ self.mpvScripts.mpris ];
     };
 
+    rofi = self.rofi;
     dmenu = (import ~/Documents/Projects/nixconfs/nixconfs/dmenu.nix);
 
 

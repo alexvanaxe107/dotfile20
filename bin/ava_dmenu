@@ -39,9 +39,9 @@ else
     else
         is_theme="$(is_theme $@)"
         if [ "${is_theme}" = "1" ]; then
-            /usr/bin/rofi -dmenu "$@"
+            rofi -dmenu "$@"
         else
-            /usr/bin/rofi -theme $HOME/.config/rofi/bspwm.rasi -dmenu "$@"
+            rofi -theme $HOME/.config/rofi/bspwm.rasi -dmenu "$@"
         fi
     fi
 fi

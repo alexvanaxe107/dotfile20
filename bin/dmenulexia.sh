@@ -2,10 +2,12 @@
 
 source $HOME/.config/wm/bspwm.conf
 
+dmenu=ava_dmenu
+
 action="${1}"
 
 if [ -z "${action}" ]; then
-    action=$(echo "" | dmenu -p "What do you want to do?"    -theme ${rofi_item5})
+    action=$(echo "" | ${dmenu} -p "What do you want to do?"    -theme ${rofi_item5})
 fi
 
 if [ -z "${action}" ]; then
