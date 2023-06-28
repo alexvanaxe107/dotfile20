@@ -22,22 +22,22 @@ export XDG_CURRENT_DESKTOP=i3
 # npm configs
 # --------------------------------------------------------
 # Set up Node Version Manager
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 # Will be used the nvm, and the bin will be linked to it
 # export npm_config_prefix="$HOME/Documents/npm/bin"
 
-export NVM_DIR="$HOME/Documents/.nvm"
-source /usr/share/nvm/nvm.sh
-source /usr/share/nvm/bash_completion
-source /usr/share/nvm/install-nvm-exec
+# export NVM_DIR="$HOME/Documents/.nvm"
+# source /usr/share/nvm/nvm.sh
+# source /usr/share/nvm/bash_completion
+# source /usr/share/nvm/install-nvm-exec
 
 # --------------------------------------------------------
 # python configs
 # --------------------------------------------------------
-export PYENV_ROOT="$HOME/.pyenv"
-eval "$(pyenv init -)"
-
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# export PYENV_ROOT="$HOME/.pyenv"
+# eval "$(pyenv init -)"
+# 
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # --------------------------------------------------------
 # Simple configs
