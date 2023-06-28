@@ -8,6 +8,7 @@ self: super:
   # https://gist.github.com/LnL7/570349866bb69467d0caf5cb175faa74
   # https://discourse.nixos.org/t/declarative-package-management-for-normal-users/1823
   # $ curl https://gist.githubusercontent.com/LnL7/570349866bb69467d0caf5cb175faa74/raw/3f3d53fe8e8713ee321ee894ecf76edbcb0b3711/lnl-overlay.nix -o ~/.config/nixpkgs/overlays/lnl.nix
+
   userPackages = super.userPackages or {} // {
 
     # Example:
@@ -48,6 +49,7 @@ self: super:
     mpv = super.mpv.override {
       scripts = [ self.mpvScripts.mpris ];
     };
+    spotify = self.spotify;
 
     rofi = self.rofi;
     dmenu = (import ~/Documents/Projects/nixconfs/nixconfs/dmenu.nix);
