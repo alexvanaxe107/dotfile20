@@ -51,6 +51,7 @@ self: super:
 
     rofi = self.rofi;
     dmenu = (import ~/Documents/Projects/nixconfs/nixconfs/dmenu.nix);
+    ava_bible = (import ~/Documents/Projects/nixconfs/nixconfs/ava-bible.nix);
 
 
     # Default packages:
