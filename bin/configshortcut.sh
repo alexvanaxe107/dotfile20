@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+dmenu=ava_dmenu
+
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytq\nytpl\nwallpaper\npolybar\ntodo\ndunst\neww\nstellaris" | dmenu -l 30    -p "Select config to edit")
+file=$(printf "config\nradio\nbspwm\nfonts\nmonitors\nytq\nytpl\nwallpaper\npolybar\ntodo\ndunst\neww\nstellaris" | ${dmenu} -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){

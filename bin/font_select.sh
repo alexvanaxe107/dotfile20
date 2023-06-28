@@ -7,7 +7,9 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | dmenu -i    -l 20 -p "Change the font: ")
+dmenu=ava_dmenu
+
+CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | ${dmenu} -i    -l 20 -p "Change the font: ")
 
 SPACE_SIZE=30
 
@@ -31,7 +33,7 @@ font() {
     space=$6
     eww=""
 
-    SIZE=$(printf "" | dmenu -i -p "Choose the size (bar(${size1}) dmenu(${size2}) conky(${size3}) vspace(${space}))")
+    SIZE=$(printf "" | ${dmenu} -i -p "Choose the size (bar(${size1}) ${dmenu}(${size2}) conky(${size3}) vspace(${space}))")
 
     if [ ! -z "${SIZE}" ]; then
         size1="$(echo ${SIZE} | cut -d ' ' -f 1)"
@@ -60,8 +62,8 @@ font() {
         sed -i "s/^\$general-font-size: .*;/\$general-font-size: ${eww};/" ${HOME}/.config/eww/eww.scss
     fi
 
-    #Change the dmenu font
-    sed -i "s/DMENU_FN.*/DMENU_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
+    #Change the ${dmenu} font
+    sed -i "s/${dmenu}_FN.*/${dmenu}_FN=\"${font_name}:style=${style}:size=${size2}\"/" ${HOME}/.config/bspwm/themes/bsp.cfg
 
     #Change the dunst font
     sed -i "s/font =.*/font = ${font_name},${style} ${size1}/" ${HOME}/.config/dunst/dunstrc
@@ -97,7 +99,7 @@ font() {
 
     sed -i "s/font_size =.*/font_size = $((size1 - 1)),/" ${HOME}/.config/wezterm/extra.lua
 
-    update=$(printf "Yes\nNo" | dmenu -i    -p "Update terminal font? (ESC go to default)")
+    update=$(printf "Yes\nNo" | ${dmenu} -i    -p "Update terminal font? (ESC go to default)")
 
     if [ "${update}" = "Yes" ]; then
         sed -i "s/family:.*/family: ${font_name}/" ${HOME}/.config/alacritty/alacritty.yml

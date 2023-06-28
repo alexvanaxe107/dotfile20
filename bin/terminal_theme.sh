@@ -5,7 +5,9 @@ PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 THEMES=$HOME/.config/wm/terminal.conf
 TERM_CONFIG=$HOME/.config/wezterm/extra.lua
 
-choosen_theme=$((printf "Theme on\nTheme off\n" && cat $THEMES) |  dmenu -i -l 27 -p "Choose the terminal theme")
+dmenu=ava_dmenu
+
+choosen_theme=$((printf "Theme on\nTheme off\n" && cat $THEMES) |  ${dmenu} -i -l 27 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 

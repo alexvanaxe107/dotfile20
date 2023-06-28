@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Redimension" "Add Virtual" "Rm Virtual" "All On!" | dmenu -p "Setting up monitors: "   )
+dmenu=ava_dmenu
+
+option=$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" "Toggle" "Primary" "Order" "Rotate" "Redimension" "Add Virtual" "Rm Virtual" "All On!" | ${dmenu} -p "Setting up monitors: "   )
 
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
 
 toggle() {
-    monitor=$(monitors_info.sh -c | dmenu -p "What monitor will be toggled?"   )
+    monitor=$(monitors_info.sh -c | ${dmenu} -p "What monitor will be toggled?"   )
 
     if [ -z "${monitor}" ]; then
         exit 0
@@ -15,14 +17,14 @@ toggle() {
 }
 
 rotate() {
-    monitor=$(monitors_info.sh -m | dmenu -p "Which monitor rotate?"   )
-    direction=$(printf "%s\n%s\n%s" "left" "right" "normal" | dmenu -p "Which monitor rotate?"   )
+    monitor=$(monitors_info.sh -m | ${dmenu} -p "Which monitor rotate?"   )
+    direction=$(printf "%s\n%s\n%s" "left" "right" "normal" | ${dmenu} -p "Which monitor rotate?"   )
 
     display_manager.sh -r "${monitor}" "${direction}"
 }
 
 set_primary() {
-    monitor=$(monitors_info.sh -m | dmenu -p "What is the new primary?"   )
+    monitor=$(monitors_info.sh -m | ${dmenu} -p "What is the new primary?"   )
 
     if [ ! -z "${monitor}" ]; then
         display_manager.sh -p ${monitor}
@@ -41,7 +43,7 @@ restart_conky() {
 }
 
 set_monitors() {
-    option=$(printf "%s\n%s" "Auto" "Manual" | dmenu -p "The method to use: "   )
+    option=$(printf "%s\n%s" "Auto" "Manual" | ${dmenu} -p "The method to use: "   )
 
     if [ "$option" = "Auto" ]; then
         preferences="$(cat $PREFERENCE_FILE)"
@@ -61,7 +63,7 @@ set_monitors() {
         list_monitor=""
         count=1
         for monitor in $(monitors_info.sh -c); do
-            local mon_tmp=$(monitors_info.sh -c | dmenu -p "Select the ${count}:"   )
+            local mon_tmp=$(monitors_info.sh -c | ${dmenu} -p "Select the ${count}:"   )
             if [ -z "${mon_tmp}" ]; then
                 break
             fi
@@ -91,7 +93,7 @@ rm_virtual() {
 }
 
 add_virtual_old() {
-    local dim="$(printf "1366x768\n1920x1080" | dmenu -p "Choose a screen dimension"   )"
+    local dim="$(printf "1366x768\n1920x1080" | ${dmenu} -p "Choose a screen dimension"   )"
     if [ -z "${dim}" ]; then
         exit 0
     fi
@@ -99,8 +101,8 @@ add_virtual_old() {
 }
 
 redimension() {
-    local monitor=$(monitors_info.sh -c | dmenu -p "Select the ${count}:"   )
-    local dim=$(xrandr | grep -P "\d+x\d+" | cut --output-delimiter=":" -s -d ' ' -f 1,4 | awk '{{if ($1 != "") val=$1}; {if ($1 == "") print val "x" $2}}' FS=':' | grep "${monitor}" | awk '{printf "%sx%s 1:%0.0f\n", $2,$3,$2/$3*10}' FS=x | dmenu -l 10)
+    local monitor=$(monitors_info.sh -c | ${dmenu} -p "Select the ${count}:"   )
+    local dim=$(xrandr | grep -P "\d+x\d+" | cut --output-delimiter=":" -s -d ' ' -f 1,4 | awk '{{if ($1 != "") val=$1}; {if ($1 == "") print val "x" $2}}' FS=':' | grep "${monitor}" | awk '{printf "%sx%s 1:%0.0f\n", $2,$3,$2/$3*10}' FS=x | ${dmenu} -l 10)
 
     dim=$(awk '{print $1}' <<< "${dim}")
 
@@ -108,7 +110,7 @@ redimension() {
 }
 
 rm_virtual_old() {
-    local virtual=$(monitors_info.sh -c | grep VIRTUAL | dmenu)
+    local virtual=$(monitors_info.sh -c | grep VIRTUAL | ${dmenu})
 
     if [ -z "${virtual}" ]; then
         exit 0

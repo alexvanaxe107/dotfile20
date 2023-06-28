@@ -2,6 +2,8 @@
 
 source $HOME/.config/wm/bspwm.conf
 
+dmenu=ava_dmenu
+
 show_help() {
     echo "Manage the pomodoro"
     echo "-s               Start a pomodoro."
@@ -21,7 +23,7 @@ while getopts "hsf" opt; do
 done
 
 if [ -z "$1" ]; then
-    chosen=$(printf "▶\n⏹" | dmenu -i    -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
+    chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
     case "$chosen" in
         "▶") $(start_pomodoro);;
         "⏹") pomodoro-client.py stop;;
