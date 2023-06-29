@@ -41,6 +41,8 @@ if [ -x /usr/bin/fortune ]; then
     /usr/bin/fortune -s     # Makes our day a bit more fun.... :-)
 fi
 
+export PATH="$HOME/bin:$PATH"
+
 function _exit()              # Function to run upon exit of shell.
 {
     echo -e "${BRed}Hasta la vista, baby${NC}"
@@ -268,5 +270,8 @@ vterm_printf(){
         printf "\e]%s\e\\" "$1"
     fi
 }
+
+# Nix configurations
+export NIXPKGS_ALLOW_UNFREE=1
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
