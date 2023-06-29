@@ -1,4 +1,4 @@
-#! /bin/dash
+#!/usr/bin/env bash
 
 show_help() {
     echo "Torrify the internet"; echo ""

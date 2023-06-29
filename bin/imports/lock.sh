@@ -1,2 +1,2 @@
-FONT="Iceland":pixelsize=21
-SAVER=~/bin/ava_saver_mpv
+FONT="Targa MS":pixelsize=19
+SAVER=$(which ava_saver_mpv)
