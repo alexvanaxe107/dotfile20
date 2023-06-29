@@ -1,2 +1,2 @@
-FONT="NovaMono":pixelsize=19
-SAVER=saver_mpv
+FONT="Iceland":pixelsize=21
+SAVER=~/bin/ava_saver_mpv
