@@ -28,7 +28,7 @@ self: super:
     yt-dlp = self.yt-dlp;
     sxiv = self.sxiv;
     imagemagick = self.imagemagick;
-    picom = self.picom;
+    # picom = self.picom;
     playerctl = self.playerctl;
 
     # utilities
@@ -54,6 +54,7 @@ self: super:
     rofi = self.rofi;
     dmenu = (import ~/Documents/Projects/nixconfs/nixconfs/dmenu.nix);
     ava_bible = (import ~/Documents/Projects/nixconfs/nixconfs/ava-bible.nix);
+    picom_animations = (import ~/Documents/Projects/nixconfs/nixconfs/picom-animations.nix);
 
 
     # Default packages:

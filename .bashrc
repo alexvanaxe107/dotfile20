@@ -72,17 +72,17 @@ export PATH="$HOME/Documents/npm/bin:$HOME/.local/bin/:$PATH"
 #export npm_config_prefix="$HOME/Documents/npm/bin"
 source /usr/share/nvm/init-nvm.sh
 
-[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/Documents/.nvm"
-source /usr/share/nvm/nvm.sh
-source /usr/share/nvm/bash_completion
-source /usr/share/nvm/install-nvm-exec
+#[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/Documents/.nvm"
+#source /usr/share/nvm/nvm.sh
+#source /usr/share/nvm/bash_completion
+#source /usr/share/nvm/install-nvm-exec
 
 #-----------------------------
 # Pyenv configs
 #-----------------------------
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.gem/ruby/2.5.0/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$HOME/bin:$PYENV_ROOT/bin:$HOME/.gem/ruby/2.5.0/bin:$PATH"
+# eval "$(pyenv init -)"
 
 
 # Add colors for filetype and  human-readable sizes by default on 'ls':
