@@ -206,7 +206,7 @@ fi
 
 search='*mouse off*'
 if [[ "$action" == $search ]]; then
-    unclutter --timeout 5 -b
+    unclutter -idle 5&
     exit 0
 fi
 

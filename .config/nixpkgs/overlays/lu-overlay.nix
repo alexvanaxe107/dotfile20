@@ -24,12 +24,14 @@ self: super:
     dunst = self.dunst;
     polybar = self.polybar;
     nitrogen = self.nitrogen;
+
     # media
     yt-dlp = self.yt-dlp;
     sxiv = self.sxiv;
     imagemagick = self.imagemagick;
     # picom = self.picom;
     playerctl = self.playerctl;
+    cli-visualizer = self.cli-visualizer;
 
     # utilities
     gnome_pomodoro = self.gnome.pomodoro;
@@ -39,6 +41,7 @@ self: super:
     xsecurelock = self.xsecurelock;
     # programming
     wezterm = self.wezterm;
+    unclutter = self.unclutter;
 
     qutebrowser = self.qutebrowser;
     fd = self.fd;

@@ -3,6 +3,6 @@ colors:
   # Default colors
   primary:
     # hard contrast: background = '0xf9f5d7'
-    background: '0xBFB8B1'
+    background: '0x101122'
     # soft contrast: background = '0xf2e5bc'
-    foreground: '0x651818'
+    foreground: '0x5A99A5'
