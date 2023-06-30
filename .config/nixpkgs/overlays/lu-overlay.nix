@@ -17,6 +17,7 @@ self: super:
     python3 = self.python3.withPackages (ps: [
 	 ps.pygobject3 ps.pydbus ps.click ps.i3ipc]);
     bspwm = self.bspwm;
+    wmctrl = self.wmctrl;
     tmux = self.tmux;
     zsh = self.zsh;
     neovim = self.neovim;

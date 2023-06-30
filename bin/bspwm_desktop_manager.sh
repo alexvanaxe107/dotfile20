@@ -4,6 +4,8 @@ CONFIG_PATH="$HOME/.config/wm/bspwm.conf"
 
 . "${CONFIG_PATH}"
 
+dmenu=$(which ava_dmenu)
+
 get_name(){
     case $1 in
         1) echo "terminal";;
@@ -159,7 +161,7 @@ get_desktop() {
         break
     done
     else
-        desktop=$(dmenu -p "Select a desktop" -l 15 <<< ${actv_monitors})
+        desktop=$(${dmenu} -p "Select a desktop" -l 15 <<< ${actv_monitors})
     fi
 
     echo $desktop

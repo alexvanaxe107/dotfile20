@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+dmenu=$(which ava_dmenu)
+
 bring_all="0"
 hide_node() {
     marked_node=$(bspc query --desktop focused -N -n .leaf.marked)
@@ -77,7 +79,7 @@ retrieve_marked_node (){
 }
 
 retrieve_index() {
-	selected=$(wmctrl -l | awk '{$1=$2=$3="";print NR $0}' | dmenu -l 10)
+	selected=$(wmctrl -l | awk '{$1=$2=$3="";print NR $0}' | ${dmenu} -l 10)
 	index=$(echo $selected | awk '{print $1}')
 	echo ${index}
 }
