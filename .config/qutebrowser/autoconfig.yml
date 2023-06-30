@@ -28,7 +28,7 @@ settings:
         cs: hint links userscript castsite.sh
         cv: hint links userscript castvideo.sh
   colors.webpage.darkmode.enabled:
-    global: true
+    global: false
   content.blocking.enabled:
     global: false
   content.notifications.enabled:
