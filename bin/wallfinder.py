@@ -6,7 +6,7 @@ import random
 import math
 import json
 from datetime import datetime
-from google_images_search import GoogleImagesSearch
+# from google_images_search import GoogleImagesSearch
 
 from Xlib import display
 from Xlib.ext import randr
@@ -278,8 +278,8 @@ class GImages():
         return self.retrieve_url_wallapaper(resolution, scene)
 
     def retrieve_url_wallapaper(self, resolution, scene):
-        gis = GoogleImagesSearch('AIzaSyDkO6Yitk9x_22eNmyB5MTcEYA7PQBPMaM',
-                                 '46a14224dfb4f74bd')
+        #gis = GoogleImagesSearch('AIzaSyDkO6Yitk9x_22eNmyB5MTcEYA7PQBPMaM', '46a14224dfb4f74bd')
+        gis = None
 
         theme_name = os.environ['theme_name']
 
