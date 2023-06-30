@@ -11,6 +11,9 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 
 -- configurar pyenv - entao neovim virtual env com neovim
 
+-- configurar o tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 *** Reconfigurar o ambiente
 - Teria que ter um ambiente para usuario, ou mais granular ainda, um apenas com o shell.
 
