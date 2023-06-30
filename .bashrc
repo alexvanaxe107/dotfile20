@@ -72,7 +72,7 @@ alias path='echo -e ${PATH//:/\\n}'
 export PATH="$HOME/Documents/npm/bin:$HOME/.local/bin/:$PATH"
 # The config below is not used, and it will be linked bellow
 #export npm_config_prefix="$HOME/Documents/npm/bin"
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
 #[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/Documents/.nvm"
 #source /usr/share/nvm/nvm.sh
@@ -273,5 +273,9 @@ vterm_printf(){
 
 # Nix configurations
 export NIXPKGS_ALLOW_UNFREE=1
+
+clear
+
+spark.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
