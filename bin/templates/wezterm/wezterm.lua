@@ -10,7 +10,7 @@ toReturn = {}
 if os.getenv("theme_name") == "day" then
     font_name = "JetBrains Mono"
 elseif os.getenv("theme_name") == "night" then
-    font_name = "Iosevka"
+    font_name = "Iosevka Nerd Font Mono"
 elseif os.getenv("theme_name") == "shabbat" then
     font_name = "mononoki"
 else

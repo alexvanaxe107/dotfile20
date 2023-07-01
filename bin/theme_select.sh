@@ -71,7 +71,7 @@ function reset_configs(){
     theme_name=$1
 
     if [ ! -d $HOME/.config/bspwm/themes ]; then
-        mkdir -p "${HOME}/.config/bspwm/themes/bsp.cfg"
+        mkdir -p "${HOME}/.config/bspwm/themes/"
     fi
     if [ ! -d ${HOME}/.vim/configs ]; then
         mkdir -p "${HOME}/.vim/configs/"
