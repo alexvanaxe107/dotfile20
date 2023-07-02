@@ -33,6 +33,7 @@ self: super:
     # picom = self.picom;
     playerctl = self.playerctl;
     cli-visualizer = self.cli-visualizer;
+    pulseaudio = self.pulseaudio;
 
     # utilities
     gnome_pomodoro = self.gnome.pomodoro;

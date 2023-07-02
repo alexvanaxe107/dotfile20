@@ -3,6 +3,9 @@
 # --------------------------------------------------------
 source ~/.profile
 
+# Turn off the fcking beep
+unsetopt BEEP
+
 alias ls='ls -h --color'
 alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d /home/media/todos/general/config/config'
