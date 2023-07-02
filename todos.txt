@@ -21,3 +21,20 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   1: Instalar o python no shell acima
   2: Criar um sh com o python que chamaria o neovim (ruim)
   3: Instalar o python no usuario
+
+
+## ORGANIZAR DEPOIS - COMO INSTALAR VMWARE
+
+I realize this is a few months late, but since I spent a day figuring this out, might as well document it somewhere and hopefully help a soul.
+Not sure what Linux distro you're using, but let's presume it's a vanilla Debian 10 with Google Chrome for browser, and you're using Workspace ONE to launch your virtual desktop.
+Check to see if MIME type vmware-view is defined:
+xdg-mime query default x-scheme-handler/vmware-view
+You should get something like this:
+vmware-view.desktop
+If not, then define it like this:
+xdg-mime default vmware-view.desktop x-scheme-handler/vmware-view
+NOTE: It's likely the association will be created in the ~/.config/mimeapps.list file.
+Now make sure the selected handler file (vmware-view.desktop) is available under /usr/share/applications/.
+Use the following to run a quick test (Horizon client should launch, albeit with an error).
+xdg-open vmware-view:
+If desired, the vmware-view.desktop file can be copied to ~/.local/share/applications and modified, for example if launching the client through a SOCKS proxy, although I would recommend renaming it to something else, ex. vmware-view-socks5.desktop, and changing the vmware-view association.
