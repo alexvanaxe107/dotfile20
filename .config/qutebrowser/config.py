@@ -54,7 +54,7 @@ c.url.searchengines = {"DEFAULT": "http://www.google.com/search?q={}", "y": "htt
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
 ## Type: Dict
-c.aliases = {'w': 'session-save', 'q': 'close', 'qa': 'quit', 'wq': 'quit --save', 'wqa': 'quit --save'}
+c.aliases = {'w': 'session-save', 'l': 'session-load default', 'q': 'close', 'qa': 'quit', 'wq': 'quit --save', 'wqa': 'quit --save'}
 
 ## Time interval (in milliseconds) between auto-saves of
 ## config/cookies/etc.
