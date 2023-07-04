@@ -39,7 +39,7 @@ c.content.headers.accept_language = "en-US,en;q=0.9"
 
 # Hide title bar when only one
 c.tabs.show = "multiple"
-c.fonts.default_size="15px"
+c.fonts.default_size="16px"
 
 c.tabs.background = True
 
@@ -54,7 +54,8 @@ c.url.searchengines = {"DEFAULT": "http://www.google.com/search?q={}", "y": "htt
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
 ## Type: Dict
-c.aliases = {'w': 'session-save', 'l': 'session-load default', 'q': 'close', 'qa': 'quit', 'wq': 'quit --save', 'wqa': 'quit --save'}
+c.aliases = {'w': 'session-save', 'l': 'session-load', 'ld': 'session-load default', 
+             'q': 'close', 'qa': 'quit', 'wq': 'quit --save', 'wqa': 'quit --save'}
 
 ## Time interval (in milliseconds) between auto-saves of
 ## config/cookies/etc.

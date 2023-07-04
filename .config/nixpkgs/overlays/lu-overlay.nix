@@ -34,6 +34,7 @@ self: super:
     playerctl = self.playerctl;
     cli-visualizer = self.cli-visualizer;
     pulseaudio = self.pulseaudio;
+    flameshot = self.flameshot;
 
     # utilities
     gnome_pomodoro = self.gnome.pomodoro;
