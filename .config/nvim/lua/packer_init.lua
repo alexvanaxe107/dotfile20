@@ -134,6 +134,7 @@ return require('packer').startup(function()
     -- If you are using Packer
     use 'marko-cerovac/material.nvim'
     use 'drewtempelmeyer/palenight.vim'
+    use { 'Shadorain/shadotheme' }
 
     use {
 	"catppuccin/nvim",

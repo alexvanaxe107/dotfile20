@@ -111,7 +111,7 @@ super + c; {c,r,shift + r,m, shift + M,a}
     , dmenulexia.sh "mouse on" \ 
     , pulseaudio-ctl sink }
 
-super + x
+super + y
     status_notify.sh -q
 
 # Show the status

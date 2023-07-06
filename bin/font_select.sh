@@ -136,7 +136,7 @@ case $CHOSEN in
     "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
-    "ElegantAmz") font "Amazon Ember" Medium 11 11 14 1;;
+    "ElegantAmz") font "Amazon Ember Mono" Medium 11 11 14 1;;
     "Amazon") font "Bookerly" Regular 11 11 14 2;;
     "Fantasy") font "CaskaydiaCove Nerd Font Mono" Normal 9 9 13 2;;
     "Neon") font "Segment14" Regular 9 9 10 1;;

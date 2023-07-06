@@ -32,6 +32,12 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
     fi
 
+    if [ "$vim_theme" == "Material" ]; then
+        sed -i 's/^colorscheme.*/colorscheme material-lighter/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="material"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/set background.*/set background=/light' ${HOME}/.vim/configs/theme.vim
+    fi
+
     if [ "$vim_theme" == "Codeschool.light" ]; then
         sed -i 's/^colorscheme.*/colorscheme OceanicNextLight/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="oceanicnextlight"/' ${HOME}/.vim/configs/theme.vim
@@ -49,6 +55,7 @@ if [ ! -z "$choosen" ]; then
         #    sed -i 's/airline_theme.*/airline_theme="tokyounight"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
     fi
+
     if [ "$vim_theme" == "Ocean (light) (terminal.sexy)" ]; then
         sed -i 's/^colorscheme.*/colorscheme OceanicNextLight/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="oceanicnextlight"/' ${HOME}/.vim/configs/theme.vim
@@ -71,6 +78,12 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/^colorscheme.*/colorscheme tokyonight/' ${HOME}/.vim/configs/theme.vim
         #    sed -i 's/airline_theme.*/airline_theme="zenburn"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    fi
+
+    if [ "$vim_theme" == "Sakura" ]; then
+        sed -i 's/^colorscheme.*/colorscheme shado/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="shado"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/set background.*/set background=/dark' ${HOME}/.vim/configs/theme.vim
     fi
 
     if [ "$vim_theme" == "PencilLight" ]; then
@@ -117,7 +130,7 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
 
-    if [ "$vim_theme" == "GruvboxDarkHard" ]; then
+    if [ "$vim_theme" == "GruvboxDark" ]; then
         sed -i 's/^colorscheme.*/colorscheme gruvbox/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="gruvbox"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
@@ -172,6 +185,7 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/airline_theme.*/airline_theme="material"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
+
 
     if [ "$vim_theme" == "material_theme_light" ]; then
         sed -i 's/^colorscheme.*/colorscheme material/' ${HOME}/.vim/configs/theme.vim
