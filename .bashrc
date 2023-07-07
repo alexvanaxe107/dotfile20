@@ -69,7 +69,7 @@ alias path='echo -e ${PATH//:/\\n}'
 #-----------------------------
 # npm configs
 #-----------------------------
-export PATH="$HOME/Documents/npm/bin:$HOME/.local/bin/:$PATH"
+#export PATH="$HOME/Documents/npm/bin:$HOME/.local/bin/:$PATH"
 # The config below is not used, and it will be linked bellow
 #export npm_config_prefix="$HOME/Documents/npm/bin"
 # source /usr/share/nvm/init-nvm.sh

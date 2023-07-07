@@ -55,4 +55,5 @@ export HISTCONTROL=ignoreboth
 export _JAVA_AWT_WM_NONREPARENTING=1
 alias subliminal="subliminal --opensubtitles nightwalker107 naovoudizer"
 
-path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin $PYENV_ROOT/bin ~/Documents/npm/bin $path[@])
+#path=(~/.local/bin $HOME/bin $HOME/.gem/ruby/2.5.0/bin $PYENV_ROOT/bin ~/Documents/npm/bin $path[@])
+path=($HOME/bin ~/Documents/npm/bin $path[@])

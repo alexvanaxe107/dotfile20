@@ -1,5 +1,5 @@
 export XDG_CONFIG_HOME=$HOME/.config
 
-export MAKEFLAGS="-j7"
+# export MAKEFLAGS="-j7"
 
 
