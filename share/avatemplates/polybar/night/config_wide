@@ -135,7 +135,7 @@ content = "%{T5}%{T-}"
 [module/pomodoro]
 type = custom/script
 interval = 3
-exec = /home/alexvanaxe/bin/pomodoro_stats.sh
+exec = pomodoro_stats.sh
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-pomodoro}
 format-prefix-foreground = ${colors.foreground-alt}
@@ -144,7 +144,7 @@ format-padding = ${format.padding}
 [module/ava_load]
 type = custom/script
 interval = 20
-exec = /home/alexvanaxe/bin/load
+exec = load
 
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-sound}
@@ -156,7 +156,7 @@ format-padding = ${format.padding}
 [module/indicators]
 type = custom/script
 interval = 3
-exec = /home/alexvanaxe/bin/indicators.sh
+exec = indicators.sh
 format-padding = ${format.padding}
 format-background = ${colors.foreground-sound}
 format-foreground = ${colors.foreground-alt2}
@@ -165,7 +165,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 [module/torrent]
 type = custom/script
 interval = 10
-exec = /home/alexvanaxe/bin/torrent
+exec = torrent
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-load}
 format-padding = ${format.padding}
@@ -174,7 +174,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 [module/desktop]
 type = custom/script
 interval = 1
-exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR1
+exec = active_monitor.sh $MONITOR1
 format-padding = ${format.padding}
 format-foreground = ${colors.foreground-alt2}
 format-background = ${colors.foreground-cpu}

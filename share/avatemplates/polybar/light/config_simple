@@ -89,12 +89,12 @@ cursor-scroll = ns-resize
 [module/pomodoro]
 type = custom/script
 interval = 3
-exec = /home/alexvanaxe/bin/pomodoro
+exec = pomodoro
 
 [module/torrent]
 type = custom/script
 interval = 10
-exec = /home/alexvanaxe/bin/torrent
+exec = torrent
 
 [module/recording]
 type = custom/script
@@ -113,7 +113,7 @@ label = %title:0:30:...%
 [module/desktop]
 type = custom/script
 interval = 1
-exec = /home/alexvanaxe/bin/active_monitor.sh $MONITOR2
+exec = active_monitor.sh $MONITOR2
 
 [module/xkeyboard]
 type = internal/xkeyboard
