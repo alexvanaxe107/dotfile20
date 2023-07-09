@@ -1,0 +1,49 @@
+#! /usr/bin/env bash
+
+. "$HOME/.config/bspwm/themes/bsp.cfg"
+killall sxhkd; sxhkd >>/tmp/sxhkcd.log 2>&1 &
+$HOME/bin/saver.sh &
+killall clipster; clipster -d &
+#inputplug -c setkmap
+
+$HOME/bin/bspwm_layout_manager.sh clear
+
+# Configure the window manager
+#polybar example &
+bspc monitor ^1 -d terminal
+bspc monitor ^2 -d audio
+
+# Prevent windows to steal focus
+#bspc config ignore_ewmh_focus true
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+bspc config border_width         1
+bspc config window_gap           6
+bspc config split_ratio 0.50
+bspc config borderless_singleton true
+bspc config borderless_monocle true
+bspc config single_monocle true
+bspc config automatic_scheme alternate
+bspc config pointer_follows_monitor true
+bspc config initial_polarity second_child
+
+# App rules
+bspc rule -a Gimp state=floating follow=on
+bspc rule -a Emacs state=tiled
+bspc rule -a Zathura state=tiled
+bspc rule -a ffplay state=floating
+bspc rule -a Gpick state=floating
+bspc rule -a qutebrowser desktop="web"
+bspc rule -a translation state=floating rectangle=800x800+0+0 center=true follow=on
+bspc rule -a mpv state=pseudo_tiled rectangle=1850x1040+0+0 desktop="video"
+bspc rule -a Zathura desktop="book"
+bspc rule -a com-investcharts-InvestCharts desktop="trade"
+#bspc rule -a mpv desktop=\^5
+#bspc rule -a Alacritty:vis desktop=^5 state=tiled
+#bspc rule -a Alacritty:weechat desktop=^7 state=tiled
+#bspc rule -a Gnome-calculator state=floating follow=on
+#bspc rule -a Chromium desktop='^2'
+#bspc rule -a mplayer2 state=floating
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
+

@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+
+SCALE=230
+
+exit_if_none(){
+    local valor="$1"
+
+    if [ -z "${valor}" ]; then
+        exit 0
+    fi
+}
+
+convert_file(){
+    filename="$(basename $file)"
+    convert $file /tmp/${filename}.jpg
+    sxiv /tmp/${filename}.jpg &
+    #convert ${file} ${file}.jpg
+}
+
+reverse_file(){
+    filename="$(basename $file)"
+    convert $file /tmp/${filename}.png
+    sxiv /tmp/${filename}.png &
+    #convert ${file} ${file}.jpg
+}
+
+save_img(){
+    local theme="$(printf "day\nnight\nshabbat" | dmenu -p "Choose the theme")"
+    exit_if_none "${theme}"
+
+    #local mode="$(printf "\nultra\ndual" | dmenu -p "Choose the modality")"
+
+    local save_location="$HOME/Documents/Pictures/Wallpapers/dual/$theme/"
+    cp ${file} "${save_location}"
+
+    notify-send "Wallpaper saved" "Saved to ${save_location}"
+}
+
+resize_img_plus(){
+    filename="$(basename $file)"
+    temp_file="rec_$filename"
+
+    local htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
+    local ltop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"; TESTE=10000} {if ($2 < TESTE) TESTE=$2;} END {print TESTE}')
+    local htoppls=$(monitors_info.sh -d | awk -v SCALE=$SCALE 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+SCALE}')
+    local optimal_rescale="$(monitors_info.sh -D)x${htop}"
+    local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + $SCALE | bc)x${htoppls}"
+    local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
+
+    local img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1)
+    local width_img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1 | cut -d 'x' -f 1)
+    local sum=$(echo $(monitors_info.sh -D)+${htop} | bc)
+
+    local half_img="$((width_img_dimensions + ${sum}))x$((width_img_dimensions + ${sum}))"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    exit_if_none "$direction"
+
+    local resolutions=$(monitors_info.sh -d)
+    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | dmenu -p "Choose the dimension")"
+    exit_if_none "$imgsize"
+
+    vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical adjustment")"
+    hadjust="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the horizontal adjustment")"
+
+    convert "$file" -quality 100 -resize "${imgsize}"^ -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
+
+    cd /tmp/
+
+    sxiv $temp_file &
+}
+
+crop_img(){
+    monitor=$(monitors_info.sh -n "$1")
+    index="$2"
+    gravity="$3"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    exit_if_none "${direction}"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
+    
+    filename="$(basename $file)"
+
+    temp_file="/tmp/tmp_$filename"
+
+    rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
+    yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    convert "$file" -filter Triangle -quality 100 -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}${horizontal}${resize}" "${temp_file}"
+
+    # Resize to the choosen monitor
+    file_location="/tmp/crp_${index}_${filename}"
+    convert "${temp_file}" -quality 100 -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${direction} -extent "${xvalue}x${yvalue}" "${file_location}"
+    sxiv "${file_location}"&
+    #nitrogen --head=${index} --save --set-scaled "${file_location}"
+}
+
+recort_img(){
+    monitor=$(monitors_info.sh -m | (printf "Custom\n" && cat) | dmenu -p "Choose the monitor to base the image")
+    index="$monitor"
+
+    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | dmenu -p "Choose the direction")"
+    resize="$(printf "+0\n+65\n+100\n+200\n+300" | dmenu -p "Set the vertical deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | dmenu -p "Set the horizontal deviation")"
+    
+    filename="$(basename $file)"
+
+    if [ "${monitor}" == "Custom" ]; then
+        monitor_info="$(printf "2000x2000" | dmenu -p "Set the dimension")"
+    else
+        monitor_info="$(monitors_info.sh -d "${monitor}")"
+    fi
+
+    xvalue="$(echo $monitor_info | awk 'BEGIN {FS="x"}; {print $1}')"
+    yvalue="$(echo $monitor_info | awk 'BEGIN {FS="x"}; {print $2}')"
+
+    # Resize to the choosen monitor
+    file_location="/tmp/crp_${index}_${filename}"
+    convert "${file}" -quality 100 -filter Triangle -gravity ${direction} -extent "${xvalue}x${yvalue}${horizontal}${resize}" -resize ${xvalue}x${yvalue}^ "${file_location}"
+    sxiv "${file_location}"&
+}
+
+while read file
+do
+    case "$1" in
+        "C-c")
+            convert_file ;;
+        "C-C")
+            reverse_file ;;
+        "C-w")
+            nitrogen --save --set-zoom-fill "$file" ;;
+        "C-e")
+            recort_img "1" "1" "East";;
+        "C-r") 
+            resize_img_plus "$file";;
+        "C-t")
+            crop_img "0" "0" "West";;
+        "C-y")
+            crop_img "1" "1" "East";;
+        "C-g")
+            convert -rotate 90 "$file" "$file" ;;
+        "C-i")
+            convert -flop "$file" "$file";;
+        "C-s")
+            save_img;;
+        "C-l")
+            cp "$file" $HOME/Documents/Pictures/lock.png ;;
+        "C-0")
+            nitrogen --head=0 --save --set-scaled --random "$file";;
+        "C-1")
+            nitrogen --head=1 --save --set-scaled --random "$file";;
+        "C-2")
+            nitrogen --head=2 --save --set-scaled --random "$file";;
+        "C-a")
+            rm "$file" ;;
+    esac
+done

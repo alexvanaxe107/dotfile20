@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# TR_TORRENT_DIR
+
+
+notify-send "Torrent finished" "$TR_TORRENT_DIR / $TR_TORRENT_NAME"
