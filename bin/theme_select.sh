@@ -14,7 +14,7 @@ set -o pipefail
 
 source $HOME/bin/imports/color_sort.sh
 
-TEMPLATES="$HOME/bin/templates/"
+TEMPLATES="$HOME/templates/"
 
 is_bspc=$(bspc wm --get-status)
 
