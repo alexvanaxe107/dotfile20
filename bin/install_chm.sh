@@ -3,14 +3,23 @@
 # for new ones. Here must have only 'static' files.
 NIX_PROFILE_DIR="$NIX_USER_PROFILE_DIR/profile"
 AVA_TEMPLATES="$NIX_PROFILE_DIR/share/avatemplates"
+AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
 
 USER_TEMPLATE="$HOME/templates"
+USER_CONFIGS="$HOME/configs"
 
 if [ -L "$USER_TEMPLATE" ]; then
     echo "Template already exists. Not touching it."
 else
     echo "Creating symlink to template"
     ln -s $AVA_TEMPLATES $USER_TEMPLATE
+fi
+
+if [ -L "$USER_CONFIGS" ]; then
+    echo "Config already exists. Not touching it."
+else
+    echo "Creating symlink to configs"
+    ln -s $AVA_CONFIGS $USER_CONFIGS
 fi
 
 echo "Copying the configuration files"
