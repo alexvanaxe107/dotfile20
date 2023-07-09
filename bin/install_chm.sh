@@ -4,6 +4,8 @@
 
 INSTALL_DIR="$0"
 
+echo $INSTALL_DIR
+
 echo "Copying the configuration files"
 #cp -rf $HOME/configs/* $HOME
 #cp -rf $HOME/configs/.* $HOME
