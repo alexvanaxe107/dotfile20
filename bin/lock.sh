@@ -2,7 +2,7 @@
 
 . ~/.config/bspwm/themes/bsp.cfg
 
-source $HOME/bin/imports/lock.sh
+source $HOME/.config/wm/imports/lock.sh
 
 killall clight
 background=$1
