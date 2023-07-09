@@ -1,6 +1,9 @@
 # We will not include the env bash because it will be executed in the nix install
 # But it can be executed at any moment, when we want to override the unchangable files
 # for new ones. Here must have only 'static' files.
+
+umask 022
+
 NIX_PROFILE_DIR="$NIX_USER_PROFILE_DIR/profile"
 AVA_TEMPLATES="$NIX_PROFILE_DIR/share/avatemplates"
 AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
@@ -23,5 +26,5 @@ else
 fi
 
 echo "Copying the configuration files"
-cp -rf $HOME/configs/* $HOME
-cp -rf $HOME/configs/.* $HOME
+cp --no-preserve=all -rf $HOME/configs/* $HOME
+cp --no-preserve=all -rf $HOME/configs/.* $HOME
