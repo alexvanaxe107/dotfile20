@@ -6,7 +6,7 @@ AVA_TEMPLATES="$NIX_PROFILE_DIR/share/avatemplates"
 
 USER_TEMPLATE="$HOME/templates"
 
-if [ -f "$USER_TEMPLATE" ]; then
+if [ -L "$USER_TEMPLATE" ]; then
     echo "Template already exists. Not touching it."
 else
     echo "Creating symlink to template"
@@ -14,5 +14,5 @@ else
 fi
 
 echo "Copying the configuration files"
-#cp -rf $HOME/configs/* $HOME
-#cp -rf $HOME/configs/.* $HOME
+cp -rf $HOME/configs/* $HOME
+cp -rf $HOME/configs/.* $HOME

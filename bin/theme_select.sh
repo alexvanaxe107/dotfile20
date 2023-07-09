@@ -12,7 +12,9 @@ set -o errtrace
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 set -o pipefail
 
-source $HOME/bin/imports/color_sort.sh
+CONFIG_DIR=$HOME/.config/wm
+
+source $CONFIG_DIR/imports/color_sort.sh
 
 TEMPLATES="$HOME/templates/"
 
@@ -26,7 +28,7 @@ show_help () {
 
 
 retrieve_themes () {
-    for theme in $HOME/bin/themes/*
+    for theme in $CONFIG_DIR/themes/*
     do
         basename -s .cfg  $theme
     done
@@ -53,7 +55,7 @@ choose(){
 begin(){
     choose $1
 
-    . $HOME/bin/themes/${CHOSEN}.cfg
+    . ${CONFIG_DIR}/themes/${CHOSEN}.cfg
 
     startup_theme
 
