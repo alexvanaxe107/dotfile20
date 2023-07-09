@@ -28,3 +28,6 @@ fi
 echo "Copying the configuration files"
 cp --no-preserve=all -rf $HOME/configs/* $HOME
 cp --no-preserve=all -rf $HOME/configs/.* $HOME
+
+echo "installing the packages"
+nix-env -f '<nixpkgs>' -r -iA userPackages
