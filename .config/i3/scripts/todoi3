@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-todo.sh -p ls | sort -k 2,2 | sed -n "3p" | cut -c 1-50

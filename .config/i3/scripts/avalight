@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# A script to use dmenu to change the light
-GS=`echo | dmenu $* -f -p "Light digit: ($(light -G)) "`
-echo $GS
-if [ ! -z "$GS" ]
-then
-	light -S "$GS";notify-send -u low "Light" "Screen monitor set to $GS"
-fi

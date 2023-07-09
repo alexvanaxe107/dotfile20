@@ -1,3 +1,0 @@
-bindsym $mod+Shift+m exec polybar-msg cmd toggle
-
-exec_always polybar example
