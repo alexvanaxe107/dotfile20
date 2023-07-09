@@ -11,6 +11,7 @@ set -o errtrace
 #set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 set -o pipefail
+umask 022
 
 CONFIG_DIR=$HOME/.config/wm
 
@@ -109,28 +110,28 @@ function reset_configs(){
         mkdir -p "${HOME}/.config/eww"
     fi
     
-    cp ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
-    cp ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
-    cp ${TEMPLATES}/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
-    cp ${TEMPLATES}/twmn/twmn.conf ${HOME}/.config/twmn/twmn.conf
-    cp ${TEMPLATES}/polybar/${theme_name}/* ${HOME}/.config/polybar/
-    cp ${TEMPLATES}/conky/${theme_name}/* ${HOME}/.config/conky/
-    cp ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
-    cp ${TEMPLATES}/tint2/* ${HOME}/.config/tint2/
-    cp ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
-    cp ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
-    cp ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
-    cp ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
-    cp ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
-    cp ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
-    cp ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
-    cp ${TEMPLATES}/eww/${theme_name}/* ${HOME}/.config/eww/
+    cp --no-preserve=all ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
+    cp --no-preserve=all ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
+    cp --no-preserve=all ${TEMPLATES}/dunst/dunstrc ${HOME}/.config/dunst/dunstrc
+    cp --no-preserve=all ${TEMPLATES}/twmn/twmn.conf ${HOME}/.config/twmn/twmn.conf
+    cp --no-preserve=all ${TEMPLATES}/polybar/${theme_name}/* ${HOME}/.config/polybar/
+    cp --no-preserve=all ${TEMPLATES}/conky/${theme_name}/* ${HOME}/.config/conky/
+    cp --no-preserve=all ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
+    cp --no-preserve=all ${TEMPLATES}/tint2/* ${HOME}/.config/tint2/
+    cp --no-preserve=all ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
+    cp --no-preserve=all ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
+    cp --no-preserve=all ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
+    cp --no-preserve=all ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
+    cp --no-preserve=all ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
+    cp --no-preserve=all ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
+    cp --no-preserve=all ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
+    cp --no-preserve=all ${TEMPLATES}/eww/${theme_name}/* ${HOME}/.config/eww/
 
     # Overwiting only if it not exists
-    [ ! -f $HOME/.tmux.conf ] && cp ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
-    [ ! -f $HOME/.config/wm/bspwm.conf ] && cp ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf
-    [ ! -f $HOME/.config/wm/monitors.conf ] && cp ${TEMPLATES}/wm/monitors.conf ${HOME}/.config/wm/monitors.conf
-    [ ! -f $HOME/.config/wezterm/wezterm.lua ] && cp ${TEMPLATES}/wezterm/wezterm.lua ${HOME}/.config/wezterm/wezterm.lua
+    [ ! -f $HOME/.tmux.conf ] && cp --no-preserve=all ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
+    [ ! -f $HOME/.config/wm/bspwm.conf ] && cp --no-preserve=all ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf
+    [ ! -f $HOME/.config/wm/monitors.conf ] && cp --no-preserve=all ${TEMPLATES}/wm/monitors.conf ${HOME}/.config/wm/monitors.conf
+    [ ! -f $HOME/.config/wezterm/wezterm.lua ] && cp --no-preserve=all ${TEMPLATES}/wezterm/wezterm.lua ${HOME}/.config/wezterm/wezterm.lua
 }
 
 function get_wallpaper() {
