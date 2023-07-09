@@ -118,7 +118,7 @@ function reset_configs(){
     cp --no-preserve=all ${TEMPLATES}/conky/${theme_name}/* ${HOME}/.config/conky/
     cp --no-preserve=all ${TEMPLATES}/vis/theme ${HOME}/.config/vis/colors/theme
     cp --no-preserve=all ${TEMPLATES}/tint2/* ${HOME}/.config/tint2/
-    cp --no-preserve=all ${TEMPLATES}/lock/lock.sh ${HOME}/bin/imports/lock.sh
+    cp --no-preserve=all ${TEMPLATES}/lock/lock.sh ${HOME}/.config/wm/imports/lock.sh
     cp --no-preserve=all ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     cp --no-preserve=all ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
     cp --no-preserve=all ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
