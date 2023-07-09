@@ -2,5 +2,8 @@
 # But it can be executed at any moment, when we want to override the unchangable files
 # for new ones. Here must have only 'static' files.
 
-cp -rf $HOME/configs/* $HOME
-cp -rf $HOME/configs/.* $HOME
+INSTALL_DIR="$0"
+
+echo "Copying the configuration files"
+#cp -rf $HOME/configs/* $HOME
+#cp -rf $HOME/configs/.* $HOME

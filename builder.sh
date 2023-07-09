@@ -16,3 +16,5 @@ mkdir $out
 
 echo "Copying files."
 cp -rf $src/* $out
+
+ln -s $out/bin ./bin
