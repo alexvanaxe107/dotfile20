@@ -23,7 +23,7 @@ XF86MonBrightness{Down,Up}
 
 # Play Radio!
 super + shift + r
-	$HOME/bin/play_radio.sh
+	play_radio.sh
 
 # Configure Printscreen
 Print
@@ -31,43 +31,43 @@ Print
 
 #Player Control
 super + shift + s
-	$HOME/bin/player_ctl.sh
+	player_ctl.sh
 
 #Lock screen
 super + shift + x
-	$HOME/bin/lock.sh
+	lock.sh
 
 #DmenuAlexia
 super + a
-	$HOME/bin/dmenulexia.sh
+	dmenulexia.sh
 
 #Fix Light
 super + shift + i
-	$HOME/bin/avalight
+	avalight
 
 #Pomodoro
 super + shift + p
-	$HOME/bin/pomodoro-client.sh
+	pomodoro-client.sh
 
 #Todos
 super + shift + t
-	$HOME/bin/dtodosh.sh
+	dtodosh.sh
 
 # Change theme
 super + shift + y
-	$HOME/bin/theme_select.sh
+	theme_select.sh
 
 # Change font
 super + shift + f
-	$HOME/bin/font_select.sh
+	font_select.sh
 
 #Power management
 super + shift + e
-	$HOME/bin/powercontrol.sh
+	powercontrol.sh
 
 # Toggle the top bar
 super + shift + b
-	$HOME/bin/toggle_bars.sh
+	toggle_bars.sh
 
 # balance equalize
 super + b
@@ -78,29 +78,29 @@ super + n
 
 # Hide show window
 super + v
-	$HOME/bin/bspc_node_manager.sh -i
+	bspc_node_manager.sh -i
 
 super + shift + v
-	$HOME/bin/bspc_node_manager.sh -I
+	bspc_node_manager.sh -I
 
 super + ctrl + v
-	$HOME/bin/bspc_node_manager.sh -aI
+	bspc_node_manager.sh -aI
 
 # Configure monitors
 super + shift + d
-	$HOME/bin/configdisplay.sh
+	configdisplay.sh
 
 # Equalizer
 super + shift + a
-	$HOME/bin/equalizer
+	equalizer
 
 # Terminal theme
 super + shift + o
-	$HOME/bin/terminal_theme.sh
+	terminal_theme.sh
 
 # Edit Config file
 super + shift + u
-	$HOME/bin/configshortcut.sh
+	configshortcut.sh
 
 # Change the configs
 super + c; {c,r,shift + r,m, shift + M,a}
@@ -131,19 +131,19 @@ super + p; {c,t,l,m,v,w,C,M,s,f,q,p,a}
     , status_notify.sh -ctlmvw }
 
 super + Tab
-	$HOME/bin/bspc_node_manager.sh
+	bspc_node_manager.sh
 
 super + alt + Tab
-	$HOME/bin/bspc_node_manager.sh -b
+	bspc_node_manager.sh -b
 
 # Toggle the top bar
 super + ctrl + b; {s,f,t,h,g,p}
-	{$HOME/bin/toggle_bars.sh --target2 \
-    , $HOME/bin/toggle_bars.sh --target1 \
-    , $HOME/bin/toggle_bars.sh --tint \
-    , $HOME/bin/toggle_bars.sh --autohide \
-    , $HOME/bin/toggle_bars.sh --eww1 \
-    , $HOME/bin/toggle_bars.sh --eww2}
+	{toggle_bars.sh --target2 \
+    , toggle_bars.sh --target1 \
+    , toggle_bars.sh --tint \
+    , toggle_bars.sh --autohide \
+    , toggle_bars.sh --eww1 \
+    , toggle_bars.sh --eww2}
 
 super + shift + g ; {g,f}
 	{start.sh -E \
@@ -158,7 +158,7 @@ super + shift + g ; {t}
 
 # Change wallpapers
 super + shift + w
-	$HOME/bin/wallpaper_changer.sh
+	wallpaper_changer.sh
 
 
 ###################
@@ -167,7 +167,7 @@ super + shift + w
 
 # quit/restart bspwm
 #super + r
-#	$HOME/bin/bspwmexit.sh -r "Restart?"
+#	bspwmexit.sh -r "Restart?"
 
 super + r : {Left,Down,Up,Right}
     STEP=20; SELECTION={1,2,3,4}; \
@@ -176,7 +176,7 @@ super + r : {Left,Down,Up,Right}
 
 # Exit the window manager asking confirmation
 super + e
-	$HOME/bin/bspwmexit.sh -e "Exit?"
+	bspwmexit.sh -e "Exit?"
 
 # close and kill
 super + {_,shift + }q
@@ -196,13 +196,13 @@ super + ctrl + {F}{1,2,3,4,5,6,7,8,9,10}
 
 # focus or send to the given desktop
 super + shift + {1-9,0}
-	$HOME/bin/bspwm_desktop_manager.sh -m '{1-9,10}'
+	bspwm_desktop_manager.sh -m '{1-9,10}'
 
 super + {1-9,0}
-	$HOME/bin/bspwm_desktop_manager.sh -g '{1-9,10}'
+	bspwm_desktop_manager.sh -g '{1-9,10}'
 
 super + z : {1-9,0}
-	$HOME/bin/bspwm_desktop_manager.sh -r '{1-9,10}'
+	bspwm_desktop_manager.sh -r '{1-9,10}'
 
 # focus or send to the given desktop considering all monitors
 super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
@@ -210,14 +210,14 @@ super + {_,shift + }{F}{1,2,3,4,5,6,7,8,9,10}
 
 # Swap desktops
 super + alt + {F}{1}
-	$HOME/bin/bspwm_desktop_manager.sh -dp
+	bspwm_desktop_manager.sh -dp
 
 # Go to desktop by list
 super + minus
-	$HOME/bin/bspwm_desktop_manager.sh -dl
+	bspwm_desktop_manager.sh -dl
 
 super + shift + minus
-	$HOME/bin/bspwm_desktop_manager.sh -dL
+	bspwm_desktop_manager.sh -dL
 
 # Send node to the other monitor
 super + t
@@ -233,7 +233,7 @@ super + alt + t
 
 # Send to other desktop and follow it
 super + control + {1-9,0}
-	$HOME/bin/bspwm_desktop_manager.sh -f '{1-9,10}'
+	bspwm_desktop_manager.sh -f '{1-9,10}'
 
 # Cycle through nodes
 super + control + {j,k}
@@ -264,7 +264,7 @@ super + ctrl + i
 	for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
 super + i
-        $HOME/bin/bspc_node_manager.sh -g
+        bspc_node_manager.sh -g
 
 # Change the transparency of the current active window
 super + o : {d,u,r,R}
@@ -294,7 +294,7 @@ super + {x,s}
 	bspc node -g {locked,sticky}
 
 super + m
-	$HOME/bin/bspc_node_manager.sh -m
+	bspc_node_manager.sh -m
 
 # focus the node in the given direction
 super + {h,j,k,l}
