@@ -277,5 +277,6 @@ export NIXPKGS_ALLOW_UNFREE=1
 clear
 
 spark.sh
+echo
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

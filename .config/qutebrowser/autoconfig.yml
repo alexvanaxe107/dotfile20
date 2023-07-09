@@ -28,11 +28,14 @@ settings:
         cs: hint links userscript castsite.sh
         cv: hint links userscript castvideo.sh
   colors.webpage.darkmode.enabled:
-    global: true
+    global: false
   content.blocking.enabled:
     global: false
   content.notifications.enabled:
     https://backiee.com: false
+  spellcheck.languages:
+    global:
+    - en-US
   statusbar.show:
     global: in-mode
   tabs.show:
