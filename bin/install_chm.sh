@@ -11,6 +11,7 @@ AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
 
 USER_TEMPLATE="$HOME/templates"
 USER_CONFIGS="$HOME/configs"
+USER_DOCS_NIX="$HOME/Documents/Projects/nixconfs/"
 
 if [ -L "$USER_TEMPLATE" ]; then
     echo "Template already exists. Not touching it."
@@ -30,5 +31,10 @@ echo "Copying the configuration files"
 cp --no-preserve=all -rf $HOME/configs/* $HOME
 cp --no-preserve=all -rf $HOME/configs/.* $HOME
 
+echo "Cloning nixos conigs"
+if [ ! -d "$USER_DOCS_NIX" ]; then
+    git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
+fi
+
 echo "installing the packages"
-nix-env -f '<nixpkgs>' -r -iA userPackages
+#nix-env -f '<nixpkgs>' -r -iA userPackages
