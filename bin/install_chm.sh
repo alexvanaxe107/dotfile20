@@ -44,3 +44,16 @@ fi
 
 echo "installing the packages"
 nix-env -f '<nixpkgs>' -r -iA userPackages
+
+# Configuring settings
+# -- Configurar git para global store
+git config --global credential.helper store
+# -- Ele trava as vezes quando o comit é grande. Entao fazemos:
+git config --global http.postBuffer 157286400
+
+# -- configurar o packer. Rodar:
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+# -- configurar o tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
