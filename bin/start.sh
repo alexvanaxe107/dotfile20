@@ -41,9 +41,9 @@ start_xinit() {
     local DP="DisplayPort-0"
     local game="$(which $1)"
     local tmp_start=/tmp/start_tmp.sh
-    cp /home/alexvanaxe/bin/start_tmp.sh ${tmp_start}
+    cp $HOME/.nix-profile/temp/start_tmp.sh ${tmp_start}
 
-    local dimensions="$(cat $HOME/.config/wm/monitor_options.conf)"
+    local dimensions="$(cat $HOME/.config/monitor_options.conf)"
     local dim=$(printf "$dimensions" | fzf)
     local dim=$(awk '{print $1}' <<< "${dim}")
 

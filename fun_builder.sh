@@ -16,10 +16,12 @@ mkdir $out
 
 echo "Copying files."
 mkdir $out/home-manager/
+mkdir $out/temp/
 mkdir $out/bin
 cp -rf $src/share/avatemplates/home-manager/fun.nix $out/home-manager/ava.nix
 cp -rf $src/share/configs/.config/home-manager/* $out/home-manager
 cp -rf $src/bin/install_fun.sh $out/bin
 cp -rf $src/bin/start.sh $out/bin/start_fun.sh
+cp -rf $src/bin/start_tmp.sh $out/temp/start_tmp.sh
 
 echo "Please run install_fun.sh to complete the installation. Enjoy."
