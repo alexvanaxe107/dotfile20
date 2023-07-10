@@ -38,4 +38,4 @@ if [ ! -d "$USER_DOCS_NIX" ]; then
 fi
 
 echo "installing the packages"
-#nix-env -f '<nixpkgs>' -r -iA userPackages
+nix-env -f '<nixpkgs>' -r -iA userPackages
