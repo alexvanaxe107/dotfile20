@@ -30,6 +30,7 @@ fi
 echo "Copying the configuration files"
 cp --no-preserve=all -rf $HOME/configs/* $HOME
 cp --no-preserve=all -rf $HOME/configs/.* $HOME
+chmod 700 $HOME/.config/bspwm/bspwmrc
 
 echo "Cloning nixos conigs"
 if [ ! -d "$USER_DOCS_NIX" ]; then
