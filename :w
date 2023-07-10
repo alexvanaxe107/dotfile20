@@ -22,10 +22,11 @@ echo "Copying the configuration files"
 if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
     mkdir -p $HOME/.config/home-manager/
     cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/* $HOME/.config/home-manager/
+    cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/home.nix $HOME/.config/home-manager/
 else
     if [ "$force" == "force" ];  then
-        mkdir -p $HOME/.config/home-manager/
-        cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/* $HOME/.config/home-manager/
+        cp --no-preserve=all $AVA_TEMPLATES/home-manager/fun.nix $HOME/.config/home-manager/ava.nix
+        cp --no-preserve=all $AVA_CONFIGS/.config/home-manager/home.nix $HOME/.config/home-manager/
     fi
 fi
 
