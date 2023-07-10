@@ -18,7 +18,7 @@ echo "Copying files."
 mkdir $out/home-manager/
 mkdir $out/bin
 cp -rf $src/share/avatemplates/home-manager/fun.nix $out/home-manager/ava.nix
-cp -rf $src/share/.config/home-manager/* $out/home-manager
+cp -rf $src/share/configs/.config/home-manager/* $out/home-manager
 cp -rf $src/bin/install_fun.sh $out/bin
 
 echo "Please run install_fun.sh to complete the installation. Enjoy."
