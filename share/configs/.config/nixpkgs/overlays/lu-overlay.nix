@@ -58,10 +58,12 @@ self: super:
     spotify = self.spotify;
 
     rofi = self.rofi;
-    dmenu = (import ~/Documents/Projects/nixconfs/avapkgs/avapkgs/dmenu.nix);
-    ava_bible = (import ~/Documents/Projects/nixconfs/avapkgs/avapkgs/ava-bible.nix);
-    picom_animations = (import ~/Documents/Projects/nixconfs/avapkgs/avapkgs/picom-animations.nix);
-    ava_chamalleon = (import ~/Documents/Projects/nixconfs/avapkgs/avapkgs/ava-chamaleon.nix);
+
+    # AVA Packages
+    dmenu = (import <avapkgs>).dmenu;
+    ava_bible = (import <avapkgs>).ava-bible;
+    picom_animations = (import <avapkgs>).picom-animations;
+    ava_chamalleon = (import <avapkgs>).ava-chamaleon;
 
 
     # Default packages:
