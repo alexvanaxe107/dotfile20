@@ -15,6 +15,10 @@ echo "Creating output"
 mkdir $out
 
 echo "Copying files."
-cp -rf $src/share/avatemplates/home-manager/* $out
+mkdir $out/home-manager/
+mkdir $out/bin
+cp -rf $src/share/avatemplates/home-manager/* $out/home-manager
+cp -rf $src/share/.config/home-manager/* $out/home-manager
+cp -rf $src/bin/install_fun.sh $out/bin
 
 echo "Please run install_chm.sh to complete the installation. Enjoy."
