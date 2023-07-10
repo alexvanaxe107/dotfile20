@@ -4,7 +4,8 @@
 
 umask 022
 
-NIX_PROFILE_DIR="$NIX_USER_PROFILE_DIR/profile"
+# NIX_PROFILE_DIR="$NIX_USER_PROFILE_DIR/profile"
+NIX_PROFILE_DIR="$HOME/.nix_profile"
 AVA_TEMPLATES="$NIX_PROFILE_DIR/share/avatemplates"
 AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
 
