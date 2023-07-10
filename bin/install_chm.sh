@@ -43,6 +43,14 @@ else
 fi
 
 echo "Copying the configuration files"
+if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
+    cp --no-preserve=all $HOME/template/home-manager/ava.nix $HOME/.config/home-manager/
+else
+    if [ "$force" == "force" ];  then
+        cp --no-preserve=all $HOME/template/home-manager/ava.nix $HOME/.config/home-manager/
+    fi
+fi
+
 cp --no-preserve=all -rf $HOME/configs/* $HOME
 cp --no-preserve=all -rf $HOME/configs/.* $HOME
 chmod 700 $HOME/.config/bspwm/bspwmrc
