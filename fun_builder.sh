@@ -21,4 +21,4 @@ cp -rf $src/share/avatemplates/home-manager/* $out/home-manager
 cp -rf $src/share/.config/home-manager/* $out/home-manager
 cp -rf $src/bin/install_fun.sh $out/bin
 
-echo "Please run install_chm.sh to complete the installation. Enjoy."
+echo "Please run install_fun.sh to complete the installation. Enjoy."
