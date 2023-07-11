@@ -27,7 +27,9 @@
 #
 # $1 - The data we'd like to graph.
 
-regex_color="4D514B"
+source $HOME/.config/bspwm/themes/bsp.cfg
+
+regex_color="${DMENU_NF}"
 count=0
 count_begin=1
 count_end=
