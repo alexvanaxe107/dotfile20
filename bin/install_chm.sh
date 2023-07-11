@@ -100,7 +100,7 @@ fi
 
 echo "Copying the configuration files"
 if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
-    cp --no-preserve=all $HOME/template/home-manager/ava.nix $HOME/.config/home-manager/
+    cp --no-preserve=all $HOME/templates/home-manager/ava.nix $HOME/.config/home-manager/
     # -- Configurar home-manager
     nix-shell '<home-manager>' -A install
 else
