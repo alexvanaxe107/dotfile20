@@ -83,7 +83,7 @@ start_embedded() {
     local program="$1"
 
     # The total screen
-    local dimensions="$(cat $HOME/.config/wm/monitor_options.conf)"
+    local dimensions="$(cat $HOME/.config/monitor_options.conf)"
     echo "Choose the dimension then the scale"
     local dim=$(printf "$dimensions" | (dmenu -p "Dimension" || fzf --height 40%))
     local dim=$(awk '{print $1}' <<< "${dim}")
