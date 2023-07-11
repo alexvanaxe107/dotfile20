@@ -2,11 +2,11 @@
 
 . "$HOME/.config/bspwm/themes/bsp.cfg"
 killall sxhkd; sxhkd >>/tmp/sxhkcd.log 2>&1 &
-$HOME/bin/saver.sh &
-killall clipster; clipster -d &
+# $HOME/bin/saver.sh &
+# killall clipster; clipster -d &
 #inputplug -c setkmap
 
-$HOME/bin/bspwm_layout_manager.sh clear
+# $HOME/bin/bspwm_layout_manager.sh clear
 
 # Configure the window manager
 #polybar example &
