@@ -47,6 +47,6 @@
 
         pkgs.rofi
 
-        (import <avapkgs>).ava-chamaleon
+        # (import <avapkgs>).ava-chamaleon
     ];
 }
