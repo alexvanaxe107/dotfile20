@@ -106,3 +106,6 @@ else
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 fi
+
+# -- Configurar home-manager
+nix-shell '<home-manager>' -A install
