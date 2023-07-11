@@ -101,11 +101,17 @@ fi
 echo "Copying the configuration files"
 if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
     cp --no-preserve=all $HOME/templates/home-manager/ava.nix $HOME/.config/home-manager/
+    nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
+    nix-channel --update
     # -- Configurar home-manager
     nix-shell '<home-manager>' -A install
 else
     if [ "$force" == "force" ];  then
-        cp --no-preserve=all $HOME/template/home-manager/ava.nix $HOME/.config/home-manager/
+        cp --no-preserve=all $HOME/templates/home-manager/ava.nix $HOME/.config/home-manager/
+        nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
+        nix-channel --update
+        # -- Configurar home-manager
+        nix-shell '<home-manager>' -A install
     fi
 fi
 

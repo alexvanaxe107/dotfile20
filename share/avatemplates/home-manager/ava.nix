@@ -48,5 +48,8 @@
         pkgs.rofi
 
         # (import <avapkgs>).ava-chamaleon
+        (import <avapkgs>).ava-bible
+        (import <avapkgs>).dmenu
+        (import <avapkgs>).picom-animations
     ];
 }
