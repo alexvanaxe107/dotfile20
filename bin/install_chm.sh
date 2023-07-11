@@ -56,18 +56,6 @@ else
     fi
 fi
 
-
-if [ ! -f $HOME/.config/wm/install.lock ]; then
-    echo "installing the packages"
-    nix-env -f '<nixpkgs>' -r -iA userPackages
-else
-    if [ "$force" == "force" ];  then
-        echo "installing the packages"
-        nix-env -f '<nixpkgs>' -r -iA userPackages
-    fi
-fi
-echo "install.lock" > $HOME/.config/wm/install.lock
-
 # Configuring settings
 # -- Configurar git para global store
 git config --global credential.helper store
