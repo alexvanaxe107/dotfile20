@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# Install and configure the node. For this we will use the nvm.
-# https://github.com/nvm-sh/nvm
+# Install and configure the node.
+# Node itself should already be installed on home-manager
 #
-# Running either of the above commands downloads a script and runs it. 
-# The script clones the nvm repository to ~/.nvm, and attempts to add the 
-# source lines from the snippet below to the correct profile 
-# file (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
+# Here we add the npm path and install the language servers.
 
+export NPM_ROOT=$HOME/Documents/npm
+export npm_config_prefix="$HOME/Documents/npm/"
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-
-
+npm -g install bash-language-server
+npm -g install pyright
+npm -g install typescript-language-server
+npm -g install vue-language-server
