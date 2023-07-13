@@ -29,7 +29,7 @@
 
 source $HOME/.config/bspwm/themes/bsp.cfg
 
-regex_color="${DMENU_NF}"
+regex_color="8E9BB0"
 count=0
 count_begin=1
 count_end=

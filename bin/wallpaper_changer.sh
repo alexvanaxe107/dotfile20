@@ -1,12 +1,13 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p "python3.withPackages(ps: [ ps.requests ps.xlib ])"
 
-. $HOME/.pyenv/versions/wm/bin/activate
+# . $HOME/.pyenv/versions/wm/bin/activate
 
 set -o errexit
 # Source the theme
 . ${HOME}/.config/bspwm/themes/bsp.cfg
 
+wallfinderpy=$(which wallfinder.py)
 NITROGEN_CONFIG=$HOME/.config/nitrogen/bg-saved.cfg
 WALLPAPER_ROOT=$HOME/Documents/Pictures/Wallpapers
 
@@ -75,12 +76,12 @@ download(){
                 for monitor_all in $(monitors_info.sh -m); do
                     index=$(monitors_info.sh -ib ${monitor_all})
                     if [ "Chromecast" = "${option}" ]; then
-                        path=$(python $HOME/bin/wallfinder.py -e c)
+                        path=$(python ${wallfinderpy} -e c)
                         #nitrogen --head=${index} --save --set-zoom-fill ${path}
                         sxiv "${path}"
                     fi
                     if [ "Bing" = "${option}" ]; then
-                        path=$(python $HOME/bin/wallfinder.py -e b)
+                        path=$(python ${wallfinderpy} -e b)
                         #nitrogen --head=${index} --save --set-zoom-fill ${path}
                         sxiv "${path}"
                     fi
@@ -93,27 +94,27 @@ download(){
             for monitor_all in $(monitors_info.sh -m); do
                 index=$(monitors_info.sh -ib ${monitor_all})
                 if [ "Luck" = "${option}" ]; then
-                    path=$(python $HOME/bin/wallfinder.py -s "${scene}")
+                    path=$(python ${wallfinderpy} -s "${scene}")
                     #nitrogen --head=${index} --save --set-zoom-fill ${path}
                     sxiv "${path}"
                 fi
                 if [ "Ratio" = "${option}" ]; then
-                    path=$(python $HOME/bin/wallfinder.py -r -m ${monitor_all} -s "${scene}")
+                    path=$(python ${wallfinderpy} -r -m ${monitor_all} -s "${scene}")
                     #nitrogen --head=${index} --save --set-scaled ${path}
                     sxiv "${path}"
                 fi
                 if [ "Resolution" = "${option}" ]; then
-                    path=$(python $HOME/bin/wallfinder.py -m ${monitor_all} -s "${scene}")
+                    path=$(python ${wallfinderpy} -m ${monitor_all} -s "${scene}")
                     #nitrogen --head=${index} --save --set-scaled ${path}
                     sxiv "${path}"
                 fi
                 if [ "Google" = "${option}" ]; then
-                    path=$(python $HOME/bin/wallfinder.py -e i -m ${monitor_all} -s "${scene}")
+                    path=$(python ${wallfinderpy} -e i -m ${monitor_all} -s "${scene}")
                     #nitrogen --head=${index} --save --set-scaled ${path}
                     sxiv "${path}"
                 fi
                 if [ "Usplash" = "${option}" ]; then
-                    path=$(python $HOME/bin/wallfinder.py -e u -m ${monitor_all} -s "${scene}")
+                    path=$(python ${wallfinderpy} -e u -m ${monitor_all} -s "${scene}")
                     #nitrogen --head=${index} --save --set-zoom-fill ${path}
                     sxiv "${path}"
                 fi
@@ -122,14 +123,14 @@ download(){
             if [[ "$notsceneoptions" == *$option* ]]; then
                 if [ "Chromecast" = "${option}" ]; then
                     notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                    path=$(python $HOME/bin/wallfinder.py -e c)
+                    path=$(python ${wallfinderpy} -e c)
                     selected=$(monitors_info.sh -ib ${monitor})
                     #nitrogen --head=${selected} --save --set-zoom-fill ${path}
                     sxiv "${path}"
                 fi
                 if [ "Bing" = "${option}" ]; then
                     notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                    path=$(python $HOME/bin/wallfinder.py -e b)
+                    path=$(python ${wallfinderpy} -e b)
                     selected=$(monitors_info.sh -ib ${monitor})
                     #nitrogen --head=${selected} --save --set-zoom-fill ${path}
                     sxiv "${path}"
@@ -140,35 +141,35 @@ download(){
             scene=$(get_scene)
             if [ "Luck" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(python $HOME/bin/wallfinder.py -s "${scene}")
+                path=$(python ${wallfinderpy} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 #nitrogen --head=${selected} --save --set-zoom-fill ${path}
                 sxiv "${path}"
             fi
             if [ "Ratio" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(python $HOME/bin/wallfinder.py -r -m ${monitor} -s "${scene}")
+                path=$(python ${wallfinderpy} -r -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 #nitrogen --head=${selected} --save --set-scaled ${path}
                 sxiv "${path}"
             fi
             if [ "Resolution" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(python $HOME/bin/wallfinder.py -m ${monitor} -s "${scene}")
+                path=$(python ${wallfinderpy} -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 #nitrogen --head=${selected} --save --set-scaled ${path}
                 sxiv "${path}"
             fi
             if [ "Google" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(python $HOME/bin/wallfinder.py -e i -m ${monitor} -s "${scene}")
+                path=$(python ${wallfinderpy} -e i -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 #nitrogen --head=${selected} --save --set-scaled ${path}
                 sxiv "${path}"
             fi
             if [ "Usplash" = "${option}" ]; then
                 notify-send -u normal "Downloading wallpaper to monitor ${monitor}."
-                path=$(python $HOME/bin/wallfinder.py -e u -m ${monitor} -s "${scene}")
+                path=$(python ${wallfinderpy} -e u -m ${monitor} -s "${scene}")
                 selected=$(monitors_info.sh -ib ${monitor})
                 #nitrogen --head=${selected} --save --set-zoom-fill ${path}
                 sxiv "${path}"
