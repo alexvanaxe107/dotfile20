@@ -8,7 +8,6 @@
         pkgs.wmctrl
         pkgs.tmux
         pkgs.zsh
-        pkgs.neovim
         pkgs.sxhkd
         pkgs.dunst
 #    polybar = self.polybar;
@@ -46,6 +45,11 @@
         pkgs.spotify
 
         pkgs.rofi
+
+        # development
+        pkgs.neovim
+        pkgs.nodejs
+
 
         # (import <avapkgs>).ava-chamaleon
         (import <avapkgs>).ava-bible
