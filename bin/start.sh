@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+MONITOR_OPTIONS="$HOME/.config/monitor_options.conf"
 
 start_program() {
     local is_openbox=0
@@ -14,7 +15,7 @@ start_program() {
     local tmp_start=/tmp/start_tmp.sh
     cp $HOME/.nix-profile/temp/start_tmp.sh ${tmp_start}
 
-    local dimensions="$(cat $HOME/.config/monitor_options.conf)"
+    local dimensions="$(cat $MONITOR_OPTIONS)"
     local dim=$(printf "$dimensions" | fzf)
     local dim=$(awk '{print $1}' <<< "${dim}")
 
@@ -43,7 +44,7 @@ start_xinit() {
     local tmp_start=/tmp/start_tmp.sh
     cp $HOME/.nix-profile/temp/start_tmp.sh ${tmp_start}
 
-    local dimensions="$(cat $HOME/.config/monitor_options.conf)"
+    local dimensions="$(cat $MONITOR_OPTIONS)"
     local dim=$(printf "$dimensions" | fzf)
     local dim=$(awk '{print $1}' <<< "${dim}")
 
@@ -63,14 +64,14 @@ start_steam_deck() {
     local program="$1"
 
     # The total screen
-    local dimensions="$(cat $HOME/.config/wm/monitor_options.conf)"
+    local dimensions="$(cat $MONITOR_OPTIONS)"
     echo "Choose the dimension then the scale"
     local dim=$(printf "$dimensions" | (dmenu -p "Game dimension" -l 10 || fzf --height 40%))
     local dim=$(awk '{print $1}' <<< "${dim}")
     local dim="$(awk '{print $2}' FS=x <<< $dim)"
 
     # The rescaled dimension
-    local dimensions="$(cat $HOME/.config/wm/monitor_options.conf)"
+    local dimensions="$(cat $MONITOR_OPTIONS)"
     local dim2=$(printf "$dimensions" | (dmenu -p "Scale to" -l 10 || fzf --height 40%))
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
@@ -83,14 +84,14 @@ start_embedded() {
     local program="$1"
 
     # The total screen
-    local dimensions="$(cat $HOME/.config/monitor_options.conf)"
+    local dimensions="$(cat $MONITOR_OPTIONS)"
     echo "Choose the dimension then the scale"
     local dim=$(printf "$dimensions" | (dmenu -p "Dimension" || fzf --height 40%))
     local dim=$(awk '{print $1}' <<< "${dim}")
     local dim="$(awk '{print $2}' FS=x <<< $dim)"
 
     # The rescaled dimension
-    local dimensions="$(cat $HOME/.config/wm/monitor_options.conf)"
+    local dimensions="$(cat $MONITOR_OPTIONS)"
     local dim2=$(printf "$dimensions" | (dmenu -p "Scale to"|| fzf --height 40%))
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"

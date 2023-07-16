@@ -5,6 +5,7 @@
 #
 # Here we add the npm path and install the language servers.
 
+echo "Configuring the npm"
 export NPM_ROOT=$HOME/Documents/npm
 export npm_config_prefix="$HOME/Documents/npm/"
 

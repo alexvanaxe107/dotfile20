@@ -22,6 +22,8 @@ USER_TEMPLATE="$HOME/templates"
 USER_CONFIGS="$HOME/configs"
 USER_DOCS_NIX="$HOME/Documents/Projects/nixconfs/"
 
+TODO_DIR="$HOME/Documents/todos"
+
 if [ -L "$USER_TEMPLATE" ]; then
     echo "Template already exists. Not touching it."
     if [ "$force" == "force" ];  then
@@ -33,7 +35,7 @@ else
 fi
 
 if [ -L "$USER_CONFIGS" ]; then
-    echo "Config already exists. Not touching it."
+    echo "Config link already exists. Not touching it."
     if [ "$force" == "force" ];  then
         ln -s $AVA_CONFIGS $USER_CONFIGS
     fi
@@ -42,10 +44,22 @@ else
     ln -s $AVA_CONFIGS $USER_CONFIGS
 fi
 
-cp --no-preserve=all -rf $HOME/configs/* $HOME
-cp --no-preserve=all -rf $HOME/configs/.* $HOME
-chmod 700 $HOME/.config/bspwm/bspwmrc
-chmod 700 $HOME/.config/sxiv/exec/*
+
+if [ ! -f $HOME/.config/bspwm/bspwmrc ]; then
+    echo "Copying the configuration files"
+    cp --no-preserve=all -rf $HOME/configs/* $HOME
+    cp --no-preserve=all -rf $HOME/configs/.* $HOME
+    chmod 700 $HOME/.config/bspwm/bspwmrc
+    chmod 700 $HOME/.config/sxiv/exec/*
+else
+    echo "Config exists. Try with force to override it"
+    if [ "$force" == "force" ];  then
+        cp --no-preserve=all -rf $HOME/configs/* $HOME
+        cp --no-preserve=all -rf $HOME/configs/.* $HOME
+        chmod 700 $HOME/.config/bspwm/bspwmrc
+        chmod 700 $HOME/.config/sxiv/exec/*
+    fi
+fi
 
 if [ ! -d "$USER_DOCS_NIX" ]; then
     echo "Cloning nixos conigs"
@@ -64,12 +78,12 @@ git config --global http.postBuffer 157286400
 
 # -- configurar o packer. Rodar:
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
-    echo "oOnfiguring packer"
+    echo "configuring packer"
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 else
     if [ "$force" == "force" ];  then
-        echo "oOnfiguring packer"
+        echo "Configuring packer"
         git clone --depth 1 https://github.com/wbthomason/packer.nvim\
          ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     fi
@@ -86,7 +100,6 @@ else
     fi
 fi
 
-echo "Copying the configuration files"
 if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
     cp --no-preserve=all $HOME/templates/home-manager/ava.nix $HOME/.config/home-manager/
     nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
@@ -103,3 +116,15 @@ else
     fi
 fi
 
+# Configure todos
+if [ ! -f $HOME/.ecryptfs/todos.sig ]; then
+    echo "Confiuring todos."
+    mkdir -p ${TODO_DIR}
+    echo "Enter the todo passphrase:"
+    pass=$(ecryptfs-add-passphrase)
+    pass=$(echo $pass | grep -Eo "\[(.*)\]" | grep -Eo '\w*')
+    echo "${pass}" > $HOME/.ecryptfs/todos.sig
+    echo "${pass}" >> $HOME/.ecryptfs/todos.sig
+
+    echo "$TODO_DIR/todos_git $TODO_DIR/todos ecryptfs" > $HOME/.ecryptfs/todos.conf
+fi
