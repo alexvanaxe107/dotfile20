@@ -1,3 +1,17 @@
+Alta prioridade
+- Configurar ambiente de desenvolvimento
+    * Configuramos no proprio usuario para facilitar o desenvolvimento.
+
+- configurar todo.txt
+- Resolver problema do dunst
+
+Media prioridade
+- Testar wayland
+
+Baixa prioridade
+- Melhorar ambiente de jogo
+
+### PARTE JA AUTOMATIZADA OU PARCIALMENTE AUTOMATIZADA
 -- Configurar git para global store
 git config --global credential.helper store
 -- Ele trava as vezes quando o comit é grande. Entao fazemos:
