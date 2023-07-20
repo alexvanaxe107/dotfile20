@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+dmenu=ava_dmenu
+
 do_mute() {
     wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     _notify_volume
@@ -16,7 +18,7 @@ do_down() {
 }
 
 change_default_sink() {
-    local sink="$(pactl list sinks short | awk '{print $2}' | dmenu -l 5 -p "Choose the default sink")"
+    local sink="$(pactl list sinks short | awk '{print $2}' | ${dmenu} -l 5 -p "Choose the default sink")"
 
     pactl set-default-sink $sink
 }
