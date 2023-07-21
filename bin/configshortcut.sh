@@ -3,7 +3,7 @@
 dmenu=ava_dmenu
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "radio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nstellaris" | ${dmenu} -l 30    -p "Select config to edit")
+file=$(printf "radio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris" | ${dmenu} -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -46,7 +46,7 @@ process_wallpaper(){
 case $file in
     "sxhkd") wezterm start $EDITOR $HOME/.config/sxhkd/sxhkdrc;;
     "radio") wezterm start $EDITOR $HOME/.config/play_radio/config;;
-    "config") wezterm start $EDITOR $HOME/bin/configshortcut.sh;;
+    "config") wezterm start $EDITOR $HOME/.config/wm/bspwm.conf;;
     "zshrc") wezterm start $EDITOR $HOME/.zshrc;;
     "monitors") wezterm start $EDITOR $HOME/.config/wm/monitors.conf;;
     "ytpl") wezterm start $EDITOR $HOME/.config/tmp/yt_pl.txt;;
