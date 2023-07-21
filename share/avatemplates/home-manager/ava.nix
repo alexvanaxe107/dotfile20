@@ -29,6 +29,8 @@
         pkgs.xclip
         pkgs.fzf
         pkgs.xsecurelock
+        # (import <unstable> {}).font-manager
+	pkgs.kcharselect
         # programming
         pkgs.wezterm
         pkgs.unclutter

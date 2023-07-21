@@ -22,7 +22,7 @@ USER_TEMPLATE="$HOME/templates"
 USER_CONFIGS="$HOME/configs"
 USER_DOCS_NIX="$HOME/Documents/Projects/nixconfs/"
 
-TODO_DIR="$HOME/Documents/todos"
+VIDEO_DIR="$HOME/Videos" # This is for the lockscreen
 
 if [ -L "$USER_TEMPLATE" ]; then
     echo "Template already exists. Not touching it."
@@ -70,6 +70,8 @@ else
     fi
 fi
 
+mkdir $VIDEO_DIR
+
 # Configuring settings
 # -- Configurar git para global store
 git config --global credential.helper store
@@ -114,17 +116,4 @@ else
         # -- Configurar home-manager
         nix-shell '<home-manager>' -A install
     fi
-fi
-
-# Configure todos
-if [ ! -f $HOME/.ecryptfs/todos.sig ]; then
-    echo "Confiuring todos."
-    mkdir -p ${TODO_DIR}
-    echo "Enter the todo passphrase:"
-    pass=$(ecryptfs-add-passphrase)
-    pass=$(echo $pass | grep -Eo "\[(.*)\]" | grep -Eo '\w*')
-    echo "${pass}" > $HOME/.ecryptfs/todos.sig
-    echo "${pass}" >> $HOME/.ecryptfs/todos.sig
-
-    echo "$TODO_DIR/todos_git $TODO_DIR/todos ecryptfs" > $HOME/.ecryptfs/todos.conf
 fi
