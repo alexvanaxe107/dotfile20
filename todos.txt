@@ -2,8 +2,11 @@ Alta prioridade
 - Configurar ambiente de desenvolvimento
     * Configuramos no proprio usuario para facilitar o desenvolvimento.
 
-- configurar todo.txt
 - Resolver problema do dunst
+
+*** Install script ***
+- Criar a pasta videos no home
+***
 
 Media prioridade
 - Testar wayland
