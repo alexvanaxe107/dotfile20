@@ -12,8 +12,6 @@ umask 022
 
 CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | ${dmenu} -i    -l 20 -p "Change the font: ")
 
-SPACE_SIZE=30
-
 if [ -z "${CHOSEN}" ]; then
     exit
 fi
@@ -23,6 +21,7 @@ NOT_MONO=$(echo $CHOSEN | cut -d '-' -f 1)
 
 # Source the theme
 . ${HOME}/.config/bspwm/themes/bsp.cfg
+. ${HOME}/.config/wm/bspwm.conf
 
 font() {
     font_name=$1
@@ -46,7 +45,7 @@ font() {
 
     #Change the polybar
     if [ "${NOT_MONO}" != "NM" ]; then 
-        height="$((size1 + ${SPACE_SIZE}))"
+        height="$((size1 + ${space_size}))"
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/height.*/height = ${height}/" ${HOME}/.config/polybar/config
 
@@ -70,7 +69,7 @@ font() {
     sed -i "s/font =.*/font = ${font_name},${style} ${size1}/" ${HOME}/.config/dunst/dunstrc
 
     #Change the twmn font
-    height="$((size1 + ${SPACE_SIZE}))"
+    height="$((size1 + ${space_size}))"
     sed -i "s/font=.*/font=${font_name}/" ${HOME}/.config/twmn/twmn.conf
     sed -i "s/font_size=.*/font_size=$((size1 + 10))/" ${HOME}/.config/twmn/twmn.conf
     sed -i "s/height=.*/height=$((size1 + height))/" ${HOME}/.config/twmn/twmn.conf

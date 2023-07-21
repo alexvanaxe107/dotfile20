@@ -2,7 +2,10 @@ Alta prioridade
 - Configurar ambiente de desenvolvimento
     * Configuramos no proprio usuario para facilitar o desenvolvimento.
 
-- Resolver problema do dunst
+- Configurar todos novo
+
+- Ver fontes do radio
+- Migrar o radio para ava no github
 
 *** Install script ***
 - Criar a pasta videos no home
@@ -10,8 +13,10 @@ Alta prioridade
 
 Media prioridade
 - Testar wayland
+- Reorganizar configuration, movendo o que esta de custom no hardware para outro lugar.
 
 Baixa prioridade
+- QOL - Manipulacao de eww? SIIIM
 - Melhorar ambiente de jogo
 
 ### PARTE JA AUTOMATIZADA OU PARCIALMENTE AUTOMATIZADA
