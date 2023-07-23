@@ -133,6 +133,7 @@ return require('packer').startup(function()
     use 'jnurmine/Zenburn'
     -- If you are using Packer
     use 'marko-cerovac/material.nvim'
+    use 'dylanaraps/wal.vim'
     use 'drewtempelmeyer/palenight.vim'
     use { 'Shadorain/shadotheme' }
 
@@ -156,7 +157,7 @@ return require('packer').startup(function()
     -- use 'vim-airline/vim-airline-themes'
 
     -- use some transparency
-    use 'xiyaowong/nvim-transparent'
+    -- use 'xiyaowong/nvim-transparent'
 end)
 
 

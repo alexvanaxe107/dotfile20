@@ -16,6 +16,8 @@ choosen_theme=$((printf "Theme on\nTheme off\nWal\n" && cat $THEMES) |  ${dmenu}
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
 
+echo "" > ${HOME}/.vim/configs/theme_config.vim
+
 if [ "${choosen}" == "Theme on" ]; then
     sed -i "s/\(custom_colors = \)\(.*\),/\1true,/" ${HOME}/.config/wezterm/extra.lua
     exit
@@ -35,6 +37,7 @@ if [ "${choosen}" == "Wal" ]; then
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
     sed -i 's/wal_enabled.*/wal_enabled="1"/' ${BSPWM_CONFIG}
+    echo "set termguicolors!" > ${HOME}/.vim/configs/theme_config.vim
 
     exit
 else
