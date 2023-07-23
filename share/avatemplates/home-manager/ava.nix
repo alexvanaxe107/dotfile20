@@ -38,6 +38,9 @@
         pkgs.qutebrowser
         pkgs.fd
 
+	# Productivity
+	pkgs.todo-txt-cli
+
         # Nicities
         pkgs.fortune
 

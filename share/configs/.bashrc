@@ -16,7 +16,7 @@ fi
 #set -o nounset     # These  two options are useful for debugging.
 #set -o xtrace
 alias debug="set -o nounset; set -o xtrace"
-alias day.sh='todo.sh -d /home/media/todos/day/config/config'
+alias day.sh='todo.sh -d /home/media/todos/todos/day/config'
 
 ulimit -S -c 0      # Don't want coredumps.
 set -o noclobber # Dont override the file on the > operator
