@@ -26,9 +26,9 @@ if [ "${choosen}" == "Theme off" ]; then
 fi
 if [ "${choosen}" == "Wal" ]; then
     if [ "${THEME_NAME}" == "day"  ]; then
-        wal -n -e -l -i $(cat $HOME/wallpaper.txt)
+        wal -n -l -i $(cat $HOME/wallpaper.txt)
     else
-        wal -n -e -i $(cat $HOME/wallpaper.txt)
+        wal -n -i $(cat $HOME/wallpaper.txt)
     fi
 
     exit
