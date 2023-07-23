@@ -19,7 +19,7 @@ export XDG_SESSION_DESKTOP=i3
 export XDG_CURRENT_DESKTOP=i3
 
 spark.sh
-alias clear="clear;echo;spark.sh"
+#alias clear="clear;echo;spark.sh"
 # alias clear="clear;echo"
 
 # --------------------------------------------------------

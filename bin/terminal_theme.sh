@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
 
+source $HOME/.config/bspwm/themes/bsp.cfg
+
 PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
 THEMES=$HOME/.config/wm/terminal.conf
 TERM_CONFIG=$HOME/.config/wezterm/extra.lua
+BSPWM_CONFIG="$HOME/.config/wm/bspwm.conf"
+
+THEME_NAME="${theme_name}"
 
 dmenu=ava_dmenu
 
-choosen_theme=$((printf "Theme on\nTheme off\n" && cat $THEMES) |  ${dmenu} -i -l 27 -p "Choose the terminal theme")
+choosen_theme=$((printf "Theme on\nTheme off\nWal\n" && cat $THEMES) |  ${dmenu} -i -l 27 -p "Choose the terminal theme")
 
 choosen=$(echo $choosen_theme | cut -d '|' -f 1)
+
+echo "" > ${HOME}/.vim/configs/theme_config.vim
 
 if [ "${choosen}" == "Theme on" ]; then
     sed -i "s/\(custom_colors = \)\(.*\),/\1true,/" ${HOME}/.config/wezterm/extra.lua
@@ -18,6 +25,23 @@ fi
 if [ "${choosen}" == "Theme off" ]; then
     sed -i "s/\(custom_colors = \)\(.*\),/\1false,/" ${HOME}/.config/wezterm/extra.lua
     exit
+fi
+if [ "${choosen}" == "Wal" ]; then
+    sed -i 's/^colorscheme.*/colorscheme wal/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="wal"/' ${HOME}/.vim/configs/theme.vim
+    if [ "${THEME_NAME}" == "day"  ]; then
+        wal -n -l -i $(cat $HOME/wallpaper.txt)
+        sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
+    else
+        wal -n -i $(cat $HOME/wallpaper.txt)
+        sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    fi
+    sed -i 's/wal_enabled.*/wal_enabled="1"/' ${BSPWM_CONFIG}
+    echo "set termguicolors!" > ${HOME}/.vim/configs/theme_config.vim
+
+    exit
+else
+    sed -i 's/wal_enabled.*/wal_enabled="0"/' ${BSPWM_CONFIG}
 fi
 
 if [ ! -z "$choosen" ]; then

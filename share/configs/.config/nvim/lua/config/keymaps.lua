@@ -36,7 +36,7 @@ map('n', 't7', ':tabn 7<CR>')
 map('n', 't8', ':tabn 8<CR>')
 map('n', 't9', ':tabn 9<CR>')
 
-map('n', '<leader>t', '<cmd>TransparentToggle<cr>')
+map('n', '<leader>t', ':highlight Normal ctermbg=none<cr>:highlight NonText ctermbg=none<cr>:highlight Normal guibg=none<cr>:highlight NonText guibg=none<cr>')
 
 map('n', '<leader>r', '<cmd>source ~/.vim/configs/theme.vim<cr>')
 

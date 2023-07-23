@@ -146,6 +146,7 @@ function get_wallpaper() {
 function refresh_theme() {
     killall -q picom
     killall -q dunst
+    reset_dunst.sh
     killall -q twmnd
     bspc config border_radius 0
     bspc config window_gap 0

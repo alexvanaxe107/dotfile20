@@ -24,7 +24,7 @@ opt.showcmd = true
 opt.showmatch = true        -- Highlight matching parenthesis
 opt.showcmd = true -- Display incomplete commands
 opt.laststatus=3            -- Set global statusline
-opt.termguicolors = true    -- Enable 24-bit RGB colors
+-- opt.termguicolors = true    -- Enable 24-bit RGB colors
 opt.linebreak = true        -- Wrap on word boundary TESTING
 opt.showmatch = true        -- Highlight matching parenthesis
 opt.ignorecase = true       -- Ignore case letters when search
@@ -71,20 +71,20 @@ g.airline_powerline_fonts = true
 
 require('lualine').setup()
 
-require("transparent").setup({
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-
-    -- example of akinsho/nvim-bufferline.lua
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude_groups = {}, -- table: groups you don't want to clear
-})
+-- require("transparent").setup({
+--   extra_groups = { -- table/string: additional groups that should be cleared
+--     -- In particular, when you set it to 'all', that means all available groups
+-- 
+--     -- example of akinsho/nvim-bufferline.lua
+--     "BufferLineTabClose",
+--     "BufferlineBufferSelected",
+--     "BufferLineFill",
+--     "BufferLineBackground",
+--     "BufferLineSeparator",
+--     "BufferLineIndicatorSelected",
+--   },
+--   exclude_groups = {}, -- table: groups you don't want to clear
+-- })
 
 require'nvim-web-devicons'.setup {
  -- your personnal icons can go here (to override)

@@ -30,7 +30,7 @@
         pkgs.fzf
         pkgs.xsecurelock
         # (import <unstable> {}).font-manager
-	pkgs.kcharselect
+    	pkgs.kcharselect
         # programming
         pkgs.wezterm
         pkgs.unclutter
@@ -43,6 +43,7 @@
 
         # Nicities
         pkgs.fortune
+        pkgs.pywal
 
         (pkgs.mpv.override {
           scripts = [ pkgs.mpvScripts.mpris ];
