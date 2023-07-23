@@ -275,4 +275,6 @@ clear
 spark.sh
 echo
 
+pywal.sh
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

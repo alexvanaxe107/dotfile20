@@ -29,7 +29,7 @@
 
 source $HOME/.config/bspwm/themes/bsp.cfg
 
-regex_color="8E9BB0"
+regex_color="B351BA"
 count=0
 count_begin=1
 count_end=

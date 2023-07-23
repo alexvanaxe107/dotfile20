@@ -6,9 +6,9 @@ PATH=$HOME/.pyenv/versions/wm/bin/:$PATH
 
 THEMES=$HOME/.config/wm/terminal.conf
 TERM_CONFIG=$HOME/.config/wezterm/extra.lua
+BSPWM_CONFIG="$HOME/.config/wm/bspwm.conf"
 
 THEME_NAME="${theme_name}"
-
 
 dmenu=ava_dmenu
 
@@ -25,13 +25,20 @@ if [ "${choosen}" == "Theme off" ]; then
     exit
 fi
 if [ "${choosen}" == "Wal" ]; then
+    sed -i 's/^colorscheme.*/colorscheme wal/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="wal"/' ${HOME}/.vim/configs/theme.vim
     if [ "${THEME_NAME}" == "day"  ]; then
         wal -n -l -i $(cat $HOME/wallpaper.txt)
+        sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
     else
         wal -n -i $(cat $HOME/wallpaper.txt)
+        sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
+    sed -i 's/wal_enabled.*/wal_enabled="1"/' ${BSPWM_CONFIG}
 
     exit
+else
+    sed -i 's/wal_enabled.*/wal_enabled="0"/' ${BSPWM_CONFIG}
 fi
 
 if [ ! -z "$choosen" ]; then
