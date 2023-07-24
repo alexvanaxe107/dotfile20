@@ -62,10 +62,12 @@ begin(){
     . $HOME/.config/bspwm/themes/bsp.cfg
 
     # Colors
-    bspc config focused_border_color            "${focused_border_color}"
-    bspc config active_border_color             "${active_border_color}"
-    bspc config normal_border_color             "${normal_border_color}"
-    bspc config presel_feedback_color           "${presel_feedback_color}"
+    if [ ! -z "${is_bspc}" ]; then
+        bspc config focused_border_color            "${focused_border_color}"
+        bspc config active_border_color             "${active_border_color}"
+        bspc config normal_border_color             "${normal_border_color}"
+        bspc config presel_feedback_color           "${presel_feedback_color}"
+    fi
 }
 
 # Try to copy the config where is the themename
@@ -148,12 +150,14 @@ function refresh_theme() {
     killall -q dunst
     reset_dunst.sh
     killall -q twmnd
-    bspc config border_radius 0
-    bspc config window_gap 0
-    bspc config top_padding 0
-    bspc config bottom_padding 0
-    bspc config left_padding 0
-    bspc config right_padding 0
+    if [ ! -z "${is_bspc}" ]; then
+        bspc config border_radius 0
+        bspc config window_gap 0
+        bspc config top_padding 0
+        bspc config bottom_padding 0
+        bspc config left_padding 0
+        bspc config right_padding 0
+    fi
 
     killall -q tint2
     killall -q conky

@@ -66,9 +66,7 @@ resize_img_plus(){
 
     convert "$file" -quality 100 -resize "${imgsize}"^ -gravity ${direction} -extent "${imgsize}${hadjust}${vadjust}" "/tmp/$temp_file"
 
-    cd /tmp/
-
-    sxiv $temp_file &
+    sxiv /tmp/$temp_file &
 }
 
 crop_img(){
