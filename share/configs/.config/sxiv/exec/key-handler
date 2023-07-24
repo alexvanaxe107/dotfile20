@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCALE=230
-WP_CONFIG_PATH="/home/alexvanaxe/.config/wm/wallpapers.conf"
+WP_CONFIG_PATH="$HOME/.config/wm/wallpapers.conf"
 
 exit_if_none(){
     local valor="$1"
@@ -139,7 +139,7 @@ set_wallpaper(){
     else
         nitrogen --head=${monitor} --save --set-scaled --random "$file"
     fi
-    sed -i "s/$monitor.*/$monitor:$file/g" $WP_CONFIG_PATH
+    sed -i "s#$monitor:.*#$monitor:$file#g" $WP_CONFIG_PATH
 }
 
 while read file
