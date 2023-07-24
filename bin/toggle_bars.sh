@@ -10,6 +10,8 @@ TARGET=$1
 dim=$(grep ";dim-value" -w $HOME/.config/polybar/config)
 dim_simple=$(grep ";dim-value" -w $HOME/.config/polybar/config_simple)
 
+dmenu=$(which ava_dmenu)
+
 toggle_light() {
     pid=$(ps aux | egrep "[l]emonbar" | awk '{print $2}')
 
@@ -144,6 +146,24 @@ auto_hide(){
 
 }
 
+toggle_options () {
+    local toggle=$(echo -e "eww1\neww2" | $dmenu -l 10 -p "Which bar to toggle?")
+    case "$toggle" in
+        "target2") $(toggle_simple);;
+        "target1") $(toggle_full);;
+        "tint") $(toggle_tint);;
+        "eww1") $(toggle_eww "general_infos");;
+        "eww2") $(toggle_eww "pc_infos");;
+        "tinth") $(toggle_tint_h);;
+        "light") $(toggle_light);;
+        "restart") restart_bar;;
+        "autohide") auto_hide;;
+        "options") toggle_options;;
+    esac
+
+
+}
+
 case "$TARGET" in
     "--target2") $(toggle_simple);;
     "--target1") $(toggle_full);;
@@ -154,6 +174,7 @@ case "$TARGET" in
     "--light") $(toggle_light);;
     "--restart") restart_bar;;
     "--autohide") auto_hide;;
+    "--options") toggle_options;;
     *) $(toggle_all);;
 esac
 
