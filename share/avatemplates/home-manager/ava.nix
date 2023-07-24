@@ -10,7 +10,7 @@
         pkgs.zsh
         pkgs.sxhkd
         pkgs.dunst
-#    polybar = self.polybar;
+        # polybar = self.polybar;
         pkgs.nitrogen
 
         # media
@@ -38,8 +38,8 @@
         pkgs.qutebrowser
         pkgs.fd
 
-	# Productivity
-	pkgs.todo-txt-cli
+        # Productivity
+        pkgs.todo-txt-cli
 
         # Nicities
         pkgs.fortune
@@ -55,6 +55,11 @@
         # development
         pkgs.neovim
         pkgs.nodejs
+
+        # Experimental
+        pkgs.hyprland
+        pkgs.swww
+        pkgs.bemenu
 
 
         # (import <avapkgs>).ava-chamaleon

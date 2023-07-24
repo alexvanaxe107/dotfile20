@@ -9,8 +9,11 @@ if [ -z "$dmenu_cmd" ]; then
     dmenu_cmd=$(which dmenu)
 fi
 
-if [ "${BEMENU_BACKEND}" = "wayland" ]; then
-    bemenu-run
+dmenu_path | $dmenu_cmd | ${SHELL:-"/bin/sh"} &
+exit
+
+if [ "${use_bemenu}" == "1" ];then
+    dmenu_path | $dmenu_cmd | ${SHELL:-"/bin/sh"} &
 else
     if [ "${use_rofi}" = "0" ]
     then
