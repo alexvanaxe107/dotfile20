@@ -12,8 +12,6 @@
 
 set_wallpaper()
 { 
-    rm ${WALLPAPER_PATH}
-
     sxiv $HOME/Documents/Pictures/Wallpapers/dual/$theme_name/*
 }
 
