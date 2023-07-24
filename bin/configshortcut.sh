@@ -53,7 +53,7 @@ case $file in
     "ytq") wezterm start $EDITOR $HOME/.confit/tmp/yt_queue.txt;;
     "sxiv") wezterm start $EDITOR $HOME/.config/sxiv/exec/key-handler;;
     "polybar")  wezterm start $EDITOR $HOME/.config/polybar/config;;
-    "wallpaper") cd $HOME/Documents/Pictures/Wallpapers/dual/$theme_name;sxiv *;;
+    "wallpaper") sxiv $HOME/Documents/Pictures/Wallpapers/dual/$theme_name/*;;
     "stellaris") cd $HOME/Documents/Pictures/Wallpapers/stellaris;sxiv *;;
     "eww")  wezterm start $EDITOR $HOME/.config/eww/*;;
 esac

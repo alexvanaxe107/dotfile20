@@ -18,6 +18,7 @@ CONFIG_DIR=$HOME/.config/wm
 source $CONFIG_DIR/imports/color_sort.sh
 
 TEMPLATES="$HOME/templates/"
+WALLPAPER_PATH=$HOME/.config/wm/wallpapers.conf
 
 is_bspc=$(bspc wm --get-status)
 
@@ -40,13 +41,11 @@ choose(){
     CHOSEN=$1
     if [ -z "$CHOSEN" ] 
     then
-        CHOSEN=$(retrieve_themes | dmenu -i     -p "Change the theme: ")
+        CHOSEN=$(retrieve_themes | dmenu -i -p "Change the theme: ")
     fi
 
     #Get the last to get how many monitors
     MONITOR=$(xrandr --query | grep "*" | nl | awk '{print $1}')
-
-    WALLPAPER_PATH=$HOME/.config/nitrogen/bg-saved.cfg
 
     if [[ -z "${CHOSEN}" ]]; then
         exit
@@ -138,7 +137,8 @@ function get_wallpaper() {
     selected_wallpaper=$(monitors_info.sh -a | dmenu -p "Extract color from wallpaper:" -n)
     selected_wallpaper=$(monitors_info.sh -ib "${selected_wallpaper}")
 #    selected_wallpaper=$((${selected_wallpaper} + 1))
-    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "xin_${selected_wallpaper}" -A 1 | tail -n 1 | cut -d '=' -f 2)
+#    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "xin_${selected_wallpaper}" -A 1 | tail -n 1 | cut -d '=' -f 2)
+    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "${selected_wallpaper}:" | cut -d ':' -f 2)
 
     echo ${cur_wallpaper}
 }
