@@ -57,9 +57,9 @@
         pkgs.nodejs
 
         # Experimental
-        pkgs.hyprland
-        pkgs.swww
-        pkgs.bemenu
+        (import <unstable> {}).hyprland
+        (import <unstable> {}).swww
+        (import <unstable> {}).bemenu
 
 
         # (import <avapkgs>).ava-chamaleon
