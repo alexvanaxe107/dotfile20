@@ -1,8 +1,5 @@
 Alta prioridade
-- Configurar ambiente de desenvolvimento
-    * Configuramos no proprio usuario para facilitar o desenvolvimento.
-
-- Configurar todos novo
+   Consertar o template. Deve ser 'imutavel'
 
 - Migrar o radio para ava no github
 
