@@ -42,7 +42,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "-25%"
+                       :y "25%"
                        :height "6%"
                        :anchor "bottom left")
     (normal_infos_layout))
@@ -53,7 +53,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "-17%"
+                       :y "17%"
                        :width "100%"
                        :height "6%"
                        :anchor "bottom left")
@@ -89,7 +89,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "-1%"
+                       :y "1%"
                        :height "7%"
                        :width "40%"
                        :anchor "bottom left")
@@ -101,7 +101,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "-5%"
+                       :y "5%"
                        :width "10%"
                        :height "6%"
                        :anchor "bottom right")
@@ -112,7 +112,7 @@
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
-    :geometry (geometry :x "-2%"
+    :geometry (geometry :x "2%"
                        :y "6%"
                        :height "10%"
                        :width "25%"

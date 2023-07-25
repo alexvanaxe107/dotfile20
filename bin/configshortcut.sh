@@ -3,7 +3,7 @@
 dmenu=ava_dmenu
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "radio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris" | ${dmenu} -l 30    -p "Select config to edit")
+file=$(printf "hypr\nradio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris" | ${dmenu} -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -44,6 +44,7 @@ process_wallpaper(){
     }
 
 case $file in
+    "hypr") wezterm start $EDITOR $HOME/.config/hypr/hyprland.conf;;
     "sxhkd") wezterm start $EDITOR $HOME/.config/sxhkd/sxhkdrc;;
     "radio") wezterm start $EDITOR $HOME/.config/play_radio/config;;
     "config") wezterm start $EDITOR $HOME/.config/wm/bspwm.conf;;
