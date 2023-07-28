@@ -1,5 +1,7 @@
 Alta prioridade
-   Consertar o template. Deve ser 'imutavel' (Ver o que )
+   Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro)
+   Consertar spark (ele fica sempre rosa) / Alguem pode estar sobreescrevendo ele. Ver quem é o culpado
+
 
 - Migrar o radio para ava no github
 
