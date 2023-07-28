@@ -23,7 +23,13 @@ while getopts "hsf" opt; do
 done
 
 if [ -z "$1" ]; then
-    chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
+   
+    if [[ $use_rofi -eq 1 ]]; then
+	chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
+    else
+	chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)")
+    fi
+
     case "$chosen" in
         "▶") $(start_pomodoro);;
         "⏹") pomodoro-client.py stop;;
