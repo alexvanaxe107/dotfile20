@@ -1,6 +1,8 @@
 Alta prioridade
    Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro)
-   Consertar spark (ele fica sempre rosa) / Alguem pode estar sobreescrevendo ele. Ver quem é o culpado
+   Tornar gaps configuraveis (facil, soh planejar como)
+   Incluir configuracao do vim nos shortcuts
+
 
 
 - Migrar o radio para ava no github
