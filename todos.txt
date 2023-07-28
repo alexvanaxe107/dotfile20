@@ -1,5 +1,5 @@
 Alta prioridade
-   Consertar o template. Deve ser 'imutavel'
+   Consertar o template. Deve ser 'imutavel' (Ver o que )
 
 - Migrar o radio para ava no github
 
