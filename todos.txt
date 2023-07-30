@@ -2,6 +2,7 @@ Alta prioridade
    Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro)
    Tornar gaps configuraveis (facil, soh planejar como)
    Incluir configuracao do vim nos shortcuts
+   Ver o todos
 
 
 

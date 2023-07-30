@@ -50,6 +50,6 @@ export HISTCONTROL=ignoreboth
 # Simple configs
 # --------------------------------------------------------
 export _JAVA_AWT_WM_NONREPARENTING=1
-alias subliminal="subliminal --opensubtitles nightwalker107 naovoudizer"
+alias subliminal="subliminal --opensubtitles USER PASS"
 
 path=($HOME/bin ~/Documents/npm/bin $path[@])
