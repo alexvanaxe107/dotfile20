@@ -416,10 +416,10 @@ class Unsplash():
     def get_wallpaper(self, monitor, scene, config):
         orientation="landscape"
 
-        if not config.dimension:
-            monitor_info = _get_monitor_info(monitor)
-            orientation=monitor_info['orientation']
-
+#        if not config.dimension:
+#            monitor_info = _get_monitor_info(monitor)
+#            orientation=monitor_info['orientation']
+#
         request = self.mount_request(orientation, scene)
         response = self.get_json(request)
 
