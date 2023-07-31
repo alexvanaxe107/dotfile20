@@ -4,6 +4,13 @@ Alta prioridade
    Incluir configuracao do vim nos shortcuts
    Ver o todos
 
+Media prioridade:
+   Ver o waybar
+   Rever os icones do radio
+   Fazer atalho para ir para o proximo workspace?
+
+Baixa prioridade:
+   Melhorar o workspace? Ver como dar os nomes a eles
 
 
 - Migrar o radio para ava no github
