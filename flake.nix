@@ -25,6 +25,6 @@
         license = licenses.mit;
         maintainers = with maintainers; [ "alexvanaxe107" ];
       };
-    }
-  };
+    };
+};
 }
