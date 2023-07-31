@@ -7,7 +7,24 @@
 
     packages.x86_64-linux.default = 
     with import nixpkgs { system = "x86_64-linux"; };
-    import ./ava-chamaleon.nix {pkgs={inherit stdenv lib fetchFromGitHub coreutils binutils;};};
+    stdenv.mkDerivation rec {
+      name = "ava-chamaleon";
+      version = "0.7.2";
 
+      src = self;
+
+
+      builder = "${bash}/bin/bash";
+      args = [ "${src}/builder.sh" ];
+#  args = [ ./builder.sh ];
+
+      baseInputs = [ coreutils binutils.bintools ];
+
+      meta = with lib; {
+        description = "The files for the desktop enviromnetn";
+        license = licenses.mit;
+        maintainers = with maintainers; [ "alexvanaxe107" ];
+      };
+    }
   };
 }
