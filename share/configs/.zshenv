@@ -9,7 +9,7 @@ unsetopt BEEP
 alias ls='ls -h --color'
 alias fuck='sudo $(fc -ln -1)'
 alias todo.sh='todo.sh -d /home/media/todos/general/config/config'
-alias day.sh='todo.sh -d /home/media/todos/day/config/config'
+alias day.sh='todo.sh -d /home/media/todos/todos/day/config'
 alias long.sh='todo.sh -d /home/media/todos/long/config/config'
 
 #export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass

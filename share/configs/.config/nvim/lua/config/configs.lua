@@ -19,7 +19,7 @@ opt.undodir = '/home/alexvanaxe/.config/.nvim/history/'
 -- UI stuffs
 opt.number = true
 opt.relativenumber = true
-opt.cursorline = true
+opt.cursorline = false
 opt.showcmd = true
 opt.showmatch = true        -- Highlight matching parenthesis
 opt.showcmd = true -- Display incomplete commands
