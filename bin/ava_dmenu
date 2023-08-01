@@ -17,7 +17,7 @@ is_theme() {
 if [ "${use_bemenu}" == "1" ];then
         # Fix the font because wayland is very stupid
         fn="$(echo "${DMENU_FN}" | awk '{print $1" "$3}' FS=: | sed 's/size=//')"
-       	BEMENU_BACKEND="wayland" $dmenu_cmd --hp "15" -H "${DMENU_H}" --fb "\'${DMENU_NB}\'" --fb "${DMENU_NB}" --ff "${DMENU_NF}" --ab "${DMENU_NB}" --af "${DMENU_NF}"  --tb "${DMENU_SB}" --tf "${DMENU_SF}" --hb "${DMENU_SB}" --hf "${DMENU_SF}" --nb "${DMENU_NB}" --nf "${DMENU_NF}" --fn "${fn}" "$@"
+       	BEMENU_BACKEND="wayland" $dmenu_cmd --hp "15" -H "${DMENU_H}" --fb "\'${DMENU_NB}\'" --fb "${DMENU_NB}" --ff "${DMENU_NF}" --ab "${DMENU_NB}" --af "${DMENU_NF}"  --tb "${DMENU_SB}" --tf "${DMENU_SF}" --hb "${DMENU_SB}" --hf "${DMENU_SF}" --nb "${DMENU_NB}" --nf "${DMENU_NF}" --fn "${fn}" "${DMENU_PARAMS}" "$@"
         exit
 fi
 
