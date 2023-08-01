@@ -4,6 +4,8 @@
 
 umask 022 # NIX_PROFILE_DIR="$NIX_USER_PROFILE_DIR/profile"
 
+nix_release="release-23.05"
+
 force="$1"
 
 if [ "$force" == "force" ];  then
@@ -103,17 +105,9 @@ else
 fi
 
 if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
-    cp --no-preserve=all $HOME/templates/home-manager/ava.nix $HOME/.config/home-manager/
-    nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
-    nix-channel --update
-    # -- Configurar home-manager
-    nix-shell '<home-manager>' -A install
+    nix run home-manager/${nix_release} -- init --switch
 else
     if [ "$force" == "force" ];  then
-        cp --no-preserve=all $HOME/templates/home-manager/ava.nix $HOME/.config/home-manager/
-        nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
-        nix-channel --update
-        # -- Configurar home-manager
-        nix-shell '<home-manager>' -A install
+        nix run home-manager/${nix_release} -- init --switch
     fi
 fi
