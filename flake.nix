@@ -18,7 +18,7 @@
       args = [ "${src}/builder.sh" ];
 #  args = [ ./builder.sh ];
 
-      baseInputs = [ coreutils binutils.bintools ];
+      baseInputs = [ coreutils ];
 
       meta = with lib; {
         description = "The files for the desktop enviromnetn";
