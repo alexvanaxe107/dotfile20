@@ -24,11 +24,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1690896867,
-        "narHash": "sha256-rzNoRc3zrPNh4cjJevScArv7/misWu62/I9xaPymkxQ=",
+        "lastModified": 1690985172,
+        "narHash": "sha256-Mx0zDlSykycmp71e+/m8IYdTCPrEcuUBgFhQONjvVw0=",
         "owner": "alexvanaxe107",
         "repo": "ava_dmenu",
-        "rev": "52a659d6b102be5b5d9e00a57ad052b0017179dd",
+        "rev": "7a99cc4485dfb334e394b25766ad43b917458e9c",
         "type": "github"
       },
       "original": {
