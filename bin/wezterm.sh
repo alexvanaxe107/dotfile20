@@ -4,4 +4,5 @@
 
 source $HOME/.config/bspwm/themes/bsp.cfg
 
-wezterm &
+#env -u WAYLAND_DISPLAY wezterm &
+env wezterm &

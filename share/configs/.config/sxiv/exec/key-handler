@@ -131,8 +131,8 @@ set_wallpaper(){
             swww init
         fi
         case "$monitor" in
-            "0") swww img -o DP-3  "$file";;
-            "1") swww img -o HDMI-A-1 "$file";;
+            "0") swww img -o $(monitors_info.sh -n 0) "$file";;
+            "1") swww img -o $(monitors_info.sh -n 1) "$file";;
         esac
     else
         nitrogen --head=${monitor} --save --set-scaled --random "$file"

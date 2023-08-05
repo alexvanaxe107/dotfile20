@@ -51,8 +51,12 @@ name_by_id_nitrogen(){
 
 name_by_id(){
     if [ ${id_only} -eq 0 ]; then
-        m_id=$(($1+1))
-        printf "${monitors}" | awk -v ID=$m_id  'NR==ID {print $0}'
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            hyprctl monitors -j | jq -r ".[$m_id].name"
+        else
+            m_id=$(($1+1))
+            printf "${monitors}" | awk -v ID=$m_id  'NR==ID {print $0}'
+        fi
     else
         printf $(($(printf "${monitors}" | nl | grep -wi $1 | xargs | cut -d " " -f 1)-1))
     fi

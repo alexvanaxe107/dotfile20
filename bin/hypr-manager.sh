@@ -1,7 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p "jq"
-
-### Manage the hyprland ###
+#!/usr/bin/env bash 
 
 dmenu=$(which ava_dmenu)
 
@@ -20,7 +17,7 @@ go_to_workspace() {
 }
 
 go_to_client() {
-    local client=$(echo "$(hyprctl clients -j | jq '.[].title' | sed 's/\"//g' | sed '/^$/d')" | $dmenu -l 10)
+    local client=$(echo "$(hyprctl clients -j | jq -r '.[].title' | sed '/^$/d')" | $dmenu -l 10)
     if [ -z "${client}" ]; then
         exit 0
     fi
