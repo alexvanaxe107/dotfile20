@@ -72,7 +72,11 @@ monitors_information_nitrogen() {
 
 monitors_information() { 
     if [ ${id_only} -eq 0 ]; then
-        printf "${monitors}"
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            hyprctl monitors -j | jq -r ".[].name"
+        else
+            printf "${monitors}"
+        fi
     else
         printf "${monitors}" | nl | awk '{print $1-1}'
     fi
