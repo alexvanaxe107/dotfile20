@@ -41,6 +41,7 @@
 
         pkgs.qutebrowser
         pkgs.fd
+        pkgs.jq
 
         # Productivity
         pkgs.todo-txt-cli

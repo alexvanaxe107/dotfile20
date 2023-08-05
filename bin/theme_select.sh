@@ -127,6 +127,7 @@ function reset_configs(){
     cp --no-preserve=all ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
     cp --no-preserve=all ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
     cp --no-preserve=all ${TEMPLATES}/eww/${theme_name}/* ${HOME}/.config/eww/
+    cp --no-preserve=all ${TEMPLATES}/qutebrowser/* ${HOME}/.config/qutebrowser/
 
     # Overwiting only if it not exists
     [ ! -f $HOME/.tmux.conf ] && cp --no-preserve=all ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf

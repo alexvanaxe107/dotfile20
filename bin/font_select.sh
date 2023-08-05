@@ -75,7 +75,7 @@ font() {
     sed -i "s/height=.*/height=$((size1 + height))/" ${HOME}/.config/twmn/twmn.conf
 
     # Update the qutebrowser font size
-    sed -i "s/c.fonts.default_size=.*/c.fonts.default_size=\"$((size1 + 5))px\"/" ${HOME}/.config/qutebrowser/config.py
+    sed -i "s/c.fonts.default_size=.*/c.fonts.default_size=\"$((size1 + 5))px\"/" ${HOME}/.config/qutebrowser/local.py
     #Change the tint font
     if [ "${NOT_MONO}" != "NM" ]; then
     for file in ${HOME}/.config/tint2/*
