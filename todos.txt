@@ -1,5 +1,6 @@
 Alta prioridade
-   Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro)
+   Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro) - DONE
+        obs: Nao alterei ainda o wallpapers pois posso torna-lo como config, restaurando ele quando o pc for ligado
    Tornar gaps configuraveis (facil, soh planejar como)
    Incluir configuracao do vim nos shortcuts
    Ver o todos

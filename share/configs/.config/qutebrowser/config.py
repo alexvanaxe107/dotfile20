@@ -12,6 +12,7 @@
 
 ## This is here so configs done via the GUI are still loaded.
 ## Remove it to not load settings done via the GUI.
+import local
 config.load_autoconfig(True)
 
 
@@ -34,12 +35,13 @@ config.bind("cs", "hint links userscript castsite.sh")
 config.bind("cV", "spawn --userscript castvideo.sh")
 config.bind("PP", "spawn --userscript playpl.sh")
 
+local.font_size(c)
+
 # Value to send in the `Accept-Language` header.
 c.content.headers.accept_language = "en-US,en;q=0.9"
 
 # Hide title bar when only one
 c.tabs.show = "multiple"
-c.fonts.default_size="15px"
 
 c.tabs.background = True
 
