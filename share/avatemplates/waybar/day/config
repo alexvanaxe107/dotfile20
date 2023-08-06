@@ -6,7 +6,7 @@
     // "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["pulseaudio", "custom/media", "network"],
-    "modules-center": ["clock"],
+    "modules-center": ["clock", "custom/weather", "custom/pomodoro"],
     "modules-right": ["cpu", "memory", "temperature", "backlight", "tray"],
 
     "keyboard-state": {
@@ -134,6 +134,22 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/weather": {
+    "format": " {icon} {} ",
+    "format-icons": {
+        "default": "Weather:"
+    },
+    "exec": "weather.sh",
+    "restart-interval": 100,
+    },
+    "custom/pomodoro": {
+    "format": " {icon} {} ",
+    "format-icons": {
+        "default": ""
+    },
+    "exec": "pomodoro_stats.sh",
+    "restart-interval": 10,
     },
     "custom/media": {
         "format": "{icon} {}",

@@ -190,6 +190,14 @@ label:focus {
     min-width: 100px;
 }
 
+#custom-pomodoro {
+  background-color: #00272B; /* memory color  */
+}
+
+#custom-weather {
+  background-color: #00272B; /* temperature color  */
+}
+
 #custom-media.custom-spotify {
     background-color: #66cc99;
 }
