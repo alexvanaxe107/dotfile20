@@ -1,4 +1,6 @@
 Alta prioridade
+   Migrar o radio para ava no github
+   consertar vim
    Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro) - DONE
         obs: Nao alterei ainda o wallpapers pois posso torna-lo como config, restaurando ele quando o pc for ligado
    Incluir configuracao do vim nos shortcuts
@@ -13,7 +15,6 @@ Baixa prioridade:
    Melhorar o workspace? Ver como dar os nomes a eles
 
 
-- Migrar o radio para ava no github
 
 *** Install script ***
 ***

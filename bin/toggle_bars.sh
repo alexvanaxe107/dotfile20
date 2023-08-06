@@ -157,7 +157,7 @@ auto_hide(){
 }
 
 toggle_options () {
-    local toggle=$(echo -e "eww1\neww2" | $dmenu -l 10 -p "Which bar to toggle?")
+    local toggle=$(echo -e "eww1\neww2\nwaybar" | $dmenu -l 10 -p "Which bar to toggle?")
     case "$toggle" in
         "target2") $(toggle_simple);;
         "target1") $(toggle_full);;
@@ -169,6 +169,7 @@ toggle_options () {
         "restart") restart_bar;;
         "autohide") auto_hide;;
         "options") toggle_options;;
+        "waybar") toggle_all;;
     esac
 
 

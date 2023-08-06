@@ -37,7 +37,7 @@ if [ "${choosen}" == "Wal" ]; then
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
     sed -i 's/wal_enabled.*/wal_enabled="1"/' ${BSPWM_CONFIG}
-    echo "set termguicolors!" > ${HOME}/.vim/configs/theme_config.vim
+    echo "set termguicolors" > ${HOME}/.vim/configs/theme_config.vim
 
     exit
 else
@@ -108,7 +108,7 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/^colorscheme.*/colorscheme shado/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="shado"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=/dark' ${HOME}/.vim/configs/theme.vim
-        echo "set termguicolors!" >> ${HOME}/.vim/configs/theme_config.vim
+        echo "set termguicolors" >> ${HOME}/.vim/configs/theme_config.vim
     fi
 
     if [ "$vim_theme" == "PencilLight" ]; then
