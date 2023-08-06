@@ -61,12 +61,11 @@
         # development
         pkgs.neovim
         pkgs.nodejs
-
-        pkgs.clipman
         # Experimental
         (import unstable {system = "${system}";}).hyprland
         (import unstable {system = "${system}";}).swww
         (import unstable {system = "${system}";}).bemenu
+        (import unstable {system = "${system}";}).waybar
 
 
         avadmenu.defaultPackage.${system}
