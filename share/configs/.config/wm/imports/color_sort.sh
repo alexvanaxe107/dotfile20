@@ -163,6 +163,16 @@ get_sorted_color() {
     echo -e ${colors_lum[@]}  | sort -n | awk '{print $2}' | cut -d "#" -f 2
 }
 
+convert_hex_rgba() {
+    local regex="$1"
+    local opacity="${2:-1}"
+    local red=$(echo "obase=10; ibase=16; ${regex:0:2}" | bc)
+    local green=$(echo "obase=10; ibase=16; ${regex:2:2}" | bc)
+    local blue=$(echo "obase=10; ibase=16; ${regex:4:2}" | bc)
+
+    printf "rgba(%s,%s,%s,%s)" "$red" "$green" "$blue" "$opacity"
+}
+
 function get_wall_colors() {
     wallpaper=$1
     local colors12=($(convert "${wallpaper}" -scale 50x50! -depth 4 +dither -colors 15 -format "%c" histogram:info: | grep -o "#......"))
