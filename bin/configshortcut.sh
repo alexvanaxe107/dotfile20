@@ -3,7 +3,7 @@
 dmenu=ava_dmenu
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "hypr\nradio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris" | ${dmenu} -l 30    -p "Select config to edit")
+file=$(printf "hypr\nradio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris\nvim" | ${dmenu} -l 30    -p "Select config to edit")
 
 
 process_wallpaper(){
@@ -56,6 +56,7 @@ case $file in
     "polybar")  wezterm start $EDITOR $HOME/.config/polybar/config;;
     "wallpaper") sxiv $HOME/Documents/Pictures/Wallpapers/dual/$theme_name/*;;
     "stellaris") cd $HOME/Documents/Pictures/Wallpapers/stellaris;sxiv *;;
+    "vim")  wezterm start $EDITOR $HOME/.vim/configs/theme*;;
     "eww")  wezterm start $EDITOR $HOME/.config/eww/*;;
 esac
 

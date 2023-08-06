@@ -167,6 +167,7 @@ function refresh_theme() {
     killall -q tint2
     killall -q conky
     killall -q polybar
+    kill -9 $(pgrep waybar)
     killall -q eww
 }
 
@@ -178,6 +179,13 @@ function startup_theme(){
 function finalize_theme(){
     font_select.sh
     terminal_theme.sh
+}
+
+function get_rgba() {
+    local color=$1
+    local opacity=$2
+
+    echo $(convert_hex_rgba $color $opacity)
 }
 
 function retrieve_color(){
