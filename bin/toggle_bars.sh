@@ -108,24 +108,34 @@ toggle_eww() {
 }
 
 toggle_all(){
-    pid_simple=$(ps aux | egrep "[p]olybar.*simple" | awk '{print $2}')
-    pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
-    if [ ! -z $pid ]; then
-        bspc config top_padding 0
-        bspc config bottom_padding 0
-        kill $pid
-        kill $pid_simple
-    else
-        if [ ! -z "${dim}" ]; then
-            bspc config -m $MONITOR1 top_padding 0
-            bspc config -m $MONITOR1 bottom_padding 0
+
+    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+        pid=$(pgrep waybar)
+        if [ -z $pid ]; then
+            waybar &
+        else
+            kill -9 $(pgrep waybar)
         fi
-        bspc config -m $MONITOR2 top_padding 0
-        bspc config -m $MONITOR2 bottom_padding 0
-        MONITOR1=$MONITOR1 polybar -q default >>/tmp/polybar1.log 2>&1 &
-        #if [ ! -z ${MONITOR2} ]; then
-            #MONITOR2=$MONITOR2 polybar -q -c $HOME/.config/polybar/config_simple simple >>/tmp/polybar2.log 2>&1 &
-        #fi
+    else
+        pid_simple=$(ps aux | egrep "[p]olybar.*simple" | awk '{print $2}')
+        pid=$(ps aux | egrep "[p]olybar.*default" | awk '{print $2}')
+        if [ ! -z $pid ]; then
+            bspc config top_padding 0
+            bspc config bottom_padding 0
+            kill $pid
+            kill $pid_simple
+        else
+            if [ ! -z "${dim}" ]; then
+                bspc config -m $MONITOR1 top_padding 0
+                bspc config -m $MONITOR1 bottom_padding 0
+            fi
+            bspc config -m $MONITOR2 top_padding 0
+            bspc config -m $MONITOR2 bottom_padding 0
+            MONITOR1=$MONITOR1 polybar -q default >>/tmp/polybar1.log 2>&1 &
+            #if [ ! -z ${MONITOR2} ]; then
+                #MONITOR2=$MONITOR2 polybar -q -c $HOME/.config/polybar/config_simple simple >>/tmp/polybar2.log 2>&1 &
+            #fi
+        fi
     fi
 }
 
@@ -175,6 +185,6 @@ case "$TARGET" in
     "--restart") restart_bar;;
     "--autohide") auto_hide;;
     "--options") toggle_options;;
-    *) $(toggle_all);;
+    *) toggle_all;;
 esac
 

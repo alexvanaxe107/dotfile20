@@ -108,6 +108,7 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/^colorscheme.*/colorscheme shado/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="shado"/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/set background.*/set background=/dark' ${HOME}/.vim/configs/theme.vim
+        echo "set termguicolors!" >> ${HOME}/.vim/configs/theme_config.vim
     fi
 
     if [ "$vim_theme" == "PencilLight" ]; then
