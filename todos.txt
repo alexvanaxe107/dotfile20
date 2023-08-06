@@ -1,11 +1,9 @@
 Alta prioridade
-   Migrar o radio para ava no github
    Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro) - DONE
         obs: Nao alterei ainda o wallpapers pois posso torna-lo como config, restaurando ele quando o pc for ligado
    Ver o todos
 
 Media prioridade:
-   Rever os icones do radio
    Fazer atalho para ir para o proximo workspace?
 
 Baixa prioridade:
@@ -16,11 +14,7 @@ Baixa prioridade:
 *** Install script ***
 ***
 
-Media prioridade
-- Testar wayland
-
 Baixa prioridade
-- QOL - Manipulacao de eww? SIIIM
 - Melhorar ambiente de jogo
 
 
