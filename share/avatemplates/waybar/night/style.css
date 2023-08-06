@@ -7,7 +7,7 @@
 window#waybar {
     background-color: rgba(0, 0, 0, 0.0);
 /*    border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-    color: #ffffff;
+    color: #ffffff; /* text color */
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -89,7 +89,7 @@ button:hover {
 #scratchpad,
 #mpd {
     padding: 0 10px;
-    color: #ffffff;
+    color: #ffffff; /* text color */
 }
 
 #window,
@@ -108,7 +108,7 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+      background-color: #00272B; /* clock color  */
 }
 
 #battery {
@@ -143,12 +143,11 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71; /* cpu color */
-    color: #000000;
+      background-color: #00272B; /* cpu color  */
 }
 
 #memory {
-    background-color: #9b59b6;  /* memory color */
+      background-color: #00272B; /* memory color  */
 } 
 
 #disk {
@@ -156,11 +155,11 @@ label:focus {
 }
 
 #backlight {
-    background-color: #90b1b1; /* backlight color */
+      background-color: #00272B; /* backlight color  */
 }
 
 #network {
-    background-color: #2980b9; /* network color */
+      background-color: #00272B; /* network color  */
 }
 
 #network.disconnected {
@@ -168,12 +167,11 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f; /* pulseaudio color */
-    color: #000000;
+      background-color: #00272B; /* pulseaudio color  */
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1; /* pulseaudiomuted color */
+      background-color: #00272B; /* pulseaudiomuted color  */
     color: #2a5c45;
 }
 
@@ -201,7 +199,7 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b; /* temperature color */
+      background-color: #00272B; /* temperature color  */
 }
 
 #temperature.critical {
