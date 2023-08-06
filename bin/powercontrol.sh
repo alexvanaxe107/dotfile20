@@ -8,8 +8,17 @@ else
     chosen=$(printf "Turnoff monitor\nSleep\nRestart\nPoweroff\nHibernate" | ava_dmenu -i -p "Power:")
 fi
 
+confirmation() {
+    if [ "${use_rofi}" = 1 ]; then
+        confirm="$(printf "No\nYes" | ava_dmenu -i -p "Power off?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
+    else
+        confirm="$(printf "No\nYes" | ava_dmenu -i -p "Power off?" -nb darkred -sb red -sf white -nf gray )"
+    fi
+    echo "$confirm"
+}
+
 poweroff() { \
-	confirm="$(printf "No\nYes" | ava_dmenu -i -p "Power off?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
+    confirm="$(confirmation)"
 	if [ "Yes" = "$confirm" ]
 	then
 		systemctl poweroff
@@ -17,7 +26,7 @@ poweroff() { \
 }
 
 chibernate() { \
-	confirm="$(printf "No\nYes" | ava_dmenu -i -p "Hibernate?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
+    confirm="$(confirmation)"
 	if [ "Yes" = "$confirm" ]
 	then
 		lock.sh -d
@@ -37,7 +46,7 @@ csuspend() { \
 }
 
 crestart() { \
-	confirm="$(printf "No\nYes" | ava_dmenu -i -p "Restart?" -nb darkred -sb red -sf white -nf gray -theme ${rofi_item2} )"
+    confirm="$(confirmation)"
 	if [ "Yes" = "$confirm" ]
 	then
 		systemctl reboot
