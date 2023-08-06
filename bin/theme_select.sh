@@ -110,6 +110,9 @@ function reset_configs(){
     if [ ! -d ${HOME}/.config/eww ]; then
         mkdir -p "${HOME}/.config/eww"
     fi
+    if [ ! -d ${HOME}/.config/waybar ]; then
+        mkdir -p "${HOME}/.config/waybar"
+    fi
     
     cp --no-preserve=all ${TEMPLATES}/bspwm/${theme_name}/bsp.cfg ${HOME}/.config/bspwm/themes/bsp.cfg
     cp --no-preserve=all ${TEMPLATES}/vim/* ${HOME}/.vim/configs/
@@ -127,6 +130,7 @@ function reset_configs(){
     cp --no-preserve=all ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
     cp --no-preserve=all ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
     cp --no-preserve=all ${TEMPLATES}/eww/${theme_name}/* ${HOME}/.config/eww/
+    cp --no-preserve=all ${TEMPLATES}/waybar/${theme_name}/* ${HOME}/.config/waybar/
     cp --no-preserve=all ${TEMPLATES}/qutebrowser/* ${HOME}/.config/qutebrowser/
 
     # Overwiting only if it not exists
