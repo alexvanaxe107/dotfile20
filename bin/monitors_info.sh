@@ -179,8 +179,7 @@ monitors_plugged(){
 is_rotated(){
     local monitor=$1
     local rotated="$(xrandr | grep "${monitor}" | grep "t (")"
-
-    if [ -z "${rotated}" ];then
+if [ -z "${rotated}" ];then
         echo "no"
     else
         echo "yes"
@@ -196,7 +195,7 @@ secundary_wide() {
 get_dimensions() {
     if [ -z $1 ]; then
         if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-            hyprctl monitors -j | jq ".[] | .width,  .height" | xargs printf "%sx%s\n"
+            hyprctl monitors -j | jq '.[] | (if .transform == 1 or .transform == 3 then .height, .width else .width, .height end)' | xargs printf "%sx%s\n"
         else
             local dimensions="$(xrandr | grep -w connected | grep -oP '\d+x\d+')"
             printf "$dimensions"
@@ -204,8 +203,8 @@ get_dimensions() {
     else
         if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
             local monitor="$1"
-            hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | .width, .height" | xargs printf "%sx%s"
-        else
+            hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | (if .transform == 1 or .transform == 3 then .height, .width else .width, .height end)" | xargs printf "%sx%s"
+            #hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | .width, .height" | xargs printf "%sx%s"
             local monitor="$1"
             dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
             echo "${dim}" 
@@ -216,7 +215,8 @@ get_dimensions() {
 # Pega a soma dos monitors
 get_sum_dimensions() {
     if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-        hyprctl monitors -j | jq -r ".[] | .width" | awk '{sum += $1} END {print sum}'
+        #hyprctl monitors -j | jq -r ".[] | .width" | awk '{sum += $1} END {print sum}'
+        hyprctl monitors -j | jq '.[] | (if .transform == 1 or .transform == 3 then .height else .width end)' | awk '{sum += $1} END {print sum}'
     else
         local sum=$(xrandr | grep -w connected | grep -oP '(\d*)x' | grep -oP '\d*' | awk '{s+=$1} END {print s}')
         echo "${sum}"
