@@ -22,7 +22,11 @@ monitors="$(__mount_monitors__)"
 
 print_primary_information() {
     if [ ${id_only} -eq 0 ]; then
-        xrandr --listmonitors | awk 'NR==2 {print $4}'
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            hyprctl monitors -j | jq -r ".[0].name"
+        else
+            xrandr --listmonitors | awk 'NR==2 {print $4}'
+        fi
     else
         xrandr --listmonitors | awk 'NR==2 {print $1$2}' | cut -d ":" -f 1
     fi
@@ -50,6 +54,7 @@ name_by_id_nitrogen(){
 }
 
 name_by_id(){
+    local m_id=$1
     if [ ${id_only} -eq 0 ]; then
         if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
             hyprctl monitors -j | jq -r ".[$m_id].name"
@@ -190,19 +195,32 @@ secundary_wide() {
 
 get_dimensions() {
     if [ -z $1 ]; then
-        local dimensions="$(xrandr | grep -w connected | grep -oP '\d+x\d+')"
-        printf "$dimensions"
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            hyprctl monitors -j | jq ".[] | .width,  .height" | xargs printf "%sx%s\n"
+        else
+            local dimensions="$(xrandr | grep -w connected | grep -oP '\d+x\d+')"
+            printf "$dimensions"
+        fi
     else
-        local monitor="$1"
-        dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
-        echo "${dim}" 
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            local monitor="$1"
+            hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | .width, .height" | xargs printf "%sx%s"
+        else
+            local monitor="$1"
+            dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
+            echo "${dim}" 
+        fi
     fi
 }
 
 # Pega a soma dos monitors
 get_sum_dimensions() {
+    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+        hyprctl monitors -j | jq -r ".[] | .width" | awk '{sum += $1} END {print sum}'
+    else
         local sum=$(xrandr | grep -w connected | grep -oP '(\d*)x' | grep -oP '\d*' | awk '{s+=$1} END {print s}')
         echo "${sum}"
+    fi
 }
 
 show_help() {
