@@ -3,9 +3,11 @@
 THEMES=$HOME/.config/wm/tmux.opt
 TMUX_CONFIG=$HOME/.config/.tmux.conf
 
-choosen_type=$(printf "block\ndefault\ndouble" | dmenu -i -p "Choose the type")
+dmenu=$(which ava_dmenu)
 
-choosen_theme=$(cat $THEMES | dmenu -i -l 27 -p "Choose the tmux theme")
+choosen_type=$(printf "block\ndefault\ndouble" | ${dmenu} -i -p "Choose the type")
+
+choosen_theme=$(cat $THEMES | ${dmenu} -i -l 27 -p "Choose the tmux theme")
 
 theme="powerline/${choosen_type}/${choosen_theme}"
 

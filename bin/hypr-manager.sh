@@ -22,6 +22,7 @@ go_to_client() {
         exit 0
     fi
     
+    client=$(basename "${client}") # Removing the slashes and getting only the last bit
     hyprctl dispatch focuswindow title:${client}
 }
 

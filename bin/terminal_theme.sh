@@ -141,6 +141,7 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
         echo "" > ${HOME}/.vim/configs/theme_config.vim
         echo "let g:gruvbox_italic=1" >> ${HOME}/.vim/configs/theme_config.vim
+        echo "let g:gruvbox_contrast_light=\"hard\"" >> ${HOME}/.vim/configs/theme_config.vim
     fi
 
     if [ "$vim_theme" == "3024.dark.yml" ]; then

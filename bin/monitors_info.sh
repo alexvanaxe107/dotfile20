@@ -63,7 +63,12 @@ name_by_id(){
             printf "${monitors}" | awk -v ID=$m_id  'NR==ID {print $0}'
         fi
     else
-        printf $(($(printf "${monitors}" | nl | grep -wi $1 | xargs | cut -d " " -f 1)-1))
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            monitor="$1"
+            hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | .id"
+        else
+            printf $(($(printf "${monitors}" | nl | grep -wi $1 | xargs | cut -d " " -f 1)-1))
+        fi
     fi
 }
 
@@ -205,6 +210,7 @@ get_dimensions() {
             local monitor="$1"
             hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | (if .transform == 1 or .transform == 3 then .height, .width else .width, .height end)" | xargs printf "%sx%s"
             #hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | .width, .height" | xargs printf "%sx%s"
+        else
             local monitor="$1"
             dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
             echo "${dim}" 
