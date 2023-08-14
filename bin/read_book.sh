@@ -1,6 +1,9 @@
-#! /usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p "sqlite"
 
 TERMINAL="0"
+
+dmenu=$(which ava_dmenu)
 
 read_book(){
     local indexes="$(calibredb search "$1" | tr ',' '\n')"
@@ -11,7 +14,7 @@ read_book(){
     done
 
     if [ "${TERMINAL}" = "0" ]; then
-        local book_to_read=$(printf "${booklist}" | dmenu -l 20)
+        local book_to_read=$(printf "${booklist}" | ${dmenu} -l 20)
     else
         local IFS=$'\n'
         select selected in $(printf $booklist)
@@ -35,7 +38,6 @@ read_book(){
     echo "$book"
     echo "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)"
     
-  . $HOME/.pyenv/versions/wm/bin/activate
     case "$format" in
         PDF) found="1";zathura "$(find ~/../media/Books -name "${book}*.pdf" | head -n 1)" 2>&1 &;;
         AZW3) found="1";foliate "$(find ~/../media/Books -name "${book}*.azw3" | head -n 1)" 2>&1 &;;

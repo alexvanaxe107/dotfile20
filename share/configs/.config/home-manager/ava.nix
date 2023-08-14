@@ -37,6 +37,9 @@
         # programming
         pkgs.wezterm
         pkgs.unclutter
+        pkgs.calibre
+        pkgs.zathura
+        pkgs.foliate
 
         pkgs.jellyfin
 
