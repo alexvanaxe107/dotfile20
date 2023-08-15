@@ -9,7 +9,7 @@
     with import nixpkgs { system = "x86_64-linux"; };
     stdenv.mkDerivation rec {
       name = "ava-chamaleon";
-      version = "0.7.3";
+      version = "0.7.4";
 
       src = self;
 
