@@ -7,6 +7,7 @@ Alta prioridade
    Ver o todos
 
 Media prioridade:
+   Ver como funciona os grupos no hyprland
    Fazer atalho para ir para o proximo workspace?
 
 Baixa prioridade:
