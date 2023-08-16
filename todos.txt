@@ -1,12 +1,13 @@
 Alta prioridade
-   Consertar o template/config. Deve ser 'imutavel' (Ver o que é de um e o que é do outro) - DONE
-        obs: Nao alterei ainda o wallpapers pois posso torna-lo como config, restaurando ele quando o pc for ligado
    Ver o todos
+   Ver onde botar os livros
 
 Media prioridade:
    Fazer atalho para ir para o proximo workspace?
 
 Baixa prioridade:
+   Colocar local nos weathers
+   melhorar o eww
    Melhorar o workspace? Ver como dar os nomes a eles
 
 
