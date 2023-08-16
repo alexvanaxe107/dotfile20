@@ -10,6 +10,7 @@ show_help() {
     echo "-m                         Show memory"
     echo "-v                         Show volume"
     echo "-w                         Show weather"
+    echo "-q                         Show active workspace/desktop"
     echo "-d                         Show time"
     echo "-M                         Show top 10 memory process"
     echo "-C                         Show top 10 CPU process"
@@ -63,10 +64,15 @@ show_song() {
 }
 
 show_desktop() {
-    local window="$(xprop -id $(bspc query -N --node) WM_NAME | grep -o '".*"')"
-    local monitor="$(bspc query --monitor focused --monitors --names)"
-    local desktop="$(bspc query --desktops --names --desktop)"
-
+    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+        local desktop="$(hyprctl activeworkspace -j | jq -r ".id")"
+        local window="$(hyprctl activeworkspace -j | jq -r ".lastwindowtitle")"
+        local monitor="$(hyprctl activeworkspace -j | jq -r ".monitor")"
+    else
+        local window="$(xprop -id $(bspc query -N --node) WM_NAME | grep -o '".*"')"
+        local monitor="$(bspc query --monitor focused --monitors --names)"
+        local desktop="$(bspc query --desktops --names --desktop)"
+    fi
     local message="\n<b>$desktop</b> \n\n $window\n"
 
     notify-send -t 1400  "$monitor" "$message"
