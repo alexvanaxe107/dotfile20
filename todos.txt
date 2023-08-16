@@ -1,6 +1,10 @@
+BUGS:
+   Fix the wall downloader
+
+
+
 Alta prioridade
    Ver o todos
-   Ver onde botar os livros
 
 Media prioridade:
    Fazer atalho para ir para o proximo workspace?
