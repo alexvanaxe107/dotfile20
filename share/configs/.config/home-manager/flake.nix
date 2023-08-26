@@ -3,8 +3,9 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # Getting unstable from the registry
+    unstable.url = "flake:unstable";
 
     avabible.url = "github:alexvanaxe107/biblia/master";
     avadmenu = {
