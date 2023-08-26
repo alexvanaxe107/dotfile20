@@ -163,7 +163,7 @@ case $CHOSEN in
     "Cute") font "Overpass Mono" Bold 9 9 12 0;;
     "Space") font "Unispace" Bold 8 8 10 2;;
     "Noir") font "Syne Mono" Regular 10 10 11 1;;
-    "Computer") font "Terminus" Bold 10 10 13 2;;
+    "Computer") font "Terminus (TTF)" Bold 10 10 13 2;;
     "SteamPunk") font "Roboto Condensed" Semibold 10 10 11;;
     "Terminator") font "Digital\-7 Mono" Bold 9 9 12 0;;
     "NM-Comix zone") font "Bangers" Bold 11 11 12 0;;
