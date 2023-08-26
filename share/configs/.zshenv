@@ -28,8 +28,8 @@ spark.sh
 # Set up Node Version Manager
 # source /usr/share/nvm/init-nvm.sh
 # Will be used the nvm, and the bin will be linked to it
-export npm_config_prefix="$HOME/Documents/npm/bin"
-# path=($PYENV_ROOT/bin ~/Documents/npm/bin $path[@])
+export npm_config_prefix="$HOME/Documents/npm/"
+# path=($PYENV_ROOT/bin ~/Documents/npm/ $path[@])
 path=(~/Documents/npm/bin $path[@])
 
 # --------------------------------------------------------

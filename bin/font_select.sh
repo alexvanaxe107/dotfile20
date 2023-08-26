@@ -102,13 +102,13 @@ font() {
     done
 
     sed -i "s/font_size =.*/font_size = $((size1 - 1)),/" ${HOME}/.config/wezterm/extra.lua
+    sed -i "s/size:.*/size: $((size1 - 1))/" ${HOME}/.config/alacritty/alacritty.yml
 
     update=$(printf "Yes\nNo" | ${dmenu} -i    -p "Update terminal font? (ESC go to default)")
 
     if [ "${update}" = "Yes" ]; then
         sed -i "s/family:.*/family: ${font_name}/" ${HOME}/.config/alacritty/alacritty.yml
         sed -i "s/custom_term_font =.*/custom_term_font = '${font_name}',/" ${HOME}/.config/wezterm/extra.lua
-        sed -i "s/#size:.*/size: ${size3}/" ${HOME}/.config/alacritty/alacritty.yml
     fi
     if [ -z "${update}" ]; then
         cp --no-preserve=all ${HOME}/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml 
