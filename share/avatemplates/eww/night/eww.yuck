@@ -36,6 +36,9 @@
 (defpoll fortune_message :interval "600s"
   `fortune.sh`)
 
+(defpoll rss_message :interval "300s"
+  `rss.sh -f`)
+
 (defwindow general_infos
     :monitor 0
     :stacking "bg"
@@ -119,6 +122,18 @@
                        :anchor "top right")
     (fortune_layout))
 
+(defwindow wrss
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "2%"
+                       :y "6%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "bottom right")
+    (rss_layout))
+
 (defwidget normal_infos_layout []
     (box :class "style_class normal_info_class" :space-evenly false
         (box :halign "start" :class "normal_int_class" :space-evenly false
@@ -133,6 +148,10 @@
         (box :halign "start" :class "normal_int_class" :space-evenly false
             "Fortunes here: "
             (button :class "bbuttons_small" :onclick "eww open --toggle wfortune" "")
+        )
+        (box :halign "start" :class "normal_int_class" :space-evenly false
+            "News here: "
+            (button :class "bbuttons_small" :onclick "eww open --toggle wrss" "")
         )
         )
 )
@@ -242,6 +261,12 @@
 (defwidget pomodoro_layout []
         (box :class "pomodoro_class" :space-evenly false :halign "center"
             (label :class "pomodoro" :text "${pomodoro_stat == "" ? "No pomodoro" : " ${pomodoro_stat}"}"))
+)
+
+(defwidget rss_layout []
+    (box :class "style_class rss_class"
+        (label :wrap true :text rss_message)
+    )
 )
 
 (defwidget fortune_layout []

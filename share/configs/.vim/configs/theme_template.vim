@@ -2,6 +2,7 @@
 "  set termguicolors
 "endif
 set background=dark
+set termguicolors
 
 source ~/.vim/configs/theme_config.vim
 

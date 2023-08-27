@@ -29,6 +29,12 @@ $transparency: 0.6;
     padding-right: 2em;
 }
 
+.rss_class {
+    background-color: rgba($surface-bg, $transparency + 0.3);
+    font-size: $general-font-size + 0.4;
+    border: 0.4em solid $border-color;
+}
+
 .fortune_class {
     background-color: rgba($surface-bg, $transparency + 0.3);
     font-size: $general-font-size;

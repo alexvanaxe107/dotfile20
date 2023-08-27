@@ -27,6 +27,7 @@
 
         # Rss News Feed
         pkgs.newsboat
+        pkgs.rsstail
 
         # utilities
         pkgs.gnome.pomodoro
