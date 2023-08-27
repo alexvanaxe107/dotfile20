@@ -1,0 +1,3 @@
+reload-threads 3
+browser "qutebrowser %u"
+
