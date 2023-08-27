@@ -3,7 +3,9 @@
 dmenu=ava_dmenu
 
 . ~/.config/bspwm/themes/bsp.cfg
-file=$(printf "hypr\nradio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris\nvim" | ${dmenu} -l 30    -p "Select config to edit")
+file=$(printf "hypr\nradio\nmonitors\nytq\nytpl\nwallpaper\npolybar\neww\nconfig\nstellaris\nvim\nrss" | ${dmenu} -l 30    -p "Select config to edit")
+
+TERMINAL_EM="alacritty -e"
 
 
 process_wallpaper(){
@@ -58,5 +60,6 @@ case $file in
     "stellaris") cd $HOME/Documents/Pictures/Wallpapers/stellaris;sxiv *;;
     "vim")  wezterm start $EDITOR $HOME/.vim/configs/theme*;;
     "eww")  wezterm start $EDITOR $HOME/.config/eww/*;;
+    "rss")  $TERMINAL_EM $EDITOR $HOME/.config/wm/rss $HOME/.config/newsboat/urls;;
 esac
 
