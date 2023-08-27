@@ -25,6 +25,9 @@
         pkgs.pulseaudio
         pkgs.flameshot
 
+        # Rss News Feed
+        pkgs.newsboat
+
         # utilities
         pkgs.gnome.pomodoro
         pkgs.eww-wayland
