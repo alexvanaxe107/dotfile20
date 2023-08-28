@@ -22,6 +22,13 @@ WALLPAPER_PATH=$HOME/.config/wm/wallpapers.conf
 
 is_bspc=$(bspc wm --get-status)
 
+
+if [ ! -z "${is_bspc}" ]; then
+    dmenu="dmenu"
+else
+    dmenu="bemenu"
+fi
+
 show_help () {
     echo "Yay! Change the theme of the desktop"
     echo "-t          The theme name"
@@ -41,7 +48,7 @@ choose(){
     CHOSEN=$1
     if [ -z "$CHOSEN" ] 
     then
-        CHOSEN=$(retrieve_themes | dmenu -i -p "Change the theme: ")
+        CHOSEN=$(retrieve_themes | $dmenu -i -p "Change the theme: ")
     fi
 
     #Get the last to get how many monitors
@@ -141,7 +148,7 @@ function reset_configs(){
 }
 
 function get_wallpaper() {
-    selected_wallpaper=$(monitors_info.sh -a | dmenu -p "Extract color from wallpaper:" -n)
+    selected_wallpaper=$(monitors_info.sh -a | $dmenu -p "Extract color from wallpaper:" -n)
     selected_wallpaper=$(monitors_info.sh -ib "${selected_wallpaper}")
 #    selected_wallpaper=$((${selected_wallpaper} + 1))
 #    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "xin_${selected_wallpaper}" -A 1 | tail -n 1 | cut -d '=' -f 2)
