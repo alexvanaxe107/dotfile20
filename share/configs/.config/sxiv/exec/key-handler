@@ -3,7 +3,11 @@
 SCALE=230
 WP_CONFIG_PATH="$HOME/.config/wm/wallpapers.conf"
 
-dmenu="ava_dmenu"
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+    dmenu="bemenu"
+else
+    dmenu="dmenu"
+fi
 
 exit_if_none(){
     local valor="$1"
