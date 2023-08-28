@@ -8,7 +8,7 @@
     with import nixpkgs { system = "x86_64-linux"; };
     stdenv.mkDerivation rec {
       name = "ava-chamaleon";
-      version = "0.7.10";
+      version = "0.7.11";
 
       src = self;
 
