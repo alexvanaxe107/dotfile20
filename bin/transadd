@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+dmenu=$(which ava_dmenu)
 
 # Mimeapp script for adding torrent to transmission-daemon, but will also start the daemon first if not running.
 
 # transmission-daemon sometimes fails to take remote requests in its first moments.
 
 #pgrep -x transmission-da || (transmission-daemon && notify-send "Starting transmission daemon..." && sleep 3 && pkill -RTMIN+7 i3blocks)
-chosen="$(printf "Other\\nMovie\\nTV\\nMusic" | dmenu -i -p "Choose the download: " )"
+chosen="$(printf "Other\\nMovie\\nTV\\nMusic" | $dmenu -i -p "Choose the download: " )"
 
 case $chosen  in
 	"Movie") transmission-remote -a "$@" --no-start-paused --torrent-done-script $HOME/Documents/Scripts/transend_video && notify-send  "🔽 Torrent added" "Started downloading a movie at $@";;
