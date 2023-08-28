@@ -23,12 +23,10 @@ show_options(){
 }
 
 change_all(){
-    for monitor in $(monitors_info.sh -m); do
-        index=$(monitors_info.sh -ib ${monitor})
-        local wallpaper="$(shuf -n1 -e ${WALLPAPER_ROOT}/dual/$theme_name/*)"
-        nitrogen --head=$index --save --set-scaled $wallpaper
-    done
-    notify-send -u normal "All wallpapers setted. Enjoy."
+    local wallpaper="$(shuf -n1 -e ${WALLPAPER_ROOT}/dual/$theme_name/*)"
+    #nitrogen --head=$index --save --set-scaled $wallpaper
+    sxiv $wallpaper
+
     option=$(show_options)
     echo "$option"
 }
