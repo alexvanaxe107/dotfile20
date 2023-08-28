@@ -68,6 +68,11 @@ $general-font-size: 1.0em;
 .image_class {
 }
 
+.rss_class {
+    background-color: rgba($surface-bg, 0.7);
+    font-size: $general-font-size + 0.4;
+}
+
 .volume_display {
     font-size: $general-font-size;
     margin-left: 1em;

@@ -41,6 +41,9 @@
 (defpoll volume :interval "1s"
   `volume_display`)
 
+(defpoll rss_message :interval "300s"
+  `rss.sh -f`)
+
 ; (deflisten music :initial ""
 ;   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
@@ -126,6 +129,18 @@
                        :width "28%"
                        :anchor "bottom center")
     (organazing_layout))
+
+(defwindow wrss
+    :monitor 0
+    :stacking "bg"
+    :windowtype "desktop"
+    :wm-ignore false
+    :geometry (geometry :x "2%"
+                       :y "6%"
+                       :height "10%"
+                       :width "25%"
+                       :anchor "bottom right")
+    (rss_layout))
 
 (defwidget player_select_layout []
     (box
@@ -236,6 +251,7 @@
         (button :onclick "eww open --toggle top_10_mem" "")
         (button :onclick "eww open --toggle midia_infos" "󰋋")
         (button :onclick "eww open --toggle organazing" "")
+        (button :onclick "eww open --toggle wrss" "")
         (player_select_layout)
     )
 )
@@ -304,3 +320,8 @@
         (label :wrap true :class "todo_day" :text "${todo_day}")
         ))
 
+(defwidget rss_layout []
+    (box :class "style_class rss_class"
+        (label :wrap true :text rss_message)
+    )
+)
