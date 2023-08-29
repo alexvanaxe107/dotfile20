@@ -92,7 +92,10 @@ require'lspconfig'.pyright.setup{on_attach=on_attach}
 require('lspconfig')['angularls'].setup{on_attach=on_attach}
 
 -- Activate the vue setup
-require'lspconfig'.volar.setup{on_attach=on_attach}
+require'lspconfig'.volar.setup{
+	on_attach=on_attach;
+	filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'};
+}
 
 --  Activate the typescript config
 require'lspconfig'.tsserver.setup{on_attach=on_attach}

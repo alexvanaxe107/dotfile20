@@ -39,4 +39,4 @@ settings:
   statusbar.show:
     global: in-mode
   tabs.show:
-    global: multiple
+    global: never
