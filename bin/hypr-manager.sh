@@ -3,7 +3,7 @@
 dmenu=$(which ava_dmenu)
 
 select_workspace() {
-    desktop=$(echo "$(hyprctl workspaces -j | jq -r '.[].id')" | $dmenu -l 10)
+    desktop=$(echo "$(hyprctl workspaces -j | jq -r '.[].name')" | $dmenu -l 10)
 
     echo $desktop
 }
