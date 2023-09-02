@@ -65,7 +65,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "10%"
+                       :y "15%"
                        :width "28%"
                        :anchor "top center")
     (pc_info_layout))
@@ -112,10 +112,10 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "55%"
+                       :y "25%"
                        :height "10%"
                        :width "28%"
-                       :anchor "top center")
+                       :anchor "bottom center")
     (midia_info_layout))
 
 (defwindow organazing

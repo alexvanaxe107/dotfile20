@@ -3,6 +3,10 @@
 . ~/.config/bspwm/themes/bsp.cfg
 . ~/.config/wm/bspwm.conf
 
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+    use_bemenu="1"
+fi
+
 dmenu_cmd=$(which dmenu)
 if [ "${use_bemenu}" == "1" ];then
     dmenu_cmd=$(which bemenu)

@@ -12,12 +12,25 @@ $general-font-size: 1.0em;
 $transparency: 0.6;
 
 .monitor_info {
+    font-size: $general-font-size;
+}
+
+.pc_info_int {
+    padding: 0.4em;
 }
 
 .style_class {
-    border: 0.2px solid $border-color;
-    background-color: rgba($surface-bg, $transparency);
     padding: 0.4em;
+}
+
+.top_10{
+    background-color: rgba($surface-bg, $transparency);
+    padding: 1em;
+}
+
+.separator_down {
+    border-bottom: 1.5px solid $surface-fg;
+    margin: 0.4em;
 }
 
 .normal_info_class {
@@ -27,6 +40,8 @@ $transparency: 0.6;
 .normal_int_class {
     padding-left: 2em;
     padding-right: 2em;
+    background-color: rgba($surface-bg, $transparency);
+    border: 0.5px solid $border-color;
 }
 
 .rss_class {

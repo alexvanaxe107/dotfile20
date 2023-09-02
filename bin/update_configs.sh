@@ -7,7 +7,7 @@ diff_files=""
 echo "The files below are changed on your config:"
 echo
 while IFS= read -r file; do
-    result=$(diff -N "$HOME/configs/$file" "$HOME/$file" )
+    result=$(diff -Npur "$HOME/configs/$file" "$HOME/$file" )
     if [ ! -z "$result" ];then
         echo $file
         diff_files=$(echo -e "$file\n$diff_files")

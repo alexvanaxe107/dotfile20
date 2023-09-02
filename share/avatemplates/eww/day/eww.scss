@@ -9,6 +9,8 @@ $general-font-size: 1.0em;
 }
 
 .separator_down {
+    color: $surface-bg;
+    background-color: rgba($surface-fg, 0.7);
     border-bottom: 0.4px solid $border-color;
     margin-bottom: 0.5em;
 }
@@ -62,7 +64,9 @@ $general-font-size: 1.0em;
 
 .header_class {
     font-size: $general-font-size + 1.0;
-    color: $border-color;
+    color: $surface-bg;
+    border: 2px solid $border-color;
+    background-color: rgba($surface-fg, 0.7);
 }
 
 .image_class {

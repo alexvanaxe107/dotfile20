@@ -45,7 +45,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "25%"
+                       :y "0%"
                        :height "6%"
                        :anchor "bottom left")
     (normal_infos_layout))
@@ -56,7 +56,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "17%"
+                       :y "12%"
                        :width "100%"
                        :height "6%"
                        :anchor "bottom left")
@@ -67,11 +67,11 @@
     :stacking "bg"
     :windowtype "desktop"
     :wm-ignore false
-    :geometry (geometry :x "27%"
+    :geometry (geometry :x "22%"
                        :y "3%"
-                       :width "25%"
-                       :height "30%"
-                       :anchor "top left")
+                       :width "17%"
+                       :height "0%"
+                       :anchor "center left")
     (_top_10_mem))
 
 (defwindow top_10_cpu
@@ -80,10 +80,10 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "1%"
-                       :y "3%"
-                       :height "30%"
-                       :width "25%"
-                       :anchor "top left")
+                       :y "1%"
+                       :height "0%"
+                       :width "17%"
+                       :anchor "center left")
     (_top_10_cpu))
 
 (defwindow midia_infos
@@ -95,7 +95,7 @@
                        :y "1%"
                        :height "7%"
                        :width "40%"
-                       :anchor "bottom left")
+                       :anchor "top left")
     (midia_info_layout))
 
 (defwindow pomodoro_infos
@@ -144,7 +144,10 @@
             "  ${volume}"
             (button :class "bbuttons_small" :onclick "eww open --toggle midia_infos" "󰋋")
         )
-        weather
+        (box :halign "start" :class "normal_int_class"
+            "  ${weather}"
+        )
+        
         (box :halign "start" :class "normal_int_class" :space-evenly false
             "Fortunes here: "
             (button :class "bbuttons_small" :onclick "eww open --toggle wfortune" "")
@@ -168,7 +171,7 @@
 
 
 (defwidget cpu_info_layout []
-    (box :class "cpu_info_class" :space-evenly false
+    (box :class "cpu_info_class pc_info_int" :space-evenly false
         (_cpu_info)
         (_cpu_graph)
         (button :class "bbuttons" :onclick "eww open --toggle top_10_cpu" "")
@@ -176,7 +179,7 @@
 ))
 
 (defwidget _cpu_info []
-    (box :class "cpu_perc_class"
+    (box :class "cpu_perc_class pc_info_int"
         (box 
             "CPU: ${round (EWW_CPU.avg, 2)}%"
 )
@@ -208,13 +211,13 @@
 ))
 
 (defwidget _cpu_temp []
-    (box :class "cpu_temp_info"
+    (box :class "cpu_temp_info pc_info_int"
         "CPU TEMP: ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
     )
 )
 
 (defwidget _gpu_temp []
-    (box :class "mem_temp_info"
+    (box :class "mem_temp_info pc_info_int"
         "GPU TEMP: ${EWW_TEMPS.AMDGPU_EDGE}°C"
     )
 )
@@ -225,19 +228,17 @@
 )
 
 (defwidget _top_10_mem []
-    (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
-        (box :class "top"
-           "Top 10 memory processess")
-        (box :class "top"
+    (box :class "style_class top_10" :orientation "v" :space-evenly false
+        (label :class "separator_down" :text "Top 10 mem processess")
+        (box
            top_mem )
     )
 )
 
 (defwidget _top_10_cpu []
-    (box :class "style_class" :orientation "v" :valign "start" :space-evenly false
-        (box :class "top"
-       "Top 10 cpu processess")
-        (box :class "top"
+    (box :class "style_class top_10" :orientation "v" :space-evenly false
+        (label :class "separator_down" :text "Top 10 cpu processess")
+        (box
        top_cpu)
     )
 )
