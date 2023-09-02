@@ -32,6 +32,7 @@
         # utilities
         pkgs.gnome.pomodoro
         pkgs.eww-wayland
+        pkgs.conky
         pkgs.xclip
         pkgs.fzf
         pkgs.xsecurelock
