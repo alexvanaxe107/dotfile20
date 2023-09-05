@@ -6,6 +6,10 @@ TERMINAL="0"
 dmenu=$(which ava_dmenu)
 
 read_book(){
+    if [ -z "$1" ]; then
+        exit 0
+    fi
+
     local indexes="$(calibredb search "$1" | tr ',' '\n')"
     local booklist=""
 
