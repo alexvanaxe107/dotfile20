@@ -1,19 +1,15 @@
 BUGS:
    Fix the wall downloader
 
-
-
 Alta prioridade
    Ver o todos
+   Testar o wlr-randr. Talvez de pra uniformixar o display manager com essa ferramenta.
 
 Media prioridade:
    Ver como funciona os grupos no hyprland
-   Fazer atalho para ir para o proximo workspace?
 
 Baixa prioridade:
    Colocar local nos weathers
-   melhorar o eww
-   Melhorar o workspace? Ver como dar os nomes a eles
 
 
 

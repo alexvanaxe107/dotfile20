@@ -75,13 +75,6 @@ rotate() {
     fi
     
     xrandr --output "${monitor}" --rotate "${direction}"
-
-    if [[ $direction == "left" ]]; then
-        kanshi -c ~/.config/kanshi/config.rotated
-    fi
-    if [[ $direction == "normal" ]]; then
-        kanshi -c ~/.config/kanshi/config
-    fi
 }
 
 # This function adds a monitor that acts as a span. It considers multiple monitors like one.
