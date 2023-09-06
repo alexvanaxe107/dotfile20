@@ -30,10 +30,10 @@ if [ "${choosen}" == "Wal" ]; then
     sed -i 's/^colorscheme.*/colorscheme wal/' ${HOME}/.vim/configs/theme.vim
     sed -i 's/airline_theme.*/airline_theme="wal"/' ${HOME}/.vim/configs/theme.vim
     if [ "${THEME_NAME}" == "day"  ]; then
-        wal -n -l -i $(cat $HOME/wallpaper.txt)
+        wal -s -n -l -i $(cat $HOME/wallpaper.txt)
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
     else
-        wal -n -i $(cat $HOME/wallpaper.txt)
+        wal -s -n -i $(cat $HOME/wallpaper.txt)
         sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
     fi
     sed -i 's/wal_enabled.*/wal_enabled="1"/' ${BSPWM_CONFIG}
