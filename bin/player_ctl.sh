@@ -221,9 +221,9 @@ if [ ! -z $chosen_p ]; then
         fi
     else
         if [ "${use_rofi}" = 1 ]; then
-            chosen=$(printf "\\n\\n\\n\\n\\n" | ava_dmenu -i -p "${prompt}"    -theme ${rofi_item4})
+            chosen=$(printf "\\n\\n\\n\\n" | ava_dmenu -i -p "${prompt}"    -theme ${rofi_item4})
         else
-            chosen=$(printf " play/pause\\n   next\\n   prev\\n  stop\\n  vol\\n  cast" | ava_dmenu -i -p "${prompt}")
+            chosen=$(printf " play/pause\\n   next\\n   prev\\n  stop\\n  vol" | ava_dmenu -i -p "${prompt}")
         fi
     fi
 
