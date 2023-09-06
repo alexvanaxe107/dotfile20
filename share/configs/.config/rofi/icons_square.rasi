@@ -29,6 +29,10 @@ configuration {
 window {
     transparency:                   "real";
     border-radius:                  0px;
+    location:                       west;
+    x-offset:                       0;
+    y-offset:                       0;
+    location: northwest;
 	width:							500px;
 }
 
