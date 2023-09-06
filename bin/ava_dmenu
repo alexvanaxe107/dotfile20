@@ -7,6 +7,10 @@ if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
     use_bemenu="1"
 fi
 
+if [ "${use_rofi}" == "1" ]; then
+    use_bemenu="0"
+fi
+
 dmenu_cmd=$(which dmenu)
 if [ "${use_bemenu}" == "1" ];then
     dmenu_cmd=$(which bemenu)
