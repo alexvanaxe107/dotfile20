@@ -27,8 +27,8 @@ if [ "${choosen}" == "Theme off" ]; then
     exit
 fi
 if [ "${choosen}" == "Wal" ]; then
-    sed -i 's/^colorscheme.*/colorscheme wal/' ${HOME}/.vim/configs/theme.vim
-    sed -i 's/airline_theme.*/airline_theme="wal"/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/^colorscheme.*/colorscheme pywal/' ${HOME}/.vim/configs/theme.vim
+    sed -i 's/airline_theme.*/airline_theme="pywal"/' ${HOME}/.vim/configs/theme.vim
     if [ "${THEME_NAME}" == "day"  ]; then
         wal -s -n -l -i $(cat $HOME/wallpaper.txt)
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim

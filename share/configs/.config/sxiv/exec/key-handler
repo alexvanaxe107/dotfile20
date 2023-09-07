@@ -137,8 +137,8 @@ set_wallpaper(){
             swww init
         fi
         case "$monitor" in
-            "0") swww img -o $(monitors_info.sh -n 0) "$file";;
-            "1") swww img -o $(monitors_info.sh -n 1) "$file";;
+            "0") swww img -o $(monitors_info.sh -n 0) "$file" --transition-type wave --transition-step 15 --transition-fps 120;;
+            "1") swww img -o $(monitors_info.sh -n 1) "$file" --transition-type wave --transition-step 15 --transition-fps 120;;
         esac
     else
         nitrogen --head=${monitor} --save --set-scaled --random "$file"
