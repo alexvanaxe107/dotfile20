@@ -49,7 +49,6 @@ font() {
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/height.*/height = ${height}/" ${HOME}/.config/polybar/config
 
-
         sed -Ei "s/(font-0.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
         sed -Ei "s/(font-2.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
         sed -Ei "s/(font-3.*=)[[:digit:]]{1,2}/\1${size1}/"  ${HOME}/.config/polybar/config
@@ -60,6 +59,7 @@ font() {
     # Change the waybar
     sed -i "s/font-family.*/font-family:${font_name};/" ${HOME}/.config/waybar/style.css
     sed -i "s/font-size.*/font-size:$((size1+3))px;/" ${HOME}/.config/waybar/style.css
+    sed -Ei "s/(\"height\": )[[:digit:]]{1,2}/\1${height}/" ${HOME}/.config/waybar/config
 
     sed -i "s/^\$general-font: .*;/\$general-font: \"${font_name}\";/" ${HOME}/.config/eww/eww.scss
     if [ ! -z "${eww}" ]; then
