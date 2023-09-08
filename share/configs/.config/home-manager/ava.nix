@@ -29,6 +29,9 @@
         pkgs.newsboat
         pkgs.rsstail
 
+        # Communication
+        pkgs.gomuks
+
         # utilities
         pkgs.gnome.pomodoro
         pkgs.eww-wayland
