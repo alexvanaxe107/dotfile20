@@ -57,7 +57,8 @@ $transparency: 0.6;
 }
 
 .midia_info_box {
-    font-size: $general-font-size - 0.1;
+    background-color: rgba($surface-bg, $transparency);
+    font-size: $general-font-size;
     border: 0.4em solid $border-color;
 }
 
