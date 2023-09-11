@@ -7,17 +7,24 @@ refreshRate=60
 dimension=""
 exclude=""
 
+
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+    randr=$(which wlr-randr)
+else
+    randr=$(which xrandr)
+fi
+
 define_primary() {
     primary=$1
 
-    xrandr --output ${primary} --primary 
+    $randr --output ${primary} --primary 
 }
 
 all_on() {
     monitors=$(monitors_info.sh  -c)
 
     for monitor in ${monitors}; do
-        xrandr --output ${monitor} --auto
+        $randr --output ${monitor} --auto
     done
 }
 
@@ -26,12 +33,12 @@ toggle_monitor() {
 
     monitor_id=$(monitors_info.sh -in ${monitor})
     
-    dim=$(xrandr | grep ${monitor} -A 1 | grep "+" | awk '{print $1}' | tail -n 1)
+    dim=$($randr | grep ${monitor} -A 1 | grep "+" | awk '{print $1}' | tail -n 1)
     if [ -z "${monitor_id}" ]; then
-        xrandr --output ${monitor} --mode ${dim} --auto
+        $randr --output ${monitor} --mode ${dim} --auto
         exit 0
     fi
-    xrandr --output ${monitor} --off
+    $randr --output ${monitor} --off
 }
 
 define_order() {
@@ -41,9 +48,9 @@ define_order() {
     for monitor in $list; do
         left_of=$(echo "$list" | awk -v F=$count '{print $F}' FS=" ")
         count=$((${count}+1))
-        #dim="$(xrandr | grep "${monitor}" | grep -Po "\b\d+x\d+" | head -n 1)"
+        #dim="$($randr | grep "${monitor}" | grep -Po "\b\d+x\d+" | head -n 1)"
 
-        dim="$(xrandr | grep "${monitor}" -A 40 | grep "*" | head -n 1 | awk '{print $1}')"
+        dim="$($randr | grep "${monitor}" -A 40 | grep "*" | head -n 1 | awk '{print $1}')"
         if [ -z "${dim}" ]; then
             dim="--auto"
         else
@@ -57,7 +64,7 @@ define_order() {
         fi
     done
 
-    command="xrandr $command"
+    command="$randr $command"
 
     echo "$command"
 
@@ -74,7 +81,7 @@ rotate() {
       exit 1
     fi
     
-    xrandr --output "${monitor}" --rotate "${direction}"
+    $randr --output "${monitor}" --rotate "${direction}"
 }
 
 # This function adds a monitor that acts as a span. It considers multiple monitors like one.
@@ -96,9 +103,9 @@ add_virtual() {
         remoteVScreen=$(echo "${dimension}" | awk '{print $2}' FS="x") 
     fi
 
-    local virtual_name="$(xrandr | grep "VIRTUAL" | grep "disconnected" | cut -d " " -f 1 | head -n 1)"
-    xrandr --newmode "${remoteHScreen}x${remoteVScreen}" ${params}
-    xrandr --addmode "${virtual_name}" "${remoteHScreen}x${remoteVScreen}"
+    local virtual_name="$($randr | grep "VIRTUAL" | grep "disconnected" | cut -d " " -f 1 | head -n 1)"
+    $randr --newmode "${remoteHScreen}x${remoteVScreen}" ${params}
+    $randr --addmode "${virtual_name}" "${remoteHScreen}x${remoteVScreen}"
 }
 
 remove_virtual() {
@@ -107,8 +114,8 @@ remove_virtual() {
     remoteHScreen=$(echo "${dim}" | awk '{print $1}' FS="x") 
     remoteVScreen=$(echo "${dim}" | awk '{print $2}' FS="x") 
 
-    xrandr --delmode "${virtual}" "${remoteHScreen}x${remoteVScreen}"
-    xrandr --rmmode "${remoteHScreen}x${remoteVScreen}"
+    $randr --delmode "${virtual}" "${remoteHScreen}x${remoteVScreen}"
+    $randr --rmmode "${remoteHScreen}x${remoteVScreen}"
 }
 
 set_dimension() {
@@ -121,7 +128,7 @@ set_dimension() {
         dim="--mode ${dim}"
     fi
     
-    xrandr --output ${monitor} ${dim}
+    $randr --output ${monitor} ${dim}
 }
 
 show_help() {
