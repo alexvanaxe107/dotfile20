@@ -26,14 +26,23 @@ go_to_client() {
     hyprctl dispatch focuswindow title:${client}
 }
 
+manipulate_window() {
+    local option="$(echo -e "0.0\n0.5\n1.0"  | $dmenu -p "Choose the opacity")"
+    if [ ! -z "${option}" ]; then
+        hyprctl setprop address:$(hyprctl activewindow -j | jq -r '.address') alpha $option
+    fi
+}
+
 show_help() {
     echo "Manipulate the desktops and hyprland configs."; echo ""
-    echo "w                             list the workspaces"
+    echo "g                             Go to workspace"
+    echo "c                             Go to client"
+    echo "w                             Manipulate the window"
 }
 
 use_dmenu="0"
 
-while getopts "h?gc" opt; do
+while getopts "h?gcw" opt; do
     case "$opt" in
     h|\?) show_help
         ;;
@@ -42,6 +51,8 @@ while getopts "h?gc" opt; do
     g) go_to_workspace
         ;;
     c) go_to_client
+        ;;
+    w) manipulate_window
         ;;
     esac
 done
