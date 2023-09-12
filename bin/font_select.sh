@@ -3,14 +3,19 @@
 # Exit on error inside any functions or subshells.
 #set -o errtrace
 # Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
+# set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 #set -o pipefail
 
 dmenu=ava_dmenu
 umask 022
 
-CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | ${dmenu} -i    -l 20 -p "Change the font: ")
+CHOSEN="$1"
+
+if [ -z "${CHOSEN}" ]; then
+    CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nClassic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | ${dmenu} -i    -l 20 -p "Change the font: ")
+fi
+
 
 if [ -z "${CHOSEN}" ]; then
     exit
@@ -156,6 +161,7 @@ case $CHOSEN in
     "Pixel") font "Repetition Scrolling" Regular 9 10 13 1;;
     "Intel") font "IntelOne Mono" Regular 11 11 13 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
+    "Classic") font "Old Standard TT" Regular 12 12 12 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 9 9 11 1;;
     "Stock") font "Share Tech Mono" Bold 11 11 13 1;;
     "Wasteland") font "Beccaria" Bold 11 11 13 1;;
