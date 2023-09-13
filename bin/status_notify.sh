@@ -65,7 +65,7 @@ show_song() {
 
 show_desktop() {
     if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-        local desktop="$(hyprctl activeworkspace -j | jq -r ".id")"
+        local desktop="$(hyprctl activeworkspace -j | jq -r ".name")"
         local window="$(hyprctl activeworkspace -j | jq -r ".lastwindowtitle")"
         local monitor="$(hyprctl activeworkspace -j | jq -r ".monitor")"
     else
