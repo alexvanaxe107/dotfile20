@@ -94,17 +94,14 @@ $transparency: 0.6;
     border: 0.2px solid $border-color;
     padding-left: 1em;
     padding-right: 1em;
-    font-size: $general-font-size;
 }
 
 .cpu_perc_class{
     min-width: 8em;
-    font-size: $general-font-size;
 }
 
 .cpu_temp_info {
     border: 0.2px solid $border-color; 
-    font-size: $general-font-size;
     background-color: rgba($cpu-temp-bg, $transparency);
     padding-left: 1em;
     padding-right: 1em;
@@ -112,7 +109,6 @@ $transparency: 0.6;
 
 .mem_temp_info {
     border: 0.2px solid $border-color; 
-    font-size: $general-font-size;
     background-color: rgba($mem-temp-bg, $transparency);
     padding-left: 1em;
     padding-right: 1em;
@@ -133,7 +129,6 @@ $transparency: 0.6;
         background-image: unset;
         border: unset;
         label {
-            font-size: $general-font-size - 0.4;
         }
 }
 
@@ -158,10 +153,6 @@ $transparency: 0.6;
         padding-left: 1.5em;
         padding-right: 1.5em;
         border: unset;
-        font-size: $general-font-size - 0.5;
-        label {
-            font-size: $general-font-size;
-        }
 }
 
 .pomodoro {
