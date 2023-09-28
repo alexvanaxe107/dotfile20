@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCALE=230
+SCALE=830
 WP_CONFIG_PATH="$HOME/.config/wm/wallpapers.conf"
 
 if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
