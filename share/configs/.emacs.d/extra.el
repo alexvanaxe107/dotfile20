@@ -1,6 +1,6 @@
 ;; You will most likely need to adjust this font size for your system!
-(defvar ava/default-font-size 205)
-(defvar ava/default-variable-font-size 205)
+(defvar ava/default-font-size 180)
+(defvar ava/default-variable-font-size 180)
 
 ;; (defvar ava/transparency-level '(93 . 93))
 ;; (defvar ava/transparency-level-list '(alpha . (93 . 93)))
@@ -496,6 +496,7 @@
          (sh-mode . lsp-deferred)
          (js-mode . lsp-deferred)
          (mhtml-mode . lsp-deferred)
+         (html-mode . lsp-deferred)
          ;; if you want which-key integration
          )
   :commands lsp-deferred
@@ -505,6 +506,7 @@
   (add-to-list 'lsp-enabled-clients 'angular-ls)
   (add-to-list 'lsp-enabled-clients 'ts-ls)
   (add-to-list 'lsp-enabled-clients 'pyright)
+  (add-to-list 'lsp-enabled-clients 'svelte-ls)
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-pyright
@@ -522,6 +524,12 @@
   :after lsp-mode
   :config
   (setq lsp-ui-doc-position 'bottom))
+
+(use-package web-mode
+  :after lsp-mode
+  :mode "\\.svelte\\'"
+  :hook (web-mode . lsp-deferred)
+  :commands lsp-ivy-workspace-symbol)
 
 (use-package company
   :after lsp-mode
