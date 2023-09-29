@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 export WM_RUNNING="emacs"
 $HOME/.config/i3/monitor/saver.sh &

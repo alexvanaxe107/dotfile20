@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 if [ -f $HOME/.config/wm/xorg_local.sh ]; then
     . $HOME/.config/wm/xorg_local.sh
