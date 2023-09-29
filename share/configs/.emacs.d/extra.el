@@ -1,6 +1,6 @@
 ;; You will most likely need to adjust this font size for your system!
-(defvar ava/default-font-size 105)
-(defvar ava/default-variable-font-size 105)
+(defvar ava/default-font-size 205)
+(defvar ava/default-variable-font-size 205)
 
 ;; (defvar ava/transparency-level '(93 . 93))
 ;; (defvar ava/transparency-level-list '(alpha . (93 . 93)))
@@ -275,8 +275,8 @@
     ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
     ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
-    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("Fantasque Sans Mono"))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Fixed"))))
+    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("IntelOne Mono"))))
+    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Nerd Font Mono"))))
     result)
 
 (defun toggle-transparency ()

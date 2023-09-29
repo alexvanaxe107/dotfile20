@@ -27,7 +27,7 @@
     (defun change-theme()
       "First disable all themes and then chose a theme and font"
       (shell-command "nitrogen --restore")
-      (shell-command "start_picom.sh \"emacs\"")
+      ;;(shell-command "picom")
       (ava/update-transparency)
       (disable-all-themes)
       (load-theme (get-theme) t)
@@ -223,7 +223,7 @@ It is good to replace counsel, it seems not to have all the functionalities from
 
 #+begin_src shell
 
-  ;; (use-package dmenu)
+  (use-package dmenu)
 
 #+end_src
 
@@ -236,7 +236,7 @@ The idea is to start a server and then start a session with the client. It will 
 
 #+begin_src sh :tangle /home/alexvanaxe/bin/emacs-server.sh :tangle-mode (identity #o700)
 
-  #! /bin/bash
+  #! /usr/bin/env bash
   iswmmode="$1"
 
   if [ -z "${iswmmode}" ]; then
@@ -251,7 +251,7 @@ The idea is to start a server and then start a session with the client. It will 
 
 Start the client
 #+begin_src sh :tangle /home/alexvanaxe/bin/wms/emacs-client.sh :tangle-mode (identity #o700)
-#! /bin/bash
+#! /usr/bin/env bash
 
 export WM_RUNNING="emacs"
 $HOME/.config/i3/monitor/saver.sh &
@@ -268,16 +268,18 @@ exec dbus-launch emacsclient -c
 Start the client.
 
 #+begin_src sh :tangle /home/alexvanaxe/bin/wms/start-emacs.sh :tangle-mode (identity #o700)
-#! /bin/bash
+  #! /usr/bin/env bash
 
-export WM_RUNNING="emacs"
-$HOME/.config/i3/monitor/saver.sh &
-display_manager.sh -o "DVI-1 HDMI-2"
-display_manager.sh -p "DVI-1"
-#display_manager.sh -r "HDMI-2" "left"
-start_picom.sh "emacs"
+  export WM_RUNNING="emacs"
+  $HOME/.config/i3/monitor/saver.sh &
+  . $HOME/.config/wm/xorg_local.sh
 
-#exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
-exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
+  #display_manager.sh -o "DVI-1 HDMI-2"
+  #display_manager.sh -p "DVI-1"
+  #display_manager.sh -r "HDMI-2" "left"
+  #start_picom.sh "emacs"
+
+  #exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
+  exec dbus-launch --exit-with-session emacs -bg "#000000" -fg "#ffffff" -mm --debug-init -l $HOME/.emacs.d/desktop.el
 
 #+end_src

@@ -1,6 +1,6 @@
 (defun choose-player()
   (let (
-  (players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+  (players (split-string (shell-command-to-string "player_ctl.sh -v") "\n")))
       (completing-read "Chose: " players)))
 
 (defun play_radio()
@@ -26,27 +26,27 @@
 
 (defun player-ctl (action)
     (when (equal action "save")
-        (shell-command (concat "player-ctl.sh -S " "'" (choose-player) "'") nil))
+        (shell-command (concat "player_ctl.sh -S " "'" (choose-player) "'") nil))
 
     (when (equal action "play_pause")
     (let (
-	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+	(players (split-string (shell-command-to-string "player_ctl.sh -v") "\n")))
     (let (
 	    (chosen_player (completing-read "Chose: " players)))
-	    (shell-command (concat "player-ctl.sh -p " "'" chosen_player "'")) )))
+	    (shell-command (concat "player_ctl.sh -p " "'" chosen_player "'")) )))
 
     (when (equal action "stop")
     (let (
-	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+	(players (split-string (shell-command-to-string "player_ctl.sh -v") "\n")))
     (let (
 	    (chosen_player (completing-read "Chose: " players)))
-	    (shell-command (concat "player-ctl.sh -s " "'" chosen_player "'")) )))
+	    (shell-command (concat "player_ctl.sh -s " "'" chosen_player "'")) )))
     (when (equal action "asaudio")
     (let (
-	(players (split-string (shell-command-to-string "player-ctl.sh -v") "\n")))
+	(players (split-string (shell-command-to-string "player_ctl.sh -v") "\n")))
     (let (
 	    (chosen_player (completing-read "Chose: " players)))
-	    (shell-command (concat "player-ctl.sh -i 1 " chosen_player)) )))
+	    (shell-command (concat "player_ctl.sh -i 1 " chosen_player)) )))
     )
 
 (defun change-light ()

@@ -14,7 +14,7 @@
 (defun change-theme()
   "First disable all themes and then chose a theme and font"
   (shell-command "nitrogen --restore")
-  (shell-command "start_picom.sh \"emacs\"")
+  ;;(shell-command "picom")
   (ava/update-transparency)
   (disable-all-themes)
   (load-theme (get-theme) t)

@@ -72,6 +72,7 @@
         # development
         pkgs.neovim
         pkgs.nodejs
+        pkgs.emacs
         # Experimental
         (import unstable {system = "${system}";}).hyprland
         (import unstable {system = "${system}";}).swww

@@ -13,7 +13,7 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/Documents/Dropbox/orgs/roam/")
+  (org-roam-directory "~/Documents/Orgs/orgs/roam/")
   (org-roam-completion-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
@@ -52,8 +52,8 @@
     (setq org-log-into-drawer t)
 
     (setq org-refile-targets
-          '(("~/Documents/Dropbox/orgs/archive.org" :maxlevel . 1)
-            ("~/Documents/Dropbox/orgs/ZTD_Finished.org" :maxlevel . 1)))
+          '(("~/Documents/Orgs/orgs/archive.org" :maxlevel . 1)
+            ("~/Documents/Orgs/orgs/ZTD_Finished.org" :maxlevel . 1)))
 
     ;; Save Org buffers after refiling!
     (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -75,7 +75,7 @@
 
     (setq org-capture-templates
           `(("t" "Tasks / Projects")
-            ("tt" "Task" entry (file+olp "~/Documents/Dropbox/orgs/ideas.org" "Inbox")
+            ("tt" "Task" entry (file+olp "~/Documents/Orgs/orgs/ideas.org" "Inbox")
              "* TODO %?\n" :empty-lines 1)))
 
 ;;            ("j" "Journal Entries")

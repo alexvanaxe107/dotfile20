@@ -9,5 +9,5 @@ xrandr --output $DP --set TearFree on
 xrandr --output $HDMI --set TearFree on
 
 display_manager.sh -p "$DP"
-display_manager.sh -r "$HDMI" right
+display_manager.sh -r "$HDMI" "left"
 display_manager.sh -o "$DP $HDMI"
