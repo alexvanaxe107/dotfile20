@@ -122,6 +122,9 @@ uncast(){
 }
 
 stop_play(){
+    if [ ! -z "$1" ]; then
+        chosen_p=$(echo "$1" | awk '{print $1}') 
+    fi
     playerctl -p $chosen_p stop
 
     # How can only be one casting file, for now will be this way
@@ -133,9 +136,10 @@ stop_play(){
 }
 
 play_pause(){
+    if [ ! -z "$1" ]; then
+        chosen_p=$(echo "$1" | awk '{print $1}') 
+    fi
     playerctl -p $chosen_p play-pause
-
-    echo "${chosen_p}"
 
     if [ "$chosen_p" = "chromecast" ]; then
         if [[ -f "${INDICATOR_CAST_FILE}" ]]; then
@@ -166,8 +170,6 @@ adjust_volume(){
   fi
 }
 
-chosen_p=$(get_titles | ava_dmenu -i -n -l 20 -p "Select the player:"   )
-chosen_p=$(echo $chosen_p | awk '{print $1}') 
 
 get_prompt() {
     local chosen_p="$1"
@@ -209,6 +211,34 @@ get_prompt() {
    #${position}$(playerctl -p $chosen_p metadata artist) - ${title:0:30} 
 }
 
+show_help() {
+    echo "Control the midia playing on your desktop and many more!"
+    echo "-v                                        Print the players"
+    echo "-s [player]                               Stop the midia"
+    echo "-h                                        This help message."
+}
+
+command=$1
+cli_mode=0
+
+while getopts "hs:p:v" opt; do
+    if [ ! -z "$opt" ]; then
+        cli_mode=1
+    fi
+    case "$opt" in
+        h) show_help;;
+        v) get_titles;;
+        s) stop_play "$OPTARG";;
+        p) play_pause "$OPTARG";;
+    esac
+done
+
+if [ ! $cli_mode -eq 1 ]; then
+    chosen_p=$(get_titles | ava_dmenu -i -n -l 20 -p "Select the player:"   )
+    chosen_p=$(echo $chosen_p | awk '{print $1}') 
+else
+    exit 0
+fi
 
 if [ ! -z $chosen_p ]; then
     #position=$(echo "$(playerctl -p ${chosen_p} position) / 60" | bc)
