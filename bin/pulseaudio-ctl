@@ -41,6 +41,8 @@ get_volume() {
 
 _notify_volume() {
     local volume="$(get_volume)"
+
+
     local icon=""
     if [ "$volume" -eq "0" ]
     then
@@ -60,7 +62,12 @@ _notify_volume() {
     then
         icon=""
     fi
-    pgrep dunst && notify-send -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
+
+    if [ "$(dunstctl is-paused)" == "true" ]; then
+        echo "$icon $volume"
+    else
+        pgrep dunst && notify-send -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
+    fi
 
 #    pgrep dunst && dunstify -h string:x-canonical-private-synchronous:audio "$icon Volume:" -h int:value:"$(get_volume)"
 #    pgrep twmnd && notify-send -t 1 "$icon Volume:" "$(get_volume)%"
