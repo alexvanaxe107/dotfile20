@@ -13,7 +13,7 @@
             (and (string-match "[[:space:]]*\\([0-9]*\\).*" choosen_radio)
                 (setq indice (match-string 1 choosen_radio)
                       ) ))
-        (shell-command (concat "play_radio.sh -r " indice " &") nil)
+        (shell-command (concat "play_radio.sh -r " indice "  > /dev/null 2>&1 &") nil)
         )))
 
 (defun play_paste()
@@ -48,6 +48,15 @@
 	    (chosen_player (completing-read "Chose: " players)))
 	    (shell-command (concat "player_ctl.sh -i 1 " chosen_player)) )))
     )
+
+(defun change_sink()
+      (let (
+      (output (split-string (shell-command-to-string "pulseaudio-ctl gs") "\n")))
+    (let (
+      (choosen_sink (completing-read "Choose the output" output)))
+
+        (shell-command (concat "pulseaudio-ctl sink " choosen_sink "  > /dev/null 2>&1") )
+        )))
 
 (defun change-light ()
 (let (

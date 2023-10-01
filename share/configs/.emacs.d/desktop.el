@@ -18,7 +18,7 @@
   (ava/update-transparency)
   (disable-all-themes)
   (load-theme (get-theme) t)
-  (set-frame-parameter (selected-frame) 'alpha ava/transparency-level)
+  (set-frame-parameter (selected-frame) 'alpha-background ava/transparency-level)
   (add-to-list 'default-frame-alist ava/transparency-level-list)
   (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))
 
@@ -34,6 +34,8 @@
   ;; (start-process-shell-command "set_wallpaper" nil "wallpaper_changer.sh")
   ;; (start-process-shell-command "set_theme" nil "theme_select.sh -emacs")
   (ava/run-in-background "nitrogen --restore")
+  (shell-command "start_picom.sh emacs")
+  (shell-command "dunstctl set-paused true")
   (with-eval-after-load 'doom-themes (load-theme (get-theme) t))
   )
 
@@ -56,6 +58,7 @@
     :config
     ;; Set the default number of workspaces
     (setq exwm-workspace-number 10)
+
 
     ;; Total focus
 ;;    (setq exwm-workspace-minibuffer-position 'bottom)
@@ -91,10 +94,10 @@
     (require 'exwm-randr)
     (exwm-randr-enable)
     ;; Configure the kmap and change caps for control
-    (start-process-shell-command "kmap" nil "setkmap")
+    ;;(start-process-shell-command "kmap" nil "setkmap")
 
     ;; Turnoff the sleep timer of the monitor
-    (start-process-shell-command "nosleep" nil "saver.sh &")
+    ;;(start-process-shell-command "nosleep" nil "saver.sh &")
 
     ;; Get the second monitor
     (let (
@@ -144,13 +147,16 @@
             ([?\s-J] . windower-swap-below)
 
             ([?\s-%] . split-window-right)
+            ([?\s-e] . split-window-right)
             ([?\s-\"] . split-window-below)
+            ([?\s-b] . split-window-below)
             ([?\s-Q] . kill-buffer)
             ([?\s-q] . delete-window)
             ([?\s-i] . exwm-input-toggle-keyboard)
             ;; ([?\s-v] . exwm-workspace-delete)
             ([?\s-v] . hide-mode-line-mode)
-            ([?\s-a] . exwm-workspace-add)
+            ([?\s-A] . exwm-workspace-add)
+            ([?\s-a] . (lambda () (interactive)(change_sink)))
             ([?\s-w] . exwm-workspace-switch)
             ,@(mapcar (lambda (i)
                         `(,(kbd (format "s-%d" i)) .
