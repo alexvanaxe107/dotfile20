@@ -23,11 +23,10 @@ while getopts "hsf" opt; do
 done
 
 if [ -z "$1" ]; then
-   
     if [[ $use_rofi -eq 1 ]]; then
-	chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
+        chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)" -theme ${rofi_item2})
     else
-	chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)")
+        chosen=$(printf "▶\n⏹" | ${dmenu} -i -p "Pomodoro: $(pomodoro_stats.sh)")
     fi
 
     case "$chosen" in

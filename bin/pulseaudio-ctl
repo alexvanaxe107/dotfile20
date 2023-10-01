@@ -17,10 +17,17 @@ do_down() {
     _notify_volume
 }
 
-change_default_sink() {
-    local sink="$(pactl list sinks short | awk '{print $2}' | ${dmenu} -l 5 -p "Choose the default sink")"
+get_sinks() {
+    echo "$(pactl list sinks short | awk '{print $2}')"
+}
 
-    pactl set-default-sink $sink
+change_default_sink() {
+    local sink="$1"
+    if [ -z "$sink" ]; then
+        local sink="$(pactl list sinks short | awk '{print $2}' | ${dmenu} -l 5 -p "Choose the default sink")"
+    fi
+
+    $(pactl set-default-sink $sink)
 }
 
 is_muted() {
@@ -81,5 +88,6 @@ case "$command" in
     "up") do_up ${param};;
     "down") do_down ${param};;
     "vol") get_volume;;
-    "sink") change_default_sink;;
+    "gs") get_sinks;;
+    "sink") change_default_sink "$param";;
 esac
