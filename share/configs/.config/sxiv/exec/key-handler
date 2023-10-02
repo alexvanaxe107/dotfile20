@@ -84,7 +84,7 @@ crop_img(){
     exit_if_none "${direction}"
     resize="$(printf "+0\n+65\n+100\n+200\n+300" | $dmenu -p "Set the vertical deviation")"
     horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | $dmenu -p "Set the horizontal deviation")"
-
+    
     filename="$(basename $file)"
 
     temp_file="/tmp/tmp_$filename"
@@ -157,7 +157,7 @@ do
             nitrogen --save --set-zoom-fill "$file" ;;
         "C-e")
             recort_img "1" "1" "East";;
-        "C-r")
+        "C-r") 
             resize_img_plus "$file";;
         "C-t")
             crop_img "0" "0" "West";;

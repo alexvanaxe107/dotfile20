@@ -50,7 +50,7 @@ export XDG_SESSION_TYPE=x11
 export GDK_BACKEND=x11
 #exec /home/alexvanaxe/bin/startdwm
 exec ~/.nix-profile/bin/wms/start-emacs.sh
-#exec ~/bin/wms/start-bspwm.sh
+#exec ~/.nix-profile/wms/start-bspwm.sh
 #exec i3
 #exec dwm
 #exec bspwm

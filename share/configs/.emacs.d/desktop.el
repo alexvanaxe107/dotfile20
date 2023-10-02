@@ -99,11 +99,19 @@
     ;; Turnoff the sleep timer of the monitor
     ;;(start-process-shell-command "nosleep" nil "saver.sh &")
 
+    ;; Get the first monitor
+    ;;(let (
+    ;;      (monitor (shell-command-to-string "monitors_info.sh -m | head -n 1")))
+
+    ;;  (setq exwm-randr-workspace-output-plist (list 0 monitor 1 monitor 2 monitor))
+
+    ;;  )
+
     ;; Get the second monitor
     (let (
           (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1")))
 
-      (setq exwm-randr-workspace-output-plist (list 0 monitor 9 monitor 8 monitor))
+      (setq exwm-randr-workspace-output-plist (list 8 monitor 9 monitor))
 
       )
 
@@ -122,7 +130,10 @@
             ([f8] . persp-switch)
             ([?\s-f] . persp-forget-buffer)
             ([?\s-R] . exwm-reset)
-            ([?\s-d] . counsel-linux-app)
+            ;;([?\s-d] . counsel-linux-app)
+            ([?\s-d] . (lambda ()
+                      (interactive)
+                      (start-process "" nil "wezterm")))
 
             ([?\s-r] . window-resize/body)
             ;; Launch applications via shell command
@@ -145,6 +156,8 @@
             ([?\s-L] . windower-swap-right)
             ([?\s-K] . windower-swap-above)
             ([?\s-J] . windower-swap-below)
+            ([?\s-t] . (lambda () (interactive) (exwm-workspace-switch (car (delete exwm-workspace--current (seq-filter #'exwm-workspace--active-p exwm-workspace--list))))))
+
 
             ([?\s-%] . split-window-right)
             ([?\s-e] . split-window-right)
