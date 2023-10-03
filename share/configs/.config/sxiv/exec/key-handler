@@ -47,12 +47,14 @@ resize_img_plus(){
     filename="$(basename $file)"
     temp_file="rec_$filename"
 
-    local htop=$(monitors_info.sh -od | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
-    local ltop=$(monitors_info.sh -od | awk 'BEGIN {FS="x"; TESTE=10000} {if ($2 < TESTE) TESTE=$2;} END {print TESTE}')
-    local htoppls=$(monitors_info.sh -od | awk -v SCALE=$SCALE 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+SCALE}')
-    local optimal_rescale="$(monitors_info.sh -oD)x${htop}"
-    local optimal_rescale_ppls="$(echo $(monitors_info.sh -oD) + $SCALE | bc)x${htoppls}"
-    local low_optimal_rescale="$(monitors_info.sh -oD)x${ltop}"
+    local htop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
+    local overriden_htop=$(monitors_info.sh -od | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
+    local ltop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"; TESTE=10000} {if ($2 < TESTE) TESTE=$2;} END {print TESTE}')
+    local htoppls=$(monitors_info.sh -d | awk -v SCALE=$SCALE 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+SCALE}')
+    local optimal_rescale="$(monitors_info.sh -D)x${htop}"
+    local overriden_optimal_rescale="$(monitors_info.sh -oD)x${overriden_htop}"
+    local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + $SCALE | bc)x${htoppls}"
+    local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
 
     local img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1)
     local width_img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1 | cut -d 'x' -f 1)
@@ -64,7 +66,7 @@ resize_img_plus(){
     exit_if_none "$direction"
 
     local resolutions=$(monitors_info.sh -d)
-    imgsize="$(printf "${optimal_rescale_ppls}\n${optimal_rescale}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | $dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale}\n${overriden_optimal_rescale}\n${optimal_rescale_ppls}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | $dmenu -p "Choose the dimension")"
     exit_if_none "$imgsize"
 
     vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | $dmenu -p "Set the vertical adjustment")"
@@ -89,10 +91,15 @@ crop_img(){
 
     temp_file="/tmp/tmp_$filename"
 
-    rescale_dim="$(monitors_info.sh -oD)x$(monitors_info.sh -od "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+    local override="$(printf "Yes\nNo" | $dmenu -p "Override the scale?")"
+    if [ "${override}" == "Yes" ]; then
+        rescale_dim="$(monitors_info.sh -oD)x$(monitors_info.sh -od "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+    else
+        rescale_dim="$(monitors_info.sh -D)x$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+    fi
 
-    xvalue="$(monitors_info.sh -od "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
-    yvalue="$(monitors_info.sh -od "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
+    xvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $1}')"
+    yvalue="$(monitors_info.sh -d "${monitor}" | awk 'BEGIN {FS="x"}; {print $2}')"
 
     convert "$file" -filter Triangle -quality 100 -gravity ${direction} -resize "${rescale_dim}"^ -extent "${rescale_dim}${horizontal}${resize}" "${temp_file}"
 
