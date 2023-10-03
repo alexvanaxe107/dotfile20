@@ -2,11 +2,13 @@
 # A POSIX variable
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 PREFERENCE_FILE="${HOME}/.config/wm/monitors.conf"
+RESOLUTION_FILE="${HOME}/.config/wm/resolution.conf"
 
 # Initialize our own variables:
 output_file=""
 id_only=0
 external=0
+override=0
 
 all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
 
@@ -36,8 +38,8 @@ emacs_string() {
     count=0
     emonitor=""
     for monitor in ${monitors}; do
-	emonitor="${emonitor}${count} ${monitor} "
-	count=$((count + 1))
+        emonitor="${emonitor}${count} ${monitor} "
+        count=$((count + 1))
     done
 
     # printf "${emonitor}" | xargs
@@ -198,35 +200,31 @@ secundary_wide() {
 }
 
 get_dimensions() {
-    if [ -z $1 ]; then
-        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-            hyprctl monitors -j | jq '.[] | (if .transform == 1 or .transform == 3 then .height, .width else .width, .height end)' | xargs printf "%sx%s\n"
-        else
-            local dimensions="$(xrandr | grep -w connected | grep -oP '\d+x\d+')"
-            printf "$dimensions"
-        fi
+    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+        local dimensions="$(hyprctl monitors -j | jq '.[] | (if .transform == 1 or .transform == 3 then .name, .height, .width else .name,.width, .height end)' | xargs printf "%s %sx%s\n")"
     else
-        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-            local monitor="$1"
-            hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | (if .transform == 1 or .transform == 3 then .height, .width else .width, .height end)" | xargs printf "%sx%s"
-            #hyprctl monitors -j | jq -r ".[] | select(.name == \"${monitor}\") | .width, .height" | xargs printf "%sx%s"
-        else
-            local monitor="$1"
-            dim="$(xrandr | grep -A 1 -i "${monitor}" | head -n 1 | grep -oP '\d+x\d+')"
-            echo "${dim}" 
-        fi
+        local dimensions="$(xrandr | grep -w connected | sed 's/primary //' | cut -d " " -f 1,3 | sed 's/\+.*//')"
+    fi
+
+    if [ ${override} == 1 ]; then
+        for odim in $(cat ${RESOLUTION_FILE}); do
+            local omonitor="$(echo ${odim} | cut -d '=' -f 1)"
+            local odim="$(echo ${odim} | cut -d '=' -f 2)"
+            local dimensions="$(echo "${dimensions}" | sed -E "s/${omonitor}.*/${omonitor} ${odim}/")"
+        done
+    fi
+
+    if [ -z $1 ]; then
+        printf "$dimensions" | cut -d " " -f 2
+    else
+        local monitor="$1"
+        printf "$dimensions" | grep "${monitor}" | cut -d " " -f 2
     fi
 }
 
 # Pega a soma dos monitors
 get_sum_dimensions() {
-    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-        #hyprctl monitors -j | jq -r ".[] | .width" | awk '{sum += $1} END {print sum}'
-        hyprctl monitors -j | jq '.[] | (if .transform == 1 or .transform == 3 then .height else .width end)' | awk '{sum += $1} END {print sum}'
-    else
-        local sum=$(xrandr | grep -w connected | grep -oP '(\d*)x' | grep -oP '\d*' | awk '{s+=$1} END {print s}')
-        echo "${sum}"
-    fi
+    get_dimensions | cut -d 'x' -f 1 | awk '{s+=$1} END {print s}'
 }
 
 show_help() {
@@ -253,7 +251,7 @@ show_help() {
     echo "-e                             Get the emacs string to configure the exwm"
 }
 
-while getopts "h?mcpqift:w:n:ab:sder:gD" opt; do
+while getopts "h?omcpqift:w:n:ab:sder:gD" opt; do
     case "$opt" in
     h|\?)
         show_help
@@ -261,6 +259,8 @@ while getopts "h?mcpqift:w:n:ab:sder:gD" opt; do
     i)  id_only=1
         ;;
     g)  external=1
+        ;;
+    o)  override=1
         ;;
     m)  monitors_information
         ;;
