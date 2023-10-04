@@ -195,7 +195,7 @@
               ([?\s-Q] . kill-buffer)
               ([?\s-q] . delete-window)
               ([?\s-i] . exwm-input-toggle-keyboard)
-              ;; ([?\s-v] . exwm-workspace-delete)
+              ([?\s-V] . exwm-workspace-delete)
               ([?\s-v] . hide-mode-line-mode)
               ([?\s-A] . exwm-workspace-add)
               ([?\s-a] . (lambda () (interactive)(change_sink)))
