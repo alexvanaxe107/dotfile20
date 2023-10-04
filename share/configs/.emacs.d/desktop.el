@@ -169,6 +169,8 @@
             ([?\s-b] . split-window-below)
             ([?\s-Q] . kill-buffer)
             ([?\s-q] . delete-window)
+            ([?\s-m] . exwm-workspace-move-window)
+            ([?\s-M] . exwm-workspace-move)
             ([?\s-i] . exwm-input-toggle-keyboard)
             ([?\s-V] . exwm-workspace-delete)
             ([?\s-v] . hide-mode-line-mode)
