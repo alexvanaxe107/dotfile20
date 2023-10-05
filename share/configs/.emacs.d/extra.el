@@ -1,6 +1,6 @@
 ;; You will most likely need to adjust this font size for your system!
-(defvar ava/default-font-size 180)
-(defvar ava/default-variable-font-size 180)
+(defvar ava/default-font-size (string-to-number(getenv "font_size_emacs")))
+(defvar ava/default-variable-font-size (string-to-number(getenv "font_size_emacs")))
 
 ;; (defvar ava/transparency-level '(93 . 93))
 ;; (defvar ava/transparency-level-list '(alpha . (93 . 93)))

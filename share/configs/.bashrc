@@ -197,6 +197,10 @@ source ~/.ng-completion
 #POWERLINE_BASH_SELECT=1
 #. /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 
+# Source the config
+. $HOME/.config/wm/bspwm.conf
+source $HOME/.config/wm/bspwm.conf
+
 export EDITOR=nvim
 
 alias dmenu=ava_dmenu
@@ -222,7 +226,7 @@ alias tdm="tdm --disable-xrunning-check"
 PULSE_LATENCY_MSEC=60
 
 #Use the amd vulkan
-AMD_VULKAN_ICD=RADV
+# AMD_VULKAN_ICD=RADV
 
 # AMDGPU 16x anisotropic filtering
 #export R600_TEX_ANISO=16
