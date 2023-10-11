@@ -13,7 +13,7 @@ override=0
 all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
 
 __mount_monitors__() {
-    first=$(xrandr | grep "primary" | cut -d " " -f 1)
+    first=$(xrandr | grep "connected" | grep "primary" | cut -d " " -f 1)
 
     all_monitors_less_first=$(xrandr | grep -w connected | cut -d " " -f 1 | grep -v -w "${first}")
 
