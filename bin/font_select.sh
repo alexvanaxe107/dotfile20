@@ -49,8 +49,8 @@ font() {
     fi
 
     #Change the polybar
+    height="$((size1 + ${space_size}))"
     if [ "${NOT_MONO}" != "NM" ]; then 
-        height="$((size1 + ${space_size}))"
         sed -i "s/font-1.*/font-1 = ${font_name}:style=${style}:pixelsize=${size1};${space}/" ${HOME}/.config/polybar/config
         sed -i "s/height.*/height = ${height}/" ${HOME}/.config/polybar/config
 
