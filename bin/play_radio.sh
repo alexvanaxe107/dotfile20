@@ -24,10 +24,13 @@ QUEUE_FILE=$HOME/.config/tmp/yt_queue.txt
 PLAYLIST_FILE_BKP=$HOME/.config/tmp/yt_pl_bkp.ps
 
 PLAY_BKP=$HOME/.config/tmp/play_bkp
+CONFIG_FILE="$HOME/.config/play_radio/config"
 
 only_sound="0"
 cast="0"
 exclude="0"
+
+
 
 show_help() {
     echo "Enjoy a good music on your stylish desktop and many more!"
@@ -47,6 +50,12 @@ show_help() {
     echo "-c               Resume the saved"
     echo "-C               Cast to chromecase beta"
     echo "-h               This help message."
+}
+
+update_stations() {
+    wget https://raw.githubusercontent.com/alexvanaxe107/Radios/main/config --output-document $CONFIG_FILE
+    
+    notify-send -u normal  "Updated" "Stations updated"
 }
 
 set_indicator() {
@@ -295,7 +304,7 @@ play_radio() {
 
     if [ -z "$chosen" ]
     then
-        chosen=$(cat $HOME/.config/play_radio/config | awk '{print NR,$1}' FS="," | ava_dmenu -p "Choose a radio:" -i -l 50)
+        chosen=$(cat $CONFIG_FILE | awk '{print NR,$1}' FS="," | ava_dmenu -p "Choose a radio:" -i -l 50)
         index=$(echo $chosen | awk '{print $1}')
     else
         index=$chosen
@@ -306,7 +315,7 @@ play_radio() {
         exit 0
     fi
 
-    radio_url=$(cat $HOME/.config/play_radio/config | awk -v IND=${index} 'NR==IND {print $2}' FS=",")
+    radio_url=$(cat $CONFIG_FILE | awk -v IND=${index} 'NR==IND {print $2}' FS=",")
 
     play_local "${radio_url}"
 }
@@ -321,7 +330,7 @@ clear_playlist() {
 }
 
 list_radio() {
-    cat $HOME/.config/play_radio/config | nl 
+    cat $CONFIG_FILE | nl 
 }
 
 play_cast() {
@@ -379,6 +388,7 @@ case "$chosen_mode" in
     "play") play_local "$option";;
     "list") list_radio;;
     "list_playlist") list_playlist "$2";;
+    "update") update_stations;;
     *) exit;;
 esac
 

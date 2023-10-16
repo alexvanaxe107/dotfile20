@@ -236,6 +236,27 @@
     (display-fill-column-indicator-mode t)
 )
 
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (scss "https://github.com/serenadeai/tree-sitter-scss")
+     (svelte "https://github.com/Himujjal/tree-sitter-svelte")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (nix "https://github.com/nix-community/tree-sitter-nix")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")))
+
+(setq treesit-font-lock-level 2)
+
+(setq major-mode-remap-alist
+ '((css-mode . css-ts-mode)
+   (bash-mode . bash-ts-mode)
+   (typescript-mode . typescript-ts-mode)
+   (python-mode . python-ts-mode)))
+
 ;;Function to get a random value from the list passed
 (defun random-choice (items)
 (let* ((size (length items))
@@ -266,15 +287,17 @@
         (setq ava/transparency-level-list '(alpha-background . 87))))
 
     (defun get-theme()
+    (setq result 'tsdh-dark)
     (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-valley-light))))
     (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
     (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
     result)
 
     (defun get-font()
+    (setq result '"Hack")
     ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
     ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
-    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
+    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fira Code"))))
     (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("IntelOne Mono"))))
     (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Nerd Font Mono"))))
     result)
@@ -659,7 +682,6 @@
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :disabled
   :custom (
            (doom-modeline-height 0)
            (doom-modeline-bar-width 4)
@@ -673,6 +695,7 @@
   (sml/theme 'respectful))
 
 (use-package telephone-line
+  :disabled
   :init (telephone-line-mode 1)
     :custom
     (telephone-line-primary-left-separator 'telephone-line-gradient)
