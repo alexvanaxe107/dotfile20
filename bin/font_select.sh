@@ -36,7 +36,8 @@ font() {
     size2=$4
     size3=$5
     space=$6
-    eww=""
+    eww=$(echo "$font_size_emacs / 100" | bc -l)
+    eww="${eww:0:4}em"
 
     SIZE=$(printf "" | ${dmenu} -i -p "Choose the size (bar(${size1}) ${dmenu}(${size2}) conky(${size3}) vspace(${space}))")
 
@@ -45,7 +46,10 @@ font() {
         size2="$(echo ${SIZE} | cut -d ' ' -f 2)"
         size3="$(echo ${SIZE} | cut -d ' ' -f 3)"
         space="$(echo ${SIZE} | cut -d ' ' -f 4)"
-        eww="$(echo ${SIZE} | cut -d ' ' -f 5)"
+        eww_tmp="$(echo ${SIZE} | cut -d ' ' -f 5)"
+        if [ ! -z ${eww_tmp} ]; then
+            eww="$(echo ${SIZE} | cut -d ' ' -f 5)"
+        fi
     fi
 
     #Change the polybar

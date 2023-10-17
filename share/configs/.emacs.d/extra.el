@@ -249,7 +249,7 @@
      (nix "https://github.com/nix-community/tree-sitter-nix")
      (toml "https://github.com/tree-sitter/tree-sitter-toml")))
 
-(setq treesit-font-lock-level 2)
+(setq treesit-font-lock-level 3)
 
 (setq major-mode-remap-alist
  '((css-mode . css-ts-mode)

@@ -362,7 +362,7 @@ Configuring the coding standards.
 ** Set the level mode
 #+begin_src emacs-lisp
 
-    (setq treesit-font-lock-level 2)
+  (setq treesit-font-lock-level 3)
 
 #+end_src
 
