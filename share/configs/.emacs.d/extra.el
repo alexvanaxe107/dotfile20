@@ -686,6 +686,8 @@
            (doom-modeline-height 0)
            (doom-modeline-bar-width 4)
            (doom-modeline-window-width-limit fill-column)
+           ;(doom-modeline-minor-modes nil)
+           (doom-modeline-display-misc-in-all-mode-lines nil)
            ))
 
 (use-package smart-mode-line
