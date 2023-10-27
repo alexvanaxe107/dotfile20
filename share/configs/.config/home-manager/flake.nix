@@ -32,7 +32,8 @@
 
         extraSpecialArgs = { inherit (inputs) unstable avadmenu avabible; inherit system; };
         modules = [ ./home.nix
-                    ./ava.nix ];
+                    ./ava.nix
+                    ./local.nix];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
