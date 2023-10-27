@@ -1,0 +1,22 @@
+#+title AVA Convenient Commands
+
+* Font Manipulation Commands
+
+** Fix font size
+
+#+begin_src emacs-lisp
+
+  (defun fixfont()
+  (let
+      ((font (concat (get-font) "-12")))
+      (set-frame-parameter (selected-frame) 'font font)
+  ))
+
+#+end_src
+
+** Change theme
+#+begin_src emacs-lisp
+
+  (setenv "theme_name" "day")
+
+#+end_src
