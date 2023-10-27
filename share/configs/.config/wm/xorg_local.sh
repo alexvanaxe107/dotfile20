@@ -2,6 +2,11 @@
 
 # Configs used for the local configuragion of the specific computer
 
+if [ "$1" == "getgs" ]; then
+    echo "DP-3"
+    exit 0
+fi
+
 DP="DisplayPort-2"
 HDMI="HDMI-A-0"
 

@@ -13,11 +13,15 @@ override=0
 all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
 
 __mount_monitors__() {
-    first=$(xrandr | grep "connected" | grep "primary" | cut -d " " -f 1)
+    first=$(xrandr | grep -w "connected" | grep "primary" | cut -d " " -f 1)
 
     all_monitors_less_first=$(xrandr | grep -w connected | cut -d " " -f 1 | grep -v -w "${first}")
 
-    printf "%s\n%s" "$first" "$all_monitors_less_first"
+    if [ -z "$first" ]; then
+        printf "%s\n%s" "$all_monitors_less_first"
+    else
+        printf "%s\n%s" "$first" "$all_monitors_less_first"
+    fi
 }
 
 monitors="$(__mount_monitors__)"

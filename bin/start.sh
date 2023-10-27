@@ -2,7 +2,7 @@
 
 MONITOR_OPTIONS="$HOME/.config/wm/monitor_options.conf"
 
-DP=$(source $HOME/.config/wm/xorg_local.sh getenvs)
+DP=$(source $HOME/.config/wm/xorg_local.sh getgs)
 
 start_program() {
     local is_openbox=0
@@ -82,7 +82,7 @@ start_steam_deck() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    echo "gamescope -h $dim -H $dim2 -O $DP -U $steamintegration -- $program"
+    gamescope -h $dim -H $dim2 -O $DP -U $steamintegration -- $program
 }
 
 start_embedded() {
