@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-MONITOR_OPTIONS="$HOME/.config/monitor_options.conf"
+MONITOR_OPTIONS="$HOME/.config/wm/monitor_options.conf"
+
+DP=$(source $HOME/.config/wm/xorg_local.sh getenvs)
 
 start_program() {
     local is_openbox=0
@@ -10,7 +12,6 @@ start_program() {
         echo "In case of problems in resolution or any other issues, please install openbox"
     fi
 
-    local DP="DisplayPort-0"
     local game="$(which $1)"
     local tmp_start=/tmp/start_tmp.sh
     cp $HOME/.nix-profile/temp/start_tmp.sh ${tmp_start}
@@ -39,7 +40,6 @@ start_program() {
 }
 
 start_xinit() {
-    local DP="DisplayPort-0"
     local game="$(which $1)"
     local tmp_start=/tmp/start_tmp.sh
     cp $HOME/.nix-profile/temp/start_tmp.sh ${tmp_start}
@@ -60,8 +60,14 @@ start_xinit() {
 }
 
 start_steam_deck() {
-    local DP="DP-0"
     local program="$1"
+    if [ -z "$program" ]; then
+        echo "No program specified, starting steam on $DP"
+        local program="steam"
+        local steamintegration="-e"
+    else
+        echo "Starting full $1 on $DP"
+    fi
 
     # The total screen
     local dimensions="$(cat $MONITOR_OPTIONS)"
@@ -76,11 +82,10 @@ start_steam_deck() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    gamescope -h $dim -H $dim2 -O $DP -U -e -- $program -gamepadui
+    echo "gamescope -h $dim -H $dim2 -O $DP -U $steamintegration -- $program"
 }
 
 start_embedded() {
-    local DP="DP-3"
     local program="$1"
 
     # The total screen
@@ -128,6 +133,6 @@ case "${rcommand}" in
     "s") start_program $1;;
     "p") start_xinit $1;;
     "e") start_embedded $1;;
-    "E") start_steam_deck "steam";;
+    "E") start_steam_deck $1;;
     "r") reset_lightness;;
 esac
