@@ -66,7 +66,7 @@ start_steam_deck() {
         local program="steam"
         local steamintegration="-e"
     else
-        echo "Starting full $1 on $DP"
+        echo "Starting full $program on $DP"
     fi
 
     # The total screen
