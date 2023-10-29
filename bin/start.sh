@@ -60,7 +60,7 @@ start_xinit() {
 }
 
 start_steam_deck() {
-    local program="$1"
+    local program="$(which $1)"
     if [ -z "$program" ]; then
         echo "No program specified, starting steam on $DP"
         local program="steam"
