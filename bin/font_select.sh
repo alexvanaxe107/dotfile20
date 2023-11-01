@@ -165,6 +165,7 @@ case $CHOSEN in
     "Pixel") font "Repetition Scrolling" Regular 9 10 13 1;;
     "Intel") font "IntelOne Mono" Regular 11 11 13 1;;
     "Western") font "Graduate" Regular 9 9 11 1;;
+    "Cosmos") font "Play" Regular 11 11 11 0;;
     "Classic") font "Old Standard TT" Regular 12 12 12 1;;
     "Book") font "Kingthings Trypewriter 2" Regular 9 9 11 1;;
     "Stock") font "Share Tech Mono" Bold 11 11 13 1;;
