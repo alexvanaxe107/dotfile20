@@ -1,4 +1,4 @@
-{ pkgs, system, unstable, avadmenu, avabible, ... }:
+{ pkgs, system, unstable, avadmenu, avabible, avafonts, ... }:
 
 {
     nixpkgs.config.allowUnfreePredicate = (pkg: true);
@@ -44,6 +44,7 @@
     	pkgs.kcharselect
         # programming
         pkgs.wezterm
+        pkgs.st
         pkgs.unclutter
         pkgs.calibre
         pkgs.zathura
@@ -79,9 +80,9 @@
         (import unstable {system = "${system}";}).bemenu
         (import unstable {system = "${system}";}).waybar
 
-
         avadmenu.defaultPackage.${system}
         avabible.defaultPackage.${system}
+        avafonts.defaultPackage.${system}
 
 
         # Here we will abuse a little and take confort by adding this code Here

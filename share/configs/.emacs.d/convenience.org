@@ -6,9 +6,9 @@
 
 #+begin_src emacs-lisp
 
-  (defun fixfont()
+  (defun fixfont(size)
   (let
-      ((font (concat (get-font) "-12")))
+      ((font (concat (get-font) size)))
       (set-frame-parameter (selected-frame) 'font font)
   ))
 

@@ -8,6 +8,7 @@
     unstable.url = "flake:unstable";
 
     avabible.url = "github:alexvanaxe107/biblia/master";
+    avafonts.url = "github:alexvanaxe107/fonts/master";
     avadmenu = {
            url = "github:alexvanaxe107/ava_dmenu/master";
        };
@@ -30,7 +31,7 @@
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
 
-        extraSpecialArgs = { inherit (inputs) unstable avadmenu avabible; inherit system; };
+        extraSpecialArgs = { inherit (inputs) unstable avadmenu avabible avafonts; inherit system; };
         modules = [ ./home.nix
                     ./ava.nix
                     ./local.nix];
