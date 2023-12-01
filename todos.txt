@@ -3,7 +3,6 @@ BUGS:
 
 Alta prioridade
    Ver o todos
-   Testar o wlr-randr. Talvez de pra uniformixar o display manager com essa ferramenta.
 
 Media prioridade:
    Ver como funciona os grupos no hyprland
