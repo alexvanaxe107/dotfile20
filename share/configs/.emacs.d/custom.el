@@ -8,7 +8,8 @@
  '(package-selected-packages
    '(telephone-line web-mode exwm org-tree-slide org-bullets org-roam visual-fill-column hide-mode-line cyberpunk-theme kaolin-themes doom-modeline doom-themes dired-hide-dotfiles all-the-icons-dired dired-single vterm eshell-git-prompt vdiff sass-mode vue-mode typescript-mode zoom-window pyvenv djangonaut flycheck company lsp-ui lsp-ivy lsp-pyright lsp-mode magit minimap yasnippet-snippets yasnippet highlight-indent-guides emmet-mode evil-surround counsel-projectile projectile key-chord evil-collection evil general perspective windower helpful flyspell-correct-ivy flyspell-correct ivy-rich counsel ivy which-key hydra rainbow-delimiters no-littering))
  '(safe-local-variable-values
-   '((flycheck-python-flake8-executable . "/home/alexvanaxe/Documents/Projects/biblia_project/api/.venv/bin/python")))
+   '((flycheck-python-flake8-executable . "/home/alexvanaxe/Documents/Projects/Develop/bible_project_api/api/.venv/bin/python")
+     (flycheck-python-flake8-executable . "/home/alexvanaxe/Documents/Projects/biblia_project/api/.venv/bin/python")))
  '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

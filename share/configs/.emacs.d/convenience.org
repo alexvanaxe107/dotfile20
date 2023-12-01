@@ -20,3 +20,14 @@
   (setenv "theme_name" "day")
 
 #+end_src
+
+* Risky
+** Set the risky variables to be permanent
+
+You can also do (advice-add 'risky-local-variable-p :override #'ignore), which has the advantage of being undoable via advice-remove.
+
+#+begin_src emacs-lisp
+
+  (advice-add 'risky-local-variable-p :override #'ignore)
+
+#+end_src
