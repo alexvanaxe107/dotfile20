@@ -13,7 +13,7 @@ umask 022
 CHOSEN="$1"
 
 if [ -z "${CHOSEN}" ]; then
-    CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nFuturistic\\nClassic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\\nCosmos\\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | ${dmenu} -i    -l 20 -p "Change the font: ")
+    CHOSEN=$(printf "Day Original\\nNight Original\\nWasteland\\nElegant\\nElegant2\\nElegantAmz\\nStock\\nRock\\nWar\\nMinimalist\\nNature\\nAmazon\\nFantasy\\nModern\\nComputer\\nClassic\\nWestern\\n80s\\nNeon\\nCyberpunk\\nPixel\\nOld Terminal\\nHacking\\nIntel\\nJet\\nProgramming\\nRetro\\nSoft\\nBook\\nCartoon\\nCute\\nClear\\nSpace\\nNoir\\nRussian\\nSteamPunk\\nCosmos\\nNM-Comix zone\nNM-80s ScyFi\nNM-Japan\nNM-Watedland\nTerminator\nNM-Space\nNM-Celtic\nNM-Soft" | ${dmenu} -i    -l 20 -p "Change the font: ")
 fi
 
 
@@ -146,7 +146,6 @@ case $CHOSEN in
     "Nature") font "CQ Mono" Bold 10 10 12 1;;
     "Modern")  font "Audimat Mono" Regular 10 10 12 1;;
     "Russian") font "Iosevka Nerd Font Mono" "Bold" 10 10 13 1;;
-    "Futuristic") font "Larabiefont Compressed" Bold 10 10 13 2;;
     "Elegant") font "Unica One" Regular 10 10 13 1;;
     "Elegant2") font "NovaMono" Normal 9 9 13 2;;
     "ElegantAmz") font "Amazon Ember Mono" Medium 11 11 14 1;;
