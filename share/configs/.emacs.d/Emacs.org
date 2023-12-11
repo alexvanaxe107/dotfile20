@@ -625,6 +625,7 @@ Disabilitado pq é uma bosta. Como quase tudo nesse emacs.
 #+begin_src emacs-lisp
 
   (use-package perspective
+    :disabled
     :bind
     (("<f9>" . persp-list-buffers)
      ("<f8>" . persp-switch)
@@ -1267,6 +1268,7 @@ There are a lot of keymaps here. The goal is to set all the keymaps here.
       "s" '(persp-switch-to-scratch-buffer :which-key "Switch to the buffer")
       "f" '(persp-forget-buffer :which-key "Forget the buffer of the persp")
       "A" '(persp-set-buffer :which-key "Set the buffer to this persp and remove from the other")
+      "p" '(persp-switch :which-key "Create a new persp")
       )
 
 

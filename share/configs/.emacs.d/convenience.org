@@ -17,7 +17,7 @@
 ** Change theme
 #+begin_src emacs-lisp
 
-  (setenv "theme_name" "day")
+  (setenv "theme_name" "night")
 
 #+end_src
 

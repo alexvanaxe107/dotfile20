@@ -385,6 +385,7 @@
   (add-to-list 'package-selected-packages 'windower))
 
 (use-package perspective
+  :disabled
   :bind
   (("<f9>" . persp-list-buffers)
    ("<f8>" . persp-switch)
@@ -785,6 +786,7 @@
     "s" '(persp-switch-to-scratch-buffer :which-key "Switch to the buffer")
     "f" '(persp-forget-buffer :which-key "Forget the buffer of the persp")
     "A" '(persp-set-buffer :which-key "Set the buffer to this persp and remove from the other")
+    "p" '(persp-switch :which-key "Create a new persp")
     )
 
 (defun ava/org-babel-tangle-config ()
