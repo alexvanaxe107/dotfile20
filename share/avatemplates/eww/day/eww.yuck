@@ -159,7 +159,7 @@
 ))
 
 (defwidget pc_info_layout []
-    (box :class "monitor_info" :orientation "v" :valign "start"
+    (box :class "monitor_info" :orientation "v" :valign "start" :space-evenly false
         (header)
         (cpu_info_layout)
         (mem_info_layout)
@@ -246,7 +246,7 @@
 )
 
 (defwidget buttons []
-    (box :class "bbuttons" :halign "center" 
+    (box :class "bbuttons"
         (button :onclick "eww open --toggle top_10_cpu" "")
         (button :onclick "eww open --toggle top_10_mem" "")
         (button :onclick "eww open --toggle midia_infos" "󰋋")
