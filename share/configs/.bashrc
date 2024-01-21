@@ -228,7 +228,7 @@ if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
 fi
 
 # Sound issues on steam no more?
-#PULSE_LATENCY_MSEC=60
+PULSE_LATENCY_MSEC=60
 
 #Use the amd vulkan
 # AMD_VULKAN_ICD=RADV
@@ -284,6 +284,6 @@ clear
 spark.sh
 echo
 
-pywal.sh
+source pywal.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
