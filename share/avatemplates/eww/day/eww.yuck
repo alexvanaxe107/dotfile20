@@ -56,7 +56,7 @@
                        :y "2%"
                        :height "8%"
                        :width "28%"
-                       :anchor "top center")
+                       :anchor "top left")
     (normal_infos_layout))
 
 (defwindow pc_infos
@@ -67,7 +67,7 @@
     :geometry (geometry :x "0%"
                        :y "15%"
                        :width "28%"
-                       :anchor "top center")
+                       :anchor "top left")
     (pc_info_layout))
 
 (defwindow top_10_mem
@@ -76,7 +76,7 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "18%"
+                       :y "2%"
                        :width "28%"
                        :anchor "top right")
     (_top_10_mem))
@@ -87,9 +87,9 @@
     :windowtype "desktop"
     :wm-ignore false
     :geometry (geometry :x "0%"
-                       :y "18%"
+                       :y "25%"
                        :width "28%"
-                       :anchor "top left")
+                       :anchor "top right")
     (_top_10_cpu))
 
 
@@ -102,7 +102,7 @@
                        :y "55%"
                        :height "10%"
                        :width "28%"
-                       :anchor "top center")
+                       :anchor "top left")
     (player_select_layout))
 
 
@@ -115,7 +115,7 @@
                        :y "25%"
                        :height "10%"
                        :width "28%"
-                       :anchor "bottom center")
+                       :anchor "bottom left")
     (midia_info_layout))
 
 (defwindow organazing
@@ -127,7 +127,7 @@
                        :y "0%"
                        :height "10%"
                        :width "28%"
-                       :anchor "bottom center")
+                       :anchor "bottom left")
     (organazing_layout))
 
 (defwindow wrss
