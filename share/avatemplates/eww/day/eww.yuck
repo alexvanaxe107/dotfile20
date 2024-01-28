@@ -115,7 +115,7 @@
                        :y "25%"
                        :height "10%"
                        :width "28%"
-                       :anchor "bottom left")
+                       :anchor "bottom right")
     (midia_info_layout))
 
 (defwindow organazing
@@ -127,7 +127,7 @@
                        :y "0%"
                        :height "10%"
                        :width "28%"
-                       :anchor "bottom left")
+                       :anchor "bottom right")
     (organazing_layout))
 
 (defwindow wrss
@@ -139,7 +139,7 @@
                        :y "6%"
                        :height "10%"
                        :width "25%"
-                       :anchor "bottom right")
+                       :anchor "bottom left")
     (rss_layout))
 
 (defwidget player_select_layout []
