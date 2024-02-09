@@ -150,9 +150,12 @@
       ;; Set up global key bindings.  These always work, no matter the input state!
       (setq exwm-input-global-keys
             `(
-              ([f5] . persp-ivy-switch-buffer)
-              ([f9] . persp-list-buffers)
+              ;([f5] . projectile-find-file)
+              ([f5] . persp-counsel-switch-buffer)
+              ;([f8] . list-buffers)
               ([f8] . persp-switch)
+              ;([f9] . counsel-switch-buffer)
+              ([f9] . persp-list-buffers)
               ([?\s-f] . persp-forget-buffer)
               ([?\s-R] . (lambda () (interactive) (play_radio)))
               ([?\s-S] . (lambda () (interactive) (player-ctl "stop")))

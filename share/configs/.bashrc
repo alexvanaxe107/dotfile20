@@ -222,10 +222,10 @@ source $HOME/.profile
 
 alias tdm="tdm --disable-xrunning-check"
 
-if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-    alias alacritty="env WAYLAND_DISPLAY= alacritty"
-    alias wezterm="env WAYLAND_DISPLAY= wezterm"
-fi
+#if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+    #alias alacritty="env WAYLAND_DISPLAY= alacritty"
+    #alias wezterm="env WAYLAND_DISPLAY= wezterm"
+#fi
 
 # Sound issues on steam no more?
 PULSE_LATENCY_MSEC=60

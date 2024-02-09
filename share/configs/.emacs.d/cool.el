@@ -70,7 +70,11 @@
 
 (defun reload-theme()
   (dolist (theme custom-enabled-themes)
-    (load-theme theme)))
+    (load-theme theme)
+    (ava/update-transparency)
+    (ava/load-transparency)
+    )
+  )
 
 (defun change-theme()
   "First disable all themes and then chose a theme and font"

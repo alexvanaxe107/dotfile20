@@ -125,20 +125,24 @@ Later it is on the road map:
 
 #+begin_src emacs-lisp
 
-  (defun disable-all-themes()
-    "Disable all active themes"
-    (dolist (theme custom-enabled-themes)
-      (disable-theme theme)))
+        (defun disable-all-themes()
+          "Disable all active themes"
+          (dolist (theme custom-enabled-themes)
+            (disable-theme theme)))
 
-  (defun reload-theme()
-    (dolist (theme custom-enabled-themes)
-      (load-theme theme)))
+        (defun reload-theme()
+          (dolist (theme custom-enabled-themes)
+            (load-theme theme)
+            (ava/update-transparency)
+            (ava/load-transparency)
+            )
+          )
 
-  (defun change-theme()
-    "First disable all themes and then chose a theme and font"
-    (disable-all-themes)
-    (load-theme (get-theme) t)
-    (ava/update-transparency)
-    (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))
+        (defun change-theme()
+          "First disable all themes and then chose a theme and font"
+          (disable-all-themes)
+          (load-theme (get-theme) t)
+          (ava/update-transparency)
+          (set-face-attribute 'default nil :font (get-font) :height ava/default-font-size))
 
 #+end_src

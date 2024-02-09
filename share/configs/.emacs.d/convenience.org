@@ -21,6 +21,15 @@
 
 #+end_src
 
+** Change the transparency
+
+#+begin_src emacs-lisp
+  (setq ava/transparency-level 80)
+  (dolist (p (frame-list))
+    (set-frame-parameter p 'alpha-background ava/transparency-level))
+
+#+end_src
+
 * Risky
 ** Set the risky variables to be permanent
 

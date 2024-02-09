@@ -157,7 +157,7 @@ return require('packer').startup(function()
     -- use 'vim-airline/vim-airline-themes'
 
     -- use some transparency
-    -- use 'xiyaowong/nvim-transparent'
+    use 'xiyaowong/nvim-transparent'
 end)
 
 

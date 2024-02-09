@@ -53,7 +53,9 @@
         pkgs.jellyfin
 
         pkgs.qutebrowser
+
         pkgs.fd
+        pkgs.ripgrep
         pkgs.jq
 
         # Productivity
@@ -70,6 +72,8 @@
 
         pkgs.rofi
 
+        pkgs.nerdfonts
+
         # development
         pkgs.neovim
         pkgs.nodejs
@@ -83,6 +87,8 @@
         avadmenu.defaultPackage.${system}
         avabible.defaultPackage.${system}
         avafonts.defaultPackage.${system}
+
+
 
 
         # Here we will abuse a little and take confort by adding this code Here

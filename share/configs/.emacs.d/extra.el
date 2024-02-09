@@ -236,6 +236,82 @@
     (display-fill-column-indicator-mode t)
 )
 
+;;Function to get a random value from the list passed
+    (defun random-choice (items)
+    (let* ((size (length items))
+            (index (random size)))
+        (nth index items)))
+
+    (defun ava/load-transparency()
+    (set-frame-parameter (selected-frame) 'alpha-background ava/transparency-level))
+
+
+    ;; TODO Ver depois, nao funfa
+    (defun ava/change-transparency(changer)
+            (setq ava/transparency-level (+ changer ava/transparency-level))
+            (ava/load-transparency)
+            )
+
+    (defun ava/update-transparency()
+        (when (string-equal (getenv "theme_name") "day")
+            (setq ava/transparency-level 85)
+            (setq ava/transparency-level-list '(alpha-background . 85)))
+
+        (when (string-equal (getenv "theme_name") "shabbat")
+            (setq ava/transparency-level 93)
+            (setq ava/transparency-level-list '(alpha-background . 93)))
+
+        (when (string-equal (getenv "theme_name") "night")
+            (message "Night updating")
+            (setq ava/transparency-level 87)
+            (setq ava/transparency-level-list '(alpha-background . 87))))
+
+        (defun get-theme()
+        (setq result 'tsdh-dark)
+        (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-valley-light))))
+        (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
+        (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
+        result)
+
+        (defun get-font()
+        (setq result '"Hack")
+        ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
+        ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
+        (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("JetBrains Mono"))))
+        (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("IntelOne Mono"))))
+        (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Nerd Font Mono"))))
+        (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+        (set-face-attribute 'font-lock-doc-face nil :slant 'italic)
+        (set-face-attribute 'font-lock-string-face nil :slant 'italic)
+
+        result)
+
+
+;;    (set-faces-lock)
+      ;;(font-lock-comment-face ((t (:inherit font-lock-comment-face :italic t))))
+      ;;(font-lock-doc-face ((t (:inherit font-lock-doc-face :italic t))))
+      ;;(font-lock-string-face ((t (:inherit font-lock-string-face :italic t))))
+
+    (defun toggle-transparency ()
+        (interactive)
+        (let ((alpha (frame-parameter nil 'alpha)))
+        (set-frame-parameter
+            nil 'alpha
+            (if (eql (cond ((numberp alpha) alpha)
+                        ((numberp (cdr alpha)) (cdr alpha))
+                        ;; Also handle undocumented (<active> <inactive>) form.
+                        ((numberp (cadr alpha)) (cadr alpha))) 100)
+                ava/transparency-level 100))))
+
+(add-hook 'emacs-startup-hook #'ava/rice-the-emacs)
+
+;;  (use-package font-lock
+;;    :ensure
+;;    :custom-face
+;;    (font-lock-comment-face ((t (:inherit font-lock-comment-face :italic t))))
+;;    (font-lock-doc-face ((t (:inherit font-lock-doc-face :italic t))))
+;;    (font-lock-string-face ((t (:inherit font-lock-string-face :italic t)))))
+
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
      (css "https://github.com/tree-sitter/tree-sitter-css")
@@ -258,64 +334,6 @@
    (bash-mode . bash-ts-mode)
    (typescript-mode . typescript-ts-mode)
    (python-mode . python-ts-mode)))
-
-;;Function to get a random value from the list passed
-(defun random-choice (items)
-(let* ((size (length items))
-        (index (random size)))
-    (nth index items)))
-
-(defun ava/load-transparency()
-(set-frame-parameter (selected-frame) 'alpha-background ava/transparency-level))
-
-;; TODO Ver depois, nao funfa
-(defun ava/change-transparency(changer)
-        (setq ava/transparency-level (+ changer ava/transparency-level))
-        (ava/load-transparency)
-        )
-
-(defun ava/update-transparency()
-    (when (string-equal (getenv "theme_name") "day")
-        (setq ava/transparency-level 85)
-        (setq ava/transparency-level-list '(alpha-background . 85)))
-
-    (when (string-equal (getenv "theme_name") "shabbat")
-        (setq ava/transparency-level 93)
-        (setq ava/transparency-level-list '(alpha-background . 93)))
-
-    (when (string-equal (getenv "theme_name") "night")
-        (message "Night updating")
-        (setq ava/transparency-level 87)
-        (setq ava/transparency-level-list '(alpha-background . 87))))
-
-    (defun get-theme()
-    (setq result 'tsdh-dark)
-    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '(kaolin-valley-light))))
-    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '(kaolin-breeze))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '(doom-moonlight doom-material kaolin-galaxy))))
-    result)
-
-    (defun get-font()
-    (setq result '"Hack")
-    ;;(when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fantasque Sans Mono"
-    ;;"Anonymous Pro" "Source Code Pro" "Space Mono"))))
-    (when (string-equal (getenv "theme_name") "day")  (setq result (random-choice '("Fira Code"))))
-    (when (string-equal (getenv "theme_name") "shabbat")  (setq result (random-choice '("IntelOne Mono"))))
-    (when (string-equal (getenv "theme_name") "night") (setq result (random-choice '("Iosevka Nerd Font Mono"))))
-    result)
-
-(defun toggle-transparency ()
-    (interactive)
-    (let ((alpha (frame-parameter nil 'alpha)))
-    (set-frame-parameter
-        nil 'alpha
-        (if (eql (cond ((numberp alpha) alpha)
-                    ((numberp (cdr alpha)) (cdr alpha))
-                    ;; Also handle undocumented (<active> <inactive>) form.
-                    ((numberp (cadr alpha)) (cadr alpha))) 100)
-            ava/transparency-level 100))))
-
-(add-hook 'emacs-startup-hook #'ava/rice-the-emacs)
 
 (use-package rainbow-delimiters
 :hook (prog-mode . rainbow-delimiters-mode))
@@ -385,7 +403,6 @@
   (add-to-list 'package-selected-packages 'windower))
 
 (use-package perspective
-  :disabled
   :bind
   (("<f9>" . persp-list-buffers)
    ("<f8>" . persp-switch)
