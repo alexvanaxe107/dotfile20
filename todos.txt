@@ -1,6 +1,8 @@
 BUGS:
    Fix the wall downloader
 
+https://github.com/alexvanaxe107/dotfile20/archive/refs/heads/nix_pack.zip
+
 Alta prioridade
    Ver o todos
 
