@@ -181,7 +181,7 @@ set_wallpaper(){
     else
         nitrogen --head=${monitor} --save --set-scaled --random "$file_name"
     fi
-    sed -i "s#$monitor:.*#$monitor:$file#g" $WP_CONFIG_PATH
+    sed -i "s#$monitor:.*#$monitor:$file_name#g" $WP_CONFIG_PATH
 }
 
 while read file

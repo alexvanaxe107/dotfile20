@@ -109,9 +109,12 @@
 
     ;; Get the second monitor
     (let (
-          (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1")))
+          (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1"))
+          (monitor2 (shell-command-to-string "monitors_info.sh -m | sed -n 2p | tr -d '\n'"))
 
-      (setq exwm-randr-workspace-output-plist (list 8 monitor 9 monitor))
+          )
+
+      (setq exwm-randr-workspace-output-plist (list 8 monitor2 9 monitor))
 
       )
 
