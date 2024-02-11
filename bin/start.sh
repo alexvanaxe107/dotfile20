@@ -82,7 +82,7 @@ start_steam_deck() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    gamescope -h $dim -H $dim2 -O $DP -U $steamintegration -- $program
+    gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program
 }
 
 start_embedded() {
@@ -101,7 +101,7 @@ start_embedded() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    gamescope -h $dim -H $dim2 -O $DP -r 60 -U -- $program
+    gamescope -h $dim -H $dim2 -O $DP -r 60 -F fsr -- $program
 }
 
 show_help() {
