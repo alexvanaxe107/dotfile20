@@ -9,6 +9,29 @@ else
     dmenu="dmenu"
 fi
 
+configure_wallpaper_menu(){
+    monitors="$(monitors_info.sh -m)"
+    monitors_index="$(monitors_info.sh -m | nl --starting-line-number=0)"
+    selected_monitor="$(echo "$monitors" | $dmenu)"
+    exit_if_none $selected_monitor
+
+    selected_index="$(echo "$monitors_index" | grep "$selected_monitor" | awk '{print $1}')"
+
+    dimension="$(monitors_info.sh -od | head -n $selected_index | awk 'BEGIN {FS="x"} {print $1}')"
+
+    resize_hint=$(echo "$dimension" | awk '{s+=$1} END {printf "%.0f\n", s}')
+
+    file_location="$(crop_img "$selected_index" "$selected_index" "Center" $resize_hint)"
+
+    exit_if_none $file_location
+
+    like_it="$(echo -e "yes\nno" | $dmenu -p "Wanna set the image as wallpaper?")"
+
+    if [ "$like_it" == "yes" ]; then
+        set_wallpaper "${selected_index}" "$file_location"
+    fi
+}
+
 exit_if_none(){
     local valor="$1"
 
@@ -44,7 +67,6 @@ save_img(){
 }
 
 resize_img_plus(){
-    echo "teste"
     filename="$(basename $file)"
     temp_file="rec_$filename"
 
@@ -82,11 +104,12 @@ crop_img(){
     monitor=$(monitors_info.sh -n "$1")
     index="$2"
     gravity="$3"
+    resize_hint="$4"
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | $dmenu -p "Choose the direction")"
     exit_if_none "${direction}"
     resize="$(printf "+0\n+65\n+100\n+200\n+300" | $dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | $dmenu -p "Set the horizontal deviation")"
+    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080\n+${resize_hint}" | $dmenu -p "Set the horizontal deviation")"
 
     filename="$(basename $file)"
 
@@ -108,6 +131,8 @@ crop_img(){
     file_location="/tmp/crp_${index}_${filename}"
     convert "${temp_file}" -quality 100 -filter Triangle -resize ${xvalue}x${yvalue}^ -gravity ${direction} -extent "${xvalue}x${yvalue}" "${file_location}"
     sxiv "${file_location}"&
+
+    echo "${file_location}"
     #nitrogen --head=${index} --save --set-scaled "${file_location}"
 }
 
@@ -138,18 +163,23 @@ recort_img(){
 
 set_wallpaper(){
     local monitor="$1"
+    local file_name="$2"
+
+    if [ -z "${file_name}" ]; then
+        file_name="${file}"
+    fi
+
+
     if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
         echo "Wayland. Doing nothing"
         if [ -z "$(pgrep swww-daemon)" ]; then
             # Init the daemon if not runnint
             swww init
         fi
-        case "$monitor" in
-            "0") swww img -o $(monitors_info.sh -n 0) "$file" --transition-type wave --transition-step 15 --transition-fps 120;;
-            "1") swww img -o $(monitors_info.sh -n 1) "$file" --transition-type wave --transition-step 15 --transition-fps 120;;
-        esac
+        swww img -o $(monitors_info.sh -n $monitor) "$file_name" --transition-type wave --transition-step 15 --transition-fps 120
+
     else
-        nitrogen --head=${monitor} --save --set-scaled --random "$file"
+        nitrogen --head=${monitor} --save --set-scaled --random "$file_name"
     fi
     sed -i "s#$monitor:.*#$monitor:$file#g" $WP_CONFIG_PATH
 }
@@ -168,9 +198,13 @@ do
         "C-r")
             resize_img_plus "$file";;
         "C-t")
-            crop_img "0" "0" "West";;
+            crop_img "0" "0" "Center";;
         "C-y")
-            crop_img "1" "1" "East";;
+            crop_img "1" "1" "Center";;
+        "C-u")
+            crop_img "2" "2" "Center";;
+        "C-i")
+            configure_wallpaper_menu "${file}";;
         "C-g")
             convert -rotate 90 "$file" "$file" ;;
         "C-i")

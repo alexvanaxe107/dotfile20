@@ -1,19 +1,22 @@
+Instructions:
+
+nix profile install https://github.com/alexvanaxe107/dotfile20/archive/refs/heads/nix_pack.zip
+
 BUGS:
    Fix the wall downloader
 
-https://github.com/alexvanaxe107/dotfile20/archive/refs/heads/nix_pack.zip
-
 Alta prioridade
    Ver o todos
+   Resolver sxiv
 
 Media prioridade:
    Rever a configuração do neovim:
        https://github.com/rockerBOO/awesome-neovim?tab=readme-ov-file#plugin-manager
    Ver como funciona os grupos no hyprland
+   Media prioridade pela complexidade: Rever as configs de usuarios, colocar no estilo nix
 
 Baixa prioridade:
    Colocar local nos weathers
-
 
 
 *** Install script ***
