@@ -63,7 +63,7 @@ name_by_id(){
     local m_id=$1
     if [ ${id_only} -eq 0 ]; then
         if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-            hyprctl monitors -j | jq -r ".[$m_id].name"
+            hyprctl monitors -j | jq -r "[.[]|{x: .x, name: .name}] | sort_by(.x) | .[$m_id].name"
         else
             m_id=$(($1+1))
             printf "${monitors}" | awk -v ID=$m_id  'NR==ID {print $0}'
@@ -89,7 +89,7 @@ monitors_information_nitrogen() {
 monitors_information() { 
     if [ ${id_only} -eq 0 ]; then
         if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-            hyprctl monitors -j | jq -r ".[].name"
+            hyprctl monitors -j | jq -r '[.[]|{x: .x, name: .name}] | sort_by(.x) | .[].name'
         else
             printf "${monitors}"
         fi
@@ -205,7 +205,7 @@ secundary_wide() {
 
 get_dimensions() {
     if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-        local dimensions="$(hyprctl monitors -j | jq '.[] | (if .transform == 1 or .transform == 3 then .name, .height, .width else .name,.width, .height end)' | xargs printf "%s %sx%s\n")"
+        local dimensions="$(hyprctl monitors -j | jq '[.[]] | sort_by(.x) | .[] | (if .transform == 1 or .transform == 3 then .name, .height, .width else .name,.width, .height end)' | xargs printf "%s %sx%s\n")"
     else
         local dimensions="$(xrandr | grep -w connected | sed 's/primary //' | cut -d " " -f 1,3 | sed 's/\+.*//')"
     fi

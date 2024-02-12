@@ -149,8 +149,8 @@ function reset_configs(){
 }
 
 function get_wallpaper() {
-    selected_wallpaper=$(monitors_info.sh -a | $dmenu -p "Extract color from wallpaper:" -n)
-    selected_wallpaper=$(monitors_info.sh -ib "${selected_wallpaper}")
+    selected_wallpaper=$(monitors_info.sh -m | $dmenu -p "Extract color from wallpaper:" -n)
+    selected_wallpaper=$(monitors_info.sh -in "${selected_wallpaper}")
 #    selected_wallpaper=$((${selected_wallpaper} + 1))
 #    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "xin_${selected_wallpaper}" -A 1 | tail -n 1 | cut -d '=' -f 2)
     cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "${selected_wallpaper}:" | cut -d ':' -f 2)
