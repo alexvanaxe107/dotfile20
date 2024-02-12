@@ -106,10 +106,14 @@ crop_img(){
     gravity="$3"
     resize_hint="$4"
 
-    direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | $dmenu -p "Choose the direction")"
+    direction="$(printf "West\nCenter\nSouth\nNorth\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | $dmenu -p "Choose the direction")"
     exit_if_none "${direction}"
     resize="$(printf "+0\n+65\n+100\n+200\n+300" | $dmenu -p "Set the vertical deviation")"
-    horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080\n+${resize_hint}" | $dmenu -p "Set the horizontal deviation")"
+    if [ -z "${resize_hint}"]; then
+        horizontal="$(printf "+0\n-100\n+100\n+200\n+300\n+1080" | $dmenu -p "Set the horizontal deviation")"
+    else
+        horizontal="$(printf "+${resize_hint}\n+0\n-100\n+100\n+200\n+300" | $dmenu -p "Set the horizontal deviation")"
+    fi
 
     filename="$(basename $file)"
 
