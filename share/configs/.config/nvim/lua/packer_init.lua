@@ -131,7 +131,7 @@ return require('packer').startup(function()
     use 'reedes/vim-colors-pencil'
     --use 'sonph/onehalf', { 'rtp': 'vim' }
     use 'jnurmine/Zenburn'
-    use { 'AlphaTechnolog/pywal.nvim', as = 'wal' }
+    use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
     -- If you are using Packer
     use 'marko-cerovac/material.nvim'
     use 'drewtempelmeyer/palenight.vim'
