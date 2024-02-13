@@ -12,6 +12,14 @@ dim_simple=$(grep ";dim-value" -w $HOME/.config/polybar/config_simple)
 
 dmenu=$(which ava_dmenu)
 
+exit_if_none(){
+    local valor="$1"
+
+    if [ -z "${valor}" ]; then
+        exit 0
+    fi
+}
+
 toggle_light() {
     pid=$(ps aux | egrep "[l]emonbar" | awk '{print $2}')
 
@@ -156,6 +164,17 @@ auto_hide(){
 
 }
 
+eww_to_monitor(){
+    monitors="$(monitors_info.sh -m)"
+    monitors_index="$(monitors_info.sh -e | nl --starting-line-number=0)"
+    selected_monitor="$(echo "$monitors" | $dmenu)"
+    exit_if_none $selected_monitor
+
+    selected_index="$(echo "$monitors_index" | grep "$selected_monitor" | awk '{print $1}')"
+
+    sed -i "s/:monitor .*/:monitor ${selected_index}/" ${HOME}/.config/eww/eww.yuck
+}
+
 toggle_options () {
     local toggle=$(echo -e "eww1\neww2\nwaybar" | $dmenu -l 10 -p "Which bar to toggle?")
     case "$toggle" in
@@ -181,6 +200,7 @@ case "$TARGET" in
     "--tint") $(toggle_tint);;
     "--eww1") $(toggle_eww "general_infos");;
     "--eww2") $(toggle_eww "pc_infos");;
+    "--ewwm") eww_to_monitor;;
     "--tinth") $(toggle_tint_h);;
     "--light") $(toggle_light);;
     "--restart") restart_bar;;
