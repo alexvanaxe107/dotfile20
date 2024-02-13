@@ -9,6 +9,14 @@ else
     dmenu="dmenu"
 fi
 
+exit_if_none(){
+    local valor="$1"
+
+    if [ -z "${valor}" ]; then
+        exit 0
+    fi
+}
+
 configure_wallpaper_menu(){
     monitors="$(monitors_info.sh -m)"
     monitors_index="$(monitors_info.sh -m | nl --starting-line-number=0)"
@@ -32,12 +40,15 @@ configure_wallpaper_menu(){
     fi
 }
 
-exit_if_none(){
-    local valor="$1"
+set_wallpaper_menu() {
+    monitors="$(monitors_info.sh -m)"
+    monitors_index="$(monitors_info.sh -m | nl --starting-line-number=0)"
+    selected_monitor="$(echo "$monitors" | $dmenu)"
+    exit_if_none $selected_monitor
 
-    if [ -z "${valor}" ]; then
-        exit 0
-    fi
+    selected_index="$(echo "$monitors_index" | grep "$selected_monitor" | awk '{print $1}')"
+
+    set_wallpaper "${selected_index}" "$file"
 }
 
 convert_file(){
@@ -89,7 +100,7 @@ resize_img_plus(){
     exit_if_none "$direction"
 
     local resolutions=$(monitors_info.sh -d)
-    imgsize="$(printf "445x805\n${optimal_rescale}\n${overriden_optimal_rescale}\n${optimal_rescale_ppls}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | $dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale}\n${overriden_optimal_rescale}\n${optimal_rescale_ppls}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | $dmenu -p "Choose the dimension")"
     exit_if_none "$imgsize"
 
     vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | $dmenu -p "Set the vertical adjustment")"
@@ -196,7 +207,7 @@ do
         "C-C")
             reverse_file ;;
         "C-w")
-            nitrogen --save --set-zoom-fill "$file" ;;
+            set_wallpaper_menu;;
         "C-e")
             recort_img "1" "1" "East";;
         "C-r")
