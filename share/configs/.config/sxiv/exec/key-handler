@@ -207,7 +207,7 @@ do
             crop_img "1" "1" "Center";;
         "C-u")
             crop_img "2" "2" "Center";;
-        "C-i")
+        "C-a")
             configure_wallpaper_menu "${file}";;
         "C-g")
             convert -rotate 90 "$file" "$file" ;;
@@ -223,7 +223,7 @@ do
             set_wallpaper "1";;
         "C-2")
             set_wallpaper "2";;
-        "C-a")
+        "C-d")
             rm "$file" ;;
         "C-z")
             convert "$file" $file.png 
