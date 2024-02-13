@@ -176,7 +176,7 @@ eww_to_monitor(){
 }
 
 toggle_options () {
-    local toggle=$(echo -e "eww1\neww2\nwaybar" | $dmenu -l 10 -p "Which bar to toggle?")
+    local toggle=$(echo -e "eww1\neww2\nwaybar\nchange monitor" | $dmenu -l 10 -p "Which bar to toggle?")
     case "$toggle" in
         "target2") $(toggle_simple);;
         "target1") $(toggle_full);;
@@ -189,6 +189,7 @@ toggle_options () {
         "autohide") auto_hide;;
         "options") toggle_options;;
         "waybar") toggle_all;;
+        "change monitor") eww_to_monitor;;
     esac
 
 
