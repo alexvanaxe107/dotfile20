@@ -12,7 +12,7 @@ override=0
 
 all_monitors=$(xrandr | grep -w connected | cut -d " " -f 1)
 
-__mount_monitors__() {
+__mount_monitors_nitrogen__() {
     first=$(xrandr | grep -w "connected" | grep "primary" | cut -d " " -f 1)
 
     all_monitors_less_first=$(xrandr | grep -w connected | cut -d " " -f 1 | grep -v -w "${first}")
@@ -22,6 +22,21 @@ __mount_monitors__() {
     else
         printf "%s\n%s" "$first" "$all_monitors_less_first"
     fi
+}
+
+monitors_nitrogen="$(__mount_monitors_nitrogen__)"
+
+__mount_monitors__() {
+    first=$(xrandr | grep -w "connected" | grep "primary" | cut -d " " -f 1)
+
+    all_monitors_less_first=$(xrandr | grep -w connected | cut -d " " -f 1)
+
+    #if [ -z "$first" ]; then
+    #    printf "%s\n%s" "$all_monitors_less_first"
+    #else
+    #    printf "%s\n%s" "$first" "$all_monitors_less_first"
+    #fi
+    printf "%s" "$all_monitors_less_first"
 }
 
 monitors="$(__mount_monitors__)"

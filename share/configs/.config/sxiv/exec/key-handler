@@ -20,6 +20,7 @@ exit_if_none(){
 configure_wallpaper_menu(){
     monitors="$(monitors_info.sh -m)"
     monitors_index="$(monitors_info.sh -m | nl --starting-line-number=0)"
+
     selected_monitor="$(echo "$monitors" | $dmenu)"
     exit_if_none $selected_monitor
 
@@ -36,7 +37,14 @@ configure_wallpaper_menu(){
     like_it="$(echo -e "yes\nno" | $dmenu -p "Wanna set the image as wallpaper?")"
 
     if [ "$like_it" == "yes" ]; then
-        set_wallpaper "${selected_index}" "$file_location"
+        if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            set_wallpaper "${selected_index}" "$file_location"
+        else
+            monitors_index="$(monitors_info.sh -a | nl --starting-line-number=0)"
+            selected_index="$(echo "$monitors_index" | grep "$selected_monitor" | awk '{print $1}')"
+            set_wallpaper "${selected_index}" "$file_location"
+
+        fi
     fi
 }
 
