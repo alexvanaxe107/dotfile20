@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 clean_config_files() {
-    files="$(find ~/configs/ -type f)"
-    files="${files//\.\/share\/configs\//}"
+    files="$(cd ~/configs/ && find ./ -type f)"
+    files="${files//\.\//~/}"
     diff_files=""
 
     echo "The files below are changed on your config:"
     echo
     while IFS= read -r file; do
-        #mkdir -p $(dirname /home/alexvanaxe/config_bkp/${file})
         rm "$file"
     done <<< "$files" 
 }
