@@ -38,6 +38,29 @@
             };
         };
 
+        note = 
+            with import nixpkgs { system = "x86_64-linux"; };
+        stdenv.mkDerivation rec {
+            name = "ava-chamaleon";
+            version = "0.7.25";
+
+            src = self;
+
+            builder = "${bash}/bin/bash";
+            args = [ "${src}/builder.sh" ];
+
+            envs = machineConfigs.note.envs;
+            machine_name = machineConfigs.note.machine_name;
+
+            baseInputs = [ coreutils ];
+
+            meta = with lib; {
+                description = "The files for the desktop enviromnetn";
+                license = licenses.mit;
+                maintainers = with maintainers; [ "alexvanaxe107" ];
+            };
+        };
+
 
 
         packages.x86_64-linux.default = self.persistence;

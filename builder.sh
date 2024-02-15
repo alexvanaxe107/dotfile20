@@ -14,12 +14,21 @@ done
 echo "Creating output"
 mkdir $out
 
-echo "Copying files."
-cp -rf $src/bin $out
-cp -rf $src/share $out
-
 echo "Overriding the specific machine files"
-cp -rf $src/machines/$machine_name/.* $out/share/configs
-cp -rf $src/machines/$machine_name/* $out/share/configs
+mkdir -p $TMPDIR/share/configs/.config/hypr
+mkdir -p $TMPDIR/share/configs/.config/wm
+
+echo "Copying files."
+cp -rf $src/bin $TMPDIR
+cp -rf $src/share $TMPDIR
+
+cp -rf $src/machines/$machine_name/* $TMPDIR/share/configs
+cp -rf $src/machines/$machine_name/.* $TMPDIR/share/configs
+
+
+cp -rf $TMPDIR/* $out
+
+
+
 
 echo "Please run install_chm.sh to complete the installation. Enjoy."
