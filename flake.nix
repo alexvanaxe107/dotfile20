@@ -19,7 +19,7 @@
             with import nixpkgs { system = "x86_64-linux"; };
         stdenv.mkDerivation rec {
             name = "ava-chamaleon";
-            version = "0.7.26";
+            version = "0.7.27";
 
             src = self;
 
@@ -42,7 +42,7 @@
             with import nixpkgs { system = "x86_64-linux"; };
         stdenv.mkDerivation rec {
             name = "ava-chamaleon";
-            version = "0.7.26";
+            version = "0.7.27";
 
             src = self;
 
