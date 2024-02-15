@@ -2,7 +2,7 @@
 
 clean_config_files() {
     files="$(find ~/configs/ -type f)"
-    #files="${files//\.\/share\/configs\//}"
+    files="${files//\.\/share\/configs\//}"
     diff_files=""
 
     echo "The files below are changed on your config:"
@@ -28,7 +28,7 @@ multiply=""
 
 while getopts "h?ci" opt; do
     case "${opt}" in
-        h|\?) show_help ;;
+        h|\?) req_command="h" ;;
         c) req_command="c";;
         i) req_command="i";;
     esac
@@ -37,6 +37,7 @@ done
 shift $((OPTIND-1))
 
 case "${req_command}" in
+    "h") show_help;;
     "c") clean_config_files;;
     "i") install_stow_config;;
     *) show_help;;
