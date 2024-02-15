@@ -32,9 +32,9 @@
         # the path to your home.nix.
 
         extraSpecialArgs = { inherit (inputs) unstable avadmenu avabible avafonts; inherit system; };
-        modules = [ ./home.nix
-                    ./ava.nix
-                    ./local.nix];
+        modules = [ ~/.config/home-manager/home.nix
+                    ~/.config/home-manager/ava.nix
+                    ~/.config/home-manager/local.nix];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
