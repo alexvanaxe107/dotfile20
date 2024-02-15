@@ -4,6 +4,9 @@
     nixpkgs.config.allowUnfreePredicate = (pkg: true);
     home.packages = [ 
 
+        # Barebones
+        pkgs.stow
+
         pkgs.polybar 
         (pkgs.python3.withPackages(ps: [ps.pygobject3 ps.pydbus ps.click ps.i3ipc]))
         pkgs.bspwm
