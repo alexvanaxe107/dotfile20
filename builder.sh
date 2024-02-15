@@ -17,6 +17,7 @@ mkdir $out
 echo "Overriding the specific machine files"
 mkdir -p $TMPDIR/share/configs/.config/hypr
 mkdir -p $TMPDIR/share/configs/.config/wm
+mkdir -p $TMPDIR/share/configs/.config/home-manager
 
 echo "Copying files."
 cp -rf $src/bin $TMPDIR
