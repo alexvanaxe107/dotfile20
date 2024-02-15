@@ -18,4 +18,8 @@ echo "Copying files."
 cp -rf $src/bin $out
 cp -rf $src/share $out
 
+echo "Overriding the specific machine files"
+cp -rf $src/machines/$machine_name/.* $out/share/configs
+cp -rf $src/machines/$machine_name/* $out/share/configs
+
 echo "Please run install_chm.sh to complete the installation. Enjoy."

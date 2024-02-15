@@ -25,7 +25,9 @@
 
             builder = "${bash}/bin/bash";
             args = [ "${src}/builder.sh" ];
-#  args = [ ./builder.sh ];
+
+            envs = machineConfigs.persistence.envs;
+            machine_name = machineConfigs.persistence.machine_name;
 
             baseInputs = [ coreutils ];
 
