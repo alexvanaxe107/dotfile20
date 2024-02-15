@@ -7,5 +7,5 @@ echo "The files below are changed on your config:"
 echo
 while IFS= read -r file; do
     #mkdir -p $(dirname /home/alexvanaxe/config_bkp/${file})
-    echo "rm "$file""
+    rm "$file"
 done <<< "$files" 
