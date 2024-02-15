@@ -110,12 +110,12 @@
     ;; Get the second monitor
     (let (
           (monitor0 (shell-command-to-string "monitors_info.sh -m | sed -n 1p | tr -d '\n'"))
-          (monitor (shell-command-to-string "monitors_info.sh -m | tail -n 1"))
-          (monitor2 (shell-command-to-string "monitors_info.sh -m | sed -n 2p | tr -d '\n'"))
+          (monitor2(shell-command-to-string "monitors_info.sh -m | tail -n 1"))
+          (monitor1 (shell-command-to-string "monitors_info.sh -m | sed -n 2p | tr -d '\n'"))
 
           )
 
-      (setq exwm-randr-workspace-output-plist (list 1 monitor2 2 monitor2 3 monitor2 4 monitor2 5 monitor2 0 monitor))
+      (setq exwm-randr-workspace-output-plist (list 5 monitor2 6 monitor2 7 monitor2 8 monitor2 9 monitor0 0 monitor0))
 
       )
 
