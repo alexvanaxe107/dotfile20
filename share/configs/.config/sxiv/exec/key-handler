@@ -93,22 +93,28 @@ resize_img_plus(){
     local overriden_htop=$(monitors_info.sh -od | awk 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE}')
     local ltop=$(monitors_info.sh -d | awk 'BEGIN {FS="x"; TESTE=10000} {if ($2 < TESTE) TESTE=$2;} END {print TESTE}')
     local htoppls=$(monitors_info.sh -d | awk -v SCALE=$SCALE 'BEGIN {FS="x"} {if ($2 > TESTE) TESTE=$2;} END {print TESTE+SCALE}')
-    local optimal_rescale="$(monitors_info.sh -D)x${htop}"
+    local optimal_rescale="$(monitors_info.sh -D)x${htop}" # All the monitors summed and the hightest heigh
     local overriden_optimal_rescale="$(monitors_info.sh -oD)x${overriden_htop}"
-    local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + $SCALE | bc)x${htoppls}"
+    #local optimal_rescale_ppls="$(echo $(monitors_info.sh -D) + $SCALE | bc)x${htoppls}"
     local low_optimal_rescale="$(monitors_info.sh -D)x${ltop}"
 
     local img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1)
     local width_img_dimensions=$(identify ${file} | grep -Eo "[[:digit:]]+ *x *[[:digit:]]+" | head -n 1 | cut -d 'x' -f 1)
-    local sum=$(echo $(monitors_info.sh -D)+${htop} | bc)
-
-    local half_img="$((width_img_dimensions + ${sum}))x$((width_img_dimensions + ${sum}))"
+    local sum=$(echo $(monitors_info.sh -D))
+    local half_img="${sum}x${sum}"
 
     direction="$(printf "Center\nSouth\nNorth\nWest\nEast\nNorthWest\nSouthWest\nNorthEast\nSouthEast\nForget\nNone" | $dmenu -p "Choose the direction")"
     exit_if_none "$direction"
 
     local resolutions=$(monitors_info.sh -d)
-    imgsize="$(printf "${optimal_rescale}\n${overriden_optimal_rescale}\n${optimal_rescale_ppls}\n${low_optimal_rescale}\n${resolutions}\n${half_img}" | $dmenu -p "Choose the dimension")"
+    imgsize="$(printf "${optimal_rescale}\n${overriden_optimal_rescale}\n${low_optimal_rescale}\n${resolutions}\n${half_img}\nincsize" | $dmenu -p "Choose the dimension")"
+
+    case $imgsize in
+        "incsize")
+            incsize="$(echo "" | $dmenu -p "Choose the dimension")";
+            imgsize=$(image_helper.sh -m $incsize "$file");;
+    esac
+
     exit_if_none "$imgsize"
 
     vadjust="$(printf "+0\n+65\n+100\n+200\n+300" | $dmenu -p "Set the vertical adjustment")"
@@ -170,7 +176,7 @@ recort_img(){
     filename="$(basename $file)"
 
     if [ "${monitor}" == "Custom" ]; then
-        monitor_info="$(printf "2000x2000" | $dmenu -p "Set the dimension")"
+        monitor_info="$(printf "2000x2000\n$(image_helper.sh -w 0.75 $file)\n$(image_helper.sh -w 0.5 $file)\n$(image_helper.sh -d $file)" | $dmenu -p "Set the dimension")"
     else
         monitor_info="$(monitors_info.sh -d "${monitor}")"
     fi

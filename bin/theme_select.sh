@@ -145,6 +145,7 @@ function reset_configs(){
     [ ! -f $HOME/.tmux.conf ] && cp --no-preserve=all ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
     [ ! -f $HOME/.config/wm/bspwm.conf ] && cp --no-preserve=all ${TEMPLATES}/wm/bspwm.conf ${HOME}/.config/wm/bspwm.conf
     [ ! -f $HOME/.config/wm/monitors.conf ] && cp --no-preserve=all ${TEMPLATES}/wm/monitors.conf ${HOME}/.config/wm/monitors.conf
+    [ ! -f $HOME/.config/wm/wallpapers.conf ] && cp --no-preserve=all ${TEMPLATES}/wm/wallpapers.conf ${HOME}/.config/wm/wallpapers.conf
     [ ! -f $HOME/.config/wezterm/wezterm.lua ] && cp --no-preserve=all ${TEMPLATES}/wezterm/wezterm.lua ${HOME}/.config/wezterm/wezterm.lua
 }
 

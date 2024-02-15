@@ -2,6 +2,13 @@ Instructions:
 
 nix profile install https://github.com/alexvanaxe107/dotfile20/archive/refs/heads/nix_pack.zip
 
+** Comando do stow
+stow --no-folding -d /home/alexvanaxe/.nix-profile/share/configs -t /home/alexvanaxe/teste_root ./
+
+Roadmap:
+- Colocar no template o que for de template
+
+
 BUGS:
    Fix the wall downloader
 
@@ -24,6 +31,7 @@ Baixa prioridade:
 
 Baixa prioridade
 - Melhorar ambiente de jogo
+
 
 
 ## ORGANIZAR DEPOIS - COMO INSTALAR VMWARE

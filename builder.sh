@@ -15,6 +15,7 @@ echo "Creating output"
 mkdir $out
 
 echo "Copying files."
-cp -rf $src/* $out
+cp -rf $src/bin $out
+cp -rf $src/share $out
 
 echo "Please run install_chm.sh to complete the installation. Enjoy."

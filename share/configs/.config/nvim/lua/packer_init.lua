@@ -46,6 +46,8 @@ return require('packer').startup(function()
     use 'tpope/vim-unimpaired'
     use 'tpope/vim-fugitive'
 
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && npx --yes yarn install' }
+
     ---------------------------------------------------
     -- PROGRAMMING
     ---------------------------------------------------
