@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Arquivo para gerenciar minhas configuracoes
 
 clean_config_files() {
     files="$(cd ~/configs/ && find ./ -type f)"
