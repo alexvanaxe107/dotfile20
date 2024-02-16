@@ -1,4 +1,4 @@
-{ pkgs, system, unstable, avadmenu, avabible, avafonts, ... }:
+{ pkgs, system, unstable, avadmenu, avabible, avafonts, avatdm, ... }:
 
 {
     nixpkgs.config.allowUnfreePredicate = (pkg: true);
@@ -90,6 +90,7 @@
         avadmenu.defaultPackage.${system}
         avabible.defaultPackage.${system}
         avafonts.defaultPackage.${system}
+        avatdm.defaultPackage.${system}
 
 
 
