@@ -33,7 +33,7 @@
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
 
-        extraSpecialArgs = { inherit (inputs) unstable avadmenu avabible avafonts; inherit system; };
+        extraSpecialArgs = { inherit (inputs) unstable avadmenu avabible avafonts avatdm; inherit system; };
         modules = [ ./home.nix
                     ./ava.nix
                     ./local.nix];
