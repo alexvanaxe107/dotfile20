@@ -3,7 +3,7 @@
 
     outputs = { self, nixpkgs }: 
         let
-        version = "0.7.27";
+        version = "0.8.00";
         machineConfigs = {
             persistence = {
                 envs = "persistence/config.env";
@@ -61,8 +61,6 @@
                 maintainers = with maintainers; [ "alexvanaxe107" ];
             };
         };
-
-
 
         packages.x86_64-linux.default = self.persistence;
     };
