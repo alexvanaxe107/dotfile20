@@ -110,8 +110,8 @@ font() {
         sed -i "s/TITLEFONT/${font_name}/g" ${file}
     done
 
-    sed -i "s/font_size =.*/font_size = $((size1 - 1)),/" ${HOME}/.config/wezterm/extra.lua
-    sed -i "s/size:.*/size: $((size1 - 1))/" ${HOME}/.config/alacritty/alacritty.yml
+    sed -i "s/font_size =.*/font_size = $((size1 - 3)),/" ${HOME}/.config/wezterm/extra.lua
+    sed -i "s/size:.*/size: $((size1 - 3))/" ${HOME}/.config/alacritty/alacritty.yml
 
     update=$(printf "Yes\nNo" | ${dmenu} -i    -p "Update terminal font? (ESC go to default)")
 
