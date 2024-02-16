@@ -90,7 +90,7 @@
         avadmenu.defaultPackage.${system}
         avabible.defaultPackage.${system}
         avafonts.defaultPackage.${system}
-        avatdm.default
+        avatdm.tdm
 
 
 
