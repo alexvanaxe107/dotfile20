@@ -3,6 +3,7 @@
 
     outputs = { self, nixpkgs }: 
         let
+        version = "0.7.27";
         machineConfigs = {
             persistence = {
                 envs = "persistence/config.env";
@@ -19,7 +20,7 @@
             with import nixpkgs { system = "x86_64-linux"; };
         stdenv.mkDerivation rec {
             name = "ava-chamaleon";
-            version = "0.7.27";
+            inherit version;
 
             src = self;
 
@@ -42,7 +43,7 @@
             with import nixpkgs { system = "x86_64-linux"; };
         stdenv.mkDerivation rec {
             name = "ava-chamaleon";
-            version = "0.7.27";
+            inherit version;
 
             src = self;
 
