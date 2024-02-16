@@ -13,7 +13,7 @@
            url = "github:alexvanaxe107/ava_dmenu/master";
        };
 
-    avatdm.url = "github:alexvanaxe107/tdm_flakes/master";
+    avatdm.url = "github:alexvanaxe107/tdm_flakes/main";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
