@@ -4,7 +4,7 @@
     nixpkgs.config.allowUnfreePredicate = (pkg: true);
     home.packages = [ 
 
-        # Barebones
+        # Barebones Changed!
         pkgs.stow
 
         pkgs.polybar 
