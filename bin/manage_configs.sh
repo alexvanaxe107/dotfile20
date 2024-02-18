@@ -27,6 +27,10 @@ install_link_config(){
     done <<< "$files_configs" 
 }
 
+apply_patch(){
+
+}
+
 install_stow_config(){
     stow --no-folding -d /home/alexvanaxe/.nix-profile/share/configs -t /home/alexvanaxe/ .
 }
@@ -45,13 +49,14 @@ show_help() {
 req_command=""
 multiply=""
 
-while getopts "h?cipl" opt; do
+while getopts "h?cipla" opt; do
     case "${opt}" in
         h|\?) req_command="h" ;;
         c) req_command="c";;
         i) req_command="i";;
         l) req_command="l";;
         p) req_command="p";;
+        a) req_command="a";;
     esac
 done
 
@@ -63,6 +68,7 @@ case "${req_command}" in
     "i") install_stow_config;;
     "l") install_link_config;;
     "p") purge_stow_config;;
+    "a") apply_patch;;
     *) show_help;;
 esac
 
