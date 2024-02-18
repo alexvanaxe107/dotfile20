@@ -28,7 +28,7 @@ install_link_config(){
 }
 
 apply_patch(){
-
+    echo "No patch at the moment to aply"
 }
 
 install_stow_config(){
