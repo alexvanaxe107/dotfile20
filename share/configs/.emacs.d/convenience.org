@@ -3,6 +3,8 @@
 * Font Manipulation Commands
 
 ** Fix font size
+To adjust the font, call the function and pass a space before the font value:
+(fixfont " 11")
 
 #+begin_src emacs-lisp
 
