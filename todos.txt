@@ -5,9 +5,6 @@ nix profile install https://github.com/alexvanaxe107/dotfile20/archive/refs/head
 ** Comando do stow
 stow --no-folding -d /home/alexvanaxe/.nix-profile/share/configs -t /home/alexvanaxe/teste_root ./
 
-Roadmap:
-- Colocar no template o que for de template
-
 
 BUGS:
    Fix the wall downloader

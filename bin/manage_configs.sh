@@ -44,6 +44,8 @@ show_help() {
     echo "c                   Clean the config files managed by nixos"
     echo "i                   Install the config files managed by nixos using stow"
     echo "p                   purge the config files managed by nixos using stow"
+    echo "l                   Install the configs using symlinks instead of stow"
+    echo "a                   Apply some required manual intervention"
 }
 
 req_command=""

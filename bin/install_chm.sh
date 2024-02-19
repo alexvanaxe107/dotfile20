@@ -4,7 +4,7 @@
 
 umask 022 # NIX_PROFILE_DIR="$NIX_USER_PROFILE_DIR/profile"
 
-nix_release="release-23.05"
+nix_release="release-23.11"
 
 force="$1"
 
@@ -22,7 +22,7 @@ AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
 
 USER_TEMPLATE="$HOME/templates"
 USER_CONFIGS="$HOME/configs"
-USER_DOCS_NIX="$HOME/Documents/Projects/nixconfs/"
+USER_DOCS_NIX="$HOME/Documents/Projects/nix/dotfile20/"
 
 VIDEO_DIR="$HOME/Videos" # This is for the lockscreen
 
@@ -47,30 +47,32 @@ else
 fi
 
 
-if [ ! -f $HOME/.config/bspwm/bspwmrc ]; then
-    echo "Copying the configuration files"
-    cp --no-preserve=all -rf $HOME/configs/* $HOME
-    cp --no-preserve=all -rf $HOME/configs/.* $HOME
-    chmod 700 $HOME/.config/bspwm/bspwmrc
-    chmod 700 $HOME/.config/sxiv/exec/*
-else
-    echo "Config exists. Try with force to override it"
-    if [ "$force" == "force" ];  then
-        cp --no-preserve=all -rf $HOME/configs/* $HOME
-        cp --no-preserve=all -rf $HOME/configs/.* $HOME
-        chmod 700 $HOME/.config/bspwm/bspwmrc
-        chmod 700 $HOME/.config/sxiv/exec/*
-    fi
-fi
+# Obsolete.. this is made by the script manage_configs.sh
+# if [ ! -f $HOME/.config/bspwm/bspwmrc ]; then
+#     echo "Copying the configuration files"
+#     cp --no-preserve=all -rf $HOME/configs/* $HOME
+#     cp --no-preserve=all -rf $HOME/configs/.* $HOME
+#     chmod 700 $HOME/.config/bspwm/bspwmrc
+#     chmod 700 $HOME/.config/sxiv/exec/*
+# else
+#     echo "Config exists. Try with force to override it"
+#     if [ "$force" == "force" ];  then
+#         cp --no-preserve=all -rf $HOME/configs/* $HOME
+#         cp --no-preserve=all -rf $HOME/configs/.* $HOME
+#         chmod 700 $HOME/.config/bspwm/bspwmrc
+#         chmod 700 $HOME/.config/sxiv/exec/*
+#     fi
+# fi
 
-if [ ! -d "$USER_DOCS_NIX" ]; then
-    echo "Cloning nixos conigs"
-    git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
-else
-    if [ "$force" == "force" ];  then
-        git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
-    fi
-fi
+# Obsolete also since flakes
+# if [ ! -d "$USER_DOCS_NIX" ]; then
+#     echo "Cloning nixos conigs"
+#     git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
+# else
+#     if [ "$force" == "force" ];  then
+#         git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
+#     fi
+# fi
 
 mkdir $VIDEO_DIR
 
