@@ -64,6 +64,8 @@ fi
 #     fi
 # fi
 
+manage_configs.sh -l
+
 # Obsolete also since flakes
 # if [ ! -d "$USER_DOCS_NIX" ]; then
 #     echo "Cloning nixos conigs"
@@ -113,3 +115,9 @@ else
         nix run home-manager/${nix_release} -- init --switch
     fi
 fi
+
+echo "Configuration is done. Next steps:"
+echo "Run theme_select.sh -t light to copy the default templates"
+echo "Install the tmux plugins with ctl+a +I"
+echo "Install neovim plugins with PackerInstall (dont forget to nix shell nixpkgs#gcc before)"
+echo "I think that it's it. Enjoy"
