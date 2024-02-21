@@ -56,6 +56,7 @@
         pkgs.jellyfin
 
         pkgs.qutebrowser
+        pkgs.brave
 
         pkgs.fd
         pkgs.ripgrep
