@@ -9,6 +9,10 @@
                 envs = "persistence/config.env";
                 machine_name = "persistence";
             };
+            jason = {
+                envs = "jason/config.env";
+                machine_name = "jason";
+            };
             note = {
                 envs = "note/config.env";
                 machine_name = "note";
@@ -50,8 +54,8 @@
             builder = "${bash}/bin/bash";
             args = [ "${src}/builder.sh" ];
 
-            envs = machineConfigs.persistence.envs;
-            machine_name = machineConfigs.persistence.machine_name;
+            envs = machineConfigs.jason.envs;
+            machine_name = machineConfigs.jason.machine_name;
 
             baseInputs = [ coreutils ];
 
