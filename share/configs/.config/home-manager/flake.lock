@@ -62,11 +62,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1708528947,
-        "narHash": "sha256-Io3Pvjs23H7Bk2XgectknMR2mn5fS2ZKv8hccmRtbOI=",
+        "lastModified": 1708642824,
+        "narHash": "sha256-wpbaMCdLfbeuhca0zx56Vje/q9C4KBztT1i9K35TRvo=",
         "owner": "alexvanaxe107",
         "repo": "tdm_flakes",
-        "rev": "64e80360c77c6054fe98f6acad0f2e461a70f2a4",
+        "rev": "27c7c19c88bb3af86f87cf6554f80a7ccfcb6b9f",
         "type": "github"
       },
       "original": {
