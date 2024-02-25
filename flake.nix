@@ -104,8 +104,8 @@
             builder = "${bash}/bin/bash";
             args = [ "${src}/fun_builder.sh" ];
 
-            envs = machineConfigs.note.envs;
-            machine_name = machineConfigs.note.machine_name;
+            envs = machineConfigs.gaming.envs;
+            machine_name = machineConfigs.gaming.machine_name;
 
             baseInputs = [ coreutils ];
 
