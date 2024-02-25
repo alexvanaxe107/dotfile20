@@ -17,9 +17,11 @@ NIXPKGS_ALLOW_UNFREE=1
 NIX_PROFILE_DIR="$HOME/.nix-profile"
 AVA_TEMPLATES="$NIX_PROFILE_DIR/share/avatemplates"
 AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
-USER_CONFIGS="$HOME/.configs"
+USER_CONFIGS="$HOME/configs"
 
-nix run home-manager/${nix_release} -- init --switch
+ln -s $AVA_CONFIGS $USER_CONFIGS
+
+#nix run home-manager/${nix_release} -- init --switch
 
 # Configuring settings
 # -- Configurar git para global store
