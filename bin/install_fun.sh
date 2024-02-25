@@ -16,18 +16,21 @@ NIXPKGS_ALLOW_UNFREE=1
 NIX_PROFILE_DIR="$HOME/.nix-profile"
 AVA_TEMPLATES="$NIX_PROFILE_DIR/share/avatemplates"
 AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
-USER_CONFIGS="$HOME/.configs"
+USER_CONFIGS="$HOME/configs"
 
-echo "Copying the configuration files"
-if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
-    mkdir -p $HOME/.config/home-manager/
-    cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/* $HOME/.config/home-manager/
-else
-    if [ "$force" == "force" ];  then
-        mkdir -p $HOME/.config/home-manager/
-        cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/* $HOME/.config/home-manager/
-    fi
-fi
+ln -s $AVA_CONFIGS $USER_CONFIGS
+
+
+#echo "Copying the configuration files"
+#if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
+#    mkdir -p $HOME/.config/home-manager/
+#    cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/* $HOME/.config/home-manager/
+#else
+#    if [ "$force" == "force" ];  then
+#        mkdir -p $HOME/.config/home-manager/
+#        cp --no-preserve=all $NIX_PROFILE_DIR/home-manager/* $HOME/.config/home-manager/
+#    fi
+#fi
 
 # Configuring settings
 # -- Configurar git para global store
