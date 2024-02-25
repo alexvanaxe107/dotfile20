@@ -11,6 +11,7 @@
     home.packages = [ 
         pkgs.openbox
         pkgs.steam
+        pkgs.fzf
         pkgs.gamescope
     ];
 }
