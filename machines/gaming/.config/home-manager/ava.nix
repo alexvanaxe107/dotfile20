@@ -14,6 +14,7 @@
         pkgs.fzf
         pkgs.gamescope
         pkgs.gamemode
+        pkgs.protonup-ng
     ];
 }
 
