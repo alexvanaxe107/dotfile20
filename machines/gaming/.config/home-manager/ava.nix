@@ -13,7 +13,7 @@
         pkgs.steam
         pkgs.fzf
         pkgs.gamescope
-        pkgs.gamemoderun 
+        pkgs.gamemode
     ];
 }
 
