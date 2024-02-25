@@ -11,8 +11,6 @@
     };
 
     programs.java.enable = true; 
-    programs.steam.package = pkgs.steam.override { withJava = true; };
-
     programs.steam.gamescopeSession.enable = true;
 
     home.packages = [ 
