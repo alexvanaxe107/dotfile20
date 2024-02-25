@@ -15,6 +15,7 @@ start_program() {
     local game="$(which $1)"
     local tmp_start=/tmp/start_tmp.sh
     cp $(which start_tmp.sh) ${tmp_start}
+    chmod 700 ${tmp_start}
 
     local dimensions="$(cat $MONITOR_OPTIONS)"
     local dim=$(printf "$dimensions" | fzf)
