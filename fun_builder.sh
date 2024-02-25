@@ -15,11 +15,12 @@ echo "Creating output"
 mkdir $out
 mkdir -p $TMPDIR/share/configs/.config/wm
 mkdir -p $TMPDIR/share/configs/.config/home-manager
+mkdir -p $TMPDIR/bin
 
 echo "Copying files."
 cp -rf $src/machines/$machine_name/.config $TMPDIR/share/configs/
-cp -rf $src/machines/$machine_name/bin/* $TMPDIR
-cp -rf $src/bin/manage_configs.sh $TMPDIR
+cp -rf $src/machines/$machine_name/bin $TMPDIR
+cp -rf $src/bin/manage_configs.sh $TMPDIR/bin
 
 cp -rf $TMPDIR/* $out
 
