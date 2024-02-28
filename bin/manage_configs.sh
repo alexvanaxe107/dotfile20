@@ -32,11 +32,11 @@ apply_patch(){
 }
 
 install_stow_config(){
-    stow --no-folding -d /home/alexvanaxe/.nix-profile/share/configs -t /home/alexvanaxe/ .
+    stow --no-folding -d $HOME/.nix-profile/share/configs -t $HOME .
 }
 
 purge_stow_config(){
-    stow -D -d /home/alexvanaxe/.nix-profile/share/configs -t /home/alexvanaxe/ .
+    stow -D -d $HOME/.nix-profile/share/configs -t $HOME .
 }
 
 show_help() {

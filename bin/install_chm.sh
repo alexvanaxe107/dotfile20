@@ -108,13 +108,8 @@ else
     fi
 fi
 
-if [ ! -f $HOME/.config/home-manager/ava.nix ]; then
-    nix run home-manager/${nix_release} -- init --switch
-else
-    if [ "$force" == "force" ];  then
-        nix run home-manager/${nix_release} -- init --switch
-    fi
-fi
+nix run home-manager/${nix_release} -- switch
+
 
 echo "Configuration is done. Next steps:"
 echo "Run theme_select.sh -t light to copy the default templates"

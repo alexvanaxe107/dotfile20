@@ -30,7 +30,7 @@ git config --global credential.helper store
 git config --global http.postBuffer 157286400
 
 echo "To install the programs, please run:"
-echo "nix run home-manager/$nix_release -- init --switch"
+echo "nix run home-manager/$nix_release -- switch"
 
 echo; echo;
 
