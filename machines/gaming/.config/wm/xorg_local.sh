@@ -5,6 +5,6 @@
 HOST_NAME="$HOST"
 
 if [ "$HOST" == "persistence" ]; then
-    echo "DP-1"
+    echo "DP-3"
     exit 0
 fi
