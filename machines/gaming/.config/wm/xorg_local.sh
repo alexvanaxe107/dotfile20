@@ -2,7 +2,9 @@
 
 # Configs used for the local configuragion of the specific computer
 
-if [ "$1" == "getgs" ]; then
+HOST_NAME="$HOST"
+
+if [ "$HOST" == "persistence" ]; then
     echo "DP-1"
     exit 0
 fi
