@@ -1,8 +1,6 @@
 Instructions:
 
-nix profile install https://github.com/alexvanaxe107/dotfile20/archive/refs/heads/nix_pack.zip
-
-Privatizar
+nix profile install https://github.com/alexvanaxe107/dotfile20/archive/refs/heads/nix_pack.zip#machine
 
 BUGS:
    Fix the wall downloader
