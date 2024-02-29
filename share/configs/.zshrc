@@ -69,6 +69,8 @@ zinit light "zsh-users/zsh-autosuggestions"
 zinit light "Aloxaf/fzf-tab"
 zinit light "IngoMeyer441/zsh-easy-motion"
 
+zinit light "nix-community/nix-zsh-completions"
+
 zinit snippet "https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/archlinux/archlinux.plugin.zsh"
 
 bindkey '^ ' autosuggest-accept

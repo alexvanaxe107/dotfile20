@@ -6,7 +6,6 @@
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
-    programs.zsh.enable = true;
 
     home.packages = [ 
 
@@ -18,6 +17,7 @@
         pkgs.bspwm
         pkgs.wmctrl
         pkgs.tmux
+        pkgs.zsh
         pkgs.sxhkd
         pkgs.dunst
         # polybar = self.polybar;
