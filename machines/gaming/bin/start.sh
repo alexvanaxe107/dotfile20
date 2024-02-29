@@ -5,6 +5,7 @@ MONITOR_OPTIONS="$HOME/.config/wm/monitor_options.conf"
 DP=$(source $HOME/.config/wm/xorg_local.sh getgs)
 
 start_program() {
+    DP=$(source $HOME/.config/wm/xorg_local.sh yes)
     local is_openbox=0
     if [ ! -z "$(command -v openbox)" ]; then
         is_openbox=1
