@@ -140,6 +140,7 @@ function reset_configs(){
     cp --no-preserve=all ${TEMPLATES}/waybar/${theme_name}/* ${HOME}/.config/waybar/
     cp --no-preserve=all ${TEMPLATES}/qutebrowser/* ${HOME}/.config/qutebrowser/
     cp --no-preserve=all $HOME/.config/alacritty/alacritty.${theme_name} ${HOME}/.config/alacritty/alacritty.yml
+    cp --no-preserve=all ${TEMPLATES}/hypr/borders.conf ${HOME}/hypr/borders.conf
 
     # Overwiting only if it not exists
     [ ! -f $HOME/.tmux.conf ] && cp --no-preserve=all ${TEMPLATES}/tmux/tmux.conf ${HOME}/.tmux.conf
