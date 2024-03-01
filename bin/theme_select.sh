@@ -132,7 +132,7 @@ function reset_configs(){
     cp --no-preserve=all ${TEMPLATES}/lock/lock.sh ${HOME}/.config/wm/imports/lock.sh
     cp --no-preserve=all ${TEMPLATES}/pulse/pulse.cfg ${HOME}/.config/wm/pulse.cfg
     cp --no-preserve=all ${TEMPLATES}/rofi/${theme_name}/* ${HOME}/.config/rofi/
-    cp --no-preserve=all ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
+#    cp --no-preserve=all ${TEMPLATES}/wm/terminal.conf ${HOME}/.config/wm/terminal.conf
     cp --no-preserve=all ${TEMPLATES}/wm/tmux.opt ${HOME}/.config/wm/tmux.opt
     cp --no-preserve=all ${TEMPLATES}/wm/ytplay.conf ${HOME}/.config/wm/ytplay.conf
     cp --no-preserve=all ${TEMPLATES}/wezterm/extra.lua ${HOME}/.config/wezterm/
