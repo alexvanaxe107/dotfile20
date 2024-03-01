@@ -381,6 +381,12 @@ if [ ! -z "$choosen" ]; then
         sed -i 's/set background.*/set background=light/' ${HOME}/.vim/configs/theme.vim
     fi
 
+    if [ "$vim_theme" == "Atelierseaside (dark) (terminal.sexy)" ]; then
+        sed -i 's/^colorscheme.*/colorscheme Atelier_SeasideDark/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/airline_theme.*/airline_theme="Atelier_SeasideDark"/' ${HOME}/.vim/configs/theme.vim
+        sed -i 's/set background.*/set background=dark/' ${HOME}/.vim/configs/theme.vim
+    fi
+
     if [ "$vim_theme" == "Atelierheath.dark.yml" ]; then
         sed -i 's/^colorscheme.*/colorscheme Atelier_HeathDark/' ${HOME}/.vim/configs/theme.vim
         sed -i 's/airline_theme.*/airline_theme="Atelier_HeathDark"/' ${HOME}/.vim/configs/theme.vim
