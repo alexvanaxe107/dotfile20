@@ -3,7 +3,7 @@
 # Configs used for the local configuragion of the specific computer
 
 DP="DisplayPort-2"
-DP2="DisplayPort-1"
+DP2="DisplayPort-0"
 HDMI="HDMI-A-0"
 
 if [ "$1" == "getgs" ]; then
@@ -12,8 +12,9 @@ if [ "$1" == "getgs" ]; then
 fi
 
 xrandr --output $DP --set TearFree on
+xrandr --output $DP2 --set TearFree on
 xrandr --output $HDMI --set TearFree on
 
 display_manager.sh -p "$DP"
-display_manager.sh -o "$DP2 $DP $HDMI"
-display_manager.sh -r "$DP2" "left"
+display_manager.sh -o "$HDMI $DP $DP2"
+display_manager.sh -r "$HDMI-A-0" "left"
