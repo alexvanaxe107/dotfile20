@@ -9,6 +9,7 @@ if [ "$HOST_NAME" == "persistence" ]; then
     else
         echo "DP-3"
     fi
+    xrandr --output HDMI-A-0 --off
     
     exit 0
 fi
