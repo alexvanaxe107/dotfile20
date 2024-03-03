@@ -27,16 +27,9 @@ __mount_monitors_nitrogen__() {
 monitors_nitrogen="$(__mount_monitors_nitrogen__)"
 
 __mount_monitors__() {
-    first=$(xrandr | grep -w "connected" | grep "primary" | cut -d " " -f 1)
-
-    all_monitors_less_first=$(xrandr | grep -w connected | cut -d " " -f 1)
-
-    #if [ -z "$first" ]; then
-    #    printf "%s\n%s" "$all_monitors_less_first"
-    #else
-    #    printf "%s\n%s" "$first" "$all_monitors_less_first"
-    #fi
-    printf "%s" "$all_monitors_less_first"
+    all_monitors=$(xrandr --listactivemonitors | cut -d ' ' -f 4,6 | grep -oP "\\+.*" | sort | cut -d ' ' -f 2)
+    
+    printf "%s" "$all_monitors"
 }
 
 monitors="$(__mount_monitors__)"
@@ -222,10 +215,20 @@ get_dimensions() {
     if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
         local dimensions="$(hyprctl monitors -j | jq '[.[]] | sort_by(.x) | .[] | (if .transform == 1 or .transform == 3 then .name, .height, .width else .name,.width, .height end)' | xargs printf "%s %sx%s\n")"
     else
-        local dimensions="$(xrandr | grep -w connected | sed 's/primary //' | cut -d " " -f 1,3 | sed 's/\+.*//')"
+        local dimensions_tmp=$(xrandr | grep -w connected | sed 's/primary //' | cut -d " " -f 1,3 | sed 's/\+.*//')
+
+        while IFS= read -r line || [[ -n $line ]]; do
+            if [ ! -z "$dimensions" ]; then
+                dimensions="$dimensions\n$(echo "$dimensions_tmp" | grep -oP "$line.*")"
+            else
+                dimensions="$(echo "$dimensions_tmp" | grep -oP "$line.*")"
+            fi
+        done < <(printf '%s' "$monitors")
+
     fi
 
     if [ ${override} == 1 ]; then
+        dimensions=$(echo -e "$dimensions")
         for odim in $(cat ${RESOLUTION_FILE}); do
             local omonitor="$(echo ${odim} | cut -d '=' -f 1)"
             local odim="$(echo ${odim} | cut -d '=' -f 2)"
