@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-#DP="DisplayPort-2"
-#HDMI="HDMI-A-0"
+HOST_NAME="$HOSTNAME"
 
-
-#display_manager.sh -o "$DP $HDMI"
-#display_manager.sh -p "$DP"
-xrandr --output HDMI-A-0 --off
-
+if [ "$HOST_NAME" == "persistence" ]; then
+    xrandr --output HDMI-A-0 --off
+    xrandr --output DisplayPort-0 --off
+fi
 
 game="$(which $1)"
 echo "starting ${game}"
