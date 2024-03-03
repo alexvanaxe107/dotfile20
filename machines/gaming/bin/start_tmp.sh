@@ -6,7 +6,7 @@
 
 #display_manager.sh -o "$DP $HDMI"
 #display_manager.sh -p "$DP"
-$HOME/.config/wm/xorg_local.sh
+source $HOME/.config/wm/xorg_local.sh
 
 
 game="$(which $1)"
