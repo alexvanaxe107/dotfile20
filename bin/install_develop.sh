@@ -13,3 +13,4 @@ npm -g install bash-language-server
 npm -g install pyright
 npm -g install typescript-language-server
 npm -g install vue-language-server
+npm -g install svelte-language-server

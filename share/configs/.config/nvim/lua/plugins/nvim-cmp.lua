@@ -97,5 +97,8 @@ require'lspconfig'.volar.setup{
 	filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'};
 }
 
+-- Activate the svelte config
+require'lspconfig'.svelte.setup{}
+
 --  Activate the typescript config
 require'lspconfig'.tsserver.setup{on_attach=on_attach}
