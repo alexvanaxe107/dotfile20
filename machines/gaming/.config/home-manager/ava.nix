@@ -10,9 +10,7 @@
 
     home.packages = [ 
         pkgs.openbox
-        (pkgs.steam.override {
-          extraPkgs = pkgs: with pkgs; [ pango harfbuzz libthai ];
-        })
+        pkgs.steam
         pkgs.fzf
         pkgs.gamescope
         pkgs.gamemode
