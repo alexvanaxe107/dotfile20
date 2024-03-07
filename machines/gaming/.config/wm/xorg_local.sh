@@ -12,3 +12,13 @@ if [ "$HOST_NAME" == "persistence" ]; then
     
     exit 0
 fi
+
+if [ "$HOST_NAME" == "Jason" ]; then
+    if [ "${CHOSE}" == "yes" ]; then
+        echo "DisplayPort-0"
+    else
+        echo "DP-1"
+    fi
+    
+    exit 0
+fi
