@@ -25,7 +25,11 @@ start_program() {
     echo "Iniciando $1 em modo $dim. Enjoy!"
     sleep 2
 
-    echo -e "xrandr --output $DP --mode '$dim'" >> ${tmp_start}
+    if [ -z "$dim" ]; then
+        echo -e "xrandr --output $DP --mode auto" >> ${tmp_start}
+    else
+        echo -e "xrandr --output $DP --mode '$dim'" >> ${tmp_start}
+    fi
     echo -e "xrandr --output $DP --set TearFree on" >> ${tmp_start}
 
     if [ ${is_openbox} == 1 ]; then
