@@ -45,7 +45,7 @@
         pkgs.eww-wayland
         pkgs.conky
         pkgs.xclip
-        pkgs.fzf
+        # pkgs.fzf Will be included a more recent version via neovim
         pkgs.xsecurelock
         pkgs.transmission
         # (import <unstable> {}).font-manager
