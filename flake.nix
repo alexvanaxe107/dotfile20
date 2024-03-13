@@ -3,7 +3,7 @@
 
     outputs = { self, nixpkgs }: 
         let
-        version = "1.0";
+        version = "1.01";
         machineConfigs = {
             persistence = {
                 envs = "persistence/config.env";
