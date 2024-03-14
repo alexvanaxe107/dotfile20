@@ -92,11 +92,13 @@ $general-font-size: 1.0em;
 }
 
 .bbuttons {
-    margin: 1em;
     button {
+        margin: 1.5em;
+        background-image: None;
         label {
+            background-color: rgba($surface-bg, 0.7);
             font-size: $general-font-size;
-            color: #000000;
+            color: $surface-fg;
         }
     }
 }
