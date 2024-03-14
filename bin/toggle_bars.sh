@@ -164,6 +164,15 @@ auto_hide(){
 
 }
 
+waybar_to_monitor(){
+    monitors="$(monitors_info.sh -m)"
+    monitors_index="$(monitors_info.sh -e | nl --starting-line-number=0)"
+    selected_monitor="$(echo "$monitors" | $dmenu)"
+    exit_if_none $selected_monitor
+
+    sed -i "s/\"output\".*/\"output\": \"${selected_monitor}\",/" ${HOME}/.config/waybar/config
+}
+
 eww_to_monitor(){
     monitors="$(monitors_info.sh -m)"
     monitors_index="$(monitors_info.sh -e | nl --starting-line-number=0)"
@@ -176,7 +185,7 @@ eww_to_monitor(){
 }
 
 toggle_options () {
-    local toggle=$(echo -e "eww1\neww2\nwaybar\nchange monitor" | $dmenu -l 10 -p "Which bar to toggle?")
+    local toggle=$(echo -e "eww1\neww2\nwaybar\neww monitor\nwaybar monitor" | $dmenu -l 10 -p "Which bar to toggle?")
     case "$toggle" in
         "target2") $(toggle_simple);;
         "target1") $(toggle_full);;
@@ -189,7 +198,8 @@ toggle_options () {
         "autohide") auto_hide;;
         "options") toggle_options;;
         "waybar") toggle_all;;
-        "change monitor") eww_to_monitor;;
+        "eww monitor") eww_to_monitor;;
+        "waybar monitor") waybar_to_monitor;;
     esac
 
 
