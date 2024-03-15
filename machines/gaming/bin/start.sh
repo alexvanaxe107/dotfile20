@@ -36,11 +36,7 @@ start_program() {
         local openbox="$(which openbox) &\n "
     fi
 
-    if [ "$1" == "steam" ]; then
-        echo -e "${openbox}gamemoderun ${game}" >> ${tmp_start}
-    else
-        echo -e "${openbox} ${game}" >> ${tmp_start}
-    fi
+    echo -e "${openbox} ${game}" >> ${tmp_start}
     xsetroot -cursor_name left_ptr
     xinit ${tmp_start} -- :1 vt$XDG_VTNR || exit 1
 }
