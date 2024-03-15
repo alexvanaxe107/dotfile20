@@ -63,7 +63,7 @@ start_xinit() {
 
 start_steam_deck() {
     local program="$(which $1)"
-    local gamepadui="$2"
+
     if [ -z "$program" ]; then
         echo "No program specified, starting steam on $DP"
         local program="steam"
@@ -87,8 +87,10 @@ start_steam_deck() {
 
     
     if [ "$gamepadui" == "1" ]; then
+        echo "Staring using gamepadui"
         gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program -gamepadui
     else
+        echo "Staring using normal mode"
         gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program
     fi
 }
@@ -143,6 +145,6 @@ case "${rcommand}" in
     "s") start_program $1;;
     "p") start_xinit $1;;
     "e") start_embedded $1;;
-    "E") start_steam_deck $1 $gamepadui;;
+    "E") start_steam_deck $1;;
     "r") reset_lightness;;
 esac
