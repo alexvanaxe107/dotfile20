@@ -63,6 +63,7 @@ start_xinit() {
 
 start_steam_deck() {
     local program="$(which $1)"
+    local gamepadui="$2"
     if [ -z "$program" ]; then
         echo "No program specified, starting steam on $DP"
         local program="steam"
@@ -84,7 +85,12 @@ start_steam_deck() {
     local dim2=$(awk '{print $1}' <<< "${dim2}")
     local dim2="$(awk '{print $2}' FS=x <<< $dim2)"
 
-    gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program
+    
+    if [ "$gamepadui" == "1" ]; then
+        gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program -gamepadui
+    else
+        gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program
+    fi
 }
 
 start_embedded() {
@@ -117,11 +123,13 @@ show_help() {
 
 rcommand="0"
 soft="0"
+gamepadui="0"
 
-while getopts "h?eEsp" opt; do
+while getopts "h?geEsp" opt; do
     case "${opt}" in
         h|\?) show_help ;;
         s) rcommand="s";;
+        g) gamepadui="1";;
         p) rcommand="p";;
         E) rcommand="E";;
         e) rcommand="e";;
@@ -135,6 +143,6 @@ case "${rcommand}" in
     "s") start_program $1;;
     "p") start_xinit $1;;
     "e") start_embedded $1;;
-    "E") start_steam_deck $1;;
+    "E") start_steam_deck $1 $gamepadui;;
     "r") reset_lightness;;
 esac
