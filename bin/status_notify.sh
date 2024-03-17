@@ -85,14 +85,21 @@ show_fortune() {
     status="$status\n$prompt"
 }
 
+show_desktop_order() {
+    local monitors="$(hyprctl monitors -j | jq -r ".[] | (.id+1, .name)" | xargs printf "%s - %s\n")"
+
+    notify-send -t 1400  "Order" "$monitors"
+    exit
+}
 
 print_message() {
     notify-send -t 15000 "status" "$status"
 }
 
+
 rcommand=""
 option=""
-while getopts "h?clmtvwdMCsfq" opt; do
+while getopts "h?clmtvwdMCsfqo" opt; do
     case "${opt}" in
     h|\?) show_help ;;
     c) cpu;;
@@ -106,6 +113,7 @@ while getopts "h?clmtvwdMCsfq" opt; do
     M) show_top_10_mem;;
     C) show_top_10_cpu;;
     s) show_song;;
+    o) show_desktop_order;;
     f) show_fortune;;
     i) rcommand="i";option=${OPTARG};;
     esac
