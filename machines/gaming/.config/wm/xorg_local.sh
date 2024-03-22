@@ -22,3 +22,13 @@ if [ "$HOST_NAME" == "Jason" ]; then
     
     exit 0
 fi
+
+if [ "$HOST_NAME" == "palauai" ]; then
+    if [ "${CHOSE}" == "yes" ]; then
+        echo "eDP-1"
+    else
+        echo "DP-1"
+    fi
+    
+    exit 0
+fi
