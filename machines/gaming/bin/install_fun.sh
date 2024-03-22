@@ -29,8 +29,14 @@ git config --global credential.helper store
 # -- Ele trava as vezes quando o comit é grande. Entao fazemos:
 git config --global http.postBuffer 157286400
 
-echo "To install the programs, please run:"
-echo "nix run home-manager/$nix_release -- switch"
+manage_configs.sh -l
+
+if [ ! -z "$(command -v home-manager)" ]; then
+    echo "To install or update the programs, please run:"
+    echo "nix run home-manager/$nix_release -- switch"
+else
+    nix run home-manager/$nix_release -- switch
+fi
 
 echo; echo;
 

@@ -22,7 +22,6 @@ AVA_CONFIGS="$NIX_PROFILE_DIR/share/configs"
 
 USER_TEMPLATE="$HOME/templates"
 USER_CONFIGS="$HOME/configs"
-USER_DOCS_NIX="$HOME/Documents/Projects/nix/dotfile20/"
 
 VIDEO_DIR="$HOME/Videos" # This is for the lockscreen
 
@@ -46,35 +45,9 @@ else
     ln -s $AVA_CONFIGS $USER_CONFIGS
 fi
 
-
-# Obsolete.. this is made by the script manage_configs.sh
-# if [ ! -f $HOME/.config/bspwm/bspwmrc ]; then
-#     echo "Copying the configuration files"
-#     cp --no-preserve=all -rf $HOME/configs/* $HOME
-#     cp --no-preserve=all -rf $HOME/configs/.* $HOME
-#     chmod 700 $HOME/.config/bspwm/bspwmrc
-#     chmod 700 $HOME/.config/sxiv/exec/*
-# else
-#     echo "Config exists. Try with force to override it"
-#     if [ "$force" == "force" ];  then
-#         cp --no-preserve=all -rf $HOME/configs/* $HOME
-#         cp --no-preserve=all -rf $HOME/configs/.* $HOME
-#         chmod 700 $HOME/.config/bspwm/bspwmrc
-#         chmod 700 $HOME/.config/sxiv/exec/*
-#     fi
-# fi
-
+echo "Pointing to the config files. Probably you can ignore any error."
+sleep 3
 manage_configs.sh -l
-
-# Obsolete also since flakes
-# if [ ! -d "$USER_DOCS_NIX" ]; then
-#     echo "Cloning nixos conigs"
-#     git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
-# else
-#     if [ "$force" == "force" ];  then
-#         git clone "https://github.com/alexvanaxe107/nixconfs.git" "$USER_DOCS_NIX"
-#     fi
-# fi
 
 mkdir $VIDEO_DIR
 
@@ -108,11 +81,26 @@ else
     fi
 fi
 
-nix run home-manager/${nix_release} -- switch
+if [ ! -z "$(command -v home-manager)" ]; then
+    echo
+    echo "Skiping installing home manager. To install or update the programs, please run:"
+    echo "nix run home-manager/$nix_release -- switch"
+    echo
+else
+    nix run home-manager/$nix_release -- switch
+fi
 
+echo
+echo "Installing and fixing the tdm permissions"
+tdmctl init
+chmod 700 $HOME/.config/tdm
+chmod 700 $HOME/.config/tdm/sessions
+
+tdmctl add ava $NIX_PROFILE_DIR/bin/wms/start-bspwm.sh
+tdmctl add focus $NIX_PROFILE_DIR/bin/wms/start-emacs.sh
 
 echo "Configuration is done. Next steps:"
-echo "Run theme_select.sh -t light to copy the default templates"
+echo "You can run theme_select.sh -t light to copy the default templates"
 echo "Install the tmux plugins with ctl+a +I"
 echo "Install neovim plugins with PackerInstall (dont forget to nix shell nixpkgs#gcc before)"
 echo "I think that it's it. Enjoy"

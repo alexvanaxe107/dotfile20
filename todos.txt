@@ -5,16 +5,18 @@ nix profile install https://github.com/alexvanaxe107/dotfile20/archive/refs/head
 BUGS:
    Fix the wall downloader
 
-Alta prioridade
+# Alta prioridade
+   Acertar configuração do tdm
+   Configurar work enviromnent
    Ver o todos
 
-Media prioridade:
+# Media prioridade:
    Rever a configuração do neovim:
        https://github.com/rockerBOO/awesome-neovim?tab=readme-ov-file#plugin-manager
 
    Ver como funciona os grupos no hyprland
 
-Baixa prioridade:
+# Baixa prioridade:
    Colocar local nos weathers
 
 
