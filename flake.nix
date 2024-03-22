@@ -21,6 +21,10 @@
                 envs = "gaming/config.env";
                 machine_name = "gaming";
             };
+            work = {
+                envs = "work/config.env";
+                machine_name = "work";
+            };
         };
     in {
 
