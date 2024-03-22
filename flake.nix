@@ -120,6 +120,29 @@
             };
         };
 
+        work = 
+            with import nixpkgs { system = "x86_64-linux"; };
+        stdenv.mkDerivation rec {
+            name = "ava-work";
+            inherit version;
+
+            src = self;
+
+            builder = "${bash}/bin/bash";
+            args = [ "${src}/work_builder.sh" ];
+
+            envs = machineConfigs.work.envs;
+            machine_name = machineConfigs.work.machine_name;
+
+            baseInputs = [ coreutils ];
+
+            meta = with lib; {
+                description = "The files for the desktop enviromnetn";
+                license = licenses.mit;
+                maintainers = with maintainers; [ "alexvanaxe107" ];
+            };
+        };
+
         packages.x86_64-linux.default = self.persistence;
     };
 
