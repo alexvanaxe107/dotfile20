@@ -9,6 +9,8 @@
     programs.java.enable = true; 
 
     home.packages = [ 
+        pkgs.openbox
+        pkgs.fzf
         pkgs.google-chrome
         pkgs.onlyoffice-bin
         pkgs.vmware-horizon-client
