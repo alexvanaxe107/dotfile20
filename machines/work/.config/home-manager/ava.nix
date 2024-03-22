@@ -14,6 +14,7 @@
         pkgs.google-chrome
         pkgs.onlyoffice-bin
         pkgs.vmware-horizon-client
+        pkgs.teams-for-linux
     ];
 }
 
