@@ -20,6 +20,7 @@ mkdir -p $TMPDIR/bin
 echo "Copying files."
 cp -rf $src/machines/$machine_name/.config $TMPDIR/share/configs/
 cp -rf $src/machines/$machine_name/bin $TMPDIR
+cp -rf $src/machines/gaming/bin $TMPDIR # Yes, I am doing this. Don't want to duplicate the files. Maybe later will put on /bin. But it's work... so whatever
 cp -rf $src/bin/manage_configs.sh $TMPDIR/bin
 cp -rf $src/bin/gen_monitor_options.sh $TMPDIR/bin
 
