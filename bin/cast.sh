@@ -1,10 +1,8 @@
 #! /usr/bin/env bash
 
-source $HOME/.pyenv/versions/wm/bin/activate
-
 CONFIG_URL="$HOME/.config/wm/tmp"
 INDICATOR_CAST_FILE=$HOME/.config/indicators/casting.ind
-ICON=""
+ICON="A"
 
 cast_info(){
     local info="$(catt info)"
