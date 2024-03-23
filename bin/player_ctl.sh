@@ -91,6 +91,7 @@ invert(){
 }
 
 cast(){
+    notify-send -u normal  "Cast" "Begining to cast to your chromecast! Wait a little please."
     player="$1"
     local media_url="$(playerctl -p "${player}" metadata xesam:url)"
     local position=$(playerctl -p ${player} position)
@@ -106,6 +107,7 @@ cast(){
 }
 
 uncast(){
+    notify-send -u normal  "UnCast" "Reverting the cast.. wait a little please."
     local yt_info=$(cast.sh -i)
     local video_id=$(awk '{printf $3}' FS="|" <<< "${yt_info}")
     local video_rash=$(awk '{printf $1}' FS="|" <<< "${yt_info}")
