@@ -272,7 +272,7 @@ if [ ! -z $chosen_p ]; then
         "asvideo") invert "$chosen_p" "0";;
         "asaudio") invert "$chosen_p" "1";;
         "") cast "$chosen_p";;
-        "  cast") cast "$chosen_p";;
+        "cast") cast "$chosen_p";;
         "") cast.sh -c;;
         "") uncast;;
         *) go_to_position ${chosen};;
