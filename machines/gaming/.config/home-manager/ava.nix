@@ -15,6 +15,7 @@
         pkgs.gamescope
         pkgs.gamemode
         pkgs.protonup-ng
+        pkgs.protontricks
     ];
 }
 
