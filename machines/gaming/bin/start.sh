@@ -88,9 +88,11 @@ start_steam_deck() {
     
     if [ "$gamepadui" == "1" ]; then
         echo "Staring using gamepadui"
+        echo "gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program -gamepadui"
         gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program -gamepadui
     else
         echo "Staring using normal mode"
+        echo "gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program"
         gamescope -h $dim -H $dim2 -O $DP -F fsr $steamintegration -- $program
     fi
 }
