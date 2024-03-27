@@ -16,6 +16,8 @@
         pkgs.gamemode
         pkgs.protonup-ng
         pkgs.protontricks
+        pkgs.lxappearance
+        pkgs.gnome.adwaita-icon-theme
     ];
 }
 
