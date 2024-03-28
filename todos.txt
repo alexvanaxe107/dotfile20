@@ -6,11 +6,11 @@ BUGS:
    Fix the wall downloader
 
 # Alta prioridade
-   Acertar configuração do tdm
-   Configurar work enviromnent
    Ver o todos
 
 # Media prioridade:
+   Corrigir os monitores sendo invertidos na definicao de cores (Dica: Usar o mesmo criterio que esta sendo usado na insercao)
+   Rever os eww, principalmente o da noite
    Rever a configuração do neovim:
        https://github.com/rockerBOO/awesome-neovim?tab=readme-ov-file#plugin-manager
 

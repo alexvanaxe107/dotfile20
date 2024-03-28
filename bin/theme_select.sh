@@ -151,11 +151,12 @@ function reset_configs(){
 }
 
 function get_wallpaper() {
-    selected_wallpaper=$(monitors_info.sh -m | $dmenu -p "Extract color from wallpaper:" -n)
-    selected_wallpaper=$(monitors_info.sh -in "${selected_wallpaper}")
-#    selected_wallpaper=$((${selected_wallpaper} + 1))
-#    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "xin_${selected_wallpaper}" -A 1 | tail -n 1 | cut -d '=' -f 2)
-    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "${selected_wallpaper}:" | cut -d ':' -f 2)
+    monitors="$(monitors_info.sh -m)"
+    monitors_index="$(monitors_info.sh -m | nl --starting-line-number=0)"
+    selected_monitor="$(echo "$monitors" | $dmenu -p "Choose the monitor to extract the colors.")"
+
+    selected_index="$(echo "$monitors_index" | grep "$selected_monitor" | awk '{print $1}')"
+    cur_wallpaper=$(cat ${WALLPAPER_PATH} | grep "${selected_index}:" | cut -d ':' -f 2)
 
     echo ${cur_wallpaper}
 }
